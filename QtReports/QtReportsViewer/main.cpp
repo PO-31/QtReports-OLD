@@ -3,11 +3,14 @@
 
 int main( int argc, char *argv[] ) {
 	QApplication a( argc, argv );
+	//Need gui interface for select report file ???
 
+	//If console
+	QString path = argc > 1 ? argv[ 1 ] : "default.report";
 	qtreports::Engine engine;
-	//QString( argv[ 1 ] ) or std::string( argv[ 1 ] )
-	engine.compile( "blabla.report" );
-	qtreports::WidgetPtr widget = engine.getWidget();
+	engine.compile( path );
+	
+	qtreports::QWidgetPtr widget = engine.getWidget();
 	widget->show();
 
 	return a.exec();

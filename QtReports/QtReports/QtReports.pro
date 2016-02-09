@@ -1,6 +1,8 @@
 TARGET = qtreports.so
-QT += core widgets gui
+QT += core widgets gui sql
 CONFIG += release
-HEADERS += ./engine.hpp
+HEADERS += ./engine.hpp \
+    ./translator.hpp
 SOURCES += ./main.cpp \
-    ./engine.cpp
+    ./engine.cpp \
+    ./translator.cpp

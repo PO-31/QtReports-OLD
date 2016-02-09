@@ -1,25 +1,32 @@
 ﻿#pragma once
 #ifndef ENGINE_H
 #define ENGINE_H
-#include <QObject>
-#include <QWidget>
+#include <QString>
+#include <QMap>
+#include <QSqlDatabase>
+#include "translator.hpp"
 
 namespace qtreports {
 
-	typedef QWidget* WidgetPtr;
-
-	class Engine : public QObject {
-		Q_OBJECT
+	class Engine {
 
 	public:
-		Engine(QObject * parent = 0);
+		Engine();
 		~Engine();
 
-		bool		compile( std::string path );
-		WidgetPtr	getWidget();
+		bool	compile( const QString & path );
+		bool	setParameters( const QMap< QString, QString > & map );
+		bool	setConnection( const QSqlDatabase & connection );
 
+		bool	createPDF( const QString & path );
+		bool	createHTML( const QString & path );//etc.
+
+		const QString		getLastError() const;
+		const QWidgetPtr	getWidget() const;
 
 	private:
+		QString		m_lastError;
+		QWidgetPtr	m_widget;
 
 	};
 
