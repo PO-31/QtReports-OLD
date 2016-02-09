@@ -1,4 +1,6 @@
-﻿#include "translator.hpp"
+﻿#include <QFile>
+#include <QXmlStreamReader>
+#include "translator.hpp"
 
 namespace qtreports {
 	namespace detail {
@@ -8,9 +10,30 @@ namespace qtreports {
 		Translator::~Translator() {}
 
 		bool	Translator::parse( const QString & path ) {
-			//QXMLParser( path );
-			//parsing...
-			//return false if error
+			QFile file( path );
+			if( !file.isOpen ) {
+				m_lastError = "The file can not be opened";
+				return false;
+			}
+
+			QXmlStreamReader reader( file.readAll() );
+
+			while( !reader.atEnd() ) {
+				auto token = reader.readNext();
+				if( token == QXmlStreamReader::StartElement ) {
+					// or switch/case
+					if( reader.name() == "element1" ) {
+						reader.readNext();
+						//reader.text().toString();
+					}
+					else if( reader.name() == "element2" ) {
+						reader.readNext();
+						//reader.text().toString();
+					}
+				}
+				reader.readNext();
+			}
+
 			m_widget = QWidgetPtr( new QWidget() );
 			return true;
 		}
