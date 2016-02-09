@@ -222,7 +222,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="QtReports.pro" />
+    <None Include="qtreports.pro" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
