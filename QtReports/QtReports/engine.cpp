@@ -1,4 +1,7 @@
-﻿#include "engine.hpp"
+﻿#include <QPrinter>
+#include <QPrintDialog>
+#include <QPainter>
+#include "engine.hpp"
 
 namespace qtreports {
 
@@ -34,16 +37,43 @@ namespace qtreports {
 
 	bool	Engine::createPDF( const QString & path ) {
 		QWidgetPtr widget = getWidget();
-		//widget to pdf
+		//QPdfWriter ?
+		//widget to pdf - simple
 		//false if error
 		return true;
 	}
 
 	bool	Engine::createHTML( const QString & path ) {
 		QWidgetPtr widget = getWidget();
-		//widget to html
+		//widget to html - ???
 		//false if error
-		return false;
+		return true;
+	}
+
+	bool	Engine::print() {
+		QWidgetPtr widget = getWidget();
+		
+		QPrinter printer;
+
+		QPrintDialog dialog( &printer );
+		dialog.setWindowTitle( QObject::tr( "Print Document" ) );
+		if ( dialog.exec() != QDialog::Accepted ) {
+			return false;
+		}
+
+		QPainter painter;
+		painter.begin( &printer );
+		double xscale = printer.pageRect().width() / double( widget->width() );
+		double yscale = printer.pageRect().height() / double( widget->height() );
+		double scale = qMin( xscale, yscale );
+		painter.translate( printer.paperRect().x() + printer.pageRect().width() / 2,
+			printer.paperRect().y() + printer.pageRect().height() / 2 );
+		painter.scale( scale, scale );
+		//spainter.translate( -width() / 2, -height() / 2 );
+		painter.end(); //??
+		widget->render( &painter );
+		
+		return true;
 	}
 
 	const QString	Engine::getLastError() const {

@@ -13,7 +13,7 @@ namespace qtreports {
 			QFile file( path );
 			if( !file.isOpen ) {
 				m_lastError = "The file can not be opened";
-				return false;
+				//return false; Uncomment later
 			}
 
 			QXmlStreamReader reader( file.readAll() );

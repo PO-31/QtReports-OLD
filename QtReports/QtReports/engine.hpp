@@ -20,6 +20,7 @@ namespace qtreports {
 
 		bool	createPDF( const QString & path );
 		bool	createHTML( const QString & path );//etc.
+		bool	print();
 
 		const QString		getLastError() const;
 		const QWidgetPtr	getWidget() const;
