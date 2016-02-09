@@ -1,4 +1,4 @@
-TARGET = QtReports
+TARGET = qtreports.so
 QT += core widgets gui
 CONFIG += release
 HEADERS += ./qtreports.h
