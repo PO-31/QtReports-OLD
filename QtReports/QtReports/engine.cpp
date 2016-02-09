@@ -1,11 +1,14 @@
-﻿#include <QPrinter>
+﻿#include <QPdfWriter>
 #include <QPrintDialog>
 #include <QPainter>
+#include <QPrintPreviewWidget>
+#include <QPrintPreviewDialog>
 #include "engine.hpp"
 
 namespace qtreports {
 
-	Engine::Engine() {}
+	Engine::Engine( QObject * parent ) : 
+		QObject( parent ) {}
 
 	Engine::~Engine() {}
 
@@ -37,9 +40,8 @@ namespace qtreports {
 
 	bool	Engine::createPDF( const QString & path ) {
 		QWidgetPtr widget = getWidget();
-		//QPdfWriter ?
-		//widget to pdf - simple
-		//false if error
+		QPdfWriter writer( path );
+		widget->render( &writer ); //very small
 		return true;
 	}
 
@@ -51,29 +53,28 @@ namespace qtreports {
 	}
 
 	bool	Engine::print() {
-		QWidgetPtr widget = getWidget();
-		
 		QPrinter printer;
 
-		QPrintDialog dialog( &printer );
-		dialog.setWindowTitle( QObject::tr( "Print Document" ) );
-		if ( dialog.exec() != QDialog::Accepted ) {
-			return false;
-		}
+		QPrintPreviewDialog preview( &printer );
+		connect( 
+			&preview, &QPrintPreviewDialog::paintRequested,
+			this, &Engine::drawPreview );
+		preview.exec();
 
-		QPainter painter;
-		painter.begin( &printer );
-		double xscale = printer.pageRect().width() / double( widget->width() );
-		double yscale = printer.pageRect().height() / double( widget->height() );
-		double scale = qMin( xscale, yscale );
-		painter.translate( printer.paperRect().x() + printer.pageRect().width() / 2,
-			printer.paperRect().y() + printer.pageRect().height() / 2 );
-		painter.scale( scale, scale );
-		//spainter.translate( -width() / 2, -height() / 2 );
-		painter.end(); //??
-		widget->render( &painter );
-		
 		return true;
+	}
+
+	void	Engine::drawPreview( QPrinter * printer ) {
+		QWidgetPtr widget = getWidget();
+		QRectF rect = printer->pageRect();
+		QPainter painter( printer );
+		double xscale = rect.width() / widget->width();
+		double yscale = rect.height() / widget->height();
+		double scale = std::min( xscale, yscale );
+		painter.translate( 0,	rect.height() / 2
+								- scale * widget->height() / 2 );
+		painter.scale( scale, scale );
+		widget->render( &painter );
 	}
 
 	const QString	Engine::getLastError() const {

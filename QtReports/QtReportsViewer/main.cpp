@@ -12,6 +12,8 @@ int main( int argc, char *argv[] ) {
 	
 	qtreports::QWidgetPtr widget = engine.getWidget();
 	widget->show();
+	//engine.print();
+	//engine.createPDF( "test.pdf" );
 
 	return a.exec();
 }

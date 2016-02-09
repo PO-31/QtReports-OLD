@@ -1,5 +1,6 @@
 ﻿#include <QFile>
 #include <QXmlStreamReader>
+#include <QLabel>
 #include "translator.hpp"
 
 namespace qtreports {
@@ -11,7 +12,7 @@ namespace qtreports {
 
 		bool	Translator::parse( const QString & path ) {
 			QFile file( path );
-			if( !file.isOpen ) {
+			if( !file.isOpen() ) {
 				m_lastError = "The file can not be opened";
 				//return false; Uncomment later
 			}
@@ -35,6 +36,12 @@ namespace qtreports {
 			}
 
 			m_widget = QWidgetPtr( new QWidget() );
+			m_widget->resize( 400, 300 );
+			QLabel * label = new QLabel( m_widget.data() );
+			label->setText( "Hello, world!" );
+			label->resize( 400, 300 );
+			label->setAlignment( Qt::AlignmentFlag::AlignCenter );
+
 			return true;
 		}
 
