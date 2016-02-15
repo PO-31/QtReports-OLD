@@ -41,5 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="qtreportsviewer.pro" />
+    <None Include="default.qreport" />
   </ItemGroup>
 </Project>

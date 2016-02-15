@@ -26,11 +26,13 @@ namespace qtreports {
 
 		const QString		getLastError() const;
 		const QWidgetPtr	getWidget() const;
+		const bool			isCompiled() const;
 
 
 	private:
-		QString		m_lastError;
+		QString		m_lastError, m_compiledPath;
 		QWidgetPtr	m_widget;
+		bool		m_isCompiled;
 
 		void		drawPreview( QPrinter * printer );
 

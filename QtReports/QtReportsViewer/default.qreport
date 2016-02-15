@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd" > 
+<html lang='en'> 
+<head> 
+<meta http-equiv='Content-type' content='text/html;charset=UTF-8'> 
+<title>Prevent Table Resizing</title> 
+</head> 
+<body> 
+<h1>Prevent Table Resizing</h1> 
+
+<p>The following table will resize on risizing the window:</p> 
+<table border="1"> 
+<tr><th>Column One</th><th>Column Two</th><th>Column Three</th><th>Column Four</th><th>Column Five</th><th>Column Six</th></tr> 
+<tr><td>Item 1</td><td>Item 2</td><td>Item 3</td><td>Item 4</td><td>Item 5</td><td>Item 6</td></tr> 
+</table> 
+
+<p>By adding width="600" the following table will not resize on risizing the window:</p> 
+<table border="1" width="600"> 
+<tr><th>Column One</th><th>Column Two</th><th>Column Three</th><th>Column Four</th><th>Column Five</th><th>Column Six</th></tr> 
+<tr><td>Item 1</td><td>Item 2</td><td>Item 3</td><td>Item 4</td><td>Item 5</td><td>Item 6</td></tr> 
+</table> 
+
+<p>By surrounding the following table in a fixed width div, it will not resize on resizing the window:</p> 
+<div style="width:600px"> 
+<table border="1"> 
+<tr><th>Column One</th><th>Column Two</th><th>Column Three</th><th>Column Four</th><th>Column Five</th><th>Column Six</th></tr> 
+<tr><td>Item 1</td><td>Item 2</td><td>Item 3</td><td>Item 4</td><td>Item 5</td><td>Item 6</td></tr> 
+</table> 
+</div> 
+
+</body> 
+</html> 

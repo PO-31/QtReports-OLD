@@ -1,4 +1,5 @@
 #include <QtWidgets/QApplication>
+#include <QMessageBox>
 #include "../QtReports/engine.hpp"
 
 int main( int argc, char *argv[] ) {
@@ -6,14 +7,22 @@ int main( int argc, char *argv[] ) {
 	//Need gui interface for select report file ???
 
 	//If console
-	QString path = argc > 1 ? argv[ 1 ] : "default.report";
+	QString path = argc > 1 ? argv[ 1 ] : "default.qreport";
 	qtreports::Engine engine;
-	engine.compile( path );
-	
-	qtreports::QWidgetPtr widget = engine.getWidget();
-	widget->show();
+	bool result = engine.compile( path );
+	if( !result ) {
+		QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+		return -1;
+	}
+
+	auto widget = engine.getWidget();
+	if( !widget.isNull() ) {
+		widget->show();
+	}
+
 	//engine.print();
 	//engine.createPDF( "test.pdf" );
+	//engine.createHTML( "test.html" );
 
 	return a.exec();
 }

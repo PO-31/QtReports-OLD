@@ -3,12 +3,16 @@
 #include <QPainter>
 #include <QPrintPreviewWidget>
 #include <QPrintPreviewDialog>
+#include <QTextBrowser>
+#include <QFile>
+#include <QTextStream>
 #include "engine.hpp"
 
 namespace qtreports {
 
 	Engine::Engine( QObject * parent ) : 
-		QObject( parent ) {}
+		QObject( parent ),
+		m_isCompiled( false ) {}
 
 	Engine::~Engine() {}
 
@@ -20,12 +24,14 @@ namespace qtreports {
 			return false;
 		}
 
+		m_isCompiled = true;
+		m_compiledPath = path;
 		m_widget = translator.getWidget();
 		return true;
 	}
 
 	bool	Engine::setParameters( const QMap< QString, QString > & map ) {
-		//setParameters
+		//QString or QVariant?
 		return true;
 	}
 
@@ -39,16 +45,33 @@ namespace qtreports {
 	}
 
 	bool	Engine::createPDF( const QString & path ) {
-		QWidgetPtr widget = getWidget();
 		QPdfWriter writer( path );
-		widget->render( &writer ); //very small
+		//Very small, need resize to page size.
+		m_widget->render( &writer );
 		return true;
 	}
 
 	bool	Engine::createHTML( const QString & path ) {
-		QWidgetPtr widget = getWidget();
-		//widget to html - ???
-		//false if error
+		QFile::copy( m_compiledPath, path );
+
+		/*
+		auto browser = dynamic_cast< QTextBrowser * >( m_widget.data() );
+		QFile file( path );
+		file.open( 
+			QIODevice::OpenModeFlag::WriteOnly | 
+			QIODevice::OpenModeFlag::Text | 
+			QIODevice::OpenModeFlag::Truncate
+		);
+
+		if( !file.isOpen() ) {
+			m_lastError = "The file can not be opened";
+			return false;
+		}
+		
+		QTextStream stream( &file );
+		stream << browser->toHtml();
+		*/
+
 		return true;
 	}
 
@@ -58,30 +81,35 @@ namespace qtreports {
 		QPrintPreviewDialog preview( &printer );
 		connect( 
 			&preview, &QPrintPreviewDialog::paintRequested,
-			this, &Engine::drawPreview );
+			this, &Engine::drawPreview
+		);
 		preview.exec();
 
 		return true;
 	}
 
 	void	Engine::drawPreview( QPrinter * printer ) {
-		QWidgetPtr widget = getWidget();
 		QRectF rect = printer->pageRect();
 		QPainter painter( printer );
-		double xscale = rect.width() / widget->width();
-		double yscale = rect.height() / widget->height();
+		double xscale = rect.width() / m_widget->width();
+		double yscale = rect.height() / m_widget->height();
 		double scale = std::min( xscale, yscale );
-		painter.translate( 0,	rect.height() / 2
-								- scale * widget->height() / 2 );
+		painter.translate( 
+			0, rect.height() / 2 - scale * m_widget->height() / 2
+		);
 		painter.scale( scale, scale );
-		widget->render( &painter );
+		m_widget->render( &painter );
 	}
 
-	const QString	Engine::getLastError() const {
+	const QString		Engine::getLastError() const {
 		return m_lastError;
 	}
 
 	const QWidgetPtr	Engine::getWidget() const {
 		return m_widget;
+	}
+
+	const bool			Engine::isCompiled() const {
+		return m_isCompiled;
 	}
 }
