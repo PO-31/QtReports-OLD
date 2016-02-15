@@ -52,8 +52,13 @@ namespace qtreports {
 	}
 
 	bool	Engine::createHTML( const QString & path ) {
-		QFile::copy( m_compiledPath, path );
+		auto isCopied = QFile::copy( m_compiledPath, path );
+		if( !isCopied ) {
+			m_lastError = "Can not create html file";
+			return false;
+		}
 
+		return true;
 		/*
 		auto browser = dynamic_cast< QTextBrowser * >( m_widget.data() );
 		QFile file( path );
@@ -70,9 +75,9 @@ namespace qtreports {
 		
 		QTextStream stream( &file );
 		stream << browser->toHtml();
-		*/
 
 		return true;
+		*/
 	}
 
 	bool	Engine::print() {
