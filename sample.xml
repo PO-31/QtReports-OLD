@@ -10,11 +10,11 @@
     <![CDATA[ select * from customers ]]>
   </queryString>
 
-  <field name="id" class="java.lang.String" />
-  <field name="firstname" class="java.lang.String" />
-  <field name="lastname" class="java.lang.String" />
-  <field name="city" class="java.lang.String" />
-  <field name="segment" class="java.lang.String" />
+  <field name="id" class="QString" />
+  <field name="firstname" class="QString" />
+  <field name="lastname" class="QString" />
+  <field name="city" class="QString" />
+  <field name="segment" class="QString" />
 
   <detail>
     <band height="20">
@@ -24,19 +24,19 @@
       </staticText>
       <textField>
         <reportElement x="0" y="0" width="50" height="20" />
-        <textFieldExpression class="java.lang.String">
+        <textFieldExpression class="QString">
           <![CDATA[$F{id}]]>
         </textFieldExpression>
       </textField>
       <textField>
         <reportElement x="51" y="0" width="200" height="20" />
-        <textFieldExpression class="java.lang.String">
+        <textFieldExpression class="QString">
           <![CDATA[$F{firstname}]]>
         </textFieldExpression>
       </textField>
       <textField>
         <reportElement x="252" y="0" width="200" height="20" />
-        <textFieldExpression class="java.lang.String">
+        <textFieldExpression class="QString">
           <![CDATA[$F{lastname}]]>
         </textFieldExpression>
      </textField>
