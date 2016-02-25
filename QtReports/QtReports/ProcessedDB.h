@@ -10,11 +10,11 @@ class ProcessedDB
 public:
     ProcessedDB();
 
-    QVariant get_param(QString p_name) const;
+    QVariant getParam(QString p_name) const;
 
-    QVariant get_field(QString query_name, QString column_name, int row) const;
+    QVariant getField(QString query_name, QString column_name, int row) const;
 
-    QVariant get_field(QString query_name, int column, int row) const;
+    QVariant getField(QString query_name, int column, int row) const;
 
 };
 

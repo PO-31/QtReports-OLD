@@ -13,9 +13,9 @@ class ObjectsPlant
 public:
     ObjectsPlant();
 
-    Object* get_object(QString object_name) const;
+    Object* getObject(QString object_name) const;
 
-    QMap <QString, QString> get_param_type_map(QString object_name) const;
+    QMap <QString, QString> getParamTypeMap(QString object_name) const;
 };
 
 #endif // OBJECTSPLANT_H

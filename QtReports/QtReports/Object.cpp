@@ -3,18 +3,18 @@
 
 Object::Object(Object *_parent)
 {
-    parent = _parent;
+    m_parent = _parent;
 
-    x = y = w = h = style_id = 0;
+    m_x = m_y = m_w = m_h = m_style_id = 0;
 }
 
-bool Object::set_param(QString param, QVariant val)
+bool Object::setParam(QString param, QVariant val)
 {
     QString _x("x"), _y("y"), _w("w"), _h("h"), _style_id("style_id");
 
     if (!val.isValid())
     {
-        errors.append("Invalid parameter value");
+        m_errors.append("Invalid parameter value");
         return false;
     }
 
@@ -22,11 +22,11 @@ bool Object::set_param(QString param, QVariant val)
     {
         if (val.type() != QVariant::Int)
         {
-            errors.append("Invalid type for this argument");
+            m_errors.append("Invalid type for this argument");
             return false;
         }
 
-        x = val.toInt();
+        m_x = val.toInt();
 
         return true;
     }
@@ -35,11 +35,11 @@ bool Object::set_param(QString param, QVariant val)
     {
         if (val.type() != QVariant::Int)
         {
-            errors.append("Invalid type for this argument");
+            m_errors.append("Invalid type for this argument");
             return false;
         }
 
-        y = val.toInt();
+        m_y = val.toInt();
 
         return true;
     }
@@ -48,11 +48,11 @@ bool Object::set_param(QString param, QVariant val)
     {
         if (val.type() != QVariant::Int)
         {
-            errors.append("Invalid type for this argument");
+            m_errors.append("Invalid type for this argument");
             return false;
         }
 
-        w = val.toInt();
+        m_w = val.toInt();
 
         return true;
     }
@@ -61,11 +61,11 @@ bool Object::set_param(QString param, QVariant val)
     {
         if (val.type() != QVariant::Int)
         {
-            errors.append("Invalid type for this argument");
+            m_errors.append("Invalid type for this argument");
             return false;
         }
 
-        h = val.toInt();
+        m_h = val.toInt();
 
         return true;
     }
@@ -74,16 +74,16 @@ bool Object::set_param(QString param, QVariant val)
     {
         if (val.type() != QVariant::Int)
         {
-            errors.append("Invalid type for this argument");
+            m_errors.append("Invalid type for this argument");
             return false;
         }
 
-        style_id = val.toInt();
+        m_style_id = val.toInt();
 
         return true;
     }
 
 
-    errors.append("Unknown argument");
+    m_errors.append("Unknown argument");
     return false;
 }

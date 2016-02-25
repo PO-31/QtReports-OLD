@@ -10,36 +10,36 @@ class Painter
 public:
     Painter();
 
-    bool begin_PDF_drawing(QString path); // Вызывается первой
+    bool beginPDF_Drawing(QString path); // Вызывается первой
 
-    int begin_object_drawing(); // Вызывается перед отрисовкой конкретного объекта, возвращает его код
-    bool set_workspace(int x, int y, int w, int h); /* Устанавливает зону отрисовки для последнего объекта,
+    int beginObjectDrawing(); // Вызывается перед отрисовкой конкретного объекта, возвращает его код
+    bool setWorkspace(int x, int y, int w, int h); /* Устанавливает зону отрисовки для последнего объекта,
                                                       вызвавшего begin_object_drawing(). */
-    bool end_object_drawing(int workspace_id);
+    bool endObjectDrawing(int workspace_id);
 
-    void page_drawing_complete(); // Завершает отрисовку данной страницы, используется объектом Report
+    void pageDrawingComplete(); // Завершает отрисовку данной страницы, используется объектом Report
 
-    bool draw_line(int x1, int y1, int x2, int y2);
+    bool drawLine(int x1, int y1, int x2, int y2);
 
-    bool draw_text(int x, int y, QString text);
+    bool drawText(int x, int y, QString text);
 
-    void set_font();
-    void set_pen();
-    void set_brush();
+    void setFont();
+    void setPen();
+    void setBrush();
 
-    void new_page_request(); // Вызывается, если объект требует новую страницу для отрисовки
-    bool is_new_page_requested();
+    void newPageRequest(); // Вызывается, если объект требует новую страницу для отрисовки
+    bool isNewPageRequested();
 
-    bool set_current_page(int ind);
-    int pages_count();
+    bool setCurrentPage(int ind);
+    int pagesCount();
 
-    int curr_page();
+    int currPage();
 
-    QString last_error();
+    QString lastError();
 
 protected:
 
-    void new_page(); // Создать новую страницу
+    void newPage(); // Создать новую страницу
 };
 
 #endif // PAINTER_H

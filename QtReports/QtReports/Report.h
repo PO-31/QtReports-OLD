@@ -8,16 +8,16 @@ class Report : public Object
 public:
     Report();
 
-    bool draw_report(Painter &p, const ProcessedDB &db);
+    bool drawReport(Painter &p, const ProcessedDB &db);
 
 protected:
 
-    virtual bool draw_self(Painter &/*p*/, const ProcessedDB &/*db*/) {return true;}
-    virtual bool prepare_childs(Painter &/*p*/, const ProcessedDB &/*db*/) {return true;}
+    virtual bool drawSelf(Painter &/*p*/, const ProcessedDB &/*db*/) {return true;}
+    virtual bool prepareChilds(Painter &/*p*/, const ProcessedDB &/*db*/) {return true;}
 
-    int page_width, page_height;
+    int m_page_width, m_page_height;
 
-    bool is_vertical;
+    bool m_is_vertical;
 };
 
 #endif // REPORT_H

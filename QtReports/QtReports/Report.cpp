@@ -1,20 +1,20 @@
 #include "Report.h"
 
-Report::Report() : page_width(600), page_height(400), is_vertical(true)
+Report::Report() : m_page_width(600), m_page_height(400), m_is_vertical(true)
 {
 
 }
 
-bool Report::draw_report(Painter &p, const ProcessedDB &db)
+bool Report::drawReport(Painter &p, const ProcessedDB &db)
 {
     do
     {
         if (!draw(p, db))
             return false;
 
-        p.page_drawing_complete();
+        p.pageDrawingComplete();
     }
-    while ((p.is_new_page_requested()));
+    while ((p.isNewPageRequested()));
 
     return true;
 }

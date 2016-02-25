@@ -5,8 +5,8 @@
 #include <QString>
 #include <QVariant>
 
-#include <Painter.h>
-#include <ProcessedDB.h>
+#include "Painter.h"
+#include "ProcessedDB.h"
 
 /* Интерфейс объекта для дальнейшей отрисовки. Координаты объекта являются локальными относительно родительского объекта.
  * При начале рисования объекта необходимо задать рабочую область (прямоугольник в относительных координатах родителя). */
@@ -19,114 +19,119 @@ public:
 
     bool draw(Painter &p, const ProcessedDB &db)
     {
-        int id = p.begin_object_drawing();
+        int id = p.beginObjectDrawing();
 
-        if (!draw_self(p, db))
+        if (!drawSelf(p, db))
         {
-            p.end_object_drawing(id);
+            p.endObjectDrawing(id);
             return false;
         }
 
-        if (!prepare_childs(p, db))
+        if (!prepareChilds(p, db))
         {
-            p.end_object_drawing(id);
+            p.endObjectDrawing(id);
             return false;
         }
 
-        if (!draw_childs(p, db))
+        if (!drawChilds(p, db))
         {
-            p.end_object_drawing(id);
+            p.endObjectDrawing(id);
             return false;
         }
 
-        p.end_object_drawing(id);
+        p.endObjectDrawing(id);
         return true;
     }
 
-    void set_position(int _x, int _y)
+    void setPosition(int _x, int _y)
     {
         if (_x < 0 || _y < 0)
             return;
 
-        x = _x;
-        y = _y;
+        m_x = _x;
+        m_y = _y;
     }
 
-    void set_size(int _w, int _h)
+    void setSize(int _w, int _h)
     {
         if (_w < 0 || _h < 0)
             return;
 
-        w = _w;
-        h = _h;
+        m_w = _w;
+        m_h = _h;
     }
 
-    void add_child(Object *ptr)
+    void addChild(Object *ptr)
     {
         if (!ptr)
             return;
 
-        childs.append(ptr);
+        m_childs.append(ptr);
     }
 
-    Object* get_child(int ind)
+    Object* getChild(int ind)
     {
-        if (ind < 0 || ind >= childs.size())
+        if (ind < 0 || ind >= m_childs.size())
             return 0;
 
-        return childs.at(ind);
+        return m_childs.at(ind);
     }
 
-    QString last_error()
+    QString lastError()
     {
-        if (!errors.size())
+        if (!m_errors.size())
             return QString();
 
-        return errors.takeLast();
+        return m_errors.takeLast();
     }
 
-    virtual bool set_param(QString param, QVariant val);
+    virtual bool setParam(QString param, QVariant val);
+
+    void set_style_id(int _style_id)
+    {
+        m_style_id = _style_id;
+    }
 
 protected:
 
-    virtual bool draw_self(Painter &p, const ProcessedDB &db) = 0; // Функция отрисовывает сам объект
-    virtual bool prepare_childs(Painter &p, const ProcessedDB &db) = 0; // Задает параметры потомков (например их положение)
-    bool draw_childs(Painter &p, const ProcessedDB &db)
+    virtual bool drawSelf(Painter &p, const ProcessedDB &db) = 0; // Функция отрисовывает сам объект
+    virtual bool prepareChilds(Painter &p, const ProcessedDB &db) = 0; // Задает параметры потомков (например их положение)
+    bool drawChilds(Painter &p, const ProcessedDB &db)
     {
-        for (int i = 0; i < childs.size(); ++i)
-            if (!childs.at(i)->draw(p, db))
+        for (int i = 0; i < m_childs.size(); ++i)
+            if (!m_childs.at(i)->draw(p, db))
                 return false;
 
         return true;
     }
 
-    void send_error(const QString &str) // Должна вызываться каждый раз при возникновении ошибки во время рисования
+    void sendError(const QString &str) // Должна вызываться каждый раз при возникновении ошибки во время рисования
     {
-        if (parent)
-            parent->recive_error(str);
+        if (m_parent)
+            m_parent->reciveError(str);
     }
 
-    void recive_error(const QString &str)
+    void reciveError(const QString &str)
     {
-        if (parent)
+        if (m_parent)
         {
-            send_error(str);
+            sendError(str);
         }
         else
         {
-            errors.append(str);
+            m_errors.append(str);
         }
     }
 
-    int x, y;
-    int w, h;
+    int m_x, m_y;
+    int m_w, m_h;
 
-    int style_id;
+    int m_style_id;
 
-    Object *parent;
+    Object *m_parent;
 
-    QVector<Object*> childs;
-    QVector<QString> errors;
+    QVector<Object*> m_childs;
+    QVector<QString> m_errors;
 };
 
 #endif // OBJECT_H
