@@ -13,7 +13,7 @@ SOURCES += tags/object.cpp \
     tags/style.cpp \
     tags/title.cpp \
     tags/statictext.cpp \
-    report.cpp \
+    tags/report.cpp \
     tags/detail.cpp \
     tags/band.cpp \
     objectsplant.cpp
@@ -26,7 +26,7 @@ HEADERS += tags/object.h \
     tags/style.h \
     tags/title.h \
     tags/statictext.h \
-    report.h \
+    tags/report.h \
     tags/detail.h \
     tags/band.h \
     objectsplant.h
