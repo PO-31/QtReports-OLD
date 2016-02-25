@@ -38,9 +38,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="report.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="processeddb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -74,6 +71,9 @@
     <ClCompile Include="translator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tags\report.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objectsplant.hpp">
@@ -83,9 +83,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="painter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="report.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tags\object.hpp">
@@ -111,6 +108,9 @@
     </ClInclude>
     <ClInclude Include="translator.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\report.hpp">
+      <Filter>Tags</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

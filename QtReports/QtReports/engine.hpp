@@ -9,7 +9,7 @@
 #include "processeddb.hpp"
 #include "painter.hpp"
 #include "tags/object.hpp"
-#include "report.hpp"
+#include "tags/report.hpp"
 
 namespace qtreports {
 

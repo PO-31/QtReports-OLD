@@ -145,10 +145,10 @@
     <ClCompile Include="objectsplant.cpp" />
     <ClCompile Include="painter.cpp" />
     <ClCompile Include="processeddb.cpp" />
-    <ClCompile Include="report.cpp" />
     <ClCompile Include="tags\band.cpp" />
     <ClCompile Include="tags\detail.cpp" />
     <ClCompile Include="tags\object.cpp" />
+    <ClCompile Include="tags\report.cpp" />
     <ClCompile Include="tags\statictext.cpp" />
     <ClCompile Include="tags\style.cpp" />
     <ClCompile Include="tags\title.cpp" />
@@ -159,10 +159,10 @@
     <ClInclude Include="objectsplant.hpp" />
     <ClInclude Include="painter.hpp" />
     <ClInclude Include="processeddb.hpp" />
-    <ClInclude Include="report.hpp" />
     <ClInclude Include="tags\band.hpp" />
     <ClInclude Include="tags\detail.hpp" />
     <ClInclude Include="tags\object.hpp" />
+    <ClInclude Include="tags\report.hpp" />
     <ClInclude Include="tags\statictext.hpp" />
     <ClInclude Include="tags\style.hpp" />
     <ClInclude Include="tags\title.hpp" />

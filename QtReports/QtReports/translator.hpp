@@ -5,7 +5,7 @@
 #include <QWidget>
 #include <QSharedPointer>
 #include <QXmlStreamReader>
-#include "report.hpp"
+#include "tags/report.hpp"
 
 namespace qtreports {
 	typedef QSharedPointer< QWidget > QWidgetPtr;
