@@ -12,25 +12,25 @@ namespace qtreports {
 
         Translator::~Translator() {}
 
-        Report*	Translator::parse( const QString & path )
+        bool Translator::parse( const QString & path )
         {
             if( !QFile::exists( path ) ) {
                 m_lastError.append("The file not exists");
-                return 0;
+                return false;
             }
 
             QFile file( path );
             file.open( QIODevice::ReadOnly | QIODevice::Text );
             if ( !file.isOpen() ) {
                 m_lastError.append("The file can not be opened");
-                return 0;
+                return false;
             }
 
             QByteArray text = file.readAll();
 
 
 
-            return 0;
+            return true;
         }
 
         const QString	Translator::getLastError()

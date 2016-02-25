@@ -11,7 +11,11 @@
 
 #include <QVector>
 
+#include <QVector>
+
 #include "Report.h"
+
+#include "Style.h"
 
 namespace qtreports {
     typedef QSharedPointer< QWidget > QWidgetPtr;
@@ -25,7 +29,10 @@ namespace qtreports {
             Translator();
             ~Translator();
 
-            Report*	parse( const QString & path );
+            bool	parse( const QString & path );
+
+            Report* getReport();
+            QVector<Style> getStyles();
 
             const QString		getLastError();
             const QWidgetPtr	getWidget() const;
