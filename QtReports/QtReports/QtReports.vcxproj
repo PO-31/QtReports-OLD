@@ -138,74 +138,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="qtreports.pro" />
+    <None Include="qtprojects.pro" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp" />
+    <ClCompile Include="objectsplant.cpp" />
+    <ClCompile Include="painter.cpp" />
+    <ClCompile Include="processeddb.cpp" />
+    <ClCompile Include="report.cpp" />
+    <ClCompile Include="tags\band.cpp" />
+    <ClCompile Include="tags\detail.cpp" />
+    <ClCompile Include="tags\object.cpp" />
+    <ClCompile Include="tags\statictext.cpp" />
+    <ClCompile Include="tags\style.cpp" />
+    <ClCompile Include="tags\title.cpp" />
     <ClCompile Include="translator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="engine.hpp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </Command>
-    </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <CustomBuild Include="translator.hpp">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      </Command>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </Message>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      </Command>
-    </CustomBuild>
+    <ClInclude Include="engine.hpp" />
+    <ClInclude Include="objectsplant.hpp" />
+    <ClInclude Include="painter.hpp" />
+    <ClInclude Include="processeddb.hpp" />
+    <ClInclude Include="report.hpp" />
+    <ClInclude Include="tags\band.hpp" />
+    <ClInclude Include="tags\detail.hpp" />
+    <ClInclude Include="tags\object.hpp" />
+    <ClInclude Include="tags\statictext.hpp" />
+    <ClInclude Include="tags\style.hpp" />
+    <ClInclude Include="tags\title.hpp" />
+    <ClInclude Include="translator.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_x64="msvc2015_64" MocOptions="" />
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="5.5.0_x86compiled" Qt5Version_x0020_x64="msvc2015_64" MocOptions="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

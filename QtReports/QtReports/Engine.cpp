@@ -3,115 +3,118 @@
 #include <QPainter>
 #include <QPrintPreviewWidget>
 #include <QPrintPreviewDialog>
-#include <QTextBrowser>
+//#include <QTextBrowser>
 #include <QFile>
-#include <QTextStream>
-#include "Engine.h"
+//#include <QTextStream>
+#include "engine.hpp"
 
 namespace qtreports {
 
-    Engine::Engine( QObject * parent ) :
-        QObject( parent ),
-        m_isCompiled( false ) {}
+	Engine::Engine( QObject * parent ) :
+		QObject( parent ),
+		m_isCompiled( false ) {}
 
-    Engine::~Engine() {}
+	Engine::~Engine() {}
 
-    bool	Engine::compile( const QString & /*path*/ )
-    {
-        return true;
-    }
+	bool	Engine::compile( const QString & path ) {
+		detail::Translator translator;
+		bool result = translator.parse( path );
+		if( !result ) {
+			m_lastError = translator.getLastError();
+			return false;
+		}
 
-    bool	Engine::setParameters( const QMap< QString, QString > & /*map*/ )
-    {
-        //QString or QVariant?
-        return true;
-    }
+		m_isCompiled = true;
+		m_compiledPath = path;
+		m_widget = translator.getWidget();
+		return true;
+	}
 
-    bool	Engine::setConnection( const QSqlDatabase & connection )
-    {
-        if( connection.isOpen() ) {
-            m_lastError.append("Connection not open");
-            return false;
-        }
+	bool	Engine::setParameters( const QMap< QString, QString > & map ) {
+		//QString or QVariant?
+		return true;
+	}
 
-        return true;
-    }
+	bool	Engine::setConnection( const QSqlDatabase & connection ) {
+		if( connection.isOpen() ) {
+			m_lastError = "Connection not open";
+			return false;
+		}
 
-    bool	Engine::createPDF( const QString & path )
-    {
-        QPdfWriter writer( path );
-        //Very small, need resize to page size.
-        m_widget->render( &writer );
-        return true;
-    }
+		return true;
+	}
 
-    bool	Engine::createHTML( const QString & path ) {
-        bool isCopied = QFile::copy( m_compiledPath, path );
-        if( !isCopied ) {
-            m_lastError.append("Can not create html file");
-            return false;
-        }
+	bool	Engine::createPDF( const QString & path ) {
+		QPdfWriter writer( path );
+		//Very small, need resize to page size.
+		m_widget->render( &writer );
+		return true;
+	}
 
-        return true;
-        /*
-        auto browser = dynamic_cast< QTextBrowser * >( m_widget.data() );
-        QFile file( path );
-        file.open(
-            QIODevice::OpenModeFlag::WriteOnly |
-            QIODevice::OpenModeFlag::Text |
-            QIODevice::OpenModeFlag::Truncate
-        );
+	bool	Engine::createHTML( const QString & path ) {
+		auto isCopied = QFile::copy( m_compiledPath, path );
+		if( !isCopied ) {
+			m_lastError = "Can not create html file";
+			return false;
+		}
 
-        if( !file.isOpen() ) {
-            m_lastError = "The file can not be opened";
-            return false;
-        }
+		return true;
+		/*
+		auto browser = dynamic_cast< QTextBrowser * >( m_widget.data() );
+		QFile file( path );
+		file.open(
+		QIODevice::OpenModeFlag::WriteOnly |
+		QIODevice::OpenModeFlag::Text |
+		QIODevice::OpenModeFlag::Truncate
+		);
 
-        QTextStream stream( &file );
-        stream << browser->toHtml();
+		if( !file.isOpen() ) {
+		m_lastError = "The file can not be opened";
+		return false;
+		}
 
-        return true;
-        */
-    }
+		QTextStream stream( &file );
+		stream << browser->toHtml();
 
-    bool	Engine::print() {
-        QPrinter printer;
+		return true;
+		*/
+	}
 
-        QPrintPreviewDialog preview( &printer );
-        connect(
-            &preview, &QPrintPreviewDialog::paintRequested,
-            this, &Engine::drawPreview
-        );
-        preview.exec();
+	bool	Engine::print() {
+		QPrinter printer;
 
-        return true;
-    }
+		QPrintPreviewDialog preview( &printer );
+		connect(
+			&preview, &QPrintPreviewDialog::paintRequested,
+			this, &Engine::drawPreview
+			);
+		preview.exec();
 
-    void	Engine::drawPreview( QPrinter * printer ) {
-        QRectF rect = printer->pageRect();
-        QPainter painter( printer );
-        double xscale = rect.width() / m_widget->width();
-        double yscale = rect.height() / m_widget->height();
-        double scale = std::min( xscale, yscale );
-        painter.translate(
-            0, rect.height() / 2 - scale * m_widget->height() / 2
-        );
-        painter.scale( scale, scale );
-        m_widget->render( &painter );
-    }
+		return true;
+	}
 
-    const QString		Engine::getLastError() {
-        if (m_lastError.size())
-            return QString();
+	void	Engine::drawPreview( QPrinter * printer ) {
+		QRectF rect = printer->pageRect();
+		QPainter painter( printer );
+		double xscale = rect.width() / m_widget->width();
+		double yscale = rect.height() / m_widget->height();
+		double scale = std::min( xscale, yscale );
+		painter.translate(
+			0, rect.height() / 2 - scale * m_widget->height() / 2
+			);
+		painter.scale( scale, scale );
+		m_widget->render( &painter );
+	}
 
-        return m_lastError.takeLast();
-    }
+	const QString		Engine::getLastError() const {
+		return m_lastError;
+	}
 
-    const QWidgetPtr	Engine::getWidget() const {
-        return m_widget;
-    }
+	const QWidgetPtr	Engine::getWidget() const {
+		return m_widget;
+	}
 
-    bool			Engine::isCompiled() const {
-        return m_isCompiled;
-    }
+	const bool			Engine::isCompiled() const {
+		return m_isCompiled;
+	}
 }

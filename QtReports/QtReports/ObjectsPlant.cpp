@@ -1,6 +1,9 @@
-#include "ObjectsPlant.h"
+#include "objectsplant.hpp"
 
-ObjectsPlant::ObjectsPlant()
-{
+namespace qtreports {
+	namespace detail {
 
+		ObjectsPlant::ObjectsPlant() {}
+
+	}
 }

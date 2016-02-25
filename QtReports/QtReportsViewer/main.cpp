@@ -16,10 +16,12 @@ int main( int argc, char *argv[] ) {
 	}
 
 	auto widget = engine.getWidget();
-	if( !widget.isNull() ) {
-		widget->show();
+	if( widget.isNull() ) {
+		QMessageBox::critical( 0, "Error: ", "Widget is empty" );
+		return -1;
 	}
 
+	widget->show();
 	//engine.print();
 	//engine.createPDF( "test.pdf" );
 	//engine.createHTML( "test.html" );

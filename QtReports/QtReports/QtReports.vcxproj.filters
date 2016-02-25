@@ -33,11 +33,41 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Tags">
+      <UniqueIdentifier>{43996f6b-420c-41a3-9f85-112a0b3471d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="qtreports.pro" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="report.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="processeddb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="painter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="objectsplant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\object.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\detail.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\band.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\statictext.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\style.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\title.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
     <ClCompile Include="engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -46,11 +76,44 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="engine.hpp">
+    <ClInclude Include="objectsplant.hpp">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="translator.hpp">
+    </ClInclude>
+    <ClInclude Include="processeddb.hpp">
       <Filter>Header Files</Filter>
-    </CustomBuild>
+    </ClInclude>
+    <ClInclude Include="painter.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="report.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\object.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\detail.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\band.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\statictext.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\style.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\title.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="engine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="translator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qtprojects.pro" />
   </ItemGroup>
 </Project>

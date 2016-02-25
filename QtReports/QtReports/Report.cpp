@@ -1,20 +1,38 @@
-#include "Report.h"
+#include "report.hpp"
 
-Report::Report() : m_page_width(600), m_page_height(400), m_is_vertical(true)
-{
+namespace qtreports {
+	namespace detail {
 
-}
+		Report::Report() :
+			m_isVertical( true ),
+			m_size( 600, 400 ) {}
 
-bool Report::drawReport(Painter &p, const ProcessedDB &db)
-{
-    do
-    {
-        if (!draw(p, db))
-            return false;
+		Report::~Report() {}
 
-        p.pageDrawingComplete();
-    }
-    while ((p.isNewPageRequested()));
+		bool	Report::draw( Painter & p, const ProcessedDB & db ) {
+			do {
+				if( !Object::draw( p, db ) ) {
+					return false;
+				}
 
-    return true;
+				p.pageDrawingComplete();
+			} 
+			while( p.isNewPageRequested() );
+
+			return true;
+		}
+
+		QString		Report::asHTML() const {
+			return "Hello, world";
+		}
+
+		bool	Report::drawSelf( Painter & painter, const ProcessedDB & db ) {
+			return false;
+		}
+
+		bool	Report::prepareChilds( Painter & painter, const ProcessedDB & db ) {
+			return false;
+		}
+
+	}
 }
