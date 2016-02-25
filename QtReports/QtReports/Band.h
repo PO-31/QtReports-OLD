@@ -1,9 +1,9 @@
 #ifndef BAND_H
 #define BAND_H
 
-#include "Band.h"
+#include "Object.h"
 
-class Band : public Band
+class Band : public Object
 {
 public:
     Band();
