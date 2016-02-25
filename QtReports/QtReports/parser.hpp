@@ -13,11 +13,11 @@ namespace qtreports {
 	//All support classes in detail
 	namespace detail {
 
-		class Translator {
+		class Parser {
 
 		public:
-			Translator();
-			~Translator();
+			Parser();
+			~Parser();
 
 			bool	parse( const QString & path );
 

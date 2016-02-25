@@ -68,11 +68,11 @@
     <ClCompile Include="engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="translator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tags\report.cpp">
       <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,11 +106,11 @@
     <ClInclude Include="engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="translator.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tags\report.hpp">
       <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

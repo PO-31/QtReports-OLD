@@ -5,7 +5,7 @@
 #include <QMap>
 #include <QSqlDatabase>
 #include <QPrinter>
-#include "translator.hpp"
+#include "parser.hpp"
 #include "processeddb.hpp"
 #include "painter.hpp"
 #include "tags/object.hpp"

@@ -14,8 +14,8 @@ namespace qtreports {
 		public:
 			ObjectsPlant();
 
-			Object *				getObject( const QString & name ) const;
-			QMap<QString, QString>	getParamTypeMap( const QString & name ) const;
+			ObjectPtr					getObject( const QString & name ) const;
+			QMap< QString, QString >	getParamTypeMap( const QString & name ) const;
 
 		};
 

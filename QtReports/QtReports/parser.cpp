@@ -2,16 +2,16 @@
 #include <QLabel>
 #include <QTextBrowser>
 #include <QVBoxLayout>
-#include "translator.hpp"
+#include "parser.hpp"
 
 namespace qtreports {
 	namespace detail {
 
-		Translator::Translator() {}
+		Parser::Parser() {}
 
-		Translator::~Translator() {}
+		Parser::~Parser() {}
 
-		bool	Translator::parse( const QString & path ) {
+		bool	Parser::parse( const QString & path ) {
 			if( !QFile::exists( path ) ) {
 				m_lastError = "The file not exists";
 				return false;
@@ -27,7 +27,7 @@ namespace qtreports {
 			return parseReport( file.readAll() );
 		}
 
-		bool	Translator::parseReport( const QString & text ) {
+		bool	Parser::parseReport( const QString & text ) {
 			QXmlStreamReader reader( text );
 			while( !reader.atEnd() ) {
 				reader.readNext();
@@ -61,7 +61,7 @@ namespace qtreports {
 			return true;
 		}
 
-		bool	Translator::parseDetail( const QString & text ) {
+		bool	Parser::parseDetail( const QString & text ) {
 			QXmlStreamReader reader( text );
 			//while( !reader.atEnd() ) {
 			//reader.readNext();
@@ -81,7 +81,7 @@ namespace qtreports {
 			return true;
 		}
 
-		void	Translator::createWidget() {
+		void	Parser::createWidget() {
 			m_widget = QWidgetPtr( new QWidget() );
 			m_widget->resize( 600, 400 );
 
@@ -94,15 +94,15 @@ namespace qtreports {
 		}
 
 
-		const ReportPtr	Translator::getReport() const {
+		const ReportPtr	Parser::getReport() const {
 			return m_report;
 		}
 
-		const QString	Translator::getLastError() const {
+		const QString	Parser::getLastError() const {
 			return m_lastError;
 		}
 
-		const QWidgetPtr	Translator::getWidget() const {
+		const QWidgetPtr	Parser::getWidget() const {
 			return m_widget;
 		}
 

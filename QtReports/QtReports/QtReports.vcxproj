@@ -152,7 +152,7 @@
     <ClCompile Include="tags\statictext.cpp" />
     <ClCompile Include="tags\style.cpp" />
     <ClCompile Include="tags\title.cpp" />
-    <ClCompile Include="translator.cpp" />
+    <ClCompile Include="parser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.hpp" />
@@ -166,7 +166,7 @@
     <ClInclude Include="tags\statictext.hpp" />
     <ClInclude Include="tags\style.hpp" />
     <ClInclude Include="tags\title.hpp" />
-    <ClInclude Include="translator.hpp" />
+    <ClInclude Include="parser.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

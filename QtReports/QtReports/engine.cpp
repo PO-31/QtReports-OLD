@@ -17,16 +17,16 @@ namespace qtreports {
 	Engine::~Engine() {}
 
 	bool	Engine::compile( const QString & path ) {
-		detail::Translator translator;
-		bool result = translator.parse( path );
+		detail::Parser parser;
+		bool result = parser.parse( path );
 		if( !result ) {
-			m_lastError = translator.getLastError();
+			m_lastError = parser.getLastError();
 			return false;
 		}
 
 		m_isCompiled = true;
 		m_compiledPath = path;
-		m_widget = translator.getWidget();
+		m_widget = parser.getWidget();
 		return true;
 	}
 
