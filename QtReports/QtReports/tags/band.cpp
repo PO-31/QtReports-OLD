@@ -3,7 +3,8 @@
 namespace qtreports {
 	namespace detail {
 
-		Band::Band() {}
+		Band::Band( ObjectPtr parent ) :
+			Object( parent ) {}
 
 	}
 }

@@ -3,7 +3,8 @@
 namespace qtreports {
 	namespace detail {
 
-		StaticText::StaticText() {}
+		StaticText::StaticText( ObjectPtr parent ) :
+			Object( parent ) {}
 
 	}
 }

@@ -7,8 +7,10 @@ namespace qtreports {
 	namespace detail {
 
 		class Detail : public Object {
+
 		public:
-			Detail();
+			Detail( ObjectPtr parent = ObjectPtr() );
+
 		};
 
 	}

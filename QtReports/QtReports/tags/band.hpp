@@ -9,7 +9,7 @@ namespace qtreports {
 		class Band : public Object {
 
 		public:
-			Band();
+			Band( ObjectPtr parent = ObjectPtr() );
 
 		};
 

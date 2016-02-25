@@ -8,8 +8,10 @@ namespace qtreports {
 	namespace detail {
 
 		class StaticText : public Object {
+
 		public:
-			StaticText();
+			StaticText( ObjectPtr parent = ObjectPtr() );
+
 		};
 
 	}

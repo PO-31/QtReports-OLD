@@ -3,7 +3,8 @@
 namespace qtreports {
 	namespace detail {
 
-		Detail::Detail() {}
+		Detail::Detail( ObjectPtr parent ) :
+			Object( parent ) {}
 
 	}
 }
