@@ -85,7 +85,7 @@ public:
         return errors.takeLast();
     }
 
-    virtual bool set_param(QString param, QVariant val) = 0;
+    virtual bool set_param(QString param, QVariant val);
 
 protected:
 
@@ -100,7 +100,7 @@ protected:
         return true;
     }
 
-    void send_error(const QString &str) // Должна вызываться каждый раз при возникновении ошибки
+    void send_error(const QString &str) // Должна вызываться каждый раз при возникновении ошибки во время рисования
     {
         if (parent)
             parent->recive_error(str);
@@ -120,6 +120,8 @@ protected:
 
     int x, y;
     int w, h;
+
+    int style_id;
 
     Object *parent;
 

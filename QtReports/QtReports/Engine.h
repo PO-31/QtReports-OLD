@@ -8,6 +8,11 @@
 
 #include "Translator.h"
 #include "ProcessedDB.h"
+#include "Painter.h"
+
+#include "Object.h"
+
+#include "Report.h"
 
 
 namespace qtreports {
