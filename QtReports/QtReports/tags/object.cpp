@@ -3,7 +3,7 @@
 namespace qtreports {
 	namespace detail {
 
-		Object::Object( Object * parent ) :
+		Object::Object( ObjectPtr parent ) :
 			m_parent( parent ),
 			m_pos( 0, 0 ),
 			m_size( 0, 0 ),

@@ -14,6 +14,7 @@ namespace qtreports {
 	namespace detail {
 		class Object;
 		typedef QSharedPointer< Object > ObjectPtr;
+
 		/* Интерфейс объекта для дальнейшей отрисовки. 
 		Координаты объекта являются локальными относительно родительского объекта.
 		При начале рисования объекта необходимо задать рабочую область 
@@ -21,7 +22,7 @@ namespace qtreports {
 		class Object {
 
 		public:
-			Object( Object * parent = Q_NULLPTR );
+			Object( ObjectPtr parent = ObjectPtr() );
 			~Object();
 
 			bool			draw( Painter & p, const ProcessedDB & db );
