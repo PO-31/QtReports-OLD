@@ -7,11 +7,24 @@
 #include <QPoint>
 #include <QSize>
 #include <QSharedPointer>
-#include "..\painter.hpp"
-#include "..\processeddb.hpp"
+
+#include "../painter.hpp"
+#include "../processeddb.hpp"
 
 namespace qtreports {
 	namespace detail {
+        class DrawingExeption
+        {
+        public:
+            DrawingExeption(QString error);
+
+            QString getError();
+
+        private:
+
+            QString m_error;
+        };
+
 		class Object;
 		typedef QSharedPointer< Object > ObjectPtr;
 
@@ -45,6 +58,10 @@ namespace qtreports {
 			// Задает параметры потомков (например их положение)
 			virtual bool	prepareChilds( Painter & painter, const ProcessedDB & db ) = 0;
 			bool			drawChilds( Painter & painter, const ProcessedDB & db );
+
+           // void sendError(const QString &str); // Должна вызываться каждый раз при возникновении ошибки во время рисования
+
+          //  void reciveError(const QString &str);
 
 			ObjectPtr				m_parent;
 			QVector< ObjectPtr >	m_childs;

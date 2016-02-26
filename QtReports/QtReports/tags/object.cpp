@@ -14,17 +14,17 @@ namespace qtreports {
 		bool	Object::draw( Painter & painter, const ProcessedDB & db ) {
 			int id = painter.beginObjectDrawing();
 
-			if( !drawSelf( painter, db ) ) {
+            if( !this->drawSelf( painter, db ) ) {
 				painter.endObjectDrawing( id );
 				return false;
 			}
 
-			if( !prepareChilds( painter, db ) ) {
+            if( !this->prepareChilds( painter, db ) ) {
 				painter.endObjectDrawing( id );
 				return false;
 			}
 
-			if( !drawChilds( painter, db ) ) {
+            if( !this->drawChilds( painter, db ) ) {
 				painter.endObjectDrawing( id );
 				return false;
 			}
@@ -142,8 +142,37 @@ namespace qtreports {
 				}
 			}
 
-			return true;
-		}
+            return true;
+        }
+
+        DrawingExeption::DrawingExeption(QString error): m_error(error)
+        {
+
+        }
+
+        QString DrawingExeption::getError()
+        {
+            return m_error;
+        }
+
+/*
+        void Object::sendError(const QString &str)
+        {
+            if (m_parent)
+                m_parent->reciveError(str);
+        }
+
+        void Object::reciveError(const QString &str)
+        {
+            if (m_parent)
+            {
+                sendError(str);
+            }
+            else
+            {
+                m_lastError = str;
+            }
+        }*/
 
 	}
 }
