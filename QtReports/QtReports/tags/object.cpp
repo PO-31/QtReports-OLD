@@ -155,24 +155,5 @@ namespace qtreports {
             return m_error;
         }
 
-/*
-        void Object::sendError(const QString &str)
-        {
-            if (m_parent)
-                m_parent->reciveError(str);
-        }
-
-        void Object::reciveError(const QString &str)
-        {
-            if (m_parent)
-            {
-                sendError(str);
-            }
-            else
-            {
-                m_lastError = str;
-            }
-        }*/
-
 	}
 }
