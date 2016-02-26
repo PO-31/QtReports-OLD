@@ -10,21 +10,10 @@
 
 #include "../painter.hpp"
 #include "../processeddb.hpp"
+#include "drawingexception.hpp"
 
 namespace qtreports {
 	namespace detail {
-        class DrawingExeption
-        {
-        public:
-            DrawingExeption(QString error);
-
-            QString getError();
-
-        private:
-
-            QString m_error;
-        };
-
 		class Object;
 		typedef QSharedPointer< Object > ObjectPtr;
 
@@ -45,7 +34,7 @@ namespace qtreports {
 			virtual bool	setParameter( const QString & name, const QVariant & value );
 
 			void			addChild( const ObjectPtr & object );
-			const ObjectPtr	getChild( int index ) const;
+			ObjectPtr		getChild( int index ) const;
 
 			void			setStyleId( int styleId );
 			int				getStyleId() const;

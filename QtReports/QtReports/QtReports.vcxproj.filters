@@ -74,8 +74,8 @@
     <ClCompile Include="parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="tags\drawingexception.cpp">
+      <Filter>Tags</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,9 +113,6 @@
       <Filter>Tags</Filter>
     </ClInclude>
     <ClInclude Include="parser.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="object.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

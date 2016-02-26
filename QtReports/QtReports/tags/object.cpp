@@ -115,7 +115,7 @@ namespace qtreports {
 			m_childs.append( object );
 		}
 
-		const ObjectPtr		Object::getChild( int index ) const {
+		ObjectPtr		Object::getChild( int index ) const {
 			if( index < 0 || index >= m_childs.size() ) {
 				return ObjectPtr();
 			}
@@ -143,16 +143,6 @@ namespace qtreports {
 			}
 
             return true;
-        }
-
-        DrawingExeption::DrawingExeption(QString error): m_error(error)
-        {
-
-        }
-
-        QString DrawingExeption::getError()
-        {
-            return m_error;
         }
 
 	}
