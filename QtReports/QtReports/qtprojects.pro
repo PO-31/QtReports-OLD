@@ -9,7 +9,7 @@ SOURCES += tags/object.cpp \
     processeddb.cpp \
     painter.cpp \
     engine.cpp \
-    translator.cpp \
+    parser.cpp \
     tags/style.cpp \
     tags/title.cpp \
     tags/statictext.cpp \
@@ -18,18 +18,18 @@ SOURCES += tags/object.cpp \
     tags/band.cpp \
     objectsplant.cpp
 
-HEADERS += tags/object.h \
-    processeddb.h \
-    painter.h \
-    translator.h \
-    engine.h \
-    tags/style.h \
-    tags/title.h \
-    tags/statictext.h \
-    tags/report.h \
-    tags/detail.h \
-    tags/band.h \
-    objectsplant.h
+HEADERS += tags/object.hpp \
+    processeddb.hpp \
+    painter.hpp \
+    parser.hpp \
+    engine.hpp \
+    tags/style.hpp \
+    tags/title.hpp \
+    tags/statictext.hpp \
+    tags/report.hpp \
+    tags/detail.hpp \
+    tags/band.hpp \
+    objectsplant.hpp
 
 unix {
     target.path = /usr/lib
