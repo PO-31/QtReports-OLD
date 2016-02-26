@@ -74,6 +74,12 @@
     <ClCompile Include="parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="report.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objectsplant.hpp">
@@ -110,6 +116,12 @@
       <Filter>Tags</Filter>
     </ClInclude>
     <ClInclude Include="parser.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="object.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="report.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -142,9 +142,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine.cpp" />
+    <ClCompile Include="object.cpp" />
     <ClCompile Include="objectsplant.cpp" />
     <ClCompile Include="painter.cpp" />
     <ClCompile Include="processeddb.cpp" />
+    <ClCompile Include="report.cpp" />
     <ClCompile Include="tags\band.cpp" />
     <ClCompile Include="tags\detail.cpp" />
     <ClCompile Include="tags\object.cpp" />
@@ -156,9 +158,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.hpp" />
+    <ClInclude Include="object.hpp" />
     <ClInclude Include="objectsplant.hpp" />
     <ClInclude Include="painter.hpp" />
     <ClInclude Include="processeddb.hpp" />
+    <ClInclude Include="report.hpp" />
     <ClInclude Include="tags\band.hpp" />
     <ClInclude Include="tags\detail.hpp" />
     <ClInclude Include="tags\object.hpp" />
