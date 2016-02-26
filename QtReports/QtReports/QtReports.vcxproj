@@ -162,6 +162,7 @@
     <ClInclude Include="processeddb.hpp" />
     <ClInclude Include="tags\band.hpp" />
     <ClInclude Include="tags\detail.hpp" />
+    <ClInclude Include="tags\drawingexception.hpp" />
     <ClInclude Include="tags\object.hpp" />
     <ClInclude Include="tags\report.hpp" />
     <ClInclude Include="tags\statictext.hpp" />

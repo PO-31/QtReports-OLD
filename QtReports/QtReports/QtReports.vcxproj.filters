@@ -115,6 +115,9 @@
     <ClInclude Include="parser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tags\drawingexception.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="qtprojects.pro" />
