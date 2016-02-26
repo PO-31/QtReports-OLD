@@ -20,6 +20,8 @@ namespace qtreports {
 
 			QString	asHTML() const;
 
+			bool	setParameter( const QString & name, const QVariant & value );
+
 		protected:
 
 			bool	drawSelf( Painter & painter, const ProcessedDB & db );

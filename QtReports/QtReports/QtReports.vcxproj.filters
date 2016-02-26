@@ -77,9 +77,6 @@
     <ClCompile Include="object.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="report.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objectsplant.hpp">
@@ -119,9 +116,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="object.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="report.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
