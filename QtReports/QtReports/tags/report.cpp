@@ -71,11 +71,15 @@ namespace qtreports {
 			return Object::setParameter( name, value );
 		}
 
-		bool	Report::drawSelf( Painter & /*painter*/, const ProcessedDB & /*db*/ ) {
+		bool	Report::drawSelf( Painter & painter, const ProcessedDB & db ) {
+			Q_UNUSED( painter )
+			Q_UNUSED( db )
 			return false;
 		}
 
-		bool	Report::prepareChilds( Painter & /*painter*/, const ProcessedDB & /*db*/ ) {
+		bool	Report::prepareChilds( Painter & painter, const ProcessedDB & db ) {
+			Q_UNUSED( painter )
+			Q_UNUSED( db )
 			return false;
 		}
 
