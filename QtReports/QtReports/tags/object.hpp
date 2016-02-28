@@ -25,7 +25,7 @@ namespace qtreports {
 
 		public:
 			Object( ObjectPtr parent = ObjectPtr() );
-			~Object();
+			virtual ~Object();
 
 			bool			draw( Painter & p, const ProcessedDB & db );
 
