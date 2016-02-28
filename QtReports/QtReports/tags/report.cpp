@@ -10,14 +10,16 @@ namespace qtreports {
 		Report::~Report() {}
 
 		bool	Report::draw( Painter & painter, const ProcessedDB & db ) {
+			bool isNewPageRequired = false;
 			do {
 				if( !Object::draw( painter, db ) ) {
 					return false;
 				}
 
+				isNewPageRequired = painter.isNewPageRequested();
 				painter.pageDrawingComplete();
 			} 
-			while( painter.isNewPageRequested() );
+			while( isNewPageRequired );
 
 			return true;
 		}
