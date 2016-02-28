@@ -14,6 +14,10 @@ namespace qtreports {
 		bool	Object::draw( Painter & painter, const ProcessedDB & db ) {
 			int id = painter.beginObjectDrawing();
 
+            painter.setWorkspace(m_pos, m_size);
+
+            painter.setStyle(m_styleId);
+
             if( !this->drawSelf( painter, db ) ) {
 				painter.endObjectDrawing( id );
 				return false;
