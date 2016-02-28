@@ -6,6 +6,7 @@
 #include <QSharedPointer>
 #include <QXmlStreamReader>
 #include "tags/report.hpp"
+#include "tags/style.hpp"
 
 namespace qtreports {
 	typedef QSharedPointer< QWidget > QWidgetPtr;
@@ -21,9 +22,11 @@ namespace qtreports {
 
 			bool	parse( const QString & path );
 
-			const ReportPtr		getReport() const;
+            const ReportPtr		getReport() const;
 			const QString		getLastError() const;
 			const QWidgetPtr	getWidget() const;
+
+            QVector<Style> getStyles() const;
 
 		private:
 			bool	parseReport( const QString & text );
