@@ -4,6 +4,8 @@
 #include <QString>
 #include <QPoint>
 #include <QSize>
+#include <QPainter>
+#include <QPdfWriter>
 #include "tags\style.hpp"
 
 namespace qtreports {
@@ -32,7 +34,7 @@ namespace qtreports {
 			bool	setWorkspace( const QPoint & pos, const QSize & size ); 
 
 			/* Заканчивает рисовать объект. */
-			bool	endObjectDrawing( int workspace_id );
+            bool	endObjectDrawing( int workspace_id );
 
 			/* Завершает отрисовку данной страницы, используется объектом Report. */
 			void	pageDrawingComplete(); 
@@ -40,10 +42,6 @@ namespace qtreports {
 			bool	drawLine( const QPoint & point1, const QPoint & point2 );
 
 			bool	drawText( int x, int y, const QString & text );
-
-			void	setFont();
-			void	setPen();
-			void	setBrush();
 
 			// Вызывается, если объект требует новую страницу для отрисовки
 			void	newPageRequest();
@@ -65,6 +63,20 @@ namespace qtreports {
 
 			// Задать стиль отрисовки
 			void setStyle( const Style & style );
+
+        private:
+
+            QPainter *q_painter;
+            QPdfWriter *qpdf_writer;
+
+            QVector <int> objects_ids;
+            QVector <QRect> workspaces_ids;
+
+            QVector <Style> *styles;
+            QString m_last_error;
+
+            bool is_new_page;
+            int page_counter;
 		};
 
 	}
