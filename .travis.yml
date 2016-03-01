@@ -35,13 +35,14 @@ addons:
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 #  - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.4"; fi
+  - export QMAKE_CC = CC 
+  - export QMAKE_CXX = CXX
    
 script:
-  - $CXX --version
-# - cd QtReports/QtReports
-# - qmake -project
-# - qmake qtreports.pro
-# - make
+  - cd QtReports/QtReports
+  - qmake -project
+  - qmake qtreports.pro
+  - make
  
 #  notifications:
 #  email: 
