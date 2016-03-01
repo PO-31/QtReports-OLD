@@ -21,12 +21,12 @@ compiler:
 before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
+  - sudo apt-add-repository --yes ppa:beineri/opt-qt551
   - sudo apt-get update -qq
-  - sudo apt-get install gcc-4.8 g++-4.8 clang
-  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install qt-latest; fi
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev; fi
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install qt5-default qttools5-dev-tools; fi
+#  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
+# - sudo apt-get install gcc-4.8 g++-4.8 clang
+  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qt-latest; fi
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install gcc-4.8 g++-4.8 qtbase5-dev qt5-default qttools5-dev-tools; fi
  
 install:
 #  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
@@ -41,7 +41,7 @@ install:
 script:
   - cd QtReports/QtReports
   - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
-  - if [ "$CXX" = "clang++" ]; then qmake qtreports.pro -spec linux-clang; fi
+  - if [ "$CXX" = "clang++" ]; then qmake qtreports.pro; fi # -spec linux-clang
   - make
  
 #  notifications:
