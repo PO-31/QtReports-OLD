@@ -30,9 +30,9 @@ namespace qtreports {
         bool	createHTML( const QString & path );//etc.
         bool	print();
 
-        const QString		getLastError() const;
-        const QWidgetPtr	getWidget() const;
-        const bool			isCompiled() const;
+		const QString		getLastError() const;
+		const QWidgetPtr	getWidget() const;
+        bool				isCompiled() const;
 
 
     private:

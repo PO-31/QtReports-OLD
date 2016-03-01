@@ -94,19 +94,19 @@ namespace qtreports {
 		}
 
 
-		ReportPtr	Parser::getReport() const {
+		const ReportPtr			Parser::getReport() const {
 			return m_report;
 		}
 
-		QString		Parser::getLastError() const {
+		const QString			Parser::getLastError() const {
 			return m_lastError;
 		}
 
-		QWidgetPtr	Parser::getWidget() const {
+		const QWidgetPtr		Parser::getWidget() const {
 			return m_widget;
 		}
 
-		QVector< Style >	Parser::getStyles() const {
+		const QVector< Style >	Parser::getStyles() const {
 			return m_styles;
 		}
 

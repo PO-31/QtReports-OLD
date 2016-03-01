@@ -34,7 +34,7 @@ namespace qtreports {
 			bool	setWorkspace( const QPoint & pos, const QSize & size ); 
 
 			/* Заканчивает рисовать объект. */
-            bool	endObjectDrawing( int workspace_id );
+            bool	endObjectDrawing( int workspaceId );
 
 			/* Завершает отрисовку данной страницы, используется объектом Report. */
 			void	pageDrawingComplete(); 
@@ -45,14 +45,14 @@ namespace qtreports {
 
 			// Вызывается, если объект требует новую страницу для отрисовки
 			void	newPageRequest();
-			bool	isNewPageRequested();
+			bool	isNewPageRequested() const;
 
-			bool	setCurrentPage( int ind );
-			int		pagesCount();
+			bool	setCurrentPage( int index );
+			int		pagesCount() const;
 
-			int		currPage();
+			int		currentPage() const;
 
-			void	setStyle( int style_id );
+			void	setStyle( int styleId );
 
 			QString	getLastError() const;
 
@@ -65,18 +65,14 @@ namespace qtreports {
 			void setStyle( const Style & style );
 
         private:
+			bool				m_isNewPage;
+			int					m_pageCounter;
+			QString				m_last_error;
+            QVector< int >		m_objects;
+            QVector< QRect >	m_workspaces;
+            QVector< Style >	m_styles;
+			QPainter			m_painter;
 
-            QPainter *q_painter;
-            QPdfWriter *qpdf_writer;
-
-            QVector <int> objects_ids;
-            QVector <QRect> workspaces_ids;
-
-            QVector <Style> *styles;
-            QString m_last_error;
-
-            bool is_new_page;
-            int page_counter;
 		};
 
 	}

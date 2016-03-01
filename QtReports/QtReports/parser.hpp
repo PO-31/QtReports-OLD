@@ -22,10 +22,10 @@ namespace qtreports {
 
 			bool	parse( const QString & path );
 
-            ReportPtr			getReport() const;
-			QString				getLastError() const;
-			QWidgetPtr			getWidget() const;
-            QVector< Style >	getStyles() const;
+			const ReportPtr			getReport() const;
+			const QString			getLastError() const;
+			const QWidgetPtr		getWidget() const;
+			const QVector< Style >	getStyles() const;
 
 		private:
 			bool	parseReport( const QString & text );

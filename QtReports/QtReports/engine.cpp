@@ -14,7 +14,7 @@ namespace qtreports {
 		QObject( parent ),
 		m_isCompiled( false ) {}
 
-    Engine::~Engine() {}
+	Engine::~Engine() {}
 
 	bool	Engine::compile( const QString & path ) {
 		detail::Parser parser;
@@ -27,35 +27,35 @@ namespace qtreports {
 		m_isCompiled = true;
 		m_compiledPath = path;
 
-        prepareDB();
+		prepareDB();
 
 		m_widget = parser.getWidget();
 		return true;
 	}
 
 	bool	Engine::setParameters( const QMap< QString, QString > & map ) {
-		//QString or QVariant?
+		Q_UNUSED( map );
 		return true;
 	}
 
 	bool	Engine::setConnection( const QSqlDatabase & connection ) {
-        if( !connection.isOpen() ) {
+		if( !connection.isOpen() ) {
 			m_lastError = "Connection not open";
 			return false;
 		}
 
-        m_dbConnection = connection;
+		m_dbConnection = connection;
 
-        return true;
-    }
+		return true;
+	}
 
-    void Engine::addQuery(const QString & query) {
-        m_dbQueriesList.append(query);
-    }
+	void Engine::addQuery( const QString & query ) {
+		m_dbQueriesList.append( query );
+	}
 
-    void Engine::addScript(const QString & script) {
-        m_scriptsList.append(script);
-    }
+	void Engine::addScript( const QString & script ) {
+		m_scriptsList.append( script );
+	}
 
 	bool	Engine::createPDF( const QString & path ) {
 		QPdfWriter writer( path );
@@ -100,7 +100,7 @@ namespace qtreports {
 		connect(
 			&preview, &QPrintPreviewDialog::paintRequested,
 			this, &Engine::drawPreview
-			);
+		);
 		preview.exec();
 
 		return true;
@@ -116,12 +116,12 @@ namespace qtreports {
 			0, rect.height() / 2 - scale * m_widget->height() / 2
 			);
 		painter.scale( scale, scale );
-        m_widget->render( &painter );
-    }
+		m_widget->render( &painter );
+	}
 
-    void Engine::prepareDB() {
+	void Engine::prepareDB() {
 
-    }
+	}
 
 	const QString		Engine::getLastError() const {
 		return m_lastError;
@@ -131,7 +131,7 @@ namespace qtreports {
 		return m_widget;
 	}
 
-	const bool			Engine::isCompiled() const {
+	bool				Engine::isCompiled() const {
 		return m_isCompiled;
 	}
 }
