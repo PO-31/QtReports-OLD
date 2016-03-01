@@ -1,10 +1,8 @@
 QT       +=  core gui sql widgets printsupport
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 TARGET = qtreportsviewer
 TEMPLATE = app
-
+CONFIG += release c++11
 
 SOURCES += main.cpp \
             ../QtReports/engine.cpp \
