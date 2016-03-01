@@ -11,6 +11,7 @@ namespace qtreports {
 		public:
 			Title();
 
+            QString getClassName();
 		};
 
 	}

@@ -16,11 +16,19 @@ namespace qtreports {
 			Report();
 			~Report();
 
+            /* Отрисовывает отчет. Аргументы те же, что и у Object::draw(...). */
 			bool	draw( Painter & p, const ProcessedDB & db );
 
 			QString	asHTML() const;
 
+            /* Список параметров Report:
+             *  - int "page_width" - ширина страницы;
+             *  - int "page_height" - высота страницы;
+             *  - bool "is_vertical" - принимает значение true, если объект вертикальный;
+             *  - все параметры Object. */
 			bool	setParameter( const QString & name, const QVariant & value );
+
+            QString getClassName();
 
 		protected:
 

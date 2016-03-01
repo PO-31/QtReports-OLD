@@ -3,7 +3,12 @@
 namespace qtreports {
 	namespace detail {
 
-		Title::Title() {}
+    Title::Title() {}
+
+    QString Title::getClassName()
+    {
+        return QString("Title");
+    }
 
 	}
 }

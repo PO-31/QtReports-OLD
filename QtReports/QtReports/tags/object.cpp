@@ -38,7 +38,8 @@ namespace qtreports {
 		}
 
 		void	Object::setPosition( const QPoint & pos ) {
-			m_pos = pos;
+            if (pos.x() >= 0 && pos.y() >= 0)
+                m_pos = pos;
 		}
 
 		void	Object::setSize( const QSize & size ) {
@@ -108,8 +109,18 @@ namespace qtreports {
 
 
 			m_lastError = "Unknown argument";
-			return false;
-		}
+            return false;
+        }
+
+        QVector<ObjectPtr> Object::getChildsVector() const
+        {
+            return m_childs;
+        }
+
+        int Object::getChildsNumber() const
+        {
+            return m_childs.size();
+        }
 
 		void	Object::addChild( const ObjectPtr & object ) {
 			if( !object.isNull() ) {
@@ -136,8 +147,13 @@ namespace qtreports {
 		}
 
 		QString	Object::getLastError() const {
-			return m_lastError;
-		}
+            return m_lastError;
+        }
+
+        QString Object::getClassName() const
+        {
+            return QString("Object");
+        }
 
 		bool	Object::drawChilds( Painter & painter, const ProcessedDB & db ) {
 			for( auto && child : m_childs ) {
@@ -148,6 +164,17 @@ namespace qtreports {
 
             return true;
         }
+
+        void Object::sendError(QString error)
+        {
+            if (!m_parent.isNull())
+            {
+                m_parent->sendError(error);
+            }
+            else
+                m_lastError = error;
+        }
+
 
 	}
 }

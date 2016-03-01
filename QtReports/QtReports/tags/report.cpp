@@ -59,7 +59,7 @@ namespace qtreports {
 			}
 
 			if( isVertical.compare( name, Qt::CaseInsensitive ) == 0 ) {
-				if( value.type() != QVariant::Int ) {
+                if( value.type() != QVariant::Bool ) {
 					m_lastError = "Invalid type for this argument";
 					return false;
 				}
@@ -68,8 +68,13 @@ namespace qtreports {
 				return true;
 			}
 
-			return Object::setParameter( name, value );
-		}
+            return Object::setParameter( name, value );
+        }
+
+        QString Report::getClassName()
+        {
+            return QString("Report");
+        }
 
 		bool	Report::drawSelf( Painter & painter, const ProcessedDB & db ) {
 			Q_UNUSED( painter )

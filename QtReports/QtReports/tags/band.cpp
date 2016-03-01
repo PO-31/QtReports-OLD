@@ -3,8 +3,13 @@
 namespace qtreports {
 	namespace detail {
 
-		Band::Band( ObjectPtr parent ) :
-			Object( parent ) {}
+    Band::Band( ObjectPtr parent ) :
+        Object( parent ) {}
+
+    QString Band::getClassName()
+    {
+        return QString("Band");
+    }
 
 	}
 }

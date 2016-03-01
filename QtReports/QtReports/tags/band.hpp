@@ -11,6 +11,8 @@ namespace qtreports {
 		public:
 			Band( ObjectPtr parent = ObjectPtr() );
 
+            QString getClassName();
+
 		};
 
 	}

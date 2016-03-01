@@ -12,6 +12,8 @@ namespace qtreports {
 		public:
 			StaticText( ObjectPtr parent = ObjectPtr() );
 
+            QString getClassName();
+
 		};
 
 	}

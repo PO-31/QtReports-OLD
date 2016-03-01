@@ -11,6 +11,8 @@ namespace qtreports {
 		public:
 			Detail( ObjectPtr parent = ObjectPtr() );
 
+            QString getClassName();
+
 		};
 
 	}
