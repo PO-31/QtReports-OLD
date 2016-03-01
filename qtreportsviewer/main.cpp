@@ -1,6 +1,6 @@
 #include <QtWidgets/QApplication>
 #include <QMessageBox>
-#include "../QtReports/engine.hpp"
+#include "../qtreportslib/engine.hpp"
 
 int main( int argc, char *argv[] ) {
     QApplication a( argc, argv );

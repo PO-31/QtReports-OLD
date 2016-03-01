@@ -5,18 +5,18 @@ TEMPLATE = app
 CONFIG += release c++11
 
 SOURCES += main.cpp \
-            ../QtReports/engine.cpp \
-            ../QtReports/parser.cpp \
-            ../QtReports/processeddb.cpp \
-            ../QtReports/painter.cpp \
-            ../QtReports/objectsplant.cpp \
-            ../QtReports/tags/object.cpp \
-            ../QtReports/tags/report.cpp \
-            ../QtReports/tags/style.cpp \
-            ../QtReports/tags/title.cpp \
-            ../QtReports/tags/statictext.cpp \
-            ../QtReports/tags/detail.cpp \
-            ../QtReports/tags/band.cpp \
+            ../qtreportslib/engine.cpp \
+            ../qtreportslib/parser.cpp \
+            ../qtreportslib/processeddb.cpp \
+            ../qtreportslib/painter.cpp \
+            ../qtreportslib/objectsplant.cpp \
+            ../qtreportslib/tags/object.cpp \
+            ../qtreportslib/tags/report.cpp \
+            ../qtreportslib/tags/style.cpp \
+            ../qtreportslib/tags/title.cpp \
+            ../qtreportslib/tags/statictext.cpp \
+            ../qtreportslib/tags/detail.cpp \
+            ../qtreportslib/tags/band.cpp \
 
 
 
