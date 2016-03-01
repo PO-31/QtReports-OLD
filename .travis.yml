@@ -24,7 +24,7 @@ before_install:
   - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
   - sudo apt-get update -qq
   - sudo apt-get install gcc-4.8 g++-4.8 clang
-  - if [ "$CXX" = "clang++" ]; then sudo apt-get install -f qt-latest qtcreator-latest; fi
+  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install qt-latest; fi
   - if [ "$CXX" = "g++" ]; then sudo apt-get install qtbase5-dev qtdeclarative5-dev libqt5webkit5-dev libsqlite3-dev; fi
   - if [ "$CXX" = "g++" ]; then sudo apt-get install qt5-default qttools5-dev-tools; fi
  
