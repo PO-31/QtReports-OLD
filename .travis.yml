@@ -18,7 +18,10 @@ addons:
     - qt5-default
     - qttools5-dev-tools
   
-#before_install:
+before_install:
+  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository ppa:beineri/opt-qt551; fi
+  - if [ "$CXX" = "clang++" ]; then sudo apt-get update -qq; fi
+  - if [ "$CXX" = "clang++" ]; then sudo apt-get install qt-latest qtcreator-latest; fi
 # - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
 # - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
 # - sudo apt-get update -qq
@@ -40,7 +43,6 @@ install:
    
 script:
   - cd QtReports/QtReports
-#  - qmake -project
   - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
   - if [ "$CXX" = "clang++" ]; then qmake qtreports.pro -spec linux-clang; fi
   - make
