@@ -25,7 +25,7 @@ before_install:
   - sudo apt-get update -qq
 #  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
 # - sudo apt-get install gcc-4.8 g++-4.8 clang
-  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qtbase5-dev qt5-default qttools5-dev-tools; fi # qt-latest qtcreator-latest 
+  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qt-latest; fi # qtcreator-latest 
   - if [ "$CXX" = "g++" ]; then sudo apt-get install gcc-4.8 g++-4.8 qtbase5-dev qt5-default qttools5-dev-tools; fi
  
 install:
@@ -40,6 +40,7 @@ install:
   
 script:
   - cd QtReports/QtReports
+  - locate qmake
   - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
   - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreports.pro; fi # -spec linux-clang
   - make
