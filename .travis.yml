@@ -13,6 +13,7 @@ cache:
   apt: true
   directories:
     - $HOME/.cache/pip
+    - /var/cache/apt/archives/
 
 branches:
   only:
@@ -56,13 +57,14 @@ before_install:
 #  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
 # - sudo apt-get install gcc-4.8 g++-4.8 clang
   - if [ "$CXX" = "g++" ]; then sudo apt-get install gcc-4.8 g++-4.8 qtbase5-dev qt5-default qttools5-dev-tools; fi
-  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qt-latest qt5-qmake qtchooser; fi # qtcreator-latest 
-  - source /opt/qt55/bin/qt55-env.sh
+  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qt-latest qt5-qmake qtchooser; fi
+  - if [ "$CXX" = "clang++" ]; then source /opt/qt55/bin/qt55-env.sh; fi
 #  - source .travis/${TRAVIS_OS_NAME}/before_install.sh
   - pip install --user cpp-coveralls
  
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
+  - if [ "$CXX" = "clang++" ]; then export QTDIR="/opt/qt55/include"; fi
    
 # before_script:
 #  - mkdir -p build
@@ -70,11 +72,13 @@ install:
 #  - cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_PREFIX_PATH=${DEPS_PREFIX_PATH}
   
 script:
-  - export QTDIR="/opt/qt55/include"
   - cd QtReports/QtReports
-  - QTDIR=/opt/qt55/include qmake --version
-  - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
-  - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreports.pro; fi
+#  - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
+#  - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreports.pro; fi
+  - qmake qtreports.pro
+  - make
+  - cd ../QtReportsViewer
+  - qmake qtreportsviewer.pro
   - make
 #  - cmake --build . --target all -- --keep-going
 #  - cmake --build . --target check
