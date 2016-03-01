@@ -42,11 +42,11 @@ notifications:
 #    - qt5-default
 #    - qttools5-dev-tools
   
-env:
-  matrix:
-    - BUILD_TYPE=Debug
-    - BUILD_TYPE=Release
-    - BUILD_TYPE=Coverage
+#env:
+#  matrix:
+#    - BUILD_TYPE=Debug
+#    - BUILD_TYPE=Release
+#    - BUILD_TYPE=Coverage
 
 before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
