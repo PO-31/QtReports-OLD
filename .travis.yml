@@ -38,10 +38,11 @@ install:
   - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.4"; fi
    
 script:
- - cd QtReports/QtReports
- - qmake -project
- - qmake qtreports.pro
- - make
+  - $CXX --version
+# - cd QtReports/QtReports
+# - qmake -project
+# - qmake qtreports.pro
+# - make
  
 #  notifications:
 #  email: 
