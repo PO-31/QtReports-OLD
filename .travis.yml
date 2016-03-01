@@ -77,6 +77,9 @@ script:
 #  - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreports.pro; fi
   - qmake qtreports.pro
   - make
+  - cd ../QtReportsViewer
+  - qmake qtreportsviewer.pro
+  - make
 #  - cmake --build . --target all -- --keep-going
 #  - cmake --build . --target check
 
