@@ -42,7 +42,7 @@ script:
   - cd QtReports/QtReports
   - which qmake
   - qtchooser -print-env
-  - find / -type d -name 'qt55base'
+  - sudo find / -type d -name 'qt55base'
   - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
   - if [ "$CXX" = "clang++" ]; then qmake -qt=qt5 -spec linux-clang qtreports.pro; fi # -spec linux-clang
   - make
