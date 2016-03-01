@@ -1,12 +1,12 @@
 #pragma once
-#ifndef PAINTER_H
-#define PAINTER_H
+#ifndef PAINTER_HPP
+#define PAINTER_HPP
 #include <QString>
 #include <QPoint>
 #include <QSize>
 #include <QPainter>
 #include <QPdfWriter>
-#include "tags\style.hpp"
+#include "tags/style.hpp"
 
 namespace qtreports {
 	namespace detail {
@@ -82,4 +82,4 @@ namespace qtreports {
 	}
 }
 
-#endif // PAINTER_H
+#endif // PAINTER_HPP
