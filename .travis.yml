@@ -21,7 +21,7 @@ compiler:
 before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository ppa:beineri/opt-qt551; fi
+  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
   - sudo apt-get update -qq
   - sudo apt-get install gcc-4.8 g++-4.8 clang
   - if [ "$CXX" = "clang++" ]; then sudo apt-get install qt-latest qtcreator-latest; fi
