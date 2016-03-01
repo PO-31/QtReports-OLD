@@ -41,4 +41,9 @@ linux-g++ | linux-g++-64 | linux-g++-32 {
     QMAKE_CC = gcc-4.8
 }
 
+linux-clang {
+    QMAKE_CXX = clang++
+    QMAKE_CC = clang
+}
+
 QMAKE_CXXFLAGS += -std=c++11

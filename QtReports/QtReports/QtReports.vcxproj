@@ -139,9 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="qtprojects.pro" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="objectsplant.cpp" />
     <ClCompile Include="painter.cpp" />
@@ -170,6 +167,9 @@
     <ClInclude Include="tags\style.hpp" />
     <ClInclude Include="tags\title.hpp" />
     <ClInclude Include="parser.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qtreports.pro" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -120,6 +120,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="qtprojects.pro" />
+    <None Include="qtreports.pro" />
   </ItemGroup>
 </Project>
