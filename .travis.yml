@@ -40,7 +40,7 @@ install:
   
 script:
   - cd QtReports/QtReports
-  - locate qmake
+  - which qmake
   - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
   - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreports.pro; fi # -spec linux-clang
   - make
