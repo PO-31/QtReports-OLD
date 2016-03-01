@@ -10,7 +10,7 @@ namespace qtreports {
 
 		class Style {
 		public:
-			Style();
+            Style(int id);
 
 			int		id() const;
 			void	setId( int id );
@@ -35,6 +35,24 @@ namespace qtreports {
 
 			bool	isItalic() const; // Курсив
 			void	setItalic( bool flag );
+
+        protected:
+
+            int m_id;
+
+            QString m_name;
+
+            bool m_is_default;
+
+            int m_font_size;
+
+            QColor m_font_color;
+
+            QString m_font_name;
+
+            bool m_is_bold;
+
+            bool m_is_italic;
 
 		};
 
