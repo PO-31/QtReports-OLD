@@ -23,6 +23,9 @@ namespace qtreports {
         bool	setParameters( const QMap< QString, QString > & map );
         bool	setConnection( const QSqlDatabase & connection );
 
+        void    addQuery(const QString & query);
+        void    addScript(const QString & script);
+
         bool	createPDF( const QString & path );
         bool	createHTML( const QString & path );//etc.
         bool	print();
@@ -37,7 +40,14 @@ namespace qtreports {
 		QWidgetPtr	m_widget;
 		bool		m_isCompiled;
 
+        QList<QString> m_dbQueriesList;
+        QList<QString> m_scriptsList;
+
+        QSqlDatabase m_dbConnection;
+
 		void		drawPreview( QPrinter * printer );
+        void        prepareDB();
+
     };
 
 }

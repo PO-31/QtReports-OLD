@@ -14,7 +14,7 @@ namespace qtreports {
 		QObject( parent ),
 		m_isCompiled( false ) {}
 
-	Engine::~Engine() {}
+    Engine::~Engine() {}
 
 	bool	Engine::compile( const QString & path ) {
 		detail::Parser parser;
@@ -26,6 +26,9 @@ namespace qtreports {
 
 		m_isCompiled = true;
 		m_compiledPath = path;
+
+        prepareDB();
+
 		m_widget = parser.getWidget();
 		return true;
 	}
@@ -36,13 +39,23 @@ namespace qtreports {
 	}
 
 	bool	Engine::setConnection( const QSqlDatabase & connection ) {
-		if( connection.isOpen() ) {
+        if( !connection.isOpen() ) {
 			m_lastError = "Connection not open";
 			return false;
 		}
 
-		return true;
-	}
+        m_dbConnection = connection;
+
+        return true;
+    }
+
+    void Engine::addQuery(const QString & query) {
+        m_dbQueriesList.append(query);
+    }
+
+    void Engine::addScript(const QString & script) {
+        m_scriptsList.append(script);
+    }
 
 	bool	Engine::createPDF( const QString & path ) {
 		QPdfWriter writer( path );
@@ -103,8 +116,12 @@ namespace qtreports {
 			0, rect.height() / 2 - scale * m_widget->height() / 2
 			);
 		painter.scale( scale, scale );
-		m_widget->render( &painter );
-	}
+        m_widget->render( &painter );
+    }
+
+    void Engine::prepareDB() {
+
+    }
 
 	const QString		Engine::getLastError() const {
 		return m_lastError;
