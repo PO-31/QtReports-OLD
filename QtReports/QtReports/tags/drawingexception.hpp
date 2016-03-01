@@ -2,20 +2,20 @@
 #include <QString>
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-		class DrawingException {
+        class DrawingException {
 
-		public:
-			DrawingException( const QString & error );
-			~DrawingException();
+        public:
+            DrawingException( const QString & error );
+            ~DrawingException();
 
-			QString		getError() const;
+            const QString   getError() const;
 
-		private:
-			QString m_error;
+        private:
+            QString m_error;
 
-		};
+        };
 
-	}
+    }
 }

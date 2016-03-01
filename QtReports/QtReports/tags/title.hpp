@@ -4,17 +4,18 @@
 #include "object.hpp"
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-		class Title : public Object {
+        class Title : public Object {
 
-		public:
-			Title();
+        public:
+            Title();
 
-            QString getClassName();
-		};
+            const QString getClassName();
 
-	}
+        };
+
+    }
 }
 
 #endif // TITLE_HPP

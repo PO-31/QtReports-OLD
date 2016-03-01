@@ -23,29 +23,29 @@ namespace qtreports {
         bool	setParameters( const QMap< QString, QString > & map );
         bool	setConnection( const QSqlDatabase & connection );
 
-        void    addQuery(const QString & query);
-        void    addScript(const QString & script);
+        void    addQuery( const QString & query );
+        void    addScript( const QString & script );
 
         bool	createPDF( const QString & path );
         bool	createHTML( const QString & path );//etc.
         bool	print();
 
-		const QString		getLastError() const;
-		const QWidgetPtr	getWidget() const;
+        const QString		getLastError() const;
+        const QWidgetPtr	getWidget() const;
         bool				isCompiled() const;
 
 
     private:
-		QString		m_lastError, m_compiledPath;
-		QWidgetPtr	m_widget;
-		bool		m_isCompiled;
+        QString		m_lastError, m_compiledPath;
+        QWidgetPtr	m_widget;
+        bool		m_isCompiled;
 
         QList<QString> m_dbQueriesList;
         QList<QString> m_scriptsList;
 
         QSqlDatabase m_dbConnection;
 
-		void		drawPreview( QPrinter * printer );
+        void		drawPreview( QPrinter * printer );
         void        prepareDB();
 
     };

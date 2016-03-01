@@ -1,14 +1,13 @@
 #include "title.hpp"
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-    Title::Title() {}
+        Title::Title() {}
 
-    QString Title::getClassName()
-    {
-        return QString("Title");
+        const QString   Title::getClassName() {
+            return QString( "Title" );
+        }
+
     }
-
-	}
 }

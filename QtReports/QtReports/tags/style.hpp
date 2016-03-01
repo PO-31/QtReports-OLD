@@ -38,22 +38,14 @@ namespace qtreports {
             void	setItalic( bool flag );
 
         protected:
-
-            int m_id;
-
-            QString m_name;
-
-            bool m_is_default;
-
-            int m_font_size;
-
-            QColor m_font_color;
-
-            QString m_font_name;
-
-            bool m_is_bold;
-
-            bool m_is_italic;
+            int         m_id;
+            bool        m_isDefault;
+            bool        m_isBold;
+            bool        m_isItalic;
+            int         m_fontSize;
+            QString     m_name;
+            QColor      m_fontColor;
+            QString     m_fontName;
 
         };
 

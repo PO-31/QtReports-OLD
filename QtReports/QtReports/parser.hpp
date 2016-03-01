@@ -9,36 +9,36 @@
 #include "tags/style.hpp"
 
 namespace qtreports {
-	typedef QSharedPointer< QWidget > QWidgetPtr;
+    typedef QSharedPointer< QWidget > QWidgetPtr;
 
-	//All support classes in detail
-	namespace detail {
+    //All support classes in detail
+    namespace detail {
 
-		class Parser {
+        class Parser {
 
-		public:
-			Parser();
-			~Parser();
+        public:
+            Parser();
+            ~Parser();
 
-			bool	parse( const QString & path );
+            bool	parse( const QString & path );
 
-			const ReportPtr			getReport() const;
-			const QString			getLastError() const;
-			const QWidgetPtr		getWidget() const;
-			const QVector< Style >	getStyles() const;
+            const ReportPtr			getReport() const;
+            const QString			getLastError() const;
+            const QWidgetPtr		getWidget() const;
+            const QVector< Style >	getStyles() const;
 
-		private:
-			bool	parseReport( const QString & text );
-			bool	parseDetail( const QString & text );
-			void	createWidget();
+        private:
+            bool	parseReport( const QString & text );
+            bool	parseDetail( const QString & text );
+            void	createWidget();
 
-			QVector< Style >	m_styles;
-			ReportPtr			m_report;
-			QString				m_lastError;
-			QWidgetPtr			m_widget;
+            QVector< Style >	m_styles;
+            ReportPtr			m_report;
+            QString				m_lastError;
+            QWidgetPtr			m_widget;
 
-		};
+        };
 
-	}
+    }
 }
 #endif // TRANSLATOR_HPP

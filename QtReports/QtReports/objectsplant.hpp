@@ -6,20 +6,20 @@
 #include "tags/object.hpp"
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-		/* Фабрика объектов, возвращает объект и карту его параметров. */
-		class ObjectsPlant {
+        /* Фабрика объектов, возвращает объект и карту его параметров. */
+        class ObjectsPlant {
 
-		public:
-			ObjectsPlant();
+        public:
+            ObjectsPlant();
 
-			ObjectPtr					getObject( const QString & name ) const;
-			QMap< QString, QString >	getParamTypeMap( const QString & name ) const;
+            const ObjectPtr					getObject( const QString & name ) const;
+            const QMap< QString, QString >	getParamTypeMap( const QString & name ) const;
 
-		};
+        };
 
-	}
+    }
 }
 
 #endif // OBJECTSPLANT_HPP

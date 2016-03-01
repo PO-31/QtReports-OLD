@@ -1,15 +1,15 @@
 ﻿#include "drawingexception.hpp"
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-		DrawingException::DrawingException( const QString & error ) : m_error( error ) {}
+        DrawingException::DrawingException( const QString & error ) : m_error( error ) {}
 
-		DrawingException::~DrawingException() {}
+        DrawingException::~DrawingException() {}
 
-		QString DrawingException::getError() const {
-			return m_error;
-		}
+        const QString   DrawingException::getError() const {
+            return m_error;
+        }
 
-	}
+    }
 }

@@ -4,7 +4,13 @@ namespace qtreports {
     namespace detail {
 
         Style::Style() : Style( -1 ) {}
-        Style::Style( int id ) : m_id( id ), m_is_default( false ), m_is_bold( false ), m_is_italic( false ) {}
+
+        Style::Style( int id ) :
+            m_id( id ),
+            m_isDefault( false ),
+            m_isBold( false ),
+            m_isItalic( false ),
+            m_fontSize( 12 ) {}
 
         int Style::id() const
         {
@@ -28,62 +34,62 @@ namespace qtreports {
 
         bool Style::isDefault() const
         {
-            return m_is_default;
+            return m_isDefault;
         }
 
         void Style::setDefault( bool flag )
         {
-            m_is_default = flag;
+            m_isDefault = flag;
         }
 
         int Style::fontSize() const
         {
-            return m_font_size;
+            return m_fontSize;
         }
 
         void Style::setFontSize( int size )
         {
-            m_font_size = size;
+            m_fontSize = size;
         }
 
         QColor Style::fontColor() const
         {
-            return m_font_color;
+            return m_fontColor;
         }
 
         void Style::setFontColor( const QColor &color )
         {
-            m_font_color = color;
+            m_fontColor = color;
         }
 
         QString Style::fontName() const
         {
-            return m_font_name;
+            return m_fontName;
         }
 
         void Style::setFontName( const QString &name )
         {
-            m_font_name = name;
+            m_fontName = name;
         }
 
         bool Style::isBold() const
         {
-            return m_is_bold;
+            return m_isBold;
         }
 
         void Style::setBold( bool flag )
         {
-            m_is_bold = flag;
+            m_isBold = flag;
         }
 
         bool Style::isItalic() const
         {
-            return m_is_italic;
+            return m_isItalic;
         }
 
         void Style::setItalic( bool flag )
         {
-            m_is_italic = flag;
+            m_isItalic = flag;
         }
 
     }

@@ -5,18 +5,18 @@
 #include "object.hpp"
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-		class StaticText : public Object {
+        class StaticText : public Object {
 
-		public:
-			StaticText( ObjectPtr parent = ObjectPtr() );
+        public:
+            StaticText( ObjectPtr parent = ObjectPtr() );
 
-            QString getClassName();
+            const QString     getClassName() const;
 
-		};
+        };
 
-	}
+    }
 }
 
 #endif // STATICTEXT_HPP

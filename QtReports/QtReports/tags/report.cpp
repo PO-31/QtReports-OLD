@@ -1,92 +1,90 @@
 #include "report.hpp"
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-		Report::Report() :
-			m_isVertical( true ),
-			m_size( 600, 400 ) {}
+        Report::Report() :
+            m_isVertical( true ),
+            m_size( 600, 400 ) {}
 
-		Report::~Report() {}
+        Report::~Report() {}
 
-		bool	Report::draw( Painter & painter, const ProcessedDB & db ) {
-			bool isNewPageRequired = false;
-			do {
-				if( !Object::draw( painter, db ) ) {
-					return false;
-				}
+        bool	Report::draw( Painter & painter, const ProcessedDB & db ) {
+            bool isNewPageRequired = false;
+            do {
+                if( !Object::draw( painter, db ) ) {
+                    return false;
+                }
 
-				isNewPageRequired = painter.isNewPageRequested();
-				painter.pageDrawingComplete();
-			} 
-			while( isNewPageRequired );
+                isNewPageRequired = painter.isNewPageRequested();
+                painter.pageDrawingComplete();
+            } while( isNewPageRequired );
 
-			return true;
-		}
+            return true;
+        }
 
-		QString		Report::asHTML() const {
-			return "Hello, world";
-		}
+        const QString	Report::asHTML() const {
+            return "Hello, world";
+        }
 
-		bool Report::setParameter( const QString & name, const QVariant & value ) {
-			QString page_width( "page_width" ), page_height( "page_height" ),
-				isVertical( "is_vertical" );
+        bool Report::setParameter( const QString & name, const QVariant & value ) {
+            QString page_width( "page_width" ), page_height( "page_height" ),
+                isVertical( "is_vertical" );
 
-			if( !value.isValid() ) {
-				m_lastError = "Invalid parameter value";
-				return false;
-			}
+            if( !value.isValid() ) {
+                m_lastError = "Invalid parameter value";
+                return false;
+            }
 
-			if( page_width.compare( name, Qt::CaseInsensitive ) == 0 ) {
-				if( value.type() != QVariant::Int ) {
-					m_lastError = "Invalid type for this argument";
-					return false;
-				}
+            if( page_width.compare( name, Qt::CaseInsensitive ) == 0 ) {
+                if( value.type() != QVariant::Int ) {
+                    m_lastError = "Invalid type for this argument";
+                    return false;
+                }
 
-				m_size.setWidth( value.toInt() );
-				return true;
-			}
+                m_size.setWidth( value.toInt() );
+                return true;
+            }
 
-			if( page_height.compare( name, Qt::CaseInsensitive ) == 0 ) {
-				if( value.type() != QVariant::Int ) {
-					m_lastError = "Invalid type for this argument";
-					return false;
-				}
+            if( page_height.compare( name, Qt::CaseInsensitive ) == 0 ) {
+                if( value.type() != QVariant::Int ) {
+                    m_lastError = "Invalid type for this argument";
+                    return false;
+                }
 
-				m_size.setWidth( value.toInt() );
+                m_size.setWidth( value.toInt() );
 
-				return true;
-			}
+                return true;
+            }
 
-			if( isVertical.compare( name, Qt::CaseInsensitive ) == 0 ) {
+            if( isVertical.compare( name, Qt::CaseInsensitive ) == 0 ) {
                 if( value.type() != QVariant::Bool ) {
-					m_lastError = "Invalid type for this argument";
-					return false;
-				}
+                    m_lastError = "Invalid type for this argument";
+                    return false;
+                }
 
-				m_isVertical = value.toBool();
-				return true;
-			}
+                m_isVertical = value.toBool();
+                return true;
+            }
 
             return Object::setParameter( name, value );
         }
 
-        QString Report::getClassName()
-        {
-            return QString("Report");
+        const QString   Report::getClassName() {
+            return QString( "Report" );
         }
 
-		bool	Report::drawSelf( Painter & painter, const ProcessedDB & db ) {
-			Q_UNUSED( painter )
-			Q_UNUSED( db )
-			return false;
-		}
+        bool	Report::drawSelf( Painter & painter, const ProcessedDB & db ) {
+            Q_UNUSED( painter )
+                Q_UNUSED( db )
+                return false;
+        }
 
-		bool	Report::prepareChilds( Painter & painter, const ProcessedDB & db ) {
-			Q_UNUSED( painter )
-			Q_UNUSED( db )
-			return false;
-		}
+        bool	Report::prepareChilds( Painter & painter, const ProcessedDB & db ) {
+            Q_UNUSED( painter )
+                Q_UNUSED( db )
+                return false;
+        }
 
-	}
+    }
 }

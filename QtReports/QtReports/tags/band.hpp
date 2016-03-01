@@ -4,18 +4,18 @@
 #include "object.hpp"
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-		class Band : public Object {
+        class Band : public Object {
 
-		public:
-			Band( ObjectPtr parent = ObjectPtr() );
+        public:
+            Band( ObjectPtr parent = ObjectPtr() );
 
-            QString getClassName();
+            const QString   getClassName();
 
-		};
+        };
 
-	}
+    }
 }
 
 #endif // BAND_HPP
