@@ -39,10 +39,9 @@ install:
   # - cmake ..
   
 script:
+  - export QTDIR="/opt/qt55"
   - cd QtReports/QtReports
-  - QTDIR=/usr/share/qt55 qmake --version
-  - sudo find / -type d -name 'qt55'
-  - sudo find / -type d -name 'qtbase'
+  - QTDIR=/opt/qt55 qmake --version
   - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
   - if [ "$CXX" = "clang++" ]; then qmake -qt=qt5 -spec linux-clang qtreports.pro; fi # -spec linux-clang
   - make
