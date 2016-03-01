@@ -5,7 +5,7 @@ namespace qtreports {
 
         Title::Title() {}
 
-        const QString   Title::getClassName() {
+        const QString   Title::getClassName() const {
             return QString( "Title" );
         }
 

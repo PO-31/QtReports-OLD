@@ -11,7 +11,7 @@ namespace qtreports {
         public:
             Title();
 
-            const QString getClassName();
+            const QString getClassName() const;
 
         };
 

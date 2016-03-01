@@ -70,7 +70,7 @@ namespace qtreports {
             return Object::setParameter( name, value );
         }
 
-        const QString   Report::getClassName() {
+        const QString   Report::getClassName() const {
             return QString( "Report" );
         }
 

@@ -28,7 +28,7 @@ namespace qtreports {
              *  - все параметры Object. */
             bool	        setParameter( const QString & name, const QVariant & value );
 
-            const QString   getClassName();
+            const QString   getClassName() const;
 
         protected:
 

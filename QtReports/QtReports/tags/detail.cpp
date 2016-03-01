@@ -6,7 +6,7 @@ namespace qtreports {
         Detail::Detail( ObjectPtr parent ) :
             Object( parent ) {}
 
-        const QString   Detail::getClassName() {
+        const QString   Detail::getClassName() const {
             return QString( "Detail" );
         }
 
