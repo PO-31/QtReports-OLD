@@ -33,15 +33,16 @@ addons:
   # - cmake ..
   
 install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+#  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 #  - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.4"; fi
-  - export QMAKE_CC="$CC"
-  - export QMAKE_CXX="$CXX"
+#  - export QMAKE_CC="$CC"
+#  - export QMAKE_CXX="$CXX"
    
 script:
   - cd QtReports/QtReports
-  - qmake -project
-  - qmake qtreports.pro
+#  - qmake -project
+  - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
+  - if [ "$CXX" = "clang++" ]; then qmake qtreports.pro -spec linux-clang; fi
   - make
  
 #  notifications:
