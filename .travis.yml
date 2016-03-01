@@ -57,6 +57,7 @@ before_install:
 # - sudo apt-get install gcc-4.8 g++-4.8 clang
   - if [ "$CXX" = "g++" ]; then sudo apt-get install gcc-4.8 g++-4.8 qtbase5-dev qt5-default qttools5-dev-tools; fi
   - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qt-latest qt5-qmake qtchooser; fi # qtcreator-latest 
+  - source /opt/qt55/bin/qt55-env.sh
 #  - source .travis/${TRAVIS_OS_NAME}/before_install.sh
 #  - pip install --user cpp-coveralls
  
