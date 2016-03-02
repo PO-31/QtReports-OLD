@@ -35,8 +35,6 @@ HEADERS  += ../qtreportslib/engine.hpp \
 
 QMAKE_CXXFLAGS += -std=c++11
 
-message("Using spec: $$QMAKESPEC")
-
 linux-g++ | linux-g++-64 | linux-g++-32 {
     QMAKE_CXX = g++-4.8
     QMAKE_CC = gcc-4.8
@@ -46,3 +44,5 @@ linux-clang {
     QMAKE_CXX = clang++
     QMAKE_CC = clang
 }
+
+message("Using spec: $$QMAKESPEC\nCompiler: $QMAKE_CXX")
