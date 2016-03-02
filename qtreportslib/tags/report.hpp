@@ -1,12 +1,14 @@
 #pragma once
 #ifndef REPORT_HPP
 #define REPORT_HPP
+
 #include <QString>
 #include <QSize>
 #include <QSharedPointer>
+
+#include "../painter.hpp"
+#include "../processeddb.hpp"
 #include "object.hpp"
-#include "painter.hpp"
-#include "processeddb.hpp"
 
 namespace qtreports {
     namespace detail {
