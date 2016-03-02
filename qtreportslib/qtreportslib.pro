@@ -48,4 +48,5 @@ linux-clang {
     QMAKE_CC = clang
 }
 
-message("Using spec: $$QMAKESPEC\nCompiler: $QMAKE_CXX")
+message("Using spec: $$QMAKESPEC")
+message("Compiler: $$QMAKE_CXX")
