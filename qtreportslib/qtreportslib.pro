@@ -30,13 +30,13 @@ HEADERS += tags/object.hpp \
     tags/detail.hpp \
     tags/band.hpp \
     objectsplant.hpp
+	
+QMAKE_CXXFLAGS += -std=c++11
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
-
-message("Using spec: $$QMAKESPEC")
 
 linux-g++ | linux-g++-64 | linux-g++-32 {
     QMAKE_CXX = g++-4.8
@@ -48,4 +48,4 @@ linux-clang {
     QMAKE_CC = clang
 }
 
-QMAKE_CXXFLAGS += -std=c++11
+message("Using spec: $$QMAKESPEC\nCompiler: $QMAKE_CXX")
