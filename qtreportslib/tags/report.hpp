@@ -4,7 +4,7 @@
 #include <QString>
 #include <QSize>
 #include <QSharedPointer>
-#include "tags/object.hpp"
+#include "object.hpp"
 #include "painter.hpp"
 #include "processeddb.hpp"
 

@@ -20,18 +20,18 @@ SOURCES += main.cpp \
 
 
 
-HEADERS  += ../QtReports/engine.hpp \
-            ../QtReports/parser.hpp \
-            ../QtReports/processeddb.hpp \
-            ../QtReports/painter.hpp \
-            ../QtReports/objectsplant.hpp \
-            ../QtReports/tags/object.cpp \
-            ../QtReports/tags/report.hpp \
-            ../QtReports/tags/style.hpp \
-            ../QtReports/tags/title.hpp \
-            ../QtReports/tags/statictext.hpp \
-            ../QtReports/tags/detail.hpp \
-            ../QtReports/tags/band.hpp
+HEADERS  += ../qtreportslib/engine.hpp \
+            ../qtreportslib/parser.hpp \
+            ../qtreportslib/processeddb.hpp \
+            ../qtreportslib/painter.hpp \
+            ../qtreportslib/objectsplant.hpp \
+            ../qtreportslib/tags/object.cpp \
+            ../qtreportslib/tags/report.hpp \
+            ../qtreportslib/tags/style.hpp \
+            ../qtreportslib/tags/title.hpp \
+            ../qtreportslib/tags/statictext.hpp \
+            ../qtreportslib/tags/detail.hpp \
+            ../qtreportslib/tags/band.hpp
 
 QMAKE_CXXFLAGS += -std=c++11
 
