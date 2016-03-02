@@ -63,7 +63,7 @@ before_install:
   - pip install --user cpp-coveralls
  
 install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
+#  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
 #  - if [ "$CXX" = "clang++" ]; then export QTDIR="/opt/qt55/include"; fi
    
 # before_script:
