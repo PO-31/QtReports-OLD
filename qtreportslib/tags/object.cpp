@@ -149,7 +149,7 @@ namespace qtreports {
         }
 
         const QString   Object::getClassName() const {
-            return "Object";
+            return QString( "Object" );
         }
 
         bool	Object::drawChilds( Painter & painter, const ProcessedDB & db ) {

@@ -7,7 +7,7 @@ namespace qtreports {
             Object( parent ) {}
 
         const QString   StaticText::getClassName() const {
-            return "StaticText";
+            return QString( "StaticText" );
         }
 
     }
