@@ -52,12 +52,12 @@ notifications:
 before_install:
   - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-  - sudo apt-add-repository --yes ppa:beineri/opt-qt551
+  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
   - sudo apt-get update -qq
 #  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
 # - sudo apt-get install gcc-4.8 g++-4.8 clang
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install gcc-4.8 g++-4.8 qtbase5-dev qt5-default qttools5-dev-tools; fi
-  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qt-latest qt5-qmake qtchooser; fi
+  - if [ "$CXX" = "g++" ]; then sudo apt-get install gcc-4.8 g++-4.8 qt5-default; fi #qtbase5-dev qttools5-dev-tools
+  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qt-latest; fi # qt5-qmake qtchooser
   - if [ "$CXX" = "clang++" ]; then source /opt/qt55/bin/qt55-env.sh; fi
 #  - source .travis/${TRAVIS_OS_NAME}/before_install.sh
   - pip install --user cpp-coveralls
