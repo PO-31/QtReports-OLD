@@ -64,7 +64,7 @@ before_install:
  
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
-  - if [ "$CXX" = "clang++" ]; then export QTDIR="/opt/qt55/include"; fi
+#  - if [ "$CXX" = "clang++" ]; then export QTDIR="/opt/qt55/include"; fi
    
 # before_script:
 #  - mkdir -p build
@@ -73,12 +73,12 @@ install:
   
 script:
   - cd qtreportslib
-#  - if [ "$CXX" = "g++" ]; then qmake qtreports.pro; fi
-#  - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreports.pro; fi
-  - qmake qtreportslib.pro
+  - if [ "$CXX" = "g++" ]; then qmake qtreportslib.pro; fi
+  - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreportslib.pro; fi
   - make
   - cd ../qtreportsviewer
-  - qmake qtreportsviewer.pro
+  - if [ "$CXX" = "g++" ]; then qmake qtreportsviewer.pro; fi
+  - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreportsviewer.pro; fi
   - make
 #  - cmake --build . --target all -- --keep-going
 #  - cmake --build . --target check
