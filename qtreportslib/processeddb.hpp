@@ -8,31 +8,31 @@
 #include <QSqlField>
 
 namespace qtreports {
-	namespace detail {
+    namespace detail {
 
-		/* Обработанные запросы к БД и параметры. */
-		class ProcessedDB {
+        /* Обработанные запросы к БД и параметры. */
+        class ProcessedDB {
 
-		public:
-			ProcessedDB();
-			~ProcessedDB();
+        public:
+            ProcessedDB();
+            ~ProcessedDB();
 
-            QVariant	getParam( const QString & name ) ;
-            bool    	getField(const QString & queryName, const QString & columnName, int row , QVariant &result);
-            bool    	getField( const QString & queryName, int column, int row, QVariant &result);
+            QVariant	getParam( const QString & name );
+            bool    	getField( const QString & queryName, const QString & columnName, int row, QVariant &result );
+            bool    	getField( const QString & queryName, int column, int row, QVariant &result );
 
-            void        addParam( const QString & name, const QVariant & value);
-            void        addExecutedQuery(const QString & name, QSqlQueryModel *model);
+            void        addParam( const QString & name, const QVariant & value );
+            void        addExecutedQuery( const QString & name, QSqlQueryModel *model );
 
             QString     getError() const;
 
         private:
             QString                         m_errorString;
-
             QMap <QString, QSqlQueryModel*> m_queriesResults;
-		};
 
-	}
+        };
+
+    }
 }
 
 #endif // PROCESSEDDB_HPP
