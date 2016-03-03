@@ -1,3 +1,5 @@
+#include <QSqlRecord>
+#include <QSqlField>
 #include "processeddb.hpp"
 
 namespace qtreports {
@@ -7,11 +9,13 @@ namespace qtreports {
 
         ProcessedDB::~ProcessedDB() {}
 
-        QVariant ProcessedDB::getParam( const QString & name ) {
-            return QVariant();
+        bool    ProcessedDB::getParam( const QString & name, QVariant & result ) {
+            Q_UNUSED( name );
+            Q_UNUSED( result );
+            return false;
         }
 
-        bool ProcessedDB::getField( const QString & queryName, const QString & columnName, int row, QVariant & result ) {
+        bool    ProcessedDB::getField( const QString & queryName, const QString & columnName, int row, QVariant & result ) {
             if( !m_queriesResults.contains( queryName ) )
             {
                 m_errorString = "No such query with name " + queryName;
@@ -61,12 +65,17 @@ namespace qtreports {
             return true;
         }
 
-        void ProcessedDB::addExecutedQuery( const QString &name, QSqlQueryModel *model )
+        void    ProcessedDB::addParam( const QString & name, const QVariant & value ) {
+            Q_UNUSED( name );
+            Q_UNUSED( value );
+        }
+
+        void    ProcessedDB::addExecutedQuery( const QString &name, const QSqlQueryModelPtr & model )
         {
             m_queriesResults[ name ] = model;
         }
 
-        QString ProcessedDB::getError() const
+        const QString   ProcessedDB::getError() const
         {
             return m_errorString;
         }

@@ -4,11 +4,11 @@
 #include <QString>
 #include <QVariant>
 #include <QSqlQueryModel>
-#include <QSqlRecord>
-#include <QSqlField>
+#include <QSharedPointer>
 
 namespace qtreports {
     namespace detail {
+        typedef QSharedPointer< QSqlQueryModel > QSqlQueryModelPtr;
 
         /* Обработанные запросы к БД и параметры. */
         class ProcessedDB {
@@ -17,18 +17,18 @@ namespace qtreports {
             ProcessedDB();
             ~ProcessedDB();
 
-            QVariant    getParam( const QString & name );
+            bool        getParam( const QString & name, QVariant & result );
             bool        getField( const QString & queryName, const QString & columnName, int row, QVariant &result );
-            bool        getField( const QString & queryName, int column, int row, QVariant &result );
+            bool        getField( const QString & queryName, int column, int row, QVariant & result );
 
             void        addParam( const QString & name, const QVariant & value );
-            void        addExecutedQuery( const QString & name, QSqlQueryModel *model );
+            void        addExecutedQuery( const QString & name, const QSqlQueryModelPtr & model );
 
-            QString     getError() const;
+            const QString   getError() const;
 
         private:
-            QString                         m_errorString;
-            QMap <QString, QSqlQueryModel*> m_queriesResults;
+            QString                             m_errorString;
+            QMap< QString, QSqlQueryModelPtr >  m_queriesResults;
 
         };
 

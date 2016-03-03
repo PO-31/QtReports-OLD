@@ -128,11 +128,10 @@ namespace qtreports {
         }
     }
 
-    QSqlQueryModel* Engine::executeQuery( const QString &query )
-    {
-        QSqlQueryModel *result = new QSqlQueryModel();
-        result->setQuery( query, m_dbConnection );
-        return result;
+    QSqlQueryModelPtr   Engine::executeQuery( const QString &query ) {
+        QSqlQueryModelPtr model( new QSqlQueryModel() );
+        model->setQuery( query, m_dbConnection );
+        return model;
     }
 
     bool			    Engine::isCompiled() const {

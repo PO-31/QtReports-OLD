@@ -37,19 +37,17 @@ namespace qtreports {
         const QWidgetPtr    getWidget() const;
 
     private:
-        QString     m_lastError, m_compiledPath;
-        QWidgetPtr  m_widget;
-        bool        m_isCompiled;
-
+        bool                        m_isCompiled;
+        QString                     m_lastError, m_compiledPath;
+        QWidgetPtr                  m_widget;
         QMap< QString, QString >    m_dbQueries;
         QVector< QString >          m_scripts;
+        QSqlDatabase                m_dbConnection;
+        ProcessedDB                 m_processedDB;
 
-        QSqlDatabase    m_dbConnection;
-        ProcessedDB     m_processedDB;
-
-        void            drawPreview( QPrinter * printer );
-        void            prepareDB();
-        QSqlQueryModel* executeQuery( const QString & query );
+        void                drawPreview( QPrinter * printer );
+        void                prepareDB();
+        QSqlQueryModelPtr   executeQuery( const QString & query );
 
     };
 
