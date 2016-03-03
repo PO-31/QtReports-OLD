@@ -23,7 +23,7 @@ HEADERS += engine.hpp \
     painter.hpp \
     parser.hpp \
     objectsplant.hpp \
-	tags/object.hpp
+	tags/object.hpp \
     tags/style.hpp \
     tags/title.hpp \
     tags/statictext.hpp \
