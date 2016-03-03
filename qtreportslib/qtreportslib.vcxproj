@@ -150,6 +150,7 @@
     <ClCompile Include="tags\band.cpp" />
     <ClCompile Include="tags\detail.cpp" />
     <ClCompile Include="tags\drawingexception.cpp" />
+    <ClCompile Include="tags\field.cpp" />
     <ClCompile Include="tags\object.cpp" />
     <ClCompile Include="tags\report.cpp" />
     <ClCompile Include="tags\statictext.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="tags\band.hpp" />
     <ClInclude Include="tags\detail.hpp" />
     <ClInclude Include="tags\drawingexception.hpp" />
+    <ClInclude Include="tags\field.hpp" />
     <ClInclude Include="tags\object.hpp" />
     <ClInclude Include="tags\report.hpp" />
     <ClInclude Include="tags\statictext.hpp" />

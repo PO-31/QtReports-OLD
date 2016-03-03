@@ -29,6 +29,7 @@ namespace qtreports {
 
         private:
             bool	parseReport( const QString & text );
+            bool	parseField( const QString & text );
             bool	parseDetail( const QString & text );
             void	createWidget();
 

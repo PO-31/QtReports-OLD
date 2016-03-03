@@ -4,6 +4,7 @@ namespace qtreports {
     namespace detail {
 
         Object::Object( ObjectPtr parent ) :
+            QObject( parent.data() ),
             m_parent( parent ),
             m_pos( 0, 0 ),
             m_size( 0, 0 ),
@@ -149,7 +150,7 @@ namespace qtreports {
         }
 
         const QString   Object::getClassName() const {
-            return QString( "Object" );
+            return metaObject()->className();
         }
 
         bool	Object::drawChilds( Painter & painter, const ProcessedDB & db ) {

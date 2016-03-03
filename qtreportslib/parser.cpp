@@ -2,6 +2,7 @@
 #include <QLabel>
 #include <QTextBrowser>
 #include <QVBoxLayout>
+#include <QMessageBox>
 #include "parser.hpp"
 
 namespace qtreports {
@@ -29,40 +30,59 @@ namespace qtreports {
 
         bool	Parser::parseReport( const QString & text ) {
             QXmlStreamReader reader( text );
+            QString message;
             while( !reader.atEnd() ) {
-                reader.readNext();
-                if( reader.isStartDocument() ) {
+                reader.readNextStartElement();
+                if( !reader.isStartElement() ) {
                     continue;
                 }
 
-                if( reader.isStartElement() ) {
-                    auto name = reader.name();
-                    if( name == "detail" ) {
-                        auto detailData = reader.readElementText( QXmlStreamReader::ReadElementTextBehaviour::IncludeChildElements );
-                        auto result = parseDetail( detailData );
-                        if( !result ) {
-                            break;
-                        }
-                    }
-                    else if( name == "element2" ) {
-                        reader.readNext();
-                        //reader.text().toString();
+                auto name = reader.name().toString();
+                auto attributes = reader.attributes();
+                reader.readNext();
+                auto data = reader.text().toString();
+                message += name + ": " + data + "\n";
+                if( name == "detail" ) {
+                    if( !parseDetail( data ) ) {
+                        break;
                     }
                 }
-                reader.readNext();
+                else if( name == "field" ) {
+                    for( auto && attribute : attributes ) {
+                        //QMessageBox::warning( 0, "attributes", attribute.name().toString() + ": " + attribute.value().toString() );
+                    }
+                    if( !parseField( data ) ) {
+                        break;
+                    }
+                }
+                //}
             }
+            QMessageBox::warning( 0, "", message );
 
             if( reader.hasError() ) {
                 m_lastError = reader.errorString();
-                //return false;
+                return false;
             }
 
             createWidget();
             return true;
         }
 
+
+        bool Parser::parseField( const QString & text ) {
+            //QXmlStreamReader reader( text );
+            //QMessageBox::warning( 0, "", text );
+            //while( !reader.atEnd() ) {
+            //    reader.readNext();
+            //    auto attributes = reader.attributes();
+            //    reader.readNext();
+            //}
+
+            return true;
+        }
+
         bool	Parser::parseDetail( const QString & text ) {
-            QXmlStreamReader reader( text );
+            //QXmlStreamReader reader( text );
             //while( !reader.atEnd() ) {
             //reader.readNext();
             //if( reader.isStartElement() ) {
