@@ -8,43 +8,46 @@
 #include "parser.hpp"
 #include "processeddb.hpp"
 #include "painter.hpp"
+//#include "dbquery.h"
 #include "tags/object.hpp"
 #include "tags/report.hpp"
 
 namespace qtreports {
+    using namespace detail;
 
     class Engine : public QObject {
 
     public:
         Engine( QObject * parent = 0 );
         ~Engine();
-        
+
         bool    compile( const QString & path );
         bool    setParameters( const QMap< QString, QString > & map );
         bool    setConnection( const QSqlDatabase & connection );
-        
-        void    addQuery( const QString & query );
+
+        void    addQuery( const QString &queryName, const QString & query );
         void    addScript( const QString & script );
 
         bool    createPDF( const QString & path );
         bool    createHTML( const QString & path );//etc.
         bool    print();
-        
+
+        bool        	    isCompiled() const;
         const QString       getLastError() const;
         const QWidgetPtr    getWidget() const;
-        bool                isCompiled() const;
-
 
     private:
-        bool		        m_isCompiled;
-        QString		        m_lastError, m_compiledPath;
-        QWidgetPtr	        m_widget;
-        QList< QString >    m_dbQueriesList;
-        QList< QString >    m_scriptsList;
-        QSqlDatabase        m_dbConnection;
+        bool                        m_isCompiled;
+        QString                     m_lastError, m_compiledPath;
+        QWidgetPtr                  m_widget;
+        QMap< QString, QString >    m_dbQueries;
+        QVector< QString >          m_scripts;
+        QSqlDatabase                m_dbConnection;
+        ProcessedDB                 m_processedDB;
 
-        void		drawPreview( QPrinter * printer );
-        void        prepareDB();
+        void                drawPreview( QPrinter * printer );
+        void                prepareDB();
+        QSqlQueryModelPtr   executeQuery( const QString & query );
 
     };
 
