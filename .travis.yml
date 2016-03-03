@@ -48,6 +48,7 @@ notifications:
 #    - BUILD_TYPE=Coverage
 
 before_install:
+  - sudo -s
   - source .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
  
 install:
