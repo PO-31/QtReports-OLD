@@ -28,20 +28,38 @@ namespace qtreports {
             return parseReport( file.readAll() );
         }
 
+        void     readElement( QXmlStreamReader & reader, QString & message ) {
+            QString name( reader.name().toString() ), data;
+            while( !reader.atEnd() && !reader.isEndElement() ) {
+                reader.readNext();
+                if( reader.isStartElement() ) {
+                    readElement( reader, message );
+                }
+                data += reader.text().toString();
+            }
+            message += name + ": " + data + "1";
+        }
+
         bool	Parser::parseReport( const QString & text ) {
             QXmlStreamReader reader( text );
+            /*
             QString message;
             while( !reader.atEnd() ) {
-                reader.readNextStartElement();
-                if( !reader.isStartElement() ) {
+                reader.readNext();
+                if( reader.isStartElement() ) {
+                    readElement( reader, message );
                     continue;
                 }
 
                 auto name = reader.name().toString();
                 auto attributes = reader.attributes();
-                reader.readNext();
-                auto data = reader.text().toString();
-                message += name + ": " + data + "\n";
+                QString data;
+                while( !reader.atEnd() && !reader.isEndElement() && !reader.isStartElement() ) {
+                    reader.readNext();
+                    data += reader.text().toString();
+                }
+                
+                //message += name + ": " + data + "\n";
                 if( name == "detail" ) {
                     if( !parseDetail( data ) ) {
                         break;
@@ -55,10 +73,9 @@ namespace qtreports {
                         break;
                     }
                 }
-                //}
             }
             QMessageBox::warning( 0, "", message );
-
+            */
             if( reader.hasError() ) {
                 m_lastError = reader.errorString();
                 return false;
@@ -70,7 +87,7 @@ namespace qtreports {
 
 
         bool Parser::parseField( const QString & text ) {
-            //QXmlStreamReader reader( text );
+            QXmlStreamReader reader( text );
             //QMessageBox::warning( 0, "", text );
             //while( !reader.atEnd() ) {
             //    reader.readNext();
@@ -82,7 +99,7 @@ namespace qtreports {
         }
 
         bool	Parser::parseDetail( const QString & text ) {
-            //QXmlStreamReader reader( text );
+            QXmlStreamReader reader( text );
             //while( !reader.atEnd() ) {
             //reader.readNext();
             //if( reader.isStartElement() ) {
