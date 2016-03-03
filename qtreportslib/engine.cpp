@@ -49,12 +49,12 @@ namespace qtreports {
         return true;
     }
 
-    void Engine::addQuery( const QString & query ) {
-        m_dbQueriesList.append( query );
+    void Engine::addQuery( const QString & queryName, const QString & query ) {
+        m_dbQueries[ queryName ] = query;
     }
 
     void Engine::addScript( const QString & script ) {
-        m_scriptsList.append( script );
+        m_scripts.append( script );
     }
 
     bool	Engine::createPDF( const QString & path ) {
@@ -120,7 +120,22 @@ namespace qtreports {
     }
 
     void Engine::prepareDB() {
+        QMapIterator <QString, QString> queriesIterator( m_dbQueries );
 
+        while( queriesIterator.hasNext() ) {
+            queriesIterator.next();
+            m_processedDB.addExecutedQuery( queriesIterator.key(), executeQuery( queriesIterator.value() ) );
+        }
+    }
+
+    QSqlQueryModelPtr   Engine::executeQuery( const QString &query ) {
+        QSqlQueryModelPtr model( new QSqlQueryModel() );
+        model->setQuery( query, m_dbConnection );
+        return model;
+    }
+
+    bool			    Engine::isCompiled() const {
+        return m_isCompiled;
     }
 
     const QString		Engine::getLastError() const {
@@ -131,7 +146,4 @@ namespace qtreports {
         return m_widget;
     }
 
-    bool				Engine::isCompiled() const {
-        return m_isCompiled;
-    }
 }
