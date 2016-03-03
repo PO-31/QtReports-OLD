@@ -5,6 +5,7 @@ TEMPLATE = app
 CONFIG += release c++11
 
 SOURCES += main.cpp \
+            test_engine.cpp \
             ../../qtreportslib/engine.cpp \
             ../../qtreportslib/parser.cpp \
             ../../qtreportslib/processeddb.cpp \
@@ -18,7 +19,8 @@ SOURCES += main.cpp \
             ../../qtreportslib/tags/detail.cpp \
             ../../qtreportslib/tags/band.cpp \
 
-HEADERS  += ../../qtreportslib/engine.hpp \
+HEADERS  += test_engine.hpp \
+            ../../qtreportslib/engine.hpp \
             ../../qtreportslib/parser.hpp \
             ../../qtreportslib/processeddb.hpp \
             ../../qtreportslib/painter.hpp \

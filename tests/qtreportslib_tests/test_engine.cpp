@@ -9,5 +9,6 @@ Test_Engine::~Test_Engine() {}
 
 void    Test_Engine::compile() {
     qtreports::Engine engine;
-    QVERIFY2( engine.compile( "" ), engine.getLastError().toStdString().c_str() );
+    QString input = QFINDTESTDATA( "default.qreport" );
+    QVERIFY2( engine.compile( input ), engine.getLastError().toStdString().c_str() );
 }
