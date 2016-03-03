@@ -4,7 +4,10 @@
 
 int main( int argc, char *argv[] ) {
     QApplication a( argc, argv );
-    QTest::qExec( new Test_Engine, argc, argv );
+    int result = 0;
+    result |= QTest::qExec( new Test_Engine, argc, argv );
 
-    return a.exec();
+    return result;
+
+    //return a.exec();
 }

@@ -3,35 +3,14 @@ QT       +=  core gui sql widgets printsupport testlib
 TARGET = qtreportslib_tests
 TEMPLATE = app
 CONFIG += release c++11
+INCLUDEPATH += ../../qtreportslib
+LIBPATH     += ../../qtreportslib
+LIBS   += -lqtreportslib
 
 SOURCES += main.cpp \
-            test_engine.cpp \
-            ../../qtreportslib/engine.cpp \
-            ../../qtreportslib/parser.cpp \
-            ../../qtreportslib/processeddb.cpp \
-            ../../qtreportslib/painter.cpp \
-            ../../qtreportslib/objectsplant.cpp \
-            ../../qtreportslib/tags/object.cpp \
-            ../../qtreportslib/tags/report.cpp \
-            ../../qtreportslib/tags/style.cpp \
-            ../../qtreportslib/tags/title.cpp \
-            ../../qtreportslib/tags/statictext.cpp \
-            ../../qtreportslib/tags/detail.cpp \
-            ../../qtreportslib/tags/band.cpp \
+           test_engine.cpp
 
-HEADERS  += test_engine.hpp \
-            ../../qtreportslib/engine.hpp \
-            ../../qtreportslib/parser.hpp \
-            ../../qtreportslib/processeddb.hpp \
-            ../../qtreportslib/painter.hpp \
-            ../../qtreportslib/objectsplant.hpp \
-            ../../qtreportslib/tags/object.cpp \
-            ../../qtreportslib/tags/report.hpp \
-            ../../qtreportslib/tags/style.hpp \
-            ../../qtreportslib/tags/title.hpp \
-            ../../qtreportslib/tags/statictext.hpp \
-            ../../qtreportslib/tags/detail.hpp \
-            ../../qtreportslib/tags/band.hpp
+HEADERS  += test_engine.hpp
 
 QMAKE_CXXFLAGS += -std=c++11
 

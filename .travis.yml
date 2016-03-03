@@ -63,6 +63,7 @@ script:
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
   - make
+  - sudo make install
   - cd ../qtreportsviewer
   - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
   - make
