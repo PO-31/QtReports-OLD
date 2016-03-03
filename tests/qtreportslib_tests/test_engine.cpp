@@ -1,5 +1,5 @@
 ﻿#include <QTest>
-#include "../../qtreportslib/engine.hpp"
+#include <engine.hpp>
 #include "test_engine.hpp"
 
 Test_Engine::Test_Engine( QObject * parent ) : 

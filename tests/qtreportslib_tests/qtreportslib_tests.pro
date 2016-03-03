@@ -1,4 +1,4 @@
-QT       +=  core gui sql widgets printsupport testlib
+QT += core gui sql widgets printsupport testlib
 
 TARGET = qtreportslib_tests
 TEMPLATE = app

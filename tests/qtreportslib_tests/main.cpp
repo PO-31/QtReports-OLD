@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QTest>
 #include "test_engine.hpp"
 
