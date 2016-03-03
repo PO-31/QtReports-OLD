@@ -13,6 +13,9 @@ cache:
   apt: true
   directories:
     - $HOME/.cache/pip
+    - $HOME/.cache/http
+    - /home/travis/.cache/pip
+    - /home/travis/.cache/pip/http
     - /var/cache/apt/archives/
 
 branches:
@@ -39,9 +42,7 @@ notifications:
 #    - gcc-4.8
 #    - g++-4.8
 #    - clang
-#    - qtbase5-dev
 #    - qt5-default
-#    - qttools5-dev-tools
   
 #env:
 #  matrix:
@@ -50,21 +51,13 @@ notifications:
 #    - BUILD_TYPE=Coverage
 
 before_install:
-  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
-  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
-  - sudo apt-get update -qq
-#  - if [ "$CXX" = "clang++" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt551; fi
-# - sudo apt-get install gcc-4.8 g++-4.8 clang
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install gcc-4.8 g++-4.8 qt5-default; fi #qtbase5-dev qttools5-dev-tools
-  - if [ "$CXX" = "clang++" ]; then sudo apt-get -f install clang qt-latest; fi # qt5-qmake qtchooser
-  - if [ "$CXX" = "clang++" ]; then source /opt/qt55/bin/qt55-env.sh; fi
-#  - source .travis/${TRAVIS_OS_NAME}/before_install.sh
-  - pip install --user cpp-coveralls
+  - sudo sh .travis/${TRAVIS_OS_NAME}/before_install.sh
+  - sudo sh .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
  
 install:
 #  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
-#  - if [ "$CXX" = "clang++" ]; then export QTDIR="/opt/qt55/include"; fi
+  - source .travis/${TRAVIS_OS_NAME}/install.sh
+  - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
 # before_script:
 #  - mkdir -p build
@@ -73,12 +66,10 @@ install:
   
 script:
   - cd qtreportslib
-  - if [ "$CXX" = "g++" ]; then qmake qtreportslib.pro; fi
-  - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreportslib.pro; fi
+  - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
   - make
   - cd ../qtreportsviewer
-  - if [ "$CXX" = "g++" ]; then qmake qtreportsviewer.pro; fi
-  - if [ "$CXX" = "clang++" ]; then qmake -spec linux-clang qtreportsviewer.pro; fi
+  - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
   - make
 #  - cmake --build . --target all -- --keep-going
 #  - cmake --build . --target check
