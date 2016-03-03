@@ -74,4 +74,5 @@ script:
 
 after_success:
   - if [ "$BUILD_TYPE" == "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
+  - if [ "$CXX" = "g++" ]; cd ../../qtreportslib; fi
   - if [ "$CXX" = "g++" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "gcov-4.8" --gcov-options "\-lp" -r ../; fi
