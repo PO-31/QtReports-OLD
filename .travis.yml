@@ -48,8 +48,7 @@ notifications:
 #    - BUILD_TYPE=Coverage
 
 before_install:
-  - sudo -s
-  - source .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
+  - sudo sh .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
  
 install:
 #  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
