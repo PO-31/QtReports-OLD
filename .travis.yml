@@ -13,6 +13,9 @@ cache:
   apt: true
   directories:
     - $HOME/.cache/pip
+    - $HOME/.cache/http
+    - /home/travis/.cache/pip
+    - /home/travis/.cache/pip/http
     - /var/cache/apt/archives/
 
 branches:
