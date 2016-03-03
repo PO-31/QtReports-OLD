@@ -59,11 +59,6 @@ install:
   - source .travis/${TRAVIS_OS_NAME}/install.sh
   - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
-# before_script:
-#  - mkdir -p build
-#  - cd build
-#  - cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_PREFIX_PATH=${DEPS_PREFIX_PATH}
-  
 script:
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
@@ -71,8 +66,10 @@ script:
   - cd ../qtreportsviewer
   - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
   - make
-#  - cmake --build . --target all -- --keep-going
-#  - cmake --build . --target check
+  - cd ../tests/qreportlib_tests
+  - qmake -spec ${USING_QT_MKSPEC} qreportlib_tests.pro
+  - make
+  - ./qreportlib_tests
 
 after_success:
   - if [ "$BUILD_TYPE" == "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
