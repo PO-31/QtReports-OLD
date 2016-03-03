@@ -1,3 +1,5 @@
+#include <QSqlRecord>
+#include <QSqlField>
 #include "processeddb.hpp"
 
 namespace qtreports {
@@ -7,25 +9,76 @@ namespace qtreports {
 
         ProcessedDB::~ProcessedDB() {}
 
-        const QVariant ProcessedDB::getParam( const QString & name ) const {
+        bool    ProcessedDB::getParam( const QString & name, QVariant & result ) {
             Q_UNUSED( name );
-            return QVariant();
+            Q_UNUSED( result );
+            return false;
         }
 
-        const QVariant ProcessedDB::getField( const QString & queryName, const QString & columnName, int row ) const {
-            Q_UNUSED( queryName );
-            Q_UNUSED( columnName );
-            Q_UNUSED( row );
-            return QVariant();
+        bool    ProcessedDB::getField( const QString & queryName, const QString & columnName, int row, QVariant & result ) {
+            if( !m_queriesResults.contains( queryName ) )
+            {
+                m_errorString = "No such query with name " + queryName;
+                return false;
+            }
+            if( m_queriesResults[ queryName ]->rowCount() == 0 )
+            {
+                m_errorString = "No data";
+                return false;
+            }
+
+            QSqlRecord record = m_queriesResults[ queryName ]->record( row );
+
+            result = record.field( columnName ).value();
+
+            if( !result.isValid() )
+            {
+                m_errorString = "Result is not valid";
+                return false;
+            }
+
+            return true;
         }
 
-        const QVariant ProcessedDB::getField( const QString & queryName, int column, int row ) const {
-            Q_UNUSED( queryName );
-            Q_UNUSED( column );
-            Q_UNUSED( row );
-            return QVariant();
+        bool ProcessedDB::getField( const QString & queryName, int column, int row, QVariant &result ) {
+            if( !m_queriesResults.contains( queryName ) )
+            {
+                m_errorString = "No such query with name ";
+                return false;
+            }
+            if( m_queriesResults[ queryName ]->rowCount() == 0 )
+            {
+                m_errorString = "No data";
+                return false;
+            }
+
+            QSqlRecord record = m_queriesResults[ queryName ]->record( row );
+
+            result = record.field( column ).value();
+
+            if( !result.isValid() )
+            {
+                m_errorString = "Result is not valid";
+                return false;
+            }
+
+            return true;
         }
 
+        void    ProcessedDB::addParam( const QString & name, const QVariant & value ) {
+            Q_UNUSED( name );
+            Q_UNUSED( value );
+        }
+
+        void    ProcessedDB::addExecutedQuery( const QString &name, const QSqlQueryModelPtr & model )
+        {
+            m_queriesResults[ name ] = model;
+        }
+
+        const QString   ProcessedDB::getError() const
+        {
+            return m_errorString;
+        }
     }
 }
 
