@@ -66,10 +66,10 @@ script:
   - cd ../qtreportsviewer
   - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
   - make
-  - cd ../tests/qreportlib_tests
-  - qmake -spec ${USING_QT_MKSPEC} qreportlib_tests.pro
+  - cd ../tests/qreportslib_tests
+  - qmake -spec ${USING_QT_MKSPEC} qreportslib_tests.pro
   - make
-  - ./qreportlib_tests
+  - ./qreportslib_tests
 
 after_success:
   - if [ "$BUILD_TYPE" == "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
