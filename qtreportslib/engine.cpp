@@ -34,7 +34,7 @@ namespace qtreports {
     }
 
     bool	Engine::setParameters( const QMap< QString, QString > & map ) {
-        //QString or QVariant?
+        Q_UNUSED( map );
         return true;
     }
 
@@ -135,6 +135,10 @@ namespace qtreports {
         return result;
     }
 
+    bool			    Engine::isCompiled() const {
+        return m_isCompiled;
+    }
+
     const QString		Engine::getLastError() const {
         return m_lastError;
     }
@@ -143,7 +147,4 @@ namespace qtreports {
         return m_widget;
     }
 
-    const bool			Engine::isCompiled() const {
-        return m_isCompiled;
-    }
 }

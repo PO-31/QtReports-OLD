@@ -17,9 +17,9 @@ namespace qtreports {
             ProcessedDB();
             ~ProcessedDB();
 
-            QVariant	getParam( const QString & name );
-            bool    	getField( const QString & queryName, const QString & columnName, int row, QVariant &result );
-            bool    	getField( const QString & queryName, int column, int row, QVariant &result );
+            QVariant    getParam( const QString & name );
+            bool        getField( const QString & queryName, const QString & columnName, int row, QVariant &result );
+            bool        getField( const QString & queryName, int column, int row, QVariant &result );
 
             void        addParam( const QString & name, const QVariant & value );
             void        addExecutedQuery( const QString & name, QSqlQueryModel *model );
