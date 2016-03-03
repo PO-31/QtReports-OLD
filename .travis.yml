@@ -49,10 +49,10 @@ notifications:
 
 before_install:
   - sudo sh .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
-  - export USING_QT_MKSPEC="linux-g++-64"
  
 install:
 #  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
+  - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
 # before_script:
 #  - mkdir -p build
@@ -60,7 +60,6 @@ install:
 #  - cmake .. -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DCMAKE_PREFIX_PATH=${DEPS_PREFIX_PATH}
   
 script:
-  - echo $USING_QT_MKSPEC
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
   - make
