@@ -78,4 +78,4 @@ after_success:
   - if [ "$CXX" = "g++" ]; then cd ../../qtreportslib; fi
   - if [ "$CXX" = "g++" ]; then find / -name 'cpp_coveralls'; fi
   - if [ "$CXX" = "g++" ]; then find / -name 'coveralls'; fi
-  - if [ "$CXX" = "g++" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "gcov-4.8" --gcov-options "\-lp" -r ../; fi
+  - if [ "$CXX" = "g++" ]; then sudo ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "gcov-4.8" --gcov-options "\-lp" -r ../; fi
