@@ -31,8 +31,7 @@ HEADERS += engine.hpp \
     tags/detail.hpp \
     tags/band.hpp
 	
-QMAKE_CXXFLAGS += -std=c++11
-QMAKE_LDFLAGS +=-fprofile-arcs -ftest-coverage
+QMAKE_CXXFLAGS += -std=c++11 -fprofile-arcs -ftest-coverage
 LIBS += -lgcov
 
 unix {
