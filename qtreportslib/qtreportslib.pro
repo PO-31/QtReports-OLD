@@ -9,8 +9,10 @@ SOURCES += engine.cpp \
     processeddb.cpp \
     painter.cpp \
     parser.cpp \
-	converter.cpp \
     objectsplant.cpp \
+	converters/convertertohtml.cpp \
+	converters/convertertoqwidget.cpp \
+	converters/convertertopdf.cpp \
     tags/object.cpp \
 	tags/widget.cpp \
     tags/report.cpp \
@@ -26,8 +28,10 @@ HEADERS += engine.hpp \
     processeddb.hpp \
     painter.hpp \
     parser.hpp \
-	converter.hpp \
     objectsplant.hpp \
+	converters/convertertohtml.hpp \
+	converters/convertertoqwidget.hpp \
+	converters/convertertopdf.hpp \
 	tags/object.hpp \
 	tags/widget.hpp \
     tags/report.hpp \
