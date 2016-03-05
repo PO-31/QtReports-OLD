@@ -1,4 +1,3 @@
-#include "../painter.hpp"
 #include "widget.hpp"
 
 namespace qtreports {
@@ -11,16 +10,15 @@ namespace qtreports {
         Widget::~Widget() {}
 
         void	Widget::setPosition( const QPoint & pos ) {
-            if( pos.x() >= 0 && pos.y() >= 0 )
-                m_pos = pos;
+            m_pos = pos;
         }
 
         void	Widget::setSize( const QSize & size ) {
             m_size = size;
         }
 
-        void	Widget::setStyleName( const QString & name ) {
-            m_styleName = name;
+        void	Widget::setStyle( const StylePtr & style ) {
+            m_style = style;
         }
 
         const QPoint    Widget::getPos() const {
@@ -47,10 +45,10 @@ namespace qtreports {
             return m_size.height();
         }
 
-        const QString   Widget::getStyleName() const {
-            return m_styleName;
+        const StylePtr  Widget::getStyle() const {
+            return m_style;
         }
-
+        /*
         bool	Widget::setParameter( const QString & name, const QVariant & value ) {
             QString _x( "x" ), _y( "y" ), _w( "w" ), _h( "h" ), _style_name( "style_name" );
 
@@ -114,6 +112,7 @@ namespace qtreports {
 
             return Object::setParameter( name, value );
         }
+        */
 
     }
 }

@@ -2,13 +2,14 @@
 #ifndef WIDGET_HPP
 #define WIDGET_HPP
 
-#include <QVector>
+//#include <QVector>
 #include <QString>
-#include <QVariant>
+//#include <QVariant>
 #include <QPoint>
 #include <QSize>
 #include <QSharedPointer>
 
+#include "style.hpp"
 #include "object.hpp"
 
 namespace qtreports {
@@ -27,7 +28,7 @@ namespace qtreports {
             /* Установить размер объекта. Аргумент - размер объекта. */
             void			setSize( const QSize & size );
             /* Устанавливает индекс стиля объекта значением styleId, отрицательные значения - стиль по умолчанию. */
-            void            setStyleName( const QString & name );
+            void            setStyle( const StylePtr & style );
             
             const QPoint    getPos() const;
             int             getX() const;
@@ -38,7 +39,7 @@ namespace qtreports {
             int             getHeight() const;
 
             /* Возвращает индекс стиля. */
-            const QString   getStyleName() const;
+            const StylePtr  getStyle() const;
 
             /* Установить значение параметра объекта с именем name значением value. Имя параметра name - не чувствительно
              * к регистру.
@@ -48,12 +49,12 @@ namespace qtreports {
              *  - int "w" - ширина объекта;
              *  - int "h" - высота объекта;
              *  - int "style_name" - индекс стиля объекта. */
-            virtual bool    setParameter( const QString & name, const QVariant & value );
+            //virtual bool    setParameter( const QString & name, const QVariant & value );
 
         protected:
             QPoint					m_pos;
             QSize					m_size;
-            QString					m_styleName;
+            StylePtr				m_style;
 
         };
         typedef QSharedPointer< Widget > WidgetPtr;

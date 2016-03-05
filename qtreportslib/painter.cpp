@@ -129,7 +129,7 @@ namespace qtreports {
         }
 
         void	Painter::setDefaultStyle() {
-            setStyle( m_report->getDefaultStyleName() );
+            setStyle( m_report->getDefaultStyle() );
         }
 
         void	Painter::setStyle( const QString & name ) {

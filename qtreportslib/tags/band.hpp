@@ -1,10 +1,11 @@
 #pragma once
 #ifndef BAND_HPP
 #define BAND_HPP
+#include <QVector>
 #include <QSharedPointer>
-#include "widget.hpp"
 #include "statictext.hpp"
 #include "textfield.hpp"
+#include "widget.hpp"
 
 namespace qtreports {
     namespace detail {

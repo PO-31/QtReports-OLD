@@ -191,7 +191,7 @@ namespace qtreports {
             style->setPDFEmbedded( toBool( isPdfEmbedded ) );
             report->setStyle( name, style );
             if( isDefaultBool ) {
-                report->setDefaultStyleName( name );
+                report->setDefaultStyle( style );
             }
 
             return !reader.hasError();

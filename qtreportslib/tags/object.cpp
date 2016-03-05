@@ -16,7 +16,7 @@ namespace qtreports {
         void    Object::setName( const QString & name ) {
             m_name = name;
         }
-
+        /*
         bool    Object::setParameter( const QString & name, const QVariant & value ) {
             QString _name( "name" );
 
@@ -38,7 +38,7 @@ namespace qtreports {
             m_lastError = "Unknown argument";
             return false;
         }
-
+        */
         const QString   Object::getName() const {
             return m_name;
         }

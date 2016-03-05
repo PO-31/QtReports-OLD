@@ -19,7 +19,7 @@ namespace qtreports {
             virtual ~Object();
 
             void            setName( const QString & name );
-            virtual bool    setParameter( const QString & name, const QVariant & value );
+            //virtual bool    setParameter( const QString & name, const QVariant & value );
 
             const QString   getName() const;
             const QString	getLastError() const;

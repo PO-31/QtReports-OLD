@@ -54,12 +54,12 @@ namespace qtreports {
         }
         */
 
-        void    Report::setDefaultStyleName( const QString & name ) {
-            m_defaultStyleName = name;
+        void    Report::setDefaultStyle( const StylePtr & style ) {
+            m_defaultStyle = style;
         }
 
-        const QString   Report::getDefaultStyleName() const {
-            return m_defaultStyleName;
+        const StylePtr  Report::getDefaultStyle() const {
+            return m_defaultStyle;
         }
 
         void    Report::setStyle( const QString & name, const StylePtr & style ) {

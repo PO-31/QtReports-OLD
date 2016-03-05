@@ -29,8 +29,8 @@ namespace qtreports {
              *  - все параметры Object. */
             //bool	                            setParameter( const QString & name, const QVariant & value );
 
-            void                                setDefaultStyleName( const QString & name );
-            const QString                       getDefaultStyleName() const;
+            void                                setDefaultStyle( const StylePtr & style );
+            const StylePtr                      getDefaultStyle() const;
 
             void                                setStyle( const QString & name, const StylePtr & style );
             const StylePtr                      getStyle( const QString & name ) const;
@@ -49,7 +49,7 @@ namespace qtreports {
         private:
             bool	                    m_isVertical; //?
             QSize	                    m_size; //?
-            QString                     m_defaultStyleName;
+            StylePtr                    m_defaultStyle;
             QMap< QString, StylePtr >   m_styles;
             QString                     m_query;
             QMap< QString, FieldPtr >   m_fields;
