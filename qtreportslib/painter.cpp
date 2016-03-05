@@ -91,13 +91,13 @@ namespace qtreports {
             return true;
         }
 
-        bool Painter::drawImage(const QString &path, const QRect &rect)
-        {
-            QImage *image = new QImage();
-            bool isLoaded = image->load(path);
+        bool Painter::drawImage( const QString & path, const QRect & rect ) {
+            QImage image( path );
+            bool isLoaded = !image.isNull();
 
-            //if (isLoaded)
-            //    m_painter.drawImage(rect, image);
+            if( isLoaded ) {
+                m_painter.drawImage( rect, image );
+            }
 
             return isLoaded;
         }

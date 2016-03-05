@@ -11,7 +11,7 @@ namespace qtreports {
             //int id = QMetaType::type( name.toStdString().c_str() );
             //QMetaType type( id );
             //m_className = name;
-
+            Q_UNUSED( name );
             return true;// type.isValid();
         }
 
