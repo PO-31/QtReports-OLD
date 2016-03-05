@@ -15,7 +15,9 @@ int main( int argc, char *argv[] ) {
         return -1;
     }
 
-    result = engine.setParameters( { { "title", "Best Title in World" } } );
+    QMap < QString, QString > map;
+    map[ "title" ] = "Best Title in World";
+    result = engine.setParameters( map );//{ { "title", "Best Title in World" } }
     if( !result ) {
         QMessageBox::critical( 0, "Error: ", engine.getLastError() );
         return -1;
