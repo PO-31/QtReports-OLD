@@ -8,6 +8,5 @@ int main( int argc, char *argv[] ) {
     result |= QTest::qExec( new Test_Engine, argc, argv );
 
     return result;
-
     //return a.exec();
 }

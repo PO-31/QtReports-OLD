@@ -4,45 +4,57 @@
 
 #include <QString>
 #include <QSize>
+#include <QMap>
+#include <QVector>
 #include <QSharedPointer>
 
-#include "../painter.hpp"
-#include "../processeddb.hpp"
-#include "object.hpp"
+#include "widget.hpp"
+#include "field.hpp"
+#include "style.hpp"
+#include "detail.hpp"
 
 namespace qtreports {
     namespace detail {
-        class Report : public Object {
 
+        class Report {
+                 
         public:
             Report();
             ~Report();
-
-            /* Отрисовывает отчет. Аргументы те же, что и у Object::draw(...). */
-            bool	draw( Painter & p, const ProcessedDB & db );
-
-            const QString	asHTML() const;
 
             /* Список параметров Report:
              *  - int "page_width" - ширина страницы;
              *  - int "page_height" - высота страницы;
              *  - bool "is_vertical" - принимает значение true, если объект вертикальный;
              *  - все параметры Object. */
-            bool	        setParameter( const QString & name, const QVariant & value );
+            //bool	                            setParameter( const QString & name, const QVariant & value );
 
-            const QString   getClassName() const;
+            void                                setField( const QString & name, const FieldPtr & field );
+            const FieldPtr                      getField( const QString & name ) const;
+            const QMap< QString, FieldPtr >     getFields() const;
 
-        protected:
+            void                                setStyle( const QString & name, const StylePtr & style );
+            const StylePtr                      getStyle( const QString & name ) const;
+            const QMap< QString, StylePtr >     getStyles() const;
 
-            bool	drawSelf( Painter & painter, const ProcessedDB & db );
-            bool	prepareChilds( Painter & painter, const ProcessedDB & db );
+            void                                setDefaultStyleName( const QString & name );
+            const QString                       getDefaultStyleName() const;
 
+            void                                setDetail( const DetailPtr & detail );
+            const DetailPtr                     getDetail() const;
+
+        private:
             bool	m_isVertical;
             QSize	m_size;
 
-        };
+            DetailPtr                   m_detail;
+            QString                     m_defaultStyleName;
+            QMap< QString, StylePtr >   m_styles;
+            QMap< QString, FieldPtr >   m_fields;
 
+        };
         typedef QSharedPointer< Report > ReportPtr;
+
     }
 }
 

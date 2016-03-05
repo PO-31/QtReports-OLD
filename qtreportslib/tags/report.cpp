@@ -1,3 +1,4 @@
+#include "../painter.hpp"
 #include "report.hpp"
 
 namespace qtreports {
@@ -8,26 +9,8 @@ namespace qtreports {
             m_size( 600, 400 ) {}
 
         Report::~Report() {}
-
-        bool	Report::draw( Painter & painter, const ProcessedDB & db ) {
-            bool isNewPageRequired = false;
-            do {
-                if( !Object::draw( painter, db ) ) {
-                    return false;
-                }
-
-                isNewPageRequired = painter.isNewPageRequested();
-                painter.pageDrawingComplete();
-            } while( isNewPageRequired );
-
-            return true;
-        }
-
-        const QString	Report::asHTML() const {
-            return "Hello, world";
-        }
-
-        bool Report::setParameter( const QString & name, const QVariant & value ) {
+        /*
+        bool    Report::setParameter( const QString & name, const QVariant & value ) {
             QString page_width( "page_width" ), page_height( "page_height" ),
                 isVertical( "is_vertical" );
 
@@ -67,23 +50,55 @@ namespace qtreports {
                 return true;
             }
 
-            return Object::setParameter( name, value );
+            return true;// Object::setParameter( name, value );
+        }
+        */
+        void    Report::setField( const QString & name, const FieldPtr & field ) {
+            m_fields[ name ] = field;
         }
 
-        const QString   Report::getClassName() const {
-            return QString( "Report" );
+        const FieldPtr  Report::getField( const QString & name ) const {
+            if( m_fields.contains( name ) ) {
+                return m_fields[ name ];
+            }
+
+            return FieldPtr();
         }
 
-        bool	Report::drawSelf( Painter & painter, const ProcessedDB & db ) {
-            Q_UNUSED( painter )
-                Q_UNUSED( db )
-                return false;
+        const QMap< QString, FieldPtr >   Report::getFields() const {
+            return m_fields;
         }
 
-        bool	Report::prepareChilds( Painter & painter, const ProcessedDB & db ) {
-            Q_UNUSED( painter )
-                Q_UNUSED( db )
-                return false;
+        void    Report::setStyle( const QString & name, const StylePtr & style ) {
+            m_styles[ name ] = style;
+        }
+
+        const StylePtr  Report::getStyle( const QString & name ) const {
+            if( m_styles.contains( name ) ) {
+                return m_styles[ name ];
+            }
+
+            return StylePtr();
+        }
+
+        const QMap< QString, StylePtr >     Report::getStyles() const {
+            return m_styles;
+        }
+
+        void    Report::setDefaultStyleName( const QString & name ) {
+            m_defaultStyleName = name;
+        }
+
+        const QString   Report::getDefaultStyleName() const {
+            return m_defaultStyleName;
+        }
+
+        void    Report::setDetail( const DetailPtr & detail ) {
+            m_detail = detail;
+        }
+
+        const DetailPtr     Report::getDetail() const {
+            return m_detail;
         }
 
     }

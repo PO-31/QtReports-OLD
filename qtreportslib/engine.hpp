@@ -7,15 +7,17 @@
 #include <QPrinter>
 #include "parser.hpp"
 #include "processeddb.hpp"
-#include "painter.hpp"
+#include "converter.hpp"
+//#include "painter.hpp"
 //#include "dbquery.h"
-#include "tags/object.hpp"
-#include "tags/report.hpp"
+//#include "tags/object.hpp"
+//#include "tags/report.hpp"
 
 namespace qtreports {
     using namespace detail;
 
     class Engine : public QObject {
+        Q_OBJECT
 
     public:
         Engine( QObject * parent = 0 );
@@ -31,14 +33,15 @@ namespace qtreports {
         bool    createPDF( const QString & path );
         bool    createHTML( const QString & path );//etc.
         bool    print();
-
+        
         bool        	    isCompiled() const;
         const QString       getLastError() const;
-        const QWidgetPtr    getWidget() const;
+        const QWidgetPtr	createWidget() const;
 
     private:
         bool                        m_isCompiled;
         QString                     m_lastError, m_compiledPath;
+        ReportPtr                   m_report;
         QWidgetPtr                  m_widget;
         QMap< QString, QString >    m_dbQueries;
         QVector< QString >          m_scripts;

@@ -4,20 +4,18 @@
 
 #include <QString>
 #include <QColor>
+#include <QSharedPointer>
+
+#include "object.hpp"
 
 namespace qtreports {
     namespace detail {
 
-        class Style {
+        class Style : public Object {
+                 
         public:
             Style();
-            Style( int id );
-
-            int		id() const;
-            void	setId( int id );
-
-            QString	getName() const;
-            void	setName( const QString & name );
+            ~Style();
 
             bool	isDefault() const; // Является ли данный стиль стилем по умолчанию
             void	setDefault( bool flag );
@@ -43,11 +41,11 @@ namespace qtreports {
             bool        m_isBold;
             bool        m_isItalic;
             int         m_fontSize;
-            QString     m_name;
             QColor      m_fontColor;
             QString     m_fontName;
 
         };
+        typedef QSharedPointer< Style > StylePtr;
 
     }
 }

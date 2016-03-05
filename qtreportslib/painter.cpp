@@ -1,3 +1,6 @@
+#include <QPdfWriter>
+#include "tags/report.hpp"
+#include "tags/style.hpp"
 #include "painter.hpp"
 
 namespace qtreports {
@@ -108,23 +111,12 @@ namespace qtreports {
             return 0;
         }
 
-        void	Painter::setStyle( int styleId ) {
-            if( styleId < 0 ) {
-                for( auto && style : m_styles ) {
-                    if( style.isDefault() ) {
-                        setStyle( style );
-                        return;
-                    }
-                }
-            }
-            else {
-                for( int i = 0; i < m_styles.size(); ++i ) {
-                    if( m_styles.at( i ).id() == styleId ) {
-                        setStyle( m_styles.at( i ) );
-                        return;
-                    }
-                }
-            }
+        void	Painter::setDefaultStyle() {
+            setStyle( m_report->getDefaultStyleName() );
+        }
+
+        void	Painter::setStyle( const QString & name ) {
+            setStyle( m_report->getStyle( name ) );
         }
 
         const QString	Painter::getLastError() const {
@@ -135,19 +127,19 @@ namespace qtreports {
             //m_pdfWriter->newPage();
         }
 
-        void Painter::setStyle( const Style & style ) {
+        void Painter::setStyle( const StylePtr & style ) {
             QFont font;
-            font.setPointSize( style.fontSize() );
-            font.setFamily( style.fontName() );
+            font.setPointSize( style->fontSize() );
+            font.setFamily( style->fontName() );
 
-            if( style.isBold() ) {
+            if( style->isBold() ) {
                 font.setBold( true );
             }
             else {
                 font.setBold( false );
             }
 
-            if( style.isItalic() ) {
+            if( style->isItalic() ) {
                 font.setItalic( true );
             }
             else {
@@ -155,7 +147,7 @@ namespace qtreports {
             }
 
             m_painter.setFont( font );
-            m_painter.setPen( style.fontColor() );
+            m_painter.setPen( style->fontColor() );
         }
 
     }

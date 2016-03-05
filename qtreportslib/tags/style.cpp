@@ -3,37 +3,15 @@
 namespace qtreports {
     namespace detail {
 
-        Style::Style() : Style( -1 ) {}
-
-        Style::Style( int id ) :
-            m_id( id ),
+        Style::Style() : 
             m_isDefault( false ),
             m_isBold( false ),
             m_isItalic( false ),
             m_fontSize( 12 ) {}
 
-        int Style::id() const
-        {
-            return m_id;
-        }
+        Style::~Style() {}
 
-        void Style::setId( int id )
-        {
-            m_id = id;
-        }
-
-        QString Style::getName() const
-        {
-            return m_name;
-        }
-
-        void Style::setName( const QString &name )
-        {
-            m_name = name;
-        }
-
-        bool Style::isDefault() const
-        {
+        bool    Style::isDefault() const {
             return m_isDefault;
         }
 

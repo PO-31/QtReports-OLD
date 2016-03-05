@@ -15,7 +15,13 @@ int main( int argc, char *argv[] ) {
         return -1;
     }
 
-    auto widget = engine.getWidget();
+    result = engine.setParameters( { { "title", "Best Title in World" } } );
+    if( !result ) {
+        QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+        return -1;
+    }
+
+    auto widget = engine.createWidget();
     if( widget.isNull() ) {
         QMessageBox::critical( 0, "Error: ", "Widget is empty" );
         return -1;

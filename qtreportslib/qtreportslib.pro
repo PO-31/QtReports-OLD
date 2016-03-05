@@ -9,30 +9,39 @@ SOURCES += engine.cpp \
     processeddb.cpp \
     painter.cpp \
     parser.cpp \
+	converter.cpp \
     objectsplant.cpp \
     tags/object.cpp \
-    tags/style.cpp \
-    tags/title.cpp \
-    tags/statictext.cpp \
+	tags/widget.cpp \
     tags/report.cpp \
+    tags/style.cpp \
+	tags/field.cpp \
+    tags/title.cpp \
     tags/detail.cpp \
-    tags/band.cpp
+    tags/band.cpp \
+    tags/statictext.cpp \
+	tags/testfield.cpp
 
 HEADERS += engine.hpp \
     processeddb.hpp \
     painter.hpp \
     parser.hpp \
+	converter.hpp \
     objectsplant.hpp \
 	tags/object.hpp \
-    tags/style.hpp \
-    tags/title.hpp \
-    tags/statictext.hpp \
+	tags/widget.hpp \
     tags/report.hpp \
+    tags/style.hpp \
+	tags/field.hpp \
+    tags/title.hpp \
     tags/detail.hpp \
-    tags/band.hpp
+    tags/band.hpp \
+    tags/statictext.hpp \
+	tags/testfield.hpp
 	
-QMAKE_CXXFLAGS += -std=c++11 -g -Wall -fprofile-arcs -ftest-coverage -O0
-LIBS += -lgcov
+# -g -Wall -fprofile-arcs -ftest-coverage -O0
+QMAKE_CXXFLAGS += -std=c++11
+#LIBS += -lgcov
 
 unix {
     target.path = /usr/lib

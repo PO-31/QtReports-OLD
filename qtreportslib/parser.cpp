@@ -1,14 +1,12 @@
 #include <QFile>
-#include <QLabel>
-#include <QTextBrowser>
-#include <QVBoxLayout>
 #include <QMessageBox>
 #include "parser.hpp"
 
 namespace qtreports {
     namespace detail {
 
-        Parser::Parser() {}
+        Parser::Parser() :
+            m_report( new Report() ) {}
 
         Parser::~Parser() {}
 
@@ -25,111 +23,326 @@ namespace qtreports {
                 return false;
             }
 
-            return parseReport( file.readAll() );
+            return parseReport( file.readAll() );//.replace( " ", "" )
         }
 
-        void     readElement( QXmlStreamReader & reader, QString & message ) {
-            QString name( reader.name().toString() ), data;
+        bool    Parser::getValue( QXmlStreamReader & reader, QString & data ) {
             while( !reader.atEnd() && !reader.isEndElement() ) {
-                reader.readNext();
-                if( reader.isStartElement() ) {
-                    readElement( reader, message );
-                }
                 data += reader.text().toString();
-            }
-            message += name + ": " + data + "1";
-        }
-
-        bool	Parser::parseReport( const QString & text ) {
-            QXmlStreamReader reader( text );
-            /*
-            QString message;
-            while( !reader.atEnd() ) {
                 reader.readNext();
-                if( reader.isStartElement() ) {
-                    readElement( reader, message );
-                    continue;
-                }
-
-                auto name = reader.name().toString();
-                auto attributes = reader.attributes();
-                QString data;
-                while( !reader.atEnd() && !reader.isEndElement() && !reader.isStartElement() ) {
-                    reader.readNext();
-                    data += reader.text().toString();
-                }
-                
-                //message += name + ": " + data + "\n";
-                if( name == "detail" ) {
-                    if( !parseDetail( data ) ) {
-                        break;
-                    }
-                }
-                else if( name == "field" ) {
-                    for( auto && attribute : attributes ) {
-                        //QMessageBox::warning( 0, "attributes", attribute.name().toString() + ": " + attribute.value().toString() );
-                    }
-                    if( !parseField( data ) ) {
-                        break;
-                    }
-                }
             }
-            QMessageBox::warning( 0, "", message );
-            */
+
             if( reader.hasError() ) {
                 m_lastError = reader.errorString();
                 return false;
             }
 
-            createWidget();
             return true;
         }
 
+        bool    Parser::getAttribute( QXmlStreamReader & reader, const QString & name, QString & data ) {
+            auto && attributes = reader.attributes();
+            if( !attributes.hasAttribute( name ) ) {
+                auto elementName = reader.name().toString();
+                m_lastError =   "Element \"" + reader.name().toString() +
+                                "\" not have attribute: " + name;
+                return false;
+            }
+            data = attributes.value( name ).toString();
 
-        bool Parser::parseField( const QString & text ) {
+            return true;
+        }
+
+        bool	Parser::parseReport( const QString & text ) {
             QXmlStreamReader reader( text );
-            //QMessageBox::warning( 0, "", text );
-            //while( !reader.atEnd() ) {
-            //    reader.readNext();
-            //    auto attributes = reader.attributes();
-            //    reader.readNext();
-            //}
+            
+            //QString message;
+            while( !reader.atEnd() ) {
+                reader.readNext();
+                if( !reader.isStartElement() ) {
+                    continue;
+                }
+
+                auto name = reader.name().toString();
+                //message += name + "\n";
+                if( name == "style" ) {
+                    if( !parseStyle( reader, m_report ) ) {
+                        return false;
+                    }
+                }
+                else if( name == "field" ) {
+                    if( !parseField( reader, m_report ) ) {
+                        return false;
+                    }
+                }
+                else if( name == "detail" ) {
+                    if( !parseDetail( reader, m_report ) ) {
+                        return false;
+                    }
+                }
+            }
+            //QMessageBox::warning( 0, "", message );
+
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
 
             return true;
         }
 
-        bool	Parser::parseDetail( const QString & text ) {
-            QXmlStreamReader reader( text );
-            //while( !reader.atEnd() ) {
-            //reader.readNext();
-            //if( reader.isStartElement() ) {
-            //auto name = reader.name();
-            //if( name == "band" ) {
-            //m_data += reader.readElementText();
-            //return true;
-            //}
-            //}
-            //reader.readNext();
-            //}
-            //reader.readNext();
-            //text += reader.text().toString();
-            //reader.text().toString();
+        bool    Parser::parseStyle( QXmlStreamReader & reader, const ReportPtr & report ) {
+            QString name;
+            if( !getAttribute( reader, "name", name ) ) {
+                return false;
+            }
+
+            QString isDefault;
+            if( !getAttribute( reader, "isDefault", isDefault ) ) {
+                return false;
+            }
+
+            QString fontName;
+            if( !getAttribute( reader, "fontName", fontName ) ) {
+                return false;
+            }
+
+            QString fontSize;
+            if( !getAttribute( reader, "fontSize", fontSize ) ) {
+                return false;
+            }
+
+            QString pdfFontName;
+            if( !getAttribute( reader, "pdfFontName", pdfFontName ) ) {
+                return false;
+            }
+
+            QString pdfEncoding;
+            if( !getAttribute( reader, "pdfEncoding", pdfEncoding ) ) {
+                return false;
+            }
+
+            QString isPdfEmbedded;
+            if( !getAttribute( reader, "isPdfEmbedded", isPdfEmbedded ) ) {
+                return false;
+            }
+
+            StylePtr field( new Style() );
+            report->setStyle( name, field );
+
+            return !reader.hasError();
+        }
+
+        bool    Parser::parseField( QXmlStreamReader & reader, const ReportPtr & report ) {
+            QString name;
+            if( !getAttribute( reader, "name", name ) ) {
+                return false;
+            }
+
+            QString className;
+            if( !getAttribute( reader, "class", className ) ) {
+                return false;
+            }
+
+            FieldPtr field( new Field() );
+            field->setClassName( className );
+            report->setField( name, field );
+            
+            return !reader.hasError();
+        }
+
+        bool	Parser::parseDetail( QXmlStreamReader & reader, const ReportPtr & report ) {
+            DetailPtr detail( new Detail() );
+            while( !reader.atEnd() ) {
+                reader.readNext();
+                if( reader.isEndElement() ) {
+                    break;
+                }
+                if( !reader.isStartElement() ) {
+                    continue;
+                }
+
+                auto name = reader.name().toString();
+                if( name == "band" ) {
+                    if( !parseBand( reader, detail ) ) {
+                        return false;
+                    }
+                }
+            }
+
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
+
+            report->setDetail( detail );
 
             return true;
         }
 
-        void	Parser::createWidget() {
-            m_widget = QWidgetPtr( new QWidget() );
-            m_widget->resize( 600, 400 );
+        bool	Parser::parseBand( QXmlStreamReader & reader, const DetailPtr & detail ) {
+            QString height;
+            if( !getAttribute( reader, "height", height ) ) {
+                return false;
+            }
 
-            QTextBrowser * browser = new QTextBrowser();
-            browser->setText( m_report->asHTML() );
+            BandPtr band( new Band() );
+            while( !reader.atEnd() ) {
+                reader.readNext();
+                if( reader.isEndElement() ) {
+                    break;
+                }
+                if( !reader.isStartElement() ) {
+                    continue;
+                }
 
-            QVBoxLayout * layout = new QVBoxLayout( m_widget.data() );
-            layout->setMargin( 0 );
-            layout->addWidget( browser );
+                auto name = reader.name().toString();
+                //QMessageBox::warning( 0, "", name );
+                if( name == "staticText" ) {
+                    if( !parseStaticText( reader, band ) ) {
+                        return false;
+                    }
+                }
+                else if( name == "textField" ) {
+                    if( !parseTextField( reader, band ) ) {
+                        return false;
+                    }
+                }
+            }
+
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
+
+            band->setSize( QSize( 0, height.toInt() ) );
+            detail->addBand( band );
+
+            return true;
         }
 
+        bool	Parser::parseStaticText( QXmlStreamReader & reader, const BandPtr & band ) {
+            StaticTextPtr staticText( new StaticText() );
+            while( !reader.atEnd() ) {
+                reader.readNext();
+                if( reader.isEndElement() ) {
+                    break;
+                }
+                if( !reader.isStartElement() ) {
+                    continue;
+                }
+
+                auto name = reader.name().toString();
+                if( name == "reportElement" ) {
+                    if( !parseReportElement( reader, staticText ) ) {
+                        return false;
+                    }
+                }
+                else if( name == "text" ) {
+                    if( !parseText( reader, staticText ) ) {
+                        return false;
+                    }
+                }
+            }
+
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
+
+            band->addStaticText( staticText );
+
+            return true;
+        }
+
+        bool	Parser::parseTextField( QXmlStreamReader & reader, const BandPtr & band ) {
+            TextFieldPtr textField( new TextField() );
+            while( !reader.atEnd() ) {
+                reader.readNext();
+                if( reader.isEndElement() ) {
+                    break;
+                }
+                if( !reader.isStartElement() ) {
+                    continue;
+                }
+
+                auto name = reader.name().toString();
+                if( name == "reportElement" ) {
+                    if( !parseReportElement( reader, textField ) ) {
+                        return false;
+                    }
+                }
+                else if( name == "textFieldExpression" ) {
+                    if( !parseTextFieldExpression( reader, textField ) ) {
+                        return false;
+                    }
+                }
+            }
+
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
+
+            band->addTextField( textField );
+
+            return true;
+        }
+
+        bool	Parser::parseReportElement( QXmlStreamReader & reader, const WidgetPtr & staticText ) {
+            QString x;
+            if( !getAttribute( reader, "x", x ) ) {
+                return false;
+            }
+
+            QString y;
+            if( !getAttribute( reader, "y", y ) ) {
+                return false;
+            }
+
+            QString width;
+            if( !getAttribute( reader, "width", width ) ) {
+                return false;
+            }
+
+            QString height;
+            if( !getAttribute( reader, "height", height ) ) {
+                return false;
+            }
+
+            while( !reader.atEnd() && !reader.isEndElement() ) {
+                reader.readNext();
+            }
+
+            QPoint pos( x.toInt(), y.toInt() );
+            QSize size( width.toInt(), height.toInt() );
+            staticText->setPosition( pos );
+            staticText->setSize( size );
+
+            return !reader.hasError();
+        }
+
+        bool	Parser::parseText( QXmlStreamReader & reader, const StaticTextPtr & staticText ) {
+            QString text;
+            if( !getValue( reader, text ) ) {
+                return false;
+            }
+
+            staticText->setText( text );
+
+            return !reader.hasError();
+        }
+
+        bool	Parser::parseTextFieldExpression( QXmlStreamReader & reader, const TextFieldPtr & textField ) {
+            QString text;
+            if( !getValue( reader, text ) ) {
+                return false;
+            }
+
+            textField->setText( text );
+
+            return !reader.hasError();
+        }
 
         const ReportPtr			Parser::getReport() const {
             return m_report;
@@ -137,14 +350,6 @@ namespace qtreports {
 
         const QString			Parser::getLastError() const {
             return m_lastError;
-        }
-
-        const QWidgetPtr		Parser::getWidget() const {
-            return m_widget;
-        }
-
-        const QVector< Style >	Parser::getStyles() const {
-            return m_styles;
         }
 
     }

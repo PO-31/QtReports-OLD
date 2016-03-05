@@ -1,11 +1,7 @@
-#include <QPdfWriter>
 #include <QPrintDialog>
 #include <QPainter>
 #include <QPrintPreviewWidget>
 #include <QPrintPreviewDialog>
-//#include <QTextBrowser>
-#include <QFile>
-//#include <QTextStream>
 #include "engine.hpp"
 
 namespace qtreports {
@@ -29,12 +25,13 @@ namespace qtreports {
 
         prepareDB();
 
-        m_widget = parser.getWidget();
+        m_report = parser.getReport();
         return true;
     }
 
     bool	Engine::setParameters( const QMap< QString, QString > & map ) {
-        Q_UNUSED( map );
+        auto text = m_report->getDetail()->getBands()[ 0 ]->getTextFields()[ 0 ]->getText();
+        m_report->getDetail()->getBands()[ 0 ]->getTextFields()[ 0 ]->setText( map[ "title" ] );
         return true;
     }
 
@@ -58,39 +55,29 @@ namespace qtreports {
     }
 
     bool	Engine::createPDF( const QString & path ) {
-        QPdfWriter writer( path );
-        //Very small, need resize to page size.
-        m_widget->render( &writer );
-        return true;
-    }
-
-    bool	Engine::createHTML( const QString & path ) {
-        auto isCopied = QFile::copy( m_compiledPath, path );
-        if( !isCopied ) {
-            m_lastError = "Can not create html file";
+        Converter converter( m_report );
+        auto result = converter.toPDF( path );
+        if( !result ) {
+            m_lastError = converter.getLastError();
             return false;
         }
 
         return true;
-        /*
-        auto browser = dynamic_cast< QTextBrowser * >( m_widget.data() );
-        QFile file( path );
-        file.open(
-        QIODevice::OpenModeFlag::WriteOnly |
-        QIODevice::OpenModeFlag::Text |
-        QIODevice::OpenModeFlag::Truncate
-        );
+    }
 
-        if( !file.isOpen() ) {
-        m_lastError = "The file can not be opened";
-        return false;
+    bool	Engine::createHTML( const QString & path ) {
+        Converter converter( m_report );
+        auto result = converter.toHTML( path );
+        if( !result ) {
+            m_lastError = converter.getLastError();
+            return false;
         }
 
-        QTextStream stream( &file );
-        stream << browser->toHtml();
-
         return true;
-        */
+    }
+
+    const QWidgetPtr	Engine::createWidget() const {
+        return Converter( m_report ).toQWidget();
     }
 
     bool	Engine::print() {
@@ -119,7 +106,7 @@ namespace qtreports {
         m_widget->render( &painter );
     }
 
-    void Engine::prepareDB() {
+    void    Engine::prepareDB() {
         QMapIterator <QString, QString> queriesIterator( m_dbQueries );
 
         while( queriesIterator.hasNext() ) {
@@ -140,10 +127,6 @@ namespace qtreports {
 
     const QString		Engine::getLastError() const {
         return m_lastError;
-    }
-
-    const QWidgetPtr	Engine::getWidget() const {
-        return m_widget;
     }
 
 }

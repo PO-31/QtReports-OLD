@@ -1,7 +1,10 @@
 #pragma once
 #ifndef DETAIL_HPP
 #define DETAIL_HPP
-#include "object.hpp"
+#include <QVector>
+#include <QSharedPointer>
+#include "widget.hpp"
+#include "band.hpp"
 
 namespace qtreports {
     namespace detail {
@@ -9,11 +12,19 @@ namespace qtreports {
         class Detail : public Object {
 
         public:
-            Detail( ObjectPtr parent = ObjectPtr() );
+            Detail();
+            ~Detail();
 
-            const QString   getClassName() const;
+            void                        addBand( const BandPtr & band );
+            const BandPtr               getBand( int index ) const;
+            int                         getBandsSize() const;
+            const QVector< BandPtr >    getBands() const;
+
+        private:
+            QVector< BandPtr >  m_bands;
 
         };
+        typedef QSharedPointer< Detail > DetailPtr;
 
     }
 }
