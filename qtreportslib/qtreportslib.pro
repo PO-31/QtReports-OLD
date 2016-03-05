@@ -20,7 +20,7 @@ SOURCES += engine.cpp \
     tags/detail.cpp \
     tags/band.cpp \
     tags/statictext.cpp \
-	tags/testfield.cpp
+	tags/textfield.cpp
 
 HEADERS += engine.hpp \
     processeddb.hpp \
@@ -37,7 +37,7 @@ HEADERS += engine.hpp \
     tags/detail.hpp \
     tags/band.hpp \
     tags/statictext.hpp \
-	tags/testfield.hpp
+	tags/textfield.hpp
 	
 # -g -Wall -fprofile-arcs -ftest-coverage -O0
 QMAKE_CXXFLAGS += -std=c++11
