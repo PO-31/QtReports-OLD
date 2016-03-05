@@ -7,10 +7,10 @@ compiler:
 os:
   - linux
   
-matrix:
-  include:
-    - compiler: gcc
-      env: BUILD_TYPE=coverage
+#matrix:
+#  include:
+#   - compiler: gcc
+#     env: BUILD_TYPE=coverage
 
 #sudo: false
   
