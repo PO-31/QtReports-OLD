@@ -96,8 +96,8 @@ namespace qtreports {
             QImage *image = new QImage();
             bool isLoaded = image->load(path);
 
-            if (isLoaded)
-                m_painter.drawImage(rect, image);
+            //if (isLoaded)
+            //    m_painter.drawImage(rect, image);
 
             return isLoaded;
         }
