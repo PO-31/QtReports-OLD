@@ -85,6 +85,23 @@ namespace qtreports {
             return true;
         }
 
+        bool Painter::drawRect(const QRect &rect)
+        {
+            m_painter.drawRect(rect);
+            return true;
+        }
+
+        bool Painter::drawImage(const QString &path, const QRect &rect)
+        {
+            QImage *image = new QImage();
+            bool isLoaded = image->load(path);
+
+            if (isLoaded)
+                m_painter.drawImage(rect, image);
+
+            return isLoaded;
+        }
+
         bool	Painter::drawText( int x, int y, const QString & text ) {
             m_painter.drawText( x, y, text );
             return true;

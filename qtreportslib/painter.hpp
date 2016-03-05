@@ -43,6 +43,8 @@ namespace qtreports {
             void	pageDrawingComplete();
 
             bool	drawLine( const QPoint & point1, const QPoint & point2 );
+            bool        drawRect( const QRect & rect );
+            bool        drawImage( const QString & path, const QRect & rect);
 
             bool	drawText( int x, int y, const QString & text );
 
