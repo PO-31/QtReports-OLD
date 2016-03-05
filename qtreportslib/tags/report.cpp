@@ -6,7 +6,10 @@ namespace qtreports {
 
         Report::Report() :
             m_isVertical( true ),
-            m_size( 600, 400 ) {}
+            m_size( 600, 400 ) {
+            Q_UNUSED( m_isVertical );
+            Q_UNUSED( m_size );
+        }
 
         Report::~Report() {}
         /*
