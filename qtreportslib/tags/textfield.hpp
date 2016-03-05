@@ -16,8 +16,12 @@ namespace qtreports {
             void            setText( const QString & text );
             const QString   getText() const;
 
+            void            setClassName( const QString & name );
+            const QString   getClassName() const;
+
         private:
             QString     m_text;
+            QString     m_className;
 
         };
         typedef QSharedPointer< TextField > TextFieldPtr;

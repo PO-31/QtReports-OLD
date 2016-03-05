@@ -5,13 +5,9 @@
 #include <QMap>
 #include <QSqlDatabase>
 #include <QPrinter>
+#include "converters/convertertoqwidget.hpp"
 #include "parser.hpp"
 #include "processeddb.hpp"
-#include "converter.hpp"
-//#include "painter.hpp"
-//#include "dbquery.h"
-//#include "tags/object.hpp"
-//#include "tags/report.hpp"
 
 namespace qtreports {
     using namespace detail;
@@ -30,13 +26,13 @@ namespace qtreports {
         void    addQuery( const QString &queryName, const QString & query );
         void    addScript( const QString & script );
 
-        bool    createPDF( const QString & path );
-        bool    createHTML( const QString & path );//etc.
-        bool    print();
+        bool                createPDF( const QString & path );
+        bool                createHTML( const QString & path );//etc.
+        const QWidgetPtr	createWidget();
+        bool                print();
         
         bool        	    isCompiled() const;
         const QString       getLastError() const;
-        const QWidgetPtr	createWidget() const;
 
     private:
         bool                        m_isCompiled;

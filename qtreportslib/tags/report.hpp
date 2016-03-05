@@ -8,7 +8,7 @@
 #include <QVector>
 #include <QSharedPointer>
 
-#include "widget.hpp"
+#include "object.hpp"
 #include "field.hpp"
 #include "style.hpp"
 #include "detail.hpp"
@@ -16,7 +16,7 @@
 namespace qtreports {
     namespace detail {
 
-        class Report {
+        class Report : public Object {
                  
         public:
             Report();
@@ -29,28 +29,31 @@ namespace qtreports {
              *  - все параметры Object. */
             //bool	                            setParameter( const QString & name, const QVariant & value );
 
-            void                                setField( const QString & name, const FieldPtr & field );
-            const FieldPtr                      getField( const QString & name ) const;
-            const QMap< QString, FieldPtr >     getFields() const;
+            void                                setDefaultStyleName( const QString & name );
+            const QString                       getDefaultStyleName() const;
 
             void                                setStyle( const QString & name, const StylePtr & style );
             const StylePtr                      getStyle( const QString & name ) const;
             const QMap< QString, StylePtr >     getStyles() const;
 
-            void                                setDefaultStyleName( const QString & name );
-            const QString                       getDefaultStyleName() const;
+            void                                setQuery( const QString & query );
+            const QString                       getQuery() const;
+
+            void                                setField( const QString & name, const FieldPtr & field );
+            const FieldPtr                      getField( const QString & name ) const;
+            const QMap< QString, FieldPtr >     getFields() const;
 
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
         private:
-            bool	m_isVertical;
-            QSize	m_size;
-
-            DetailPtr                   m_detail;
+            bool	                    m_isVertical; //?
+            QSize	                    m_size; //?
             QString                     m_defaultStyleName;
             QMap< QString, StylePtr >   m_styles;
+            QString                     m_query;
             QMap< QString, FieldPtr >   m_fields;
+            DetailPtr                   m_detail;
 
         };
         typedef QSharedPointer< Report > ReportPtr;

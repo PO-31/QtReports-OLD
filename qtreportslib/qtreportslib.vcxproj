@@ -143,7 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="converter.cpp" />
+    <ClCompile Include="converters\convertertohtml.cpp" />
+    <ClCompile Include="converters\convertertopdf.cpp" />
+    <ClCompile Include="converters\convertertoqwidget.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_engine.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -160,6 +162,7 @@
     <ClCompile Include="tags\detail.cpp" />
     <ClCompile Include="tags\field.cpp" />
     <ClCompile Include="tags\object.cpp" />
+    <ClCompile Include="tags\querystring.cpp" />
     <ClCompile Include="tags\report.cpp" />
     <ClCompile Include="tags\statictext.cpp" />
     <ClCompile Include="tags\style.cpp" />
@@ -169,6 +172,10 @@
     <ClCompile Include="tags\widget.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="converters\convertertohtml.hpp" />
+    <ClInclude Include="converters\convertertopdf.hpp" />
+    <ClInclude Include="converters\convertertoqwidget.hpp" />
+    <ClInclude Include="tags\querystring.hpp" />
     <ClInclude Include="tags\textfield.hpp" />
     <CustomBuild Include="engine.hpp">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -188,7 +195,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_PRINTSUPPORT_LIB -DQT_GUI_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtPrintSupport" "-I$(QTDIR)\include\QtGui" "-I.\tags"</Command>
     </CustomBuild>
-    <ClInclude Include="converter.hpp" />
     <ClInclude Include="objectsplant.hpp" />
     <ClInclude Include="painter.hpp" />
     <ClInclude Include="processeddb.hpp" />

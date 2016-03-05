@@ -36,6 +36,9 @@
     <Filter Include="Tags">
       <UniqueIdentifier>{43996f6b-420c-41a3-9f85-112a0b3471d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="converters">
+      <UniqueIdentifier>{83a7da29-a9e7-496e-9d6f-53cb62f12123}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="processeddb.cpp">
@@ -86,11 +89,20 @@
     <ClCompile Include="GeneratedFiles\Release\moc_engine.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="converter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tags\textfield.cpp">
       <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\querystring.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="converters\convertertohtml.cpp">
+      <Filter>converters</Filter>
+    </ClCompile>
+    <ClCompile Include="converters\convertertopdf.cpp">
+      <Filter>converters</Filter>
+    </ClCompile>
+    <ClCompile Include="converters\convertertoqwidget.cpp">
+      <Filter>converters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,11 +118,20 @@
     <ClInclude Include="parser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="converter.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tags\textfield.hpp">
       <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\querystring.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="converters\convertertohtml.hpp">
+      <Filter>converters</Filter>
+    </ClInclude>
+    <ClInclude Include="converters\convertertopdf.hpp">
+      <Filter>converters</Filter>
+    </ClInclude>
+    <ClInclude Include="converters\convertertoqwidget.hpp">
+      <Filter>converters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

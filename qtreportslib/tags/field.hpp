@@ -12,7 +12,8 @@ namespace qtreports {
             Field();
             ~Field();
 
-            bool    setClassName( const QString & name );
+            void            setClassName( const QString & name );
+            const QString   getClassName() const;
 
         private:
             QString     m_className;

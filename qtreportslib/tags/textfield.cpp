@@ -15,5 +15,13 @@ namespace qtreports {
             return m_text;
         }
 
+        void    TextField::setClassName( const QString & name ) {
+            m_className = name;
+        }
+
+        const QString   TextField::getClassName() const {
+            return m_className;
+        }
+
     }
 }

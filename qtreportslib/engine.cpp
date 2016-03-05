@@ -2,6 +2,8 @@
 #include <QPainter>
 #include <QPrintPreviewWidget>
 #include <QPrintPreviewDialog>
+#include "converters/convertertopdf.hpp"
+#include "converters/convertertohtml.hpp"
 #include "engine.hpp"
 
 namespace qtreports {
@@ -30,8 +32,28 @@ namespace qtreports {
     }
 
     bool	Engine::setParameters( const QMap< QString, QString > & map ) {
-        auto text = m_report->getDetail()->getBands()[ 0 ]->getTextFields()[ 0 ]->getText();
-        m_report->getDetail()->getBands()[ 0 ]->getTextFields()[ 0 ]->setText( map[ "title" ] );
+        if( m_report.isNull() ) {
+            m_lastError = "Report is empty. Please create report from compile()";
+            return false;
+        }
+
+        auto detail = m_report->getDetail();
+        if( detail.isNull() ) {
+            m_lastError = "Report->Detail is empty. Please create report from compile()";
+            return false;
+        }
+
+        for( auto && band : detail->getBands() ) {
+            for( auto && textField : band->getTextFields() ) {
+                auto text = textField->getText();
+                text = text.replace( "\n", "" ).replace( "\r", "" ).replace( " ", "" );
+                if( text.startsWith( "$P{" ) && text.contains( "}" ) ) {
+                    auto name = text.split( "{" ).at( 1 ).split( "}" ).at( 0 );
+                    textField->setText( map[ name ] );
+                }
+            }
+        }
+
         return true;
     }
 
@@ -55,8 +77,13 @@ namespace qtreports {
     }
 
     bool	Engine::createPDF( const QString & path ) {
-        Converter converter( m_report );
-        auto result = converter.toPDF( path );
+        if( m_report.isNull() ) {
+            m_lastError = "Report is empty. Please create report from compile()";
+            return false;
+        }
+
+        ConverterToPDF converter( m_report );
+        auto result = converter.convert( path );
         if( !result ) {
             m_lastError = converter.getLastError();
             return false;
@@ -66,8 +93,13 @@ namespace qtreports {
     }
 
     bool	Engine::createHTML( const QString & path ) {
-        Converter converter( m_report );
-        auto result = converter.toHTML( path );
+        if( m_report.isNull() ) {
+            m_lastError = "Report is empty. Please create report from compile()";
+            return false;
+        }
+
+        ConverterToHTML converter( m_report );
+        auto result = converter.convert( path );
         if( !result ) {
             m_lastError = converter.getLastError();
             return false;
@@ -76,8 +108,20 @@ namespace qtreports {
         return true;
     }
 
-    const QWidgetPtr	Engine::createWidget() const {
-        return Converter( m_report ).toQWidget();
+    const QWidgetPtr	Engine::createWidget() {
+        if( m_report.isNull() ) {
+            m_lastError = "Report is empty. Please create report from compile()";
+            return QWidgetPtr();
+        }
+
+        ConverterToQWidget converter( m_report );
+        auto result = converter.convert();
+        if( !result ) {
+            m_lastError = converter.getLastError();
+            return QWidgetPtr();
+        }
+
+        return converter.getQWidget();
     }
 
     bool	Engine::print() {

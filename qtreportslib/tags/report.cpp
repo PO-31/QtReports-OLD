@@ -53,37 +53,6 @@ namespace qtreports {
             return true;// Object::setParameter( name, value );
         }
         */
-        void    Report::setField( const QString & name, const FieldPtr & field ) {
-            m_fields[ name ] = field;
-        }
-
-        const FieldPtr  Report::getField( const QString & name ) const {
-            if( m_fields.contains( name ) ) {
-                return m_fields[ name ];
-            }
-
-            return FieldPtr();
-        }
-
-        const QMap< QString, FieldPtr >   Report::getFields() const {
-            return m_fields;
-        }
-
-        void    Report::setStyle( const QString & name, const StylePtr & style ) {
-            m_styles[ name ] = style;
-        }
-
-        const StylePtr  Report::getStyle( const QString & name ) const {
-            if( m_styles.contains( name ) ) {
-                return m_styles[ name ];
-            }
-
-            return StylePtr();
-        }
-
-        const QMap< QString, StylePtr >     Report::getStyles() const {
-            return m_styles;
-        }
 
         void    Report::setDefaultStyleName( const QString & name ) {
             m_defaultStyleName = name;
@@ -91,6 +60,46 @@ namespace qtreports {
 
         const QString   Report::getDefaultStyleName() const {
             return m_defaultStyleName;
+        }
+
+        void    Report::setStyle( const QString & name, const StylePtr & style ) {
+            m_styles[ name ] = style;
+        }
+
+        const StylePtr  Report::getStyle( const QString & name ) const {
+            if( !m_styles.contains( name ) ) {
+                return StylePtr();
+            }
+
+            return m_styles[ name ];
+        }
+
+        const QMap< QString, StylePtr >     Report::getStyles() const {
+            return m_styles;
+        }
+
+        void    Report::setQuery( const QString & query ) {
+            m_query = query;
+        }
+
+        const QString   Report::getQuery() const {
+            return m_query;
+        }
+
+        void    Report::setField( const QString & name, const FieldPtr & field ) {
+            m_fields[ name ] = field;
+        }
+
+        const FieldPtr  Report::getField( const QString & name ) const {
+            if( !m_fields.contains( name ) ) {
+                return  FieldPtr();
+            }
+
+            return m_fields[ name ];
+        }
+
+        const QMap< QString, FieldPtr >   Report::getFields() const {
+            return m_fields;
         }
 
         void    Report::setDetail( const DetailPtr & detail ) {

@@ -34,8 +34,10 @@ namespace qtreports {
             bool    getValue( QXmlStreamReader & reader, QString & data );
             bool    getAttribute( QXmlStreamReader & reader, const QString & name, QString & data );
 
-            bool	parseReport( const QString & text );
+            bool    parseDocument( const QString & text );
+            bool	parseReport( QXmlStreamReader & reader );
             bool    parseStyle( QXmlStreamReader & reader, const ReportPtr & report );
+            bool    parseQueryString( QXmlStreamReader & reader, const ReportPtr & report );
             bool	parseField( QXmlStreamReader & reader, const ReportPtr & report );
             bool	parseDetail( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseBand( QXmlStreamReader & reader, const DetailPtr & detail );

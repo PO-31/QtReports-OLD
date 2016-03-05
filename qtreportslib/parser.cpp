@@ -5,8 +5,9 @@
 namespace qtreports {
     namespace detail {
 
-        Parser::Parser() :
-            m_report( new Report() ) {}
+        Parser::Parser() {
+            //m_functions[ "band" ] = &Parser::parseBand;
+        }
 
         Parser::~Parser() {}
 
@@ -23,7 +24,7 @@ namespace qtreports {
                 return false;
             }
 
-            return parseReport( file.readAll() );//.replace( " ", "" )
+            return parseDocument( file.readAll() );//.replace( " ", "" )
         }
 
         bool    Parser::getValue( QXmlStreamReader & reader, QString & data ) {
@@ -53,35 +54,24 @@ namespace qtreports {
             return true;
         }
 
-        bool	Parser::parseReport( const QString & text ) {
+        bool    Parser::parseDocument( const QString & text ) {
             QXmlStreamReader reader( text );
-            
-            //QString message;
             while( !reader.atEnd() ) {
                 reader.readNext();
+                if( reader.isEndElement() ) {
+                    break;
+                }
                 if( !reader.isStartElement() ) {
                     continue;
                 }
 
                 auto name = reader.name().toString();
-                //message += name + "\n";
-                if( name == "style" ) {
-                    if( !parseStyle( reader, m_report ) ) {
-                        return false;
-                    }
-                }
-                else if( name == "field" ) {
-                    if( !parseField( reader, m_report ) ) {
-                        return false;
-                    }
-                }
-                else if( name == "detail" ) {
-                    if( !parseDetail( reader, m_report ) ) {
+                if( isEquals( name, "report" ) ) {
+                    if( !parseReport( reader ) ) {
                         return false;
                     }
                 }
             }
-            //QMessageBox::warning( 0, "", message );
 
             if( reader.hasError() ) {
                 m_lastError = reader.errorString();
@@ -89,6 +79,60 @@ namespace qtreports {
             }
 
             return true;
+        }
+
+        bool	Parser::parseReport( QXmlStreamReader & reader ) {
+            QString name;
+            if( !getAttribute( reader, "name", name ) ) {
+                return false;
+            }
+
+            ReportPtr report( new Report() );
+            while( !reader.atEnd() ) {
+                reader.readNext();
+                if( reader.isEndElement() ) {
+                    break;
+                }
+                if( !reader.isStartElement() ) {
+                    continue;
+                }
+
+                auto name = reader.name().toString();
+                if( isEquals( name, "style" ) ) {
+                    if( !parseStyle( reader, report ) ) {
+                        return false;
+                    }
+                }
+                else if( isEquals( name, "queryString" ) ) {
+                    if( !parseQueryString( reader, report ) ) {
+                        return false;
+                    }
+                }
+                else if( isEquals( name, "field" ) ) {
+                    if( !parseField( reader, report ) ) {
+                        return false;
+                    }
+                }
+                else if( isEquals( name, "detail" ) ) {
+                    if( !parseDetail( reader, report ) ) {
+                        return false;
+                    }
+                }
+            }
+
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
+
+            report->setName( name );
+            m_report = report;
+
+            return true;
+        }
+
+        bool    toBool( const QString & string ) {
+            return isEquals( string, "true" ) || isEquals( string, "1" );
         }
 
         bool    Parser::parseStyle( QXmlStreamReader & reader, const ReportPtr & report ) {
@@ -127,8 +171,28 @@ namespace qtreports {
                 return false;
             }
 
-            StylePtr field( new Style() );
-            report->setStyle( name, field );
+            while( !reader.atEnd() && !reader.isEndElement() ) {
+                reader.readNext();
+            }
+
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
+
+            bool isDefaultBool = toBool( isDefault );
+            StylePtr style( new Style() );
+            style->setName( name );
+            style->setAsDefault( isDefaultBool );
+            style->setFontName( fontName );
+            style->setFontSize( fontSize.toInt() );
+            style->setPDFFontName( pdfFontName );
+            style->setPDFEncoding( pdfEncoding );
+            style->setPDFEmbedded( toBool( isPdfEmbedded ) );
+            report->setStyle( name, style );
+            if( isDefaultBool ) {
+                report->setDefaultStyleName( name );
+            }
 
             return !reader.hasError();
         }
@@ -144,7 +208,17 @@ namespace qtreports {
                 return false;
             }
 
+            while( !reader.atEnd() && !reader.isEndElement() ) {
+                reader.readNext();
+            }
+
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
+
             FieldPtr field( new Field() );
+            field->setName( name );
             field->setClassName( className );
             report->setField( name, field );
             
@@ -163,7 +237,7 @@ namespace qtreports {
                 }
 
                 auto name = reader.name().toString();
-                if( name == "band" ) {
+                if( isEquals( name, "band" ) ) {
                     if( !parseBand( reader, detail ) ) {
                         return false;
                     }
@@ -198,12 +272,12 @@ namespace qtreports {
 
                 auto name = reader.name().toString();
                 //QMessageBox::warning( 0, "", name );
-                if( name == "staticText" ) {
+                if( isEquals( name, "staticText" ) ) {
                     if( !parseStaticText( reader, band ) ) {
                         return false;
                     }
                 }
-                else if( name == "textField" ) {
+                else if( isEquals( name, "textField" ) ) {
                     if( !parseTextField( reader, band ) ) {
                         return false;
                     }
@@ -233,12 +307,12 @@ namespace qtreports {
                 }
 
                 auto name = reader.name().toString();
-                if( name == "reportElement" ) {
+                if( isEquals( name, "reportElement" ) ) {
                     if( !parseReportElement( reader, staticText ) ) {
                         return false;
                     }
                 }
-                else if( name == "text" ) {
+                else if( isEquals( name, "text" ) ) {
                     if( !parseText( reader, staticText ) ) {
                         return false;
                     }
@@ -267,12 +341,12 @@ namespace qtreports {
                 }
 
                 auto name = reader.name().toString();
-                if( name == "reportElement" ) {
+                if( isEquals( name, "reportElement" ) ) {
                     if( !parseReportElement( reader, textField ) ) {
                         return false;
                     }
                 }
-                else if( name == "textFieldExpression" ) {
+                else if( isEquals( name, "textFieldExpression" ) ) {
                     if( !parseTextFieldExpression( reader, textField ) ) {
                         return false;
                     }
@@ -289,7 +363,7 @@ namespace qtreports {
             return true;
         }
 
-        bool	Parser::parseReportElement( QXmlStreamReader & reader, const WidgetPtr & staticText ) {
+        bool	Parser::parseReportElement( QXmlStreamReader & reader, const WidgetPtr & widget ) {
             QString x;
             if( !getAttribute( reader, "x", x ) ) {
                 return false;
@@ -314,10 +388,15 @@ namespace qtreports {
                 reader.readNext();
             }
 
+            if( reader.hasError() ) {
+                m_lastError = reader.errorString();
+                return false;
+            }
+
             QPoint pos( x.toInt(), y.toInt() );
             QSize size( width.toInt(), height.toInt() );
-            staticText->setPosition( pos );
-            staticText->setSize( size );
+            widget->setPosition( pos );
+            widget->setSize( size );
 
             return !reader.hasError();
         }
@@ -334,12 +413,29 @@ namespace qtreports {
         }
 
         bool	Parser::parseTextFieldExpression( QXmlStreamReader & reader, const TextFieldPtr & textField ) {
+            QString className;
+            if( !getAttribute( reader, "class", className ) ) {
+                return false;
+            }
+            
             QString text;
             if( !getValue( reader, text ) ) {
                 return false;
             }
 
             textField->setText( text );
+            textField->setClassName( className );
+
+            return !reader.hasError();
+        }
+
+        bool	Parser::parseQueryString( QXmlStreamReader & reader, const ReportPtr & report ) {
+            QString text;
+            if( !getValue( reader, text ) ) {
+                return false;
+            }
+
+            report->setQuery( text );
 
             return !reader.hasError();
         }

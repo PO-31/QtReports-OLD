@@ -7,12 +7,15 @@ namespace qtreports {
 
         Field::~Field() {}
 
-        bool    Field::setClassName( const QString & name ) {
+        void    Field::setClassName( const QString & name ) {
             //int id = QMetaType::type( name.toStdString().c_str() );
             //QMetaType type( id );
-            //m_className = name;
-            Q_UNUSED( name );
-            return true;// type.isValid();
+            //return type.isValid();
+            m_className = name;
+        }
+
+        const QString   Field::getClassName() const {
+            return m_className;
         }
 
     }

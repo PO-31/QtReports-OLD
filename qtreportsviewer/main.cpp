@@ -7,7 +7,7 @@ int main( int argc, char *argv[] ) {
     //Need gui interface for select report file ???
 
     //If console
-    QString path = argc > 1 ? argv[ 1 ] : "default.qreport";
+    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/default.qreport";
     qtreports::Engine engine;
     bool result = engine.compile( path );
     if( !result ) {
@@ -32,7 +32,7 @@ int main( int argc, char *argv[] ) {
     widget->show();
     //engine.print();
     //engine.createPDF( "test.pdf" );
-    //engine.createHTML( "test.html" );
+    //engine.createHTML( "C:/Users/haven/Desktop/test.html" );
 
     return a.exec();
 }

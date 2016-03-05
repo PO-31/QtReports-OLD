@@ -144,10 +144,10 @@ namespace qtreports {
             //m_pdfWriter->newPage();
         }
 
-        void Painter::setStyle( const StylePtr & style ) {
+        void    Painter::setStyle( const StylePtr & style ) {
             QFont font;
-            font.setPointSize( style->fontSize() );
-            font.setFamily( style->fontName() );
+            font.setPointSize( style->getFontSize() );
+            font.setFamily( style->getFontName() );
 
             if( style->isBold() ) {
                 font.setBold( true );
@@ -164,7 +164,7 @@ namespace qtreports {
             }
 
             m_painter.setFont( font );
-            m_painter.setPen( style->fontColor() );
+            m_painter.setPen( style->getFontColor() );
         }
 
     }
