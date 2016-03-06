@@ -84,9 +84,9 @@ coverage {
     QMAKE_EXTRA_TARGETS += capture
 
     coverage.depends += zerocounters capture
-    QMAKE_EXTRA_TARGETS += coverage
     message(Code coverage collection enabled)
 }
+QMAKE_EXTRA_TARGETS += coverage
 
 message("Using spec: $$QMAKESPEC")
 message("Compiler: $$QMAKE_CXX")
