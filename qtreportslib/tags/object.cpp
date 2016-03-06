@@ -16,6 +16,10 @@ namespace qtreports {
         void    Object::setName( const QString & name ) {
             m_name = name;
         }
+
+        void    Object::setTagName( const QString & name ) {
+            m_tagName = name;
+        }
         /*
         bool    Object::setParameter( const QString & name, const QVariant & value ) {
             QString _name( "name" );
@@ -41,6 +45,10 @@ namespace qtreports {
         */
         const QString   Object::getName() const {
             return m_name;
+        }
+
+        const QString   Object::getTagName() const {
+            return m_tagName;
         }
 
         const QString	Object::getLastError() const {
