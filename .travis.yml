@@ -1,16 +1,20 @@
 language: cpp
 
-compiler: 
-  - gcc
-  - clang
-
 os:
   - linux
   
-#matrix:
-#  include:
-#   - compiler: gcc
-#     env: BUILD_TYPE=coverage
+compiler: 
+  - gcc
+  - clang
+  
+env:
+  - BUILD_TYPE=release
+  
+matrix:
+  include:
+   - os: linux
+     compiler: gcc
+     env: BUILD_TYPE=coverage
 
 #sudo: false
   
