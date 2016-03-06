@@ -65,15 +65,15 @@ install:
    
 script:
   - cd qtreportslib
-  - qmake -var "QMAKE_CXX=${CXX}" -var "QMAKE_CC=${CC}" qtreportslib.pro
+  - qmake -set QMAKE_CXX ${CXX} -set QMAKE_CC ${CC} qtreportslib.pro
   - make
   - sudo make install
 #  - make coverage
   - cd ../qtreportsviewer
-  - qmake -var "QMAKE_CXX=${CXX}" -var "QMAKE_CC=${CC}" qtreportsviewer.pro
+  - qmake -set QMAKE_CXX ${CXX} -set QMAKE_CC ${CC} qtreportsviewer.pro
   - make
   - cd ../tests/qtreportslib_tests
-  - qmake -var "QMAKE_CXX=${CXX}" -var "QMAKE_CC=${CC}" qtreportslib_tests.pro
+  - qmake -set QMAKE_CXX ${CXX} -set QMAKE_CC ${CC} qtreportslib_tests.pro
   - make
   - ./qtreportslib_tests
 
