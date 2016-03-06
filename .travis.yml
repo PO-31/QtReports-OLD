@@ -80,10 +80,10 @@ script:
   - ./qtreportslib_tests
 
 after_success:
-#  - if [ "$BUILD_TYPE" == "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
+#  - if [ "$BUILD_TYPE" = "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
 #  - if [ "$BUILD_TYPE" = "coverage" ]; then sudo ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "gcov-4.8" --gcov-options "\-lp" -r ../../qtreportslib; fi
-#  - if [ "$BUILD_TYPE" == "coverage" ]; then coveralls-lcov --repo_token "${COVERALLS_IO_TOKEN}" ../../qtreportslib/qtreportslib.cov; fi
+#  - if [ "$BUILD_TYPE" = "coverage" ]; then coveralls-lcov --repo_token "${COVERALLS_IO_TOKEN}" ../../qtreportslib/qtreportslib.cov; fi
   - > 
-    if [ "$BUILD_TYPE" == "coverage" ]; then 
-	  lcoveralls --retry-count 5 $TRAVIS_BUILD_DIR-build/test/coverage.info; 
-	fi
+    if [ "$BUILD_TYPE" = "coverage" ]; then
+      lcoveralls --retry-count 5 $TRAVIS_BUILD_DIR-qtreportslib/coverage.info 
+    fi
