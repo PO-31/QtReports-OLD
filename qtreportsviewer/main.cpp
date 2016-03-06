@@ -101,7 +101,7 @@ int main( int argc, char *argv[] ) {
         }
         
         if( window.centralWidget() != nullptr ) {
-        #ifdef QT_VERSION_CHECK( 5, 2, 0 ) ) 
+        #ifdef QT_VERSION_CHECK( 5, 2, 0 )
             window.takeCentralWidget();
         #endif // QT_VERSION_CHECK
         }
