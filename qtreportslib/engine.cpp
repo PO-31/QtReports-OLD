@@ -10,19 +10,27 @@ namespace qtreports {
 
     Engine::Engine( QObject * parent ) :
         QObject( parent ),
-        m_isCompiled( false ) {}
+        m_isOpened( false ) {}
+
+    Engine::Engine( const QString & path, QObject * parent ) :
+        Engine( parent ) {
+        open( path );
+    }
 
     Engine::~Engine() {}
 
-    bool	Engine::compile( const QString & path ) {
+    bool	Engine::open( const QString & path ) {
         detail::Parser parser;
         bool result = parser.parse( path );
         if( !result ) {
+            m_isOpened = false;
+            m_compiledPath.clear();
+            m_report.clear();
             m_lastError = parser.getLastError();
             return false;
         }
 
-        m_isCompiled = true;
+        m_isOpened = true;
         m_compiledPath = path;
 
         prepareDB();
@@ -33,13 +41,13 @@ namespace qtreports {
 
     bool	Engine::setParameters( const QMap< QString, QString > & map ) {
         if( m_report.isNull() ) {
-            m_lastError = "Report is empty. Please create report from compile()";
+            m_lastError = "Report is empty. Please open report file";
             return false;
         }
 
         auto detail = m_report->getDetail();
         if( detail.isNull() ) {
-            m_lastError = "Report->Detail is empty. Please create report from compile()";
+            m_lastError = "Report->Detail is empty. Please open report file";
             return false;
         }
 
@@ -78,7 +86,7 @@ namespace qtreports {
 
     bool	Engine::createPDF( const QString & path ) {
         if( m_report.isNull() ) {
-            m_lastError = "Report is empty. Please create report from compile()";
+            m_lastError = "Report is empty. Please open report file";
             return false;
         }
 
@@ -94,7 +102,7 @@ namespace qtreports {
 
     bool	Engine::createHTML( const QString & path ) {
         if( m_report.isNull() ) {
-            m_lastError = "Report is empty. Please create report from compile()";
+            m_lastError = "Report is empty. Please open report file";
             return false;
         }
 
@@ -110,7 +118,7 @@ namespace qtreports {
 
     const QWidgetPtr	Engine::createWidget() {
         if( m_report.isNull() ) {
-            m_lastError = "Report is empty. Please create report from compile()";
+            m_lastError = "Report is empty. Please open report file";
             return QWidgetPtr();
         }
 
@@ -131,23 +139,25 @@ namespace qtreports {
         connect(
             &preview, &QPrintPreviewDialog::paintRequested,
             this, &Engine::drawPreview
-            );
+        );
         preview.exec();
 
         return true;
     }
 
     void	Engine::drawPreview( QPrinter * printer ) {
+        auto widget = createWidget();
+        if( widget.isNull() ) {
+            return;
+        }
+
         QRectF rect = printer->pageRect();
         QPainter painter( printer );
-        double xscale = rect.width() / m_widget->width();
-        double yscale = rect.height() / m_widget->height();
-        double scale = std::min( xscale, yscale );
-        painter.translate(
-            0, rect.height() / 2 - scale * m_widget->height() / 2
-            );
+        double scale = rect.width() / widget->width();
+        widget->resize( widget->width(), rect.height() / scale );
+        painter.translate( 0, rect.height() / 2 - scale * widget->height() / 2 );
         painter.scale( scale, scale );
-        m_widget->render( &painter );
+        widget->render( &painter );
     }
 
     void    Engine::prepareDB() {
@@ -165,8 +175,8 @@ namespace qtreports {
         return model;
     }
 
-    bool			    Engine::isCompiled() const {
-        return m_isCompiled;
+    bool			    Engine::isOpened() const {
+        return m_isOpened;
     }
 
     const QString		Engine::getLastError() const {

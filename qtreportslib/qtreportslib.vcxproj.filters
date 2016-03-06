@@ -36,7 +36,7 @@
     <Filter Include="Tags">
       <UniqueIdentifier>{43996f6b-420c-41a3-9f85-112a0b3471d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="converters">
+    <Filter Include="Converters">
       <UniqueIdentifier>{83a7da29-a9e7-496e-9d6f-53cb62f12123}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -96,13 +96,13 @@
       <Filter>Tags</Filter>
     </ClCompile>
     <ClCompile Include="converters\convertertohtml.cpp">
-      <Filter>converters</Filter>
+      <Filter>Converters</Filter>
     </ClCompile>
     <ClCompile Include="converters\convertertopdf.cpp">
-      <Filter>converters</Filter>
+      <Filter>Converters</Filter>
     </ClCompile>
     <ClCompile Include="converters\convertertoqwidget.cpp">
-      <Filter>converters</Filter>
+      <Filter>Converters</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,13 +125,13 @@
       <Filter>Tags</Filter>
     </ClInclude>
     <ClInclude Include="converters\convertertohtml.hpp">
-      <Filter>converters</Filter>
+      <Filter>Converters</Filter>
     </ClInclude>
     <ClInclude Include="converters\convertertopdf.hpp">
-      <Filter>converters</Filter>
+      <Filter>Converters</Filter>
     </ClInclude>
     <ClInclude Include="converters\convertertoqwidget.hpp">
-      <Filter>converters</Filter>
+      <Filter>Converters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

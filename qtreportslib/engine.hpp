@@ -16,10 +16,11 @@ namespace qtreports {
         Q_OBJECT
 
     public:
-        Engine( QObject * parent = 0 );
+        Engine( QObject * parent = Q_NULLPTR );
+        Engine( const QString & path, QObject * parent = Q_NULLPTR );
         ~Engine();
 
-        bool    compile( const QString & path );
+        bool    open( const QString & path );
         bool    setParameters( const QMap< QString, QString > & map );
         bool    setConnection( const QSqlDatabase & connection );
 
@@ -31,14 +32,13 @@ namespace qtreports {
         const QWidgetPtr	createWidget();
         bool                print();
         
-        bool        	    isCompiled() const;
+        bool        	    isOpened() const;
         const QString       getLastError() const;
 
     private:
-        bool                        m_isCompiled;
+        bool                        m_isOpened;
         QString                     m_lastError, m_compiledPath;
         ReportPtr                   m_report;
-        QWidgetPtr                  m_widget;
         QMap< QString, QString >    m_dbQueries;
         QVector< QString >          m_scripts;
         QSqlDatabase                m_dbConnection;
