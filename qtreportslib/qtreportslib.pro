@@ -66,11 +66,17 @@ coverage {
 
     zerocounters.commands = @lcov --directory \$(OBJECTS_DIR) --zerocounters
     QMAKE_EXTRA_TARGETS += zerocounters
-
-	#../../coverage/
+    
+    #echo "usage: ${0} <gcov-files-dir> \"<file-pattern>\" <target-dir>"
+    #lcov -d ${1} -c -o ${1}/coverage.info
+    #lcov --list-full-path -e ${1}/coverage.info ${2} -o ${1}/coverage-stripped.info
+    #genhtml -o ${3} ${1}/coverage-stripped.info
+    #lcov -d ${1} -z
+    
+    #../../coverage/
     capture.file = qtreportslib.cov
-    capture.commands = @mkdir -p ../../coverage
-    capture.commands += && lcov --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
+    #capture.commands = @mkdir -p ../../coverage && 
+    capture.commands = lcov --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
     capture.filters = \"/usr/*\" \"moc_*.cpp\" \"*3rdparty/*\" \"*QtCore/*\" \"*QtNetwork/*\" \"*corelib/*\" \"*network/*\"
     #!isEqual(IRC_MODULE, "IrcCore"):capture.filters += \"*/IrcCore/*\"
     #!isEqual(IRC_MODULE, "IrcModel"):capture.filters += \"*/IrcModel/*\"
