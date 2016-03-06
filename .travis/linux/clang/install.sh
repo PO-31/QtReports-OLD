@@ -1,4 +1,4 @@
 #!/bin/bash
 
 source /opt/qt55/bin/qt55-env.sh
-export CXX="clang++" CC="clang"
+export USING_QT_MKSPEC="linux-clang"

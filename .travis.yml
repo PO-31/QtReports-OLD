@@ -65,15 +65,16 @@ install:
    
 script:
   - cd qtreportslib
-  - qmake -set QMAKE_CXX ${CXX} -set QMAKE_CC ${CC} qtreportslib.pro
+  - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
   - make
+  - if [ "$BUILD_TYPE" = "coverage" ]; then make coverage; fi
   - sudo make install
 #  - make coverage
   - cd ../qtreportsviewer
-  - qmake -set QMAKE_CXX ${CXX} -set QMAKE_CC ${CC} qtreportsviewer.pro
+  - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
   - make
   - cd ../tests/qtreportslib_tests
-  - qmake -set QMAKE_CXX ${CXX} -set QMAKE_CC ${CC} qtreportslib_tests.pro
+  - qmake -spec ${USING_QT_MKSPEC} qtreportslib_tests.pro
   - make
   - ./qtreportslib_tests
 

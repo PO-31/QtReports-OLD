@@ -53,6 +53,11 @@ unix {
     INSTALLS += headers
 }
 
+linux-g++ | linux-g++-64 | linux-g++-32 {
+    QMAKE_CXX = g++-4.8
+    QMAKE_CC = gcc-4.8
+}
+
 coverage {
 	QMAKE_CXXFLAGS += -g -Wall -fprofile-arcs -ftest-coverage -O0
 	LIBS += -lgcov
