@@ -101,7 +101,7 @@ int main( int argc, char *argv[] ) {
         }
         
         if( window.centralWidget() != nullptr ) {
-            window.takeCentralWidget();
+            //window.takeCentralWidget();
         }
 
         bool result = engine.open( file );
