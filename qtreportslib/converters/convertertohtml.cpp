@@ -43,12 +43,13 @@ namespace qtreports {
                 return false;
             }
 
-            if( m_report->getDetail().isNull() ) {
+            auto detail = m_report->getDetail();
+            if( detail.isNull() ) {
                 m_lastError = "Report->Detail is empty";
                 return false;
             }
 
-            for( auto && band : m_report->getDetail()->getBands() ) {
+            for( auto && band : detail->getBands() ) {
                 m_html += QString(
                     "<table border='1' width='100%' height='%1' "
                     "style='border-style: solid; border-color: black;'>"

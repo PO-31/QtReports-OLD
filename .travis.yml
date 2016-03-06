@@ -67,9 +67,7 @@ script:
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
   - make
-  - if [ "$BUILD_TYPE" = "coverage" ]; then 
-      make coverage
-	; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then make coverage; fi
   - sudo make install
 #  - make coverage
   - cd ../qtreportsviewer
