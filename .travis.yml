@@ -9,6 +9,7 @@ compiler:
   
 env:
   - BUILD_TYPE=release
+# - BUILD_TYPE=debug
   
 matrix:
   include:
@@ -52,12 +53,6 @@ notifications:
 #    - g++-4.8
 #    - clang
 #    - qt5-default
-  
-#env:
-#  matrix:
-#    - BUILD_TYPE=Debug
-#    - BUILD_TYPE=Release
-#    - BUILD_TYPE=Coverage
 
 before_install:
   - sudo sh .travis/${TRAVIS_OS_NAME}/before_install.sh
@@ -70,15 +65,15 @@ install:
    
 script:
   - cd qtreportslib
-  - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
+  - qmake -var "QMAKE_CXX=${CXX}" -var "QMAKE_CC=${CC}" qtreportslib.pro
   - make
   - sudo make install
 #  - make coverage
   - cd ../qtreportsviewer
-  - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
+  - qmake -var "QMAKE_CXX=${CXX}" -var "QMAKE_CC=${CC}" qtreportsviewer.pro
   - make
   - cd ../tests/qtreportslib_tests
-  - qmake -spec ${USING_QT_MKSPEC} qtreportslib_tests.pro
+  - qmake -var "QMAKE_CXX=${CXX}" -var "QMAKE_CC=${CC}" qtreportslib_tests.pro
   - make
   - ./qtreportslib_tests
 

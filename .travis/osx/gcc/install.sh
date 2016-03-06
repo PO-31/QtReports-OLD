@@ -1,3 +1,3 @@
 #!/bin/bash
 
-export USING_QT_MKSPEC="linux-g++-64"
+export CXX="g++-4.8" CC="gcc-4.8"
