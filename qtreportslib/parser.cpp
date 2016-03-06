@@ -125,6 +125,7 @@ namespace qtreports {
                 return false;
             }
 
+            report->setTagName( "report" );
             report->setName( name );
             m_report = report;
 
@@ -182,6 +183,7 @@ namespace qtreports {
 
             bool isDefaultBool = toBool( isDefault );
             StylePtr style( new Style() );
+            style->setTagName( "style" );
             style->setName( name );
             style->setAsDefault( isDefaultBool );
             style->setFontName( fontName );
@@ -218,6 +220,7 @@ namespace qtreports {
             }
 
             FieldPtr field( new Field() );
+            field->setTagName( "field" );
             field->setName( name );
             field->setClassName( className );
             report->setField( name, field );
@@ -249,6 +252,7 @@ namespace qtreports {
                 return false;
             }
 
+            detail->setTagName( "detail" );
             report->setDetail( detail );
 
             return true;
@@ -289,6 +293,7 @@ namespace qtreports {
                 return false;
             }
 
+            band->setTagName( "band" );
             band->setSize( QSize( 0, height.toInt() ) );
             detail->addBand( band );
 
@@ -324,6 +329,7 @@ namespace qtreports {
                 return false;
             }
 
+            staticText->setTagName( "staticText" );
             band->addStaticText( staticText );
 
             return true;
@@ -358,6 +364,7 @@ namespace qtreports {
                 return false;
             }
 
+            textField->setTagName( "textField" );
             band->addTextField( textField );
 
             return true;
