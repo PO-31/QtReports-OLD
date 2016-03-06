@@ -64,9 +64,10 @@ install:
   - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
 script:
+  - nproc
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
-  - make
+  - make -j$(nproc)
   - if [ "$BUILD_TYPE" = "coverage" ]; then make coverage; fi
   - sudo make install
 #  - make coverage
@@ -80,4 +81,5 @@ script:
 
 after_success:
 #  - if [ "$BUILD_TYPE" == "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
-  - if [ "$BUILD_TYPE" = "coverage" ]; then sudo ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "gcov-4.8" --gcov-options "\-lp" -r ../../qtreportslib; fi
+#  - if [ "$BUILD_TYPE" = "coverage" ]; then sudo ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "gcov-4.8" --gcov-options "\-lp" -r ../../qtreportslib; fi
+  - if [ "$BUILD_TYPE" == "coverage" ]; then coveralls-lcov ../../qtreportslib/qtreportslib.cov; fi
