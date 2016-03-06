@@ -101,9 +101,9 @@ int main( int argc, char *argv[] ) {
         }
         
         if( window.centralWidget() != nullptr ) {
-        #ifdef QT_VERSION_CHECK( 5, 2, 0 )
+        #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 2, 0 ) )
             window.takeCentralWidget();
-        #endif // QT_VERSION_CHECK
+        #endif
         }
 
         bool result = engine.open( file );
