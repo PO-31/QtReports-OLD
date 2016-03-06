@@ -58,7 +58,6 @@ linux-g++ | linux-g++-64 | linux-g++-32 {
     QMAKE_CC = gcc-4.8
 }
 
-QMAKE_EXTRA_TARGETS += coverage
 coverage {
 	QMAKE_CXXFLAGS += -g -Wall -fprofile-arcs -ftest-coverage -O0
 	QMAKE_LDFLAGS += -g -Wall -fprofile-arcs -ftest-coverage  -O0
@@ -77,6 +76,7 @@ coverage {
     capture.commands += && lcov --remove $$capture.file $$capture.filters --output-file $$capture.file
     QMAKE_EXTRA_TARGETS += capture
 }
+QMAKE_EXTRA_TARGETS += coverage
 
 message("Using spec: $$QMAKESPEC")
 message("Compiler: $$QMAKE_CXX")
