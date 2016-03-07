@@ -72,7 +72,7 @@ script:
     if [ "$BUILD_TYPE" = "coverage" ]; then
       sudo apt-get install tree
       tree
-      sudo make coverage
+      #sudo make coverage
     else
       sudo make install
       cd ../qtreportsviewer
