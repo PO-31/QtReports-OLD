@@ -78,6 +78,7 @@ script:
   - ./qtreportslib_tests
   - >
     if [ "$BUILD_TYPE" = "coverage" ]; then
+      cd ../..
       sudo apt-get install tree
       tree
       #sudo make coverage
