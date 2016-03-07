@@ -2,7 +2,7 @@ QT += core gui sql widgets printsupport
 
 TARGET = qtreportslib
 TEMPLATE = lib
-CONFIG += c++11
+CONFIG += release c++11
 DEFINES += QTREPORTS_LIBRARY
 
 SOURCES += engine.cpp \
