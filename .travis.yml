@@ -68,16 +68,19 @@ script:
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
   - make -j$(nproc)
-  - if [ "$BUILD_TYPE" = "coverage" ]; then make coverage; fi
-  - sudo make install
-#  - make coverage
-  - cd ../qtreportsviewer
-  - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
-  - make
-  - cd ../tests/qtreportslib_tests
-  - qmake -spec ${USING_QT_MKSPEC} qtreportslib_tests.pro
-  - make
-  - ./qtreportslib_tests
+  - > 
+    if [ "$BUILD_TYPE" = "coverage" ]; then 
+      make coverage
+    else
+      sudo make install
+      cd ../qtreportsviewer
+      qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
+      make
+      cd ../tests/qtreportslib_tests
+      qmake -spec ${USING_QT_MKSPEC} qtreportslib_tests.pro
+      make
+      ./qtreportslib_tests
+    fi
 
 after_success:
 #  - if [ "$BUILD_TYPE" = "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
