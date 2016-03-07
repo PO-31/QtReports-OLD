@@ -59,8 +59,10 @@ linux-g++ | linux-g++-64 | linux-g++-32 {
 }
 
 coverage {
-	QMAKE_CXXFLAGS += -g -Wall -fprofile-arcs -ftest-coverage -O0
-	QMAKE_LDFLAGS += -g -Wall -fprofile-arcs -ftest-coverage  -O0
+	QMAKE_CXXFLAGS -= -O2
+	QMAKE_LDFLAGS -= -O2
+	QMAKE_CXXFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
+	QMAKE_LDFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
 	#QMAKE_CLEAN += $$OBJECTS_DIR/*.gcda $$OBJECTS_DIR/*.gcno
 	LIBS += -lgcov
 
