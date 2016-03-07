@@ -64,24 +64,24 @@ install:
   - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
 script:
-  - nproc
-  - cd qtreportslib
-  - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
-  - sudo make -j$(nproc)
   - > 
+    nproc
+    cd qtreportslib
+    qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
+    sudo make -j$(nproc)
+    sudo make install
+    cd ../qtreportsviewer
+    qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
+    make
+    cd ../tests/qtreportslib_tests
+    qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
+    sudo make
+    ./qtreportslib_tests
     if [ "$BUILD_TYPE" = "coverage" ]; then
       sudo apt-get install tree
       tree
       #sudo make coverage
     else
-      sudo make install
-      cd ../qtreportsviewer
-      qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
-      make
-      cd ../tests/qtreportslib_tests
-      qmake -spec ${USING_QT_MKSPEC} qtreportslib_tests.pro
-      make
-      ./qtreportslib_tests
     fi
 
 after_success:

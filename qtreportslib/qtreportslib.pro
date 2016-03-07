@@ -59,21 +59,7 @@ linux-g++ | linux-g++-64 | linux-g++-32 {
 }
 
 coverage {
-    QMAKE_CXXFLAGS_RELEASE -= -O1
-    QMAKE_CXXFLAGS_RELEASE -= -O2
-	QMAKE_CXXFLAGS_RELEASE -= -O3
-	QMAKE_CXXFLAGS_RELEASE -= -fPIC
-	QMAKE_CXXFLAGS_RELEASE -= -pipe
-	QMAKE_CXXFLAGS_RELEASE -= -m64
-	QMAKE_LDFLAGS_RELEASE -= -fPIC
-	QMAKE_LDFLAGS_RELEASE -= -pipe
-	QMAKE_LDFLAGS_RELEASE -= -m64
-	QMAKE_CXXFLAGS -= -fPIC
-	QMAKE_CXXFLAGS -= -pipe
-	QMAKE_CXXFLAGS -= -m64
-	QMAKE_LDFLAGS -= -fPIC
-	QMAKE_LDFLAGS -= -pipe
-	QMAKE_LDFLAGS -= -m64
+    #QMAKE_CXXFLAGS_RELEASE -= -O2
 	QMAKE_CXXFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
 	QMAKE_LDFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
 	#QMAKE_CLEAN += $$OBJECTS_DIR/*.gcda $$OBJECTS_DIR/*.gcno
