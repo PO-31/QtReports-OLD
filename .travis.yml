@@ -70,6 +70,7 @@ script:
   - make -j$(nproc)
   - > 
     if [ "$BUILD_TYPE" = "coverage" ]; then
+      sudo apt-get install tree
       tree
       make coverage
     else
