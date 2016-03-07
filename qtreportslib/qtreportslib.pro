@@ -85,7 +85,7 @@ coverage {
     QMAKE_EXTRA_TARGETS += capture
 
 	#depends += capture zerocounters
-    coverage.depends += zerocounters capture
+    coverage.depends += capture zerocounters
     message(Code coverage collection enabled)
 }
 QMAKE_EXTRA_TARGETS += coverage
