@@ -70,7 +70,7 @@ script:
   - make -j$(nproc)
   - > 
     if [ "$BUILD_TYPE" = "coverage" ]; then
-      rsync -acv --filter='+ */' --filter='+ *.cpp' --filter='+ *.h' --filter='+ *.gcno' --filter='- *' ./ ./
+      tree
       make coverage
     else
       sudo make install
