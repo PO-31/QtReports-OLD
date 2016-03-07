@@ -69,7 +69,8 @@ script:
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
   - make -j$(nproc)
   - > 
-    if [ "$BUILD_TYPE" = "coverage" ]; then 
+    if [ "$BUILD_TYPE" = "coverage" ]; then
+      rsync -acv --filter='+ */' --filter='+ *.cpp' --filter='+ *.h' --filter='+ *.gcno' --filter='- *' ./ ./
       make coverage
     else
       sudo make install
