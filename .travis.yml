@@ -67,12 +67,12 @@ script:
   - nproc
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
-  - make -j$(nproc)
+  - sudo make -j$(nproc)
   - > 
     if [ "$BUILD_TYPE" = "coverage" ]; then
       sudo apt-get install tree
       tree
-      make coverage
+      sudo make coverage
     else
       sudo make install
       cd ../qtreportsviewer
