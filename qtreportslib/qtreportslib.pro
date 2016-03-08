@@ -73,7 +73,7 @@ coverage {
     capture.file = coverage.cov
 	#capture.target = qtreportslib.cov
     #capture.commands = @mkdir -p ../../coverage && 
-    capture.commands = lcov --compat split_crc=on --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
+    capture.commands = lcov --compat "split_crc=on" --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
     capture.filters = \"/usr/*\" \"moc_*.cpp\" \"*3rdparty/*\" \"*QtCore/*\" \"*QtNetwork/*\" \"*corelib/*\" \"*network/*\"
     #!isEqual(IRC_MODULE, "IrcCore"):capture.filters += \"*/IrcCore/*\"
     #!isEqual(IRC_MODULE, "IrcModel"):capture.filters += \"*/IrcModel/*\"
