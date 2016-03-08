@@ -53,11 +53,6 @@ unix {
     INSTALLS += headers
 }
 
-linux-g++ | linux-g++-64 | linux-g++-32 {
-    #QMAKE_CXX = g++-4.8
-    #QMAKE_CC = gcc-4.8
-}
-
 coverage {
     #QMAKE_CXXFLAGS_RELEASE -= -O2
 	QMAKE_CLEAN += $$OBJECTS_DIR/*.gcda $$OBJECTS_DIR/*.gcno

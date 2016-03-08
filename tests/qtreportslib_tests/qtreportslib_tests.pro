@@ -35,10 +35,5 @@ QMAKE_EXTRA_TARGETS += coverage
 
 QMAKE_CXXFLAGS += -std=c++11
 
-linux-g++ | linux-g++-64 | linux-g++-32 {
-    #QMAKE_CXX = g++-4.8
-    #QMAKE_CC = gcc-4.8
-}
-
 message("Using spec: $$QMAKESPEC")
 message("Compiler: $$QMAKE_CXX")
