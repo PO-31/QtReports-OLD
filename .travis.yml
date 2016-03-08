@@ -75,14 +75,14 @@ script:
   - ${CXX} --version
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
-  - sudo make -j$(nproc)
+  - make -j$(nproc)
   - sudo make install
   - cd ../qtreportsviewer
   - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
-  - make
+  - make -j$(nproc)
   - cd ../tests/qtreportslib_tests
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
-  - sudo make
+  - make -j$(nproc)
   - ./qtreportslib_tests
   - >
     if [ "$BUILD_TYPE" = "coverage" ]; then
