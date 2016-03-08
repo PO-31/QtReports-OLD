@@ -11,6 +11,13 @@ env:
   - BUILD_TYPE=release
 # - BUILD_TYPE=debug
   
+#env:
+#  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+#   - secure: "P9gHn+wkHWzjRqcwlcCoSGmz8pw1aG3CwuPP0rsMpqsa+jh0lr3SDfdA01Xll68Rb7xY7yVTtXaFOXrEk6ceb3fvGs4JxYXNXRgkG8uF808Lm19bbADAQBb5kXECiClaLKk20es/Y4mlI6G/8Qmr4OmOc0Z2gL/sVqLnh6QLTtI="
+
+  
 matrix:
   include:
    - os: linux
@@ -81,7 +88,8 @@ script:
       cd ../..
       sudo apt-get install tree
       tree
-      #sudo make coverage
+      cd qtreportslib
+      sudo make coverage
     fi
 
 after_success:
@@ -90,5 +98,5 @@ after_success:
 #  - if [ "$BUILD_TYPE" = "coverage" ]; then coveralls-lcov --repo_token "${COVERALLS_IO_TOKEN}" ../../qtreportslib/qtreportslib.cov; fi
   - > 
     if [ "$BUILD_TYPE" = "coverage" ]; then
-      lcoveralls --retry-count 5 $TRAVIS_BUILD_DIR-qtreportslib/coverage.info 
+      lcoveralls --retry-count 5 $TRAVIS_BUILD_DIR/qtreportslib/coverage.info 
     fi
