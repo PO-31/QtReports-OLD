@@ -14,7 +14,7 @@ HEADERS  += test_engine.hpp
 
 coverage {
 	QMAKE_CXXFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
-	QMAKE_LDFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
+	#QMAKE_LDFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
 	LIBS += -lgcov
 
     zerocounters.commands = @lcov --directory \$(OBJECTS_DIR) --zerocounters
@@ -22,9 +22,7 @@ coverage {
     
     capture.file = qtreportslib_tests.cov
     capture.commands = lcov --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
-    capture.filters = \"/usr/*\" \"moc_*.cpp\" \"*3rdparty/*\" \"*QtCore/*\" \"*QtNetwork/*\" \"*corelib/*\" \"*network/*\"
-    #!isEqual(IRC_MODULE, "IrcCore"):capture.filters += \"*/IrcCore/*\"
-    #!isEqual(IRC_MODULE, "IrcModel"):capture.filters += \"*/IrcModel/*\"
+    capture.filters = \"*moc_*.cpp\" \"*3rdparty/*\"
     capture.commands += && lcov --remove $$capture.file $$capture.filters --output-file $$capture.file
     QMAKE_EXTRA_TARGETS += capture
 

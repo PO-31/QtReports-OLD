@@ -55,9 +55,9 @@ unix {
 
 coverage {
     #QMAKE_CXXFLAGS_RELEASE -= -O2
-	QMAKE_CLEAN += $$OBJECTS_DIR/*.gcda $$OBJECTS_DIR/*.gcno
+	#QMAKE_CLEAN += $$OBJECTS_DIR/*.gcda $$OBJECTS_DIR/*.gcno
 	QMAKE_CXXFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
-	QMAKE_LDFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
+	#QMAKE_LDFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
 	LIBS += -lgcov
 
     zerocounters.commands = @lcov --directory \$(OBJECTS_DIR) --zerocounters
@@ -70,11 +70,11 @@ coverage {
     #lcov -d ${1} -z
     
     #../../coverage/
-    capture.file = coverage.cov
+    capture.file = coverage.info
 	#capture.target = qtreportslib.cov
     #capture.commands = @mkdir -p ../../coverage && 
-    capture.commands = lcov --no-compat-libtool --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
-    capture.filters = \"/usr/*\" \"moc_*.cpp\" \"*3rdparty/*\" \"*QtCore/*\" \"*QtNetwork/*\" \"*corelib/*\" \"*network/*\"
+    capture.commands = lcov --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
+    capture.filters = \"/usr/*\" \"*moc_*.cpp\" \"*3rdparty/*\"
     #!isEqual(IRC_MODULE, "IrcCore"):capture.filters += \"*/IrcCore/*\"
     #!isEqual(IRC_MODULE, "IrcModel"):capture.filters += \"*/IrcModel/*\"
     capture.commands += && lcov --remove $$capture.file $$capture.filters --output-file $$capture.file
