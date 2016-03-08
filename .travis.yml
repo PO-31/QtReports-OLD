@@ -89,7 +89,7 @@ script:
       git clone https://github.com/linux-test-project/lcov && cd lcov && sudo make install && cd .. && lcov --version
       cd ../../qtreportslib
       lcov --capture --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info
-      lcov --remove --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info "*moc_*.cpp"
+      lcov --remove coverage.info --output-file coverage.info "*moc_*.cpp"
     fi
 
 after_success:
