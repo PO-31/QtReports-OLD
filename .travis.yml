@@ -72,8 +72,7 @@ install:
    
 script:
   - nproc
-  - g++ --version
-  - lcov --version
+  - ${CXX} --version
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
   - sudo make -j$(nproc)
@@ -87,6 +86,7 @@ script:
   - ./qtreportslib_tests
   - >
     if [ "$BUILD_TYPE" = "coverage" ]; then
+      lcov --version
       cd ../..
       sudo apt-get install tree
       tree
