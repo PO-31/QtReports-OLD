@@ -127,5 +127,64 @@ void    Test_Engine::compile() {
         }
 
         QVERIFY2( bands_num == report->getDetail()->getBandsSize(), "Detail block test error" );
+        
+        /* <detail> */
+        QWARN( "Test <detail>" );
+        auto detail = report->getDetail();
+        QTRY_VERIFY( !detail.isNull() );
+        QTRY_COMPARE( detail->getName(), QString( "" ) );
+        QTRY_COMPARE( detail->getTagName(), QString( "detail" ) );
+        QTRY_COMPARE( detail->getLastError(), QString( "" ) );
+        QTRY_VERIFY( detail->getBandsSize() == 1 );
+        auto bands = detail->getBands();
+        QTRY_VERIFY( bands.size() == 1 );
+        QTRY_COMPARE( detail->getBand( 0 ), bands.at( 0 ) );
+        
+        /* <band height = "400"> */
+        QWARN( "Test <band>" );
+        auto band = bands.at( 0 );
+        QTRY_VERIFY( !band.isNull() );
+        QTRY_COMPARE( band->getName(), QString( "" ) );
+        QTRY_COMPARE( band->getTagName(), QString( "band" ) );
+        QTRY_COMPARE( band->getLastError(), QString( "" ) );
+        QTRY_COMPARE( band->getX(), 0 );
+        QTRY_COMPARE( band->getY(), 0 );
+        QTRY_COMPARE( band->getWidth(), 0 );
+        QTRY_COMPARE( band->getHeight(), 400 );
+        QTRY_COMPARE( band->getPos(), QPoint() );
+        QTRY_VERIFY( band->getPos().isNull() );
+        QTRY_COMPARE( band->getSize(), QSize( 0, 400 ) );
+        QTRY_VERIFY( band->getStyle().isNull() );
+        QTRY_VERIFY( band->getStaticTextsSize() == 1 );
+        auto staticTexts = band->getStaticTexts();
+        QTRY_VERIFY( staticTexts.size() == 1 );
+        QTRY_COMPARE( band->getStaticText( 0 ), staticTexts.at( 0 ) );
+        QTRY_VERIFY( band->getTextFieldsSize() == 4 );
+        auto textFields = band->getTextFields();
+        QTRY_VERIFY( textFields.size() == 4 );
+        QTRY_COMPARE( band->getTextField( 0 ), textFields.at( 0 ) );
+
+        /*  
+          <staticText>
+          <reportElement x = "380" y = "0" width = "200" height = "20"/>
+          <text><![CDATA[Тест !!]]></text>
+          </staticText>
+        */
+        QWARN( "Test <staticText>" );
+        auto staticText = staticTexts.at( 0 );
+        QTRY_VERIFY( !staticText.isNull() );
+        QTRY_COMPARE( staticText->getName(), QString( "" ) );
+        QTRY_COMPARE( staticText->getTagName(), QString( "staticText" ) );
+        QTRY_COMPARE( staticText->getLastError(), QString( "" ) );
+        QTRY_COMPARE( staticText->getX(), 380 );
+        QTRY_COMPARE( staticText->getY(), 0 );
+        QTRY_COMPARE( staticText->getWidth(), 200 );
+        QTRY_COMPARE( staticText->getHeight(), 20 );
+        QTRY_COMPARE( staticText->getPos(), QPoint( 380, 0 ) );
+        QTRY_COMPARE( staticText->getSize(), QSize( 200, 20 ) );
+        QTRY_VERIFY( staticText->getStyle().isNull() );
+        // QWARN( staticText->getText().toStdString().c_str() );
+        // Use u8 literal for utf-8 texts
+        QTRY_COMPARE( staticText->getText(), QString( u8"Тест !!" ) );
     }
 }

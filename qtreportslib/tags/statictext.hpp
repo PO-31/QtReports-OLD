@@ -1,6 +1,7 @@
 #pragma once
 #ifndef STATICTEXT_HPP
 #define STATICTEXT_HPP
+#include <QString>
 #include <QSharedPointer>
 #include "widget.hpp"
 
