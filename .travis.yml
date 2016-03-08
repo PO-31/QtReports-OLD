@@ -73,7 +73,7 @@ install:
 script:
   - nproc
   - g++ --version
-  - gcov --version
+  - lcov --version
   - cd qtreportslib
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
   - sudo make -j$(nproc)

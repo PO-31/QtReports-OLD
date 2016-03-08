@@ -8,6 +8,6 @@ if [ "$BUILD_TYPE" = "coverage" ]; then
   #sudo -H pip install --user cpp-coveralls
   #sudo pip install --upgrade pip
   #sudo pip install --user cpp-coveralls
-  sudo apt-get install -y ruby-full rubygems lcov gdb
+  sudo apt-get install -y ruby-full rubygems lcov-4.8 gdb
   gem install lcoveralls
 fi
