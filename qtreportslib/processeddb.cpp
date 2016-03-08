@@ -1,3 +1,4 @@
+#include <QPair>
 #include <QSqlRecord>
 #include <QSqlField>
 #include "processeddb.hpp"
