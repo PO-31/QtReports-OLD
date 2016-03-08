@@ -2,7 +2,7 @@ QT += core gui sql widgets printsupport testlib
 
 TARGET = qtreportslib_tests
 TEMPLATE = app
-CONFIG += release c++11
+CONFIG += c++11
 INCLUDEPATH += ../../qtreportslib
 LIBPATH     += ../../qtreportslib
 LIBS   += -lqtreportslib

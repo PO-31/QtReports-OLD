@@ -86,12 +86,11 @@ script:
   - ./qtreportslib_tests
   - >
     if [ "$BUILD_TYPE" = "coverage" ]; then
-      lcov --version
-      cd ../..
-      sudo apt-get install tree
-      tree
-      cd qtreportslib
-      sudo make coverage
+      git clone https://github.com/linux-test-project/lcov && cd lcov && make && sudo make install && cd .. && lcov --version
+      cd ../../qtreportslib && lcov -c -d ./ -o coverage.info
+      #sudo apt-get install tree
+      #tree
+      #sudo make coverage
     fi
 
 after_success:
@@ -100,5 +99,5 @@ after_success:
 #  - if [ "$BUILD_TYPE" = "coverage" ]; then coveralls-lcov --repo_token "${COVERALLS_IO_TOKEN}" ../../qtreportslib/qtreportslib.cov; fi
   - > 
     if [ "$BUILD_TYPE" = "coverage" ]; then
-      lcoveralls --retry-count 5 $TRAVIS_BUILD_DIR/qtreportslib/coverage.info 
+      lcoveralls --retry-count 5 --token "${COVERALLS_IO_TOKEN}" $TRAVIS_BUILD_DIR/qtreportslib/coverage.info 
     fi
