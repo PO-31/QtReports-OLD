@@ -85,7 +85,7 @@ coverage {
     capture.commands += && lcov --remove $$capture.file $$capture.filters --output-file $$capture.file
     QMAKE_EXTRA_TARGETS += capture
 
-    coverage.depends += zerocounters capture
+    coverage.depends += capture zerocounters
     message(Code coverage collection enabled)
 }
 QMAKE_EXTRA_TARGETS += coverage
