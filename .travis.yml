@@ -98,5 +98,6 @@ after_success:
 #  - if [ "$BUILD_TYPE" = "coverage" ]; then coveralls-lcov --repo_token "${COVERALLS_IO_TOKEN}" ../../qtreportslib/qtreportslib.cov; fi
   - > 
     if [ "$BUILD_TYPE" = "coverage" ]; then
-      lcoveralls --retry-count 5 --token "${COVERALLS_IO_TOKEN}" $TRAVIS_BUILD_DIR/qtreportslib/coverage.info 
+      cd $TRAVIS_BUILD_DIR/qtreportslib
+      lcoveralls --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
     fi
