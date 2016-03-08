@@ -22,6 +22,11 @@ namespace qtreports {
             Report();
             ~Report();
 
+            enum Size {
+                A4Gorizontal = 0,
+                A4Vertical
+            };
+
             /* Список параметров Report:
              *  - int "page_width" - ширина страницы;
              *  - int "page_height" - высота страницы;
