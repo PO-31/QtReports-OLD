@@ -2,12 +2,15 @@
 #define ENGINE_HPP
 #include <QObject>
 #include <QString>
+#include <QVariant>
 #include <QMap>
+#include <QVector>
 #include <QSqlDatabase>
 #include <QPrinter>
-#include "converters/convertertoqwidget.hpp"
 #include "parser.hpp"
 #include "processeddb.hpp"
+#include "tags/report.hpp"
+#include "converters/convertertoqwidget.hpp"
 
 namespace qtreports {
     using namespace detail;
