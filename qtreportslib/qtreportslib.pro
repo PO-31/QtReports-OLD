@@ -70,7 +70,7 @@ coverage {
     #lcov -d ${1} -z
     
     #../../coverage/
-    capture.file = coverage.info
+    capture.file = coverage.cov
 	#capture.target = qtreportslib.cov
     #capture.commands = @mkdir -p ../../coverage && 
     capture.commands = lcov --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
