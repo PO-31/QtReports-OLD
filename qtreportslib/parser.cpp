@@ -5,14 +5,14 @@
 namespace qtreports {
     namespace detail {
 
-        auto    bindParseFunc( ParseMethodPtr method, Parser * obj ) {
+        ParseFunc    bindParseFunc( ParseMethodPtr method, Parser * obj ) {
             using namespace std::placeholders;
             auto func = std::bind( method, obj, _1, _2 );
             return func;
         }
 
         template < typename T1 >
-        auto    toParseFunc( bool( Parser::*method )( QXmlStreamReader &, const T1 & ), Parser * obj ) {
+        ParseFunc    toParseFunc( bool( Parser::*method )( QXmlStreamReader &, const T1 & ), Parser * obj ) {
             //Cast second parameter to ObjectPtr type;
             auto parseMethodPtr = reinterpret_cast< ParseMethodPtr >( method );
             return bindParseFunc( parseMethodPtr, obj );
