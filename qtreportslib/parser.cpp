@@ -5,8 +5,35 @@
 namespace qtreports {
     namespace detail {
 
+        auto    bindParseFunc( ParseMethodPtr method, Parser * obj ) {
+            using namespace std::placeholders;
+            auto func = std::bind( method, obj, _1, _2 );
+            return func;
+        }
+
+        template < typename T1 >
+        auto    toParseFunc( bool( Parser::*method )( QXmlStreamReader &, const T1 & ), Parser * obj ) {
+            //Cast second parameter to ObjectPtr type;
+            auto parseMethodPtr = reinterpret_cast< ParseMethodPtr >( method );
+            return bindParseFunc( parseMethodPtr, obj );
+        }
+
+        bool    toBool( const QString & string ) {
+            return isEquals( string, "true" ) || isEquals( string, "1" );
+        }
+
         Parser::Parser() {
-            //m_functions[ "band" ] = &Parser::parseBand;
+            m_functions[ "report" ] = toParseFunc( &Parser::parseReport, this );
+            m_functions[ "style" ] = toParseFunc( &Parser::parseStyle, this );
+            m_functions[ "queryString" ] = toParseFunc( &Parser::parseQueryString, this );
+            m_functions[ "field" ] = toParseFunc( &Parser::parseField, this );
+            m_functions[ "detail" ] = toParseFunc( &Parser::parseDetail, this );
+            m_functions[ "band" ] = toParseFunc( &Parser::parseBand, this );
+            m_functions[ "staticText" ] = toParseFunc( &Parser::parseStaticText, this );
+            m_functions[ "textField" ] = toParseFunc( &Parser::parseTextField, this );
+            m_functions[ "reportElement" ] = toParseFunc( &Parser::parseReportElement, this );
+            m_functions[ "text" ] = toParseFunc( &Parser::parseText, this );
+            m_functions[ "textFieldExpression" ] = toParseFunc( &Parser::parseTextFieldExpression, this );
         }
 
         Parser::~Parser() {}
@@ -41,9 +68,12 @@ namespace qtreports {
             return true;
         }
 
-        bool    Parser::getAttribute( QXmlStreamReader & reader, const QString & name, QString & data ) {
+        bool    Parser::getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option ) {
             auto && attributes = reader.attributes();
             if( !attributes.hasAttribute( name ) ) {
+                if( option != AttributeOption::Required ) {
+                    return true;
+                }
                 auto elementName = reader.name().toString();
                 m_lastError =   "Element \"" + reader.name().toString() +
                                 "\" not have attribute: " + name;
@@ -54,8 +84,7 @@ namespace qtreports {
             return true;
         }
 
-        bool    Parser::parseDocument( const QString & text ) {
-            QXmlStreamReader reader( text );
+        bool    Parser::parseChilds( QXmlStreamReader & reader, const ObjectPtr & object ) {
             while( !reader.atEnd() ) {
                 reader.readNext();
                 if( reader.isEndElement() ) {
@@ -66,8 +95,9 @@ namespace qtreports {
                 }
 
                 auto name = reader.name().toString();
-                if( isEquals( name, "report" ) ) {
-                    if( !parseReport( reader ) ) {
+                if( m_functions.contains( name ) ) {
+                    auto func = m_functions[ name ];
+                    if( !func( reader, object ) ) {
                         return false;
                     }
                 }
@@ -81,60 +111,35 @@ namespace qtreports {
             return true;
         }
 
-        bool	Parser::parseReport( QXmlStreamReader & reader ) {
-            QString name;
-            if( !getAttribute( reader, "name", name ) ) {
-                return false;
-            }
-
+        bool    Parser::parseDocument( const QString & text ) {
+            QXmlStreamReader reader( text );
+            
             ReportPtr report( new Report() );
-            while( !reader.atEnd() ) {
-                reader.readNext();
-                if( reader.isEndElement() ) {
-                    break;
-                }
-                if( !reader.isStartElement() ) {
-                    continue;
-                }
-
-                auto name = reader.name().toString();
-                if( isEquals( name, "style" ) ) {
-                    if( !parseStyle( reader, report ) ) {
-                        return false;
-                    }
-                }
-                else if( isEquals( name, "queryString" ) ) {
-                    if( !parseQueryString( reader, report ) ) {
-                        return false;
-                    }
-                }
-                else if( isEquals( name, "field" ) ) {
-                    if( !parseField( reader, report ) ) {
-                        return false;
-                    }
-                }
-                else if( isEquals( name, "detail" ) ) {
-                    if( !parseDetail( reader, report ) ) {
-                        return false;
-                    }
-                }
-            }
-
-            if( reader.hasError() ) {
-                m_lastError = reader.errorString();
+            if( !parseChilds( reader, report ) ) {
                 return false;
             }
 
-            report->setTagName( "report" );
-            report->setName( name );
             m_report = report;
 
             return true;
         }
 
-        bool    toBool( const QString & string ) {
-            return isEquals( string, "true" ) || isEquals( string, "1" );
+        bool	Parser::parseReport( QXmlStreamReader & reader, const ReportPtr & report ) {
+            QString name;
+            if( !getAttribute( reader, "name", name ) ) {
+                return false;
+            }
+
+            if( !parseChilds( reader, report ) ) {
+                return false;
+            }
+
+            report->setTagName( "report" );
+            report->setName( name );
+
+            return true;
         }
+
 
         bool    Parser::parseStyle( QXmlStreamReader & reader, const ReportPtr & report ) {
             QString name;
@@ -230,25 +235,7 @@ namespace qtreports {
 
         bool	Parser::parseDetail( QXmlStreamReader & reader, const ReportPtr & report ) {
             DetailPtr detail( new Detail() );
-            while( !reader.atEnd() ) {
-                reader.readNext();
-                if( reader.isEndElement() ) {
-                    break;
-                }
-                if( !reader.isStartElement() ) {
-                    continue;
-                }
-
-                auto name = reader.name().toString();
-                if( isEquals( name, "band" ) ) {
-                    if( !parseBand( reader, detail ) ) {
-                        return false;
-                    }
-                }
-            }
-
-            if( reader.hasError() ) {
-                m_lastError = reader.errorString();
+            if( !parseChilds( reader, detail ) ) {
                 return false;
             }
 
@@ -265,31 +252,7 @@ namespace qtreports {
             }
 
             BandPtr band( new Band() );
-            while( !reader.atEnd() ) {
-                reader.readNext();
-                if( reader.isEndElement() ) {
-                    break;
-                }
-                if( !reader.isStartElement() ) {
-                    continue;
-                }
-
-                auto name = reader.name().toString();
-                //QMessageBox::warning( 0, "", name );
-                if( isEquals( name, "staticText" ) ) {
-                    if( !parseStaticText( reader, band ) ) {
-                        return false;
-                    }
-                }
-                else if( isEquals( name, "textField" ) ) {
-                    if( !parseTextField( reader, band ) ) {
-                        return false;
-                    }
-                }
-            }
-
-            if( reader.hasError() ) {
-                m_lastError = reader.errorString();
+            if( !parseChilds( reader, band ) ) {
                 return false;
             }
 
@@ -302,30 +265,7 @@ namespace qtreports {
 
         bool	Parser::parseStaticText( QXmlStreamReader & reader, const BandPtr & band ) {
             StaticTextPtr staticText( new StaticText() );
-            while( !reader.atEnd() ) {
-                reader.readNext();
-                if( reader.isEndElement() ) {
-                    break;
-                }
-                if( !reader.isStartElement() ) {
-                    continue;
-                }
-
-                auto name = reader.name().toString();
-                if( isEquals( name, "reportElement" ) ) {
-                    if( !parseReportElement( reader, staticText ) ) {
-                        return false;
-                    }
-                }
-                else if( isEquals( name, "text" ) ) {
-                    if( !parseText( reader, staticText ) ) {
-                        return false;
-                    }
-                }
-            }
-
-            if( reader.hasError() ) {
-                m_lastError = reader.errorString();
+            if( !parseChilds( reader, staticText ) ) {
                 return false;
             }
 
@@ -337,30 +277,7 @@ namespace qtreports {
 
         bool	Parser::parseTextField( QXmlStreamReader & reader, const BandPtr & band ) {
             TextFieldPtr textField( new TextField() );
-            while( !reader.atEnd() ) {
-                reader.readNext();
-                if( reader.isEndElement() ) {
-                    break;
-                }
-                if( !reader.isStartElement() ) {
-                    continue;
-                }
-
-                auto name = reader.name().toString();
-                if( isEquals( name, "reportElement" ) ) {
-                    if( !parseReportElement( reader, textField ) ) {
-                        return false;
-                    }
-                }
-                else if( isEquals( name, "textFieldExpression" ) ) {
-                    if( !parseTextFieldExpression( reader, textField ) ) {
-                        return false;
-                    }
-                }
-            }
-
-            if( reader.hasError() ) {
-                m_lastError = reader.errorString();
+            if( !parseChilds( reader, textField ) ) {
                 return false;
             }
 
@@ -443,6 +360,7 @@ namespace qtreports {
             }
 
             report->setQuery( text );
+            report->setTagName( "queryString" );
 
             return !reader.hasError();
         }

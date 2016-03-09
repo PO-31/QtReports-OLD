@@ -88,6 +88,21 @@ int main( int argc, char *argv[] ) {
         }
     } );
 
+    QAction close( QObject::tr( "&Close..." ), &window );
+    close.setShortcuts( QKeySequence::Close );
+    close.setStatusTip( QObject::tr( "Close current report" ) );
+    QObject::connect( &close, &QAction::triggered, [ & ]() {
+        if( window.centralWidget() != nullptr ) {
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 2, 0 ) )
+            window.takeCentralWidget();
+#endif
+        }
+
+        print.setEnabled( false );
+        convert.setEnabled( false );
+        close.setEnabled( false );
+    } );
+
     QAction open( QObject::tr( "&Open..." ), &window );
     open.setShortcuts( QKeySequence::Open );
     open.setStatusTip( QObject::tr( "Open an existing file" ) );
@@ -109,6 +124,7 @@ int main( int argc, char *argv[] ) {
         bool result = engine.open( file );
         print.setEnabled( engine.isOpened() );
         convert.setEnabled( engine.isOpened() );
+        close.setEnabled( engine.isOpened() );
         if( !result ) {
             QMessageBox::critical( 0, "Error: ", engine.getLastError() );
             return;
@@ -133,6 +149,7 @@ int main( int argc, char *argv[] ) {
 
     file.addAction( &open );
     file.addAction( &print );
+    file.addAction( &close );
     file.addAction( &exit );
     convert.addAction( &createPDF );
     convert.addAction( &createHTML );

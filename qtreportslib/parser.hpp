@@ -10,11 +10,18 @@
 #include "tags/band.hpp"
 #include "tags/statictext.hpp"
 #include "tags/textfield.hpp"
+#include "QMap"
+#include <functional>
 
 namespace qtreports {
 
     //All support classes in detail
     namespace detail {
+
+        class Parser;
+        using ParseFuncPtr = bool( QXmlStreamReader &, const ObjectPtr & );
+        using ParseMethodPtr = bool( Parser::* )( QXmlStreamReader &, const ObjectPtr & );
+        using ParseFunc = std::function< ParseFuncPtr >;
 
         class Parser {
 
@@ -22,20 +29,29 @@ namespace qtreports {
             Parser();
             ~Parser();
 
+            enum AttributeOption {
+                Required,
+                Optional
+            };
+
             bool	            parse( const QString & path );
 
             const ReportPtr	    getReport() const;
             const QString       getLastError() const;
 
+            bool    test( int a );
+
         private:
             ReportPtr	m_report;
             QString		m_lastError;
+            QMap< QString, ParseFunc > m_functions;
 
             bool    getValue( QXmlStreamReader & reader, QString & data );
-            bool    getAttribute( QXmlStreamReader & reader, const QString & name, QString & data );
+            bool    getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option = AttributeOption::Required );
+            bool    parseChilds( QXmlStreamReader & reader, const ObjectPtr & object );
 
             bool    parseDocument( const QString & text );
-            bool	parseReport( QXmlStreamReader & reader );
+            bool	parseReport( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseStyle( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseQueryString( QXmlStreamReader & reader, const ReportPtr & report );
             bool	parseField( QXmlStreamReader & reader, const ReportPtr & report );
