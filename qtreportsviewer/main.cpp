@@ -141,7 +141,7 @@ int main( int argc, char *argv[] ) {
     } );
 
     QAction exit( QObject::tr( "&Exit..." ), &window );
-    exit.setShortcuts( QKeySequence::Close );
+    exit.setShortcuts( QKeySequence::Quit );
     QObject::connect( &exit, &QAction::triggered, &window, &QMainWindow::close );
 
     print.setEnabled( engine.isOpened() );
