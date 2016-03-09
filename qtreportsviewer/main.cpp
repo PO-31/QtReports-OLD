@@ -16,7 +16,7 @@ int main( int argc, char *argv[] ) {
     QMenu file( "File", &bar );
     QMenu convert( "Convert", &bar );
 
-    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/default.qreport";
+    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/simple.qreport";
     qtreports::Engine engine( path );
     if( !engine.isOpened() ) {
         QMessageBox::critical( 0, "Error: ", engine.getLastError() );

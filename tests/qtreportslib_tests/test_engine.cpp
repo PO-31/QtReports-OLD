@@ -10,7 +10,7 @@ Test_Engine::~Test_Engine() {}
 
 void    Test_Engine::compile() {
     qtreports::Engine engine;
-    QString input = QFINDTESTDATA( "default.qreport" );
+    QString input = QFINDTESTDATA( "simple.qreport" );
     QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
 
     QString input_scheme = QFINDTESTDATA( "default.txt" );

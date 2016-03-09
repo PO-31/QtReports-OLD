@@ -173,7 +173,8 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="default.qreport" />
+    <None Include="detail.qreport" />
+    <None Include="simple.qreport" />
     <None Include="qtreportslib_tests.pro" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

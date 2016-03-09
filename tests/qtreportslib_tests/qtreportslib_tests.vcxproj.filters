@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="qtreportslib_tests.pro" />
-    <None Include="default.qreport" />
+    <None Include="simple.qreport" />
+    <None Include="detail.qreport" />
   </ItemGroup>
 </Project>
