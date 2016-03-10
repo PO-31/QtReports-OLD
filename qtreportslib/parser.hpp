@@ -1,8 +1,11 @@
 #pragma once
 #ifndef TRANSLATOR_HPP
 #define TRANSLATOR_HPP
+#include <functional>
 #include <QString>
 #include <QXmlStreamReader>
+#include <QMap>
+#include <QTextStream>
 #include "tags/report.hpp"
 #include "tags/style.hpp"
 #include "tags/field.hpp"
@@ -10,8 +13,6 @@
 #include "tags/band.hpp"
 #include "tags/statictext.hpp"
 #include "tags/textfield.hpp"
-#include "QMap"
-#include <functional>
 
 namespace qtreports {
 
@@ -38,16 +39,17 @@ namespace qtreports {
 
             const ReportPtr	    getReport() const;
             const QString       getLastError() const;
-
-            bool    test( int a );
+            const QString       getLog() const;
 
         private:
-            ReportPtr	m_report;
-            QString		m_lastError;
-            QMap< QString, ParseFunc > m_functions;
+            ReportPtr	                m_report;
+            QString		                m_lastError;
+            QTextStream                 m_log;
+            QMap< QString, ParseFunc >  m_functions;
 
             bool    getValue( QXmlStreamReader & reader, QString & data );
             bool    getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option = AttributeOption::Required );
+            bool    goToElementEnd( QXmlStreamReader & reader );
             bool    parseChilds( QXmlStreamReader & reader, const ObjectPtr & object );
 
             bool    parseDocument( const QString & text );
@@ -55,6 +57,7 @@ namespace qtreports {
             bool    parseStyle( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseQueryString( QXmlStreamReader & reader, const ReportPtr & report );
             bool	parseField( QXmlStreamReader & reader, const ReportPtr & report );
+            bool	parseTitle( QXmlStreamReader & reader, const ReportPtr & report );
             bool	parseDetail( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseBand( QXmlStreamReader & reader, const DetailPtr & detail );
             bool    parseStaticText( QXmlStreamReader & reader, const BandPtr & band );

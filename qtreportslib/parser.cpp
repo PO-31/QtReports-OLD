@@ -1,5 +1,6 @@
 #include <QFile>
 #include <QMessageBox>
+#include <QDebug>
 #include "parser.hpp"
 
 namespace qtreports {
@@ -22,11 +23,12 @@ namespace qtreports {
             return isEquals( string, "true" ) || isEquals( string, "1" );
         }
 
-        Parser::Parser() {
+        Parser::Parser() : m_log( new QString() ) {
             m_functions[ "report" ] = toParseFunc( this, &Parser::parseReport );
             m_functions[ "style" ] = toParseFunc( this, &Parser::parseStyle );
             m_functions[ "queryString" ] = toParseFunc( this, &Parser::parseQueryString );
             m_functions[ "field" ] = toParseFunc( this, &Parser::parseField );
+            m_functions[ "title" ] = toParseFunc( this, &Parser::parseTitle );
             m_functions[ "detail" ] = toParseFunc( this, &Parser::parseDetail );
             m_functions[ "band" ] = toParseFunc( this, &Parser::parseBand );
             m_functions[ "staticText" ] = toParseFunc( this, &Parser::parseStaticText );
@@ -55,31 +57,64 @@ namespace qtreports {
         }
 
         bool    Parser::getValue( QXmlStreamReader & reader, QString & data ) {
+            m_log << "getValue: start" << endl;
             while( !reader.atEnd() && !reader.isEndElement() ) {
                 data += reader.text().toString();
                 reader.readNext();
             }
 
             if( reader.hasError() ) {
+                m_log << "getValue: error" << endl;
                 m_lastError = reader.errorString();
                 return false;
             }
+
+            m_log << "getValue: end. data: " << data << endl;
 
             return true;
         }
 
         bool    Parser::getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option ) {
+            m_log << "getAttribute: start. name: " << name << endl;
             auto && attributes = reader.attributes();
             if( !attributes.hasAttribute( name ) ) {
+                m_log << "getAttribute: !hasAttribute" << endl;
                 if( option != AttributeOption::Required ) {
                     return true;
                 }
+                m_log << "getAttribute: error" << endl;
                 auto elementName = reader.name().toString();
                 m_lastError =   "Element \"" + reader.name().toString() +
                                 "\" not have attribute: " + name;
                 return false;
             }
             data = attributes.value( name ).toString();
+            m_log << "getAttribute: end. name: " << name << ", data: " << data << endl;
+            return true;
+        }
+
+        bool    Parser::goToElementEnd( QXmlStreamReader & reader ) {
+            m_log << "goToEnd: start" << endl;
+            int level = 0;
+            while( !reader.atEnd() ) {
+                reader.readNext();
+                if( reader.isEndElement() ) {
+                    if( level <= 0 ) {
+                        break;
+                    }
+                    --level;
+                }
+                if( reader.isStartElement() ) {
+                    ++level;
+                }
+            }
+
+            if( reader.hasError() ) {
+                m_log << "goToEnd: error" << endl;
+                m_lastError = reader.errorString();
+                return false;
+            }
+            m_log << "goToEnd: end" << endl;
 
             return true;
         }
@@ -98,6 +133,11 @@ namespace qtreports {
                 if( m_functions.contains( name ) ) {
                     auto func = m_functions[ name ];
                     if( !func( reader, object ) ) {
+                        return false;
+                    }
+                }
+                else {
+                    if( !goToElementEnd( reader ) ) {
                         return false;
                     }
                 }
@@ -209,12 +249,12 @@ namespace qtreports {
             if( !getAttribute( reader, "name", name ) ) {
                 return false;
             }
-
+            
             QString className;
             if( !getAttribute( reader, "class", className ) ) {
                 return false;
             }
-
+            /*
             while( !reader.atEnd() && !reader.isEndElement() ) {
                 reader.readNext();
             }
@@ -223,14 +263,31 @@ namespace qtreports {
                 m_lastError = reader.errorString();
                 return false;
             }
-
+            */
             FieldPtr field( new Field() );
+            if( !parseChilds( reader, field ) ) {
+                return false;
+            }
+            
             field->setTagName( "field" );
             field->setName( name );
             field->setClassName( className );
             report->setField( name, field );
             
             return !reader.hasError();
+        }
+
+        bool	Parser::parseTitle( QXmlStreamReader & reader, const ReportPtr & report ) {
+            TitlePtr title( new Title() );
+            //FIX: cast to DetailPtr instead TitlePtr
+            if( !parseChilds( reader, title ) ) {
+                return false;
+            }
+            
+            title->setTagName( "title" );
+            report->setTitle( title );
+
+            return true;
         }
 
         bool	Parser::parseDetail( QXmlStreamReader & reader, const ReportPtr & report ) {
@@ -371,6 +428,10 @@ namespace qtreports {
 
         const QString			Parser::getLastError() const {
             return m_lastError;
+        }
+
+        const QString           Parser::getLog() const {
+            return *m_log.string();
         }
 
     }

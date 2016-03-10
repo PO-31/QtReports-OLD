@@ -1,5 +1,5 @@
 //#include <QTextBrowser>
-//#include <QVBoxLayout>
+#include <QVBoxLayout>
 //#include "convertertohtml.hpp"
 #include <QFrame>
 #include <QLabel>
@@ -54,8 +54,37 @@ namespace qtreports {
                 return false;
             }
 
+            auto layout = new QVBoxLayout( m_qwidget.data() );
+            layout->setMargin( 0 );
+
+            auto title = m_report->getTitle();
+            if( !title.isNull() ) {
+                auto titleWidget = new QFrame();
+                titleWidget->setMaximumHeight( 30 );
+                layout->addWidget( titleWidget );
+
+                auto titleLabel = new QLabel( titleWidget );
+                titleLabel->setText( "Title" );
+                titleLabel->setStyleSheet( "font-size: 26px; color: rgba( 0, 0, 0, 50% )" );
+                titleLabel->setAlignment( Qt::AlignCenter );
+                titleLabel->resize( titleWidget->size() );
+            }
+
+            auto detailWidget = new QFrame();
+            detailWidget->setMaximumHeight( 150 );
+            layout->addWidget( detailWidget );
+
+            auto detailLabel = new QLabel( detailWidget );
+            detailLabel->setText( "Detail" );
+            detailLabel->setStyleSheet( "font-size: 26px; color: rgba( 0, 0, 0, 50% )" );
+            detailLabel->setAlignment( Qt::AlignCenter );
+            detailLabel->resize( detailWidget->size() );
+
+            auto emptyWidget = new QFrame();
+            layout->addWidget( emptyWidget );
+
             for( auto && band : detail->getBands() ) {
-                auto frame = new QFrame( m_qwidget.data() );
+                auto frame = new QFrame( detailWidget );
                 frame->setGeometry( 0, 0, m_qwidget->width(), band->getSize().height() );
                 for( auto && staticText : band->getStaticTexts() ) {
                     auto label = new QLabel( frame );

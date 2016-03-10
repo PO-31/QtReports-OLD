@@ -11,6 +11,7 @@
 #include "object.hpp"
 #include "field.hpp"
 #include "style.hpp"
+#include "title.hpp"
 #include "detail.hpp"
 
 namespace qtreports {
@@ -48,6 +49,9 @@ namespace qtreports {
             const FieldPtr                      getField( const QString & name ) const;
             const QMap< QString, FieldPtr >     getFields() const;
 
+            void                                setTitle( const TitlePtr & title );
+            const TitlePtr                      getTitle() const;
+
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
@@ -58,6 +62,7 @@ namespace qtreports {
             QMap< QString, StylePtr >   m_styles;
             QString                     m_query;
             QMap< QString, FieldPtr >   m_fields;
+            TitlePtr                    m_title;
             DetailPtr                   m_detail;
 
         };

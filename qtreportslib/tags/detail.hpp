@@ -3,7 +3,7 @@
 #define DETAIL_HPP
 #include <QVector>
 #include <QSharedPointer>
-#include "widget.hpp"
+#include "object.hpp"
 #include "band.hpp"
 
 namespace qtreports {

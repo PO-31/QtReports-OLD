@@ -1,4 +1,3 @@
-#include "../painter.hpp"
 #include "report.hpp"
 
 namespace qtreports {
@@ -103,6 +102,14 @@ namespace qtreports {
 
         const QMap< QString, FieldPtr >   Report::getFields() const {
             return m_fields;
+        }
+
+        void    Report::setTitle( const TitlePtr & title ) {
+            m_title = title;
+        }
+
+        const TitlePtr     Report::getTitle() const {
+            return m_title;
         }
 
         void    Report::setDetail( const DetailPtr & detail ) {
