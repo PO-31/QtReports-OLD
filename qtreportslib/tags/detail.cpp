@@ -3,12 +3,9 @@
 namespace qtreports {
     namespace detail {
 
-        Detail::Detail( ObjectPtr parent ) :
-            Object( parent ) {}
+        Detail::Detail() {}
 
-        const QString   Detail::getClassName() const {
-            return QString( "Detail" );
-        }
+        Detail::~Detail() {}
 
     }
 }

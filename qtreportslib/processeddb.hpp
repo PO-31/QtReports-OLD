@@ -3,8 +3,9 @@
 #define PROCESSEDDB_HPP
 #include <QString>
 #include <QVariant>
-#include <QSqlQueryModel>
+#include <QMap>
 #include <QSharedPointer>
+#include <QSqlQueryModel>
 
 namespace qtreports {
     namespace detail {

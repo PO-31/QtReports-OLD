@@ -5,29 +5,14 @@ namespace qtreports {
 
         Report::Report() :
             m_isVertical( true ),
-            m_size( 600, 400 ) {}
+            m_size( 600, 400 ) {
+            Q_UNUSED( m_isVertical );
+            Q_UNUSED( m_size );
+        }
 
         Report::~Report() {}
-
-        bool	Report::draw( Painter & painter, const ProcessedDB & db ) {
-            bool isNewPageRequired = false;
-            do {
-                if( !Object::draw( painter, db ) ) {
-                    return false;
-                }
-
-                isNewPageRequired = painter.isNewPageRequested();
-                painter.pageDrawingComplete();
-            } while( isNewPageRequired );
-
-            return true;
-        }
-
-        const QString	Report::asHTML() const {
-            return "Hello, world";
-        }
-
-        bool Report::setParameter( const QString & name, const QVariant & value ) {
+        /*
+        bool    Report::setParameter( const QString & name, const QVariant & value ) {
             QString page_width( "page_width" ), page_height( "page_height" ),
                 isVertical( "is_vertical" );
 
@@ -67,23 +52,72 @@ namespace qtreports {
                 return true;
             }
 
-            return Object::setParameter( name, value );
+            return true;// Object::setParameter( name, value );
+        }
+        */
+
+        void    Report::setDefaultStyle( const StylePtr & style ) {
+            m_defaultStyle = style;
         }
 
-        const QString   Report::getClassName() const {
-            return QString( "Report" );
+        const StylePtr  Report::getDefaultStyle() const {
+            return m_defaultStyle;
         }
 
-        bool	Report::drawSelf( Painter & painter, const ProcessedDB & db ) {
-            Q_UNUSED( painter )
-                Q_UNUSED( db )
-                return false;
+        void    Report::setStyle( const QString & name, const StylePtr & style ) {
+            m_styles[ name ] = style;
         }
 
-        bool	Report::prepareChilds( Painter & painter, const ProcessedDB & db ) {
-            Q_UNUSED( painter )
-                Q_UNUSED( db )
-                return false;
+        const StylePtr  Report::getStyle( const QString & name ) const {
+            if( !m_styles.contains( name ) ) {
+                return StylePtr();
+            }
+
+            return m_styles[ name ];
+        }
+
+        const QMap< QString, StylePtr >     Report::getStyles() const {
+            return m_styles;
+        }
+
+        void    Report::setQuery( const QString & query ) {
+            m_query = query;
+        }
+
+        const QString   Report::getQuery() const {
+            return m_query;
+        }
+
+        void    Report::setField( const QString & name, const FieldPtr & field ) {
+            m_fields[ name ] = field;
+        }
+
+        const FieldPtr  Report::getField( const QString & name ) const {
+            if( !m_fields.contains( name ) ) {
+                return  FieldPtr();
+            }
+
+            return m_fields[ name ];
+        }
+
+        const QMap< QString, FieldPtr >   Report::getFields() const {
+            return m_fields;
+        }
+
+        void    Report::setTitle( const TitlePtr & title ) {
+            m_title = title;
+        }
+
+        const TitlePtr     Report::getTitle() const {
+            return m_title;
+        }
+
+        void    Report::setDetail( const DetailPtr & detail ) {
+            m_detail = detail;
+        }
+
+        const DetailPtr     Report::getDetail() const {
+            return m_detail;
         }
 
     }

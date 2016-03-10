@@ -2,44 +2,46 @@
 #define ENGINE_HPP
 #include <QObject>
 #include <QString>
+#include <QVariant>
 #include <QMap>
+#include <QVector>
 #include <QSqlDatabase>
 #include <QPrinter>
 #include "parser.hpp"
 #include "processeddb.hpp"
-#include "painter.hpp"
-//#include "dbquery.h"
-#include "tags/object.hpp"
 #include "tags/report.hpp"
+#include "converters/convertertoqwidget.hpp"
 
 namespace qtreports {
     using namespace detail;
 
     class Engine : public QObject {
+        Q_OBJECT
 
     public:
-        Engine( QObject * parent = 0 );
+        Engine( QObject * parent = Q_NULLPTR );
+        Engine( const QString & path, QObject * parent = Q_NULLPTR );
         ~Engine();
 
-        bool    compile( const QString & path );
+        bool    open( const QString & path );
         bool    setParameters( const QMap< QString, QString > & map );
         bool    setConnection( const QSqlDatabase & connection );
 
         void    addQuery( const QString &queryName, const QString & query );
         void    addScript( const QString & script );
 
-        bool    createPDF( const QString & path );
-        bool    createHTML( const QString & path );//etc.
-        bool    print();
-
-        bool        	    isCompiled() const;
+        bool                createPDF( const QString & path );
+        bool                createHTML( const QString & path );//etc.
+        const QWidgetPtr	createWidget();
+        bool                print();
+        
+        bool        	    isOpened() const;
         const QString       getLastError() const;
-        const QWidgetPtr    getWidget() const;
 
     private:
-        bool                        m_isCompiled;
+        bool                        m_isOpened;
         QString                     m_lastError, m_compiledPath;
-        QWidgetPtr                  m_widget;
+        ReportPtr                   m_report;
         QMap< QString, QString >    m_dbQueries;
         QVector< QString >          m_scripts;
         QSqlDatabase                m_dbConnection;

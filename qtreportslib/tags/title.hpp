@@ -1,19 +1,22 @@
 #pragma once
 #ifndef TITLE_HPP
 #define TITLE_HPP
-#include "object.hpp"
+#include <QSharedPointer>
+#include "section.hpp"
 
 namespace qtreports {
     namespace detail {
 
-        class Title : public Object {
+        class Title : public Section {
 
         public:
             Title();
+            ~Title();
 
-            const QString getClassName() const;
+        private:
 
         };
+        typedef QSharedPointer< Title > TitlePtr;
 
     }
 }
