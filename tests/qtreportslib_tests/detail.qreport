@@ -15,16 +15,16 @@
 
   <queryString language="xPath"><![CDATA[/rss/channel/item]]></queryString>
 
-  <field name="Title" class="java.lang.String">
+  <field name="Title" class="QString">
     <fieldDescription><![CDATA[title]]></fieldDescription>
   </field>
-  <field name="Link" class="java.lang.String">
+  <field name="Link" class="QString">
     <fieldDescription><![CDATA[link]]></fieldDescription>
   </field>
-  <field name="Description" class="java.lang.String">
+  <field name="Description" class="QString">
     <fieldDescription><![CDATA[description]]></fieldDescription>
   </field>
-  <field name="Category" class="java.lang.String">
+  <field name="Category" class="QString">
     <fieldDescription><![CDATA[category]]></fieldDescription>
   </field>
 
@@ -52,22 +52,22 @@
       <textElement textAlignment="Center">
         <font isBold="true"/>
       </textElement>
-      <textFieldExpression class="java.lang.String"><![CDATA[$F{Title}]]></textFieldExpression>
+      <textFieldExpression class="QString"><![CDATA[$F{Title}]]></textFieldExpression>
     </textField>
 
     <textField>
       <reportElement x="0" y="30" width="178" height="15" style="Basic"/>
-      <textFieldExpression class="java.lang.String"><![CDATA[$F{Link}]]></textFieldExpression>
+      <textFieldExpression class="QString"><![CDATA[$F{Link}]]></textFieldExpression>
     </textField>
 
     <textField>
       <reportElement x="0" y="45" width="178" height="100" style="Basic"/>
-      <textFieldExpression class="java.lang.String"><![CDATA[$F{Description}]]></textFieldExpression>
+      <textFieldExpression class="QString"><![CDATA[$F{Description}]]></textFieldExpression>
     </textField>
 
     <textField>
       <reportElement x="0" y="130" width="178" height="15" style="Basic"/>
-      <textFieldExpression class="java.lang.String"><![CDATA[$F{Category}]]></textFieldExpression>
+      <textFieldExpression class="QString"><![CDATA[$F{Category}]]></textFieldExpression>
     </textField>
   </band>
 </detail>
