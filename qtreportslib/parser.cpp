@@ -5,14 +5,14 @@
 namespace qtreports {
     namespace detail {
 
-        ParseFunc    bindParseFunc( ParseMethodPtr method, Parser * obj ) {
+        ParseFunc    bindParseFunc( Parser * obj, ParseMethodPtr method ) {
             using namespace std::placeholders;
             auto func = std::bind( method, obj, _1, _2 );
             return func;
         }
 
         template < typename T1 >
-        ParseFunc    toParseFunc( bool( Parser::*method )( QXmlStreamReader &, const T1 & ), Parser * obj ) {
+        ParseFunc    toParseFunc( Parser * obj, bool( Parser::*method )( QXmlStreamReader &, const T1 & ) ) {
             //Cast second parameter to ObjectPtr type;
             auto parseMethodPtr = reinterpret_cast< ParseMethodPtr >( method );
             return bindParseFunc( parseMethodPtr, obj );
@@ -23,17 +23,17 @@ namespace qtreports {
         }
 
         Parser::Parser() {
-            m_functions[ "report" ] = toParseFunc( &Parser::parseReport, this );
-            m_functions[ "style" ] = toParseFunc( &Parser::parseStyle, this );
-            m_functions[ "queryString" ] = toParseFunc( &Parser::parseQueryString, this );
-            m_functions[ "field" ] = toParseFunc( &Parser::parseField, this );
-            m_functions[ "detail" ] = toParseFunc( &Parser::parseDetail, this );
-            m_functions[ "band" ] = toParseFunc( &Parser::parseBand, this );
-            m_functions[ "staticText" ] = toParseFunc( &Parser::parseStaticText, this );
-            m_functions[ "textField" ] = toParseFunc( &Parser::parseTextField, this );
-            m_functions[ "reportElement" ] = toParseFunc( &Parser::parseReportElement, this );
-            m_functions[ "text" ] = toParseFunc( &Parser::parseText, this );
-            m_functions[ "textFieldExpression" ] = toParseFunc( &Parser::parseTextFieldExpression, this );
+            m_functions[ "report" ] = toParseFunc( this, &Parser::parseReport );
+            m_functions[ "style" ] = toParseFunc( this, &Parser::parseStyle );
+            m_functions[ "queryString" ] = toParseFunc( this, &Parser::parseQueryString );
+            m_functions[ "field" ] = toParseFunc( this, &Parser::parseField );
+            m_functions[ "detail" ] = toParseFunc( this, &Parser::parseDetail );
+            m_functions[ "band" ] = toParseFunc( this, &Parser::parseBand );
+            m_functions[ "staticText" ] = toParseFunc( this, &Parser::parseStaticText );
+            m_functions[ "textField" ] = toParseFunc( this, &Parser::parseTextField );
+            m_functions[ "reportElement" ] = toParseFunc( this, &Parser::parseReportElement );
+            m_functions[ "text" ] = toParseFunc( this, &Parser::parseText );
+            m_functions[ "textFieldExpression" ] = toParseFunc( this, &Parser::parseTextFieldExpression );
         }
 
         Parser::~Parser() {}
@@ -163,17 +163,17 @@ namespace qtreports {
             }
 
             QString pdfFontName;
-            if( !getAttribute( reader, "pdfFontName", pdfFontName ) ) {
+            if( !getAttribute( reader, "pdfFontName", pdfFontName, AttributeOption::Optional ) ) {
                 return false;
             }
 
             QString pdfEncoding;
-            if( !getAttribute( reader, "pdfEncoding", pdfEncoding ) ) {
+            if( !getAttribute( reader, "pdfEncoding", pdfEncoding, AttributeOption::Optional ) ) {
                 return false;
             }
 
             QString isPdfEmbedded;
-            if( !getAttribute( reader, "isPdfEmbedded", isPdfEmbedded ) ) {
+            if( !getAttribute( reader, "isPdfEmbedded", isPdfEmbedded, AttributeOption::Optional ) ) {
                 return false;
             }
 
