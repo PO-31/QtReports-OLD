@@ -279,7 +279,6 @@ namespace qtreports {
 
         bool	Parser::parseTitle( QXmlStreamReader & reader, const ReportPtr & report ) {
             TitlePtr title( new Title() );
-            //FIX: cast to DetailPtr instead TitlePtr
             if( !parseChilds( reader, title ) ) {
                 return false;
             }
@@ -302,7 +301,7 @@ namespace qtreports {
             return true;
         }
 
-        bool	Parser::parseBand( QXmlStreamReader & reader, const DetailPtr & detail ) {
+        bool	Parser::parseBand( QXmlStreamReader & reader, const SectionPtr & section ) {
             QString height;
             if( !getAttribute( reader, "height", height ) ) {
                 return false;
@@ -314,8 +313,8 @@ namespace qtreports {
             }
 
             band->setTagName( "band" );
-            band->setSize( QSize( 0, height.toInt() ) );
-            detail->addBand( band );
+            band->setHeight( height.toInt() );
+            section->addBand( band );
 
             return true;
         }
@@ -374,10 +373,8 @@ namespace qtreports {
                 return false;
             }
 
-            QPoint pos( x.toInt(), y.toInt() );
-            QSize size( width.toInt(), height.toInt() );
-            widget->setPosition( pos );
-            widget->setSize( size );
+            QRect rect( x.toInt(), y.toInt(), width.toInt(), height.toInt() );
+            widget->setRect( rect );
 
             return !reader.hasError();
         }

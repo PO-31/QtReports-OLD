@@ -3,6 +3,7 @@
 #define CONVERTERTOQWIDGET_HPP
 #include <QString>
 #include <QWidget>
+#include <QVBoxLayout>
 #include "tags/report.hpp"
 
 namespace qtreports {
@@ -26,6 +27,8 @@ namespace qtreports {
             QWidgetPtr  m_qwidget;
 
             bool        createQWidget();
+            bool        createSection( QVBoxLayout * parent, const SectionPtr & section );
+            bool        createBands( QWidget * parent, const SectionPtr & section );
 
         };
 

@@ -7,6 +7,7 @@
 //#include <QVariant>
 #include <QPoint>
 #include <QSize>
+#include <QRect>
 #include <QSharedPointer>
 
 #include "style.hpp"
@@ -25,8 +26,15 @@ namespace qtreports {
             /* Установить положение объекта. Аргумент - неотрицательные координаты объекта, с центром координат в
              * верхнем левом углу. Координаты задаются относительно внешнего объекта. */
             void			setPosition( const QPoint & pos );
+            void			setX( int x );
+            void			setY( int y );
+
             /* Установить размер объекта. Аргумент - размер объекта. */
             void			setSize( const QSize & size );
+            void			setWidth( int width );
+            void			setHeight( int height );
+
+            void			setRect( const QRect & rect );
             /* Устанавливает индекс стиля объекта значением styleId, отрицательные значения - стиль по умолчанию. */
             void            setStyle( const StylePtr & style );
             
@@ -37,6 +45,8 @@ namespace qtreports {
             const QSize     getSize() const;
             int             getWidth() const;
             int             getHeight() const;
+
+            const QRect     getRect() const;
 
             /* Возвращает индекс стиля. */
             const StylePtr  getStyle() const;
@@ -52,8 +62,7 @@ namespace qtreports {
             //virtual bool    setParameter( const QString & name, const QVariant & value );
 
         protected:
-            QPoint					m_pos;
-            QSize					m_size;
+            QRect					m_rect;
             StylePtr				m_style;
 
         };

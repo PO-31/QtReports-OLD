@@ -15,6 +15,7 @@ SOURCES += engine.cpp \
 	converters/convertertopdf.cpp \
     tags/object.cpp \
 	tags/widget.cpp \
+	tags/section.cpp \
     tags/report.cpp \
     tags/style.cpp \
 	tags/field.cpp \
@@ -34,6 +35,7 @@ HEADERS += engine.hpp \
 	converters/convertertopdf.hpp \
 	tags/object.hpp \
 	tags/widget.hpp \
+	tags/section.hpp \
     tags/report.hpp \
     tags/style.hpp \
 	tags/field.hpp \

@@ -4,17 +4,36 @@ namespace qtreports {
     namespace detail {
 
         Widget::Widget() :
-            m_pos( 0, 0 ),
-            m_size( 0, 0 ) {}
+            m_rect( 0, 0, 0, 0 ) {}
 
         Widget::~Widget() {}
 
         void	Widget::setPosition( const QPoint & pos ) {
-            m_pos = pos;
+            m_rect.setTopLeft( pos );
+        }
+
+        void    Widget::setX( int x ) {
+            m_rect.setLeft( x );
+        }
+
+        void    Widget::setY( int y ) {
+            m_rect.setTop( y );
         }
 
         void	Widget::setSize( const QSize & size ) {
-            m_size = size;
+            m_rect.setSize( size );
+        }
+
+        void    Widget::setWidth( int width ) {
+            m_rect.setWidth( width );
+        }
+
+        void    Widget::setHeight( int height ) {
+            m_rect.setHeight( height );
+        }
+
+        void	Widget::setRect( const QRect & rect ) {
+            m_rect = rect;
         }
 
         void	Widget::setStyle( const StylePtr & style ) {
@@ -22,27 +41,31 @@ namespace qtreports {
         }
 
         const QPoint    Widget::getPos() const {
-            return m_pos;
+            return m_rect.topLeft();
         }
 
         int             Widget::getX() const {
-            return m_pos.x();
+            return m_rect.x();
         }
 
         int             Widget::getY() const {
-            return m_pos.y();
+            return m_rect.y();
         }
 
         const QSize     Widget::getSize() const {
-            return m_size;
+            return m_rect.size();
         }
 
         int             Widget::getWidth() const {
-            return m_size.width();
+            return m_rect.width();
         }
 
         int             Widget::getHeight() const {
-            return m_size.height();
+            return m_rect.height();
+        }
+
+        const QRect     Widget::getRect() const {
+            return m_rect;
         }
 
         const StylePtr  Widget::getStyle() const {

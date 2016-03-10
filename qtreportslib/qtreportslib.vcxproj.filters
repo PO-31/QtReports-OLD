@@ -104,6 +104,9 @@
     <ClCompile Include="converters\convertertoqwidget.cpp">
       <Filter>Converters</Filter>
     </ClCompile>
+    <ClCompile Include="tags\section.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objectsplant.hpp">
@@ -132,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="converters\convertertoqwidget.hpp">
       <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\section.hpp">
+      <Filter>Tags</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

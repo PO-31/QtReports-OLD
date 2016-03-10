@@ -164,6 +164,7 @@
     <ClCompile Include="tags\object.cpp" />
     <ClCompile Include="tags\querystring.cpp" />
     <ClCompile Include="tags\report.cpp" />
+    <ClCompile Include="tags\section.cpp" />
     <ClCompile Include="tags\statictext.cpp" />
     <ClCompile Include="tags\style.cpp" />
     <ClCompile Include="tags\textfield.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="converters\convertertopdf.hpp" />
     <ClInclude Include="converters\convertertoqwidget.hpp" />
     <ClInclude Include="tags\querystring.hpp" />
+    <ClInclude Include="tags\section.hpp" />
     <ClInclude Include="tags\textfield.hpp" />
     <CustomBuild Include="engine.hpp">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

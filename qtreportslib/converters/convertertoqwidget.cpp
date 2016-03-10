@@ -1,5 +1,4 @@
 //#include <QTextBrowser>
-#include <QVBoxLayout>
 //#include "convertertohtml.hpp"
 #include <QFrame>
 #include <QLabel>
@@ -58,44 +57,52 @@ namespace qtreports {
             layout->setMargin( 0 );
 
             auto title = m_report->getTitle();
-            if( !title.isNull() ) {
-                auto titleWidget = new QFrame();
-                titleWidget->setMaximumHeight( 30 );
-                layout->addWidget( titleWidget );
-
-                auto titleLabel = new QLabel( titleWidget );
-                titleLabel->setText( "Title" );
-                titleLabel->setStyleSheet( "font-size: 26px; color: rgba( 0, 0, 0, 50% )" );
-                titleLabel->setAlignment( Qt::AlignCenter );
-                titleLabel->resize( titleWidget->size() );
+            if( !title.isNull() && !createSection( layout, title ) ) {
+                return false;
             }
 
-            auto detailWidget = new QFrame();
-            detailWidget->setMaximumHeight( 150 );
-            layout->addWidget( detailWidget );
-
-            auto detailLabel = new QLabel( detailWidget );
-            detailLabel->setText( "Detail" );
-            detailLabel->setStyleSheet( "font-size: 26px; color: rgba( 0, 0, 0, 50% )" );
-            detailLabel->setAlignment( Qt::AlignCenter );
-            detailLabel->resize( detailWidget->size() );
+            if( !createSection( layout, detail ) ) {
+                return false;;
+            }
 
             auto emptyWidget = new QFrame();
+            emptyWidget->setMinimumHeight( 0 );
             layout->addWidget( emptyWidget );
 
-            for( auto && band : detail->getBands() ) {
-                auto frame = new QFrame( detailWidget );
-                frame->setGeometry( 0, 0, m_qwidget->width(), band->getSize().height() );
+            return true;
+        }
+
+        bool    ConverterToQWidget::createSection( QVBoxLayout * parent, const SectionPtr & section ) {
+            auto frame = new QFrame();
+            frame->setMaximumHeight( section->getHeight() );
+            frame->setMinimumHeight( section->getHeight() );
+            parent->addWidget( frame );
+
+            auto label = new QLabel( frame );
+            label->setText( section->getTagName() );
+            label->setAttribute( Qt::WA_TranslucentBackground );
+            label->setStyleSheet( "font-size: 26px; color: rgba( 0, 0, 0, 50% )" );
+            label->setAlignment( Qt::AlignCenter );
+            label->resize( frame->size() );
+
+            if( !createBands( frame, section ) ) {
+                return false;;
+            }
+
+            return true;
+        }
+
+        bool    ConverterToQWidget::createBands( QWidget * parent, const SectionPtr & section ) {
+            for( auto && band : section->getBands() ) {
+                auto frame = new QFrame( parent );
                 for( auto && staticText : band->getStaticTexts() ) {
                     auto label = new QLabel( frame );
-                    QRect rect( staticText->getPos(), staticText->getSize() );
-                    label->setGeometry( rect );
+                    label->setGeometry( staticText->getRect() );
                     label->setText( staticText->getText() );
                 }
                 for( auto && textField : band->getTextFields() ) {
                     auto label = new QLabel( frame );
-                    QRect rect( textField->getPos(), textField->getSize() );
-                    label->setGeometry( rect );
+                    label->setGeometry( textField->getRect() );
                     label->setText( textField->getText() );
                 }
             }
