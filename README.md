@@ -18,3 +18,4 @@ master (stable) | develop (unstable)
 
 # Contacts [![Gitter](https://badges.gitter.im/PO-21/QtReports.svg)](https://gitter.im/PO-21/QtReports?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 * [Gitter](https://gitter.im/PO-21/QtReports?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+* [Doc](http://po-21.github.io/html/)
