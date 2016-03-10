@@ -15,7 +15,7 @@ namespace qtreports {
         ParseFunc    toParseFunc( Parser * obj, bool( Parser::*method )( QXmlStreamReader &, const T1 & ) ) {
             //Cast second parameter to ObjectPtr type;
             auto parseMethodPtr = reinterpret_cast< ParseMethodPtr >( method );
-            return bindParseFunc( parseMethodPtr, obj );
+            return bindParseFunc( obj, parseMethodPtr );
         }
 
         bool    toBool( const QString & string ) {
