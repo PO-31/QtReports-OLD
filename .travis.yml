@@ -108,11 +108,11 @@ after_success:
       #cd $TRAVIS_BUILD_DIR qtreportslib/
       lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
       #
+      sudo apt-get install --yes doxygen
       cd "$TRAVIS_BUILD_DIR"
       # This generates a `web` directory containing the website.
-      make PO-21.github.io
+      git clone https://github.com/PO-21/PO-21.github.io
       cd PO-21.github.io
-      sudo apt-get install --yes doxygen
       doxygen Doxyfile
       #git init
       #git checkout -b gh-pages
