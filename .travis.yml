@@ -114,6 +114,7 @@ after_success:
       # This generates a `web` directory containing the website.
       git clone https://github.com/PO-21/PO-21.github.io
       cd PO-21.github.io
+      rm -d -f -r html
       doxygen Doxyfile
       tree
       #git init
@@ -122,6 +123,7 @@ after_success:
       #git -c user.name='travis' -c user.email='travis' commit -m init
       # Make sure to make the output quiet, or else the API token will leak!
       # This works because the API key can replace your password.
+      git config --global push.default simple
       git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io > /dev/null
       cd "$TRAVIS_BUILD_DIR"
       #
