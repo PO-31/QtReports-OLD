@@ -116,15 +116,19 @@ after_success:
       cd PO-21.github.io
       rm -d -f -r html
       doxygen Doxyfile
-      tree
+      #tree
       #git init
       #git checkout -b gh-pages
       #git add .
       #git -c user.name='travis' -c user.email='travis' commit -m init
       # Make sure to make the output quiet, or else the API token will leak!
       # This works because the API key can replace your password.
-      git config --global push.default simple
-      git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io > /dev/null
+      git config --global user.name "travic"
+      git config --global user.email "travic@travic.org"
+      git add -A
+      git commit -a -m "Update doc from Travic CI"
+      #git config --global push.default simple
+      git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io
       cd "$TRAVIS_BUILD_DIR"
       #
       #git clone "https://github.com/PO-21/PO-21.github.io.git"
