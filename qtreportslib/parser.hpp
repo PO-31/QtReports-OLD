@@ -36,12 +36,12 @@ namespace qtreports {
             };
 
             /*! \~russian
-            Парсит отчет и создает из него внутреннюю структуру данных Report
+            Парсит отчет и создает из него внутреннюю структуру данных Report.
             Если во время выполнения произошли ошибки, 
             то функция возвращает false, 
             при этом метод getLastError() возратит описание
             последней произошедшей ошибки.
-            @param[in] const QString & path Путь к отчету формата .qreport
+            @param[in] path Путь к отчету формата .qreport
             @return bool Возвращает true, если функция выполнена успешно.
             */
             bool	            parse( const QString & path );
@@ -51,20 +51,20 @@ namespace qtreports {
             Указатель может быть пустый, перед использованием необходимо
             проверить с помощью
             @code
-            if ( !report.isNull() )
+            if ( !report.isNull() ) {
             @endcode
-            @return const ReportPtr Указатель на внутреннюю структуру отчета.
+            @return ReportPtr Указатель на внутреннюю структуру отчета.
             */
             const ReportPtr	    getReport() const;
 
             /*! \~russian
-            @return const QString Описание последней произошедшей ошибки.
+            @return QString Описание последней произошедшей ошибки.
             */
             const QString       getLastError() const;
 
             /*! \~russian
             Используется для отладки при добавлении новый тэгов.
-            @return const QString Лог процесса парсинга.
+            @return QString Лог процесса парсинга.
             */
             const QString       getLog() const;
 
