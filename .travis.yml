@@ -107,7 +107,6 @@ after_success:
       ruby --version
       #cd $TRAVIS_BUILD_DIR qtreportslib/
       lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
-	  
       cd $TRAVIS_BUILD_DIR
       cat $DEPLOY_KEY > .travis/deploy_key.pem
       eval "$(ssh-agent -s)" #start the ssh agent
