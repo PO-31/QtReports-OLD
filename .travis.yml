@@ -127,8 +127,8 @@ after_success:
       git config --global user.email "travic@travic.org"
       git add -A
       git commit -a -m "Update doc from Travic CI"
-      #git config --global push.default simple
-      git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io
+      git config --global push.default simple
+      git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io > /dev/null
       cd "$TRAVIS_BUILD_DIR"
       #
       #git clone "https://github.com/PO-21/PO-21.github.io.git"
