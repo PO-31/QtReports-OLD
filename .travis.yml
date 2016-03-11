@@ -105,6 +105,6 @@ after_success:
   - > 
     if [ "$BUILD_TYPE" = "coverage" ]; then
       ruby --version
-      cd $TRAVIS_BUILD_DIR
-      lcoveralls --retry-count 5 --token "${COVERALLS_IO_TOKEN}" qtreportslib/coverage.info
+      #cd $TRAVIS_BUILD_DIR qtreportslib/
+      lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
     fi
