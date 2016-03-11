@@ -15,8 +15,6 @@
 #include "tags/textfield.hpp"
 
 namespace qtreports {
-
-    //All support classes in detail
     namespace detail {
 
         class Parser;
@@ -24,6 +22,16 @@ namespace qtreports {
         using ParseMethodPtr = bool( Parser::* )( QXmlStreamReader &, const ObjectPtr & );
         using ParseFunc = std::function< ParseFuncPtr >;
 
+        /*! @~russian
+        \brief Класс, используемый для парсинга исходного отчета.
+        \warning Все функции данного класса, возвращающие bool,
+        возвращают true в случае успеха либо false, если во время 
+        выполнения произошли ошибки. При этом с помощью метода getLastError()
+        можно получить описание последней произошедшей ошибки.
+
+        Класс, который отвечает за парсинг отчета и 
+        создание из него внутренней структуры данных Report.
+        */
         class Parser {
 
         public:
@@ -37,34 +45,32 @@ namespace qtreports {
 
             /*! @~russian
             Парсит отчет и создает из него внутреннюю структуру данных Report.
+            Возвращает true в случае успеха.
             Если во время выполнения произошли ошибки, 
             то функция возвращает false, 
             при этом метод getLastError() возратит описание
             последней произошедшей ошибки.
             @param[in] path Путь к отчету формата .qreport
-            @return bool Возвращает true, если функция выполнена успешно.
             */
             bool	            parse( const QString & path );
 
             /*! @~russian
             Возвращает указатель на внутреннюю структуру отчета.
-            Указатель может быть пустый, перед использованием необходимо
+            Указатель может быть пустым, перед использованием необходимо
             проверить с помощью
             @code
             if ( !report.isNull() ) {
             @endcode
-            @return ReportPtr Указатель на внутреннюю структуру отчета.
             */
             const ReportPtr	    getReport() const;
 
             /*! @~russian
-            @return QString Описание последней произошедшей ошибки.
+            Возвращает описание последней произошедшей ошибки.
             */
             const QString       getLastError() const;
 
             /*! @~russian
-            Используется для отладки при добавлении новый тэгов.
-            @return QString Лог процесса парсинга.
+            Возвращает лог процесса парсинга. Используется для отладки при добавлении новый тэгов.
             */
             const QString       getLog() const;
 
