@@ -112,10 +112,9 @@ after_success:
       cd "$TRAVIS_BUILD_DIR"
       cd ..
       # Install last doxygen version
-      mkdir doxygen
-      cd doxygen
       wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'
       tar -xvzf doxygen-1.8.11.linux.bin.tar.gz
+      cd doxygen-1.8.11
       ./configure
       sudo make install
       cd ..
