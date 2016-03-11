@@ -35,7 +35,7 @@ namespace qtreports {
                 Optional ///< При отсутствии аттрибута будет использовано пустое значение.
             };
 
-            /*! \~russian
+            /*! @~russian
             Парсит отчет и создает из него внутреннюю структуру данных Report.
             Если во время выполнения произошли ошибки, 
             то функция возвращает false, 
@@ -46,7 +46,7 @@ namespace qtreports {
             */
             bool	            parse( const QString & path );
 
-            /*! \~russian
+            /*! @~russian
             Возвращает указатель на внутреннюю структуру отчета.
             Указатель может быть пустый, перед использованием необходимо
             проверить с помощью
@@ -57,12 +57,12 @@ namespace qtreports {
             */
             const ReportPtr	    getReport() const;
 
-            /*! \~russian
+            /*! @~russian
             @return QString Описание последней произошедшей ошибки.
             */
             const QString       getLastError() const;
 
-            /*! \~russian
+            /*! @~russian
             Используется для отладки при добавлении новый тэгов.
             @return QString Лог процесса парсинга.
             */
