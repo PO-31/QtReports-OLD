@@ -55,6 +55,10 @@ unix {
     INSTALLS += headers
 }
 
+linux-clang {
+    QMAKE_CXXFLAGS += -Wdocumentation
+}
+
 coverage {
     #QMAKE_CXXFLAGS_RELEASE -= -O2
 	#QMAKE_CLEAN += $$OBJECTS_DIR/*.gcda $$OBJECTS_DIR/*.gcno
