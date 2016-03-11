@@ -107,4 +107,15 @@ after_success:
       ruby --version
       #cd $TRAVIS_BUILD_DIR qtreportslib/
       lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
+	  
+      cd $TRAVIS_BUILD_DIR
+      cat $DEPLOY_KEY > .travis/deploy_key.pem
+      eval "$(ssh-agent -s)" #start the ssh agent
+      chmod 600 .travis/deploy_key.pem # this key should have push access
+      ssh-add .travis/deploy_key.pem
+      git clone "https://github.com/PO-21/PO-21.github.io.git"
+      cd PO-21.github.io
+      sudo sh create.sh
+      git commit -a -m "Update doc from Travic CI"
+      git push origin master
     fi
