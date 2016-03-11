@@ -23,8 +23,8 @@ namespace qtreports {
         using ParseFunc = std::function< ParseFuncPtr >;
 
         /*! @~russian
-        \brief Класс, используемый для парсинга исходного отчета.
-        \warning Все функции данного класса, возвращающие bool,
+        @brief Класс, используемый для парсинга исходного отчета.
+        @warning Все функции данного класса, возвращающие bool,
         возвращают true в случае успеха либо false, если во время 
         выполнения произошли ошибки. При этом с помощью метода getLastError()
         можно получить описание последней произошедшей ошибки.
@@ -45,14 +45,9 @@ namespace qtreports {
 
             /*! @~russian
             Парсит отчет и создает из него внутреннюю структуру данных Report.
-            Возвращает true в случае успеха.
-            Если во время выполнения произошли ошибки, 
-            то функция возвращает false, 
-            при этом метод getLastError() возратит описание
-            последней произошедшей ошибки.
             @param[in] path Путь к отчету формата .qreport
             */
-            bool	            parse( const QString & path );
+            bool                parse( const QString & path );
 
             /*! @~russian
             Возвращает указатель на внутреннюю структуру отчета.
@@ -62,17 +57,17 @@ namespace qtreports {
             if ( !report.isNull() ) {
             @endcode
             */
-            const ReportPtr	    getReport() const;
+            const ReportPtr     getReport() const;
 
             /*! @~russian
             Возвращает описание последней произошедшей ошибки.
             */
-            const QString       getLastError() const;
+            const QString      getLastError() const;
 
             /*! @~russian
             Возвращает лог процесса парсинга. Используется для отладки при добавлении новый тэгов.
             */
-            const QString       getLog() const;
+            const QString      getLog() const;
 
         private:
             ReportPtr	                m_report;
@@ -86,12 +81,12 @@ namespace qtreports {
             bool    parseChilds( QXmlStreamReader & reader, const ObjectPtr & object );
 
             bool    parseDocument( const QString & text );
-            bool	parseReport( QXmlStreamReader & reader, const ReportPtr & report );
+            bool    parseReport( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseStyle( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseQueryString( QXmlStreamReader & reader, const ReportPtr & report );
-            bool	parseField( QXmlStreamReader & reader, const ReportPtr & report );
-            bool	parseTitle( QXmlStreamReader & reader, const ReportPtr & report );
-            bool	parseDetail( QXmlStreamReader & reader, const ReportPtr & report );
+            bool    parseField( QXmlStreamReader & reader, const ReportPtr & report );
+            bool    parseTitle( QXmlStreamReader & reader, const ReportPtr & report );
+            bool    parseDetail( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseBand( QXmlStreamReader & reader, const SectionPtr & section );
             bool    parseStaticText( QXmlStreamReader & reader, const BandPtr & band );
             bool    parseTextField( QXmlStreamReader & reader, const BandPtr & band );
