@@ -107,22 +107,24 @@ after_success:
       ruby --version
       #cd $TRAVIS_BUILD_DIR qtreportslib/
       lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
-      #
-      sudo apt-get install --yes doxygen tree
+      # 
+      #sudo apt-get install --yes doxygen tree
       cd "$TRAVIS_BUILD_DIR"
       cd ..
-      # This generates a `web` directory containing the website.
+      # Install last doxygen version
+      mkdir doxygen
+      cd doxygen
+      wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'
+      tar -xvzf doxygen-1.8.11.linux.bin.tar.gz
+      ./configure
+      sudo make install
+      cd ..
+      # Clone repo and update doc
       git clone https://github.com/PO-21/PO-21.github.io
       cd PO-21.github.io
       rm -d -f -r html
       doxygen Doxyfile
       #tree
-      #git init
-      #git checkout -b gh-pages
-      #git add .
-      #git -c user.name='travis' -c user.email='travis' commit -m init
-      # Make sure to make the output quiet, or else the API token will leak!
-      # This works because the API key can replace your password.
       git config --global user.name "travic"
       git config --global user.email "travic@travic.org"
       git add -A
@@ -130,10 +132,4 @@ after_success:
       git config --global push.default simple
       git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io > /dev/null
       cd "$TRAVIS_BUILD_DIR"
-      #
-      #git clone "https://github.com/PO-21/PO-21.github.io.git"
-      #cd PO-21.github.io
-      #sudo sh create.sh
-      #git commit -a -m "Update doc from Travic CI"
-      #git push origin master
     fi
