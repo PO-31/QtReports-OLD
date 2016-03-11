@@ -99,31 +99,26 @@ script:
     fi
 
 after_success:
-#  - if [ "$BUILD_TYPE" = "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
-#  - if [ "$BUILD_TYPE" = "coverage" ]; then sudo ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "gcov-4.8" --gcov-options "\-lp" -r ../../qtreportslib; fi
-#  - if [ "$BUILD_TYPE" = "coverage" ]; then coveralls-lcov --repo_token "${COVERALLS_IO_TOKEN}" ../../qtreportslib/qtreportslib.cov; fi
   - > 
     if [ "$BUILD_TYPE" = "coverage" ]; then
       ruby --version
-      #cd $TRAVIS_BUILD_DIR qtreportslib/
       lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
-      # 
-      #sudo apt-get install --yes doxygen tree
+      # Auto documentation generation
       cd "$TRAVIS_BUILD_DIR"
       cd ..
-      # Install last doxygen version
+      # Install last doxygen version # Alternative: sudo apt-get install --yes doxygen
       wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'
       tar -xvzf doxygen-1.8.11.linux.bin.tar.gz
       cd doxygen-1.8.11
       ./configure
       sudo make install
       cd ..
-      # Clone repo and update doc
+      # Clone repository and update doc
       git clone https://github.com/PO-21/PO-21.github.io
       cd PO-21.github.io
       rm -d -f -r html
       doxygen Doxyfile
-      #tree
+      # Push changes to remote repository
       git config --global user.name "travic"
       git config --global user.email "travic@travic.org"
       git add -A
