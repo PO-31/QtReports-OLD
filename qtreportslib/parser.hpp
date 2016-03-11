@@ -31,14 +31,41 @@ namespace qtreports {
             ~Parser();
 
             enum AttributeOption {
-                Required,
-                Optional
+                Required, ///< При отсутствии аттрибута будет выдана ошибка.
+                Optional ///< При отсутствии аттрибута будет использовано пустое значение.
             };
 
+            /*!
+            Парсит отчет и создает из него внутреннюю структуру данных Report
+            @param[in] const QString & path Путь к отчету формата .qreport
+            @return bool Возвращает true, если функция выполнена успешно.
+            Если функция возвращает false, метод getLastError() возратит описание
+            последней произошедшей ошибки.
+            */
             bool	            parse( const QString & path );
 
+            /*!
+            Возвращает указатель на внутреннюю структуру отчета.
+            Указатель может быть пустый, перед использованием необходимо
+            проверить с помощью
+            /code C++
+            if ( !report.isNull() )
+            /endcode
+            @return const ReportPtr Указатель на внутреннюю структуру отчета.
+            */
             const ReportPtr	    getReport() const;
+
+            /*!
+            Возвращает описание последней произошедшей ошибки.
+            @return const QString
+            */
             const QString       getLastError() const;
+
+            /*!
+            Возвращает лог процесса парсинга.
+            Используется для отладки при добавлении новый тэгов.
+            @return const QString
+            */
             const QString       getLog() const;
 
         private:

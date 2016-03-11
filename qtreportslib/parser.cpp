@@ -120,6 +120,7 @@ namespace qtreports {
         }
 
         bool    Parser::parseChilds( QXmlStreamReader & reader, const ObjectPtr & object ) {
+            m_log << "parseChilds: start" << endl;
             while( !reader.atEnd() ) {
                 reader.readNext();
                 if( reader.isEndElement() ) {
@@ -130,13 +131,16 @@ namespace qtreports {
                 }
 
                 auto name = reader.name().toString();
+                m_log << "parseChilds: current tag: " << name << endl;
                 if( m_functions.contains( name ) ) {
+                    m_log << "parseChilds: use func for: " << name << endl;
                     auto func = m_functions[ name ];
                     if( !func( reader, object ) ) {
                         return false;
                     }
                 }
                 else {
+                    m_log << "parseChilds: goToElementEnd: " << name << endl;
                     if( !goToElementEnd( reader ) ) {
                         return false;
                     }
@@ -144,10 +148,12 @@ namespace qtreports {
             }
 
             if( reader.hasError() ) {
+                m_log << "parseChilds: error" << endl;
                 m_lastError = reader.errorString();
                 return false;
             }
 
+            m_log << "parseChilds: end" << endl;
             return true;
         }
 
