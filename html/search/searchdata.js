@@ -1,18 +1,27 @@
 var indexSectionsWithContent =
 {
-  0: "bcdefopqrstw",
-  1: "bcdefopqrstw"
+  0: "abcdefgopqrstw",
+  1: "bcdefopqrstw",
+  2: "gp",
+  3: "a",
+  4: "or"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "classes"
+  1: "classes",
+  2: "functions",
+  3: "enums",
+  4: "enumvalues"
 };
 
 var indexSectionLabels =
 {
-  0: "All",
-  1: "Classes"
+  0: "Указатель",
+  1: "Классы",
+  2: "Функции",
+  3: "Перечисления",
+  4: "Элементы перечислений"
 };
 
