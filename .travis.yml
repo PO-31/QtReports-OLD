@@ -107,14 +107,25 @@ after_success:
       ruby --version
       #cd $TRAVIS_BUILD_DIR qtreportslib/
       lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
-      cd $TRAVIS_BUILD_DIR
-      cat $DEPLOY_KEY > .travis/deploy_key.pem
-      eval "$(ssh-agent -s)" #start the ssh agent
-      chmod 600 .travis/deploy_key.pem # this key should have push access
-      ssh-add .travis/deploy_key.pem
-      git clone "https://github.com/PO-21/PO-21.github.io.git"
+      #
+      cd "$TRAVIS_BUILD_DIR"
+      # This generates a `web` directory containing the website.
+      make PO-21.github.io
       cd PO-21.github.io
-      sudo sh create.sh
-      git commit -a -m "Update doc from Travic CI"
-      git push origin master
+      sudo apt-get install --yes doxygen
+      doxygen Doxyfile
+      #git init
+      #git checkout -b gh-pages
+      #git add .
+      #git -c user.name='travis' -c user.email='travis' commit -m init
+      # Make sure to make the output quiet, or else the API token will leak!
+      # This works because the API key can replace your password.
+      git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io > /dev/null
+      cd "$TRAVIS_BUILD_DIR"
+      #
+      #git clone "https://github.com/PO-21/PO-21.github.io.git"
+      #cd PO-21.github.io
+      #sudo sh create.sh
+      #git commit -a -m "Update doc from Travic CI"
+      #git push origin master
     fi
