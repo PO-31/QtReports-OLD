@@ -12,6 +12,24 @@
 #include "tags/report.hpp"
 #include "converters/convertertoqwidget.hpp"
 
+/*! @~russian
+@mainpage QtReports
+Добро пожаловать в документацию проекта QtReports
+
+@section intro_sec Введение
+Хм.
+
+@section install_sec Установка
+
+@subsection step1 Шаг 1: Скачайте и установите.
+
+@section use_sec Использование
+Подключите библиотеку к проекту с помощью
+-lqtreportslib -I/usr/include/qtreportslib
+и вперед, навстречу приключениям!
+
+*/
+
 namespace qtreports {
     using namespace detail;
 
