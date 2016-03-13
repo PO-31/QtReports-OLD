@@ -5,7 +5,7 @@ namespace qtreports {
 
         Widget::Widget() :
             m_rect( 0, 0, 0, 0 ),
-            m_alignment( Qt::AlignmentFlag::AlignLeft ) {}
+            m_alignment( Qt::AlignmentFlag::AlignLeft | Qt::AlignmentFlag::AlignVCenter ) {}
 
         Widget::~Widget() {}
 

@@ -431,12 +431,27 @@ namespace qtreports {
                 return false;
             }
 
+            QString textVAlignment;
+            if( !getOptionalAttribute( reader, "textVAlignment", textVAlignment ) ) {
+                return false;
+            }
+
             if( !goToElementEnd( reader ) ) {
                 return false;
             }
 
-            auto alignment = isEquals( textAlignment, "Left" ) ? Qt::AlignLeft : Qt::AlignCenter;
-            widget->setAlignment( alignment );
+            auto isCenter = isEquals( textAlignment, "Center" );
+            auto isRight = isEquals( textAlignment, "Right" );
+            auto isLeft = !isCenter && !isRight;
+
+            auto isVTop = isEquals( textVAlignment, "Top" );
+            auto isVBottom = isEquals( textVAlignment, "Bottom" );
+            auto isVCenter = !isVTop && !isVBottom;
+
+            auto hFlag = isCenter ? Qt::AlignCenter : isRight ? Qt::AlignRight : Qt::AlignLeft;
+            auto vFlag = isVTop ? Qt::AlignTop : isVBottom ? Qt::AlignBottom : Qt::AlignVCenter;
+
+            widget->setAlignment( hFlag | vFlag );
 
             return !reader.hasError();
         }
