@@ -89,6 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
 <a href="#pub-methods">Открытые члены</a> &#124;
 <a href="classqtreports_1_1detail_1_1_parser-members.html">Полный список членов класса</a>  </div>
   <div class="headertitle">
@@ -101,6 +102,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 <p><code>#include &lt;<a class="el" href="parser_8hpp_source.html">parser.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:adfdf402a43853e1e726c40445583a976"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adfdf402a43853e1e726c40445583a976"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ParseFuncPtr</b> = bool(QXmlStreamReader &amp;, const ObjectPtr &amp;)</td></tr>
+<tr class="separator:adfdf402a43853e1e726c40445583a976"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa92d8489d44a3687a55a540c90c41ba4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa92d8489d44a3687a55a540c90c41ba4"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ParseMethodPtr</b> = bool(Parser::*)(QXmlStreamReader &amp;, const ObjectPtr &amp;)</td></tr>
+<tr class="separator:aa92d8489d44a3687a55a540c90c41ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1811b718f5928a8e8e3b289748e0d7fd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1811b718f5928a8e8e3b289748e0d7fd"></a>
+using&#160;</td><td class="memItemRight" valign="bottom"><b>ParseFunc</b> = std::function&lt; ParseFuncPtr &gt;</td></tr>
+<tr class="separator:a1811b718f5928a8e8e3b289748e0d7fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:af4fd503fc1282226edea9b6712b0adc2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_parser.html#af4fd503fc1282226edea9b6712b0adc2">parse</a> (const QString &amp;path)</td></tr>
