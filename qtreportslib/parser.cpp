@@ -210,7 +210,22 @@ namespace qtreports {
 
             report->setTagName( "report" );
             report->setName( name );
-            //report->setM
+
+            if( !leftMargin.isEmpty() ) {
+                report->setLeftMargin( leftMargin.toInt() );
+            }
+
+            if( !topMargin.isEmpty() ) {
+                report->setTopMargin( topMargin.toInt() );
+            }
+
+            if( !rightMargin.isEmpty() ) {
+                report->setRightMargin( rightMargin.toInt() );
+            }
+
+            if( !bottomMargin.isEmpty() ) {
+                report->setBottomMargin( bottomMargin.toInt() );
+            }
 
             return true;
         }

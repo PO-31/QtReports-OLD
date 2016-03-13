@@ -112,24 +112,23 @@ namespace qtreports {
             auto layout = new QVBoxLayout( m_qwidget.data() );
             layout->setMargin( 0 );
             layout->setSpacing( 0 );
-
-            addVerticalBorder( layout, 30, 30, 30 );
+            addVerticalBorder( layout, m_report->getTopMargin(), m_report->getLeftMargin(), m_report->getRightMargin() );
             
             auto title = m_report->getTitle();
             if( !title.isNull() ) {
-                auto sectionWidget = addSectionLayout( layout, title->getHeight(), 30, 30 );
+                auto sectionWidget = addSectionLayout( layout, title->getHeight(), m_report->getLeftMargin(), m_report->getRightMargin() );
                 if( !createSection( sectionWidget, title ) ) {
                     return false;
                 }
             }
 
-            auto sectionWidget = addSectionLayout( layout, detail->getHeight(), 30, 30 );
+            auto sectionWidget = addSectionLayout( layout, detail->getHeight(), m_report->getLeftMargin(), m_report->getRightMargin() );
             if( !createSection( sectionWidget, detail ) ) {
                 return false;;
             }
             
-            addEmptySection( layout, 30, 30 );
-            addVerticalBorder( layout, 30, 30, 30 );
+            addEmptySection( layout, m_report->getLeftMargin(), m_report->getRightMargin() );
+            addVerticalBorder( layout, m_report->getBottomMargin(), m_report->getLeftMargin(), m_report->getRightMargin() );
 
             return true;
         }

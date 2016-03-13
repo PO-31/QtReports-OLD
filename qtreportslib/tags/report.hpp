@@ -55,9 +55,23 @@ namespace qtreports {
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
+            int     getLeftMargin();
+            int     getTopMargin();
+            int     getRightMargin();
+            int     getBottomMargin();
+            void    setLeftMargin( int left );
+            void    setTopMargin( int top );
+            void    setRightMargin( int right );
+            void    setBottomMargin( int bottom );
+            void    setMargins( int left, int top, int right, int bottom );
+
         private:
             bool	                    m_isVertical; //?
             QSize	                    m_size; //?
+            int                         m_leftMargin;
+            int                         m_topMargin;
+            int                         m_rightMargin;
+            int                         m_bottomMargin;
             StylePtr                    m_defaultStyle;
             QMap< QString, StylePtr >   m_styles;
             QString                     m_query;
