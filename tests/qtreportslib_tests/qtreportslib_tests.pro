@@ -9,13 +9,11 @@ LIBS += -L../../qtreportslib
 LIBS   += -lqtreportslib
 
 SOURCES += main.cpp \
-           test_engine.cpp \
-    test_parser.cpp \
-    test_engine.cpp
+    test_engine.cpp \
+    test_parser.cpp
 
 HEADERS  += test_engine.hpp \
-    test_parser.hpp \
-    test_engine.h
+    test_parser.hpp
 
 QMAKE_CXXFLAGS += -std=c++11
 
