@@ -26,8 +26,9 @@ namespace qtreports {
             leftFrame->setFixedHeight( height );
             leftFrame->setStyleSheet( "border: 1px solid black; border-width: 0px 1px 0px 0px; " );
 
-            auto emptyFrame = new QFrame();
-            emptyFrame->setFixedHeight( height );
+            auto centerFrame = new QFrame();
+            centerFrame->setFixedHeight( height );
+            centerFrame->setObjectName( "frame" );
             //emptyFrame->setStyleSheet( "border: 1px solid black; border-width: 0px 1px; " );
 
             auto rightFrame = new QFrame();
@@ -36,7 +37,7 @@ namespace qtreports {
             rightFrame->setStyleSheet( "border: 1px solid black; border-width: 0px 0px 0px 1px; " );
 
             layout->addWidget( leftFrame );
-            layout->addWidget( emptyFrame );
+            layout->addWidget( centerFrame );
             layout->addWidget( rightFrame );
 
             return layout;
@@ -87,10 +88,7 @@ namespace qtreports {
                 return false;;
             }
 
-            auto empty = new QFrame();
-            center->addWidget( empty );
-
-            auto layout = new QHBoxLayout( empty );
+            auto layout = new QHBoxLayout();
             layout->setMargin( 0 );
             layout->setSpacing( 0 );
 
@@ -109,6 +107,8 @@ namespace qtreports {
             layout->addWidget( left );
             layout->addWidget( frame );
             layout->addWidget( right );
+
+            center->addLayout( layout );
 
             return true;
         }
@@ -117,27 +117,43 @@ namespace qtreports {
             auto layout = new QHBoxLayout();
             layout->setMargin( 0 );
             layout->setSpacing( 0 );
-            parent->addLayout( layout );
-
             
             auto left = new QFrame();
             left->setFixedHeight( section->getHeight() );
             left->setFixedWidth( 30 );
             left->setStyleSheet( "border: 1px solid gray; border-width: 0px 1px 1px 0px; " );
 
-            auto right = new QFrame();
-            right->setFixedHeight( section->getHeight() );
-            right->setFixedWidth( 30 );
-            right->setStyleSheet( "border: 1px solid gray; border-width: 0px 0px 1px 1px; " );
-            
             auto frame = new QFrame();
             frame->setFixedHeight( section->getHeight() );
             frame->setObjectName( "frame" );
             frame->setStyleSheet( "#frame { border: 1px solid gray; border-width: 0px 0px 1px 0px; }" );
 
+            auto right = new QFrame();
+            right->setFixedHeight( section->getHeight() );
+            right->setFixedWidth( 30 );
+            right->setStyleSheet( "border: 1px solid gray; border-width: 0px 0px 1px 1px; " );
+            
             layout->addWidget( left );
             layout->addWidget( frame );
             layout->addWidget( right );
+            /*
+            for( auto && child : layout->children() ) {
+                if( !child->isWidgetType() ) {
+                    continue;
+                }
+
+                auto widget = static_cast< QWidget * >( child );
+                widget->setFixedHeight( section->getHeight() );
+            }
+            */
+            //auto layout = createVerticalBorder( section->getHeight(), 30, 30 );
+            //auto frame = layout->findChild< QFrame * >( "frame" );
+            //if( frame == nullptr ) {
+            //    m_lastError = "Creation vertical border error";
+            //    return false;
+            //}
+
+            parent->addLayout( layout );
 
             auto label = new QLabel( frame );
             label->setText( section->getTagName() );

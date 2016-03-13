@@ -38,11 +38,6 @@ namespace qtreports {
             Parser();
             ~Parser();
 
-            enum AttributeOption {
-                Required, ///< При отсутствии аттрибута будет выдана ошибка.
-                Optional ///< При отсутствии аттрибута будет использовано пустое значение.
-            };
-
             /*! @~russian
             Парсит отчет и создает из него внутреннюю структуру данных Report.
             @param[in] path Путь к отчету формата .qreport
@@ -75,8 +70,18 @@ namespace qtreports {
             QTextStream                 m_log;
             QMap< QString, ParseFunc >  m_functions;
 
+            /*! @~russian
+            Опции при получении аттрибута с помощью вызова getAttribute().
+            */
+            enum AttributeOption {
+                Required, ///< При отсутствии аттрибута будет выдана ошибка.
+                Optional ///< При отсутствии аттрибута будет использовано пустое значение.
+            };
+
             bool    getValue( QXmlStreamReader & reader, QString & data );
-            bool    getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option = AttributeOption::Required );
+            bool    getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option );
+            bool    getRequiredAttribute( QXmlStreamReader & reader, const QString & name, QString & data );
+            bool    getOptionalAttribute( QXmlStreamReader & reader, const QString & name, QString & data );
             bool    goToElementEnd( QXmlStreamReader & reader );
             bool    parseChilds( QXmlStreamReader & reader, const ObjectPtr & object );
 
