@@ -13,7 +13,11 @@ namespace qtreports {
         ConverterToQWidget::~ConverterToQWidget() {}
 
         bool    ConverterToQWidget::convert() {
-            return createQWidget();
+            return createQWidget( m_report );
+        }
+
+        bool    ConverterToQWidget::convert( const ReportPtr & report ) {
+            return createQWidget( report );
         }
 
         void    addVerticalBorder( QBoxLayout * parent, int height, int left, int right ) {
@@ -95,13 +99,13 @@ namespace qtreports {
             return centerFrame;
         }
 
-        bool    ConverterToQWidget::createQWidget() {
-            if( m_report.isNull() ) {
+        bool    ConverterToQWidget::createQWidget( const ReportPtr & report ) {
+            if( report.isNull() ) {
                 m_lastError = "Report is empty";
                 return false;
             }
 
-            auto detail = m_report->getDetail();
+            auto detail = report->getDetail();
             if( detail.isNull() ) {
                 m_lastError = "Report->Detail is empty";
                 return false;
@@ -112,23 +116,23 @@ namespace qtreports {
             auto layout = new QVBoxLayout( m_qwidget.data() );
             layout->setMargin( 0 );
             layout->setSpacing( 0 );
-            addVerticalBorder( layout, m_report->getTopMargin(), m_report->getLeftMargin(), m_report->getRightMargin() );
+            addVerticalBorder( layout, report->getTopMargin(), report->getLeftMargin(), report->getRightMargin() );
             
-            auto title = m_report->getTitle();
+            auto title = report->getTitle();
             if( !title.isNull() ) {
-                auto sectionWidget = addSectionLayout( layout, title->getHeight(), m_report->getLeftMargin(), m_report->getRightMargin() );
+                auto sectionWidget = addSectionLayout( layout, title->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
                 if( !createSection( sectionWidget, title ) ) {
                     return false;
                 }
             }
 
-            auto sectionWidget = addSectionLayout( layout, detail->getHeight(), m_report->getLeftMargin(), m_report->getRightMargin() );
+            auto sectionWidget = addSectionLayout( layout, detail->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
             if( !createSection( sectionWidget, detail ) ) {
                 return false;;
             }
             
-            addEmptySection( layout, m_report->getLeftMargin(), m_report->getRightMargin() );
-            addVerticalBorder( layout, m_report->getBottomMargin(), m_report->getLeftMargin(), m_report->getRightMargin() );
+            addEmptySection( layout, report->getLeftMargin(), report->getRightMargin() );
+            addVerticalBorder( layout, report->getBottomMargin(), report->getLeftMargin(), report->getRightMargin() );
 
             return true;
         }

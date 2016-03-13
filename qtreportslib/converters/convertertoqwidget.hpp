@@ -20,6 +20,7 @@ namespace qtreports {
             ~ConverterToQWidget();
 
             bool                convert();
+            bool                convert( const ReportPtr & report );
 
             const QString       getLastError() const;
             const QWidgetPtr    getQWidget() const;
@@ -29,7 +30,7 @@ namespace qtreports {
             QString     m_lastError;
             QWidgetPtr  m_qwidget;
 
-            bool        createQWidget();
+            bool        createQWidget( const ReportPtr & report );
             bool        createSection( QWidget * parent, const SectionPtr & section );
             bool        createBands( QWidget * parent, const SectionPtr & section );
 
