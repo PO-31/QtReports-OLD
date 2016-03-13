@@ -89,7 +89,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Открытые типы</a> &#124;
 <a href="#pub-methods">Открытые члены</a> &#124;
 <a href="classqtreports_1_1detail_1_1_parser-members.html">Полный список членов класса</a>  </div>
   <div class="headertitle">
@@ -102,13 +101,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 
 <p><code>#include &lt;<a class="el" href="parser_8hpp_source.html">parser.hpp</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Открытые типы</h2></td></tr>
-<tr class="memitem:a948af6bc4f1f3da7c5d120dd0877662e"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_parser.html#a948af6bc4f1f3da7c5d120dd0877662e">AttributeOption</a> { <a class="el" href="classqtreports_1_1detail_1_1_parser.html#a948af6bc4f1f3da7c5d120dd0877662ea73231206302321da6052db0ab177648e">Required</a>, 
-<a class="el" href="classqtreports_1_1detail_1_1_parser.html#a948af6bc4f1f3da7c5d120dd0877662eafed240217cef8e118dda3837feadf7b5">Optional</a>
- }</td></tr>
-<tr class="separator:a948af6bc4f1f3da7c5d120dd0877662e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Открытые члены</h2></td></tr>
 <tr class="memitem:af4fd503fc1282226edea9b6712b0adc2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_parser.html#af4fd503fc1282226edea9b6712b0adc2">parse</a> (const QString &amp;path)</td></tr>
@@ -124,28 +116,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <div class="textblock"><p>Класс, используемый для парсинга исходного отчета. </p>
 <dl class="section warning"><dt>Предупреждения</dt><dd>Все функции данного класса, возвращающие bool, возвращают true в случае успеха либо false, если во время выполнения произошли ошибки. При этом с помощью метода <a class="el" href="classqtreports_1_1detail_1_1_parser.html#acb2cceb86384551fed0652b0bfcd9383">getLastError()</a> можно получить описание последней произошедшей ошибки.</dd></dl>
 <p>Класс, который отвечает за парсинг отчета и создание из него внутренней структуры данных <a class="el" href="classqtreports_1_1detail_1_1_report.html">Report</a>. </p>
-</div><h2 class="groupheader">Перечисления</h2>
-<a class="anchor" id="a948af6bc4f1f3da7c5d120dd0877662e"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="classqtreports_1_1detail_1_1_parser.html#a948af6bc4f1f3da7c5d120dd0877662e">qtreports::detail::Parser::AttributeOption</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a class="anchor" id="a948af6bc4f1f3da7c5d120dd0877662ea73231206302321da6052db0ab177648e"></a>Required&#160;</td><td class="fielddoc">
-<p>При отсутствии аттрибута будет выдана ошибка. </p>
-</td></tr>
-<tr><td class="fieldname"><a class="anchor" id="a948af6bc4f1f3da7c5d120dd0877662eafed240217cef8e118dda3837feadf7b5"></a>Optional&#160;</td><td class="fielddoc">
-<p>При отсутствии аттрибута будет использовано пустое значение. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Методы</h2>
+</div><h2 class="groupheader">Методы</h2>
 <a class="anchor" id="acb2cceb86384551fed0652b0bfcd9383"></a>
 <div class="memitem">
 <div class="memproto">
