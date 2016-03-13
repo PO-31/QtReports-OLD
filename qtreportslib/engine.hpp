@@ -31,7 +31,6 @@
 */
 
 namespace qtreports {
-    using namespace detail;
 
     class Engine : public QObject {
         Q_OBJECT
@@ -59,15 +58,15 @@ namespace qtreports {
     private:
         bool                        m_isOpened;
         QString                     m_lastError, m_compiledPath;
-        ReportPtr                   m_report;
+        detail::ReportPtr           m_report;
         QMap< QString, QString >    m_dbQueries;
         QVector< QString >          m_scripts;
         QSqlDatabase                m_dbConnection;
-        ProcessedDB                 m_processedDB;
+        detail::ProcessedDB         m_processedDB;
 
         void                drawPreview( QPrinter * printer );
         void                prepareDB();
-        QSqlQueryModelPtr   executeQuery( const QString & query );
+        detail::QSqlQueryModelPtr   executeQuery( const QString & query );
 
     };
 

@@ -90,7 +90,7 @@ namespace qtreports {
             return false;
         }
 
-        ConverterToPDF converter( m_report );
+        detail::ConverterToPDF converter( m_report );
         auto result = converter.convert( path );
         if( !result ) {
             m_lastError = converter.getLastError();
@@ -106,7 +106,7 @@ namespace qtreports {
             return false;
         }
 
-        ConverterToHTML converter( m_report );
+        detail::ConverterToHTML converter( m_report );
         auto result = converter.convert( path );
         if( !result ) {
             m_lastError = converter.getLastError();
@@ -122,7 +122,7 @@ namespace qtreports {
             return QWidgetPtr();
         }
 
-        ConverterToQWidget converter( m_report );
+        detail::ConverterToQWidget converter( m_report );
         auto result = converter.convert();
         if( !result ) {
             m_lastError = converter.getLastError();
@@ -169,8 +169,8 @@ namespace qtreports {
         }
     }
 
-    QSqlQueryModelPtr   Engine::executeQuery( const QString &query ) {
-        QSqlQueryModelPtr model( new QSqlQueryModel() );
+    detail::QSqlQueryModelPtr   Engine::executeQuery( const QString &query ) {
+        detail::QSqlQueryModelPtr model( new QSqlQueryModel() );
         model->setQuery( query, m_dbConnection );
         return model;
     }

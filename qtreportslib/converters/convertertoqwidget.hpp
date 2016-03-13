@@ -9,8 +9,9 @@
 #include "tags/report.hpp"
 
 namespace qtreports {
+    typedef QSharedPointer< QWidget > QWidgetPtr;
+
     namespace detail {
-        typedef QSharedPointer< QWidget > QWidgetPtr;
 
         class ConverterToQWidget {
 
