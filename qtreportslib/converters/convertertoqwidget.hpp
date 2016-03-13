@@ -29,10 +29,8 @@ namespace qtreports {
             QString     m_lastError;
             QWidgetPtr  m_qwidget;
 
-            QHBoxLayout *   createVerticalBorder( int height, int left, int right );
-
             bool        createQWidget();
-            bool        createSection( QBoxLayout * parent, const SectionPtr & section );
+            bool        createSection( QWidget * parent, const SectionPtr & section );
             bool        createBands( QWidget * parent, const SectionPtr & section );
 
         };
