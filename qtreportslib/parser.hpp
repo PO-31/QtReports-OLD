@@ -17,11 +17,6 @@
 namespace qtreports {
     namespace detail {
 
-        class Parser;
-        using ParseFuncPtr = bool( QXmlStreamReader &, const ObjectPtr & );
-        using ParseMethodPtr = bool( Parser::* )( QXmlStreamReader &, const ObjectPtr & );
-        using ParseFunc = std::function< ParseFuncPtr >;
-
         /*! @~russian
         @brief Класс, используемый для парсинга исходного отчета.
         @warning Все функции данного класса, возвращающие bool,
@@ -63,6 +58,10 @@ namespace qtreports {
             Возвращает лог процесса парсинга. Используется для отладки при добавлении новый тэгов.
             */
             const QString      getLog() const;
+
+            using ParseFuncPtr = bool( QXmlStreamReader &, const ObjectPtr & );
+            using ParseMethodPtr = bool( Parser::* )( QXmlStreamReader &, const ObjectPtr & );
+            using ParseFunc = std::function< ParseFuncPtr >;
 
         private:
             ReportPtr	                m_report;
