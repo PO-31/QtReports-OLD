@@ -37,6 +37,9 @@ namespace qtreports {
             void			setRect( const QRect & rect );
             /* Устанавливает индекс стиля объекта значением styleId, отрицательные значения - стиль по умолчанию. */
             void            setStyle( const StylePtr & style );
+
+            void            setAlignment( Qt::Alignment alignment );
+            Qt::Alignment   getAlignment();
             
             const QPoint    getPos() const;
             int             getX() const;
@@ -63,6 +66,7 @@ namespace qtreports {
 
         protected:
             QRect					m_rect;
+            Qt::Alignment           m_alignment;
             StylePtr				m_style;
 
         };

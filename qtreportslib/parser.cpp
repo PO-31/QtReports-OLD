@@ -34,6 +34,7 @@ namespace qtreports {
             m_functions[ "staticText" ] = toParseFunc( this, &Parser::parseStaticText );
             m_functions[ "textField" ] = toParseFunc( this, &Parser::parseTextField );
             m_functions[ "reportElement" ] = toParseFunc( this, &Parser::parseReportElement );
+            m_functions[ "textElement" ] = toParseFunc( this, &Parser::parseTextElement );
             m_functions[ "text" ] = toParseFunc( this, &Parser::parseText );
             m_functions[ "textFieldExpression" ] = toParseFunc( this, &Parser::parseTextFieldExpression );
         }
@@ -414,17 +415,28 @@ namespace qtreports {
                 return false;
             }
 
-            while( !reader.atEnd() && !reader.isEndElement() ) {
-                reader.readNext();
-            }
-
-            if( reader.hasError() ) {
-                m_lastError = reader.errorString();
+            if( !goToElementEnd( reader ) ) {
                 return false;
             }
 
             QRect rect( x.toInt(), y.toInt(), width.toInt(), height.toInt() );
             widget->setRect( rect );
+
+            return !reader.hasError();
+        }
+
+        bool	Parser::parseTextElement( QXmlStreamReader & reader, const WidgetPtr & widget ) {
+            QString textAlignment;
+            if( !getRequiredAttribute( reader, "textAlignment", textAlignment ) ) {
+                return false;
+            }
+
+            if( !goToElementEnd( reader ) ) {
+                return false;
+            }
+
+            auto alignment = isEquals( textAlignment, "Left" ) ? Qt::AlignLeft : Qt::AlignCenter;
+            widget->setAlignment( alignment );
 
             return !reader.hasError();
         }
