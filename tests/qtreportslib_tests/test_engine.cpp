@@ -1,30 +1,45 @@
 ﻿#include <QTest>
+#include <QSqlQuery>
+#include <QSqlDatabase>
+#include <QRegularExpression>
+#include <QDebug>
 #include <engine.hpp>
 #include "test_engine.hpp"
 
-Test_Engine::Test_Engine( QObject * parent ) : 
+Test_Engine::Test_Engine( QObject * parent ) :
     QObject( parent ) {}
 
 Test_Engine::~Test_Engine() {}
 
 void    Test_Engine::compile() {
-    Parser_Tester pt;
-
-    pt.ReportTreeParseTest();
+    qtreports::Engine engine;
+    QString input = QFINDTESTDATA( "default.qreport" );
+    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
 }
 
-void Test_Engine::tags_parse()
-{
-    Parser_Tester pt;
+void    Test_Engine::setConnection() {
+    qtreports::Engine engine;
+    QString input = QFINDTESTDATA( "default.qreport" );
+    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
 
-    pt.ReportTagParseTest();
+    QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE" );
+    db.setDatabaseName( "testDB" );
 
-    pt.TextTest();
+    QVERIFY2( db.open(), "Can't open test database 'testDB'" );
+    QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
+
+    /*
+    QSqlQuery q;
+    q.exec("select * from groups_t;");
+    while (q.next()) {
+    qDebug() << q.value(1).toString();
+    }
+    */
+
+    db.close();
 }
 
-void Test_Engine::connection()
-{
-    Engine_Tester eng_t;
+void    Test_Engine::setParameters() {
 
-    eng_t.TestConnectionSetting();
 }
+
