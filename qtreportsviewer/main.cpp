@@ -6,6 +6,8 @@
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QDir>
+#include <QSqlDatabase>
+#include <QSqlError>
 #include <engine.hpp>
 
 int main( int argc, char *argv[] ) {
@@ -26,6 +28,19 @@ int main( int argc, char *argv[] ) {
     QMap < QString, QString > map;
     map[ "title" ] = "Best Title in World";
     bool result = engine.setParameters( map );//{ { "title", "Best Title in World" } }
+    if( !result ) {
+        QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+        return -1;
+    }
+
+    auto db = QSqlDatabase::addDatabase( "QSQLITE" );
+    db.setDatabaseName( "../tests/qtreportslib_tests/testDB" );
+    if( !db.open() ) {
+        QMessageBox::critical( 0, "Error: ", "Can not open database. Database error: " + db.lastError().text() );
+        return -1;
+    }
+
+    result = engine.setConnection( db );
     if( !result ) {
         QMessageBox::critical( 0, "Error: ", engine.getLastError() );
         return -1;
