@@ -44,7 +44,7 @@ namespace qtreports {
         bool    setParameters( const QMap< QString, QString > & map );
         bool    setConnection( const QSqlDatabase & connection );
 
-        void    addQuery( const QString &queryName, const QString & query );
+        void    addQuery( const QString & queryName, const QString & query );
         void    addScript( const QString & script );
 
         bool                createPDF( const QString & path );

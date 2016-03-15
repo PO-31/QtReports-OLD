@@ -124,6 +124,10 @@ namespace qtreports {
             return m_detail;
         }
 
+        int     Report::getRowCount() {
+            return 9;
+        }
+
         int     Report::getLeftMargin() {
             return m_leftMargin;
         }

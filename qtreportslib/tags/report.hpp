@@ -55,10 +55,13 @@ namespace qtreports {
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
+            int     getRowCount();
+
             int     getLeftMargin();
             int     getTopMargin();
             int     getRightMargin();
             int     getBottomMargin();
+
             void    setLeftMargin( int left );
             void    setTopMargin( int top );
             void    setRightMargin( int right );

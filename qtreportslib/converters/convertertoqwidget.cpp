@@ -126,9 +126,11 @@ namespace qtreports {
                 }
             }
 
-            auto sectionWidget = addSectionLayout( layout, detail->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
-            if( !createSection( sectionWidget, detail ) ) {
-                return false;;
+            for( int i = 0; i < report->getRowCount(); ++i ) {
+                auto sectionWidget = addSectionLayout( layout, detail->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
+                if( !createSection( sectionWidget, detail ) ) {
+                    return false;;
+                }
             }
             
             addEmptySection( layout, report->getLeftMargin(), report->getRightMargin() );
