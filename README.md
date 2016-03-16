@@ -1,4 +1,4 @@
-# QtReports
+# QtReports [![License](https://img.shields.io/badge/license-LGPL-blue.svg)](https://github.com/PO-21/QtReports/blob/develop/LICENSE.txt) [![Requirements](https://img.shields.io/badge/requirements-Qt5-red.svg)]()
 Reimplementation of JasperReports in Qt
 
 Branches
