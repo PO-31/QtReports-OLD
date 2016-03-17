@@ -5,7 +5,11 @@ namespace qtreports {
 
         Report::Report() :
             m_isVertical( true ),
-            m_size( 600, 400 ) {
+            m_size( 600, 400 ),
+            m_leftMargin( 30 ),
+            m_topMargin( 30 ),
+            m_rightMargin( 30 ),
+            m_bottomMargin( 30 ) {
             Q_UNUSED( m_isVertical );
             Q_UNUSED( m_size );
         }
@@ -118,6 +122,49 @@ namespace qtreports {
 
         const DetailPtr     Report::getDetail() const {
             return m_detail;
+        }
+
+        int     Report::getRowCount() {
+            return 9;
+        }
+
+        int     Report::getLeftMargin() {
+            return m_leftMargin;
+        }
+
+        int     Report::getTopMargin() {
+            return m_topMargin;
+        }
+
+        int     Report::getRightMargin() {
+            return m_rightMargin;
+        }
+
+        int     Report::getBottomMargin() {
+            return m_bottomMargin;
+        }
+
+        void    Report::setLeftMargin( int left ) {
+            m_leftMargin = left;
+        }
+
+        void    Report::setTopMargin( int top ) {
+            m_topMargin = top;
+        }
+
+        void    Report::setRightMargin( int right ) {
+            m_rightMargin = right;
+        }
+
+        void    Report::setBottomMargin( int bottom ) {
+            m_bottomMargin = bottom;
+        }
+
+        void    Report::setMargins( int left, int top, int right, int bottom ) {
+            setLeftMargin( left );
+            setTopMargin( top );
+            setRightMargin( right );
+            setBottomMargin( bottom );
         }
 
     }

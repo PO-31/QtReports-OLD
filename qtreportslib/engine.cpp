@@ -90,7 +90,7 @@ namespace qtreports {
             return false;
         }
 
-        ConverterToPDF converter( m_report );
+        detail::ConverterToPDF converter( m_report );
         auto result = converter.convert( path );
         if( !result ) {
             m_lastError = converter.getLastError();
@@ -106,7 +106,7 @@ namespace qtreports {
             return false;
         }
 
-        ConverterToHTML converter( m_report );
+        detail::ConverterToHTML converter( m_report );
         auto result = converter.convert( path );
         if( !result ) {
             m_lastError = converter.getLastError();
@@ -122,7 +122,7 @@ namespace qtreports {
             return QWidgetPtr();
         }
 
-        ConverterToQWidget converter( m_report );
+        detail::ConverterToQWidget converter( m_report );
         auto result = converter.convert();
         if( !result ) {
             m_lastError = converter.getLastError();
@@ -153,11 +153,21 @@ namespace qtreports {
 
         QRectF rect = printer->pageRect();
         QPainter painter( printer );
-        double scale = rect.width() / widget->width();
+        qreal scale = rect.width() / widget->width();
+        
         widget->resize( widget->width(), rect.height() / scale );
+        painter.scale( scale, scale ); 
+
         painter.translate( 0, rect.height() / 2 - scale * widget->height() / 2 );
-        painter.scale( scale, scale );
         widget->render( &painter );
+
+        auto height = widget->height() * scale;
+        int count = static_cast< int >( std::ceil( height / rect.height() ) );
+        for( int i = 1; i < count; ++i ) {
+            printer->newPage();
+            painter.translate( 0, - height / count );
+            widget->render( &painter );
+        }
     }
 
     void    Engine::prepareDB() {
@@ -169,8 +179,8 @@ namespace qtreports {
         }
     }
 
-    QSqlQueryModelPtr   Engine::executeQuery( const QString &query ) {
-        QSqlQueryModelPtr model( new QSqlQueryModel() );
+    detail::QSqlQueryModelPtr   Engine::executeQuery( const QString &query ) {
+        detail::QSqlQueryModelPtr model( new QSqlQueryModel() );
         model->setQuery( query, m_dbConnection );
         return model;
     }

@@ -55,34 +55,16 @@ unix {
     INSTALLS += headers
 }
 
+linux-clang {
+    QMAKE_CXXFLAGS += -Wdocumentation
+}
+
 coverage {
-    #QMAKE_CXXFLAGS_RELEASE -= -O2
-	#QMAKE_CLEAN += $$OBJECTS_DIR/*.gcda $$OBJECTS_DIR/*.gcno
+    QMAKE_CXXFLAGS_RELEASE -= -O2
+	QMAKE_CLEAN += $$OBJECTS_DIR/*.gcda $$OBJECTS_DIR/*.gcno
 	QMAKE_CXXFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
-	#QMAKE_LDFLAGS += -c -g -Wall -fprofile-arcs -ftest-coverage -O0
 	LIBS += -lgcov
 
-    zerocounters.commands = @lcov --directory \$(OBJECTS_DIR) --zerocounters
-    QMAKE_EXTRA_TARGETS += zerocounters
-    
-    #echo "usage: ${0} <gcov-files-dir> \"<file-pattern>\" <target-dir>"
-    #lcov -d ${1} -c -o ${1}/coverage.info
-    #lcov --list-full-path -e ${1}/coverage.info ${2} -o ${1}/coverage-stripped.info
-    #genhtml -o ${3} ${1}/coverage-stripped.info
-    #lcov -d ${1} -z
-    
-    #../../coverage/
-    capture.file = coverage.info
-	#capture.target = qtreportslib.cov
-    #capture.commands = @mkdir -p ../../coverage && 
-    capture.commands = lcov --base-directory $$_PRO_FILE_PWD_ --directory \$(OBJECTS_DIR) --capture --output-file $$capture.file
-    capture.filters = \"/usr/*\" \"*moc_*.cpp\" \"*3rdparty/*\"
-    #!isEqual(IRC_MODULE, "IrcCore"):capture.filters += \"*/IrcCore/*\"
-    #!isEqual(IRC_MODULE, "IrcModel"):capture.filters += \"*/IrcModel/*\"
-    capture.commands += && lcov --remove $$capture.file $$capture.filters --output-file $$capture.file
-    QMAKE_EXTRA_TARGETS += capture
-
-    coverage.depends += capture zerocounters
     message(Code coverage collection enabled)
 }
 QMAKE_EXTRA_TARGETS += coverage

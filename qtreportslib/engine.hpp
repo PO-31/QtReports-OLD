@@ -12,8 +12,25 @@
 #include "tags/report.hpp"
 #include "converters/convertertoqwidget.hpp"
 
+/*! @~russian
+@mainpage QtReports
+Добро пожаловать в документацию проекта QtReports
+
+@section intro_sec Введение
+Хм.
+
+@section install_sec Установка
+
+@subsection step1 Шаг 1: Скачайте и установите.
+
+@section use_sec Использование
+Подключите библиотеку к проекту с помощью
+-lqtreportslib -I/usr/include/qtreportslib
+и вперед, навстречу приключениям!
+
+*/
+
 namespace qtreports {
-    using namespace detail;
 
     class Engine : public QObject {
         Q_OBJECT
@@ -27,7 +44,7 @@ namespace qtreports {
         bool    setParameters( const QMap< QString, QString > & map );
         bool    setConnection( const QSqlDatabase & connection );
 
-        void    addQuery( const QString &queryName, const QString & query );
+        void    addQuery( const QString & queryName, const QString & query );
         void    addScript( const QString & script );
 
         bool                createPDF( const QString & path );
@@ -41,15 +58,15 @@ namespace qtreports {
     private:
         bool                        m_isOpened;
         QString                     m_lastError, m_compiledPath;
-        ReportPtr                   m_report;
+        detail::ReportPtr           m_report;
         QMap< QString, QString >    m_dbQueries;
         QVector< QString >          m_scripts;
         QSqlDatabase                m_dbConnection;
-        ProcessedDB                 m_processedDB;
+        detail::ProcessedDB         m_processedDB;
 
         void                drawPreview( QPrinter * printer );
         void                prepareDB();
-        QSqlQueryModelPtr   executeQuery( const QString & query );
+        detail::QSqlQueryModelPtr   executeQuery( const QString & query );
 
     };
 

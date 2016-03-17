@@ -6,16 +6,16 @@
 namespace qtreports {
     namespace detail {
 
-        ParseFunc    bindParseFunc( Parser * obj, ParseMethodPtr method ) {
+        Parser::ParseFunc    bindParseFunc( Parser * obj, Parser::ParseMethodPtr method ) {
             using namespace std::placeholders;
             auto func = std::bind( method, obj, _1, _2 );
             return func;
         }
 
         template < typename T1 >
-        ParseFunc    toParseFunc( Parser * obj, bool( Parser::*method )( QXmlStreamReader &, const T1 & ) ) {
+        Parser::ParseFunc    toParseFunc( Parser * obj, bool( Parser::*method )( QXmlStreamReader &, const T1 & ) ) {
             //Cast second parameter to ObjectPtr type;
-            auto parseMethodPtr = reinterpret_cast< ParseMethodPtr >( method );
+            auto parseMethodPtr = reinterpret_cast< Parser::ParseMethodPtr >( method );
             return bindParseFunc( obj, parseMethodPtr );
         }
 
@@ -34,6 +34,7 @@ namespace qtreports {
             m_functions[ "staticText" ] = toParseFunc( this, &Parser::parseStaticText );
             m_functions[ "textField" ] = toParseFunc( this, &Parser::parseTextField );
             m_functions[ "reportElement" ] = toParseFunc( this, &Parser::parseReportElement );
+            m_functions[ "textElement" ] = toParseFunc( this, &Parser::parseTextElement );
             m_functions[ "text" ] = toParseFunc( this, &Parser::parseText );
             m_functions[ "textFieldExpression" ] = toParseFunc( this, &Parser::parseTextFieldExpression );
         }
@@ -93,6 +94,14 @@ namespace qtreports {
             return true;
         }
 
+        bool    Parser::getRequiredAttribute( QXmlStreamReader & reader, const QString & name, QString & data ) {
+            return getAttribute( reader, name, data, AttributeOption::Required );
+        }
+
+        bool    Parser::getOptionalAttribute( QXmlStreamReader & reader, const QString & name, QString & data ) {
+            return getAttribute( reader, name, data, AttributeOption::Optional );
+        }
+
         bool    Parser::goToElementEnd( QXmlStreamReader & reader ) {
             m_log << "goToEnd: start" << endl;
             int level = 0;
@@ -120,6 +129,7 @@ namespace qtreports {
         }
 
         bool    Parser::parseChilds( QXmlStreamReader & reader, const ObjectPtr & object ) {
+            m_log << "parseChilds: start" << endl;
             while( !reader.atEnd() ) {
                 reader.readNext();
                 if( reader.isEndElement() ) {
@@ -130,13 +140,16 @@ namespace qtreports {
                 }
 
                 auto name = reader.name().toString();
+                m_log << "parseChilds: current tag: " << name << endl;
                 if( m_functions.contains( name ) ) {
+                    m_log << "parseChilds: use func for: " << name << endl;
                     auto func = m_functions[ name ];
                     if( !func( reader, object ) ) {
                         return false;
                     }
                 }
                 else {
+                    m_log << "parseChilds: goToElementEnd: " << name << endl;
                     if( !goToElementEnd( reader ) ) {
                         return false;
                     }
@@ -144,10 +157,12 @@ namespace qtreports {
             }
 
             if( reader.hasError() ) {
+                m_log << "parseChilds: error" << endl;
                 m_lastError = reader.errorString();
                 return false;
             }
 
+            m_log << "parseChilds: end" << endl;
             return true;
         }
 
@@ -166,7 +181,27 @@ namespace qtreports {
 
         bool	Parser::parseReport( QXmlStreamReader & reader, const ReportPtr & report ) {
             QString name;
-            if( !getAttribute( reader, "name", name ) ) {
+            if( !getRequiredAttribute( reader, "name", name ) ) {
+                return false;
+            }
+
+            QString leftMargin;
+            if( !getOptionalAttribute( reader, "leftMargin", leftMargin ) ) {
+                return false;
+            }
+
+            QString rightMargin;
+            if( !getOptionalAttribute( reader, "rightMargin", rightMargin ) ) {
+                return false;
+            }
+
+            QString topMargin;
+            if( !getOptionalAttribute( reader, "topMargin", topMargin ) ) {
+                return false;
+            }
+
+            QString bottomMargin;
+            if( !getOptionalAttribute( reader, "bottomMargin", bottomMargin ) ) {
                 return false;
             }
 
@@ -177,43 +212,59 @@ namespace qtreports {
             report->setTagName( "report" );
             report->setName( name );
 
+            if( !leftMargin.isEmpty() ) {
+                report->setLeftMargin( leftMargin.toInt() );
+            }
+
+            if( !topMargin.isEmpty() ) {
+                report->setTopMargin( topMargin.toInt() );
+            }
+
+            if( !rightMargin.isEmpty() ) {
+                report->setRightMargin( rightMargin.toInt() );
+            }
+
+            if( !bottomMargin.isEmpty() ) {
+                report->setBottomMargin( bottomMargin.toInt() );
+            }
+
             return true;
         }
 
 
         bool    Parser::parseStyle( QXmlStreamReader & reader, const ReportPtr & report ) {
             QString name;
-            if( !getAttribute( reader, "name", name ) ) {
+            if( !getRequiredAttribute( reader, "name", name ) ) {
                 return false;
             }
 
             QString isDefault;
-            if( !getAttribute( reader, "isDefault", isDefault ) ) {
+            if( !getOptionalAttribute( reader, "isDefault", isDefault ) ) {
                 return false;
             }
 
             QString fontName;
-            if( !getAttribute( reader, "fontName", fontName ) ) {
+            if( !getOptionalAttribute( reader, "fontName", fontName ) ) {
                 return false;
             }
 
             QString fontSize;
-            if( !getAttribute( reader, "fontSize", fontSize ) ) {
+            if( !getOptionalAttribute( reader, "fontSize", fontSize ) ) {
                 return false;
             }
 
             QString pdfFontName;
-            if( !getAttribute( reader, "pdfFontName", pdfFontName, AttributeOption::Optional ) ) {
+            if( !getOptionalAttribute( reader, "pdfFontName", pdfFontName ) ) {
                 return false;
             }
 
             QString pdfEncoding;
-            if( !getAttribute( reader, "pdfEncoding", pdfEncoding, AttributeOption::Optional ) ) {
+            if( !getOptionalAttribute( reader, "pdfEncoding", pdfEncoding ) ) {
                 return false;
             }
 
             QString isPdfEmbedded;
-            if( !getAttribute( reader, "isPdfEmbedded", isPdfEmbedded, AttributeOption::Optional ) ) {
+            if( !getOptionalAttribute( reader, "isPdfEmbedded", isPdfEmbedded ) ) {
                 return false;
             }
 
@@ -246,12 +297,12 @@ namespace qtreports {
 
         bool    Parser::parseField( QXmlStreamReader & reader, const ReportPtr & report ) {
             QString name;
-            if( !getAttribute( reader, "name", name ) ) {
+            if( !getRequiredAttribute( reader, "name", name ) ) {
                 return false;
             }
             
             QString className;
-            if( !getAttribute( reader, "class", className ) ) {
+            if( !getRequiredAttribute( reader, "class", className ) ) {
                 return false;
             }
             /*
@@ -303,7 +354,7 @@ namespace qtreports {
 
         bool	Parser::parseBand( QXmlStreamReader & reader, const SectionPtr & section ) {
             QString height;
-            if( !getAttribute( reader, "height", height ) ) {
+            if( !getRequiredAttribute( reader, "height", height ) ) {
                 return false;
             }
 
@@ -345,36 +396,62 @@ namespace qtreports {
 
         bool	Parser::parseReportElement( QXmlStreamReader & reader, const WidgetPtr & widget ) {
             QString x;
-            if( !getAttribute( reader, "x", x ) ) {
+            if( !getRequiredAttribute( reader, "x", x ) ) {
                 return false;
             }
 
             QString y;
-            if( !getAttribute( reader, "y", y ) ) {
+            if( !getRequiredAttribute( reader, "y", y ) ) {
                 return false;
             }
 
             QString width;
-            if( !getAttribute( reader, "width", width ) ) {
+            if( !getRequiredAttribute( reader, "width", width ) ) {
                 return false;
             }
 
             QString height;
-            if( !getAttribute( reader, "height", height ) ) {
+            if( !getRequiredAttribute( reader, "height", height ) ) {
                 return false;
             }
 
-            while( !reader.atEnd() && !reader.isEndElement() ) {
-                reader.readNext();
-            }
-
-            if( reader.hasError() ) {
-                m_lastError = reader.errorString();
+            if( !goToElementEnd( reader ) ) {
                 return false;
             }
 
             QRect rect( x.toInt(), y.toInt(), width.toInt(), height.toInt() );
             widget->setRect( rect );
+
+            return !reader.hasError();
+        }
+
+        bool	Parser::parseTextElement( QXmlStreamReader & reader, const WidgetPtr & widget ) {
+            QString textAlignment;
+            if( !getRequiredAttribute( reader, "textAlignment", textAlignment ) ) {
+                return false;
+            }
+
+            QString textVAlignment;
+            if( !getOptionalAttribute( reader, "textVAlignment", textVAlignment ) ) {
+                return false;
+            }
+
+            if( !goToElementEnd( reader ) ) {
+                return false;
+            }
+
+            auto isCenter = isEquals( textAlignment, "Center" );
+            auto isRight = isEquals( textAlignment, "Right" );
+            auto isLeft = !isCenter && !isRight;
+
+            auto isVTop = isEquals( textVAlignment, "Top" );
+            auto isVBottom = isEquals( textVAlignment, "Bottom" );
+            auto isVCenter = !isVTop && !isVBottom;
+
+            auto hFlag = isCenter ? Qt::AlignCenter : isRight ? Qt::AlignRight : Qt::AlignLeft;
+            auto vFlag = isVTop ? Qt::AlignTop : isVBottom ? Qt::AlignBottom : Qt::AlignVCenter;
+
+            widget->setAlignment( hFlag | vFlag );
 
             return !reader.hasError();
         }
@@ -392,7 +469,7 @@ namespace qtreports {
 
         bool	Parser::parseTextFieldExpression( QXmlStreamReader & reader, const TextFieldPtr & textField ) {
             QString className;
-            if( !getAttribute( reader, "class", className ) ) {
+            if( !getRequiredAttribute( reader, "class", className ) ) {
                 return false;
             }
             

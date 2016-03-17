@@ -13,79 +13,142 @@ namespace qtreports {
         ConverterToQWidget::~ConverterToQWidget() {}
 
         bool    ConverterToQWidget::convert() {
-            return createQWidget();
+            return createQWidget( m_report );
         }
 
-        bool    ConverterToQWidget::createQWidget() {
-            if( m_report.isNull() ) {
+        bool    ConverterToQWidget::convert( const ReportPtr & report ) {
+            return createQWidget( report );
+        }
+
+        void    addVerticalBorder( QBoxLayout * parent, int height, int left, int right ) {
+            auto layout = new QHBoxLayout();
+            layout->setMargin( 0 );
+            layout->setSpacing( 0 );
+
+            auto leftFrame = new QFrame();
+            leftFrame->setFixedWidth( left );
+            leftFrame->setFixedHeight( height );
+            leftFrame->setStyleSheet( "border: 1px solid gray; border-width: 0px 1px 0px 0px; " );
+
+            auto centerFrame = new QFrame();
+            centerFrame->setFixedHeight( height );
+            centerFrame->setStyleSheet( "border: 1px solid gray; border-width: 0px 0px 0px 0px; " );
+
+            auto rightFrame = new QFrame();
+            rightFrame->setFixedWidth( right );
+            rightFrame->setFixedHeight( height );
+            rightFrame->setStyleSheet( "border: 1px solid gray; border-width: 0px 0px 0px 1px; " );
+
+            layout->addWidget( leftFrame );
+            layout->addWidget( centerFrame );
+            layout->addWidget( rightFrame );
+
+            parent->addLayout( layout );
+        }
+
+        void    addEmptySection( QBoxLayout * parent, int left, int right ) {
+            auto layout = new QHBoxLayout();
+            layout->setMargin( 0 );
+            layout->setSpacing( 0 );
+
+            auto leftFrame = new QFrame();
+            leftFrame->setFixedWidth( left );
+            leftFrame->setStyleSheet( "border: 1px solid gray; border-width: 1px 1px 1px 0px; " );
+
+            auto centerFrame = new QFrame();
+            centerFrame->setObjectName( "frame" );
+            centerFrame->setStyleSheet( "#frame { border: 1px solid gray; border-width: 1px 0px 1px 0px; }" );
+
+            auto rightFrame = new QFrame();
+            rightFrame->setFixedWidth( right );
+            rightFrame->setStyleSheet( "border: 1px solid gray; border-width: 1px 0px 1px 1px; " );
+
+            layout->addWidget( leftFrame );
+            layout->addWidget( centerFrame );
+            layout->addWidget( rightFrame );
+
+            parent->addLayout( layout );
+        }
+
+        QFrame *    addSectionLayout( QBoxLayout * parent, int height, int left, int right ) {
+            auto layout = new QHBoxLayout();
+            layout->setMargin( 0 );
+            layout->setSpacing( 0 );
+
+            auto leftFrame = new QFrame();
+            leftFrame->setFixedHeight( height );
+            leftFrame->setFixedWidth( left );
+            leftFrame->setStyleSheet( "border: 1px solid gray; border-width: 1px 1px 0px 0px; " );
+
+            auto centerFrame = new QFrame();
+            centerFrame->setFixedHeight( height );
+            centerFrame->setObjectName( "frame" );
+            centerFrame->setStyleSheet( "#frame { border: 1px solid gray; border-width: 1px 0px 0px 0px; }" );
+
+            auto rightFrame = new QFrame();
+            rightFrame->setFixedHeight( height );
+            rightFrame->setFixedWidth( right );
+            rightFrame->setStyleSheet( "border: 1px solid gray; border-width: 1px 0px 0px 1px; " );
+
+            layout->addWidget( leftFrame );
+            layout->addWidget( centerFrame );
+            layout->addWidget( rightFrame );
+
+            parent->addLayout( layout );
+
+            return centerFrame;
+        }
+
+        bool    ConverterToQWidget::createQWidget( const ReportPtr & report ) {
+            if( report.isNull() ) {
                 m_lastError = "Report is empty";
                 return false;
             }
-            /*
-            ConverterToHTML converter( m_report );
-            bool result = converter.convert();
-            if( !result ) {
-                m_lastError = "Cannot convert to HTML: " + converter.getLastError();
-                return false;
-            }
 
-            QString html = converter.getHTML();
-
-            auto widget = new QWidget();
-            widget->resize( 600, 400 );
-
-            auto browser = new QTextBrowser();
-            browser->setText( html );
-
-            auto layout = new QVBoxLayout( widget );
-            layout->setMargin( 0 );
-            layout->addWidget( browser );
-
-            m_qwidget = QWidgetPtr( widget );
-            */
-
-            m_qwidget = QWidgetPtr( new QWidget() );
-            m_qwidget->setStyleSheet( "border: 1px solid black" );
-
-            auto detail = m_report->getDetail();
+            auto detail = report->getDetail();
             if( detail.isNull() ) {
                 m_lastError = "Report->Detail is empty";
                 return false;
             }
 
+            m_qwidget = QWidgetPtr( new QWidget() );
+
             auto layout = new QVBoxLayout( m_qwidget.data() );
             layout->setMargin( 0 );
-
-            auto title = m_report->getTitle();
-            if( !title.isNull() && !createSection( layout, title ) ) {
-                return false;
+            layout->setSpacing( 0 );
+            addVerticalBorder( layout, report->getTopMargin(), report->getLeftMargin(), report->getRightMargin() );
+            
+            auto title = report->getTitle();
+            if( !title.isNull() ) {
+                auto sectionWidget = addSectionLayout( layout, title->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
+                if( !createSection( sectionWidget, title ) ) {
+                    return false;
+                }
             }
 
-            if( !createSection( layout, detail ) ) {
-                return false;;
+            for( int i = 0; i < report->getRowCount(); ++i ) {
+                auto sectionWidget = addSectionLayout( layout, detail->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
+                if( !createSection( sectionWidget, detail ) ) {
+                    return false;;
+                }
             }
-
-            auto emptyWidget = new QFrame();
-            emptyWidget->setMinimumHeight( 0 );
-            layout->addWidget( emptyWidget );
+            
+            addEmptySection( layout, report->getLeftMargin(), report->getRightMargin() );
+            addVerticalBorder( layout, report->getBottomMargin(), report->getLeftMargin(), report->getRightMargin() );
 
             return true;
         }
 
-        bool    ConverterToQWidget::createSection( QVBoxLayout * parent, const SectionPtr & section ) {
-            auto frame = new QFrame();
-            frame->setMaximumHeight( section->getHeight() );
-            frame->setMinimumHeight( section->getHeight() );
-            parent->addWidget( frame );
 
-            auto label = new QLabel( frame );
+        bool    ConverterToQWidget::createSection( QWidget * parent, const SectionPtr & section ) {
+            auto label = new QLabel( parent );
             label->setText( section->getTagName() );
             label->setAttribute( Qt::WA_TranslucentBackground );
-            label->setStyleSheet( "font-size: 26px; color: rgba( 0, 0, 0, 50% )" );
+            label->setStyleSheet( "font-size: 26px; color: gray" );
             label->setAlignment( Qt::AlignCenter );
-            label->resize( frame->size() );
+            label->resize( parent->size() );
 
-            if( !createBands( frame, section ) ) {
+            if( !createBands( parent, section ) ) {
                 return false;;
             }
 
@@ -97,12 +160,16 @@ namespace qtreports {
                 auto frame = new QFrame( parent );
                 for( auto && staticText : band->getStaticTexts() ) {
                     auto label = new QLabel( frame );
+                    label->setStyleSheet( "border: 1px solid gray;" );
                     label->setGeometry( staticText->getRect() );
+                    label->setAlignment( staticText->getAlignment() );
                     label->setText( staticText->getText() );
                 }
                 for( auto && textField : band->getTextFields() ) {
                     auto label = new QLabel( frame );
+                    label->setStyleSheet( "border: 1px solid gray;" );
                     label->setGeometry( textField->getRect() );
+                    label->setAlignment( textField->getAlignment() );
                     label->setText( textField->getText() );
                 }
             }

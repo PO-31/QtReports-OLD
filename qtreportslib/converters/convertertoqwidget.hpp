@@ -3,12 +3,15 @@
 #define CONVERTERTOQWIDGET_HPP
 #include <QString>
 #include <QWidget>
+#include <QBoxLayout>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include "tags/report.hpp"
 
 namespace qtreports {
+    typedef QSharedPointer< QWidget > QWidgetPtr;
+
     namespace detail {
-        typedef QSharedPointer< QWidget > QWidgetPtr;
 
         class ConverterToQWidget {
 
@@ -17,6 +20,7 @@ namespace qtreports {
             ~ConverterToQWidget();
 
             bool                convert();
+            bool                convert( const ReportPtr & report );
 
             const QString       getLastError() const;
             const QWidgetPtr    getQWidget() const;
@@ -26,8 +30,8 @@ namespace qtreports {
             QString     m_lastError;
             QWidgetPtr  m_qwidget;
 
-            bool        createQWidget();
-            bool        createSection( QVBoxLayout * parent, const SectionPtr & section );
+            bool        createQWidget( const ReportPtr & report );
+            bool        createSection( QWidget * parent, const SectionPtr & section );
             bool        createBands( QWidget * parent, const SectionPtr & section );
 
         };

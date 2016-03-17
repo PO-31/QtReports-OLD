@@ -11,7 +11,9 @@ public:
     ~Test_Engine();
 
 private slots:
-    void    compile();
+    void    open();
+    void    setConnection();
+    void    setParameters();
 
 };
 

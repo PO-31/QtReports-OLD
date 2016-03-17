@@ -4,7 +4,8 @@ namespace qtreports {
     namespace detail {
 
         Widget::Widget() :
-            m_rect( 0, 0, 0, 0 ) {}
+            m_rect( 0, 0, 0, 0 ),
+            m_alignment( Qt::AlignmentFlag::AlignLeft | Qt::AlignmentFlag::AlignVCenter ) {}
 
         Widget::~Widget() {}
 
@@ -38,6 +39,14 @@ namespace qtreports {
 
         void	Widget::setStyle( const StylePtr & style ) {
             m_style = style;
+        }
+
+        void    Widget::setAlignment( Qt::Alignment alignment ) {
+            m_alignment = alignment;
+        }
+
+        Qt::Alignment   Widget::getAlignment() {
+            return m_alignment;
         }
 
         const QPoint    Widget::getPos() const {

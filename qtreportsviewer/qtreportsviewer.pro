@@ -5,6 +5,7 @@ TEMPLATE = app
 CONFIG += release c++11
 INCLUDEPATH += ../qtreportslib
 LIBPATH     += ../qtreportslib
+LIBS   += -L../../qtreportslib
 LIBS   += -lqtreportslib
 
 SOURCES += main.cpp
