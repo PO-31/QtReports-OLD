@@ -1,4 +1,4 @@
-# QtReports [![Language](https://img.shields.io/badge/language-C++11-blue.svg)]() [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/PO-21/QtReports/blob/develop/LICENSE.txt) [![Requirements](https://img.shields.io/badge/requirements-Qt5-red.svg)]()
+# QtReports [![Language](https://img.shields.io/badge/language-C++11-blue.svg)](https://github.com/PO-21/QtReports/search?l=cpp) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/PO-21/QtReports/blob/develop/LICENSE.txt) [![Requirements](https://img.shields.io/badge/requirements-Qt5-red.svg)]()
 Reimplementation of JasperReports in Qt
 
 Branches
