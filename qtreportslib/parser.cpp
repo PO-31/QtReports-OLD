@@ -35,6 +35,7 @@ namespace qtreports {
             m_functions[ "textField" ] = toParseFunc( this, &Parser::parseTextField );
             m_functions[ "reportElement" ] = toParseFunc( this, &Parser::parseReportElement );
             m_functions[ "textElement" ] = toParseFunc( this, &Parser::parseTextElement );
+            m_functions[ "font" ] = toParseFunc( this, &Parser::parseFont );
             m_functions[ "text" ] = toParseFunc( this, &Parser::parseText );
             m_functions[ "textFieldExpression" ] = toParseFunc( this, &Parser::parseTextFieldExpression );
         }
@@ -436,7 +437,7 @@ namespace qtreports {
                 return false;
             }
 
-            if( !goToElementEnd( reader ) ) {
+            if( !parseChilds( reader, widget ) ) {
                 return false;
             }
 
@@ -453,7 +454,24 @@ namespace qtreports {
 
             widget->setAlignment( hFlag | vFlag );
 
-            return !reader.hasError();
+            return true;
+        }
+
+        bool	Parser::parseFont( QXmlStreamReader & reader, const WidgetPtr & widget ) {
+            QString isBold;
+            if( !getOptionalAttribute( reader, "isBold", isBold ) ) {
+                return false;
+            }
+
+            if( !goToElementEnd( reader ) ) {
+                return false;
+            }
+
+            if( !isBold.isEmpty() ) {
+                widget->setBold( toBool( isBold ) );
+            }
+
+            return true;
         }
 
         bool	Parser::parseText( QXmlStreamReader & reader, const StaticTextPtr & staticText ) {

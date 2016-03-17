@@ -96,6 +96,7 @@ namespace qtreports {
             bool    parseTextField( QXmlStreamReader & reader, const BandPtr & band );
             bool    parseReportElement( QXmlStreamReader & reader, const WidgetPtr & widget );
             bool	parseTextElement( QXmlStreamReader & reader, const WidgetPtr & widget );
+            bool	parseFont( QXmlStreamReader & reader, const WidgetPtr & widget );
             bool    parseText( QXmlStreamReader & reader, const StaticTextPtr & text );
             bool    parseTextFieldExpression( QXmlStreamReader & reader, const TextFieldPtr & text );
 

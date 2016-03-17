@@ -160,14 +160,24 @@ namespace qtreports {
                 auto frame = new QFrame( parent );
                 for( auto && staticText : band->getStaticTexts() ) {
                     auto label = new QLabel( frame );
-                    label->setStyleSheet( "border: 1px solid gray;" );
+                    QString style = "";
+                    if( staticText->isBold() ) {
+                        style += "font-weight: bold; ";
+                    }
+                    style += "border: 1px solid gray; ";
+                    label->setStyleSheet( style );
                     label->setGeometry( staticText->getRect() );
                     label->setAlignment( staticText->getAlignment() );
                     label->setText( staticText->getText() );
                 }
                 for( auto && textField : band->getTextFields() ) {
                     auto label = new QLabel( frame );
-                    label->setStyleSheet( "border: 1px solid gray;" );
+                    QString style = "";
+                    if( textField->isBold() ) {
+                        style += "font-weight: bold; ";
+                    }
+                    style += "border: 1px solid gray; ";
+                    label->setStyleSheet( style );
                     label->setGeometry( textField->getRect() );
                     label->setAlignment( textField->getAlignment() );
                     label->setText( textField->getText() );

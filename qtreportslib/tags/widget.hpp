@@ -54,6 +54,9 @@ namespace qtreports {
             /* Возвращает индекс стиля. */
             const StylePtr  getStyle() const;
 
+            bool            isBold() const;
+            void            setBold( bool isBold );
+
             /* Установить значение параметра объекта с именем name значением value. Имя параметра name - не чувствительно
              * к регистру.
              * Список параметров:
@@ -65,6 +68,7 @@ namespace qtreports {
             //virtual bool    setParameter( const QString & name, const QVariant & value );
 
         protected:
+            bool                    m_isBold;
             QRect					m_rect;
             Qt::Alignment           m_alignment;
             StylePtr				m_style;

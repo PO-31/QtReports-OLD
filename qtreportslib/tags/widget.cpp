@@ -4,6 +4,7 @@ namespace qtreports {
     namespace detail {
 
         Widget::Widget() :
+            m_isBold( false ),
             m_rect( 0, 0, 0, 0 ),
             m_alignment( Qt::AlignmentFlag::AlignLeft | Qt::AlignmentFlag::AlignVCenter ) {}
 
@@ -80,6 +81,16 @@ namespace qtreports {
         const StylePtr  Widget::getStyle() const {
             return m_style;
         }
+
+        bool    Widget::isBold() const {
+            return m_isBold;
+        }
+
+        void    Widget::setBold( bool isBold ) {
+            m_isBold = isBold;
+        }
+
+
         /*
         bool	Widget::setParameter( const QString & name, const QVariant & value ) {
             QString _x( "x" ), _y( "y" ), _w( "w" ), _h( "h" ), _style_name( "style_name" );
