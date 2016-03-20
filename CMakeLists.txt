@@ -8,7 +8,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #обязательно указать CMAKE_PREFIX_PATH "C:/Qt/5/5.5/mingw492_32" к qt5
-set (CMAKE_PREFIX_PATH "C:/Qt/5/5.5/mingw492_32")
 if(!CMAKE_PREFIX_PATH)
 message(WARNING "CHECK CMAKE_PREFIX_PATH")
 endif()
