@@ -17,46 +17,54 @@ namespace qtreports {
         }
 
         bool    ProcessedDB::getField( const QString & queryName, const QString & columnName, int row, QVariant & result ) {
-            if( !m_queriesResults.contains( queryName ) ) {
-                m_errorString = "No such query with name " + queryName;
+            if( !m_queriesResultData.contains( queryName ) ) {
+                m_errorString = "No such query with name ";
                 return false;
             }
-            if( m_queriesResults[ queryName ]->rowCount() == 0 ) {
+            if( m_queriesResultData[ queryName ].size() == 0 ) {
                 m_errorString = "No data";
                 return false;
             }
 
-            QSqlRecord record = m_queriesResults[ queryName ]->record( row );
-
-            result = record.field( columnName ).value();
-
-            if( !result.isValid() ) {
-                m_errorString = "Result is not valid";
+            if( row > m_queriesResultData[ queryName ].size() || row < 0) {
+                m_errorString = "Invalid row index";
                 return false;
             }
 
+            QSqlRecord rec = m_queriesResultData[ queryName ][row];
+
+            if(!rec.contains(columnName)) {
+                m_errorString = "Invalid column name";
+                return false;
+            }
+
+            result = rec.field(columnName).value();
             return true;
         }
 
         bool    ProcessedDB::getField( const QString & queryName, int column, int row, QVariant &result ) {
-            if( !m_queriesResults.contains( queryName ) ) {
+            if( !m_queriesResultData.contains( queryName ) ) {
                 m_errorString = "No such query with name ";
                 return false;
             }
-            if( m_queriesResults[ queryName ]->rowCount() == 0 ) {
+            if( m_queriesResultData[ queryName ].size() == 0 ) {
                 m_errorString = "No data";
                 return false;
             }
 
-            QSqlRecord record = m_queriesResults[ queryName ]->record( row );
-
-            result = record.field( column ).value();
-
-            if( !result.isValid() ) {
-                m_errorString = "Result is not valid";
+            if( row > m_queriesResultData[ queryName ].size() || row < 0) {
+                m_errorString = "Invalid row index";
                 return false;
             }
 
+            QSqlRecord rec = m_queriesResultData[ queryName ][row];
+
+            if(column > rec.count() || column < 0) {
+                m_errorString = "Invalid column index";
+                return false;
+            }
+
+            result = rec.field(column).value();
             return true;
         }
 
@@ -66,7 +74,12 @@ namespace qtreports {
         }
 
         void    ProcessedDB::addExecutedQuery( const QString & name, const QSqlQueryModelPtr & model ) {
-            m_queriesResults[ name ] = model;
+            QVector <QSqlRecord> recordsList;
+            for(int row = 0; row < model.data()->rowCount(); row++) {
+                QSqlRecord rec = model.data()->record(row);
+                recordsList.append(rec);
+            }
+            m_queriesResultData[ name ] = recordsList;
         }
 
         const QString   ProcessedDB::getError() const {
