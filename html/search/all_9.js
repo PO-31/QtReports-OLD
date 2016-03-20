@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['report',['Report',['../classqtreports_1_1detail_1_1_report.html',1,'qtreports::detail']]]
+  ['qtreports',['QtReports',['../index.html',1,'']]],
+  ['querystring',['QueryString',['../classqtreports_1_1detail_1_1_query_string.html',1,'qtreports::detail']]]
 ];
