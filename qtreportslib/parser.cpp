@@ -443,11 +443,9 @@ namespace qtreports {
 
             auto isCenter = isEquals( textAlignment, "Center" );
             auto isRight = isEquals( textAlignment, "Right" );
-            auto isLeft = !isCenter && !isRight;
 
             auto isVTop = isEquals( textVAlignment, "Top" );
             auto isVBottom = isEquals( textVAlignment, "Bottom" );
-            auto isVCenter = !isVTop && !isVBottom;
 
             auto hFlag = isCenter ? Qt::AlignCenter : isRight ? Qt::AlignRight : Qt::AlignLeft;
             auto vFlag = isVTop ? Qt::AlignTop : isVBottom ? Qt::AlignBottom : Qt::AlignVCenter;
