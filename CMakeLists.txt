@@ -38,8 +38,8 @@ else()
 endif()
 
 
-SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin) 
+SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/qtreportsviewer)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/qtreportsviewer) 
 
 
   include_directories (
