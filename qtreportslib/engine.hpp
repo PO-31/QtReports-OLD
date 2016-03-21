@@ -21,7 +21,58 @@
 
 @section install_sec Установка
 
-@subsection step1 Шаг 1: Скачайте и установите.
+@subsection step1 Шаг 1: Подготовка исходных файлов проекта к утсановке.
+
+1) Скачать исходные файлы проекта;
+2) Создать папку QtReports;
+3) В папке QtReports создать три папки: qtreportslib, qtreportsviewer и tests;
+4) В папке tests создать папку qtreportslib_tests;
+5) В папке qtreportslib создать папки converters и tags;
+6) Скопировать файлы в соответствующие папки:
+
+convertertohtml.cpp, convertertohtml.hpp,
+convertertopdf.cpp, convertertopdf.hpp,
+convertertoqwidget.cpp, convertertoqwidget.hpp в папку converters;
+
+band.cpp, band.hpp,
+detail.cpp, detail.hpp, 
+drawingexception.cpp, drawingexception.hpp,
+field.cpp, field.hpp,
+querystring.cpp, querystring.hpp,
+object.cpp, object.hpp,
+report.cpp, report.hpp,
+section.cpp, section.hpp,
+statictext.cpp, statictext.hpp,
+textfield.cpp, textfield.hpp,
+style.cpp, style.hpp,
+title.cpp, title.hpp,
+widget.cpp, widget.hpp в папку tags;
+
+engine.cpp, engine.hpp,
+objectsplant.cpp, objectsplant.hpp,
+painter.cpp, painter.hpp,
+parser.cpp, parser.hpp,
+processeddb.cpp, processeddb.hpp в папку qtreportslib;
+
+main.cpp в папку qtreportsviewer;
+
+detail.qreport, testDB в qtreportslib_tests
+
+@subsection step2 Шаг 2: Генерация CMakeLists.
+
+В корневой папке QtReports, где расположен CMakeLists.txt в командной строке запустить команду: 
+cmake CMAKE_PREFIX_PATH="путь к qt5"  -G "MinGW Makefiles" -B./bin -H./
+
+Пример пути к qt5: C:/Qt/5/5.5/mingw492_32
+
+@subsection step3 Шаг 3: Компиляция проекта.
+
+Windows:
+Запустить команду: mingw32-make -C./bin
+
+Linux: В директории ../QtReports/bin запустить команду make;
+
+Exe-файл будет расположен в папке qtreportsviewer
 
 @section use_sec Использование
 Подключите библиотеку к проекту с помощью
