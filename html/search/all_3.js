@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['engine',['Engine',['../classqtreports_1_1_engine.html',1,'qtreports']]]
+  ['detail',['Detail',['../classqtreports_1_1detail_1_1_detail.html',1,'qtreports::detail']]]
 ];
