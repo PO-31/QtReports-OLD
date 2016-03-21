@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['required',['Required',['../classqtreports_1_1detail_1_1_parser.html#a948af6bc4f1f3da7c5d120dd0877662ea73231206302321da6052db0ab177648e',1,'qtreports::detail::Parser']]]
+  ['report',['Report',['../classqtreports_1_1detail_1_1_converter_to_q_widget.html#a5a1a0eee82b83313e90b505536a527f7a3f1936c4d6b915558c8ad64808bf2759',1,'qtreports::detail::ConverterToQWidget']]]
 ];
