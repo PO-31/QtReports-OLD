@@ -46,14 +46,14 @@ int main( int argc, char *argv[] ) {
         return -1;
     }
 
-    auto widget = engine.createWidget();
-    if( widget.isNull() ) {
-        QMessageBox::critical( 0, "Error: ", "Widget is empty" );
+    auto layout = engine.createLayout();
+    if( layout.isNull() ) {
+        QMessageBox::critical( 0, "Error: ", "Layout is empty" );
         return -1;
     }
 
-    window.setCentralWidget( widget.data() );
-    window.resize( widget->size() );
+    window.setCentralWidget( layout.data() );
+    window.resize( layout->size() );
     window.show();
 
     QAction print( QObject::tr( "&Print..." ), &window );
@@ -145,14 +145,14 @@ int main( int argc, char *argv[] ) {
             return;
         }
 
-        widget = engine.createWidget();
-        if( widget.isNull() ) {
+        layout = engine.createLayout();
+        if( layout.isNull() ) {
             QMessageBox::critical( 0, "Error: ", "Widget is empty" );
             return;
         }
 
-        window.setCentralWidget( widget.data() );
-        window.resize( widget->size() );
+        window.setCentralWidget( layout.data() );
+        window.resize( layout->size() );
     } );
 
     QAction exit( QObject::tr( "&Exit..." ), &window );
