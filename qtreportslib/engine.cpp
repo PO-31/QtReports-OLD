@@ -181,6 +181,19 @@ namespace qtreports
     {
         QPrinter printer;
 
+        m_printedWidget = createWidget();
+        if( m_printedWidget.isNull() )
+        {
+            m_lastError = "Cannot create widget. Error: " + m_lastError;
+            return false;
+        }
+
+        m_printedWidget->resize( 595, 595 );
+
+        //Magic
+        m_printedWidget->show();
+        m_printedWidget->hide();
+
         QPrintPreviewDialog preview( &printer );
         connect(
             &preview, &QPrintPreviewDialog::paintRequested,
@@ -188,34 +201,31 @@ namespace qtreports
             );
         preview.exec();
 
+        m_printedWidget.clear();
+
         return true;
     }
 
     void	Engine::drawPreview( QPrinter * printer )
     {
-        auto widget = createWidget();
-        if( widget.isNull() )
+        if( m_printedWidget.isNull() )
         {
             return;
         }
 
         QRectF rect = printer->pageRect();
         QPainter painter( printer );
-        qreal scale = rect.width() / widget->width();
+        qreal scale = rect.width() / m_printedWidget->width();
 
-        widget->resize( widget->width(), rect.height() / scale );
+        m_printedWidget->resize( m_printedWidget->width(), rect.height() / scale );
         painter.scale( scale, scale );
 
-        painter.translate( 0, rect.height() / 2 - scale * widget->height() / 2 );
-        widget->render( &painter );
-
-        auto height = widget->height() * scale;
+        auto height = m_printedWidget->height() * scale;
         int count = static_cast< int >( std::ceil( height / rect.height() ) );
-        for( int i = 1; i < count; ++i )
+        for( int i = 0; i < count; ++i )
         {
-            printer->newPage();
-            painter.translate( 0, -height / count );
-            widget->render( &painter );
+            i != 0 ? printer->newPage() : 0;
+            m_printedWidget->render( &painter, QPoint( 0, - i * rect.height() / scale ) );
         }
     }
 

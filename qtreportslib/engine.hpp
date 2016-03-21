@@ -64,6 +64,7 @@ namespace qtreports {
         QVector< QString >          m_scripts;
         QSqlDatabase                m_dbConnection;
         detail::ProcessedDB         m_processedDB;
+        QWidgetPtr                  m_printedWidget;
 
         void                drawPreview( QPrinter * printer );
         void                prepareDB();
