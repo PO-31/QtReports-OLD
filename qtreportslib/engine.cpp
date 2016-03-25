@@ -84,6 +84,12 @@ namespace qtreports
             return false;
         }
 
+        if( m_report.isNull() )
+        {
+            m_lastError = "Report is empty. Please open report file";
+            return false;
+        }
+
         m_dbConnection = connection;
 
         prepareDB();
