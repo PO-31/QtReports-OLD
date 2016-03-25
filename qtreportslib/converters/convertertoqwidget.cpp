@@ -201,6 +201,7 @@ namespace qtreports
             for( auto && band : section->getBands() )
             {
                 auto frame = new QFrame( parent );
+                frame->setStyleSheet( "background-color: transparent; " );
                 for( auto && staticText : band->getStaticTexts() )
                 {
                     auto label = new QLabel( frame );
@@ -213,7 +214,7 @@ namespace qtreports
                     {
                         style += "border: 1px solid gray; ";
                     }
-                    label->setStyleSheet( style );
+                    label->setStyleSheet( "background-color: transparent; " + style );
                     label->setGeometry( staticText->getRect() );
                     label->setAlignment( staticText->getAlignment() );
                     label->setText( staticText->getText() );
@@ -230,7 +231,7 @@ namespace qtreports
                     {
                         style += "border: 1px solid gray; ";
                     }
-                    label->setStyleSheet( style );
+                    label->setStyleSheet( "background-color: transparent; " + style );
                     label->setGeometry( textField->getRect() );
                     label->setAlignment( textField->getAlignment() );
                     label->setText( textField->getText() );
