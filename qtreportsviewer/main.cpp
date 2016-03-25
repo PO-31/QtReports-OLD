@@ -108,58 +108,6 @@ int main( int argc, char *argv[] ) {
         }
     } );
 
-    QAction close( QObject::tr( "&Close..." ), &window );
-    close.setShortcuts( QKeySequence::Close );
-    close.setStatusTip( QObject::tr( "Close current report" ) );
-    QObject::connect( &close, &QAction::triggered, [ & ]() {
-        if( window.centralWidget() != nullptr ) {
-#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 2, 0 ) )
-            window.takeCentralWidget();
-#endif
-        }
-
-        print.setEnabled( false );
-        convert.setEnabled( false );
-        close.setEnabled( false );
-    } );
-
-    QAction open( QObject::tr( "&Open..." ), &window );
-    open.setShortcuts( QKeySequence::Open );
-    open.setStatusTip( QObject::tr( "Open an existing file" ) );
-    QObject::connect( &open, &QAction::triggered, [ & ]() {
-        auto file = QFileDialog::getOpenFileName( &window,
-            QObject::tr( "Open QReport" ),
-            QString(),
-            QObject::tr( "QReport Files (*.qreport);;All Files (*.*)" ) );
-        if( file.isEmpty() ) {
-            return;
-        }
-        
-        if( window.centralWidget() != nullptr ) {
-        #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 2, 0 ) )
-            window.takeCentralWidget();
-        #endif
-        }
-
-        bool result = engine.open( file );
-        print.setEnabled( engine.isOpened() );
-        convert.setEnabled( engine.isOpened() );
-        close.setEnabled( engine.isOpened() );
-        if( !result ) {
-            showError( engine.getLastError() );
-            return;
-        }
-
-        layout = engine.createLayout();
-        if( layout.isNull() ) {
-            showError( "Widget is empty" );
-            return;
-        }
-
-        window.setCentralWidget( layout.data() );
-        window.resize( layout->size() );
-    } );
-
     QAction selectDB( QObject::tr( "&Select DB..." ), &window );
     selectDB.setStatusTip( QObject::tr( "Select database file" ) );
     QObject::connect( &selectDB, &QAction::triggered, [ & ]() {
@@ -185,6 +133,60 @@ int main( int argc, char *argv[] ) {
             showError( engine.getLastError() );
             return;
         }
+    } );
+
+    QAction close( QObject::tr( "&Close..." ), &window );
+    close.setShortcuts( QKeySequence::Close );
+    close.setStatusTip( QObject::tr( "Close current report" ) );
+    QObject::connect( &close, &QAction::triggered, [ & ]() {
+        if( window.centralWidget() != nullptr ) {
+#if ( QT_VERSION >= QT_VERSION_CHECK( 5, 2, 0 ) )
+            window.takeCentralWidget();
+#endif
+        }
+
+        print.setEnabled( false );
+        convert.setEnabled( false );
+        close.setEnabled( false );
+        selectDB.setEnabled( false );
+    } );
+
+    QAction open( QObject::tr( "&Open..." ), &window );
+    open.setShortcuts( QKeySequence::Open );
+    open.setStatusTip( QObject::tr( "Open an existing file" ) );
+    QObject::connect( &open, &QAction::triggered, [ & ]() {
+        auto file = QFileDialog::getOpenFileName( &window,
+            QObject::tr( "Open QReport" ),
+            QString(),
+            QObject::tr( "QReport Files (*.qreport);;All Files (*.*)" ) );
+        if( file.isEmpty() ) {
+            return;
+        }
+        
+        if( window.centralWidget() != nullptr ) {
+        #if ( QT_VERSION >= QT_VERSION_CHECK( 5, 2, 0 ) )
+            window.takeCentralWidget();
+        #endif
+        }
+
+        bool result = engine.open( file );
+        print.setEnabled( result );
+        convert.setEnabled( result );
+        close.setEnabled( result );
+        selectDB.setEnabled( result );
+        if( !result ) {
+            showError( engine.getLastError() );
+            return;
+        }
+
+        layout = engine.createLayout();
+        if( layout.isNull() ) {
+            showError( "Widget is empty" );
+            return;
+        }
+
+        window.setCentralWidget( layout.data() );
+        window.resize( layout->size() );
     } );
 
     QAction exit( QObject::tr( "&Exit..." ), &window );
