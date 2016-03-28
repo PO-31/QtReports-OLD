@@ -89,16 +89,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <h2><a class="anchor" id="step1"></a>
 Шаг 1: Распаковка проекта.</h2>
 <p>Скачать проект по ссылке <a href="https://github.com/PO-21/QtReports/archive/master.zip">https://github.com/PO-21/QtReports/archive/master.zip</a>. Распаковать архив в папку QtReports. (Полный путь к папке QtReports не должен содержать кириллицы)</p>
-<h2><a class="anchor" id="step1"></a>
-Шаг 1: Распаковка проекта.</h2>
+<h2><a class="anchor" id="step2"></a>
+Шаг 2: Генерация CMakeLists.</h2>
 <p>В корневой папке QtReports, где расположен CMakeLists.txt в командной строке запустить команду:</p>
 <p>Для Windows: cmake [CMAKE_PREFIX_PATH="путь к qt"] -G "MinGW Makefiles" -B./bin -H./</p>
 <p>Для Unix: cmake [CMAKE_PREFIX_PATH="путь к qt"] -G "Unix Makefiles" -B./bin -H./</p>
 <p>Примечание: При возникновении ошибки "By not providing "FindQt5Widgets.cmake" in CMAKE_MODULE_PATH this project has asked CMake to find a package configuration file provided by "Qt5Widgets", but CMake did not find one." необходимо добавить в команду блок [CMAKE_PREFIX_PATH="путь к qt"].</p>
 <p>Пример для Windows: cmake [CMAKE_PREFIX_PATH="C:/Qt/5.5/mingw492_32"] -G "MinGW Makefiles" -B./bin -H./</p>
 <p>Пример для Unix: cmake CMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/qt5" -G "Unix Makefiles" -B./bin -H./</p>
-<h2><a class="anchor" id="step1"></a>
-Шаг 1: Распаковка проекта.</h2>
+<h2><a class="anchor" id="step3"></a>
+Шаг 3: Компиляция проекта.</h2>
 <p>Windows: Запустить команду: mingw32-make -C./bin Linux: Запустить команду: make -C ./bin</p>
 <p>Exe-файл будет расположен в папке qtreportsviewer</p>
 <h1><a class="anchor" id="use_sec"></a>
