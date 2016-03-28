@@ -65,5 +65,8 @@
     <None Include="qtreportslib_tests.pro" />
     <None Include="simple.qreport" />
     <None Include="detail.qreport" />
+    <None Include="report test.qreport" />
+    <None Include="text test.qreport" />
+    <None Include="default.qreport" />
   </ItemGroup>
 </Project>

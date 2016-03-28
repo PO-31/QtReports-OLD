@@ -55,7 +55,10 @@ namespace qtreports {
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
+            void setFieldData(const QString field_name, const QVector < QVariant > data);
+
             int     getRowCount();
+            void    setRowCount( int count );
 
             int     getLeftMargin();
             int     getTopMargin();
@@ -75,6 +78,7 @@ namespace qtreports {
             int                         m_topMargin;
             int                         m_rightMargin;
             int                         m_bottomMargin;
+            int                         m_rowCount;
             StylePtr                    m_defaultStyle;
             QMap< QString, StylePtr >   m_styles;
             QString                     m_query;

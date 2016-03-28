@@ -15,6 +15,8 @@ private slots:
     void    setConnection();
     void    setParameters();
 
+    void createHTML();
+
 };
 
 #endif // TEST_ENGINE_HPP

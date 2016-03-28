@@ -10,9 +10,14 @@
 #include <QSqlError>
 #include <engine.hpp>
 
+void    showError( const QString & text )
+{
+    QMessageBox::warning( 0, "Error: ", text );
+}
+
 int main( int argc, char *argv[] ) {
     QApplication a( argc, argv );
-    //Need initialize first of engine widget( for not memory problem );
+    //Need initialize before of engine widget( for not stack memory problem );
     QMainWindow window;
     QMenuBar bar( &window );
     QMenu file( "File", &bar );
@@ -21,7 +26,7 @@ int main( int argc, char *argv[] ) {
     QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/detail.qreport";
     qtreports::Engine engine( path );
     if( !engine.isOpened() ) {
-        QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+        showError( engine.getLastError() );
         return -1;
     }
 
@@ -29,31 +34,31 @@ int main( int argc, char *argv[] ) {
     map[ "title" ] = "Best Title in World";
     bool result = engine.setParameters( map );//{ { "title", "Best Title in World" } }
     if( !result ) {
-        QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+        showError( engine.getLastError() );
         return -1;
     }
 
     auto db = QSqlDatabase::addDatabase( "QSQLITE" );
     db.setDatabaseName( "../tests/qtreportslib_tests/testDB" );
     if( !db.open() ) {
-        QMessageBox::critical( 0, "Error: ", "Can not open database. Database error: " + db.lastError().text() );
+        showError( "Can not open database. Database error: " + db.lastError().text() );
         return -1;
     }
 
     result = engine.setConnection( db );
     if( !result ) {
-        QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+        showError( engine.getLastError() );
         return -1;
     }
 
-    auto widget = engine.createWidget();
-    if( widget.isNull() ) {
-        QMessageBox::critical( 0, "Error: ", "Widget is empty" );
+    auto layout = engine.createLayout();
+    if( layout.isNull() ) {
+        showError( "Layout is empty" );
         return -1;
     }
 
-    window.setCentralWidget( widget.data() );
-    window.resize( widget->size() );
+    window.setCentralWidget( layout.data() );
+    window.resize( layout->size() );
     window.show();
 
     QAction print( QObject::tr( "&Print..." ), &window );
@@ -62,7 +67,7 @@ int main( int argc, char *argv[] ) {
     QObject::connect( &print, &QAction::triggered, [ & ]() {
         bool result = engine.print();
         if( !result ) {
-            QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+            showError( engine.getLastError() );
             return;
         }
     } );
@@ -80,7 +85,7 @@ int main( int argc, char *argv[] ) {
 
         bool result = engine.createPDF( file );
         if( !result ) {
-            QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+            showError( engine.getLastError() );
             return;
         }
     } );
@@ -98,7 +103,34 @@ int main( int argc, char *argv[] ) {
 
         bool result = engine.createHTML( file );
         if( !result ) {
-            QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+            showError( engine.getLastError() );
+            return;
+        }
+    } );
+
+    QAction selectDB( QObject::tr( "&Select DB..." ), &window );
+    selectDB.setStatusTip( QObject::tr( "Select database file" ) );
+    QObject::connect( &selectDB, &QAction::triggered, [ & ]() {
+        auto file = QFileDialog::getOpenFileName( &window,
+            QObject::tr( "Open DB" ),
+            QString(),
+            QObject::tr( "All Files (*.*)" ) );
+        if( file.isEmpty() )
+        {
+            return;
+        }
+
+        auto db = QSqlDatabase::addDatabase( "QSQLITE" );
+        db.setDatabaseName( file );
+        if( !db.open() )
+        {
+            showError( "Can not open database. Database error: " + db.lastError().text() );
+            return;
+        }
+
+        if( !engine.setConnection( db ) )
+        {
+            showError( engine.getLastError() );
             return;
         }
     } );
@@ -116,6 +148,7 @@ int main( int argc, char *argv[] ) {
         print.setEnabled( false );
         convert.setEnabled( false );
         close.setEnabled( false );
+        selectDB.setEnabled( false );
     } );
 
     QAction open( QObject::tr( "&Open..." ), &window );
@@ -137,22 +170,23 @@ int main( int argc, char *argv[] ) {
         }
 
         bool result = engine.open( file );
-        print.setEnabled( engine.isOpened() );
-        convert.setEnabled( engine.isOpened() );
-        close.setEnabled( engine.isOpened() );
+        print.setEnabled( result );
+        convert.setEnabled( result );
+        close.setEnabled( result );
+        selectDB.setEnabled( result );
         if( !result ) {
-            QMessageBox::critical( 0, "Error: ", engine.getLastError() );
+            showError( engine.getLastError() );
             return;
         }
 
-        widget = engine.createWidget();
-        if( widget.isNull() ) {
-            QMessageBox::critical( 0, "Error: ", "Widget is empty" );
+        layout = engine.createLayout();
+        if( layout.isNull() ) {
+            showError( "Widget is empty" );
             return;
         }
 
-        window.setCentralWidget( widget.data() );
-        window.resize( widget->size() );
+        window.setCentralWidget( layout.data() );
+        window.resize( layout->size() );
     } );
 
     QAction exit( QObject::tr( "&Exit..." ), &window );
@@ -163,6 +197,7 @@ int main( int argc, char *argv[] ) {
     convert.setEnabled( engine.isOpened() );
 
     file.addAction( &open );
+    file.addAction( &selectDB );
     file.addAction( &print );
     file.addAction( &close );
     file.addAction( &exit );

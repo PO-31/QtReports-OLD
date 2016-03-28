@@ -18,5 +18,23 @@ namespace qtreports {
             return m_className;
         }
 
+        void Field::setData(const QVector<QVariant> &data)
+        {
+            m_data = data;
+        }
+
+        QString Field::getData(int row)
+        {
+            if (row < 0 || row >= m_data.size())
+                return QString();
+
+            return m_data[row].toString();
+        }
+
+        int Field::getRowCount()
+        {
+            return m_data.size();
+        }
+
     }
 }

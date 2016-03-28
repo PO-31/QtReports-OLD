@@ -1,61 +1,85 @@
 #include <QPrintDialog>
 #include <QPainter>
+#include <QDebug>
 #include <QPrintPreviewWidget>
 #include <QPrintPreviewDialog>
 #include "converters/convertertopdf.hpp"
 #include "converters/convertertohtml.hpp"
 #include "engine.hpp"
 
-namespace qtreports {
+namespace qtreports
+{
 
     Engine::Engine( QObject * parent ) :
         QObject( parent ),
-        m_isOpened( false ) {}
+        m_isOpened( false ),
+        m_connectionIsSet( false ),
+        m_dataSourceIsSet( false )
+    {}
 
     Engine::Engine( const QString & path, QObject * parent ) :
-        Engine( parent ) {
+        Engine( parent )
+    {
         open( path );
     }
 
     Engine::~Engine() {}
 
-    bool	Engine::open( const QString & path ) {
+    bool	Engine::open( const QString & path )
+    {
+        if( isOpened() )
+        {
+            close();
+        }
+
         detail::Parser parser;
-        bool result = parser.parse( path );
-        if( !result ) {
-            m_isOpened = false;
-            m_compiledPath.clear();
-            m_report.clear();
-            m_lastError = parser.getLastError();
+        if( !parser.parse( path ) )
+        {
+            m_lastError = "Parsing error: " + parser.getLastError();
             return false;
         }
 
         m_isOpened = true;
         m_compiledPath = path;
-
-        prepareDB();
-
         m_report = parser.getReport();
+
+        fillColumnsFromReport(); //MB as ProcessedDB::createColumns( ReportPtr )
+
         return true;
     }
 
-    bool	Engine::setParameters( const QMap< QString, QString > & map ) {
-        if( m_report.isNull() ) {
+    bool    Engine::close()
+    {
+        m_isOpened = false;
+        m_compiledPath.clear();
+        m_report.clear();
+
+        return true;
+    }
+
+    bool	Engine::setParameters( const QMap< QString, QString > & map )
+    {
+        if( m_report.isNull() )
+        {
             m_lastError = "Report is empty. Please open report file";
             return false;
         }
 
         auto detail = m_report->getDetail();
-        if( detail.isNull() ) {
+        if( detail.isNull() )
+        {
             m_lastError = "Report->Detail is empty. Please open report file";
             return false;
         }
 
-        for( auto && band : detail->getBands() ) {
-            for( auto && textField : band->getTextFields() ) {
+        for( auto && band : detail->getBands() )
+        {
+            for( auto && textField : band->getTextFields() )
+            {
                 auto text = textField->getText();
                 text = text.replace( "\n", "" ).replace( "\r", "" ).replace( " ", "" );
-                if( text.startsWith( "$P{" ) && text.contains( "}" ) ) {
+                if( text.startsWith( "$P{" ) && text.contains( "}" ) )
+                {
                     auto name = text.split( "{" ).at( 1 ).split( "}" ).at( 0 );
                     textField->setText( map[ name ] );
                 }
@@ -65,34 +89,68 @@ namespace qtreports {
         return true;
     }
 
-    bool	Engine::setConnection( const QSqlDatabase & connection ) {
-        if( !connection.isOpen() ) {
+    bool	Engine::setConnection( const QSqlDatabase & connection )
+    {
+        if( !connection.isOpen() )
+        {
             m_lastError = "Connection not open";
             return false;
         }
 
+        if( m_report.isNull() )
+        {
+            m_lastError = "Report is empty. Please open report file";
+            return false;
+        }
+
         m_dbConnection = connection;
+        m_connectionIsSet = true;
+
+        prepareDB();
+        m_report->setRowCount( 9 ); //m_processedDB.getField()
+
+        for( auto && field : m_report->getFields() )
+        {
+            QVector < QVariant > tmp_vec;
+            if (m_processedDB.getColumn( field->getName(), tmp_vec))
+            {
+                m_report->setFieldData( field->getName(), tmp_vec );
+            }
+        }
 
         return true;
     }
 
-    void Engine::addQuery( const QString & queryName, const QString & query ) {
-        m_dbQueries[ queryName ] = query;
+    void Engine::setDataSource(const QMap<QString, QVector<QVariant> > &columnsSet)
+    {
+        m_dataSource = columnsSet;
+        m_dataSourceIsSet = true;
+
+        prepareDataSource();
     }
 
-    void Engine::addScript( const QString & script ) {
+    void Engine::setQuery(const QString &query)
+    {
+        m_queriesList = query.split(";", QString::SkipEmptyParts);
+    }
+
+    void Engine::addScript( const QString & script )
+    {
         m_scripts.append( script );
     }
 
-    bool	Engine::createPDF( const QString & path ) {
-        if( m_report.isNull() ) {
+    bool	Engine::createPDF( const QString & path )
+    {
+        if( m_report.isNull() )
+        {
             m_lastError = "Report is empty. Please open report file";
             return false;
         }
 
         detail::ConverterToPDF converter( m_report );
         auto result = converter.convert( path );
-        if( !result ) {
+        if( !result )
+        {
             m_lastError = converter.getLastError();
             return false;
         }
@@ -100,15 +158,18 @@ namespace qtreports {
         return true;
     }
 
-    bool	Engine::createHTML( const QString & path ) {
-        if( m_report.isNull() ) {
+    bool	Engine::createHTML( const QString & path )
+    {
+        if( m_report.isNull() )
+        {
             m_lastError = "Report is empty. Please open report file";
             return false;
         }
 
         detail::ConverterToHTML converter( m_report );
         auto result = converter.convert( path );
-        if( !result ) {
+        if( !result )
+        {
             m_lastError = converter.getLastError();
             return false;
         }
@@ -116,15 +177,18 @@ namespace qtreports {
         return true;
     }
 
-    const QWidgetPtr	Engine::createWidget() {
-        if( m_report.isNull() ) {
+    const QWidgetPtr	Engine::createWidget()
+    {
+        if( m_report.isNull() )
+        {
             m_lastError = "Report is empty. Please open report file";
             return QWidgetPtr();
         }
 
         detail::ConverterToQWidget converter( m_report );
-        auto result = converter.convert();
-        if( !result ) {
+        auto result = converter.convert( detail::ConverterToQWidget::WidgetType::Report );
+        if( !result )
+        {
             m_lastError = converter.getLastError();
             return QWidgetPtr();
         }
@@ -132,64 +196,138 @@ namespace qtreports {
         return converter.getQWidget();
     }
 
-    bool	Engine::print() {
+    const QWidgetPtr	Engine::createLayout()
+    {
+        if( m_report.isNull() )
+        {
+            m_lastError = "Report is empty. Please open report file";
+            return QWidgetPtr();
+        }
+
+        detail::ConverterToQWidget converter( m_report );
+        auto result = converter.convert( detail::ConverterToQWidget::WidgetType::Layout );
+        if( !result )
+        {
+            m_lastError = converter.getLastError();
+            return QWidgetPtr();
+        }
+
+        return converter.getQWidget();
+    }
+
+    bool	Engine::print()
+    {
         QPrinter printer;
+
+        m_printedWidget = createWidget();
+        if( m_printedWidget.isNull() )
+        {
+            m_lastError = "Cannot create widget. Error: " + m_lastError;
+            return false;
+        }
+
+        m_printedWidget->resize( 595, 595 );
+
+        //Magic
+        m_printedWidget->show();
+        m_printedWidget->hide();
 
         QPrintPreviewDialog preview( &printer );
         connect(
             &preview, &QPrintPreviewDialog::paintRequested,
             this, &Engine::drawPreview
-        );
+            );
         preview.exec();
+
+        m_printedWidget.clear();
 
         return true;
     }
 
-    void	Engine::drawPreview( QPrinter * printer ) {
-        auto widget = createWidget();
-        if( widget.isNull() ) {
+    void	Engine::drawPreview( QPrinter * printer )
+    {
+        if( m_printedWidget.isNull() )
+        {
             return;
         }
 
         QRectF rect = printer->pageRect();
         QPainter painter( printer );
-        qreal scale = rect.width() / widget->width();
-        
-        widget->resize( widget->width(), rect.height() / scale );
-        painter.scale( scale, scale ); 
+        qreal scale = rect.width() / m_printedWidget->width();
 
-        painter.translate( 0, rect.height() / 2 - scale * widget->height() / 2 );
-        widget->render( &painter );
+        m_printedWidget->resize( m_printedWidget->width(), rect.height() / scale );
+        painter.scale( scale, scale );
 
-        auto height = widget->height() * scale;
+        auto height = m_printedWidget->height() * scale;
         int count = static_cast< int >( std::ceil( height / rect.height() ) );
-        for( int i = 1; i < count; ++i ) {
-            printer->newPage();
-            painter.translate( 0, - height / count );
-            widget->render( &painter );
+        for( int i = 0; i < count; ++i )
+        {
+            i != 0 ? printer->newPage() : 0;
+            m_printedWidget->render( &painter, QPoint( 0, - i * rect.height() / scale ) );
         }
     }
 
-    void    Engine::prepareDB() {
-        QMapIterator <QString, QString> queriesIterator( m_dbQueries );
+    void    Engine::prepareDB()
+    {
+        setQuery(m_report.data()->getQuery());
+        executeQueries();
+    }
 
-        while( queriesIterator.hasNext() ) {
-            queriesIterator.next();
-            m_processedDB.addExecutedQuery( queriesIterator.key(), executeQuery( queriesIterator.value() ) );
+    void Engine::prepareDataSource()
+    {
+        QMapIterator <QString, QVector <QVariant> > iterator(m_dataSource);
+        while(iterator.hasNext()) {
+            iterator.next();
+            m_processedDB.addFieldData(iterator.key(), iterator.value());
         }
     }
 
-    detail::QSqlQueryModelPtr   Engine::executeQuery( const QString &query ) {
-        detail::QSqlQueryModelPtr model( new QSqlQueryModel() );
-        model->setQuery( query, m_dbConnection );
-        return model;
+    void    Engine::fillColumnsFromReport()
+    {
+
+        QMap <QString, detail::FieldPtr> fieldMap = m_report.data()->getFields();
+        QMapIterator <QString, detail::FieldPtr> fieldIterator(fieldMap);
+        while(fieldIterator.hasNext()) {
+            fieldIterator.next();
+            m_processedDB.addColumn(fieldIterator.key());
+        }
+
+        /*for( auto && field : m_report->getFields() )
+        {
+            m_processedDB.addColumn( field->getName() );
+        }*/
     }
 
-    bool			    Engine::isOpened() const {
+    void Engine::executeQueries()
+    {
+        /*
+        QStringListIterator iterator(m_queriesList);
+        while(iterator.hasNext()) {
+            QString query = iterator.next();
+            QSqlQueryModel * model = new QSqlQueryModel();
+        */
+        for( auto && query : m_queriesList )
+        {
+            auto model = new QSqlQueryModel();
+            model->setQuery( query, m_dbConnection );
+            for( int row = 0; row < model->rowCount(); row++ )
+            {
+                QSqlRecord rec = model->record( row );
+                for( int col = 0; col < rec.count(); col++ )
+                {
+                    m_processedDB.addFieldData( rec.fieldName( col ), rec.field( col ).value() );
+                }
+            }
+        }
+    }
+
+    bool			    Engine::isOpened() const
+    {
         return m_isOpened;
     }
 
-    const QString		Engine::getLastError() const {
+    const QString		Engine::getLastError() const
+    {
         return m_lastError;
     }
 
