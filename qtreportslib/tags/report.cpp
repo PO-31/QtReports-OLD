@@ -9,7 +9,8 @@ namespace qtreports {
             m_leftMargin( 30 ),
             m_topMargin( 30 ),
             m_rightMargin( 30 ),
-            m_bottomMargin( 30 ) {
+            m_bottomMargin( 30 ),
+            m_rowCount( 0 ) {
             Q_UNUSED( m_isVertical );
             Q_UNUSED( m_size );
         }
@@ -125,7 +126,12 @@ namespace qtreports {
         }
 
         int     Report::getRowCount() {
-            return 9;
+            return m_rowCount;
+        }
+
+        void Report::setRowCount( int count )
+        {
+            m_rowCount = count;
         }
 
         int     Report::getLeftMargin() {

@@ -56,6 +56,7 @@ namespace qtreports {
             const DetailPtr                     getDetail() const;
 
             int     getRowCount();
+            void    setRowCount( int count );
 
             int     getLeftMargin();
             int     getTopMargin();
@@ -75,6 +76,7 @@ namespace qtreports {
             int                         m_topMargin;
             int                         m_rightMargin;
             int                         m_bottomMargin;
+            int                         m_rowCount;
             StylePtr                    m_defaultStyle;
             QMap< QString, StylePtr >   m_styles;
             QString                     m_query;

@@ -27,27 +27,32 @@ namespace qtreports
 
     bool	Engine::open( const QString & path )
     {
-        detail::Parser parser;
-        bool result = parser.parse( path );
-        if( !result )
+        if( isOpened() )
         {
-            m_isOpened = false;
-            m_compiledPath.clear();
-            m_report.clear();
-            m_lastError = parser.getLastError();
+            close();
+        }
+
+        detail::Parser parser;
+        if( !parser.parse( path ) )
+        {
+            m_lastError = "Parsing error: " + parser.getLastError();
             return false;
         }
 
         m_isOpened = true;
         m_compiledPath = path;
-
         m_report = parser.getReport();
 
-        fillColumnsFromReport();
-        if(m_connectionIsSet)
-            prepareDB();
-        if(m_dataSourceIsSet)
-            prepareDataSource();
+        fillColumnsFromReport(); //MB as ProcessedDB::createColumns( ReportPtr )
+
+        return true;
+    }
+
+    bool    Engine::close()
+    {
+        m_isOpened = false;
+        m_compiledPath.clear();
+        m_report.clear();
 
         return true;
     }
@@ -100,6 +105,9 @@ namespace qtreports
 
         m_dbConnection = connection;
         m_connectionIsSet = true;
+
+        prepareDB();
+        m_report->setRowCount( 9 ); //m_processedDB.getField()
         return true;
     }
 
@@ -107,6 +115,8 @@ namespace qtreports
     {
         m_dataSource = columnsSet;
         m_dataSourceIsSet = true;
+
+        prepareDataSource();
     }
 
     void Engine::setQuery(const QString &query)
@@ -248,7 +258,7 @@ namespace qtreports
     }
 
     void    Engine::prepareDB()
-    {;
+    {
         setQuery(m_report.data()->getQuery());
         executeQueries();
     }
@@ -262,27 +272,40 @@ namespace qtreports
         }
     }
 
-    void Engine::fillColumnsFromReport()
+    void    Engine::fillColumnsFromReport()
     {
+        /*
         QMap <QString, detail::FieldPtr> fieldMap = m_report.data()->getFields();
         QMapIterator <QString, detail::FieldPtr> fieldIterator(fieldMap);
         while(fieldIterator.hasNext()) {
             fieldIterator.next();
             m_processedDB.addColumn(fieldIterator.key());
         }
+        */
+        for( auto && field : m_report->getFields() )
+        {
+            m_processedDB.addColumn( field->getName() );
+        }
     }
 
     void Engine::executeQueries()
     {
+        /*
         QStringListIterator iterator(m_queriesList);
         while(iterator.hasNext()) {
             QString query = iterator.next();
             QSqlQueryModel * model = new QSqlQueryModel();
-            model->setQuery(query, m_dbConnection);
-            for(int row = 0; row < model->rowCount(); row++) {
-                QSqlRecord rec = model->record(row);
-                for(int col = 0; col < rec.count(); col++) {
-                    m_processedDB.addFieldData(rec.fieldName(col), rec.field(col).value());
+        */
+        for( auto && query : m_queriesList )
+        {
+            auto model = new QSqlQueryModel();
+            model->setQuery( query, m_dbConnection );
+            for( int row = 0; row < model->rowCount(); row++ )
+            {
+                QSqlRecord rec = model->record( row );
+                for( int col = 0; col < rec.count(); col++ )
+                {
+                    m_processedDB.addFieldData( rec.fieldName( col ), rec.field( col ).value() );
                 }
             }
         }
