@@ -85,23 +85,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 Введение</h1>
 <p>Хм.</p>
 <h1><a class="anchor" id="install_sec"></a>
-Установка</h1>
+Установка с помощью CMAKE</h1>
 <h2><a class="anchor" id="step1"></a>
-Шаг 1: Подготовка исходных файлов проекта к утсановке.</h2>
-<p>1) Скачать исходные файлы проекта; 2) Создать папку QtReports; 3) В папке QtReports создать три папки: qtreportslib, qtreportsviewer и tests; 4) В папке tests создать папку qtreportslib_tests; 5) В папке qtreportslib создать папки converters и tags; 6) Скопировать файлы в соответствующие папки:</p>
-<p>convertertohtml.cpp, <a class="el" href="convertertohtml_8hpp_source.html">convertertohtml.hpp</a>, convertertopdf.cpp, <a class="el" href="convertertopdf_8hpp_source.html">convertertopdf.hpp</a>, convertertoqwidget.cpp, <a class="el" href="convertertoqwidget_8hpp_source.html">convertertoqwidget.hpp</a> в папку converters;</p>
-<p>band.cpp, <a class="el" href="band_8hpp_source.html">band.hpp</a>, detail.cpp, <a class="el" href="detail_8hpp_source.html">detail.hpp</a>, drawingexception.cpp, drawingexception.hpp, field.cpp, <a class="el" href="field_8hpp_source.html">field.hpp</a>, querystring.cpp, <a class="el" href="querystring_8hpp_source.html">querystring.hpp</a>, object.cpp, <a class="el" href="object_8hpp_source.html">object.hpp</a>, report.cpp, <a class="el" href="report_8hpp_source.html">report.hpp</a>, section.cpp, <a class="el" href="section_8hpp_source.html">section.hpp</a>, statictext.cpp, <a class="el" href="statictext_8hpp_source.html">statictext.hpp</a>, textfield.cpp, <a class="el" href="textfield_8hpp_source.html">textfield.hpp</a>, style.cpp, <a class="el" href="style_8hpp_source.html">style.hpp</a>, title.cpp, <a class="el" href="title_8hpp_source.html">title.hpp</a>, widget.cpp, <a class="el" href="widget_8hpp_source.html">widget.hpp</a> в папку tags;</p>
-<p>engine.cpp, <a class="el" href="engine_8hpp_source.html">engine.hpp</a>, objectsplant.cpp, <a class="el" href="objectsplant_8hpp_source.html">objectsplant.hpp</a>, painter.cpp, <a class="el" href="painter_8hpp_source.html">painter.hpp</a>, parser.cpp, <a class="el" href="parser_8hpp_source.html">parser.hpp</a>, processeddb.cpp, <a class="el" href="processeddb_8hpp_source.html">processeddb.hpp</a> в папку qtreportslib;</p>
-<p>main.cpp в папку qtreportsviewer;</p>
-<p>detail.qreport, testDB в qtreportslib_tests</p>
-<h2><a class="anchor" id="step2"></a>
-Шаг 2: Генерация CMakeLists.</h2>
-<p>В корневой папке QtReports, где расположен CMakeLists.txt в командной строке запустить команду: cmake CMAKE_PREFIX_PATH="путь к qt5" -G "MinGW Makefiles" -B./bin -H./</p>
-<p>Пример пути к qt5: C:/Qt/5/5.5/mingw492_32</p>
-<h2><a class="anchor" id="step3"></a>
-Шаг 3: Компиляция проекта.</h2>
-<p>Windows: Запустить команду: mingw32-make -C./bin</p>
-<p>Linux: В директории ../QtReports/bin запустить команду make;</p>
+Шаг 1: Распаковка проекта.</h2>
+<p>Скачать проект по ссылке <a href="https://github.com/PO-21/QtReports/archive/master.zip">https://github.com/PO-21/QtReports/archive/master.zip</a>. Распаковать архив в папку QtReports. (Полный путь к папке QtReports не должен содержать кириллицы)</p>
+<h2><a class="anchor" id="step1"></a>
+Шаг 1: Распаковка проекта.</h2>
+<p>В корневой папке QtReports, где расположен CMakeLists.txt в командной строке запустить команду:</p>
+<p>Для Windows: cmake [CMAKE_PREFIX_PATH="путь к qt"] -G "MinGW Makefiles" -B./bin -H./</p>
+<p>Для Unix: cmake [CMAKE_PREFIX_PATH="путь к qt"] -G "Unix Makefiles" -B./bin -H./</p>
+<p>Примечание: При возникновении ошибки "By not providing "FindQt5Widgets.cmake" in CMAKE_MODULE_PATH this project has asked CMake to find a package configuration file provided by "Qt5Widgets", but CMake did not find one." необходимо добавить в команду блок [CMAKE_PREFIX_PATH="путь к qt"].</p>
+<p>Пример для Windows: cmake [CMAKE_PREFIX_PATH="C:/Qt/5.5/mingw492_32"] -G "MinGW Makefiles" -B./bin -H./</p>
+<p>Пример для Unix: cmake CMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/qt5" -G "Unix Makefiles" -B./bin -H./</p>
+<h2><a class="anchor" id="step1"></a>
+Шаг 1: Распаковка проекта.</h2>
+<p>Windows: Запустить команду: mingw32-make -C./bin Linux: Запустить команду: make -C ./bin</p>
 <p>Exe-файл будет расположен в папке qtreportsviewer</p>
 <h1><a class="anchor" id="use_sec"></a>
 Использование</h1>
