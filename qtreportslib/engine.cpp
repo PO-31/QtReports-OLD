@@ -158,6 +158,7 @@ namespace qtreports
     bool Engine::setDataModel( const QAbstractItemModel & model )
     {
         //Need check parameters
+        Q_UNUSED( model )
         return true;
     }
 
