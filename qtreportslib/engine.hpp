@@ -30,7 +30,7 @@
 Распаковать архив в папку QtReports. 
 (Полный путь к папке QtReports не должен содержать кириллицы)
 
-@subsection step1 Шаг 2: Генерация CMakeLists.
+@subsection step2 Шаг 2: Генерация CMakeLists.
 
 В корневой папке QtReports, где расположен CMakeLists.txt в командной строке запустить команду: 
 
@@ -52,7 +52,7 @@ cmake [CMAKE_PREFIX_PATH="C:/Qt/5.5/mingw492_32"]  -G "MinGW Makefiles" -B./bin 
 cmake CMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/qt5"  -G "Unix Makefiles" -B./bin -H./
 
 
-@subsection step1 Шаг 3: Компиляция проекта.
+@subsection step3 Шаг 3: Компиляция проекта.
 Windows:
 Запустить команду: mingw32-make -C./bin
 Linux: 
