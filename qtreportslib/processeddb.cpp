@@ -173,7 +173,7 @@ namespace qtreports
             return false;
             */
 
-            auto key = m_columnsSet.keys[ col ];
+            auto key = m_columnsSet.keys()[ col ];
             return getColumn( key, result );
         }
 
@@ -220,7 +220,7 @@ namespace qtreports
                 return -1;
             }
 
-            return getRowCount( m_columnsSet.keys[ col ] );
+            return getRowCount( m_columnsSet.keys()[ col ] );
         }
 
         int     ProcessedDB::getMaxRowCount() const

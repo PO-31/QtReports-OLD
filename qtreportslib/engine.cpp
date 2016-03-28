@@ -107,7 +107,7 @@ namespace qtreports
         m_connectionIsSet = true;
 
         prepareDB();
-        m_report->setRowCount( 9 ); //m_processedDB.getField()
+        m_report->setRowCount( m_processedDB.getMaxRowCount() );
 
         for( auto && field : m_report->getFields() )
         {
