@@ -230,7 +230,7 @@ namespace qtreports
 
                     auto text = textField->getText();
                     text = text.replace( "\n", "" ).replace( "\r", "" ).replace( " ", "" );
-                    if( text.startsWith( "$F{" ) && text.contains( "}" ) )
+                    if( isReport() && text.startsWith( "$F{" ) && text.contains( "}" ) )
                     {
                         auto name = text.split( "{" ).at( 1 ).split( "}" ).at( 0 );
                         text = m_report->getField( name )->getData( i );
