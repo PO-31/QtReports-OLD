@@ -159,6 +159,41 @@ namespace qtreports {
             return -1;
         }
 
+        int ProcessedDB::getRowCount(const QString &columnName) const
+        {
+            if(m_columnsSet.contains(columnName)) {
+                return -1;
+            }
+            return m_columnsSet[columnName].size();
+        }
+
+        int ProcessedDB::getRowCount(int col) const
+        {
+            int index = 0;
+            QMapIterator <QString, QVector <QVariant> > iterator(m_columnsSet);
+            while(iterator.hasNext()) {
+                iterator.next();
+                if(index == col) {
+                    return iterator.value().size();
+                }
+                index++;
+            }
+            return -1;
+        }
+
+        int ProcessedDB::getMaxRowCount() const
+        {
+            int max = 0;
+            QMapIterator <QString, QVector <QVariant> > iterator(m_columnsSet);
+            while(iterator.hasNext()) {
+                iterator.next();
+                if(iterator.value().size() > max) {
+                    max = iterator.value().size();
+                }
+            }
+            return max;
+        }
+
         const QString   ProcessedDB::getError() const {
             return m_errorString;
         }

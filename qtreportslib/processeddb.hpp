@@ -102,6 +102,23 @@ namespace qtreports {
             int         getFieldIndex(const QString & name);
 
             /*! @~russian
+              Получает количество записей в столбце.
+              @param[in] columnName Имя столбца.
+             */
+            int         getRowCount(const QString & columnName) const;
+
+            /*! @~russian
+              Получает количество записей в столбце.
+              @param[in] col Номер столбца.
+             */
+            int         getRowCount(int col) const;
+
+            /*! @~russian
+              Получает максимальное количество записей среди набора столбцов.
+             */
+            int         getMaxRowCount() const;
+
+            /*! @~russian
             Получает строку ошибки.
             */
             const QString   getError() const;
