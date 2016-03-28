@@ -98,10 +98,10 @@ namespace qtreports {
 
         bool    setParameters( const QMap< QString, QString > & map );
         bool    setConnection( const QSqlDatabase & connection );
-        void    setDataSource( const QMap <QString, QVector <QVariant> > & columnsSet);
-
-        void    setQuery( const QString & query );
-        void    addScript( const QString & script );
+        bool    setDataSource( const QMap <QString, QVector <QVariant> > & columnsSet);
+        bool    setQuery( const QString & query );
+        bool    addScript( const QString & script );
+        bool    setDataModel( const QAbstractItemModel & model );
 
         bool                createPDF( const QString & path );
         bool                createHTML( const QString & path );//etc.
@@ -126,7 +126,7 @@ namespace qtreports {
         detail::ProcessedDB                 m_processedDB;
 
         void                                drawPreview( QPrinter * printer );
-        void                                prepareDB();
+        bool                                prepareDB();
         void                                prepareDataSource();
         void                                fillColumnsFromReport();
         void                                executeQueries();

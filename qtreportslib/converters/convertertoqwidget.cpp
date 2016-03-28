@@ -95,7 +95,7 @@ namespace qtreports
             auto centerFrame = new QFrame();
             centerFrame->setFixedHeight( height );
 
-            
+
 
             auto rightFrame = new QFrame();
             rightFrame->setFixedHeight( height );
@@ -143,29 +143,19 @@ namespace qtreports
             if( !title.isNull() )
             {
                 auto sectionWidget = addSectionLayout( layout, title->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
-                if( !createSection( sectionWidget, title ) )
+                if( !createSection( sectionWidget, title, 0 ) )
                 {
                     return false;
                 }
             }
 
-            if( isReport() )
-            {
-                for( int i = 0; i < report->getRowCount(); ++i )
-                {
-                    auto sectionWidget = addSectionLayout( layout, detail->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
-                    if( !createSection( sectionWidget, detail ) )
-                    {
-                        return false;;
-                    }
-                }
-            }
-            else
+            int count = isReport() ? report->getRowCount() : 1;
+            for( int i = 0; i < count; ++i )
             {
                 auto sectionWidget = addSectionLayout( layout, detail->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
-                if( !createSection( sectionWidget, detail ) )
+                if( !createSection( sectionWidget, detail, i ) )
                 {
-                    return false;;
+                    return false;
                 }
             }
 
@@ -176,7 +166,7 @@ namespace qtreports
         }
 
 
-        bool    ConverterToQWidget::createSection( QWidget * parent, const SectionPtr & section )
+        bool    ConverterToQWidget::createSection( QWidget * parent, const SectionPtr & section, int i )
         {
             if( isLayout() )
             {
@@ -188,19 +178,22 @@ namespace qtreports
                 label->resize( parent->size() );
             }
 
-            if( !createBands( parent, section ) )
+            if( !createBands( parent, section, i ) )
             {
-                return false;;
+                return false;
             }
 
             return true;
         }
 
-        bool    ConverterToQWidget::createBands( QWidget * parent, const SectionPtr & section )
+        bool    ConverterToQWidget::createBands( QWidget * parent, const SectionPtr & section, int i )
         {
+            auto dy = 0;
             for( auto && band : section->getBands() )
             {
                 auto frame = new QFrame( parent );
+                frame->move( frame->x(), dy );
+                dy += band->getHeight();
                 frame->setStyleSheet( "background-color: transparent; " );
                 for( auto && staticText : band->getStaticTexts() )
                 {
@@ -225,7 +218,7 @@ namespace qtreports
                     QString style = "";
                     if( textField->isBold() )
                     {
-                        style += "font-weight: bold; ";
+                        style += "font-weight: bold; "; 
                     }
                     if( isLayout() )
                     {
@@ -234,7 +227,15 @@ namespace qtreports
                     label->setStyleSheet( "background-color: transparent; " + style );
                     label->setGeometry( textField->getRect() );
                     label->setAlignment( textField->getAlignment() );
-                    label->setText( textField->getText() );
+
+                    auto text = textField->getText();
+                    text = text.replace( "\n", "" ).replace( "\r", "" ).replace( " ", "" );
+                    if( text.startsWith( "$F{" ) && text.contains( "}" ) )
+                    {
+                        auto name = text.split( "{" ).at( 1 ).split( "}" ).at( 0 );
+                        text = m_report->getField( name )->getData( i );
+                    }
+                    label->setText( text );
                 }
             }
 

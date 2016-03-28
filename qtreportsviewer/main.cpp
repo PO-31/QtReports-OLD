@@ -23,7 +23,7 @@ int main( int argc, char *argv[] ) {
     QMenu file( "File", &bar );
     QMenu convert( "Convert", &bar );
 
-    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/detail.qreport";
+    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/default.qreport";
     qtreports::Engine engine( path );
     if( !engine.isOpened() ) {
         showError( engine.getLastError() );
@@ -53,7 +53,7 @@ int main( int argc, char *argv[] ) {
 
     auto layout = engine.createLayout();
     if( layout.isNull() ) {
-        showError( "Layout is empty" );
+        showError( "Layout is empty. Error: " + engine.getLastError() );
         return -1;
     }
 

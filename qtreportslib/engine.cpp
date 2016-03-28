@@ -106,13 +106,18 @@ namespace qtreports
         m_dbConnection = connection;
         m_connectionIsSet = true;
 
-        prepareDB();
+        if( !prepareDB() )
+        {
+            m_lastError = "Error in prepareDB: " + m_lastError;
+            return false;
+        }
+
         m_report->setRowCount( m_processedDB.getMaxRowCount() );
 
         for( auto && field : m_report->getFields() )
         {
             QVector < QVariant > tmp_vec;
-            if (m_processedDB.getColumn( field->getName(), tmp_vec))
+            if( m_processedDB.getColumn( field->getName(), tmp_vec ) )
             {
                 m_report->setFieldData( field->getName(), tmp_vec );
             }
@@ -121,22 +126,39 @@ namespace qtreports
         return true;
     }
 
-    void Engine::setDataSource(const QMap<QString, QVector<QVariant> > &columnsSet)
+    bool    Engine::setDataSource( const QMap<QString, QVector<QVariant> > & columnsSet )
     {
+        //Need check parameters
         m_dataSource = columnsSet;
         m_dataSourceIsSet = true;
 
         prepareDataSource();
+
+        return true;
     }
 
-    void Engine::setQuery(const QString &query)
+    bool    Engine::setQuery( const QString & query )
     {
-        m_queriesList = query.split(";", QString::SkipEmptyParts);
+        //Need check parameters
+        m_queriesList = query.split( ";", QString::SkipEmptyParts );
+        executeQueries();
+
+        m_lastError = query;
+        return true;
     }
 
-    void Engine::addScript( const QString & script )
+    bool    Engine::addScript( const QString & script )
     {
+        //Need check parameters
         m_scripts.append( script );
+
+        return true;
+    }
+
+    bool Engine::setDataModel( const QAbstractItemModel & model )
+    {
+        //Need check parameters
+        return true;
     }
 
     bool	Engine::createPDF( const QString & path )
@@ -259,37 +281,36 @@ namespace qtreports
         painter.scale( scale, scale );
 
         auto height = m_printedWidget->height() * scale;
-        int count = static_cast< int >( std::ceil( height / rect.height() ) );
+        auto count = static_cast< int >( std::ceil( height / rect.height() ) );
         for( int i = 0; i < count; ++i )
         {
             i != 0 ? printer->newPage() : 0;
-            m_printedWidget->render( &painter, QPoint( 0, - i * rect.height() / scale ) );
+            m_printedWidget->render( &painter, QPoint( 0, -i * rect.height() / scale ) );
         }
     }
 
-    void    Engine::prepareDB()
-    {
-        setQuery(m_report.data()->getQuery());
-        executeQueries();
+    bool    Engine::prepareDB() {
+        return setQuery( m_report->getQuery() );
     }
 
     void Engine::prepareDataSource()
     {
-        QMapIterator <QString, QVector <QVariant> > iterator(m_dataSource);
-        while(iterator.hasNext()) {
+        QMapIterator <QString, QVector <QVariant> > iterator( m_dataSource );
+        while( iterator.hasNext() )
+        {
             iterator.next();
-            m_processedDB.addFieldData(iterator.key(), iterator.value());
+            m_processedDB.addFieldData( iterator.key(), iterator.value() );
         }
     }
 
     void    Engine::fillColumnsFromReport()
     {
-
-        QMap <QString, detail::FieldPtr> fieldMap = m_report.data()->getFields();
-        QMapIterator <QString, detail::FieldPtr> fieldIterator(fieldMap);
-        while(fieldIterator.hasNext()) {
+        QMap <QString, detail::FieldPtr> fieldMap = m_report->getFields();
+        QMapIterator <QString, detail::FieldPtr> fieldIterator( fieldMap );
+        while( fieldIterator.hasNext() )
+        {
             fieldIterator.next();
-            m_processedDB.addColumn(fieldIterator.key());
+            m_processedDB.addColumn( fieldIterator.key() );
         }
 
         /*for( auto && field : m_report->getFields() )
@@ -298,7 +319,7 @@ namespace qtreports
         }*/
     }
 
-    void Engine::executeQueries()
+    void    Engine::executeQueries()
     {
         /*
         QStringListIterator iterator(m_queriesList);
@@ -321,12 +342,12 @@ namespace qtreports
         }
     }
 
-    bool			    Engine::isOpened() const
+    bool    Engine::isOpened() const
     {
         return m_isOpened;
     }
 
-    const QString		Engine::getLastError() const
+    const QString   Engine::getLastError() const
     {
         return m_lastError;
     }

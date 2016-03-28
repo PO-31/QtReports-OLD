@@ -48,8 +48,8 @@ namespace qtreports {
             QFrame *    addSectionLayout( QBoxLayout * parent, int height, int left, int right );
 
             bool        createQWidget( const ReportPtr & report );
-            bool        createSection( QWidget * parent, const SectionPtr & section );
-            bool        createBands( QWidget * parent, const SectionPtr & section );
+            bool        createSection( QWidget * parent, const SectionPtr & section, int i );
+            bool        createBands( QWidget * parent, const SectionPtr & section, int i );
 
         };
 
