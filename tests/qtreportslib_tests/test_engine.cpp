@@ -43,3 +43,20 @@ void    Test_Engine::setParameters() {
 
 }
 
+void Test_Engine::createHTML()
+{
+    qtreports::Engine engine;
+    QString input = QFINDTESTDATA( "html.qreport" );
+    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
+
+    QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE" );
+    db.setDatabaseName( "testDB" );
+
+    QVERIFY2( db.open(), "Can't open test database 'testDB'" );
+    QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
+
+    engine.createHTML("test.html");
+
+    db.close();
+}
+

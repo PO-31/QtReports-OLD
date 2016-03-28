@@ -108,6 +108,16 @@ namespace qtreports
 
         prepareDB();
         m_report->setRowCount( 9 ); //m_processedDB.getField()
+
+        for( auto && field : m_report->getFields() )
+        {
+            QVector < QVariant > tmp_vec;
+            if (m_processedDB.getColumn( field->getName(), tmp_vec))
+            {
+                m_report->setFieldData( field->getName(), tmp_vec );
+            }
+        }
+
         return true;
     }
 
@@ -274,18 +284,18 @@ namespace qtreports
 
     void    Engine::fillColumnsFromReport()
     {
-        /*
+
         QMap <QString, detail::FieldPtr> fieldMap = m_report.data()->getFields();
         QMapIterator <QString, detail::FieldPtr> fieldIterator(fieldMap);
         while(fieldIterator.hasNext()) {
             fieldIterator.next();
             m_processedDB.addColumn(fieldIterator.key());
         }
-        */
-        for( auto && field : m_report->getFields() )
+
+        /*for( auto && field : m_report->getFields() )
         {
             m_processedDB.addColumn( field->getName() );
-        }
+        }*/
     }
 
     void Engine::executeQueries()

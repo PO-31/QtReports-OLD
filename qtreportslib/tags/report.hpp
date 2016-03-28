@@ -55,6 +55,8 @@ namespace qtreports {
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
+            void setFieldData(const QString field_name, const QVector < QVariant > data);
+
             int     getRowCount();
             void    setRowCount( int count );
 

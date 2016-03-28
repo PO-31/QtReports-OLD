@@ -125,6 +125,11 @@ namespace qtreports {
             return m_detail;
         }
 
+        void Report::setFieldData(const QString field_name, const QVector<QVariant> data)
+        {
+            m_fields[ field_name ]->setData(data);
+        }
+
         int     Report::getRowCount() {
             return m_rowCount;
         }

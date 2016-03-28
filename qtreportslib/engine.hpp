@@ -112,7 +112,7 @@ namespace qtreports {
         bool        	    isOpened() const;
         const QString       getLastError() const;
 
-    private:
+    public:
         bool                                m_isOpened;
         QString                             m_lastError, m_compiledPath;
         detail::ReportPtr                   m_report;
