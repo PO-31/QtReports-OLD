@@ -5,7 +5,10 @@
 #include <QVariant>
 #include <QMap>
 #include <QVector>
+#include <QSqlRecord>
 #include <QSqlDatabase>
+#include <QSqlQueryModel>
+#include <QSqlField>
 #include <QPrinter>
 #include "parser.hpp"
 #include "processeddb.hpp"
@@ -82,7 +85,6 @@ Exe-файл будет расположен в папке qtreportsviewer
 */
 
 namespace qtreports {
-
     class Engine : public QObject {
         Q_OBJECT
 
@@ -94,8 +96,9 @@ namespace qtreports {
         bool    open( const QString & path );
         bool    setParameters( const QMap< QString, QString > & map );
         bool    setConnection( const QSqlDatabase & connection );
+        void    setDataSource( const QMap <QString, QVector <QVariant> > & columnsSet);
 
-        void    addQuery( const QString & queryName, const QString & query );
+        void    setQuery( const QString & query );
         void    addScript( const QString & script );
 
         bool                createPDF( const QString & path );
@@ -108,20 +111,23 @@ namespace qtreports {
         const QString       getLastError() const;
 
     private:
-        bool                        m_isOpened;
-        QString                     m_lastError, m_compiledPath;
-        detail::ReportPtr           m_report;
-        QMap< QString, QString >    m_dbQueries;
-        QVector< QString >          m_scripts;
-        QSqlDatabase                m_dbConnection;
-        detail::ProcessedDB         m_processedDB;
-        QWidgetPtr                  m_printedWidget;
+        bool                                m_isOpened;
+        QString                             m_lastError, m_compiledPath;
+        detail::ReportPtr                   m_report;
+        QStringList                         m_queriesList;
+        QVector< QString >                  m_scripts;
+        QSqlDatabase                        m_dbConnection;
+        QWidgetPtr                          m_printedWidget;
+        bool                                m_connectionIsSet;
+        bool                                m_dataSourceIsSet;
+        QMap <QString, QVector <QVariant> > m_dataSource;
+        detail::ProcessedDB                 m_processedDB;
 
-        void                drawPreview( QPrinter * printer );
-        void                prepareDB();
-        detail::QSqlQueryModelPtr   executeQuery( const QString & query );
-
+        void                                drawPreview( QPrinter * printer );
+        void                                prepareDB();
+        void                                prepareDataSource();
+        void                                fillColumnsFromReport();
+        void                                executeQueries();
     };
-
 }
 #endif // ENGINE_HPP

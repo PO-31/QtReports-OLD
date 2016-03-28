@@ -1,5 +1,6 @@
 #include <QPrintDialog>
 #include <QPainter>
+#include <QDebug>
 #include <QPrintPreviewWidget>
 #include <QPrintPreviewDialog>
 #include "converters/convertertopdf.hpp"
@@ -11,7 +12,9 @@ namespace qtreports
 
     Engine::Engine( QObject * parent ) :
         QObject( parent ),
-        m_isOpened( false )
+        m_isOpened( false ),
+        m_connectionIsSet( false ),
+        m_dataSourceIsSet( false )
     {}
 
     Engine::Engine( const QString & path, QObject * parent ) :
@@ -38,9 +41,14 @@ namespace qtreports
         m_isOpened = true;
         m_compiledPath = path;
 
-        prepareDB();
-
         m_report = parser.getReport();
+
+        fillColumnsFromReport();
+        if(m_connectionIsSet)
+            prepareDB();
+        if(m_dataSourceIsSet)
+            prepareDataSource();
+
         return true;
     }
 
@@ -91,15 +99,19 @@ namespace qtreports
         }
 
         m_dbConnection = connection;
-
-        prepareDB();
-
+        m_connectionIsSet = true;
         return true;
     }
 
-    void Engine::addQuery( const QString & queryName, const QString & query )
+    void Engine::setDataSource(const QMap<QString, QVector<QVariant> > &columnsSet)
     {
-        m_dbQueries[ queryName ] = query;
+        m_dataSource = columnsSet;
+        m_dataSourceIsSet = true;
+    }
+
+    void Engine::setQuery(const QString &query)
+    {
+        m_queriesList = query.split(";", QString::SkipEmptyParts);
     }
 
     void Engine::addScript( const QString & script )
@@ -236,21 +248,44 @@ namespace qtreports
     }
 
     void    Engine::prepareDB()
-    {
-        QMapIterator <QString, QString> queriesIterator( m_dbQueries );
+    {;
+        setQuery(m_report.data()->getQuery());
+        executeQueries();
+    }
 
-        while( queriesIterator.hasNext() )
-        {
-            queriesIterator.next();
-            m_processedDB.addExecutedQuery( queriesIterator.key(), executeQuery( queriesIterator.value() ) );
+    void Engine::prepareDataSource()
+    {
+        QMapIterator <QString, QVector <QVariant> > iterator(m_dataSource);
+        while(iterator.hasNext()) {
+            iterator.next();
+            m_processedDB.addFieldData(iterator.key(), iterator.value());
         }
     }
 
-    detail::QSqlQueryModelPtr   Engine::executeQuery( const QString &query )
+    void Engine::fillColumnsFromReport()
     {
-        detail::QSqlQueryModelPtr model( new QSqlQueryModel() );
-        model->setQuery( query, m_dbConnection );
-        return model;
+        QMap <QString, detail::FieldPtr> fieldMap = m_report.data()->getFields();
+        QMapIterator <QString, detail::FieldPtr> fieldIterator(fieldMap);
+        while(fieldIterator.hasNext()) {
+            fieldIterator.next();
+            m_processedDB.addColumn(fieldIterator.key());
+        }
+    }
+
+    void Engine::executeQueries()
+    {
+        QStringListIterator iterator(m_queriesList);
+        while(iterator.hasNext()) {
+            QString query = iterator.next();
+            QSqlQueryModel * model = new QSqlQueryModel();
+            model->setQuery(query, m_dbConnection);
+            for(int row = 0; row < model->rowCount(); row++) {
+                QSqlRecord rec = model->record(row);
+                for(int col = 0; col < rec.count(); col++) {
+                    m_processedDB.addFieldData(rec.fieldName(col), rec.field(col).value());
+                }
+            }
+        }
     }
 
     bool			    Engine::isOpened() const
