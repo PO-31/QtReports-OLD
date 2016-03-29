@@ -60,6 +60,9 @@ namespace qtreports {
             int     getRowCount();
             void    setRowCount( int count );
 
+            const QSize     getSize();
+            void            setSize( const QSize & size );
+
             int     getLeftMargin();
             int     getTopMargin();
             int     getRightMargin();

@@ -107,6 +107,12 @@
     <ClCompile Include="tags\section.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
+    <ClCompile Include="tags\line.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\rect.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objectsplant.hpp">
@@ -137,6 +143,12 @@
       <Filter>Converters</Filter>
     </ClInclude>
     <ClInclude Include="tags\section.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\line.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\rect.hpp">
       <Filter>Tags</Filter>
     </ClInclude>
   </ItemGroup>

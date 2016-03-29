@@ -39,5 +39,44 @@ namespace qtreports {
             return m_textFields;
         }
 
+        void    Band::addLine( const LinePtr & line )
+        {
+            m_lines.append( line );
+        }
+
+        const LinePtr  Band::getLine( int index ) const
+        {
+            return m_lines.at( index );
+        }
+
+        int     Band::getLinesSize() const
+        {
+            return m_lines.size();
+        }
+
+        const QVector< LinePtr >    Band::getLines() const
+        {
+            return m_lines;
+        }
+
+        void    Band::addRect( const RectPtr & rect )
+        {
+            m_rects.append( rect );
+        }
+
+        const RectPtr  Band::getRect( int index ) const
+        {
+            return m_rects.at( index );
+        }
+
+        int     Band::getRectsSize() const
+        {
+            return m_rects.size();
+        }
+
+        const QVector< RectPtr >    Band::getRects() const
+        {
+            return m_rects;
+        }
     }
 }

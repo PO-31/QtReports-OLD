@@ -68,5 +68,6 @@
     <None Include="report test.qreport" />
     <None Include="text test.qreport" />
     <None Include="default.qreport" />
+    <None Include="students.qreport" />
   </ItemGroup>
 </Project>

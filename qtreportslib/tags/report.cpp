@@ -1,18 +1,20 @@
 #include "report.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
         Report::Report() :
             m_isVertical( true ),
-            m_size( 600, 400 ),
+            m_size( 595, 842 ),
             m_leftMargin( 30 ),
             m_topMargin( 30 ),
             m_rightMargin( 30 ),
             m_bottomMargin( 30 ),
-            m_rowCount( 0 ) {
+            m_rowCount( 0 )
+        {
             Q_UNUSED( m_isVertical );
-            Q_UNUSED( m_size );
         }
 
         Report::~Report() {}
@@ -61,76 +63,93 @@ namespace qtreports {
         }
         */
 
-        void    Report::setDefaultStyle( const StylePtr & style ) {
+        void    Report::setDefaultStyle( const StylePtr & style )
+        {
             m_defaultStyle = style;
         }
 
-        const StylePtr  Report::getDefaultStyle() const {
+        const StylePtr  Report::getDefaultStyle() const
+        {
             return m_defaultStyle;
         }
 
-        void    Report::setStyle( const QString & name, const StylePtr & style ) {
+        void    Report::setStyle( const QString & name, const StylePtr & style )
+        {
             m_styles[ name ] = style;
         }
 
-        const StylePtr  Report::getStyle( const QString & name ) const {
-            if( !m_styles.contains( name ) ) {
+        const StylePtr  Report::getStyle( const QString & name ) const
+        {
+            if( !m_styles.contains( name ) )
+            {
                 return StylePtr();
             }
 
             return m_styles[ name ];
         }
 
-        const QMap< QString, StylePtr >     Report::getStyles() const {
+        const QMap< QString, StylePtr >     Report::getStyles() const
+        {
             return m_styles;
         }
 
-        void    Report::setQuery( const QString & query ) {
+        void    Report::setQuery( const QString & query )
+        {
             m_query = query;
         }
 
-        const QString   Report::getQuery() const {
+        const QString   Report::getQuery() const
+        {
             return m_query;
         }
 
-        void    Report::setField( const QString & name, const FieldPtr & field ) {
+        void    Report::setField( const QString & name, const FieldPtr & field )
+        {
             m_fields[ name ] = field;
         }
 
-        const FieldPtr  Report::getField( const QString & name ) const {
-            if( !m_fields.contains( name ) ) {
+        const FieldPtr  Report::getField( const QString & name ) const
+        {
+            if( !m_fields.contains( name ) )
+            {
                 return  FieldPtr();
             }
 
             return m_fields[ name ];
         }
 
-        const QMap< QString, FieldPtr >   Report::getFields() const {
+        const QMap< QString, FieldPtr >   Report::getFields() const
+        {
             return m_fields;
         }
 
-        void    Report::setTitle( const TitlePtr & title ) {
+        void    Report::setTitle( const TitlePtr & title )
+        {
             m_title = title;
         }
 
-        const TitlePtr     Report::getTitle() const {
+        const TitlePtr     Report::getTitle() const
+        {
             return m_title;
         }
 
-        void    Report::setDetail( const DetailPtr & detail ) {
+        void    Report::setDetail( const DetailPtr & detail )
+        {
             m_detail = detail;
         }
 
-        const DetailPtr     Report::getDetail() const {
+        const DetailPtr     Report::getDetail() const
+        {
             return m_detail;
         }
 
-        void Report::setFieldData(const QString field_name, const QVector<QVariant> data)
+        void Report::setFieldData( const QString field_name, const QVector<QVariant> data )
         {
-            m_fields[ field_name ]->setData(data);
+            m_fields[ field_name ]->setData( data );
         }
 
-        int     Report::getRowCount() {
+        int     Report::getRowCount()
+        {
             return m_rowCount;
         }
 
@@ -139,39 +158,58 @@ namespace qtreports {
             m_rowCount = count;
         }
 
-        int     Report::getLeftMargin() {
+        const QSize     Report::getSize()
+        {
+            return m_size;
+        }
+
+        void    Report::setSize( const QSize & size )
+        {
+            m_size = size;
+        }
+
+        int     Report::getLeftMargin()
+        {
             return m_leftMargin;
         }
 
-        int     Report::getTopMargin() {
+        int     Report::getTopMargin()
+        {
             return m_topMargin;
         }
 
-        int     Report::getRightMargin() {
+        int     Report::getRightMargin()
+        {
             return m_rightMargin;
         }
 
-        int     Report::getBottomMargin() {
+        int     Report::getBottomMargin()
+        {
             return m_bottomMargin;
         }
 
-        void    Report::setLeftMargin( int left ) {
+        void    Report::setLeftMargin( int left )
+        {
             m_leftMargin = left;
         }
 
-        void    Report::setTopMargin( int top ) {
+        void    Report::setTopMargin( int top )
+        {
             m_topMargin = top;
         }
 
-        void    Report::setRightMargin( int right ) {
+        void    Report::setRightMargin( int right )
+        {
             m_rightMargin = right;
         }
 
-        void    Report::setBottomMargin( int bottom ) {
+        void    Report::setBottomMargin( int bottom )
+        {
             m_bottomMargin = bottom;
         }
 
-        void    Report::setMargins( int left, int top, int right, int bottom ) {
+        void    Report::setMargins( int left, int top, int right, int bottom )
+        {
             setLeftMargin( left );
             setTopMargin( top );
             setRightMargin( right );

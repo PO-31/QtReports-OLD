@@ -161,8 +161,10 @@
     <ClCompile Include="tags\band.cpp" />
     <ClCompile Include="tags\detail.cpp" />
     <ClCompile Include="tags\field.cpp" />
+    <ClCompile Include="tags\line.cpp" />
     <ClCompile Include="tags\object.cpp" />
     <ClCompile Include="tags\querystring.cpp" />
+    <ClCompile Include="tags\rect.cpp" />
     <ClCompile Include="tags\report.cpp" />
     <ClCompile Include="tags\section.cpp" />
     <ClCompile Include="tags\statictext.cpp" />
@@ -176,7 +178,9 @@
     <ClInclude Include="converters\convertertohtml.hpp" />
     <ClInclude Include="converters\convertertopdf.hpp" />
     <ClInclude Include="converters\convertertoqwidget.hpp" />
+    <ClInclude Include="tags\line.hpp" />
     <ClInclude Include="tags\querystring.hpp" />
+    <ClInclude Include="tags\rect.hpp" />
     <ClInclude Include="tags\section.hpp" />
     <ClInclude Include="tags\textfield.hpp" />
     <CustomBuild Include="engine.hpp">

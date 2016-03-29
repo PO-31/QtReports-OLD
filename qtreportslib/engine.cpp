@@ -126,13 +126,13 @@ namespace qtreports
         return true;
     }
 
-    bool    Engine::setDataSource( const QMap<QString, QVector<QVariant> > & columnsSet )
+    bool    Engine::setDataSource( const QMap< QString, QVector< QVariant > > & source )
     {
         //Need check parameters
-        m_dataSource = columnsSet;
+        //m_dataSource = columnsSet;
         m_dataSourceIsSet = true;
 
-        prepareDataSource();
+        prepareDataSource( source );
 
         return true;
     }
@@ -140,8 +140,8 @@ namespace qtreports
     bool    Engine::setQuery( const QString & query )
     {
         //Need check parameters
-        m_queriesList = query.split( ";", QString::SkipEmptyParts );
-        executeQueries();
+        auto queries = query.split( ";", QString::SkipEmptyParts );
+        executeQueries( queries );
 
         m_lastError = query;
         return true;
@@ -155,7 +155,7 @@ namespace qtreports
         return true;
     }
 
-    bool Engine::setDataModel( const QAbstractItemModel & model )
+    bool    Engine::setDataModel( const QAbstractItemModel & model )
     {
         //Need check parameters
         Q_UNUSED( model )
@@ -294,13 +294,20 @@ namespace qtreports
         return setQuery( m_report->getQuery() );
     }
 
-    void Engine::prepareDataSource()
+    void    Engine::prepareDataSource( const QMap< QString, QVector< QVariant > > & source )
     {
-        QMapIterator <QString, QVector <QVariant> > iterator( m_dataSource );
+        QMapIterator <QString, QVector <QVariant> > iterator( source );
         while( iterator.hasNext() )
         {
             iterator.next();
-            m_processedDB.addFieldData( iterator.key(), iterator.value() );
+            //m_processedDB.addFieldData( iterator.key(), iterator.value() );
+            auto field = m_report->getField( iterator.key() );
+            if( field.isNull() )
+            {
+                continue;
+            }
+
+            field->setData( iterator.value() );
         }
     }
 
@@ -320,7 +327,7 @@ namespace qtreports
         }*/
     }
 
-    void    Engine::executeQueries()
+    void    Engine::executeQueries( const QStringList & queries )
     {
         /*
         QStringListIterator iterator(m_queriesList);
@@ -328,7 +335,7 @@ namespace qtreports
             QString query = iterator.next();
             QSqlQueryModel * model = new QSqlQueryModel();
         */
-        for( auto && query : m_queriesList )
+        for( auto && query : queries )
         {
             auto model = new QSqlQueryModel();
             model->setQuery( query, m_dbConnection );

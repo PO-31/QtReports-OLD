@@ -237,6 +237,40 @@ namespace qtreports
                     }
                     label->setText( text );
                 }
+                for( auto && line : band->getLines() )
+                {
+                    auto label = new QLabel( frame );
+                    QString style = "";
+                    if( line->isBold() )
+                    {
+                        style += "font-weight: bold; ";
+                    }
+                    //if( isLayout() )
+                    {
+                        style += "border: 1px solid gray; ";
+                    }
+                    label->setStyleSheet( "background-color: transparent; " + style );
+                    label->setGeometry( line->getRect() );
+                    label->setAlignment( line->getAlignment() );
+                    //label->setText( "----------------------" );
+                }
+                for( auto && rect : band->getRects() )
+                {
+                    auto label = new QLabel( frame );
+                    QString style = "";
+                    if( rect->isBold() )
+                    {
+                        style += "font-weight: bold; ";
+                    }
+                    //if( isLayout() )
+                    {
+                        style += "border: 1px solid gray; ";
+                    }
+                    label->setStyleSheet( "background-color: transparent; " + style );
+                    label->setGeometry( rect->getRect() );
+                    label->setAlignment( rect->getAlignment() );
+                    //label->setText( "----------------------" );
+                }
             }
 
             return true;

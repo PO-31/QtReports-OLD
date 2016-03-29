@@ -10,6 +10,7 @@
 #include <QSqlQueryModel>
 #include <QSqlField>
 #include <QPrinter>
+#include <QAbstractItemModel>
 #include "parser.hpp"
 #include "processeddb.hpp"
 #include "tags/report.hpp"
@@ -116,20 +117,19 @@ namespace qtreports {
         bool                                m_isOpened;
         QString                             m_lastError, m_compiledPath;
         detail::ReportPtr                   m_report;
-        QStringList                         m_queriesList;
         QVector< QString >                  m_scripts;
         QSqlDatabase                        m_dbConnection;
         QWidgetPtr                          m_printedWidget;
         bool                                m_connectionIsSet;
         bool                                m_dataSourceIsSet;
-        QMap <QString, QVector <QVariant> > m_dataSource;
+        //QMap <QString, QVector <QVariant> > m_dataSource;
         detail::ProcessedDB                 m_processedDB;
 
         void                                drawPreview( QPrinter * printer );
         bool                                prepareDB();
-        void                                prepareDataSource();
+        void                                prepareDataSource( const QMap< QString, QVector< QVariant > > & source );
         void                                fillColumnsFromReport();
-        void                                executeQueries();
+        void                                executeQueries( const QStringList & queries );
     };
 }
 #endif // ENGINE_HPP

@@ -70,7 +70,7 @@ namespace qtreports {
 
             /*! @~russian
             Добавляет данные в соответствующий столбец.
-            @param[in] columnName Номер поля.
+            @param[in] column Номер поля.
             @param[in] data Значение поля.
             */
             void        addFieldData( int column, const QVariant & data );

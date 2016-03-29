@@ -33,6 +33,8 @@ namespace qtreports {
             m_functions[ "band" ] = toParseFunc( this, &Parser::parseBand );
             m_functions[ "staticText" ] = toParseFunc( this, &Parser::parseStaticText );
             m_functions[ "textField" ] = toParseFunc( this, &Parser::parseTextField );
+            m_functions[ "line" ] = toParseFunc( this, &Parser::parseLine );
+            m_functions[ "rect" ] = toParseFunc( this, &Parser::parseRect );
             m_functions[ "reportElement" ] = toParseFunc( this, &Parser::parseReportElement );
             m_functions[ "textElement" ] = toParseFunc( this, &Parser::parseTextElement );
             m_functions[ "font" ] = toParseFunc( this, &Parser::parseFont );
@@ -395,6 +397,34 @@ namespace qtreports {
             return true;
         }
 
+        bool Parser::parseLine( QXmlStreamReader & reader, const BandPtr & band )
+        {
+            LinePtr line( new Line() );
+            if( !parseChilds( reader, line ) )
+            {
+                return false;
+            }
+
+            line->setTagName( "line" );
+            band->addLine( line );
+
+            return true;
+        }
+
+        bool Parser::parseRect( QXmlStreamReader & reader, const BandPtr & band )
+        {
+            RectPtr rect( new Rect() );
+            if( !parseChilds( reader, rect ) )
+            {
+                return false;
+            }
+
+            rect->setTagName( "rect" );
+            band->addRect( rect );
+
+            return true;
+        }
+
         bool	Parser::parseReportElement( QXmlStreamReader & reader, const WidgetPtr & widget ) {
             QString x;
             if( !getRequiredAttribute( reader, "x", x ) ) {
@@ -406,8 +436,8 @@ namespace qtreports {
                 return false;
             }
 
-            QString width;
-            if( !getRequiredAttribute( reader, "width", width ) ) {
+            QString widthString;
+            if( !getRequiredAttribute( reader, "width", widthString ) ) {
                 return false;
             }
 
@@ -420,7 +450,19 @@ namespace qtreports {
                 return false;
             }
 
-            QRect rect( x.toInt(), y.toInt(), width.toInt(), height.toInt() );
+            int width = 0;
+            if( widthString.contains( "%" ) )
+            {
+                //auto percentString = widthString.split( "%" ).at( 0 );
+                //int percent = std::max( 0, std::min( 100, percentString.toInt() ) );
+                //width = 100;// percent * m_report->getSize().width();
+            }
+            else
+            {
+                width = widthString.toInt();
+            }
+
+            QRect rect( x.toInt(), y.toInt(), width, height.toInt() );
             widget->setRect( rect );
 
             return !reader.hasError();
