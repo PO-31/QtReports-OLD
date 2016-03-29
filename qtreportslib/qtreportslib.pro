@@ -23,7 +23,9 @@ SOURCES += engine.cpp \
     tags/detail.cpp \
     tags/band.cpp \
     tags/statictext.cpp \
-	tags/textfield.cpp
+	tags/textfield.cpp \
+	tags/line.cpp \
+	tags/rect.cpp
 
 HEADERS += engine.hpp \
     processeddb.hpp \
@@ -43,7 +45,9 @@ HEADERS += engine.hpp \
     tags/detail.hpp \
     tags/band.hpp \
     tags/statictext.hpp \
-	tags/textfield.hpp
+	tags/textfield.hpp \
+	tags/line.hpp \
+	tags/rect.hpp
 	
 QMAKE_CXXFLAGS += -std=c++11
 
