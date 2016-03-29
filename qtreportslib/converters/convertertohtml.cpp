@@ -44,8 +44,8 @@ namespace qtreports {
                 return false;
             }
 
-            int m_pageHeight = 800;
-            int m_pageWidth = 600;
+            int m_pageHeight = m_report->getSize().height();
+            int m_pageWidth = m_report->getSize().width();
             int m_freePageSpace = m_pageHeight;
 
             m_html += QString("<!DOCTYPE html>\n"
@@ -64,8 +64,7 @@ namespace qtreports {
 
                       "   .page {\n"
                       "   width: %1px;\n"
-                      "   height: %2px;\n"
-                      "   background-color: #C1CDC1;\n"
+                      "   height: %2px;\n" 
                       "   }\n"
 
                       "   .statictext, .textfield {\n"
@@ -79,7 +78,6 @@ namespace qtreports {
                       "   color: %5;\n"
                       "   font-style: %6;\n"
                       "   font-weight: %7;\n"
-                      "   background-color: Snow;\n"
                       "   }\n"
 
                       "   .textfield {\n"
@@ -88,57 +86,52 @@ namespace qtreports {
                       "   color: %10;\n"
                       "   font-style: %11;\n"
                       "   font-weight: %12;\n"
-                      "   background-color: GhostWhite;\n"
                       "   }\n"
 
                       "  </style>\n"
                       " </head>\n"
                       " <body>\n")
                     .arg(m_pageWidth).arg(m_pageHeight)
-                    .arg("Verdana").arg("12").arg("black").arg("normal").arg("bold")
-                    .arg("Verdana").arg("12").arg("black").arg("italic").arg("normal");
+                    .arg("Verdana").arg("12").arg("black").arg("normal").arg("normal")
+                    .arg("Verdana").arg("12").arg("black").arg("normal").arg("normal");
 
             m_html += "  <div class='page'>\n";
-            m_html += "   <div class='title' style='background-color: #FFE4C4'>\n";
 
             auto title = m_report->getTitle();
 
-            if(title.isNull())
+            if(!title.isNull())
             {
-                m_lastError = "Report->Title is empty";
-                return false;
-            }
+                m_html += "   <div class='title'>\n";
+            	int m_titleHeight = 0;
 
-            int m_titleHeight = 0;
+            	for(auto && band : title->getBands())
+            	{
+                    QString m_elementStr = "";
 
-            for(auto && band : title->getBands())
-            {
-                QString m_elementStr = "";
+                	for(auto && textField : band->getTextFields())
+                	{
+                        QString m_oldStr = textField->getText();
+                        QString m_fieldStr = "";
+                        QString m_newStr = "";
 
-                for(auto && textField : band->getTextFields())
-                {
-                   QString m_oldStr = textField->getText();
-                   QString m_fieldStr = "";
-                   QString m_newStr = "";
+                        while (m_oldStr.contains("$F{"))
+                        {
+                            m_newStr += m_oldStr.section("$F{", 0, 0);
+                            m_oldStr = m_oldStr.section("$F{", 1, -1);
+                            m_fieldStr = m_oldStr.section("}", 0, 0);
+                            m_oldStr = m_oldStr.section("}", 1, -1);
 
-                   while (m_oldStr.contains("$F{"))
-                   {
-                       m_newStr += m_oldStr.section("$F{", 0, 0);
-                       m_oldStr = m_oldStr.section("$F{", 1, -1);
-                       m_fieldStr = m_oldStr.section("}", 0, 0);
-                       m_oldStr = m_oldStr.section("}", 1, -1);
+                            if (m_report->getField(m_fieldStr).data()->getRowCount() > 0)
+                            {
+                                m_newStr += m_report->getField(m_fieldStr).data()->getData(0);
+                            }
+                        }
 
-                       if (m_report->getField(m_fieldStr).data()->getRowCount() > 0)
-                       {
-                           m_newStr += m_report->getField(m_fieldStr).data()->getData(0);
-                       }
-                   }
+                        m_oldStr = m_newStr + m_oldStr;
 
-                   m_oldStr = m_newStr + m_oldStr;
-
-                   if (m_oldStr != "")
-                   {
-                       m_elementStr += QString("     <div class='textfield' "
+                        if (m_oldStr != "")
+                        {
+                            m_elementStr += QString("     <div class='textfield' "
                                "style='left: %1px; top: %2px; "
                                "width: %3px; height: %4px'>%5</div>\n")
                                .arg(textField->getX())
@@ -146,12 +139,12 @@ namespace qtreports {
                                .arg(textField->getWidth())
                                .arg(textField->getHeight())
                                .arg(m_oldStr);
-                   }
-                }
+                        }
+                    }
 
-                for(auto && staticText : band->getStaticTexts())
-                {
-                    m_elementStr += QString("     <div class='statictext' "
+                    for(auto && staticText : band->getStaticTexts())
+                    {
+                        m_elementStr += QString("     <div class='statictext' "
                             "style='left: %1px; top: %2px; "
                             "width: %3px; height: %4px'>%5</div>\n")
                             .arg(staticText->getX())
@@ -159,19 +152,19 @@ namespace qtreports {
                             .arg(staticText->getWidth())
                             .arg(staticText->getHeight())
                             .arg(staticText->getText());
-                }
+                    }
 
-                m_titleHeight += band->getSize().height();
+                    m_titleHeight += band->getSize().height();
 
-                m_html += QString("    <div class='band' "
+                    m_html += QString("    <div class='band' "
                              "style='height: %1px'>\n%2    </div>\n")
                              .arg(band->getSize().height())
                              .arg(m_elementStr);
+            	}
+
+            	m_html += "   </div>\n";
+            	m_freePageSpace -= m_titleHeight;
             }
-
-            m_html += "   </div>\n";
-
-            m_freePageSpace -= m_titleHeight;
 
 
             auto detail = m_report->getDetail();
@@ -187,7 +180,6 @@ namespace qtreports {
             while (true)
             {
                 bool m_isDetailEmpty = true;
-                int m_detailHeight = 0;
                 QString m_bandStr = "";
 
                 for(auto && band : detail->getBands())
@@ -254,12 +246,27 @@ namespace qtreports {
                         }
 
                         m_isDetailEmpty = false;
-                        m_detailHeight += band->getSize().height();
+
+                        if (m_freePageSpace < band->getSize().height())
+                        {
+                            m_html += QString("   <div class='detail'>\n%1   </div>\n")
+                                    .arg(m_bandStr);
+
+                            ++m_pageCount;
+                            //колонтитул
+                            m_html += "  </div>\n";
+
+                            m_freePageSpace = m_pageHeight - band->getSize().height();
+                            m_html += "  <div class='page'>\n";
+                            m_bandStr = "";
+                        }
+                        else
+                            m_freePageSpace -= band->getSize().height();
 
                         m_bandStr += QString("    <div class='band' "
-                                     "style='height: %1px'>\n%2    </div>\n")
-                                     .arg(band->getSize().height())
-                                     .arg(m_elementStr);
+                                "style='height: %1px'>\n%2    </div>\n")
+                                .arg(band->getSize().height())
+                                .arg(m_elementStr);
                     }
                 }
 
@@ -271,31 +278,13 @@ namespace qtreports {
                     break;
                 }
                 else
-                {
-                    if (m_detailHeight > m_freePageSpace)
-                    {
-                        ++m_pageCount;
-                        //Колонтитул
-                        m_html += QString("  </div>\n"
-                                  "  <div class='page'>\n"
-                                  "   <div class='detail' style='background-color: #FFF8DC'>\n%1   </div>\n")
-                                  .arg(m_bandStr);
-
-                        m_freePageSpace = m_pageHeight - m_detailHeight;
-                    }
-                    else
-                    {
-                        m_html += QString("   <div class='detail' style='background-color: #EEEEE0'>\n%1   </div>\n")
-                                  .arg(m_bandStr);
-                        m_freePageSpace -= m_detailHeight;
-                    }
-                }
+                    m_html += QString("   <div class='detail'>\n%1   </div>\n")
+                        .arg(m_bandStr);
 
                 ++m_detailCount;
             }
 
             m_html += " </body>\n</html>\n";
-
             return true;
         }
 
