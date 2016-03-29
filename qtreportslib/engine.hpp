@@ -23,58 +23,53 @@
 @section intro_sec Введение
 Хм.
 
-@section install_sec Установка
+@section install_sec Установка с помощью CMAKE
 
-@subsection step1 Шаг 1: Подготовка исходных файлов проекта к утсановке.
+@subsection step1 Шаг 1: Распаковка проекта.
 
-1) Скачать исходные файлы проекта;
-2) Создать папку QtReports;
-3) В папке QtReports создать три папки: qtreportslib, qtreportsviewer и tests;
-4) В папке tests создать папку qtreportslib_tests;
-5) В папке qtreportslib создать папки converters и tags;
-6) Скопировать файлы в соответствующие папки:
+Скачать проект по ссылке https://github.com/PO-21/QtReports/archive/master.zip.
 
-convertertohtml.cpp, convertertohtml.hpp,
-convertertopdf.cpp, convertertopdf.hpp,
-convertertoqwidget.cpp, convertertoqwidget.hpp в папку converters;
+Распаковать архив в папку QtReports. 
 
-band.cpp, band.hpp,
-detail.cpp, detail.hpp, 
-drawingexception.cpp, drawingexception.hpp,
-field.cpp, field.hpp,
-querystring.cpp, querystring.hpp,
-object.cpp, object.hpp,
-report.cpp, report.hpp,
-section.cpp, section.hpp,
-statictext.cpp, statictext.hpp,
-textfield.cpp, textfield.hpp,
-style.cpp, style.hpp,
-title.cpp, title.hpp,
-widget.cpp, widget.hpp в папку tags;
-
-engine.cpp, engine.hpp,
-objectsplant.cpp, objectsplant.hpp,
-painter.cpp, painter.hpp,
-parser.cpp, parser.hpp,
-processeddb.cpp, processeddb.hpp в папку qtreportslib;
-
-main.cpp в папку qtreportsviewer;
-
-detail.qreport, testDB в qtreportslib_tests
+(Полный путь к папке QtReports не должен содержать кириллицы)
 
 @subsection step2 Шаг 2: Генерация CMakeLists.
 
 В корневой папке QtReports, где расположен CMakeLists.txt в командной строке запустить команду: 
-cmake CMAKE_PREFIX_PATH="путь к qt5"  -G "MinGW Makefiles" -B./bin -H./
 
-Пример пути к qt5: C:/Qt/5/5.5/mingw492_32
+Для Windows:
+
+cmake [CMAKE_PREFIX_PATH="путь к qt"]  -G "MinGW Makefiles" -B./bin -H./
+
+Для Unix:
+
+cmake [CMAKE_PREFIX_PATH="путь к qt"]  -G "Unix Makefiles" -B./bin -H./
+
+Примечание:
+
+При возникновении ошибки "By not providing "FindQt5Widgets.cmake" in CMAKE_MODULE_PATH this project
+
+has asked CMake to find a package configuration file provided by
+
+"Qt5Widgets", but CMake did not find one." необходимо добавить в команду блок [CMAKE_PREFIX_PATH="путь к qt"].
+
+Пример для Windows:
+cmake [CMAKE_PREFIX_PATH="C:/Qt/5.5/mingw492_32"]  -G "MinGW Makefiles" -B./bin -H./
+
+Пример для Unix:
+
+cmake CMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/qt5"  -G "Unix Makefiles" -B./bin -H./
+
 
 @subsection step3 Шаг 3: Компиляция проекта.
 
 Windows:
+
 Запустить команду: mingw32-make -C./bin
 
-Linux: В директории ../QtReports/bin запустить команду make;
+Linux: 
+
+Запустить команду: make -C ./bin
 
 Exe-файл будет расположен в папке qtreportsviewer
 
