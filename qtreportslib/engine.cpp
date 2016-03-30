@@ -133,6 +133,17 @@ namespace qtreports
         m_dataSourceIsSet = true;
 
         prepareDataSource( source );
+        
+        m_report->setRowCount( m_processedDB.getMaxRowCount() );
+
+        for( auto && field : m_report->getFields() )
+        {
+            QVector < QVariant > tmp_vec;
+            if( m_processedDB.getColumn( field->getName(), tmp_vec ) )
+            {
+                m_report->setFieldData( field->getName(), tmp_vec );
+            }
+        }
 
         return true;
     }
