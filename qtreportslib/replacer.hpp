@@ -90,6 +90,9 @@ namespace qtreports
             */
             bool    replace( const SectionPtr & section, const ReportPtr & report, int i );
 
+            /*! @~russian
+            Возвращает описание последней произошедшей ошибки.
+            */
             const QString   getLastError() const;
 
         private:
