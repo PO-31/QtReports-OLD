@@ -89,7 +89,6 @@ namespace qtreports
             /*! @~russian
             Получает столбец целиком.
             @param[in] col Номер столбца.
-            @param[out] result Вектор-столбец.
             */
             const QVector< QVariant >   getColumn( int col ) const;
 

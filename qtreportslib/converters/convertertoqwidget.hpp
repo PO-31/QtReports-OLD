@@ -53,7 +53,7 @@ namespace qtreports {
 
             bool        createQWidget( const ReportPtr & report );
             bool        createSection( QWidget * parent, const SectionPtr & section, int i );
-            bool        createBands( QWidget * parent, const SectionPtr & section, int i );
+            bool        createBands( QWidget * parent, const SectionPtr & section );
 
         };
 

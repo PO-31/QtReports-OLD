@@ -225,7 +225,7 @@ namespace qtreports
                 }
             }
 
-            if( !createBands( parent, section, i ) )
+            if( !createBands( parent, section ) )
             {
                 return false;
             }
@@ -233,7 +233,7 @@ namespace qtreports
             return true;
         }
 
-        bool    ConverterToQWidget::createBands( QWidget * parent, const SectionPtr & section, int i )
+        bool    ConverterToQWidget::createBands( QWidget * parent, const SectionPtr & section )
         {
             auto dy = 0;
             for( auto && band : section->getBands() )
