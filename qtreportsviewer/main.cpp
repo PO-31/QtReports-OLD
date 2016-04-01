@@ -10,6 +10,10 @@
 #include <QSqlError>
 #include <engine.hpp>
 
+#ifdef WIN32
+#include <Windows.h>
+#endif
+
 void    showError( const QString & text )
 {
     QMessageBox::warning( 0, "Error: ", text );
@@ -22,6 +26,13 @@ int main( int argc, char *argv[] ) {
     QMenuBar bar( &window );
     QMenu file( "File", &bar );
     QMenu convert( "Convert", &bar );
+
+//For Debug in Windows
+#ifdef WIN32
+    AllocConsole();
+    freopen( "CONOUT$", "w", stdout );
+    freopen( "CONOUT$", "w", stderr );
+#endif
 
     QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/students.qreport";
     qtreports::Engine engine( path );
