@@ -22,6 +22,7 @@ SOURCES += engine.cpp \
     tags/title.cpp \
     tags/detail.cpp \
     tags/band.cpp \
+    tags/textwidget.cpp \
     tags/statictext.cpp \
 	tags/textfield.cpp \
 	tags/line.cpp \
@@ -44,6 +45,7 @@ HEADERS += engine.hpp \
     tags/title.hpp \
     tags/detail.hpp \
     tags/band.hpp \
+    tags/textwidget.hpp \
     tags/statictext.hpp \
 	tags/textfield.hpp \
 	tags/line.hpp \
