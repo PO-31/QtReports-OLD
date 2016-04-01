@@ -125,6 +125,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <tr class="separator:abd9759818a49ea6400137b0e67823917"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b9729908a55c7c3ff35589e914b0519"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_processed_d_b.html#a6b9729908a55c7c3ff35589e914b0519">getFieldIndex</a> (const QString &amp;name)</td></tr>
 <tr class="separator:a6b9729908a55c7c3ff35589e914b0519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5f6f5a25fb0ed7681a859535b5ca659"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_processed_d_b.html#ad5f6f5a25fb0ed7681a859535b5ca659">columnIsExists</a> (const QString &amp;name) const </td></tr>
+<tr class="separator:ad5f6f5a25fb0ed7681a859535b5ca659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae759ff226b5d626346acb0e579158dd2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_processed_d_b.html#ae759ff226b5d626346acb0e579158dd2">columnIsExists</a> (int col) const </td></tr>
+<tr class="separator:ae759ff226b5d626346acb0e579158dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a887c707b061cd783e7a07047046dae2e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_processed_d_b.html#a887c707b061cd783e7a07047046dae2e">getRowCount</a> (const QString &amp;columnName) const </td></tr>
 <tr class="separator:a887c707b061cd783e7a07047046dae2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8720a1be6272489513cad0c24a7fb0b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_processed_d_b.html#aa8720a1be6272489513cad0c24a7fb0b">getRowCount</a> (int col) const </td></tr>
@@ -287,6 +291,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Имя параметра </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>Значение параметра </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad5f6f5a25fb0ed7681a859535b5ca659"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qtreports::detail::ProcessedDB::columnIsExists </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Проверяет, существует ли столбец с определенным именем. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Имя столбца. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae759ff226b5d626346acb0e579158dd2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qtreports::detail::ProcessedDB::columnIsExists </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Проверяет, существует ли столбец с определенным именем. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Номер столбца. </td></tr>
   </table>
   </dd>
 </dl>
