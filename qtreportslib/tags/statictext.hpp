@@ -10,9 +10,9 @@ namespace qtreports
     {
 
         /*! @~russian
-        @brief Класс, реализующий тэг StaticText
+        @brief В Р»Р°СЃСЃ, СЂРµР°Р»РёР·СѓСЋС‰РёР№ С‚СЌРі StaticText
 
-        Класс, реализующий тэг StaticText
+        В Р»Р°СЃСЃ, СЂРµР°Р»РёР·СѓСЋС‰РёР№ С‚СЌРі StaticText
         */
         class StaticText : public TextWidget {
 
