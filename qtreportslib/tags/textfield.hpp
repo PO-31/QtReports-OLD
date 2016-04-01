@@ -1,26 +1,39 @@
 #pragma once
 #ifndef TEXTFIELD_HPP
 #define TEXTFIELD_HPP
+#include <QString>
 #include <QSharedPointer>
-#include "widget.hpp"
+#include "textwidget.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
-        class TextField : public Widget {
-              
+        /*! @~russian
+        @brief Класс, реализующий тэг TextField
+
+        Класс, реализующий тэг TextField
+        */
+        class TextField : public TextWidget {
+
         public:
             TextField();
             ~TextField();
 
-            void            setText( const QString & text );
-            const QString   getText() const;
-
+            /*! @~russian
+            Устанавливает имя класса. Данное значение будет использоваться
+            при вычислении содержимого.
+            @param[in] name Имя класса
+            */
             void            setClassName( const QString & name );
+
+            /*! @~russian
+            Возвращает текущее имя класса.
+            */
             const QString   getClassName() const;
 
         private:
-            QString     m_text;
             QString     m_className;
 
         };

@@ -170,6 +170,7 @@
     <ClCompile Include="tags\statictext.cpp" />
     <ClCompile Include="tags\style.cpp" />
     <ClCompile Include="tags\textfield.cpp" />
+    <ClCompile Include="tags\textwidget.cpp" />
     <ClCompile Include="tags\title.cpp" />
     <ClCompile Include="parser.cpp" />
     <ClCompile Include="tags\widget.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="tags\rect.hpp" />
     <ClInclude Include="tags\section.hpp" />
     <ClInclude Include="tags\textfield.hpp" />
+    <ClInclude Include="tags\textwidget.hpp" />
     <CustomBuild Include="engine.hpp">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing engine.hpp...</Message>

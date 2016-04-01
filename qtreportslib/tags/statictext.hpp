@@ -1,24 +1,26 @@
 #pragma once
 #ifndef STATICTEXT_HPP
 #define STATICTEXT_HPP
-#include <QString>
 #include <QSharedPointer>
-#include "widget.hpp"
+#include "textwidget.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
-        class StaticText : public Widget {
-              
+        /*! @~russian
+        @brief Класс, реализующий тэг StaticText
+
+        Класс, реализующий тэг StaticText
+        */
+        class StaticText : public TextWidget {
+
         public:
             StaticText();
             ~StaticText();
 
-            void            setText( const QString & text );
-            const QString   getText() const;
-
         private:
-            QString     m_text;
 
         };
         typedef QSharedPointer< StaticText > StaticTextPtr;

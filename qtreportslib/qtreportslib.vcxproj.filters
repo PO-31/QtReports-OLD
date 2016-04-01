@@ -113,6 +113,9 @@
     <ClCompile Include="tags\rect.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
+    <ClCompile Include="tags\textwidget.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objectsplant.hpp">
@@ -149,6 +152,9 @@
       <Filter>Tags</Filter>
     </ClInclude>
     <ClInclude Include="tags\rect.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\textwidget.hpp">
       <Filter>Tags</Filter>
     </ClInclude>
   </ItemGroup>
