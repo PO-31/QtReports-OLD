@@ -62,8 +62,6 @@ qtreportslib/tags/band.cpp
 qtreportslib/tags/band.hpp 
 qtreportslib/tags/detail.cpp 
 qtreportslib/tags/detail.hpp 
-qtreportslib/tags/drawingexception.cpp 
-qtreportslib/tags/drawingexception.hpp
 qtreportslib/tags/field.cpp
 qtreportslib/tags/field.hpp
 qtreportslib/tags/querystring.cpp
@@ -78,6 +76,10 @@ qtreportslib/tags/statictext.cpp
 qtreportslib/tags/statictext.hpp
 qtreportslib/tags/textfield.cpp
 qtreportslib/tags/textfield.hpp
+qtreportslib/tags/line.cpp 
+qtreportslib/tags/line.hpp
+qtreportslib/tags/rect.cpp 
+qtreportslib/tags/rect.hpp
 qtreportslib/tags/style.cpp 
 qtreportslib/tags/style.hpp
 qtreportslib/tags/title.cpp 
