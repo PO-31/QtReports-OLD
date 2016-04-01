@@ -5,12 +5,14 @@
 #include <QVariant>
 #include <QMap>
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
         /*! @~russian
         @brief Класс, используемый для хранения выполненных запросов и параметров.
-        @warning Все функции данного класса, возвращающие bool,
+        @note Все функции данного класса, возвращающие bool,
         возвращают true в случае успеха либо false, если во время
         выполнения произошли ошибки. При этом с помощью метода getLastError()
         можно получить описание последней произошедшей ошибки.
@@ -25,48 +27,45 @@ namespace qtreports {
             ~ProcessedDB();
 
             /*! @~russian
-            Получает параметр из результата работы скрипта.
+            Возвращает параметр из результата работы скрипта.
             @param[in] name Имя параметра
-            @param[out] result Значение параметра
             */
-            bool        getParam( const QString & name, QVariant & result );
+            const QVariant  getParam( const QString & name ) const;
 
             /*! @~russian
-            Получает значение поля из выполненного запроса.
+            Возвращает значение поля.
             @param[in] columnName Название столбца
             @param[in] row Номер строки
-            @param[out] result Значение поля
             */
-            bool        getField( const QString & columnName, int row, QVariant &result );
+            const QVariant  getField( const QString & columnName, int row ) const;
 
             /*! @~russian
-            Получает значение поля из выполненного запроса.
+            Возвращает значение поля.
             @param[in] column Номер столбца
             @param[in] row Номер строки
-            @param[out] result Значение поля
             */
-            bool        getField( int column, int row, QVariant & result );
+            const QVariant  getField( int column, int row ) const;
 
             /*! @~russian
             Добавляет параметр в список параметров.
             @param[in] name Имя параметра
             @param[in] value Значение параметра
             */
-            void        addParam(const QString & name, const QVariant & value );
+            void        addParam( const QString & name, const QVariant & value );
 
             /*! @~russian
             Добавляет данные в соответствующий столбец.
             @param[in] columnName Имя поля
             @param[in] data Значение поля
             */
-            void        addFieldData( const QString & columnName, const QVariant & data);
+            void        addFieldData( const QString & columnName, const QVariant & data );
 
             /*! @~russian
             Добавляет данные в соответствующий столбец.
             @param[in] columnName Имя поля.
             @param[in] data Множество значений поля.
             */
-            void        addFieldData(const QString &columnName, const QVector <QVariant> & data);
+            void        addFieldData( const QString & columnName, const QVector< QVariant > & data );
 
             /*! @~russian
             Добавляет данные в соответствующий столбец.
@@ -79,27 +78,33 @@ namespace qtreports {
             Добавляет столбец.
             @param[in] name Имя столбца.
             */
-            void        addColumn( const QString & name);
+            void        addColumn( const QString & name );
 
             /*! @~russian
-             Получает столбец целиком.
-             @param[in] name Имя столбца.
-             @param[out] result Вектор-столбец.
-             */
-            bool        getColumn(const QString & name, QVector <QVariant> & result);
+            Возвращает столбец данных.
+            @param[in] name Имя столбца.
+            */
+            const QVector< QVariant >   getColumn( const QString & name ) const;
 
             /*! @~russian
-             Получает столбец целиком.
-             @param[in] col Номер столбца.
-             @param[out] result Вектор-столбец.
-             */
-            bool        getColumn(int col, QVector <QVariant> & result);
+            Получает столбец целиком.
+            @param[in] col Номер столбца.
+            @param[out] result Вектор-столбец.
+            */
+            const QVector< QVariant >   getColumn( int col ) const;
 
             /*! @~russian
-             Получает индекс столбца по имени. (Возврат -1, если столбца нет).
-             @param[in] name Имя столбца.
-             */
-            int         getFieldIndex(const QString & name);
+            Возвращает имя столбца.
+            @param[in] column Номер столбца
+            */
+            QString     getColumnName( int column ) const;
+
+            /*! @~russian
+            Возвращает индекс столбца по имени. Если столбец не существует,
+            возвращает -1.
+            @param[in] name Имя столбца.
+            */
+            int         getColumnIndex( const QString & name ) const;
 
             /*! @~russian
             Проверяет, существует ли столбец с определенным именем.
@@ -109,25 +114,25 @@ namespace qtreports {
 
             /*! @~russian
             Проверяет, существует ли столбец с определенным именем.
-            @param[in] name Номер столбца.
+            @param[in] column Номер столбца.
             */
-            bool        columnIsExists( int col ) const;
+            bool        columnIsExists( int column ) const;
 
             /*! @~russian
-              Получает количество записей в столбце.
-              @param[in] columnName Имя столбца.
-             */
-            int         getRowCount(const QString & columnName) const;
+            Получает количество записей в столбце.
+            @param[in] columnName Имя столбца.
+            */
+            int         getRowCount( const QString & columnName ) const;
 
             /*! @~russian
-              Получает количество записей в столбце.
-              @param[in] col Номер столбца.
-             */
-            int         getRowCount(int col) const;
+            Получает количество записей в столбце.
+            @param[in] column Номер столбца.
+            */
+            int         getRowCount( int column ) const;
 
             /*! @~russian
-              Получает максимальное количество записей среди набора столбцов.
-             */
+            Получает максимальное количество записей среди набора столбцов.
+            */
             int         getMaxRowCount() const;
 
             /*! @~russian

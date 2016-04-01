@@ -14,80 +14,19 @@ namespace qtreports
 
         ProcessedDB::~ProcessedDB() {}
 
-        bool    ProcessedDB::getParam( const QString & name, QVariant & result )
+        const QVariant  ProcessedDB::getParam( const QString & name ) const
         {
-            if( m_parametersMap.contains( name ) )
-            {
-                m_errorString = "No parameter with name " + name;
-                return false;
-            }
-            result = m_parametersMap[ name ];
-            if( !result.isValid() )
-            {
-                m_errorString = "Invalid data";
-                return false;
-            }
-            return true;
+            return m_parametersMap.value( name );
         }
 
-        bool    ProcessedDB::getField( const QString & columnName, int row, QVariant & result )
+        const QVariant  ProcessedDB::getField( const QString & columnName, int row ) const
         {
-            if( !m_columnsSet.contains( columnName ) )
-            {
-                m_errorString = "No such column " + columnName;
-                return false;
-            }
-            if( row < 0 || row >= m_columnsSet[ columnName ].size() )
-            {
-                m_errorString = "Invalid row index: " +
-                    QString::number( row ) +
-                    " . Row count: " + QString::number( m_columnsSet[ columnName ].size() );
-                return false;
-            }
-            result = m_columnsSet[ columnName ][ row ];
-            if( !result.isValid() )
-            {
-                m_errorString = "Invalid data";
-                return false;
-            }
-            return true;
+            return m_columnsSet.value( columnName ).value( row );
         }
 
-        bool    ProcessedDB::getField( int column, int row, QVariant &result )
+        const QVariant  ProcessedDB::getField( int column, int row ) const
         {
-            if( column >= m_columnsSet.size() )
-            {
-                m_errorString = "Invalid column index: " + QString::number( column ) + " . " +
-                    "Column count: " + QString::number( m_columnsSet.size() );
-                return false;
-            }
-            QMapIterator <QString, QVector <QVariant> > iterator( m_columnsSet );
-            int index = 0;
-            QString columnName;
-            while( iterator.hasNext() )
-            {
-                iterator.next();
-                if( index == column )
-                {
-                    columnName = iterator.key();
-                    break;
-                }
-                index++;
-            }
-            if( row < 0 || row >= m_columnsSet[ columnName ].size() )
-            {
-                m_errorString = "Invalid row index: " +
-                    QString::number( row ) +
-                    " . Row count: " + QString::number( m_columnsSet[ columnName ].size() );
-                return false;
-            }
-            result = m_columnsSet[ columnName ][ row ];
-            if( !result.isValid() )
-            {
-                m_errorString = "Invalid data";
-                return false;
-            }
-            return true;
+            return getField( getColumnName( column ), row );
         }
 
         void    ProcessedDB::addParam( const QString &name, const QVariant & value )
@@ -95,7 +34,7 @@ namespace qtreports
             m_parametersMap[ name ] = value;
         }
 
-        void    ProcessedDB::addFieldData( const QString &columnName, const QVariant &data )
+        void    ProcessedDB::addFieldData( const QString & columnName, const QVariant & data )
         {
             if( m_columnsSet.contains( columnName ) )
             {
@@ -103,7 +42,7 @@ namespace qtreports
             }
         }
 
-        void    ProcessedDB::addFieldData( const QString &columnName, const QVector<QVariant> &data )
+        void    ProcessedDB::addFieldData( const QString & columnName, const QVector< QVariant > & data )
         {
             if( m_columnsSet.contains( columnName ) )
             {
@@ -111,86 +50,42 @@ namespace qtreports
             }
         }
 
-        void ProcessedDB::addFieldData( int column, const QVariant &data )
+        void ProcessedDB::addFieldData( int column, const QVariant & data )
         {
-            if( column < m_columnsSet.size() )
-            {
-                QMapIterator <QString, QVector <QVariant> > iterator( m_columnsSet );
-                int index = 0;
-                while( iterator.hasNext() )
-                {
-                    iterator.next();
-                    if( index == column )
-                    {
-                        m_columnsSet[ iterator.key() ].append( data );
-                    }
-                    index++;
-                }
-            }
+            addFieldData( getColumnName( column ), data );
         }
 
-        void ProcessedDB::addColumn( const QString &name )
+        void ProcessedDB::addColumn( const QString & name )
         {
             if( !m_columnsSet.contains( name ) )
             {
-                m_columnsSet[ name ] = QVector <QVariant>( 0 );
+                m_columnsSet[ name ] = QVector< QVariant >();
             }
         }
 
-        bool ProcessedDB::getColumn( const QString &name, QVector<QVariant> &result )
+        const QVector<QVariant>     ProcessedDB::getColumn( const QString & name ) const
         {
-            if( !m_columnsSet.contains( name ) )
-            {
-                m_errorString = "No such column: " + name;
-                return false;
-            }
-            result = m_columnsSet[ name ];
-            return true;
+            return m_columnsSet.value( name );
         }
 
-        bool    ProcessedDB::getColumn( int col, QVector< QVariant > & result )
+        const QVector< QVariant >   ProcessedDB::getColumn( int column ) const
         {
-            if( col < 0 || col >= m_columnsSet.size() )
-            {
-                m_errorString = QString( "Invalid column index: %1. Column count: %2" ).
-                    arg( col ).arg( m_columnsSet.size() );
-            }
-            /*
-            int index = 0;
-            QMapIterator <QString, QVector <QVariant> > iterator( m_columnsSet );
-            while( iterator.hasNext() )
-            {
-                iterator.next();
-                if( index == col )
-                {
-                    result = m_columnsSet[ iterator.key() ];
-                    return true;
-                }
-                index++;
-            }
-            
-            m_errorString = "Column with index " + QString::number( col ) + " not found.";
-            return false;
-            */
-
-            auto key = m_columnsSet.keys()[ col ];
-            return getColumn( key, result );
+            return getColumn( getColumnName( column ) );
         }
 
-        int ProcessedDB::getFieldIndex( const QString &name )
+        QString     ProcessedDB::getColumnName( int column ) const
         {
-            int index = 0;
-            QMapIterator <QString, QVector <QVariant> > iterator( m_columnsSet );
-            while( iterator.hasNext() )
+            return m_columnsSet.keys().value( column );
+        }
+
+        int     ProcessedDB::getColumnIndex( const QString & name ) const
+        {
+            if( !columnIsExists( name ) )
             {
-                iterator.next();
-                if( iterator.key() == name )
-                {
-                    return index;
-                }
-                index++;
+                return -1;
             }
-            return -1;
+
+            return std::distance( m_columnsSet.begin(), m_columnsSet.find( name ) );
         }
 
         bool    ProcessedDB::columnIsExists( const QString & name ) const
@@ -198,62 +93,23 @@ namespace qtreports
             return m_columnsSet.contains( name );
         }
 
-        bool    ProcessedDB::columnIsExists( int col ) const
+        bool    ProcessedDB::columnIsExists( int column ) const
         {
-            return m_columnsSet.keys().value( col ).isEmpty();
+            return columnIsExists( getColumnName( column ) );
         }
 
-        int     ProcessedDB::getRowCount( const QString &columnName ) const
+        int     ProcessedDB::getRowCount( const QString & columnName ) const
         {
-            /*
-            if( !m_columnsSet.contains( columnName ) )
-            {
-                return -1;
-            }
-            */
             return m_columnsSet.value( columnName ).size();
         }
 
-        int     ProcessedDB::getRowCount( int col ) const
+        int     ProcessedDB::getRowCount( int column ) const
         {
-            /*
-            int index = 0;
-            QMapIterator <QString, QVector <QVariant> > iterator(m_columnsSet);
-            while(iterator.hasNext()) {
-                iterator.next();
-                if(index == col) {
-                    return iterator.value().size();
-                }
-                index++;
-            }
-            
-            if( col < 0 || col >= m_columnsSet.size() )
-            {
-                return -1;
-            }
-            */
-            return getRowCount( m_columnsSet.keys().value( col ) );
+            return getRowCount( getColumnName( column ) );
         }
 
         int     ProcessedDB::getMaxRowCount() const
         {
-            /*
-            int max = 0;
-            QMapIterator <QString, QVector <QVariant> > iterator(m_columnsSet);
-            while(iterator.hasNext()) {
-                iterator.next();
-                if(iterator.value().size() > max) {
-                    max = iterator.value().size();
-                }
-            }
-            return max;
-            */
-            /*
-            return std::max_element( m_columnsSet.begin(), m_columnsSet.end(),
-            []( auto && first, auto && second ) {
-                return first.size() < second.size();
-            } )->size();
-            */
             int max = 0;
             for( auto && column : m_columnsSet )
             {
