@@ -11,32 +11,55 @@ namespace qtreports {
             m_staticTexts.append( staticText );
         }
 
+        const QVector< StaticTextPtr >    Band::getStaticTexts() const
+        {
+            return m_staticTexts;
+        }
+
         const StaticTextPtr  Band::getStaticText( int index ) const {
-            return m_staticTexts.at( index );
+            return getStaticTexts().value( index );
         }
 
         int     Band::getStaticTextsSize() const {
-            return m_staticTexts.size();
-        }
-
-        const QVector< StaticTextPtr >    Band::getStaticTexts() const {
-            return m_staticTexts;
+            return getStaticTexts().size();
         }
 
         void    Band::addTextField( const TextFieldPtr & staticText ) {
             m_textFields.append( staticText );
         }
 
+        const QVector< TextFieldPtr >    Band::getTextFields() const
+        {
+            return m_textFields;
+        }
+
         const TextFieldPtr  Band::getTextField( int index ) const {
-            return m_textFields.at( index );
+            return getTextFields().value( index );
         }
 
         int     Band::getTextFieldsSize() const {
-            return m_textFields.size();
+            return getTextFields().size();
         }
 
-        const QVector< TextFieldPtr >    Band::getTextFields() const {
-            return m_textFields;
+        QVector< TextWidgetPtr >    Band::getTextWidgets() const
+        {
+            QVector< TextWidgetPtr > textWidgets;
+            //Slooooow
+            for( auto && widget : getStaticTexts() )
+            {
+                textWidgets.append( widget );
+            }
+            for( auto && widget : getTextFields() )
+            {
+                textWidgets.append( widget );
+            }
+
+            return textWidgets;
+        }
+
+        int     Band::getTextWidgetsSize() const
+        {
+            return getTextWidgets().size();
         }
 
         void    Band::addLine( const LinePtr & line )

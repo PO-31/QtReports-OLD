@@ -19,14 +19,17 @@ namespace qtreports {
             ~Band();
 
             void                            addStaticText( const StaticTextPtr & staticText );
+            const QVector< StaticTextPtr >  getStaticTexts() const;
             const StaticTextPtr             getStaticText( int index ) const;
             int                             getStaticTextsSize() const;
-            const QVector< StaticTextPtr >  getStaticTexts() const;
 
             void                            addTextField( const TextFieldPtr & staticText );
+            const QVector< TextFieldPtr >   getTextFields() const;
             const TextFieldPtr              getTextField( int index ) const;
             int                             getTextFieldsSize() const;
-            const QVector< TextFieldPtr >   getTextFields() const;
+
+            int                             getTextWidgetsSize() const;
+            QVector< TextWidgetPtr >        getTextWidgets() const;
 
             void                            addLine( const LinePtr & line );
             const LinePtr                   getLine( int index ) const;
