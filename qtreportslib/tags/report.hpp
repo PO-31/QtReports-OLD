@@ -58,6 +58,7 @@ namespace qtreports {
             const DetailPtr                     getDetail() const;
 
             void                                setParameter( const QString & name, const QString & value );
+            void                                setParameters( const QMap< QString, QString > & parameters );
             const QString                       getParameter( const QString & name ) const;
             const QMap< QString, QString >      getParameters() const;
 

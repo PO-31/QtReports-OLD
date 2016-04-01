@@ -100,6 +100,11 @@ namespace qtreports
             m_parameters[ name ] = value;
         }
 
+        void    Report::setParameters( const QMap< QString, QString > & parameters )
+        {
+            m_parameters = parameters;
+        }
+
         const QString  Report::getParameter( const QString & name ) const
         {
             return m_parameters.value( name );
