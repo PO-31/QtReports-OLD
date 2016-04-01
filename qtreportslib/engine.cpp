@@ -260,7 +260,7 @@ namespace qtreports
             return false;
         }
 
-        m_printedWidget->resize( 595, 595 );
+        m_printedWidget->resize( m_report->getSize() );
 
         //Magic
         m_printedWidget->show();
