@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['section',['Section',['../classqtreports_1_1detail_1_1_section.html',1,'qtreports::detail']]],
-  ['statictext',['StaticText',['../classqtreports_1_1detail_1_1_static_text.html',1,'qtreports::detail']]],
-  ['style',['Style',['../classqtreports_1_1detail_1_1_style.html',1,'qtreports::detail']]]
+  ['rect',['Rect',['../classqtreports_1_1detail_1_1_rect.html',1,'qtreports::detail']]],
+  ['report',['Report',['../classqtreports_1_1detail_1_1_report.html',1,'qtreports::detail']]]
 ];
