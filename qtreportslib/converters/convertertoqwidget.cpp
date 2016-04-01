@@ -70,17 +70,17 @@ namespace qtreports
             return layout;
         }
 
-        void    ConverterToQWidget::addVerticalBorder( QBoxLayout * parent, int height, int left, int right )
+        void    ConverterToQWidget::addVerticalBorder( QBoxLayout * parent, const QMargins & margins, int height )
         {
             auto leftFrame = new QFrame();
-            leftFrame->setFixedWidth( left );
+            leftFrame->setFixedWidth( margins.left() );
             leftFrame->setFixedHeight( height );
 
             auto centerFrame = new QFrame();
             centerFrame->setFixedHeight( height );
 
             auto rightFrame = new QFrame();
-            rightFrame->setFixedWidth( right );
+            rightFrame->setFixedWidth( margins.right() );
             rightFrame->setFixedHeight( height );
 
             if( isLayout() )
@@ -94,15 +94,15 @@ namespace qtreports
             parent->addLayout( layout );
         }
 
-        void    ConverterToQWidget::addEmptySection( QBoxLayout * parent, int left, int right )
+        void    ConverterToQWidget::addEmptySection( QBoxLayout * parent, const QMargins & margins )
         {
             auto leftFrame = new QFrame();
-            leftFrame->setFixedWidth( left );
+            leftFrame->setFixedWidth( margins.left() );
 
             auto centerFrame = new QFrame();
 
             auto rightFrame = new QFrame();
-            rightFrame->setFixedWidth( right );
+            rightFrame->setFixedWidth( margins.right() );
 
             if( isLayout() )
             {
@@ -117,11 +117,11 @@ namespace qtreports
             parent->addLayout( layout );
         }
 
-        QFrame *    ConverterToQWidget::addSectionLayout( QBoxLayout * parent, int height, int left, int right )
+        QFrame *    ConverterToQWidget::addSectionLayout( QBoxLayout * parent, const QMargins & margins, int height )
         {
             auto leftFrame = new QFrame();
             leftFrame->setFixedHeight( height );
-            leftFrame->setFixedWidth( left );
+            leftFrame->setFixedWidth( margins.left() );
 
             auto centerFrame = new QFrame();
             centerFrame->setFixedHeight( height );
@@ -130,7 +130,7 @@ namespace qtreports
 
             auto rightFrame = new QFrame();
             rightFrame->setFixedHeight( height );
-            rightFrame->setFixedWidth( right );
+            rightFrame->setFixedWidth( margins.right() );
 
             if( isLayout() )
             {
@@ -175,12 +175,12 @@ namespace qtreports
             auto layout = new QVBoxLayout( m_qwidget.data() );
             layout->setMargin( 0 );
             layout->setSpacing( 0 );
-            addVerticalBorder( layout, report->getTopMargin(), report->getLeftMargin(), report->getRightMargin() );
+            addVerticalBorder( layout, report->getMargins(), report->getTopMargin() );
 
             auto title = report->getTitle();
             if( !title.isNull() )
             {
-                auto sectionWidget = addSectionLayout( layout, title->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
+                auto sectionWidget = addSectionLayout( layout, report->getMargins(), title->getHeight() );
                 if( !createSection( sectionWidget, title, 0 ) )
                 {
                     return false;
@@ -190,15 +190,15 @@ namespace qtreports
             int count = isReport() ? report->getRowCount() : 1;
             for( int i = 0; i < count; ++i )
             {
-                auto sectionWidget = addSectionLayout( layout, detail->getHeight(), report->getLeftMargin(), m_report->getRightMargin() );
+                auto sectionWidget = addSectionLayout( layout, report->getMargins(), detail->getHeight() );
                 if( !createSection( sectionWidget, detail, i ) )
                 {
                     return false;
                 }
             }
 
-            addEmptySection( layout, report->getLeftMargin(), report->getRightMargin() );
-            addVerticalBorder( layout, report->getBottomMargin(), report->getLeftMargin(), report->getRightMargin() );
+            addEmptySection( layout, report->getMargins() );
+            addVerticalBorder( layout, report->getMargins(), report->getBottomMargin() );
 
             return true;
         }
