@@ -9,7 +9,8 @@ namespace qtreports
 
         ConverterToQWidget::ConverterToQWidget( const ReportPtr & report ) :
             m_report( report ),
-            m_type( WidgetType::Report )
+            m_type( WidgetType::Report ),
+            m_currentHeight( 0 )
         {}
 
         ConverterToQWidget::~ConverterToQWidget() {}
@@ -20,10 +21,39 @@ namespace qtreports
             return createQWidget( m_report );
         }
 
-        bool    ConverterToQWidget::convert( const ReportPtr & report, WidgetType type )
+        bool    ConverterToQWidget::isReport() const
         {
-            m_type = type;
-            return createQWidget( report );
+            return m_type == WidgetType::Report;
+        }
+
+        bool    ConverterToQWidget::isLayout() const
+        {
+            return m_type == WidgetType::Layout;
+        }
+
+        ConverterToQWidget::WidgetType  ConverterToQWidget::getType() const
+        {
+            return m_type;
+        }
+
+        const QWidgetPtr    ConverterToQWidget::getQWidget() const
+        {
+            return m_qwidget;
+        }
+
+        const QWidgetPtr    ConverterToQWidget::getPage( int i ) const
+        {
+            return m_pages.value( i );
+        }
+
+        const QVector< QWidgetPtr >     ConverterToQWidget::getPages() const
+        {
+            return m_pages;
+        }
+
+        const QString       ConverterToQWidget::getLastError() const
+        {
+            return m_lastError;
         }
 
         QHBoxLayout * createLayout( QWidget * left, QWidget * center, QWidget * right )
@@ -116,6 +146,12 @@ namespace qtreports
             return centerFrame;
         }
 
+        QWidget *   ConverterToQWidget::addPage()
+        {
+            m_pages.append( QWidgetPtr( new QWidget() ) );
+            return m_pages.last().data();
+        }
+
         bool    ConverterToQWidget::createQWidget( const ReportPtr & report )
         {
             if( report.isNull() )
@@ -191,6 +227,13 @@ namespace qtreports
             auto dy = 0;
             for( auto && band : section->getBands() )
             {
+                if( m_currentHeight + band->getHeight() > m_report->getHeight() )
+                {
+                    parent = addPage();
+                    m_currentHeight = 0;
+                }
+                m_currentHeight += band->getHeight();
+
                 auto frame = new QFrame( parent );
                 frame->move( frame->x(), dy );
                 dy += band->getHeight();
@@ -274,31 +317,6 @@ namespace qtreports
             }
 
             return true;
-        }
-
-        const QString       ConverterToQWidget::getLastError() const
-        {
-            return m_lastError;
-        }
-
-        bool    ConverterToQWidget::isReport() const
-        {
-            return m_type == WidgetType::Report;
-        }
-
-        bool    ConverterToQWidget::isLayout() const
-        {
-            return m_type == WidgetType::Layout;
-        }
-
-        ConverterToQWidget::WidgetType  ConverterToQWidget::getType() const
-        {
-            return m_type;
-        }
-
-        const QWidgetPtr    ConverterToQWidget::getQWidget() const
-        {
-            return m_qwidget;
         }
 
     }
