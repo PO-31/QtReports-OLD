@@ -16,7 +16,7 @@
     <band height="35">
       <staticText>
         <reportElement x="10" y="10" width="150" height="20" />
-        <text><![CDATA[Список студентов: ]]></text>
+        <text><![CDATA[$P{title}]]></text>
       </staticText>
       <rect>
         <reportElement x="0" y="0" width="535" height="35" />
@@ -30,27 +30,21 @@
       </line>
       <textField>
         <reportElement x="5" y="0" width="180" height="20" />
-        <textFieldExpression class="QString">
-          <![CDATA[$F{stud_name}]]>
-        </textFieldExpression>
+        <textFieldExpression class="QString"><![CDATA[$F{stud_name}]]></textFieldExpression>
       </textField>
       <line>
         <reportElement x="185" y="0" width="1" height="20" />
       </line>
       <textField>
         <reportElement x="190" y="0" width="200" height="20" />
-        <textFieldExpression class="QString">
-          <![CDATA[$F{group_name}]]>
-        </textFieldExpression>
+        <textFieldExpression class="QString"><![CDATA[$F{group_name}]]></textFieldExpression>
       </textField>
       <line>
         <reportElement x="390" y="0" width="1" height="20" />
       </line>
       <textField>
         <reportElement x="405" y="0" width="190" height="20" />
-        <textFieldExpression class="QString">
-          <![CDATA[$F{dep_name}]]>
-        </textFieldExpression>
+        <textFieldExpression class="QString"><![CDATA[$F{dep_name}]]></textFieldExpression>
       </textField>
       <line>
         <reportElement x="534" y="0" width="1" height="20" />

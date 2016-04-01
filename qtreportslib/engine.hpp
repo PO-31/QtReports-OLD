@@ -115,9 +115,6 @@ namespace qtreports {
         QVector< QString >                  m_scripts;
         QSqlDatabase                        m_dbConnection;
         QWidgetPtr                          m_printedWidget;
-        bool                                m_connectionIsSet;
-        bool                                m_dataSourceIsSet;
-        //QMap <QString, QVector <QVariant> > m_dataSource;
         detail::ProcessedDB                 m_processedDB;
 
         void                                drawPreview( QPrinter * printer );

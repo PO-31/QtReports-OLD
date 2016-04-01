@@ -5,6 +5,7 @@
 #include <QPrintPreviewDialog>
 #include "converters/convertertopdf.hpp"
 #include "converters/convertertohtml.hpp"
+#include "replacer.hpp"
 #include "engine.hpp"
 
 namespace qtreports
@@ -12,9 +13,7 @@ namespace qtreports
 
     Engine::Engine( QObject * parent ) :
         QObject( parent ),
-        m_isOpened( false ),
-        m_connectionIsSet( false ),
-        m_dataSourceIsSet( false )
+        m_isOpened( false )
     {}
 
     Engine::Engine( const QString & path, QObject * parent ) :
@@ -57,7 +56,7 @@ namespace qtreports
         return true;
     }
 
-    bool	Engine::setParameters( const QMap< QString, QString > & map )
+    bool	Engine::setParameters( const QMap< QString, QString > & parameters )
     {
         if( m_report.isNull() )
         {
@@ -65,26 +64,7 @@ namespace qtreports
             return false;
         }
 
-        auto detail = m_report->getDetail();
-        if( detail.isNull() )
-        {
-            m_lastError = "Report->Detail is empty. Please open report file";
-            return false;
-        }
-
-        for( auto && band : detail->getBands() )
-        {
-            for( auto && textField : band->getTextFields() )
-            {
-                auto text = textField->getText();
-                text = text.replace( "\n", "" ).replace( "\r", "" ).replace( " ", "" );
-                if( text.startsWith( "$P{" ) && text.contains( "}" ) )
-                {
-                    auto name = text.split( "{" ).at( 1 ).split( "}" ).at( 0 );
-                    textField->setText( map[ name ] );
-                }
-            }
-        }
+        m_report->setParameters( parameters );
 
         return true;
     }
@@ -104,11 +84,10 @@ namespace qtreports
         }
 
         m_dbConnection = connection;
-        m_connectionIsSet = true;
 
         if( !prepareDB() )
         {
-            m_lastError = "Error in prepareDB: " + m_lastError;
+            m_lastError = "Error in prepare db process: " + m_lastError;
             return false;
         }
 
@@ -116,11 +95,9 @@ namespace qtreports
 
         for( auto && field : m_report->getFields() )
         {
-            QVector < QVariant > tmp_vec;
-            if( m_processedDB.getColumn( field->getName(), tmp_vec ) )
-            {
-                m_report->setFieldData( field->getName(), tmp_vec );
-            }
+            auto name = field->getName();
+            auto value = m_processedDB.getColumn( name );
+            m_report->setFieldData( name, value );
         }
 
         return true;
@@ -130,7 +107,6 @@ namespace qtreports
     {
         //Need check parameters
         //m_dataSource = columnsSet;
-        m_dataSourceIsSet = true;
 
         prepareDataSource( source );
         
@@ -138,11 +114,9 @@ namespace qtreports
 
         for( auto && field : m_report->getFields() )
         {
-            QVector < QVariant > tmp_vec;
-            if( m_processedDB.getColumn( field->getName(), tmp_vec ) )
-            {
-                m_report->setFieldData( field->getName(), tmp_vec );
-            }
+            auto name = field->getName();
+            auto value = m_processedDB.getColumn( name );
+            m_report->setFieldData( name, value );
         }
 
         return true;
@@ -324,18 +298,18 @@ namespace qtreports
 
     void    Engine::fillColumnsFromReport()
     {
-        QMap <QString, detail::FieldPtr> fieldMap = m_report->getFields();
-        QMapIterator <QString, detail::FieldPtr> fieldIterator( fieldMap );
+        /*auto fields = m_report->getFields();
+        QMapIterator< QString, detail::FieldPtr > fieldIterator( fields );
         while( fieldIterator.hasNext() )
         {
             fieldIterator.next();
             m_processedDB.addColumn( fieldIterator.key() );
         }
-
-        /*for( auto && field : m_report->getFields() )
+        */
+        for( auto && field : m_report->getFields() )
         {
             m_processedDB.addColumn( field->getName() );
-        }*/
+        }
     }
 
     void    Engine::executeQueries( const QStringList & queries )

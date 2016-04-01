@@ -1,5 +1,6 @@
 #include <QFrame>
 #include <QLabel>
+#include "../replacer.hpp"
 #include "convertertoqwidget.hpp"
 
 namespace qtreports
@@ -214,6 +215,15 @@ namespace qtreports
                 label->setAttribute( Qt::WA_TranslucentBackground );
                 label->resize( parent->size() );
             }
+            else
+            {
+                detail::Replacer replacer;
+                if( !replacer.replace( section, m_report, i ) )
+                {
+                    m_lastError = "Error in replacing process: " + replacer.getLastError();
+                    return false;
+                }
+            }
 
             if( !createBands( parent, section, i ) )
             {
@@ -239,11 +249,11 @@ namespace qtreports
                 frame->move( frame->x(), dy );
                 dy += band->getHeight();
                 frame->setStyleSheet( "background-color: transparent; " );
-                for( auto && staticText : band->getStaticTexts() )
+                for( auto && textWidget : band->getTextWidgets() )
                 {
                     auto label = new QLabel( frame );
                     QString style = "";
-                    if( staticText->isBold() )
+                    if( textWidget->isBold() )
                     {
                         style += "font-weight: bold; ";
                     }
@@ -252,33 +262,9 @@ namespace qtreports
                         style += "border: 1px solid gray; ";
                     }
                     label->setStyleSheet( "background-color: transparent; " + style );
-                    label->setGeometry( staticText->getRect() );
-                    label->setAlignment( staticText->getAlignment() );
-                    label->setText( staticText->getText() );
-                }
-                for( auto && textField : band->getTextFields() )
-                {
-                    auto label = new QLabel( frame );
-                    QString style = "";
-                    if( textField->isBold() )
-                    {
-                        style += "font-weight: bold; "; 
-                    }
-                    if( isLayout() )
-                    {
-                        style += "border: 1px solid gray; ";
-                    }
-                    label->setStyleSheet( "background-color: transparent; " + style );
-                    label->setGeometry( textField->getRect() );
-                    label->setAlignment( textField->getAlignment() );
-
-                    auto text = textField->getText();
-                    text = text.replace( "\n", "" ).replace( "\r", "" ).replace( " ", "" );
-                    if( isReport() && text.startsWith( "$F{" ) && text.contains( "}" ) )
-                    {
-                        auto name = text.split( "{" ).at( 1 ).split( "}" ).at( 0 );
-                        text = m_report->getField( name )->getData( i );
-                    }
+                    label->setGeometry( textWidget->getRect() );
+                    label->setAlignment( textWidget->getAlignment() );
+                    auto text = isLayout() ? textWidget->getOriginalText() : textWidget->getText();
                     label->setText( text );
                 }
                 for( auto && line : band->getLines() )
