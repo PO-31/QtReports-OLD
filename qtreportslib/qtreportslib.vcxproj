@@ -158,6 +158,7 @@
     <ClCompile Include="objectsplant.cpp" />
     <ClCompile Include="painter.cpp" />
     <ClCompile Include="processeddb.cpp" />
+    <ClCompile Include="replacer.cpp" />
     <ClCompile Include="tags\band.cpp" />
     <ClCompile Include="tags\detail.cpp" />
     <ClCompile Include="tags\field.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="converters\convertertohtml.hpp" />
     <ClInclude Include="converters\convertertopdf.hpp" />
     <ClInclude Include="converters\convertertoqwidget.hpp" />
+    <ClInclude Include="replacer.hpp" />
     <ClInclude Include="tags\line.hpp" />
     <ClInclude Include="tags\querystring.hpp" />
     <ClInclude Include="tags\rect.hpp" />

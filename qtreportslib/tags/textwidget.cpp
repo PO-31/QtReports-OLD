@@ -16,7 +16,7 @@ namespace qtreports
 
         const QString   TextWidget::getText() const
         {
-            return m_text;
+            return m_text.isEmpty() ? m_originalText : m_text;
         }
 
         void    TextWidget::setOriginalText( const QString & text )

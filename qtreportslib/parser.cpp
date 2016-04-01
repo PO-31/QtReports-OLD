@@ -520,7 +520,7 @@ namespace qtreports {
                 return false;
             }
 
-            staticText->setText( text );
+            staticText->setOriginalText( text );
 
             return !reader.hasError();
         }
@@ -536,7 +536,7 @@ namespace qtreports {
                 return false;
             }
 
-            textField->setText( text );
+            textField->setOriginalText( text );
             textField->setClassName( className );
 
             return !reader.hasError();
