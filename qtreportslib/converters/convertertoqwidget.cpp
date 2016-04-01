@@ -168,7 +168,8 @@ namespace qtreports
             }
 
             m_qwidget = QWidgetPtr( new QWidget() );
-            m_qwidget->setStyleSheet( "background-color: white; " );
+            m_qwidget->setStyleSheet( "background-color: white; " );//border: 1px solid gray; 
+            //m_qwidget->setContentsMargins( m_report->getMargins() );
 
             auto layout = new QVBoxLayout( m_qwidget.data() );
             layout->setMargin( 0 );
