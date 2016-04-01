@@ -15,50 +15,6 @@ namespace qtreports
         }
 
         Report::~Report() {}
-        /*
-        bool    Report::setParameter( const QString & name, const QVariant & value ) {
-            QString page_width( "page_width" ), page_height( "page_height" ),
-                isVertical( "is_vertical" );
-
-            if( !value.isValid() ) {
-                m_lastError = "Invalid parameter value";
-                return false;
-            }
-
-            if( page_width.compare( name, Qt::CaseInsensitive ) == 0 ) {
-                if( value.type() != QVariant::Int ) {
-                    m_lastError = "Invalid type for this argument";
-                    return false;
-                }
-
-                m_size.setWidth( value.toInt() );
-                return true;
-            }
-
-            if( page_height.compare( name, Qt::CaseInsensitive ) == 0 ) {
-                if( value.type() != QVariant::Int ) {
-                    m_lastError = "Invalid type for this argument";
-                    return false;
-                }
-
-                m_size.setWidth( value.toInt() );
-
-                return true;
-            }
-
-            if( isVertical.compare( name, Qt::CaseInsensitive ) == 0 ) {
-                if( value.type() != QVariant::Bool ) {
-                    m_lastError = "Invalid type for this argument";
-                    return false;
-                }
-
-                m_isVertical = value.toBool();
-                return true;
-            }
-
-            return true;// Object::setParameter( name, value );
-        }
-        */
 
         void    Report::setDefaultStyle( const StylePtr & style )
         {
@@ -77,12 +33,7 @@ namespace qtreports
 
         const StylePtr  Report::getStyle( const QString & name ) const
         {
-            if( !m_styles.contains( name ) )
-            {
-                return StylePtr();
-            }
-
-            return m_styles[ name ];
+            return m_styles.value( name );
         }
 
         const QMap< QString, StylePtr >     Report::getStyles() const
@@ -107,17 +58,21 @@ namespace qtreports
 
         const FieldPtr  Report::getField( const QString & name ) const
         {
-            if( !m_fields.contains( name ) )
-            {
-                return  FieldPtr();
-            }
-
-            return m_fields[ name ];
+            return m_fields.value( name );
         }
 
         const QMap< QString, FieldPtr >   Report::getFields() const
         {
             return m_fields;
+        }
+
+        void    Report::setFieldData( const QString & name, const QVector< QVariant > & data )
+        {
+            auto field = getField( name );
+            if( !field.isNull() )
+            {
+                field->setData( data );
+            }
         }
 
         void    Report::setTitle( const TitlePtr & title )
@@ -140,9 +95,19 @@ namespace qtreports
             return m_detail;
         }
 
-        void Report::setFieldData( const QString field_name, const QVector<QVariant> data )
+        void    Report::setParameter( const QString & name, const QString & value )
         {
-            m_fields[ field_name ]->setData( data );
+            m_parameters[ name ] = value;
+        }
+
+        const QString  Report::getParameter( const QString & name ) const
+        {
+            return m_parameters.value( name );
+        }
+
+        const QMap< QString, QString >   Report::getParameters() const
+        {
+            return m_parameters;
         }
 
         int     Report::getRowCount() const

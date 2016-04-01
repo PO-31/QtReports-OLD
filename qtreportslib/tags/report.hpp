@@ -49,6 +49,7 @@ namespace qtreports {
             void                                setField( const QString & name, const FieldPtr & field );
             const FieldPtr                      getField( const QString & name ) const;
             const QMap< QString, FieldPtr >     getFields() const;
+            void                                setFieldData( const QString & name, const QVector< QVariant > & data );
 
             void                                setTitle( const TitlePtr & title );
             const TitlePtr                      getTitle() const;
@@ -56,7 +57,9 @@ namespace qtreports {
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
-            void    setFieldData(const QString field_name, const QVector < QVariant > data);
+            void                                setParameter( const QString & name, const QString & value );
+            const QString                       getParameter( const QString & name ) const;
+            const QMap< QString, QString >      getParameters() const;
 
             int     getRowCount() const;
             void    setRowCount( int count );
@@ -91,6 +94,7 @@ namespace qtreports {
             QMap< QString, FieldPtr >   m_fields;
             TitlePtr                    m_title;
             DetailPtr                   m_detail;
+            QMap< QString, QString >    m_parameters;
 
         };
         typedef QSharedPointer< Report > ReportPtr;
