@@ -102,6 +102,18 @@ namespace qtreports {
             int         getFieldIndex(const QString & name);
 
             /*! @~russian
+            Проверяет, существует ли столбец с определенным именем.
+            @param[in] name Имя столбца.
+            */
+            bool        columnIsExists( const QString & name ) const;
+
+            /*! @~russian
+            Проверяет, существует ли столбец с определенным именем.
+            @param[in] name Номер столбца.
+            */
+            bool        columnIsExists( int col ) const;
+
+            /*! @~russian
               Получает количество записей в столбце.
               @param[in] columnName Имя столбца.
              */

@@ -193,13 +193,25 @@ namespace qtreports
             return -1;
         }
 
+        bool    ProcessedDB::columnIsExists( const QString & name ) const
+        {
+            return m_columnsSet.contains( name );
+        }
+
+        bool    ProcessedDB::columnIsExists( int col ) const
+        {
+            return m_columnsSet.keys().value( col ).isEmpty();
+        }
+
         int     ProcessedDB::getRowCount( const QString &columnName ) const
         {
-            if( m_columnsSet.contains( columnName ) )
+            /*
+            if( !m_columnsSet.contains( columnName ) )
             {
                 return -1;
             }
-            return m_columnsSet[ columnName ].size();
+            */
+            return m_columnsSet.value( columnName ).size();
         }
 
         int     ProcessedDB::getRowCount( int col ) const
@@ -214,13 +226,13 @@ namespace qtreports
                 }
                 index++;
             }
-            */
+            
             if( col < 0 || col >= m_columnsSet.size() )
             {
                 return -1;
             }
-
-            return getRowCount( m_columnsSet.keys()[ col ] );
+            */
+            return getRowCount( m_columnsSet.keys().value( col ) );
         }
 
         int     ProcessedDB::getMaxRowCount() const
@@ -242,7 +254,7 @@ namespace qtreports
                 return first.size() < second.size();
             } )->size();
             */
-            int max = -1;
+            int max = 0;
             for( auto && column : m_columnsSet )
             {
                 max = std::max( max, column.size() );
