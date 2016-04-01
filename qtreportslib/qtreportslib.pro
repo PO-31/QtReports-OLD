@@ -7,7 +7,7 @@ DEFINES += QTREPORTS_LIBRARY
 
 SOURCES += engine.cpp \
     processeddb.cpp \
-    painter.cpp \
+    replacer.cpp \
     parser.cpp \
     objectsplant.cpp \
 	converters/convertertohtml.cpp \
@@ -30,7 +30,7 @@ SOURCES += engine.cpp \
 
 HEADERS += engine.hpp \
     processeddb.hpp \
-    painter.hpp \
+    replacer.hpp \
     parser.hpp \
     objectsplant.hpp \
 	converters/convertertohtml.hpp \
