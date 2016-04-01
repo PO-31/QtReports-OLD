@@ -8,10 +8,7 @@ namespace qtreports
         Report::Report() :
             m_isVertical( true ),
             m_size( 595, 842 ),
-            m_leftMargin( 30 ),
-            m_topMargin( 30 ),
-            m_rightMargin( 30 ),
-            m_bottomMargin( 30 ),
+            m_margins( 30, 30, 30, 30 ),
             m_rowCount( 0 )
         {
             Q_UNUSED( m_isVertical );
@@ -148,7 +145,7 @@ namespace qtreports
             m_fields[ field_name ]->setData( data );
         }
 
-        int     Report::getRowCount()
+        int     Report::getRowCount() const
         {
             return m_rowCount;
         }
@@ -158,7 +155,7 @@ namespace qtreports
             m_rowCount = count;
         }
 
-        const QSize     Report::getSize()
+        const QSize     Report::getSize() const
         {
             return m_size;
         }
@@ -168,44 +165,59 @@ namespace qtreports
             m_size = size;
         }
 
-        int     Report::getLeftMargin()
+        int     Report::getHeight() const
         {
-            return m_leftMargin;
+            return m_size.height();
         }
 
-        int     Report::getTopMargin()
+        int     Report::getWidth() const
         {
-            return m_topMargin;
+            return m_size.width();
         }
 
-        int     Report::getRightMargin()
+        int     Report::getLeftMargin() const
         {
-            return m_rightMargin;
+            return m_margins.left();
         }
 
-        int     Report::getBottomMargin()
+        int     Report::getTopMargin() const
         {
-            return m_bottomMargin;
+            return m_margins.top();
+        }
+
+        int     Report::getRightMargin() const
+        {
+            return m_margins.right();
+        }
+
+        int     Report::getBottomMargin() const
+        {
+            return m_margins.bottom();
+        }
+
+        const QMargins  Report::getMargins() const
+        {
+            return m_margins;
         }
 
         void    Report::setLeftMargin( int left )
         {
-            m_leftMargin = left;
+            m_margins.setLeft( left );
         }
 
         void    Report::setTopMargin( int top )
         {
-            m_topMargin = top;
+            m_margins.setTop( top );
         }
 
         void    Report::setRightMargin( int right )
         {
-            m_rightMargin = right;
+            m_margins.setRight( right );
         }
 
         void    Report::setBottomMargin( int bottom )
         {
-            m_bottomMargin = bottom;
+            m_margins.setBottom( bottom );
         }
 
         void    Report::setMargins( int left, int top, int right, int bottom )
@@ -214,6 +226,11 @@ namespace qtreports
             setTopMargin( top );
             setRightMargin( right );
             setBottomMargin( bottom );
+        }
+
+        void    Report::setMargins( const QMargins & margins )
+        {
+            m_margins = margins;
         }
 
     }

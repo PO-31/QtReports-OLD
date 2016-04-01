@@ -7,6 +7,7 @@
 #include <QMap>
 #include <QVector>
 #include <QSharedPointer>
+#include <QMargins>
 
 #include "object.hpp"
 #include "field.hpp"
@@ -55,32 +56,34 @@ namespace qtreports {
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
-            void setFieldData(const QString field_name, const QVector < QVariant > data);
+            void    setFieldData(const QString field_name, const QVector < QVariant > data);
 
-            int     getRowCount();
+            int     getRowCount() const;
             void    setRowCount( int count );
 
-            const QSize     getSize();
+            const QSize     getSize() const;
             void            setSize( const QSize & size );
 
-            int     getLeftMargin();
-            int     getTopMargin();
-            int     getRightMargin();
-            int     getBottomMargin();
+            int             getHeight() const;
+            int             getWidth() const;
+
+            int     getLeftMargin() const;
+            int     getTopMargin() const;
+            int     getRightMargin() const;
+            int     getBottomMargin() const;
+            const QMargins  getMargins() const;
 
             void    setLeftMargin( int left );
             void    setTopMargin( int top );
             void    setRightMargin( int right );
             void    setBottomMargin( int bottom );
             void    setMargins( int left, int top, int right, int bottom );
+            void    setMargins( const QMargins & margins );
 
         private:
             bool	                    m_isVertical; //?
             QSize	                    m_size; //?
-            int                         m_leftMargin;
-            int                         m_topMargin;
-            int                         m_rightMargin;
-            int                         m_bottomMargin;
+            QMargins                    m_margins;
             int                         m_rowCount;
             StylePtr                    m_defaultStyle;
             QMap< QString, StylePtr >   m_styles;
