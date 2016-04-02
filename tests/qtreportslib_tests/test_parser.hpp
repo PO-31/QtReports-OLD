@@ -12,6 +12,10 @@ private:
     void ReportTreeParseTest();
     void ReportTagParseTest();
     void TextTest();
+    void ReportFieldParseTest();
+    void ReportLineParseTest();
+    void ReportStyleParseTest();
+
 
 private slots:
     void    parse();
