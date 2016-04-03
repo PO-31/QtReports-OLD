@@ -277,9 +277,9 @@ void Test_Parser::ReportFieldParseTest()
     
     QVERIFY2( !report.isNull(), "Null ptr report returned in text test" );
 
-    QVERIFY2( report->getField( "Title" ).isNull(), "Null ptr field in field test" );
+    QVERIFY2( !report->getField( "Title" ).isNull(), "Null ptr field in field test" );
 
-    QVERIFY2( report->getField("Title")->getClassName() == "String", "Wrong className in field test");
+    QVERIFY2( report->getField("Title")->getClassName() == "QString", "Wrong className in field test");
 
     //QVERIFY2( report->getField("PersonName")->getData( 0 ) )
     
