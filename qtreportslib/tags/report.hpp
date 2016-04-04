@@ -8,6 +8,7 @@
 #include <QVector>
 #include <QSharedPointer>
 #include <QMargins>
+#include <QPrinter>
 
 #include "object.hpp"
 #include "field.hpp"
@@ -23,18 +24,6 @@ namespace qtreports {
         public:
             Report();
             ~Report();
-
-            enum Size {
-                A4Gorizontal = 0,
-                A4Vertical
-            };
-
-            /* Список параметров Report:
-             *  - int "page_width" - ширина страницы;
-             *  - int "page_height" - высота страницы;
-             *  - bool "is_vertical" - принимает значение true, если объект вертикальный;
-             *  - все параметры Object. */
-            //bool	                            setParameter( const QString & name, const QVariant & value );
 
             void                                setDefaultStyle( const StylePtr & style );
             const StylePtr                      getDefaultStyle() const;
@@ -65,6 +54,9 @@ namespace qtreports {
             int     getRowCount() const;
             void    setRowCount( int count );
 
+            QPrinter::Orientation   getOrientation() const;
+            void                    setOrientation( QPrinter::Orientation orientation );
+
             const QSize     getSize() const;
             void            setSize( const QSize & size );
 
@@ -85,8 +77,8 @@ namespace qtreports {
             void    setMargins( const QMargins & margins );
 
         private:
-            bool	                    m_isVertical; //?
-            QSize	                    m_size; //?
+            QPrinter::Orientation	    m_orientation;
+            QSize	                    m_size;
             QMargins                    m_margins;
             int                         m_rowCount;
             StylePtr                    m_defaultStyle;

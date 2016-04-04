@@ -6,13 +6,11 @@ namespace qtreports
     {
 
         Report::Report() :
-            m_isVertical( true ),
+            m_orientation( QPrinter::Orientation::Landscape ),
             m_size( 595, 842 ),
             m_margins( 30, 30, 30, 30 ),
             m_rowCount( 0 )
-        {
-            Q_UNUSED( m_isVertical );
-        }
+        {}
 
         Report::~Report() {}
 
@@ -120,9 +118,19 @@ namespace qtreports
             return m_rowCount;
         }
 
-        void Report::setRowCount( int count )
+        void    Report::setRowCount( int count )
         {
             m_rowCount = count;
+        }
+
+        QPrinter::Orientation     Report::getOrientation() const
+        {
+            return m_orientation;
+        }
+
+        void    Report::setOrientation( QPrinter::Orientation orientation )
+        {
+            m_orientation = orientation;
         }
 
         const QSize     Report::getSize() const
