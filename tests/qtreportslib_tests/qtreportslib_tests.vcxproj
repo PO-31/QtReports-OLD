@@ -192,6 +192,7 @@
     <None Include="students.qreport">
       <SubType>Designer</SubType>
     </None>
+    <None Include="style test.qreport" />
     <None Include="text test.qreport" />
   </ItemGroup>
   <ItemGroup>

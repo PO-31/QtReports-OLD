@@ -385,7 +385,7 @@ namespace qtreports
             style->setTagName( "style" );
             style->setName( nameString );
 
-            if( isDefaultString.isEmpty() )
+            if( !isDefaultString.isEmpty() )
             {
                 bool isDefault = toBool( isDefaultString );
                 style->setAsDefault( isDefault );
