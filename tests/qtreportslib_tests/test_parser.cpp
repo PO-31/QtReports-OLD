@@ -258,17 +258,127 @@ void    Test_Parser::TextTest() {
     QVERIFY2( report->getDetail()->getBand( 0 )->getTextField( 0 )->getWidth() == 100, "Wrong text field width in text test" );
 
     QVERIFY2( report->getDetail()->getBand( 0 )->getTextField( 0 )->getHeight() == 200, "Wrong text field height in text test" );
-
+/*
     error = "Wrong text field in text test: '";
-    error += report->getDetail()->getBand( 0 )->getTextField( 0 )->getText();
+    error += report->getDetail()->getBand( 0 )->getTextFieldld( 0 )->getText();
     error += "'";
-
+*/
     //QVERIFY2( report->getDetail()->getBand(0)->getTextField(0)->getText() == "$P{title}", error.toLatin1().data() );
 }
+
+void Test_Parser::ReportFieldParseTest()
+{
+
+    qtreports::detail::Parser parser;
+    QString input = QFINDTESTDATA( "field test.qreport" );
+    QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
+
+    qtreports::detail::ReportPtr report = parser.getReport();
+    
+    QVERIFY2( !report.isNull(), "Null ptr report returned in text test" );
+
+    QVERIFY2( !report->getField( "Title" ).isNull(), "Null ptr field in field test" );
+
+    QVERIFY2( report->getField("Title")->getClassName() == "QString", "Wrong className in field test");
+
+    //QVERIFY2( report->getField("PersonName")->getData( 0 ) )
+    
+    
+    //QVERIFY2( report->get().getBandsSize() == 1, "Wrong bands number in text test" );
+
+    //QVERIFY2( !report-> getDetail()->getetBand( 0 ).isNull(), "Null ptr band in text test" );
+    
+
+    
+}
+
+void Test_Parser::ReportLineParseTest()
+{
+    qtreports::detail::Parser parser;
+    QString input = QFINDTESTDATA( "line test.qreport" );
+    QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
+
+    qtreports::detail::ReportPtr report = parser.getReport();
+
+    QString error;
+
+    QVERIFY2( !report.isNull(), "Null ptr report returned in line test" );
+
+    QVERIFY2( !report->getDetail().isNull(), "Null ptr detail in line test" );
+
+    QVERIFY2( report->getDetail()->getBandsSize() == 1, "Wrong bands number in text test" );
+
+    QVERIFY2( !report->getDetail()->getBand( 0 ).isNull(), "Null ptr band in line test" );
+
+    QVERIFY2( !report->getDetail()->getBand( 0 )->getLine( 0 ).isNull(), "Null ptr in line test" );
+
+   // QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getAlignment() == Qt::Alignment(), "Wrong line alignment in line test" );
+
+    QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getHeight() == 25, "Wrong line height in line test");
+
+    QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getPos().x() == 200 && report->getDetail()->getBand( 0 )->getLine( 0 )->getPos().y() == 20, "Wrong position in line test");
+
+    // QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getRect() )
+    QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getSize() == QSize(5,2), "Wrong line size in line test");
+
+   //  QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getStyle() == )
+
+   //  QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getTagName())
+
+    QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getWidth() == 10, "Wrong line width in line test");
+
+    QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getX() == 10, "Wrong line X in line test");
+
+    QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->getY() == 20, "wrong line Y in line test");
+
+    QVERIFY2( report->getDetail()->getBand( 0 )->getLine( 0 )->isBold(), "Wrong line bold in line test");
+}
+
+void Test_Parser::ReportStyleParseTest()
+{
+    qtreports::detail::Parser parser;
+    QString input = QFINDTESTDATA( "style test.qreport" );
+
+    QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
+
+    qtreports::detail::ReportPtr report = parser.getReport();
+
+    QString error;
+
+    QVERIFY2( !report.isNull(), "Null ptr report returned in style test" );
+
+    QVERIFY2( !report->getStyle( "Arial_Normal" ).isNull(), "Null ptr band in style test" );
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->getFontColor() == QColor("red"), "Wrong font color in style test");
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->getFontName() == "Arial", "Wrong font name in style test");
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->getFontSize() == 12, "Wrong font size in style test");
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->getPDFEncoding() == "Cp1251", "Wrong PDF encoding in style test");
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->getPDFFontName() == "c:\\tahoma.ttf", "Wrong PDF encoding in style test");
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->isBold(), "Wrong bold in style test");
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->isDefault(), "Wrong default in style test");
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->isItalic(), "Wrong italic in style test");
+
+    QVERIFY2( report->getStyle( "Arial_Normal" )->isPDFEmbedded(), "Wrong PDFEmbedded in style test");
+
+
+
+}
+
+
+
 
 void    Test_Parser::parse() {
     ReportTreeParseTest();
     ReportTagParseTest();
+    ReportStyleParseTest();
+    ReportFieldParseTest();
     TextTest();
 }
 
