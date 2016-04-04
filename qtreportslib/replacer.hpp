@@ -55,11 +55,19 @@ namespace qtreports
 
             /*! @~russian
             Возвращает текст с подставленными значениями полей из источника данных.
-            @param[in] report Указатель на отчет
             @param[in] text Исходный текст
+            @param[in] report Указатель на отчет
             @param[in] i Текущая строка
             */
             QString  replaceField( const QString & text, const ReportPtr & report, int i );
+
+            /*! @~russian
+            Возвращает изображение на основе первого найденного выражения.
+            @param[in] text Исходный текст
+            @param[in] report Указатель на отчет
+            @param[in] i Текущая строка
+            */
+            QImage  replaceFieldImage( const QString & text, const ReportPtr & report, int i );
 
             /*! @~russian
             Заменяет текст виджета текстом с подставленными значениями полей из источника данных.
@@ -69,6 +77,15 @@ namespace qtreports
             @param[in] i Текущая строка
             */
             bool    replaceFieldInTextWidget( const TextWidgetPtr & widget, const ReportPtr & report, int i );
+
+            /*! @~russian
+            На основе текста виджета вставляет в него изображение из источника данных.
+            Перегружанная функция, предоставленная для удобства.
+            @param[in] widget Указатель на виджет
+            @param[in] report Указатель на отчет
+            @param[in] i Текущая строка
+            */
+            bool    replaceFieldInImageWidget( const ImagePtr & widget, const ReportPtr & report, int i );
 
             /*! @~russian
             Заменяет текст всех виджетов секции

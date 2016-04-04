@@ -1,5 +1,7 @@
 #include "replacer.hpp"
 #include <QRegularExpression>
+#include <QImage>
+#include <QByteArray>
 #include <QDebug>
 
 namespace qtreports
@@ -103,11 +105,37 @@ namespace qtreports
             return newText;
         }
 
+        QImage  Replacer::replaceFieldImage( const QString & text, const ReportPtr & report, int i )
+        {
+            QRegularExpression expr( "(\\$F\\{\\w+\\})", QRegularExpression::CaseInsensitiveOption );
+            auto iterator = expr.globalMatch( text );
+            while( iterator.hasNext() )
+            {
+                auto match = iterator.next();
+                auto name = match.captured( 1 ).remove( 0, 3 ).remove( -1, 1 );
+                auto byteArray = report->getField( name )->getData< QByteArray >( i );
+                auto image = QImage::fromData( byteArray );
+                return image;
+            }
+
+            return QImage();
+        }
+
         bool    Replacer::replaceFieldInTextWidget( const TextWidgetPtr & widget, const ReportPtr & report, int i )
         {
             auto text = widget->getOriginalText();
             auto replacedText = replaceField( text, report, i );
             widget->setText( replacedText );
+
+            return true;
+        }
+
+        bool    Replacer::replaceFieldInImageWidget( const ImagePtr & widget, const ReportPtr & report, int i )
+        {
+            auto text = widget->getOriginalText();
+            auto image = replaceFieldImage( text, report, i );
+            auto size = widget->getSize();
+            widget->setImage( image.scaled( size ) );
 
             return true;
         }
@@ -125,6 +153,14 @@ namespace qtreports
                 for( auto && textWidget : band->getTextWidgets() )
                 {
                     if( !replaceFieldInTextWidget( textWidget, report, i ) )
+                    {
+                        return false;
+                    }
+                }
+
+                for( auto && imageWidget : band->getImages() )
+                {
+                    if( !replaceFieldInImageWidget( imageWidget, report, i ) )
                     {
                         return false;
                     }

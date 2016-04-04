@@ -7,6 +7,7 @@
 #include "textfield.hpp"
 #include "line.hpp"
 #include "rect.hpp"
+#include "image.hpp"
 #include "widget.hpp"
 
 namespace qtreports {
@@ -41,11 +42,18 @@ namespace qtreports {
             int                             getRectsSize() const;
             const QVector< RectPtr >        getRects() const;
 
+            void                            addImage( const ImagePtr & rect );
+            const ImagePtr                  getImage( int index ) const;
+            int                             getImagesSize() const;
+            const QVector< ImagePtr >       getImages() const;
+
         private:
             QVector< StaticTextPtr >    m_staticTexts;
             QVector< TextFieldPtr >     m_textFields;
+            QVector< TextWidgetPtr >    m_textWidgets;
             QVector< LinePtr >          m_lines;
             QVector< RectPtr >          m_rects;
+            QVector< ImagePtr >         m_images;
 
         };
         typedef QSharedPointer< Band > BandPtr;

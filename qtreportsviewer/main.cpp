@@ -34,7 +34,7 @@ int main( int argc, char *argv[] ) {
     freopen( "CONOUT$", "w", stderr );
 #endif
 
-    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/students.qreport";
+    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/images.qrxml";
     qtreports::Engine engine( path );
     if( !engine.isOpened() ) {
         showError( engine.getLastError() );
@@ -50,7 +50,7 @@ int main( int argc, char *argv[] ) {
     }
 
     auto db = QSqlDatabase::addDatabase( "QSQLITE" );
-    db.setDatabaseName( "../tests/qtreportslib_tests/testDB" );
+    db.setDatabaseName( "../tests/qtreportslib_tests/images.db" );
     if( !db.open() ) {
         showError( "Can not open database. Database error: " + db.lastError().text() );
         return -1;

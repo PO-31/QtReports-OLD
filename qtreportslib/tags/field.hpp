@@ -6,6 +6,7 @@
 #include <QVariant>
 #include <QString>
 #include <QVector>
+#include <QImage>
 
 #include "object.hpp"
 
@@ -20,9 +21,15 @@ namespace qtreports {
             void            setClassName( const QString & name );
             const QString   getClassName() const;
 
-            void setData(const QVector < QVariant > & data);
+            void            setData( const QVector< QVariant > & data );
 
-            QString getData(int row);
+            QString         getData( int row );
+
+            template< typename T1 >
+            const T1        getData( int row )
+            {
+                return m_data.value( row ).value< T1 >();
+            }
 
             int getRowCount();
 

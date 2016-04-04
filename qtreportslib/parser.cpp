@@ -41,6 +41,8 @@ namespace qtreports
             m_functions[ "textField" ] = toParseFunc( this, &Parser::parseTextField );
             m_functions[ "line" ] = toParseFunc( this, &Parser::parseLine );
             m_functions[ "rect" ] = toParseFunc( this, &Parser::parseRect );
+            m_functions[ "image" ] = toParseFunc( this, &Parser::parseImage );
+            m_functions[ "imageExpression" ] = toParseFunc( this, &Parser::parseImageExpression );
             m_functions[ "reportElement" ] = toParseFunc( this, &Parser::parseReportElement );
             m_functions[ "textElement" ] = toParseFunc( this, &Parser::parseTextElement );
             m_functions[ "font" ] = toParseFunc( this, &Parser::parseFont );
@@ -592,6 +594,20 @@ namespace qtreports
             return !reader.hasError();
         }
 
+        bool    Parser::parseImage( QXmlStreamReader & reader, const BandPtr & band )
+        {
+            ImagePtr image( new Image() );
+            if( !parseChilds( reader, image ) )
+            {
+                return false;
+            }
+
+            image->setTagName( "rect" );
+            band->addImage( image );
+
+            return !reader.hasError();
+        }
+
         bool	Parser::parseReportElement( QXmlStreamReader & reader, const WidgetPtr & widget )
         {
             QString xString;
@@ -732,6 +748,26 @@ namespace qtreports
 
             textField->setOriginalText( text );
             textField->setClassName( className );
+
+            return !reader.hasError();
+        }
+
+        bool    Parser::parseImageExpression( QXmlStreamReader & reader, const ImagePtr & image )
+        {
+            //QString className;
+            //if( !getRequiredAttribute( reader, "class", className ) )
+            //{
+            //    return false;
+            //}
+
+            QString text;
+            if( !getValue( reader, text ) )
+            {
+                return false;
+            }
+
+            image->setOriginalText( text );
+            //image->setClassName( className );
 
             return !reader.hasError();
         }

@@ -15,6 +15,7 @@
 #include "tags/textfield.hpp"
 #include "tags/line.hpp"
 #include "tags/rect.hpp"
+#include "tags/image.hpp"
 
 namespace qtreports {
     namespace detail {
@@ -76,7 +77,7 @@ namespace qtreports {
             */
             enum AttributeOption {
                 Required, ///< При отсутствии аттрибута будет выдана ошибка.
-                Optional ///< При отсутствии аттрибута будет использовано пустое значение.
+                Optional ///< При отсутствии аттрибута будет использовано значение по умолчанию.
             };
 
             bool    getValue( QXmlStreamReader & reader, QString & data );
@@ -98,11 +99,13 @@ namespace qtreports {
             bool    parseTextField( QXmlStreamReader & reader, const BandPtr & band );
             bool    parseLine( QXmlStreamReader & reader, const BandPtr & band );
             bool    parseRect( QXmlStreamReader & reader, const BandPtr & band );
+            bool    parseImage( QXmlStreamReader & reader, const BandPtr & band );
             bool    parseReportElement( QXmlStreamReader & reader, const WidgetPtr & widget );
             bool	parseTextElement( QXmlStreamReader & reader, const WidgetPtr & widget );
             bool	parseFont( QXmlStreamReader & reader, const WidgetPtr & widget );
             bool    parseText( QXmlStreamReader & reader, const StaticTextPtr & text );
             bool    parseTextFieldExpression( QXmlStreamReader & reader, const TextFieldPtr & text );
+            bool    parseImageExpression( QXmlStreamReader & reader, const ImagePtr & image );
 
         };
 

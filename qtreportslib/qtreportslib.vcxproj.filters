@@ -119,6 +119,9 @@
     <ClCompile Include="replacer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tags\image.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objectsplant.hpp">
@@ -162,6 +165,9 @@
     </ClInclude>
     <ClInclude Include="replacer.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\image.hpp">
+      <Filter>Tags</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

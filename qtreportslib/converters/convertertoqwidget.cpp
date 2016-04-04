@@ -284,6 +284,19 @@ namespace qtreports
                     label->setAlignment( line->getAlignment() );
                     //label->setText( "----------------------" );
                 }
+                for( auto && imageWidget : band->getImages() )
+                {
+                    auto label = new QLabel( frame );
+                    QString style = "";
+                    if( isLayout() )
+                    {
+                        style += "border: 1px solid gray; ";
+                    }
+                    label->setStyleSheet( "background-color: transparent; " + style );
+                    label->setGeometry( imageWidget->getRect() );
+                    label->setAlignment( imageWidget->getAlignment() );
+                    label->setPixmap( QPixmap::fromImage( imageWidget->getImage() ) );
+                }
                 for( auto && rect : band->getRects() )
                 {
                     auto label = new QLabel( frame );
