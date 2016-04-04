@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<report name="sample_report">
+<report name="sample_report" orientation="Landscape">
   <style name="Arial_Normal" isDefault="true" fontName="Arial"
     fontSize="12" pdfFontName="c:\tahoma.ttf" pdfEncoding="Cp1251"
     isPdfEmbedded="false" />

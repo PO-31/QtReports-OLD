@@ -208,6 +208,12 @@ namespace qtreports {
                 return false;
             }
 
+            QString orientationString;
+            if( !getOptionalAttribute( reader, "orientation", orientationString ) )
+            {
+                return false;
+            }
+
             if( !parseChilds( reader, report ) ) {
                 return false;
             }
@@ -229,6 +235,14 @@ namespace qtreports {
 
             if( !bottomMargin.isEmpty() ) {
                 report->setBottomMargin( bottomMargin.toInt() );
+            }
+
+            if( !orientationString.isEmpty() )
+            {
+                auto orientation = isEquals( orientationString, "portrait" ) ?
+                    QPrinter::Orientation::Portrait :
+                    QPrinter::Orientation::Landscape;
+                report->setOrientation( orientation );
             }
 
             return true;
