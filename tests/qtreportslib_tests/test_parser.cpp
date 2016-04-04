@@ -371,6 +371,35 @@ void Test_Parser::ReportStyleParseTest()
 
 }
 
+void Test_Parser::OptionalFieldsTest()
+{
+    qtreports::detail::Parser parser;
+    QString input = QFINDTESTDATA( "optional.qreport" );
+
+    QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
+
+    qtreports::detail::ReportPtr report = parser.getReport();
+
+    QVERIFY( !report.isNull());
+
+    QCOMPARE( report->getWidth(), 595 );
+    QCOMPARE( report->getHeight(), 842 );
+
+    QVERIFY( !report->getStyle("Optional_style").isNull() );
+
+    QCOMPARE( report->getStyle("Optional_style")->getFontSize(), 12);
+    QCOMPARE( report->getStyle("Optional_style")->isDefault(), false);
+    QCOMPARE( report->getStyle("Optional_style")->isBold(), false);
+    QCOMPARE( report->getStyle("Optional_style")->isItalic(), false);
+
+    QVERIFY( !report->getDetail().isNull() );
+    QVERIFY( !report->getDetail()->getBand(0).isNull() );
+    QVERIFY( !report->getDetail()->getBand(0)->getStaticText(0).isNull() );
+
+    QCOMPARE( report->getDetail()->getBand(0)->getStaticText(0)->getAlignment() & Qt::AlignLeft, Qt::AlignLeft);
+    QCOMPARE( report->getDetail()->getBand(0)->getStaticText(0)->getAlignment() & Qt::AlignVCenter, Qt::AlignVCenter);
+}
+
 
 
 
@@ -380,6 +409,8 @@ void    Test_Parser::parse() {
     ReportStyleParseTest();
     ReportFieldParseTest();
     TextTest();
+
+    OptionalFieldsTest();
 }
 
 void    Test_Parser::getReport() {
