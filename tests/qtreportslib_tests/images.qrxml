@@ -25,9 +25,9 @@
   </title>
   <detail>
     <band height="200">
-      <line>
-        <reportElement x="0" y="0" width="1" height="200" />
-      </line>
+      <rect>
+        <reportElement x="0" y="0" width="535" height="200" />
+      </rect>
       <textField>
         <reportElement x="5" y="0" width="20" height="200" />
         <textFieldExpression class="QString"><![CDATA[$F{idImg}]]></textFieldExpression>
@@ -46,12 +46,6 @@
         <reportElement x="170" y="0" width="425" height="200" />
         <imageExpression class="QString"><![CDATA[$F{image}]]></imageExpression>
       </image>
-      <line>
-        <reportElement x="534" y="0" width="1" height="200" />
-      </line>
-      <line>
-        <reportElement x="0" y="199" width="535" height="1" />
-      </line>
     </band>
   </detail>
 
