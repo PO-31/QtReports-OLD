@@ -26,7 +26,8 @@ SOURCES += engine.cpp \
     tags/statictext.cpp \
 	tags/textfield.cpp \
 	tags/line.cpp \
-	tags/rect.cpp
+	tags/rect.cpp \
+	tags/image.cpp
 
 HEADERS += engine.hpp \
     processeddb.hpp \
@@ -49,7 +50,8 @@ HEADERS += engine.hpp \
     tags/statictext.hpp \
 	tags/textfield.hpp \
 	tags/line.hpp \
-	tags/rect.hpp
+	tags/rect.hpp \
+	tags/image.hpp
 	
 QMAKE_CXXFLAGS += -std=c++11
 
