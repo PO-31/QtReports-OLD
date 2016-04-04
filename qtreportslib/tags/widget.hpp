@@ -36,7 +36,8 @@ namespace qtreports {
 
             void			setRect( const QRect & rect );
             /* Устанавливает индекс стиля объекта значением styleId, отрицательные значения - стиль по умолчанию. */
-            void            setStyle( const StylePtr & style );
+            //void            setStyle( const StylePtr & style );
+            void            setStyle( const QString & style );
 
             void            setAlignment( Qt::Alignment alignment );
             Qt::Alignment   getAlignment();
@@ -52,26 +53,18 @@ namespace qtreports {
             const QRect     getRect() const;
 
             /* Возвращает индекс стиля. */
-            const StylePtr  getStyle() const;
+            //const StylePtr  getStyle() const;
+            const QString   getStyle() const;
 
             bool            isBold() const;
             void            setBold( bool isBold );
-
-            /* Установить значение параметра объекта с именем name значением value. Имя параметра name - не чувствительно
-             * к регистру.
-             * Список параметров:
-             *  - int "x" - x - координата объекта;
-             *  - int "y" - y - координата объекта;
-             *  - int "w" - ширина объекта;
-             *  - int "h" - высота объекта;
-             *  - int "style_name" - индекс стиля объекта. */
-            //virtual bool    setParameter( const QString & name, const QVariant & value );
 
         protected:
             bool                    m_isBold;
             QRect					m_rect;
             Qt::Alignment           m_alignment;
-            StylePtr				m_style;
+            //StylePtr				m_style;
+            QString				    m_style;
 
         };
         typedef QSharedPointer< Widget > WidgetPtr;
