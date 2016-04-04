@@ -62,6 +62,10 @@ namespace qtreports {
                       "   overflow: hidden;\n"
                       "   }\n"
 
+                      "   @media print {\n"
+                      "   .page {page-break-after: always;}\n"
+                      "   }\n"
+
                       "   .page {\n"
                       "   width: %1px;\n"
                       "   height: %2px;\n" 
