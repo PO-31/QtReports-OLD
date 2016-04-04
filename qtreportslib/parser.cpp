@@ -250,38 +250,68 @@ namespace qtreports {
 
 
         bool    Parser::parseStyle( QXmlStreamReader & reader, const ReportPtr & report ) {
-            QString name;
-            if( !getRequiredAttribute( reader, "name", name ) ) {
+            QString nameString;
+            if( !getRequiredAttribute( reader, "name", nameString ) ) {
                 return false;
             }
 
-            QString isDefault;
-            if( !getOptionalAttribute( reader, "isDefault", isDefault ) ) {
+            QString isDefaultString;
+            if( !getOptionalAttribute( reader, "isDefault", isDefaultString ) ) {
                 return false;
             }
 
-            QString fontName;
-            if( !getOptionalAttribute( reader, "fontName", fontName ) ) {
+            QString fontNameString;
+            if( !getOptionalAttribute( reader, "fontName", fontNameString ) ) {
                 return false;
             }
 
-            QString fontSize;
-            if( !getOptionalAttribute( reader, "fontSize", fontSize ) ) {
+            QString fontSizeString;
+            if( !getOptionalAttribute( reader, "fontSize", fontSizeString ) ) {
                 return false;
             }
 
-            QString pdfFontName;
-            if( !getOptionalAttribute( reader, "pdfFontName", pdfFontName ) ) {
+            QString fontColorString;
+            if( !getOptionalAttribute( reader, "fontColor", fontColorString ) )
+            {
                 return false;
             }
 
-            QString pdfEncoding;
-            if( !getOptionalAttribute( reader, "pdfEncoding", pdfEncoding ) ) {
+            QString isBoldString;
+            if( !getOptionalAttribute( reader, "isBold", isBoldString ) )
+            {
                 return false;
             }
 
-            QString isPdfEmbedded;
-            if( !getOptionalAttribute( reader, "isPdfEmbedded", isPdfEmbedded ) ) {
+            QString isItalicString;
+            if( !getOptionalAttribute( reader, "isItalic", isItalicString ) )
+            {
+                return false;
+            }
+
+            QString isUnderlineString;
+            if( !getOptionalAttribute( reader, "isUnderline", isUnderlineString ) )
+            {
+                return false;
+            }
+
+            QString isStrikeThroughString;
+            if( !getOptionalAttribute( reader, "isStrikeThrough", isStrikeThroughString ) )
+            {
+                return false;
+            }
+
+            QString pdfFontNameString;
+            if( !getOptionalAttribute( reader, "pdfFontName", pdfFontNameString ) ) {
+                return false;
+            }
+
+            QString pdfEncodingString;
+            if( !getOptionalAttribute( reader, "pdfEncoding", pdfEncodingString ) ) {
+                return false;
+            }
+
+            QString isPdfEmbeddedString;
+            if( !getOptionalAttribute( reader, "isPdfEmbedded", isPdfEmbeddedString ) ) {
                 return false;
             }
 
@@ -294,18 +324,24 @@ namespace qtreports {
                 return false;
             }
 
-            bool isDefaultBool = toBool( isDefault );
+            //isBold = "false" isItalic = "false" isUnderline = "false" isStrikeThrough = "false"
+            bool isDefault = toBool( isDefaultString );
             StylePtr style( new Style() );
             style->setTagName( "style" );
-            style->setName( name );
-            style->setAsDefault( isDefaultBool );
-            style->setFontName( fontName );
-            style->setFontSize( fontSize.toInt() );
-            style->setPDFFontName( pdfFontName );
-            style->setPDFEncoding( pdfEncoding );
-            style->setPDFEmbedded( toBool( isPdfEmbedded ) );
-            report->setStyle( name, style );
-            if( isDefaultBool ) {
+            style->setName( nameString );
+            style->setAsDefault( isDefault );
+            style->setFontName( fontNameString );
+            style->setFontColor( QColor( fontColorString ) );
+            style->setFontSize( fontSizeString.toInt() );
+            style->setBold( toBool( isBoldString ) );
+            style->setItalic( toBool( isItalicString ) );
+            style->setUnderline( toBool( isUnderlineString ) );
+            style->setStrikeThrough( toBool( isStrikeThroughString ) );
+            style->setPDFFontName( pdfFontNameString );
+            style->setPDFEncoding( pdfEncodingString );
+            style->setPDFEmbedded( toBool( isPdfEmbeddedString ) );
+            report->setStyle( nameString, style );
+            if( isDefault ) {
                 report->setDefaultStyle( style );
             }
 
