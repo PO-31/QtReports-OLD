@@ -100,6 +100,13 @@ namespace qtreports
             m_report->setFieldData( name, value );
         }
 
+        QMap<QString, QString> paramsMap = m_report.data()->getParameters();
+        QMapIterator <QString, QString> iterator(paramsMap);
+        while(iterator.hasNext()) {
+            iterator.next();
+            m_processedDB.addParam(iterator.key(), QVariant(iterator.value()));
+        }
+
         return true;
     }
 
