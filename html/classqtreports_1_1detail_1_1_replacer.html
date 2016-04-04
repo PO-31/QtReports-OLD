@@ -113,8 +113,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <tr class="separator:a0755107511a830346c28a8e51bcf99e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4642b07160798f2ee4de276e1d0c1ecd"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_replacer.html#a4642b07160798f2ee4de276e1d0c1ecd">replaceField</a> (const QString &amp;text, const ReportPtr &amp;report, int i)</td></tr>
 <tr class="separator:a4642b07160798f2ee4de276e1d0c1ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1ac521aeaf5fdd694e79e2ae52d4704"><td class="memItemLeft" align="right" valign="top">QImage&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_replacer.html#ae1ac521aeaf5fdd694e79e2ae52d4704">replaceFieldImage</a> (const QString &amp;text, const ReportPtr &amp;report, int i)</td></tr>
+<tr class="separator:ae1ac521aeaf5fdd694e79e2ae52d4704"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2be57bd514335f9b9f2a520247562ce1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_replacer.html#a2be57bd514335f9b9f2a520247562ce1">replaceFieldInTextWidget</a> (const TextWidgetPtr &amp;widget, const ReportPtr &amp;report, int i)</td></tr>
 <tr class="separator:a2be57bd514335f9b9f2a520247562ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aeb7794f90c0be34a30ab60a6df1920"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_replacer.html#a4aeb7794f90c0be34a30ab60a6df1920">replaceFieldInImageWidget</a> (const ImagePtr &amp;widget, const ReportPtr &amp;report, int i)</td></tr>
+<tr class="separator:a4aeb7794f90c0be34a30ab60a6df1920"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58cf857aa78eb3e273f6543769af425b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_replacer.html#a58cf857aa78eb3e273f6543769af425b">replaceFieldInSection</a> (const SectionPtr &amp;section, const ReportPtr &amp;report, int i)</td></tr>
 <tr class="separator:a58cf857aa78eb3e273f6543769af425b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7ccb83be264f7c72b7485cf38455450"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_replacer.html#af7ccb83be264f7c72b7485cf38455450">replace</a> (const SectionPtr &amp;section, const ReportPtr &amp;report, int i)</td></tr>
@@ -213,8 +217,88 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 </div><div class="memdoc">
 <p>Возвращает текст с подставленными значениями полей из источника данных. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">report</td><td>Указатель на отчет </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">text</td><td>Исходный текст </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">report</td><td>Указатель на отчет </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>Текущая строка </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ae1ac521aeaf5fdd694e79e2ae52d4704"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QImage qtreports::detail::Replacer::replaceFieldImage </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ReportPtr &amp;&#160;</td>
+          <td class="paramname"><em>report</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Возвращает изображение на основе первого найденного выражения. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">text</td><td>Исходный текст </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">report</td><td>Указатель на отчет </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>Текущая строка </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4aeb7794f90c0be34a30ab60a6df1920"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool qtreports::detail::Replacer::replaceFieldInImageWidget </td>
+          <td>(</td>
+          <td class="paramtype">const ImagePtr &amp;&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const ReportPtr &amp;&#160;</td>
+          <td class="paramname"><em>report</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>На основе текста виджета вставляет в него изображение из источника данных. Перегружанная функция, предоставленная для удобства. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">widget</td><td>Указатель на виджет </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">report</td><td>Указатель на отчет </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">i</td><td>Текущая строка </td></tr>
   </table>
   </dd>
