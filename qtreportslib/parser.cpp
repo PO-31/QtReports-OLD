@@ -640,7 +640,7 @@ namespace qtreports
                 return false;
             }
 
-            image->setTagName( "rect" );
+            image->setTagName( "image" );
             band->addImage( image );
 
             return !reader.hasError();
