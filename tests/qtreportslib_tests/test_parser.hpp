@@ -17,6 +17,7 @@ private:
     void ReportStyleParseTest();
 
     void OptionalFieldsTest();
+    void FullTest();
 
 
 private slots:

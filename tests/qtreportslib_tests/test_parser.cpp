@@ -400,8 +400,101 @@ void Test_Parser::OptionalFieldsTest()
     QCOMPARE( report->getDetail()->getBand(0)->getStaticText(0)->getAlignment() & Qt::AlignVCenter, Qt::AlignVCenter);
 }
 
+void Test_Parser::FullTest() {
+    qtreports::detail::Parser parser;
+    QString input = QFINDTESTDATA( "full.qreport" );
 
+    QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
 
+    qtreports::detail::ReportPtr report = parser.getReport();
+
+    QVERIFY( !report.isNull());
+
+    QCOMPARE( report->getWidth(), 600 );
+    QCOMPARE( report->getHeight(), 500 );
+    QCOMPARE( report->getOrientation(), QPrinter::Orientation::Landscape );
+    QCOMPARE( report->getName(), QString("full_report") );
+
+    QVERIFY( !report->getStyle("Arial_Normal").isNull() );
+
+    QCOMPARE( report->getStyle("Arial_Normal")->isDefault(), true );
+    QCOMPARE( report->getStyle("Arial_Normal")->getFontName(), QString("Arial"));
+    QCOMPARE( report->getStyle("Arial_Normal")->getFontSize(), 12 );
+    QCOMPARE( report->getStyle("Arial_Normal")->getPDFFontName(), QString("c:\\tahoma.ttf") );
+    QCOMPARE( report->getStyle("Arial_Normal")->isPDFEmbedded(), false );
+    QCOMPARE( report->getStyle("Arial_Normal")->isBold(), true );
+    QCOMPARE( report->getStyle("Arial_Normal")->isItalic(), true );
+    QCOMPARE( report->getStyle("Arial_Normal")->getFontColor(), QColor("red") );
+
+    QCOMPARE( report->getQuery(), QString("\n     select idImg, nameImg, image from images; \n  ") );
+
+    QVERIFY( !report->getField("idImg").isNull() );
+    QVERIFY( !report->getField("nameImg").isNull() );
+    QVERIFY( !report->getField("image").isNull() );
+
+    QCOMPARE( report->getField("idImg")->getClassName(), QString("integer") );
+    QCOMPARE( report->getField("nameImg")->getClassName(), QString("QString") );
+    QCOMPARE( report->getField("image")->getClassName(), QString("QString") );
+
+    QVERIFY( !report->getTitle().isNull() );
+
+    QVERIFY( !report->getTitle()->getBand(0).isNull() );
+
+    QCOMPARE( report->getTitle()->getBand(0)->getHeight(), 200 );
+
+    QVERIFY( !report->getTitle()->getBand(0)->getStaticText(0).isNull() );
+
+    QCOMPARE( report->getTitle()->getBand(0)->getStaticText(0)->getAlignment() & Qt::AlignRight, Qt::AlignRight);
+    QCOMPARE( report->getTitle()->getBand(0)->getStaticText(0)->getAlignment() & Qt::AlignTop, Qt::AlignTop);
+    QCOMPARE( report->getTitle()->getBand(0)->getStaticText(0)->getPos(), QPoint(0, 40) );
+    QCOMPARE( report->getTitle()->getBand(0)->getStaticText(0)->getSize(), QSize(200, 20) );
+    QCOMPARE( report->getTitle()->getBand(0)->getStaticText(0)->getOriginalText(), QString("TopRight Text") );
+
+    QVERIFY( !report->getDetail().isNull() );
+
+    QVERIFY( !report->getDetail()->getBand(0).isNull() );
+    QVERIFY( !report->getDetail()->getBand(1).isNull() );
+    QVERIFY( !report->getDetail()->getBand(2).isNull() );
+
+    QVERIFY( !report->getDetail()->getBand(0)->getTextField(0).isNull() );
+
+    QCOMPARE( report->getDetail()->getBand(0)->getTextField(0)->getSize(), QSize(100, 30) );
+    QCOMPARE( report->getDetail()->getBand(0)->getTextField(0)->getPos(), QPoint(20, 20) );
+    QCOMPARE( report->getDetail()->getBand(0)->getTextField(0)->getClassName(), QString("QString") );
+    QCOMPARE( report->getDetail()->getBand(0)->getTextField(0)->getOriginalText(), QString("$P{param1}") );
+
+    QCOMPARE( report->getTitle()->getBandsSize(), 1 );
+    QCOMPARE( report->getDetail()->getBandsSize(), 3 );
+
+    QVERIFY( !report->getDetail()->getBand(1).isNull() );
+
+    QCOMPARE( report->getDetail()->getBand(1)->getHeight(), 230);
+    QCOMPARE( report->getDetail()->getBand(1)->getTextFieldsSize(), 2 );
+    QCOMPARE( report->getDetail()->getBand(1)->getTextField(0)->getOriginalText(), QString("$F{idImg}") );
+    QCOMPARE( report->getDetail()->getBand(1)->getTextField(1)->getAlignment() & Qt::AlignLeft, Qt::AlignLeft);
+    QCOMPARE( report->getDetail()->getBand(1)->getTextField(1)->getAlignment() & Qt::AlignBottom, Qt::AlignBottom);
+
+    QVERIFY( !report->getDetail()->getBand(1)->getImage(0).isNull() );
+
+    QCOMPARE( report->getDetail()->getBand(1)->getImage(0)->getSize(), QSize(425, 200) );
+    QCOMPARE( report->getDetail()->getBand(1)->getImage(0)->getPos(), QPoint(102, 0) );
+    QCOMPARE( report->getDetail()->getBand(1)->getImage(0)->getOriginalText(), QString("$F{image}"));
+
+    QVERIFY( !report->getDetail()->getBand(2).isNull() );
+
+    QVERIFY( !report->getDetail()->getBand(2)->getRect(0).isNull() );
+    QVERIFY( !report->getDetail()->getBand(2)->getLine(0).isNull() );
+    QVERIFY( !report->getDetail()->getBand(2)->getEllipse(0).isNull() );
+
+    QCOMPARE( report->getDetail()->getBand(2)->getRect(0)->getPos(), QPoint(50, 0));
+    QCOMPARE( report->getDetail()->getBand(2)->getRect(0)->getSize(), QSize(100, 100));
+
+    QCOMPARE( report->getDetail()->getBand(2)->getLine(0)->getPos(), QPoint(100, 0));
+    QCOMPARE( report->getDetail()->getBand(2)->getLine(0)->getSize(), QSize(1, 100));
+
+    QCOMPARE( report->getDetail()->getBand(2)->getEllipse(0)->getPos(), QPoint(50, 0));
+    QCOMPARE( report->getDetail()->getBand(2)->getEllipse(0)->getSize(), QSize(100, 100));
+}
 
 void    Test_Parser::parse() {
     ReportTreeParseTest();
