@@ -485,6 +485,7 @@ void    Test_Parser::parse() {
     QCOMPARE( field_image->getName(), QString( "image" ) );
     QCOMPARE( field_image->getClassName(), QString( "QString" ) );
     QCOMPARE( field_image->getData( 0 ), QString() );
+    QCOMPARE( field_image->getData< QImage >( 0 ), QImage() );
     QCOMPARE( field_image->getLastError(), QString() );
     QCOMPARE( field_image->getRowCount(), 0 );
 
@@ -528,6 +529,7 @@ void    Test_Parser::parse() {
     QCOMPARE( staticText_0_band_0_title->getStyle(), QString( "Arial_Normal" ) );
     QCOMPARE( staticText_0_band_0_title->getAlignment() & Qt::AlignRight, Qt::AlignRight );
     QCOMPARE( staticText_0_band_0_title->getAlignment() & Qt::AlignTop, Qt::AlignTop );
+    QCOMPARE( staticText_0_band_0_title->getText(), QString( "TopRight Text" ) );
     QCOMPARE( staticText_0_band_0_title->getOriginalText(), QString( "TopRight Text" ) );
 
     auto bands_title = title->getBands();
@@ -563,6 +565,7 @@ void    Test_Parser::parse() {
     QCOMPARE( textField_0_band_0_detail->getSize(), QSize( 100, 30 ) );
     QCOMPARE( textField_0_band_0_detail->getPos(), QPoint( 20, 20 ) );
     QCOMPARE( textField_0_band_0_detail->getClassName(), QString( "QString" ) );
+    QCOMPARE( textField_0_band_0_detail->getText(), QString( "$P{param1}" ) );
     QCOMPARE( textField_0_band_0_detail->getOriginalText(), QString( "$P{param1}" ) );
 
     //FIX. Not full
@@ -580,6 +583,7 @@ void    Test_Parser::parse() {
     QCOMPARE( textField_0_band_1_detail->getTagName(), QString( "textField" ) );
     QCOMPARE( textField_0_band_1_detail->getName(), QString() );
     QCOMPARE( textField_0_band_1_detail->getLastError(), QString() );
+    QCOMPARE( textField_0_band_1_detail->getText(), QString( "$F{idImg}" ) );
     QCOMPARE( textField_0_band_1_detail->getOriginalText(), QString( "$F{idImg}" ) );
 
     //FIX. Not full
@@ -590,6 +594,8 @@ void    Test_Parser::parse() {
     QCOMPARE( textField_1_band_1_detail->getLastError(), QString() );
     QCOMPARE( textField_1_band_1_detail->getAlignment() & Qt::AlignLeft, Qt::AlignLeft );
     QCOMPARE( textField_1_band_1_detail->getAlignment() & Qt::AlignBottom, Qt::AlignBottom );
+    QCOMPARE( textField_1_band_1_detail->getText(), QString( "\n          $F{nameImg}\n        " ) );
+    QCOMPARE( textField_1_band_1_detail->getOriginalText(), QString( "\n          $F{nameImg}\n        " ) );
 
     //FIX. Not full
     QCOMPARE( band_1_detail->getTextFieldsSize(), 2 );
@@ -602,7 +608,9 @@ void    Test_Parser::parse() {
     QCOMPARE( image_0_band_1_detail->getLastError(), QString() );
     QCOMPARE( image_0_band_1_detail->getSize(), QSize( 425, 200 ) );
     QCOMPARE( image_0_band_1_detail->getPos(), QPoint( 102, 0 ) );
+    QCOMPARE( image_0_band_1_detail->getText(), QString( "$F{image}" ) );
     QCOMPARE( image_0_band_1_detail->getOriginalText(), QString( "$F{image}" ) );
+    QCOMPARE( image_0_band_1_detail->getImage(), QImage() );
 
     //FIX. Not full
     auto band_2_detail = detail->getBand( 2 );
