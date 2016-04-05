@@ -74,7 +74,7 @@ namespace qtreports
 
         bool    Parser::getValue( QXmlStreamReader & reader, QString & data )
         {
-            m_log << "getValue: start" << endl;
+            m_log << "getValue():\tstart" << endl;
             while( !reader.atEnd() && !reader.isEndElement() )
             {
                 data += reader.text().toString();
@@ -83,35 +83,35 @@ namespace qtreports
 
             if( reader.hasError() )
             {
-                m_log << "getValue: error" << endl;
+                m_log << "getValue():\terror" << endl;
                 m_lastError = reader.errorString();
                 return false;
             }
 
-            m_log << "getValue: end. data: " << data << endl;
+            m_log << "getValue():\tend. data: " << data << endl;
 
             return true;
         }
 
         bool    Parser::getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option )
         {
-            m_log << "getAttribute: start. name: " << name << endl;
+            m_log << "getAttribute():\tstart. name: " << name << endl;
             auto && attributes = reader.attributes();
             if( !attributes.hasAttribute( name ) )
             {
-                m_log << "getAttribute: !hasAttribute" << endl;
-                if( option != AttributeOption::Required )
+                m_log << "getAttribute():\tnot have attribute: " + name << endl;
+                if( option == AttributeOption::Optional )
                 {
                     return true;
                 }
-                m_log << "getAttribute: error" << endl;
+                m_log << "getAttribute():\terror" << endl;
                 auto elementName = reader.name().toString();
                 m_lastError = "Element \"" + reader.name().toString() +
                     "\" not have attribute: " + name;
                 return false;
             }
             data = attributes.value( name ).toString();
-            m_log << "getAttribute: end. name: " << name << ", data: " << data << endl;
+            m_log << "getAttribute():\tend. name: " << name << ",\t data: " << data << endl;
             return true;
         }
 
@@ -127,7 +127,7 @@ namespace qtreports
 
         bool    Parser::goToElementEnd( QXmlStreamReader & reader )
         {
-            m_log << "goToEnd: start" << endl;
+            m_log << "goToEnd():\tstart" << endl;
             int level = 0;
             while( !reader.atEnd() )
             {
@@ -148,18 +148,18 @@ namespace qtreports
 
             if( reader.hasError() )
             {
-                m_log << "goToEnd: error" << endl;
+                m_log << "goToEnd():\terror" << endl;
                 m_lastError = reader.errorString();
                 return false;
             }
-            m_log << "goToEnd: end" << endl;
+            m_log << "goToEnd():\tend" << endl;
 
             return true;
         }
 
         bool    Parser::parseChilds( QXmlStreamReader & reader, const ObjectPtr & object )
         {
-            m_log << "parseChilds: start" << endl;
+            m_log << "parseChilds():\tstart" << endl;
             while( !reader.atEnd() )
             {
                 reader.readNext();
@@ -173,10 +173,10 @@ namespace qtreports
                 }
 
                 auto name = reader.name().toString();
-                m_log << "parseChilds: current tag: " << name << endl;
+                m_log << "parseChilds():\tcurrent tag: " << name << endl;
                 if( m_functions.contains( name ) )
                 {
-                    m_log << "parseChilds: use func for: " << name << endl;
+                    m_log << "parseChilds():\tuse func for: " << name << endl;
                     auto func = m_functions[ name ];
                     if( !func( reader, object ) )
                     {
@@ -185,7 +185,7 @@ namespace qtreports
                 }
                 else
                 {
-                    m_log << "parseChilds: goToElementEnd: " << name << endl;
+                    m_log << "parseChilds():\tgoToElementEnd: " << name << endl;
                     if( !goToElementEnd( reader ) )
                     {
                         return false;
@@ -195,12 +195,12 @@ namespace qtreports
 
             if( reader.hasError() )
             {
-                m_log << "parseChilds: error" << endl;
+                m_log << "parseChilds():\terror" << endl;
                 m_lastError = reader.errorString();
                 return false;
             }
 
-            m_log << "parseChilds: end" << endl;
+            m_log << "parseChilds():\tend" << endl;
             return true;
         }
 
@@ -256,7 +256,7 @@ namespace qtreports
             }
 
             QString pageWidthString;
-            if( !getOptionalAttribute( reader, "ðàgeWidth", pageWidthString ) )
+            if( !getOptionalAttribute( reader, "pageWidth", pageWidthString ) )
             {
                 return false;
             }
