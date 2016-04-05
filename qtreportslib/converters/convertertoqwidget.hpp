@@ -49,7 +49,8 @@ namespace qtreports {
             void        addVerticalBorder( QBoxLayout * parent, const QMargins & margins, int height );
             void        addEmptySection( QBoxLayout * parent, const QMargins & margins );
             QFrame *    addSectionLayout( QBoxLayout * parent, const QMargins & margins, int height );
-            QWidget *   addPage();
+            
+            void        addPage();
 
             bool        createQWidget( const ReportPtr & report );
             bool        createSection( QWidget * parent, const SectionPtr & section, int i );

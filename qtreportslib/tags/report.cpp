@@ -135,22 +135,22 @@ namespace qtreports
 
         const QSize     Report::getSize() const
         {
-            return m_size;
+            return m_orientation == QPrinter::Orientation::Portrait ? m_size : m_size.transposed();
         }
 
         void    Report::setSize( const QSize & size )
         {
-            m_size = size;
+            m_size = QPrinter::Orientation::Portrait ? size : size.transposed();
         }
 
         int     Report::getHeight() const
         {
-            return m_size.height();
+            return getSize().height();
         }
 
         int     Report::getWidth() const
         {
-            return m_size.width();
+            return getSize().width();
         }
 
         int     Report::getLeftMargin() const

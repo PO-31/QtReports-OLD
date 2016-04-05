@@ -232,21 +232,13 @@ namespace qtreports
 
     bool	Engine::print()
     {
-        QPrinter printer;
-
-        m_printedWidget = createWidget();
-        if( m_printedWidget.isNull() )
+        if( m_report.isNull() )
         {
-            m_lastError = "Cannot create widget. Error: " + m_lastError;
+            m_lastError = "Report is empty. Please open report file";
             return false;
         }
 
-        m_printedWidget->resize( m_report->getSize() );
-
-        //Magic
-        m_printedWidget->show();
-        m_printedWidget->hide();
-
+        QPrinter printer;
         QPrintPreviewDialog preview( &printer );
         connect(
             &preview, &QPrintPreviewDialog::paintRequested,
@@ -254,31 +246,52 @@ namespace qtreports
             );
         preview.exec();
 
-        m_printedWidget.clear();
-
         return true;
     }
 
     void	Engine::drawPreview( QPrinter * printer )
     {
-        if( m_printedWidget.isNull() )
+        auto temp = m_report->getOrientation();
+        m_report->setOrientation( printer->orientation() );
+        detail::ConverterToQWidget converter( m_report );
+        auto result = converter.convert( detail::ConverterToQWidget::WidgetType::Report );
+        m_report->setOrientation( temp );
+        if( !result )
         {
+            m_lastError = converter.getLastError();
             return;
         }
 
+        auto widgets = converter.getPages();
+        if( widgets.isEmpty() )
+        {
+            m_lastError = "Cannot print widget: all pages is empty";
+            return;
+        }
+
+        auto widget = widgets.value( 0 );
+
         QRectF rect = printer->pageRect();
         QPainter painter( printer );
-        qreal scale = rect.width() / m_printedWidget->width();
+        qreal scale = rect.width() / widget->width();
 
-        m_printedWidget->resize( m_printedWidget->width(), rect.height() / scale );
+        widget->resize( widget->width(), rect.height() / scale );
         painter.scale( scale, scale );
 
-        auto height = m_printedWidget->height() * scale;
-        auto count = static_cast< int >( std::ceil( height / rect.height() ) );
-        for( int i = 0; i < count; ++i )
+        for( int i = 0; i < widgets.size(); ++i )
         {
             i != 0 ? printer->newPage() : 0;
-            m_printedWidget->render( &painter, QPoint( 0, -i * rect.height() / scale ) );
+            widget = widgets.value( i );
+            if( widget.isNull() )
+            {
+                m_lastError = "Error in print process: printed widget is empty";
+                return;
+            }
+
+            //Magic
+            widget->show();
+            widget->hide();
+            widget->render( &painter );
         }
     }
 

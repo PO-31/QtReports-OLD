@@ -2,6 +2,7 @@
 #include <QLabel>
 #include "../replacer.hpp"
 #include "convertertoqwidget.hpp"
+#include <QDebug>
 
 namespace qtreports
 {
@@ -147,10 +148,12 @@ namespace qtreports
             return centerFrame;
         }
 
-        QWidget *   ConverterToQWidget::addPage()
+        void    ConverterToQWidget::addPage()
         {
-            m_pages.append( QWidgetPtr( new QWidget() ) );
-            return m_pages.last().data();
+            QWidgetPtr widget( new QWidget() );
+            widget->resize( m_report->getSize() );
+            widget->setStyleSheet( "background-color: white; " );
+            m_pages.append( widget );
         }
 
         bool    ConverterToQWidget::createQWidget( const ReportPtr & report )
@@ -172,6 +175,8 @@ namespace qtreports
             m_qwidget->setStyleSheet( "background-color: white; " );//border: 1px solid gray; 
             //m_qwidget->setContentsMargins( m_report->getMargins() );
 
+            addPage();
+
             auto layout = new QVBoxLayout( m_qwidget.data() );
             layout->setMargin( 0 );
             layout->setSpacing( 0 );
@@ -180,7 +185,7 @@ namespace qtreports
             auto title = report->getTitle();
             if( !title.isNull() )
             {
-                auto sectionWidget = addSectionLayout( layout, report->getMargins(), title->getHeight() );
+                QWidget * sectionWidget = isLayout() ? addSectionLayout( layout, report->getMargins(), title->getHeight() ) : nullptr;
                 if( !createSection( sectionWidget, title, 0 ) )
                 {
                     return false;
@@ -190,7 +195,7 @@ namespace qtreports
             int count = isReport() ? report->getRowCount() : 1;
             for( int i = 0; i < count; ++i )
             {
-                auto sectionWidget = addSectionLayout( layout, report->getMargins(), detail->getHeight() );
+                QWidget * sectionWidget = isLayout() ? addSectionLayout( layout, report->getMargins(), detail->getHeight() ) : nullptr;
                 if( !createSection( sectionWidget, detail, i ) )
                 {
                     return false;
@@ -199,7 +204,6 @@ namespace qtreports
 
             addEmptySection( layout, report->getMargins() );
             addVerticalBorder( layout, report->getMargins(), report->getBottomMargin() );
-
             return true;
         }
 
@@ -240,15 +244,17 @@ namespace qtreports
             {
                 if( m_currentHeight + band->getHeight() > m_report->getHeight() )
                 {
-                    parent = addPage();
+                    addPage();
                     m_currentHeight = 0;
                 }
-                m_currentHeight += band->getHeight();
 
-                auto frame = new QFrame( parent );
-                frame->move( frame->x(), dy );
-                dy += band->getHeight();
+                auto frame = new QFrame( isLayout() ? parent : m_pages.last().data() );
                 frame->setStyleSheet( "background-color: transparent; " );
+                frame->move( frame->x(), isLayout() ? dy : m_currentHeight );
+
+                m_currentHeight += band->getHeight();
+                dy += band->getHeight();
+
                 for( auto && textWidget : band->getTextWidgets() )
                 {
                     auto label = new QLabel( frame );
