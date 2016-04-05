@@ -255,8 +255,8 @@ namespace qtreports
                 return false;
             }
 
-            QString ðàgeWidthString;
-            if( !getOptionalAttribute( reader, "ðàgeWidth", ðàgeWidthString ) )
+            QString pageWidthString;
+            if( !getOptionalAttribute( reader, "ðàgeWidth", pageWidthString ) )
             {
                 return false;
             }
@@ -303,19 +303,14 @@ namespace qtreports
                 report->setOrientation( orientation );
             }
 
-            if( !ðàgeWidthString.isEmpty() )
+            if( !pageWidthString.isEmpty() )
             {
-                report->setWidth( ðàgeWidthString.toInt() );
+                report->setWidth( pageWidthString.toInt() );
             }
 
             if( !pageHeightString.isEmpty() )
             {
                 report->setHeight( pageHeightString.toInt() );
-            }
-
-            if( !bottomMargin.isEmpty() )
-            {
-                report->setBottomMargin( bottomMargin.toInt() );
             }
 
             return !reader.hasError();
