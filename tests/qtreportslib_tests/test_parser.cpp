@@ -504,6 +504,7 @@ void    Test_Parser::parse() {
     TextTest();
 
     OptionalFieldsTest();
+    FullTest();
 }
 
 void    Test_Parser::getReport() {
