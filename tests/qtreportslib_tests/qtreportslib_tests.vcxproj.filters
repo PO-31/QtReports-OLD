@@ -71,5 +71,6 @@
     <None Include="students.qreport" />
     <None Include="style test.qreport" />
     <None Include="images.qrxml" />
+    <None Include="full.qrxml" />
   </ItemGroup>
 </Project>

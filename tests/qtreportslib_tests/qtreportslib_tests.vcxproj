@@ -186,6 +186,7 @@
     <None Include="detail.qreport">
       <SubType>Designer</SubType>
     </None>
+    <None Include="full.qrxml" />
     <None Include="images.qrxml" />
     <None Include="report test.qreport" />
     <None Include="simple.qreport" />
