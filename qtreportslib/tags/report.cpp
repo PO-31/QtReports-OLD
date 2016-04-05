@@ -113,19 +113,14 @@ namespace qtreports
             return m_parameters;
         }
 
-        int     Report::getRowCount() const
-        {
-            return m_rowCount;
-        }
-
         void    Report::setRowCount( int count )
         {
             m_rowCount = count;
         }
 
-        QPrinter::Orientation     Report::getOrientation() const
+        int     Report::getRowCount() const
         {
-            return m_orientation;
+            return m_rowCount;
         }
 
         void    Report::setOrientation( QPrinter::Orientation orientation )
@@ -133,9 +128,9 @@ namespace qtreports
             m_orientation = orientation;
         }
 
-        const QSize     Report::getSize() const
+        QPrinter::Orientation     Report::getOrientation() const
         {
-            return m_orientation == QPrinter::Orientation::Portrait ? m_size : m_size.transposed();
+            return m_orientation;
         }
 
         void    Report::setSize( const QSize & size )
@@ -143,9 +138,21 @@ namespace qtreports
             m_size = QPrinter::Orientation::Portrait ? size : size.transposed();
         }
 
-        int     Report::getHeight() const
+        const QSize     Report::getSize() const
         {
-            return getSize().height();
+            return m_orientation == QPrinter::Orientation::Portrait ? m_size : m_size.transposed();
+        }
+
+        void Report::setWidth( int width )
+        {
+            //if( m_orientation == QPrinter::Orientation::Portrait )
+            //{
+                m_size.setWidth( width );
+            //}
+            //else
+            //{
+            //    m_size.setHeight( width );
+            //}
         }
 
         int     Report::getWidth() const
@@ -153,29 +160,21 @@ namespace qtreports
             return getSize().width();
         }
 
-        int     Report::getLeftMargin() const
+        void Report::setHeight( int height )
         {
-            return m_margins.left();
+            //if( m_orientation == QPrinter::Orientation::Portrait )
+            //{
+                m_size.setHeight( height );
+            //}
+            //else
+            //{
+            //    m_size.setWidth( height );
+            //}
         }
 
-        int     Report::getTopMargin() const
+        int     Report::getHeight() const
         {
-            return m_margins.top();
-        }
-
-        int     Report::getRightMargin() const
-        {
-            return m_margins.right();
-        }
-
-        int     Report::getBottomMargin() const
-        {
-            return m_margins.bottom();
-        }
-
-        const QMargins  Report::getMargins() const
-        {
-            return m_margins;
+            return getSize().height();
         }
 
         void    Report::setLeftMargin( int left )
@@ -183,9 +182,19 @@ namespace qtreports
             m_margins.setLeft( left );
         }
 
+        int     Report::getLeftMargin() const
+        {
+            return m_margins.left();
+        }
+
         void    Report::setTopMargin( int top )
         {
             m_margins.setTop( top );
+        }
+
+        int     Report::getTopMargin() const
+        {
+            return m_margins.top();
         }
 
         void    Report::setRightMargin( int right )
@@ -193,9 +202,19 @@ namespace qtreports
             m_margins.setRight( right );
         }
 
+        int     Report::getRightMargin() const
+        {
+            return m_margins.right();
+        }
+
         void    Report::setBottomMargin( int bottom )
         {
             m_margins.setBottom( bottom );
+        }
+
+        int     Report::getBottomMargin() const
+        {
+            return m_margins.bottom();
         }
 
         void    Report::setMargins( int left, int top, int right, int bottom )
@@ -209,6 +228,11 @@ namespace qtreports
         void    Report::setMargins( const QMargins & margins )
         {
             m_margins = margins;
+        }
+
+        const QMargins  Report::getMargins() const
+        {
+            return m_margins;
         }
 
     }

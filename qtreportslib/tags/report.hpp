@@ -51,30 +51,36 @@ namespace qtreports {
             const QString                       getParameter( const QString & name ) const;
             const QMap< QString, QString >      getParameters() const;
 
-            int     getRowCount() const;
             void    setRowCount( int count );
+            int     getRowCount() const;
 
-            QPrinter::Orientation   getOrientation() const;
             void                    setOrientation( QPrinter::Orientation orientation );
+            QPrinter::Orientation   getOrientation() const;
 
-            const QSize     getSize() const;
             void            setSize( const QSize & size );
+            const QSize     getSize() const;
 
-            int             getHeight() const;
+            void            setWidth( int width );
             int             getWidth() const;
 
-            int     getLeftMargin() const;
-            int     getTopMargin() const;
-            int     getRightMargin() const;
-            int     getBottomMargin() const;
-            const QMargins  getMargins() const;
+            void            setHeight( int height );
+            int             getHeight() const;
 
             void    setLeftMargin( int left );
+            int     getLeftMargin() const;
+
             void    setTopMargin( int top );
+            int     getTopMargin() const;
+
             void    setRightMargin( int right );
+            int     getRightMargin() const;
+
             void    setBottomMargin( int bottom );
-            void    setMargins( int left, int top, int right, int bottom );
-            void    setMargins( const QMargins & margins );
+            int     getBottomMargin() const;
+
+            void            setMargins( int left, int top, int right, int bottom );
+            void            setMargins( const QMargins & margins );
+            const QMargins  getMargins() const;
 
         private:
             QPrinter::Orientation	    m_orientation;

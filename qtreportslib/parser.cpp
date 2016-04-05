@@ -255,6 +255,18 @@ namespace qtreports
                 return false;
             }
 
+            QString ðàgeWidthString;
+            if( !getOptionalAttribute( reader, "ðàgeWidth", ðàgeWidthString ) )
+            {
+                return false;
+            }
+
+            QString pageHeightString;
+            if( !getOptionalAttribute( reader, "pageHeight", pageHeightString ) )
+            {
+                return false;
+            }
+
             if( !parseChilds( reader, report ) )
             {
                 return false;
@@ -289,6 +301,21 @@ namespace qtreports
                     QPrinter::Orientation::Portrait :
                     QPrinter::Orientation::Landscape;
                 report->setOrientation( orientation );
+            }
+
+            if( !ðàgeWidthString.isEmpty() )
+            {
+                report->setWidth( ðàgeWidthString.toInt() );
+            }
+
+            if( !pageHeightString.isEmpty() )
+            {
+                report->setHeight( pageHeightString.toInt() );
+            }
+
+            if( !bottomMargin.isEmpty() )
+            {
+                report->setBottomMargin( bottomMargin.toInt() );
             }
 
             return !reader.hasError();
