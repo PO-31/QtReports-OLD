@@ -15,7 +15,10 @@ namespace qtreports {
             Section();
             ~Section();
 
-            int                         getHeight();
+            void                        setWidth( int width );
+            int                         getWidth() const;
+
+            int                         getHeight() const;
 
             void                        addBand( const BandPtr & band );
             const BandPtr               getBand( int index ) const;
@@ -24,6 +27,8 @@ namespace qtreports {
 
         protected:
             QVector< BandPtr >  m_bands;
+            int                 m_width;
+            int                 m_height;
 
         };
         typedef QSharedPointer< Section > SectionPtr;

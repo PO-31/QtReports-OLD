@@ -41,6 +41,7 @@ namespace qtreports
             m_functions[ "textField" ] = toParseFunc( this, &Parser::parseTextField );
             m_functions[ "line" ] = toParseFunc( this, &Parser::parseLine );
             m_functions[ "rect" ] = toParseFunc( this, &Parser::parseRect );
+            m_functions[ "ellipse" ] = toParseFunc( this, &Parser::parseEllipse );
             m_functions[ "image" ] = toParseFunc( this, &Parser::parseImage );
             m_functions[ "imageExpression" ] = toParseFunc( this, &Parser::parseImageExpression );
             m_functions[ "reportElement" ] = toParseFunc( this, &Parser::parseReportElement );
@@ -207,13 +208,11 @@ namespace qtreports
         {
             QXmlStreamReader reader( text );
 
-            ReportPtr report( new Report() );
-            if( !parseChilds( reader, report ) )
+            m_report = ReportPtr( new Report() );
+            if( !parseChilds( reader, m_report ) )
             {
                 return false;
             }
-
-            m_report = report;
 
             return !reader.hasError();
         }
@@ -498,6 +497,7 @@ namespace qtreports
             }
 
             title->setTagName( "title" );
+            title->setWidth( report->getWidth() );
             report->setTitle( title );
 
             return !reader.hasError();
@@ -512,6 +512,7 @@ namespace qtreports
             }
 
             detail->setTagName( "detail" );
+            detail->setWidth( report->getWidth() );
             report->setDetail( detail );
 
             return !reader.hasError();
@@ -533,6 +534,7 @@ namespace qtreports
 
             band->setTagName( "band" );
             band->setHeight( height.toInt() );
+            band->setWidth( section->getWidth() );
             section->addBand( band );
 
             return !reader.hasError();
@@ -590,6 +592,20 @@ namespace qtreports
 
             rect->setTagName( "rect" );
             band->addRect( rect );
+
+            return !reader.hasError();
+        }
+
+        bool    Parser::parseEllipse( QXmlStreamReader & reader, const BandPtr & band )
+        {
+            EllipsePtr ellipse( new Ellipse() );
+            if( !parseChilds( reader, ellipse ) )
+            {
+                return false;
+            }
+
+            ellipse->setTagName( "ellipse" );
+            band->addEllipse( ellipse );
 
             return !reader.hasError();
         }
@@ -655,7 +671,12 @@ namespace qtreports
                 widget->setStyle( styleString );
             }
 
-            //if( widthString.contains( "%" ) )
+            if( widthString.contains( "%" ) )
+            {
+                auto percentString = widthString.split( "%" ).at( 0 );
+                int percent = std::max( 0, std::min( 100, percentString.toInt() ) );
+                width = static_cast< int >( percent * m_report->getWidth() * 0.01 );
+            }
             //auto percentString = widthString.split( "%" ).at( 0 );
             //int percent = std::max( 0, std::min( 100, percentString.toInt() ) );
             //width = 100;// percent * m_report->getSize().width();

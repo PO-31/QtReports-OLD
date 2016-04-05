@@ -1,5 +1,6 @@
 #include <QFrame>
 #include <QLabel>
+#include <QPainter>
 #include "../replacer.hpp"
 #include "convertertoqwidget.hpp"
 #include <QDebug>
@@ -319,6 +320,27 @@ namespace qtreports
                     label->setGeometry( rect->getRect() );
                     label->setAlignment( rect->getAlignment() );
                     //label->setText( "----------------------" );
+                }
+                for( auto && ellipse : band->getEllipses() )
+                {
+                    auto label = new QLabel( frame );
+                    QString style = "";
+                    if( isLayout() )
+                    {
+                        style += "border: 1px solid gray; ";
+                    }
+                    QPixmap pixmap( ellipse->getSize() );
+                    pixmap.fill( Qt::GlobalColor::transparent );
+
+                    QPainter painter( &pixmap );
+                    painter.setRenderHint( QPainter::Antialiasing );
+                    painter.drawEllipse( ellipse->getRect() );
+                    painter.end();
+
+                    label->setStyleSheet( "background-color: transparent; " + style );
+                    label->setGeometry( ellipse->getRect() );
+                    label->setAlignment( ellipse->getAlignment() );
+                    label->setPixmap( pixmap );
                 }
             }
 

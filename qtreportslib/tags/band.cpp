@@ -93,6 +93,26 @@ namespace qtreports {
             return m_rects;
         }
 
+        void    Band::addEllipse( const EllipsePtr & rect )
+        {
+            m_ellipses.append( rect );
+        }
+
+        const EllipsePtr  Band::getEllipse( int index ) const
+        {
+            return m_ellipses.value( index );
+        }
+
+        int     Band::getEllipsesSize() const
+        {
+            return m_ellipses.size();
+        }
+
+        const QVector< EllipsePtr >    Band::getEllipses() const
+        {
+            return m_ellipses;
+        }
+
         void    Band::addImage( const ImagePtr & image )
         {
             m_images.append( image );

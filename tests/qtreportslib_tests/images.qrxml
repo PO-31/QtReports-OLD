@@ -18,9 +18,9 @@
         <reportElement x="10" y="10" width="150" height="20" />
         <text><![CDATA[$P{title}]]></text>
       </staticText>
-      <rect>
-        <reportElement x="0" y="0" width="535" height="35" />
-      </rect>
+      <ellipse>
+        <reportElement x="0" y="0" width="50%" height="35" />
+      </ellipse>
     </band>
   </title>
   <detail>

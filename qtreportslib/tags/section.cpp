@@ -1,34 +1,50 @@
 #include "section.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
-        Section::Section() {}
+        Section::Section() :
+            m_width( 0 ),
+            m_height( 0 )
+        {}
 
         Section::~Section() {}
 
-        int     Section::getHeight() {
-            int height = 0;
-            for( auto && band : getBands() ) {
-                height += band->getHeight();
-            }
-
-            return height;
+        void    Section::setWidth( int width )
+        {
+            m_width = width;
         }
 
-        void    Section::addBand( const BandPtr & band ) {
+        int     Section::getWidth() const
+        {
+            return m_width;
+        }
+
+        int     Section::getHeight() const
+        {
+            return m_height;
+        }
+
+        void    Section::addBand( const BandPtr & band )
+        {
             m_bands.append( band );
+            m_height += band->getHeight();
         }
 
-        const BandPtr  Section::getBand( int index ) const {
-            return m_bands.at( index );
+        const BandPtr  Section::getBand( int index ) const
+        {
+            return m_bands.value( index );
         }
 
-        int     Section::getBandsSize() const {
+        int     Section::getBandsSize() const
+        {
             return m_bands.size();
         }
 
-        const QVector< BandPtr >    Section::getBands() const {
+        const QVector< BandPtr >    Section::getBands() const
+        {
             return m_bands;
         }
 

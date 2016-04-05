@@ -6,7 +6,7 @@ namespace qtreports
     {
 
         Report::Report() :
-            m_orientation( QPrinter::Orientation::Landscape ),
+            m_orientation( QPrinter::Orientation::Portrait ),
             m_size( 595, 842 ),
             m_margins( 30, 30, 30, 30 ),
             m_rowCount( 0 )

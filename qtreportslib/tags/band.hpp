@@ -7,6 +7,7 @@
 #include "textfield.hpp"
 #include "line.hpp"
 #include "rect.hpp"
+#include "ellipse.hpp"
 #include "image.hpp"
 #include "widget.hpp"
 
@@ -42,6 +43,11 @@ namespace qtreports {
             int                             getRectsSize() const;
             const QVector< RectPtr >        getRects() const;
 
+            void                            addEllipse( const EllipsePtr & rect );
+            const EllipsePtr                getEllipse( int index ) const;
+            int                             getEllipsesSize() const;
+            const QVector< EllipsePtr >     getEllipses() const;
+
             void                            addImage( const ImagePtr & rect );
             const ImagePtr                  getImage( int index ) const;
             int                             getImagesSize() const;
@@ -53,6 +59,7 @@ namespace qtreports {
             QVector< TextWidgetPtr >    m_textWidgets;
             QVector< LinePtr >          m_lines;
             QVector< RectPtr >          m_rects;
+            QVector< EllipsePtr >       m_ellipses;
             QVector< ImagePtr >         m_images;
 
         };
