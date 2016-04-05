@@ -511,7 +511,26 @@ void    Test_Parser::parse() {
     QCOMPARE( band_0_title->getTagName(), QString( "band" ) );
     QCOMPARE( band_0_title->getName(), QString() );
     QCOMPARE( band_0_title->getLastError(), QString() );
+    //QCOMPARE( band_0_title->getWidth(), 600 );
     QCOMPARE( band_0_title->getHeight(), 200 );
+    QCOMPARE( band_0_title->getLine( 0 ), qtreports::detail::LinePtr() );
+    QCOMPARE( band_0_title->getLines().empty(), true );
+    QCOMPARE( band_0_title->getLinesSize(), 0 );
+    QCOMPARE( band_0_title->getRect( 0 ), qtreports::detail::RectPtr() );
+    QCOMPARE( band_0_title->getRects().empty(), true );
+    QCOMPARE( band_0_title->getRectsSize(), 0 );
+    QCOMPARE( band_0_title->getEllipse( 0 ), qtreports::detail::EllipsePtr() );
+    QCOMPARE( band_0_title->getEllipses().empty(), true );
+    QCOMPARE( band_0_title->getEllipsesSize(), 0 );
+    QCOMPARE( band_0_title->getImage( 0 ), qtreports::detail::ImagePtr() );
+    QCOMPARE( band_0_title->getImages().empty(), true );
+    QCOMPARE( band_0_title->getImagesSize(), 0 );
+    QCOMPARE( band_0_title->getTextField( 0 ), qtreports::detail::TextFieldPtr() );
+    QCOMPARE( band_0_title->getTextFields().empty(), true );
+    QCOMPARE( band_0_title->getTextFieldsSize(), 0 );
+    QCOMPARE( band_0_title->getTextWidgets().empty(), false );
+    QCOMPARE( band_0_title->getTextWidgets().size(), 1 );
+    QCOMPARE( band_0_title->getTextWidgetsSize(), 1 );
 
     //FIX. Not full
     auto staticText_0_band_0_title = band_0_title->getStaticText( 0 );
@@ -531,6 +550,12 @@ void    Test_Parser::parse() {
     QCOMPARE( staticText_0_band_0_title->getAlignment() & Qt::AlignTop, Qt::AlignTop );
     QCOMPARE( staticText_0_band_0_title->getText(), QString( "TopRight Text" ) );
     QCOMPARE( staticText_0_band_0_title->getOriginalText(), QString( "TopRight Text" ) );
+
+    auto staticTexts_band_0_title = band_0_title->getStaticTexts();
+    QVERIFY( !staticTexts_band_0_title.isEmpty() );
+    QCOMPARE( staticTexts_band_0_title.size(), 1 );
+    QCOMPARE( band_0_title->getStaticTextsSize(), 1 );
+    QCOMPARE( staticTexts_band_0_title.value( 0 ), staticText_0_band_0_title );
 
     auto bands_title = title->getBands();
     QVERIFY( !bands_title.isEmpty() );
