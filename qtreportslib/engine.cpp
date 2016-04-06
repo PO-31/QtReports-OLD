@@ -192,7 +192,7 @@ namespace qtreports
         return true;
     }
 
-    const QWidgetPtr	Engine::createWidget()
+    QWidgetPtr	Engine::createWidget()
     {
         if( m_report.isNull() )
         {
@@ -211,7 +211,7 @@ namespace qtreports
         return converter.getQWidget();
     }
 
-    const QWidgetPtr	Engine::createLayout()
+    QWidgetPtr	Engine::createLayout()
     {
         if( m_report.isNull() )
         {
@@ -360,6 +360,11 @@ namespace qtreports
         return m_isOpened;
     }
 
+    detail::ReportPtr	Engine::getReport() const
+    {
+        return m_report;
+    }
+	
     const QString   Engine::getLastError() const
     {
         return m_lastError;

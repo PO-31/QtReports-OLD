@@ -3,6 +3,7 @@
 #include <QSize>
 #include <parser.hpp>
 #include "test_parser.hpp"
+#include <QDebug>
 
 Test_Parser::Test_Parser( QObject *parent ) :
     QObject( parent ) {}
@@ -414,10 +415,14 @@ void    Test_Parser::parse() {
     
 
     qtreports::detail::Parser parser;
-    QString input = QFINDTESTDATA( "full.qrxml" );
+    QString reportPath = QFINDTESTDATA( "full.qrxml" );
+    qDebug() << endl << "Used report: " << reportPath;
 
-    QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
-    QWARN( parser.getLog().toStdString().c_str() );
+    QVERIFY2( parser.parse( reportPath ), parser.getLastError().toStdString().c_str() );
+    QVERIFY( parser.getLog() != QString() );
+    QVERIFY( parser.getReport() != qtreports::detail::ReportPtr() );
+    QCOMPARE( parser.getLastError(), QString() );
+    //QWARN( parser.getLog().toStdString().c_str() );
 
     auto report = parser.getReport();
 

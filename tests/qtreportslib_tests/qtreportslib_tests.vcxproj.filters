@@ -61,6 +61,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_test_convertertoqwidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="test_convertertopdf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_convertertopdf.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_convertertopdf.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="test_engine.hpp">
@@ -70,6 +79,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="test_convertertoqwidget.hpp">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="test_convertertopdf.hpp">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

@@ -1,9 +1,11 @@
 ﻿#include <QTest>
-#include <QSqlQuery>
+#include <QMap>
 #include <QSqlDatabase>
-#include <parser.hpp>
+#include <QSqlError>
+#include <engine.hpp>
 #include <converters/convertertoqwidget.hpp>
 #include "test_convertertoqwidget.hpp"
+#include <QDebug>
 
 Test_ConverterToQWidget::Test_ConverterToQWidget( QObject * parent ) :
     QObject( parent ) {}
@@ -11,16 +13,25 @@ Test_ConverterToQWidget::Test_ConverterToQWidget( QObject * parent ) :
 Test_ConverterToQWidget::~Test_ConverterToQWidget() {}
 
 void    Test_ConverterToQWidget::convert() {
-    QString input = QFINDTESTDATA( "full.qrxml" );
+    QString reportPath = QFINDTESTDATA( "full.qrxml" );
+    qDebug() << endl << "Used report: " << reportPath;
 
-    qtreports::detail::Parser parser;
-    if( !parser.parse( input ) )
-    {
-        QFAIL( ( "Parsing error: " + parser.getLastError() ).toStdString().c_str() );
-        return;
-    }
+    qtreports::Engine engine;
+    QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
 
-    auto report = parser.getReport();
+    QMap < QString, QString > map;
+    map[ "title" ] = "Best Title in World";
+    qDebug() << endl << "Used map: " << map;
+    QVERIFY2( engine.setParameters( map ), engine.getLastError().toStdString().c_str() );
+
+    QString dbPath = QFINDTESTDATA( "images.db" );
+    qDebug() << endl << "Used db: " << dbPath;
+    auto db = QSqlDatabase::addDatabase( "QSQLITE" );
+    db.setDatabaseName( dbPath );
+    QVERIFY2( db.open(), db.lastError().text().toStdString().c_str() );
+    QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
+
+    auto report = engine.getReport();
 
     qtreports::detail::ConverterToQWidget converterToWidget( report );
     QVERIFY2( converterToWidget.convert( qtreports::detail::ConverterToQWidget::WidgetType::Report ), converterToWidget.getLastError().toStdString().c_str() );
