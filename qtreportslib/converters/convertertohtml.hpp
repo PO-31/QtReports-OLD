@@ -16,8 +16,8 @@ namespace qtreports {
             bool    convert();
             bool    convert( const QString & path );
 
-            const QString   getLastError() const;
             const QString   getHTML() const;
+            const QString   getLastError() const;
 
         private:
             ReportPtr   m_report;

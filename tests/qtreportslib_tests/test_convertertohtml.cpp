@@ -4,17 +4,17 @@
 #include <QSqlError>
 #include <QFile>
 #include <engine.hpp>
-#include <converters/convertertopdf.hpp>
-#include "test_convertertopdf.hpp"
+#include <converters/convertertohtml.hpp>
+#include "test_convertertohtml.hpp"
 #include <QDebug>
 
-Test_ConverterToPDF::Test_ConverterToPDF( QObject * parent ) :
+Test_ConverterToHTML::Test_ConverterToHTML( QObject * parent ) :
     QObject( parent )
 {}
 
-Test_ConverterToPDF::~Test_ConverterToPDF() {}
+Test_ConverterToHTML::~Test_ConverterToHTML() {}
 
-void    Test_ConverterToPDF::convert()
+void    Test_ConverterToHTML::convert()
 {
     QString reportPath = QFINDTESTDATA( "full.qrxml" );
     qDebug() << endl << "Used report: " << reportPath;
@@ -35,12 +35,17 @@ void    Test_ConverterToPDF::convert()
     QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
 
     auto report = engine.getReport();
-    auto outPath = "test.pdf";
 
-    qtreports::detail::ConverterToPDF converter( report );
-    QVERIFY2( converter.convert( outPath ), converter.getLastError().toStdString().c_str() );
-    QCOMPARE( converter.getDPI(), 600 );
-    QCOMPARE( converter.getLastError(), QString() );
+    qtreports::detail::ConverterToHTML converterToMemory( report );
+    QVERIFY2( converterToMemory.convert(), converterToMemory.getLastError().toStdString().c_str() );
+    QVERIFY( converterToMemory.getHTML() != QString() );
+    QCOMPARE( converterToMemory.getLastError(), QString() );
+
+    auto outPath = "test.pdf";
+    qtreports::detail::ConverterToHTML converterToPath( report );
+    QVERIFY2( converterToPath.convert( outPath ), converterToPath.getLastError().toStdString().c_str() );
+    QVERIFY( converterToPath.getHTML() != QString() );
+    QCOMPARE( converterToPath.getLastError(), QString() );
 
     QCOMPARE( QFile::exists( outPath ), true );
     QFile file( outPath );
@@ -50,27 +55,18 @@ void    Test_ConverterToPDF::convert()
     QCOMPARE( QFile::remove( outPath ), true );
 }
 
-void    Test_ConverterToPDF::setDPI()
+void    Test_ConverterToHTML::getHTML()
 {
     auto report = qtreports::detail::ReportPtr();
-    qtreports::detail::ConverterToPDF converter( report );
+    qtreports::detail::ConverterToHTML converter( report );
 
-    converter.setDPI( 500 );
-    QCOMPARE( converter.getDPI(), 500 );
+    QCOMPARE( converter.getHTML(), QString() );
 }
 
-void    Test_ConverterToPDF::getDPI()
+void    Test_ConverterToHTML::getLastError()
 {
     auto report = qtreports::detail::ReportPtr();
-    qtreports::detail::ConverterToPDF converter( report );
-
-    QCOMPARE( converter.getDPI(), 600 );
-}
-
-void    Test_ConverterToPDF::getLastError()
-{
-    auto report = qtreports::detail::ReportPtr();
-    qtreports::detail::ConverterToPDF converter( report );
+    qtreports::detail::ConverterToHTML converter( report );
 
     QCOMPARE( converter.getLastError(), QString() );
 }

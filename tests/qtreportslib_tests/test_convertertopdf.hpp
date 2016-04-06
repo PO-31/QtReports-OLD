@@ -3,12 +3,12 @@
 #define TEST_CONVERTERTOPDF_HPP
 #include <QObject>
 
-class Test_ConverterToPdf : public QObject {
+class Test_ConverterToPDF : public QObject {
     Q_OBJECT
 
 public:
-    explicit Test_ConverterToPdf( QObject * parent = Q_NULLPTR );
-    ~Test_ConverterToPdf();
+    explicit Test_ConverterToPDF( QObject * parent = Q_NULLPTR );
+    ~Test_ConverterToPDF();
 
 private slots:
     void    convert();

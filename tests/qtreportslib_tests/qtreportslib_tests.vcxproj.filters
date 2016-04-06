@@ -70,6 +70,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_test_convertertopdf.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_convertertohtml.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_convertertohtml.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="test_convertertohtml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="test_engine.hpp">
@@ -82,6 +91,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="test_convertertopdf.hpp">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="test_convertertohtml.hpp">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
