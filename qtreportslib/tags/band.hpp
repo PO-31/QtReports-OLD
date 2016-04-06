@@ -20,38 +20,38 @@ namespace qtreports {
             Band();
             ~Band();
 
-            void                            addStaticText( const StaticTextPtr & staticText );
-            const QVector< StaticTextPtr >  getStaticTexts() const;
-            const StaticTextPtr             getStaticText( int index ) const;
-            int                             getStaticTextsSize() const;
+            void                            addStaticText( const StaticTextPtr & staticText );//Добавить StaticText
+            const QVector< StaticTextPtr >  getStaticTexts() const;//Получить StaticText
+            const StaticTextPtr             getStaticText( int index ) const;//Получить индекс StaticText
+            int                             getStaticTextsSize() const;//Получить размер StaticText
 
-            void                            addTextField( const TextFieldPtr & staticText );
-            const QVector< TextFieldPtr >   getTextFields() const;
-            const TextFieldPtr              getTextField( int index ) const;
-            int                             getTextFieldsSize() const;
+            void                            addTextField( const TextFieldPtr & staticText );//Добавить Field
+            const QVector< TextFieldPtr >   getTextFields() const;//Получить Field
+            const TextFieldPtr              getTextField( int index ) const;//Получить индекс Field
+            int                             getTextFieldsSize() const;//Получить размер Field
 
-            int                             getTextWidgetsSize() const;
-            QVector< TextWidgetPtr >        getTextWidgets() const;
+            int                             getTextWidgetsSize() const;//Получить размер TextWidgets
+            QVector< TextWidgetPtr >        getTextWidgets() const;//Получить TextWidgets
 
-            void                            addLine( const LinePtr & line );
-            const LinePtr                   getLine( int index ) const;
-            int                             getLinesSize() const;
-            const QVector< LinePtr >        getLines() const;
+            void                            addLine( const LinePtr & line );//Добавить Line
+            const LinePtr                   getLine( int index ) const;//Получить индекс Line
+            int                             getLinesSize() const;//Получить размер Line
+            const QVector< LinePtr >        getLines() const;//Получить Lines
 
-            void                            addRect( const RectPtr & rect );
-            const RectPtr                   getRect( int index ) const;
-            int                             getRectsSize() const;
-            const QVector< RectPtr >        getRects() const;
+            void                            addRect( const RectPtr & rect );//Добавить Rect
+            const RectPtr                   getRect( int index ) const;//Получить индекс Rect
+            int                             getRectsSize() const;//Получить размер Rect
+            const QVector< RectPtr >        getRects() const;//Получить Rects
 
-            void                            addEllipse( const EllipsePtr & rect );
-            const EllipsePtr                getEllipse( int index ) const;
-            int                             getEllipsesSize() const;
-            const QVector< EllipsePtr >     getEllipses() const;
+            void                            addEllipse( const EllipsePtr & rect );//Добавить Ellipse
+            const EllipsePtr                getEllipse( int index ) const;//Получить индекс Ellipse
+            int                             getEllipsesSize() const;//Получить размер Ellipse
+            const QVector< EllipsePtr >     getEllipses() const;//Получить Ellipses
 
-            void                            addImage( const ImagePtr & rect );
-            const ImagePtr                  getImage( int index ) const;
-            int                             getImagesSize() const;
-            const QVector< ImagePtr >       getImages() const;
+            void                            addImage( const ImagePtr & rect );//Добавить Image
+            const ImagePtr                  getImage( int index ) const;//Получить индекс Image
+            int                             getImagesSize() const;//Получить размер Image
+            const QVector< ImagePtr >       getImages() const;//Получить Images
 
         private:
             QVector< StaticTextPtr >    m_staticTexts;
