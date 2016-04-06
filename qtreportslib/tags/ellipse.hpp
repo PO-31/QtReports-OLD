@@ -8,7 +8,12 @@ namespace qtreports
 {
     namespace detail
     {
+        
 
+        /*! @~russian
+        @brief Класс, реализующий тэг <Ellipse>
+        Класс, реализующий тэг <Ellipse>
+        */
         class Ellipse : public Widget {
 
         public:
