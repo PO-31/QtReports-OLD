@@ -12,7 +12,7 @@ namespace qtreports
         /*! @~russian
         @brief  ласс, реализующий тэг StaticText
 
-         ласс, реализующий тэг StaticText
+        Класс, реализующий тэг StaticText
         */
         class StaticText : public TextWidget {
 
