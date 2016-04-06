@@ -108,5 +108,6 @@
     <None Include="style test.qreport" />
     <None Include="images.qrxml" />
     <None Include="full.qrxml" />
+    <None Include="errored.qrxml" />
   </ItemGroup>
 </Project>

@@ -689,10 +689,20 @@ void    Test_Parser::getReport() {
 
 void    Test_Parser::getLastError() {
     qtreports::detail::Parser parser;
-    QVERIFY( parser.getLastError() == QString( "" ) );
+    QCOMPARE( parser.getLastError(), QString() );
+
+    QString reportPath = QFINDTESTDATA( "errored.qrxml" );
+    qDebug() << endl << "Used report: " << reportPath;
+    QCOMPARE( parser.parse( reportPath ), false );
+    QVERIFY( parser.getLastError() != QString() );
 }
 
 void    Test_Parser::getLog() {
     qtreports::detail::Parser parser;
-    QVERIFY( parser.getLog() == QString( "" ) );
+    QCOMPARE( parser.getLog(), QString() );
+
+    QString reportPath = QFINDTESTDATA( "full.qrxml" );
+    qDebug() << endl << "Used report: " << reportPath;
+    QVERIFY2( parser.parse( reportPath ), parser.getLastError().toStdString().c_str() );
+    QVERIFY( parser.getLog() != QString() );
 }
