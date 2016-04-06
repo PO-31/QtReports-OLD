@@ -53,7 +53,7 @@ namespace qtreports {
             int                             getImagesSize() const;//Получить размер Image
             const QVector< ImagePtr >       getImages() const;//Получить Images
 
-        private:
+        private://Храним вектора со значеними
             QVector< StaticTextPtr >    m_staticTexts;
             QVector< TextFieldPtr >     m_textFields;
             QVector< TextWidgetPtr >    m_textWidgets;
