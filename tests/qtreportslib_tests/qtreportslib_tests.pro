@@ -19,7 +19,7 @@ HEADERS  += test_engine.hpp \
     test_parser.hpp \
     test_convertertoqwidget.hpp \
     test_convertertopdf.hpp \
-    test_convertertohtml.cpp
+    test_convertertohtml.hpp
 
 QMAKE_CXXFLAGS += -std=c++11
 
