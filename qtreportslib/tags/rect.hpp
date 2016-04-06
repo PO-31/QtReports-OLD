@@ -9,6 +9,11 @@ namespace qtreports
     namespace detail
     {
 
+        /*! @~russian
+        @brief Класс, реализующий тэг <Rect>
+        Квадрат (тест)
+        Класс, реализующий тэг <Rect>
+        */
         class Rect : public Widget {
 
         public:
