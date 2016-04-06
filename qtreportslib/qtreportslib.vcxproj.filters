@@ -47,9 +47,6 @@
     <ClCompile Include="painter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="objectsplant.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tags\object.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
@@ -127,9 +124,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="objectsplant.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="processeddb.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

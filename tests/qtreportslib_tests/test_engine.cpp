@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <engine.hpp>
 #include "test_engine.hpp"
+#include <QDebug>
 
 Test_Engine::Test_Engine( QObject * parent ) :
     QObject( parent ) {}
@@ -15,6 +16,23 @@ void    Test_Engine::open() {
     qtreports::Engine engine;
     QString input = QFINDTESTDATA( "default.qreport" );
     QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
+}
+
+void    Test_Engine::close()
+{
+    QString input = QFINDTESTDATA( "default.qreport" );
+
+    qtreports::Engine engine;
+    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
+
+    QCOMPARE( engine.isOpened(), true );
+    engine.close();
+    QCOMPARE( engine.isOpened(), false );
+}
+
+void    Test_Engine::setParameters()
+{
+
 }
 
 void    Test_Engine::setConnection() {
@@ -39,7 +57,28 @@ void    Test_Engine::setConnection() {
     db.close();
 }
 
-void    Test_Engine::setParameters() {
+void    Test_Engine::setDataSource()
+{
+
+}
+
+void    Test_Engine::setQuery()
+{
+
+}
+
+void    Test_Engine::addScript()
+{
+
+}
+
+void    Test_Engine::setDataModel()
+{
+
+}
+
+void    Test_Engine::createPDF()
+{
 
 }
 
@@ -58,5 +97,35 @@ void Test_Engine::createHTML()
     engine.createHTML("test.html");
 
     db.close();
+}
+
+void    Test_Engine::createWidget()
+{
+
+}
+
+void    Test_Engine::createLayout()
+{
+
+}
+
+void    Test_Engine::print()
+{
+
+}
+
+void    Test_Engine::isOpened()
+{
+
+}
+
+void    Test_Engine::getReport()
+{
+
+}
+
+void    Test_Engine::getLastError()
+{
+
 }
 

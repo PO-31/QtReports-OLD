@@ -9,7 +9,6 @@ SOURCES += engine.cpp \
     processeddb.cpp \
     replacer.cpp \
     parser.cpp \
-    objectsplant.cpp \
     converters/convertertohtml.cpp \
     converters/convertertoqwidget.cpp \
     converters/convertertopdf.cpp \
@@ -34,7 +33,6 @@ HEADERS += engine.hpp \
     processeddb.hpp \
     replacer.hpp \
     parser.hpp \
-    objectsplant.hpp \
     converters/convertertohtml.hpp \
     converters/convertertoqwidget.hpp \
     converters/convertertopdf.hpp \

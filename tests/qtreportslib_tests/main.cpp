@@ -15,6 +15,6 @@ int main( int argc, char *argv[] ) {
     result |= QTest::qExec( new Test_ConverterToPDF, argc, argv );
     result |= QTest::qExec( new Test_ConverterToHTML, argc, argv );
 
-    return result;
-    //return a.exec();
+    //return result;
+    return a.exec();
 }

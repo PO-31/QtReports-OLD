@@ -155,7 +155,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="objectsplant.cpp" />
     <ClCompile Include="painter.cpp" />
     <ClCompile Include="processeddb.cpp" />
     <ClCompile Include="replacer.cpp" />
@@ -209,7 +208,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_PRINTSUPPORT_LIB -DQT_GUI_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtPrintSupport" "-I$(QTDIR)\include\QtGui" "-I.\tags"</Command>
     </CustomBuild>
-    <ClInclude Include="objectsplant.hpp" />
     <ClInclude Include="painter.hpp" />
     <ClInclude Include="processeddb.hpp" />
     <CustomBuild Include="tags\band.hpp">

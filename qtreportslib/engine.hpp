@@ -90,7 +90,7 @@ namespace qtreports {
         ~Engine();
 
         bool    open( const QString & path );
-        bool    close();
+        void    close();
 
         bool    setParameters( const QMap< QString, QString > & map );
         bool    setConnection( const QSqlDatabase & connection );

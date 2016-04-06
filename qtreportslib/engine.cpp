@@ -47,13 +47,11 @@ namespace qtreports
         return true;
     }
 
-    bool    Engine::close()
+    void    Engine::close()
     {
         m_isOpened = false;
         m_compiledPath.clear();
         m_report.clear();
-
-        return true;
     }
 
     bool	Engine::setParameters( const QMap< QString, QString > & parameters )
