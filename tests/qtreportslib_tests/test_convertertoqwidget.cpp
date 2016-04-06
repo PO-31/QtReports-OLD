@@ -12,7 +12,8 @@ Test_ConverterToQWidget::~Test_ConverterToQWidget() {}
 
 void    Test_ConverterToQWidget::convert() {
     QString input = QFINDTESTDATA( "full.qrxml" );
-
+    QWARN( ( "Used input: " + input ).toStdString().c_str() );
+    
     qtreports::detail::Parser parser;
     if( !parser.parse( input ) )
     {
