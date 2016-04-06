@@ -132,20 +132,20 @@ namespace qtreports {
             Добавляем изображение в <Band>
             @param[in] Image изображение
             */ 
-            void                            addImage( const ImagePtr & rect );//Добавить Image
+            void                            addImage( const ImagePtr & rect );
             /*! @~russian
             Возвращает <Image> по индексу
             @param[in] index индекс
             */             
-            const ImagePtr                  getImage( int index ) const;//Получить индекс Image
+            const ImagePtr                  getImage( int index ) const;
             /*! @~russian
             Возвращает размер <Image>
             */             
-            int                             getImagesSize() const;//Получить размер Image
+            int                             getImagesSize() const;
             /*! @~russian
             Возвращает вектор <Image>
             */             
-            const QVector< ImagePtr >       getImages() const;//Получить Images
+            const QVector< ImagePtr >       getImages() const;
 
         private://Храним вектора со значеними
             QVector< StaticTextPtr >    m_staticTexts;
