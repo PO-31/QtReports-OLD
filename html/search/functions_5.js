@@ -4,5 +4,7 @@ var searchData=
   ['setdpi',['setDPI',['../classqtreports_1_1detail_1_1_converter_to_p_d_f.html#a2cac83dd515822a5c3c7560ef5eb5fd8',1,'qtreports::detail::ConverterToPDF']]],
   ['setimage',['setImage',['../classqtreports_1_1detail_1_1_image.html#a31875a96d73387d6e766ba42b73eebf9',1,'qtreports::detail::Image']]],
   ['setoriginaltext',['setOriginalText',['../classqtreports_1_1detail_1_1_text_widget.html#aa5b5c9ec0ef4cd677426f03352ef73c3',1,'qtreports::detail::TextWidget']]],
+  ['setparameter',['setParameter',['../classqtreports_1_1detail_1_1_processed_d_b.html#adf782690eec02fa73a5247f4eff5eb6e',1,'qtreports::detail::ProcessedDB']]],
+  ['setparameters',['setParameters',['../classqtreports_1_1detail_1_1_processed_d_b.html#a55572b40bb4f91ec1648f254e8cbefc4',1,'qtreports::detail::ProcessedDB']]],
   ['settext',['setText',['../classqtreports_1_1detail_1_1_text_widget.html#a442eab76c8decee3624f573a4d91d27f',1,'qtreports::detail::TextWidget']]]
 ];
