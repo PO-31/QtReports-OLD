@@ -311,6 +311,8 @@ namespace qtreports
 
             field->setData( iterator.value() );
         }
+
+        return true;
     }
 
     void    Engine::fillColumnsFromReport()
