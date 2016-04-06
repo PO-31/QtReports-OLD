@@ -26,6 +26,7 @@ void    Test_ConverterToQWidget::convert() {
 
     QString dbPath = QFINDTESTDATA( "images.db" );
     qDebug() << endl << "Used db: " << dbPath;
+    QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
     auto db = QSqlDatabase::addDatabase( "QSQLITE" );
     db.setDatabaseName( dbPath );
     QVERIFY2( db.open(), db.lastError().text().toStdString().c_str() );

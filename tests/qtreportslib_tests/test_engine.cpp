@@ -32,7 +32,16 @@ void    Test_Engine::close()
 
 void    Test_Engine::setParameters()
 {
+    QString reportPath = QFINDTESTDATA( "full.qrxml" );
+    qDebug() << endl << "Used report: " << reportPath;
 
+    qtreports::Engine engine;
+    QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
+
+    QMap < QString, QString > map;
+    map[ "title" ] = "Best Title in World";
+    qDebug() << endl << "Used map: " << map;
+    QVERIFY2( engine.setParameters( map ), engine.getLastError().toStdString().c_str() );
 }
 
 void    Test_Engine::setConnection() {
@@ -40,11 +49,13 @@ void    Test_Engine::setConnection() {
     QString input = QFINDTESTDATA( "default.qreport" );
     QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
 
+    QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
     QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE" );
     db.setDatabaseName( "testDB" );
 
     QVERIFY2( db.open(), "Can't open test database 'testDB'" );
     QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
+    db.close();
 
     /*
     QSqlQuery q;
@@ -53,8 +64,6 @@ void    Test_Engine::setConnection() {
     qDebug() << q.value(1).toString();
     }
     */
-
-    db.close();
 }
 
 void    Test_Engine::setDataSource()
@@ -79,7 +88,9 @@ void    Test_Engine::setDataModel()
 
 void    Test_Engine::createPDF()
 {
+    qtreports::Engine engine;
 
+    QCOMPARE( engine.createPDF( "test.pdf" ), false );
 }
 
 void Test_Engine::createHTML()
@@ -88,6 +99,7 @@ void Test_Engine::createHTML()
     QString input = QFINDTESTDATA( "html.qreport" );
     QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
 
+    QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
     QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE" );
     db.setDatabaseName( "testDB" );
 
@@ -101,31 +113,43 @@ void Test_Engine::createHTML()
 
 void    Test_Engine::createWidget()
 {
+    qtreports::Engine engine;
 
+    QCOMPARE( engine.createWidget(), qtreports::QWidgetPtr() );
 }
 
 void    Test_Engine::createLayout()
 {
+    qtreports::Engine engine;
 
+    QCOMPARE( engine.createLayout(), qtreports::QWidgetPtr() );
 }
 
 void    Test_Engine::print()
 {
+    qtreports::Engine engine;
 
+    QCOMPARE( engine.print(), false );
 }
 
 void    Test_Engine::isOpened()
 {
+    qtreports::Engine engine;
 
+    QCOMPARE( engine.isOpened(), false );
 }
 
 void    Test_Engine::getReport()
 {
+    qtreports::Engine engine;
 
+    QCOMPARE( engine.getReport(), qtreports::detail::ReportPtr() );
 }
 
 void    Test_Engine::getLastError()
 {
+    qtreports::Engine engine;
 
+    QCOMPARE( engine.getLastError(), QString() );
 }
 
