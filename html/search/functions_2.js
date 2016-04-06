@@ -31,7 +31,7 @@ var searchData=
   ['getstatictext',['getStaticText',['../classqtreports_1_1detail_1_1_band.html#a23f2aebafb2019f3c4a6396b63641a00',1,'qtreports::detail::Band']]],
   ['getstatictexts',['getStaticTexts',['../classqtreports_1_1detail_1_1_band.html#a060f906c4eb5afe9d6dcdbe33b935d09',1,'qtreports::detail::Band']]],
   ['getstatictextssize',['getStaticTextsSize',['../classqtreports_1_1detail_1_1_band.html#aa154d5e1eef9be35f5ec44a8d0b13e00',1,'qtreports::detail::Band']]],
-  ['gettext',['getText',['../classqtreports_1_1detail_1_1_text_widget.html#ad823fa8df671a3776b939c9808661feb',1,'qtreports::detail::TextWidget']]],
+  ['gettext',['getText',['../classqtreports_1_1detail_1_1_query_string.html#a6eafd05ad897935806b1699d49e1b250',1,'qtreports::detail::QueryString::getText()'],['../classqtreports_1_1detail_1_1_text_widget.html#ad823fa8df671a3776b939c9808661feb',1,'qtreports::detail::TextWidget::getText()']]],
   ['gettextfield',['getTextField',['../classqtreports_1_1detail_1_1_band.html#acffc1d8fc7cd651607d596cb0681d128',1,'qtreports::detail::Band']]],
   ['gettextfields',['getTextFields',['../classqtreports_1_1detail_1_1_band.html#a635f26e50cb92abd2f49fc19c48da0bf',1,'qtreports::detail::Band']]],
   ['gettextfieldssize',['getTextFieldsSize',['../classqtreports_1_1detail_1_1_band.html#a338ce758d304830ca207afb19a98663e',1,'qtreports::detail::Band']]],
