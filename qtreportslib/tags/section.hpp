@@ -9,6 +9,10 @@
 namespace qtreports {
     namespace detail {
 
+        /*! @~russian
+        @brief Класс, реализующий тэг <>
+        Класс, реализующий тэг <>
+        */
         class Section : public Object {
 
         public:
