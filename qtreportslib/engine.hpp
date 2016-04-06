@@ -102,7 +102,7 @@ namespace qtreports {
         bool                createPDF( const QString & path );
         bool                createHTML( const QString & path );//etc.
         QWidgetPtr          createWidget();
-        QWidgetPtr	        createLayout();
+        QWidgetPtr          createLayout();
         bool                print();
         
         bool        	    isOpened() const;
