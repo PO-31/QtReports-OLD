@@ -92,7 +92,7 @@ namespace qtreports {
         bool    open( const QString & path );
         void    close();
 
-        bool    setParameters( const QMap< QString, QString > & map );
+        bool    setParameters( const QMap< QString, QVariant > & map );
         bool    setConnection( const QSqlDatabase & connection );
         bool    setDataSource( const QMap <QString, QVector <QVariant> > & columnsSet);
         bool    setQuery( const QString & query );
@@ -119,7 +119,7 @@ namespace qtreports {
 
         void                                drawPreview( QPrinter * printer );
         bool                                prepareDB();
-        void                                prepareDataSource( const QMap< QString, QVector< QVariant > > & source );
+        bool                                prepareDataSource( const QMap< QString, QVector< QVariant > > & source );
         void                                fillColumnsFromReport();
         void                                executeQueries( const QStringList & queries );
     };

@@ -19,7 +19,7 @@ void    Test_ConverterToQWidget::convert() {
     qtreports::Engine engine;
     QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
 
-    QMap < QString, QString > map;
+    QMap < QString, QVariant > map;
     map[ "title" ] = "Best Title in World";
     qDebug() << endl << "Used map: " << map;
     QVERIFY2( engine.setParameters( map ), engine.getLastError().toStdString().c_str() );

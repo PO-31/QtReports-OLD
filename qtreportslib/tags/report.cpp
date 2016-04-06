@@ -93,22 +93,22 @@ namespace qtreports
             return m_detail;
         }
 
-        void    Report::setParameter( const QString & name, const QString & value )
+        void    Report::setParameter( const QString & name, const QVariant & value )
         {
             m_parameters[ name ] = value;
         }
 
-        void    Report::setParameters( const QMap< QString, QString > & parameters )
+        void    Report::setParameters( const QMap< QString, QVariant > & parameters )
         {
             m_parameters = parameters;
         }
 
-        const QString  Report::getParameter( const QString & name ) const
+        const QVariant  Report::getParameter( const QString & name ) const
         {
             return m_parameters.value( name );
         }
 
-        const QMap< QString, QString >   Report::getParameters() const
+        const QMap< QString, QVariant >   Report::getParameters() const
         {
             return m_parameters;
         }

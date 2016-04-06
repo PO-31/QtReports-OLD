@@ -14,27 +14,37 @@ namespace qtreports
 
         ProcessedDB::~ProcessedDB() {}
 
-        const QVariant  ProcessedDB::getParam( const QString & name ) const
-        {
-            return m_parametersMap.value( name );
-        }
-
-        const QVariant  ProcessedDB::getField( const QString & columnName, int row ) const
-        {
-            return m_columnsSet.value( columnName ).value( row );
-        }
-
-        const QVariant  ProcessedDB::getField( int column, int row ) const
-        {
-            return getField( getColumnName( column ), row );
-        }
-
-        void    ProcessedDB::addParam( const QString &name, const QVariant & value )
+        void    ProcessedDB::setParameter( const QString &name, const QVariant & value )
         {
             m_parametersMap[ name ] = value;
         }
 
-        void    ProcessedDB::addFieldData( const QString & columnName, const QVariant & data )
+        void    ProcessedDB::setParameters( const QMap< QString, QVariant > & map )
+        {
+            m_parametersMap = map;
+        }
+
+        const QVariant  ProcessedDB::getParameter( const QString & name ) const
+        {
+            return m_parametersMap.value( name );
+        }
+
+        const QMap< QString, QVariant >     ProcessedDB::getParameters() const
+        {
+            return m_parametersMap;
+        }
+
+        const QVariant  ProcessedDB::getFieldData( const QString & columnName, int row ) const
+        {
+            return getColumn( columnName ).value( row );
+        }
+
+        const QVariant  ProcessedDB::getFieldData( int column, int row ) const
+        {
+            return getFieldData( getColumnName( column ), row );
+        }
+
+        void    ProcessedDB::appendColumnData( const QString & columnName, const QVariant & data )
         {
             if( m_columnsSet.contains( columnName ) )
             {
@@ -42,7 +52,12 @@ namespace qtreports
             }
         }
 
-        void    ProcessedDB::addFieldData( const QString & columnName, const QVector< QVariant > & data )
+        void    ProcessedDB::appendColumnData( int column, const QVariant & data )
+        {
+            appendColumnData( getColumnName( column ), data );
+        }
+
+        void    ProcessedDB::appendColumnData( const QString & columnName, const QVector< QVariant > & data )
         {
             if( m_columnsSet.contains( columnName ) )
             {
@@ -50,17 +65,22 @@ namespace qtreports
             }
         }
 
-        void ProcessedDB::addFieldData( int column, const QVariant & data )
+        void    ProcessedDB::appendColumnData( int column, const QVector< QVariant > & data )
         {
-            addFieldData( getColumnName( column ), data );
+            appendColumnData( getColumnName( column ), data );
         }
 
-        void ProcessedDB::addColumn( const QString & name )
+        void    ProcessedDB::addEmptyColumn( const QString & name )
         {
             if( !m_columnsSet.contains( name ) )
             {
                 m_columnsSet[ name ] = QVector< QVariant >();
             }
+        }
+
+        void    ProcessedDB::addEmptyColumn( int column )
+        {
+            addEmptyColumn( getColumnName( column ) );
         }
 
         const QVector<QVariant>     ProcessedDB::getColumn( const QString & name ) const

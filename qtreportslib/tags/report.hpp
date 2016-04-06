@@ -46,10 +46,10 @@ namespace qtreports {
             void                                setDetail( const DetailPtr & detail );
             const DetailPtr                     getDetail() const;
 
-            void                                setParameter( const QString & name, const QString & value );
-            void                                setParameters( const QMap< QString, QString > & parameters );
-            const QString                       getParameter( const QString & name ) const;
-            const QMap< QString, QString >      getParameters() const;
+            void                                setParameter( const QString & name, const QVariant & value );
+            void                                setParameters( const QMap< QString, QVariant > & parameters );
+            const QVariant                      getParameter( const QString & name ) const;
+            const QMap< QString, QVariant >     getParameters() const;
 
             void    setRowCount( int count );
             int     getRowCount() const;
@@ -93,7 +93,7 @@ namespace qtreports {
             QMap< QString, FieldPtr >   m_fields;
             TitlePtr                    m_title;
             DetailPtr                   m_detail;
-            QMap< QString, QString >    m_parameters;
+            QMap< QString, QVariant >   m_parameters;
 
         };
         typedef QSharedPointer< Report > ReportPtr;

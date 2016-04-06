@@ -27,58 +27,68 @@ namespace qtreports
             ~ProcessedDB();
 
             /*! @~russian
-            Возвращает параметр из результата работы скрипта.
-            @param[in] name Имя параметра
-            */
-            const QVariant  getParam( const QString & name ) const;
-
-            /*! @~russian
-            Возвращает значение поля.
-            @param[in] columnName Название столбца
-            @param[in] row Номер строки
-            */
-            const QVariant  getField( const QString & columnName, int row ) const;
-
-            /*! @~russian
-            Возвращает значение поля.
-            @param[in] column Номер столбца
-            @param[in] row Номер строки
-            */
-            const QVariant  getField( int column, int row ) const;
-
-            /*! @~russian
             Добавляет параметр в список параметров.
             @param[in] name Имя параметра
             @param[in] value Значение параметра
             */
-            void        addParam( const QString & name, const QVariant & value );
+            void            setParameter( const QString & name, const QVariant & value );
+
+            /*! @~russian
+            Устанавливает карту параметров.
+            @param[in] map Карта параметров.
+            */
+            void            setParameters( const QMap< QString, QVariant > & map );
+
+            /*! @~russian
+            Возвращает параметр из результата работы скрипта.
+            @param[in] name Имя параметра
+            */
+            const QVariant  getParameter( const QString & name ) const;
+
+            /*! @~russian
+            Возвращает карту параметров.
+            */
+            const QMap< QString, QVariant >     getParameters() const;
 
             /*! @~russian
             Добавляет данные в соответствующий столбец.
             @param[in] columnName Имя поля
             @param[in] data Значение поля
             */
-            void        addFieldData( const QString & columnName, const QVariant & data );
-
-            /*! @~russian
-            Добавляет данные в соответствующий столбец.
-            @param[in] columnName Имя поля.
-            @param[in] data Множество значений поля.
-            */
-            void        addFieldData( const QString & columnName, const QVector< QVariant > & data );
+            void            appendColumnData( const QString & columnName, const QVariant & data );
 
             /*! @~russian
             Добавляет данные в соответствующий столбец.
             @param[in] column Номер поля.
             @param[in] data Значение поля.
             */
-            void        addFieldData( int column, const QVariant & data );
+            void            appendColumnData( int column, const QVariant & data );
+
+            /*! @~russian
+            Добавляет данные в соответствующий столбец.
+            @param[in] columnName Имя поля.
+            @param[in] data Множество значений поля.
+            */
+            void            appendColumnData( const QString & columnName, const QVector< QVariant > & data );
+
+            /*! @~russian
+            Добавляет данные в соответствующий столбец.
+            @param[in] column Номер поля.
+            @param[in] data Множество значений поля.
+            */
+            void            appendColumnData( int column, const QVector< QVariant > & data );
 
             /*! @~russian
             Добавляет столбец.
             @param[in] name Имя столбца.
             */
-            void        addColumn( const QString & name );
+            void            addEmptyColumn( const QString & name );
+
+            /*! @~russian
+            Добавляет столбец.
+            @param[in] column Номер столбца
+            */
+            void            addEmptyColumn( int column );
 
             /*! @~russian
             Возвращает столбец данных.
@@ -118,6 +128,20 @@ namespace qtreports
             bool        columnIsExists( int column ) const;
 
             /*! @~russian
+            Возвращает значение поля.
+            @param[in] columnName Название столбца
+            @param[in] row Номер строки
+            */
+            const QVariant  getFieldData( const QString & columnName, int row ) const;
+
+            /*! @~russian
+            Возвращает значение поля.
+            @param[in] column Номер столбца
+            @param[in] row Номер строки
+            */
+            const QVariant  getFieldData( int column, int row ) const;
+
+            /*! @~russian
             Получает количество записей в столбце.
             @param[in] columnName Имя столбца.
             */
@@ -140,9 +164,9 @@ namespace qtreports
             const QString   getError() const;
 
         private:
-            QMap <QString, QVector <QVariant> >             m_columnsSet;
-            QMap <QString, QVariant>                        m_parametersMap;
-            QString                                         m_errorString;
+            QMap< QString, QVector< QVariant > >        m_columnsSet;
+            QMap< QString, QVariant >                   m_parametersMap;
+            QString                                     m_errorString;
         };
     }
 }

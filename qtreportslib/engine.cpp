@@ -54,7 +54,7 @@ namespace qtreports
         m_report.clear();
     }
 
-    bool	Engine::setParameters( const QMap< QString, QString > & parameters )
+    bool	Engine::setParameters( const QMap< QString, QVariant > & parameters )
     {
         if( m_report.isNull() )
         {
@@ -98,12 +98,7 @@ namespace qtreports
             m_report->setFieldData( name, value );
         }
 
-        QMap<QString, QString> paramsMap = m_report.data()->getParameters();
-        QMapIterator <QString, QString> iterator(paramsMap);
-        while(iterator.hasNext()) {
-            iterator.next();
-            m_processedDB.addParam(iterator.key(), QVariant(iterator.value()));
-        }
+        m_processedDB.setParameters( m_report->getParameters() );
 
         return true;
     }
@@ -113,7 +108,11 @@ namespace qtreports
         //Need check parameters
         //m_dataSource = columnsSet;
 
-        prepareDataSource( source );
+        if( !prepareDataSource( source ) )
+        {
+            m_lastError = "Error in prepare data source: " + m_lastError;
+            return false;
+        }
         
         m_report->setRowCount( m_processedDB.getMaxRowCount() );
 
@@ -297,17 +296,17 @@ namespace qtreports
         return setQuery( m_report->getQuery() );
     }
 
-    void    Engine::prepareDataSource( const QMap< QString, QVector< QVariant > > & source )
+    bool    Engine::prepareDataSource( const QMap< QString, QVector< QVariant > > & source )
     {
-        QMapIterator <QString, QVector <QVariant> > iterator( source );
+        QMapIterator< QString, QVector< QVariant > > iterator( source );
         while( iterator.hasNext() )
         {
             iterator.next();
-            //m_processedDB.addFieldData( iterator.key(), iterator.value() );
             auto field = m_report->getField( iterator.key() );
             if( field.isNull() )
             {
-                continue;
+                m_lastError = "Report not have column: " + iterator.key();
+                return false;
             }
 
             field->setData( iterator.value() );
@@ -316,28 +315,14 @@ namespace qtreports
 
     void    Engine::fillColumnsFromReport()
     {
-        /*auto fields = m_report->getFields();
-        QMapIterator< QString, detail::FieldPtr > fieldIterator( fields );
-        while( fieldIterator.hasNext() )
-        {
-            fieldIterator.next();
-            m_processedDB.addColumn( fieldIterator.key() );
-        }
-        */
         for( auto && field : m_report->getFields() )
         {
-            m_processedDB.addColumn( field->getName() );
+            m_processedDB.addEmptyColumn( field->getName() );
         }
     }
 
     void    Engine::executeQueries( const QStringList & queries )
     {
-        /*
-        QStringListIterator iterator(m_queriesList);
-        while(iterator.hasNext()) {
-            QString query = iterator.next();
-            QSqlQueryModel * model = new QSqlQueryModel();
-        */
         for( auto && query : queries )
         {
             auto model = new QSqlQueryModel();
@@ -347,7 +332,7 @@ namespace qtreports
                 QSqlRecord rec = model->record( row );
                 for( int col = 0; col < rec.count(); col++ )
                 {
-                    m_processedDB.addFieldData( rec.fieldName( col ), rec.field( col ).value() );
+                    m_processedDB.appendColumnData( rec.fieldName( col ), rec.field( col ).value() );
                 }
             }
         }
