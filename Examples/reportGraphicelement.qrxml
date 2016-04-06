@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report  name="report2" 
+	<title>
+		<band height="79" splitType="Stretch">
+			<line>
+				<reportElement x="178" y="15" width="204" height="1" />
+			</line>
+			<rectangle>
+				<reportElement x="24" y="44" width="100" height="20" />
+			</rectangle>
+			<ellipse>
+				<reportElement x="178" y="44" width="100" height="20" />
+			</ellipse>
+			<rectangle radius="10">
+				<reportElement x="371" y="44" width="100" height="20" />
+			</rectangle>
+		</band>
+	</title>
+</jasperReport>
