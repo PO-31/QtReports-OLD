@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['getclassname',['getClassName',['../classqtreports_1_1detail_1_1_text_field.html#a50c6ba3f1b96253e28666556721f9df5',1,'qtreports::detail::TextField']]],
+  ['getclassname',['getClassName',['../classqtreports_1_1detail_1_1_field.html#a5208eca6f0064477efd12c2df17ee9a2',1,'qtreports::detail::Field::getClassName()'],['../classqtreports_1_1detail_1_1_text_field.html#a50c6ba3f1b96253e28666556721f9df5',1,'qtreports::detail::TextField::getClassName()']]],
   ['getcolumn',['getColumn',['../classqtreports_1_1detail_1_1_processed_d_b.html#a5cf66b1fba61011b877f94c7305929b2',1,'qtreports::detail::ProcessedDB::getColumn(const QString &amp;name) const '],['../classqtreports_1_1detail_1_1_processed_d_b.html#aeb26946e955330ed7dc1a2674ae3979c',1,'qtreports::detail::ProcessedDB::getColumn(int col) const ']]],
   ['getcolumnindex',['getColumnIndex',['../classqtreports_1_1detail_1_1_processed_d_b.html#ac344a699fd870182826954d9253b3485',1,'qtreports::detail::ProcessedDB']]],
   ['getcolumnname',['getColumnName',['../classqtreports_1_1detail_1_1_processed_d_b.html#a8b9f7f36966f17b602656c9dd5b41e05',1,'qtreports::detail::ProcessedDB']]],
+  ['getdata',['getData',['../classqtreports_1_1detail_1_1_field.html#a4ecc69df8b63e2c3d3a1f8bb2701faab',1,'qtreports::detail::Field']]],
   ['getdpi',['getDPI',['../classqtreports_1_1detail_1_1_converter_to_p_d_f.html#a1069b167434da43b9428ffa3a556a3b3',1,'qtreports::detail::ConverterToPDF']]],
   ['getellipse',['getEllipse',['../classqtreports_1_1detail_1_1_band.html#a77ca6f6126d836c2338e4132c2160929',1,'qtreports::detail::Band']]],
   ['getellipses',['getEllipses',['../classqtreports_1_1detail_1_1_band.html#abd9f491bab5daef5c1326476b66babea',1,'qtreports::detail::Band']]],
@@ -26,7 +27,7 @@ var searchData=
   ['getrects',['getRects',['../classqtreports_1_1detail_1_1_band.html#afdd4c1c109eedbcd75e5967e4c7879b8',1,'qtreports::detail::Band']]],
   ['getrectssize',['getRectsSize',['../classqtreports_1_1detail_1_1_band.html#ac2c4dfe6c30cafaeaf01bee83466af85',1,'qtreports::detail::Band']]],
   ['getreport',['getReport',['../classqtreports_1_1detail_1_1_parser.html#a070b8403eda3e69ac206252b4178c256',1,'qtreports::detail::Parser']]],
-  ['getrowcount',['getRowCount',['../classqtreports_1_1detail_1_1_processed_d_b.html#a887c707b061cd783e7a07047046dae2e',1,'qtreports::detail::ProcessedDB::getRowCount(const QString &amp;columnName) const '],['../classqtreports_1_1detail_1_1_processed_d_b.html#a56dbe65687e82f1a1bc8f6be5ce2672c',1,'qtreports::detail::ProcessedDB::getRowCount(int column) const ']]],
+  ['getrowcount',['getRowCount',['../classqtreports_1_1detail_1_1_processed_d_b.html#a887c707b061cd783e7a07047046dae2e',1,'qtreports::detail::ProcessedDB::getRowCount(const QString &amp;columnName) const '],['../classqtreports_1_1detail_1_1_processed_d_b.html#a56dbe65687e82f1a1bc8f6be5ce2672c',1,'qtreports::detail::ProcessedDB::getRowCount(int column) const '],['../classqtreports_1_1detail_1_1_field.html#a53c646a9e83d661e7d19654632e764aa',1,'qtreports::detail::Field::getRowCount()']]],
   ['getstatictext',['getStaticText',['../classqtreports_1_1detail_1_1_band.html#a23f2aebafb2019f3c4a6396b63641a00',1,'qtreports::detail::Band']]],
   ['getstatictexts',['getStaticTexts',['../classqtreports_1_1detail_1_1_band.html#a060f906c4eb5afe9d6dcdbe33b935d09',1,'qtreports::detail::Band']]],
   ['getstatictextssize',['getStaticTextsSize',['../classqtreports_1_1detail_1_1_band.html#aa154d5e1eef9be35f5ec44a8d0b13e00',1,'qtreports::detail::Band']]],
