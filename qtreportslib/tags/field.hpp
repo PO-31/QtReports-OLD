@@ -18,12 +18,12 @@ namespace qtreports {
             Field();
             ~Field();
 
-            void            setClassName( const QString & name );
-            const QString   getClassName() const;
+            void            setClassName( const QString & name );//Задать ClassName
+            const QString   getClassName() const;//Получить
 
-            void            setData( const QVector< QVariant > & data );
+            void            setData( const QVector< QVariant > & data );//Задать Data
 
-            QString         getData( int row );
+            QString         getData( int row );//Получить строку
 
             template< typename T1 >
             const T1        getData( int row )
@@ -31,7 +31,7 @@ namespace qtreports {
                 return m_data.value( row ).value< T1 >();
             }
 
-            int getRowCount();
+            int getRowCount();//Получить количество строк
 
         private:
             QString     m_className;
