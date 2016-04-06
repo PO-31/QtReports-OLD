@@ -1,16 +1,28 @@
 language: cpp
 
-compiler: 
-  - gcc
-  - clang
-
 os:
   - linux
   
+compiler: 
+  - gcc
+  - clang
+  
+env:
+  - BUILD_TYPE=release
+# - BUILD_TYPE=debug
+  
+#env:
+#  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+#   - secure: "P9gHn+wkHWzjRqcwlcCoSGmz8pw1aG3CwuPP0rsMpqsa+jh0lr3SDfdA01Xll68Rb7xY7yVTtXaFOXrEk6ceb3fvGs4JxYXNXRgkG8uF808Lm19bbADAQBb5kXECiClaLKk20es/Y4mlI6G/8Qmr4OmOc0Z2gL/sVqLnh6QLTtI="
+
+  
 matrix:
   include:
-    - compiler: gcc
-      env: BUILD_TYPE=coverage
+   - os: linux
+     compiler: gcc
+     env: BUILD_TYPE=coverage
 
 #sudo: false
   
@@ -48,12 +60,6 @@ notifications:
 #    - g++-4.8
 #    - clang
 #    - qt5-default
-  
-#env:
-#  matrix:
-#    - BUILD_TYPE=Debug
-#    - BUILD_TYPE=Release
-#    - BUILD_TYPE=Coverage
 
 before_install:
   - sudo sh .travis/${TRAVIS_OS_NAME}/before_install.sh
@@ -65,19 +71,59 @@ install:
   - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
 script:
+  - nproc
+  - ${CXX} --version
   - cd qtreportslib
-  - qmake -spec ${USING_QT_MKSPEC} qtreportslib.pro
-  - make
+  - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
+  - make -j$(nproc)
   - sudo make install
-#  - make coverage
   - cd ../qtreportsviewer
   - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
-  - make
+  - make -j$(nproc)
   - cd ../tests/qtreportslib_tests
-  - qmake -spec ${USING_QT_MKSPEC} qtreportslib_tests.pro
-  - make
+  - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
+  - make -j$(nproc)
   - ./qtreportslib_tests
+  - >
+    if [ "$BUILD_TYPE" = "coverage" ]; then
+      cd ../..
+      git clone https://github.com/linux-test-project/lcov
+      cd lcov
+      sudo make install
+      cd ..
+      lcov --version
+      
+      cd qtreportslib
+      lcov --capture --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info
+      lcov --remove coverage.info --output-file coverage.info "*moc_*.cpp"
+    fi
 
 after_success:
-#  - if [ "$BUILD_TYPE" == "Coverage" ]; then ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "$GCOV" --exclude build/gtest -E ".*CMake.*CompilerId.c" --gcov-options "\-lp" -r ../; fi
-  - if [ "$BUILD_TYPE" = "coverage" ]; then sudo ~/.local/bin/coveralls --repo_token "${COVERALLS_IO_TOKEN}" --gcov "gcov-4.8" --gcov-options "\-lp" -r ../../qtreportslib; fi
+  - > 
+    if [ "$BUILD_TYPE" = "coverage" ]; then
+      ruby --version
+      lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
+      # Auto documentation generation
+      cd "$TRAVIS_BUILD_DIR"
+      cd ..
+      # Install last doxygen version # Alternative: sudo apt-get install --yes doxygen
+      wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'
+      tar -xvzf doxygen-1.8.11.linux.bin.tar.gz
+      cd doxygen-1.8.11
+      ./configure
+      sudo make install
+      cd ..
+      # Clone repository and update doc
+      git clone https://github.com/PO-21/PO-21.github.io
+      cd PO-21.github.io
+      rm -d -f -r html
+      doxygen Doxyfile
+      # Push changes to remote repository
+      git config --global user.name "travic"
+      git config --global user.email "travic@travic.org"
+      git add -A
+      git commit -a -m "Update doc from Travic CI"
+      git config --global push.default simple
+      git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io > /dev/null
+      cd "$TRAVIS_BUILD_DIR"
+    fi

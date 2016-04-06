@@ -1,19 +1,22 @@
 #pragma once
 #ifndef DETAIL_HPP
 #define DETAIL_HPP
-#include "object.hpp"
+#include <QSharedPointer>
+#include "section.hpp"
 
 namespace qtreports {
     namespace detail {
 
-        class Detail : public Object {
+        class Detail : public Section {
 
         public:
-            Detail( ObjectPtr parent = ObjectPtr() );
+            Detail();
+            ~Detail();
 
-            const QString   getClassName() const;
+        private:
 
         };
+        typedef QSharedPointer< Detail > DetailPtr;
 
     }
 }

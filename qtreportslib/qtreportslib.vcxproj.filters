@@ -36,6 +36,9 @@
     <Filter Include="Tags">
       <UniqueIdentifier>{43996f6b-420c-41a3-9f85-112a0b3471d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Converters">
+      <UniqueIdentifier>{83a7da29-a9e7-496e-9d6f-53cb62f12123}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="processeddb.cpp">
@@ -74,10 +77,34 @@
     <ClCompile Include="parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tags\drawingexception.cpp">
+    <ClCompile Include="tags\field.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
-    <ClCompile Include="tags\field.cpp">
+    <ClCompile Include="tags\widget.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_engine.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_engine.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\textfield.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\querystring.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
+    <ClCompile Include="converters\convertertohtml.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="converters\convertertopdf.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="converters\convertertoqwidget.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="tags\section.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
   </ItemGroup>
@@ -91,41 +118,61 @@
     <ClInclude Include="painter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tags\object.hpp">
-      <Filter>Tags</Filter>
-    </ClInclude>
-    <ClInclude Include="tags\detail.hpp">
-      <Filter>Tags</Filter>
-    </ClInclude>
-    <ClInclude Include="tags\band.hpp">
-      <Filter>Tags</Filter>
-    </ClInclude>
-    <ClInclude Include="tags\statictext.hpp">
-      <Filter>Tags</Filter>
-    </ClInclude>
-    <ClInclude Include="tags\style.hpp">
-      <Filter>Tags</Filter>
-    </ClInclude>
-    <ClInclude Include="tags\title.hpp">
-      <Filter>Tags</Filter>
-    </ClInclude>
-    <ClInclude Include="engine.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tags\report.hpp">
-      <Filter>Tags</Filter>
-    </ClInclude>
     <ClInclude Include="parser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tags\drawingexception.hpp">
+    <ClInclude Include="tags\textfield.hpp">
       <Filter>Tags</Filter>
     </ClInclude>
-    <ClInclude Include="tags\field.hpp">
+    <ClInclude Include="tags\querystring.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="converters\convertertohtml.hpp">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="converters\convertertopdf.hpp">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="converters\convertertoqwidget.hpp">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\section.hpp">
       <Filter>Tags</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="qtreportslib.pro" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="tags\object.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tags\field.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tags\report.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tags\widget.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tags\style.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
+    <CustomBuild Include="engine.hpp">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tags\statictext.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tags\detail.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tags\band.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tags\title.hpp">
+      <Filter>Tags</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

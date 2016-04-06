@@ -43,13 +43,30 @@
     <ClCompile Include="GeneratedFiles\Release\moc_test_engine.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="test_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_test_parser.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_test_parser.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="test_engine.hpp">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="test_parser.hpp">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="qtreportslib_tests.pro" />
+    <None Include="simple.qreport" />
+    <None Include="detail.qreport" />
+    <None Include="report test.qreport" />
+    <None Include="text test.qreport" />
+    <None Include="default.qreport" />
   </ItemGroup>
 </Project>

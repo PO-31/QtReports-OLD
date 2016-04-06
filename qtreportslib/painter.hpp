@@ -5,11 +5,14 @@
 #include <QPoint>
 #include <QSize>
 #include <QPainter>
-#include <QPdfWriter>
-#include "tags/style.hpp"
+#include <QSharedPointer>
 
 namespace qtreports {
     namespace detail {
+        class Style;
+        class Report;
+        typedef QSharedPointer< Report > ReportPtr;
+        typedef QSharedPointer< Style > StylePtr;
 
         /* Осуществляет отображение отчета в некоторые форматы. */
         class Painter {
@@ -40,6 +43,8 @@ namespace qtreports {
             void	pageDrawingComplete();
 
             bool	drawLine( const QPoint & point1, const QPoint & point2 );
+            bool        drawRect( const QRect & rect );
+            bool        drawImage( const QString & path, const QRect & rect);
 
             bool	drawText( int x, int y, const QString & text );
 
@@ -52,17 +57,17 @@ namespace qtreports {
 
             int		currentPage() const;
 
-            void	setStyle( int styleId );
+            void    setDefaultStyle();
+            void	setStyle( const QString & name );
 
             const QString	getLastError() const;
 
         protected:
-
             // Создать новую страницу
-            void newPage();
+            void    newPage();
 
             // Задать стиль отрисовки
-            void setStyle( const Style & style );
+            void    setStyle( const StylePtr & style );
 
         private:
             bool				m_isNewPage;
@@ -70,7 +75,7 @@ namespace qtreports {
             QString				m_last_error;
             QVector< int >		m_objects;
             QVector< QRect >	m_workspaces;
-            QVector< Style >	m_styles;
+            ReportPtr       	m_report;
             QPainter			m_painter;
 
         };
