@@ -13,44 +13,138 @@
 
 namespace qtreports {
     namespace detail {
-
+        
+        /*! @~russian
+        @brief Класс, реализующий тэг <Band>
+        Класс, реализующий тэг <Band
+        */
         class Band : public Widget {
 
         public:
             Band();
             ~Band();
+            
+            /*! @~russian
+            Добавляет <StaticText> в <Band>
+            @param[in] staticText Статичный текст
+            */
+            void                            addStaticText( const StaticTextPtr & staticText );
+            /*! @~russian
+            Получаем вектор <StaticText>
+            */
+            const QVector< StaticTextPtr >  getStaticTexts() const;
+            /*! @~russian
+            Возвращает  <StaticText> по индексу
+            @param[in] index индекс
+            */            
+            const StaticTextPtr             getStaticText( int index ) const;
+            /*! @~russian
+            Возращате размер <StaticText>
+            */            
+            int                             getStaticTextsSize() const;
 
-            void                            addStaticText( const StaticTextPtr & staticText );//Добавить StaticText
-            const QVector< StaticTextPtr >  getStaticTexts() const;//Получить StaticText
-            const StaticTextPtr             getStaticText( int index ) const;//Получить индекс StaticText
-            int                             getStaticTextsSize() const;//Получить размер StaticText
+            /*! @~russian
+            Добавляем вычисляемое поле в <Band>
+            @param[in] TextField вычисляемое поле
+            */
+            void                            addTextField( const TextFieldPtr & staticText );
+            /*! @~russian
+            Получаем вектор <TextFields>
+            */            
+            const QVector< TextFieldPtr >   getTextFields() const;
+            /*! @~russian
+            Возвращает  <TextFields> по индексу
+            @param[in] index индекс
+            */            
+            const TextFieldPtr              getTextField( int index ) const;
+            /*! @~russian
+            Возвращает размер <TextFields>
+            */            
+            int                             getTextFieldsSize() const;
 
-            void                            addTextField( const TextFieldPtr & staticText );//Добавить Field
-            const QVector< TextFieldPtr >   getTextFields() const;//Получить Field
-            const TextFieldPtr              getTextField( int index ) const;//Получить индекс Field
-            int                             getTextFieldsSize() const;//Получить размер Field
+            /*! @~russian
+            Возвращает размер <TextWidgets>
+            */  
+            int                             getTextWidgetsSize() const;
+            /*! @~russian
+            Плучаем вектор <TextWidgets>
+            */              
+            QVector< TextWidgetPtr >        getTextWidgets() const;
 
-            int                             getTextWidgetsSize() const;//Получить размер TextWidgets
-            QVector< TextWidgetPtr >        getTextWidgets() const;//Получить TextWidgets
+            /*! @~russian
+            Добавить линию в <Band>
+            @param[in] Line линия
+            */ 
+            void                            addLine( const LinePtr & line );
+            /*! @~russian
+            Возвращает <Line> по индексу
+            @param[in] index индекс
+            */             
+            const LinePtr                   getLine( int index ) const;
+            /*! @~russian
+            Возвращает размер <Line>
+            */            
+            int                             getLinesSize() const;
+            /*! @~russian
+            Возвращает вектор <Line>
+            */             
+            const QVector< LinePtr >        getLines() const;
 
-            void                            addLine( const LinePtr & line );//Добавить Line
-            const LinePtr                   getLine( int index ) const;//Получить индекс Line
-            int                             getLinesSize() const;//Получить размер Line
-            const QVector< LinePtr >        getLines() const;//Получить Lines
+            /*! @~russian
+            Добавляем квадрат в <Band>
+            @param[in] Rect квадрат
+            */  
+            void                            addRect( const RectPtr & rect );
+            /*! @~russian
+            Возвращает <Rect> по индексу
+            @param[in] index индекс
+            */              
+            const RectPtr                   getRect( int index ) const;
+            /*! @~russian
+            Возвращает размер <Rect>
+            */              
+            int                             getRectsSize() const;
+            /*! @~russian
+            Возвращает вектор <Rect>
+            */              
+            const QVector< RectPtr >        getRects() const;
 
-            void                            addRect( const RectPtr & rect );//Добавить Rect
-            const RectPtr                   getRect( int index ) const;//Получить индекс Rect
-            int                             getRectsSize() const;//Получить размер Rect
-            const QVector< RectPtr >        getRects() const;//Получить Rects
+            /*! @~russian
+            Добавляем эллипс в <Band>
+            @param[in] Ellipse эллипс
+            */   
+            void                            addEllipse( const EllipsePtr & rect );
+            /*! @~russian
+            Возвращает <Ellipse> по индексу
+            @param[in] index индекс
+            */               
+            const EllipsePtr                getEllipse( int index ) const;
+             /*! @~russian
+            Возвращает размер <Ellipse>
+            */              
+            int                             getEllipsesSize() const;
+            /*! @~russian
+            Возвращает вектор <Ellipse>
+            */               
+            const QVector< EllipsePtr >     getEllipses() const;
 
-            void                            addEllipse( const EllipsePtr & rect );//Добавить Ellipse
-            const EllipsePtr                getEllipse( int index ) const;//Получить индекс Ellipse
-            int                             getEllipsesSize() const;//Получить размер Ellipse
-            const QVector< EllipsePtr >     getEllipses() const;//Получить Ellipses
-
+            /*! @~russian
+            Добавляем изображение в <Band>
+            @param[in] Image изображение
+            */ 
             void                            addImage( const ImagePtr & rect );//Добавить Image
+            /*! @~russian
+            Возвращает <Image> по индексу
+            @param[in] index индекс
+            */             
             const ImagePtr                  getImage( int index ) const;//Получить индекс Image
+            /*! @~russian
+            Возвращает размер <Image>
+            */             
             int                             getImagesSize() const;//Получить размер Image
+            /*! @~russian
+            Возвращает вектор <Image>
+            */             
             const QVector< ImagePtr >       getImages() const;//Получить Images
 
         private://Храним вектора со значеними
