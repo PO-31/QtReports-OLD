@@ -238,3 +238,4 @@ _Pvt_Extensions
 *.db
 /qtreportsviewer/test.pdf
 /tests/qtreportslib_tests/test.html
+/tests/qtreportslib_tests/test.pdf

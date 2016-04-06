@@ -9,40 +9,45 @@
 #include <QDebug>
 
 Test_ConverterToPdf::Test_ConverterToPdf( QObject * parent ) :
-    QObject( parent ) {}
+    QObject( parent )
+{}
 
 Test_ConverterToPdf::~Test_ConverterToPdf() {}
 
-void    Test_ConverterToPdf::convert() {
+void    Test_ConverterToPdf::convert()
+{
     QString reportPath = QFINDTESTDATA( "full.qrxml" );
-	qDebug() << endl << "Used report: " << reportPath;
-	
+    qDebug() << endl << "Used report: " << reportPath;
+
     qtreports::Engine engine;
     QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
-	
+
     QMap < QString, QString > map;
     map[ "title" ] = "Best Title in World";
     qDebug() << endl << "Used map: " << map;
-	QVERIFY2( engine.setParameters( map ), engine.getLastError().toStdString().c_str() );
+    QVERIFY2( engine.setParameters( map ), engine.getLastError().toStdString().c_str() );
 
     QString dbPath = QFINDTESTDATA( "images.db" );
     qDebug() << endl << "Used db: " << dbPath;
     auto db = QSqlDatabase::addDatabase( "QSQLITE" );
     db.setDatabaseName( dbPath );
-	QVERIFY2( db.open(), db.lastError().text().toStdString().c_str() );
-	QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
+    QVERIFY2( db.open(), db.lastError().text().toStdString().c_str() );
+    QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
 
     auto report = engine.getReport();
-	auto outPath = "test.pdf";
+    auto outPath = "test.pdf";
 
     qtreports::detail::ConverterToPDF converter( report );
     QVERIFY2( converter.convert( outPath ), converter.getLastError().toStdString().c_str() );
     QCOMPARE( converter.getDPI(), 600 );
     QCOMPARE( converter.getLastError(), QString() );
-	
-	QCOMPARE( QFile::exists( outPath ), true );
+
+    QCOMPARE( QFile::exists( outPath ), true );
+    QFile file( outPath );
+    QVERIFY2( file.open( QIODevice::OpenModeFlag::ReadOnly ), file.errorString().toStdString().c_str() );
+    QVERIFY( file.size() != 0 );
+    file.close();
     QCOMPARE( QFile::remove( outPath ), true );
-	//QVERIFY( QFile( test.pdf ).size() != 0 );
 }
 
 void    Test_ConverterToPdf::setDPI()
