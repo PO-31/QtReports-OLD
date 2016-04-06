@@ -12,18 +12,43 @@
 
 namespace qtreports {
     namespace detail {
+        
+        
+        /*! @~russian
+        @brief Класс, реализующий тэг <Field>
+        Класс, реализующий тэг <Field>
+        */
         class Field : public Object {
 
         public:
             Field();
             ~Field();
 
-            void            setClassName( const QString & name );//Задать ClassName
-            const QString   getClassName() const;//Получить
 
-            void            setData( const QVector< QVariant > & data );//Задать Data
+            /*! @~russian
+            Задаем ClassName
+            @param[in] name 
+            */
+            void            setClassName( const QString & name );
 
-            QString         getData( int row );//Получить строку
+            /*! @~russian
+            Получаем ClassName.
+            */            
+            const QString   getClassName() const;
+
+
+            /*! @~russian
+            Задаем Data
+            @param[in] data 
+            */
+            void            setData( const QVector< QVariant > & data );
+
+
+            /*! @~russian
+            Получить номер строки.
+            @param[in] row номер
+            */
+            QString         getData( int row );
 
             template< typename T1 >
             const T1        getData( int row )
@@ -31,7 +56,11 @@ namespace qtreports {
                 return m_data.value( row ).value< T1 >();
             }
 
-            int getRowCount();//Получить количество строк
+
+            /*! @~russian
+            Получить количесвто строк
+            */
+            int getRowCount();
 
         private:
             QString     m_className;
