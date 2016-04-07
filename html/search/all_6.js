@@ -4,7 +4,7 @@ var searchData=
   ['getcolumn',['getColumn',['../classqtreports_1_1detail_1_1_processed_d_b.html#a5cf66b1fba61011b877f94c7305929b2',1,'qtreports::detail::ProcessedDB::getColumn(const QString &amp;name) const '],['../classqtreports_1_1detail_1_1_processed_d_b.html#aeb26946e955330ed7dc1a2674ae3979c',1,'qtreports::detail::ProcessedDB::getColumn(int col) const ']]],
   ['getcolumnindex',['getColumnIndex',['../classqtreports_1_1detail_1_1_processed_d_b.html#ac344a699fd870182826954d9253b3485',1,'qtreports::detail::ProcessedDB']]],
   ['getcolumnname',['getColumnName',['../classqtreports_1_1detail_1_1_processed_d_b.html#a8b9f7f36966f17b602656c9dd5b41e05',1,'qtreports::detail::ProcessedDB']]],
-  ['getdata',['getData',['../classqtreports_1_1detail_1_1_field.html#a4ecc69df8b63e2c3d3a1f8bb2701faab',1,'qtreports::detail::Field']]],
+  ['getdata',['getData',['../classqtreports_1_1detail_1_1_field.html#a4ecc69df8b63e2c3d3a1f8bb2701faab',1,'qtreports::detail::Field::getData(int row)'],['../classqtreports_1_1detail_1_1_field.html#a6479482ff09c2eedab090cf58c9a0ca9',1,'qtreports::detail::Field::getData(int row)']]],
   ['getdpi',['getDPI',['../classqtreports_1_1detail_1_1_converter_to_p_d_f.html#a1069b167434da43b9428ffa3a556a3b3',1,'qtreports::detail::ConverterToPDF']]],
   ['getellipse',['getEllipse',['../classqtreports_1_1detail_1_1_band.html#a77ca6f6126d836c2338e4132c2160929',1,'qtreports::detail::Band']]],
   ['getellipses',['getEllipses',['../classqtreports_1_1detail_1_1_band.html#abd9f491bab5daef5c1326476b66babea',1,'qtreports::detail::Band']]],

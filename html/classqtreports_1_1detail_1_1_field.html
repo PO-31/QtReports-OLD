@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 </div><!--header-->
 <div class="contents">
 
-<p>Класс, реализующий тэг &lt;Field&gt; Класс, реализующий тэг &lt;Field&gt;  
+<p>Класс, реализующий тэг &lt;field&gt;  
  <a href="classqtreports_1_1detail_1_1_field.html#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="field_8hpp_source.html">field.hpp</a>&gt;</code></p>
@@ -120,9 +120,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <tr class="separator:a5ac656a5cba9112fb858c8c791005822"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ecc69df8b63e2c3d3a1f8bb2701faab"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_field.html#a4ecc69df8b63e2c3d3a1f8bb2701faab">getData</a> (int row)</td></tr>
 <tr class="separator:a4ecc69df8b63e2c3d3a1f8bb2701faab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6479482ff09c2eedab090cf58c9a0ca9"><td class="memTemplParams" colspan="2"><a class="anchor" id="a6479482ff09c2eedab090cf58c9a0ca9"></a>
-template&lt;typename T1 &gt; </td></tr>
-<tr class="memitem:a6479482ff09c2eedab090cf58c9a0ca9"><td class="memTemplItemLeft" align="right" valign="top">const T1&#160;</td><td class="memTemplItemRight" valign="bottom"><b>getData</b> (int row)</td></tr>
+<tr class="memitem:a6479482ff09c2eedab090cf58c9a0ca9"><td class="memTemplParams" colspan="2">template&lt;typename T1 &gt; </td></tr>
+<tr class="memitem:a6479482ff09c2eedab090cf58c9a0ca9"><td class="memTemplItemLeft" align="right" valign="top">const T1&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_field.html#a6479482ff09c2eedab090cf58c9a0ca9">getData</a> (int row)</td></tr>
 <tr class="separator:a6479482ff09c2eedab090cf58c9a0ca9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53c646a9e83d661e7d19654632e764aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_field.html#a53c646a9e83d661e7d19654632e764aa">getRowCount</a> ()</td></tr>
 <tr class="separator:a53c646a9e83d661e7d19654632e764aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,7 +159,8 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
 <tr class="separator:a738222cc50885d7aaa05166a4e10bed5 inherit pro_attribs_classqtreports_1_1detail_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Класс, реализующий тэг &lt;Field&gt; Класс, реализующий тэг &lt;Field&gt; </p>
+<div class="textblock"><p>Класс, реализующий тэг &lt;field&gt; </p>
+<p>Класс, реализующий тэг &lt;field&gt; </p>
 </div><h2 class="groupheader">Методы</h2>
 <a class="anchor" id="a5208eca6f0064477efd12c2df17ee9a2"></a>
 <div class="memitem">
@@ -174,7 +174,7 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Получаем ClassName. </p>
+<p>Возвращает атрибут className. </p>
 
 </div>
 </div>
@@ -191,9 +191,41 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Получить номер строки. </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Возвращает содержимое &lt;field&gt; </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>номер </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>Номер строки </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6479482ff09c2eedab090cf58c9a0ca9"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T1 &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T1 qtreports::detail::Field::getData </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Возвращает содержимое &lt;field&gt;. Шаблонный вариант. </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">row</td><td>Номер строки </td></tr>
   </table>
   </dd>
 </dl>
@@ -212,7 +244,7 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Получить количесвто строк </p>
+<p>Получить количество строк в &lt;field&gt; </p>
 
 </div>
 </div>
@@ -229,9 +261,9 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Задаем ClassName </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Устанавливает атрибут className </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Название класса </td></tr>
   </table>
   </dd>
 </dl>
@@ -251,9 +283,9 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Задаем Data </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Устанавливает содержимое &lt;field&gt; </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>Вектор, содержащие данные &lt;field&gt; </td></tr>
   </table>
   </dd>
 </dl>
