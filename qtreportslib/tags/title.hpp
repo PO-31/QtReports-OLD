@@ -4,12 +4,15 @@
 #include <QSharedPointer>
 #include "section.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
         /*! @~russian
-        @brief Класс, реализующий тэг <Title>
-        Класс, реализующий тэг <Title>
+        @brief Класс, реализующий тэг <title>
+
+        Класс, реализующий тэг <title>
         */
         class Title : public Section {
 

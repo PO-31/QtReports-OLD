@@ -10,13 +10,15 @@
 
 #include "object.hpp"
 
-namespace qtreports {
-    namespace detail {
-        
-        
+namespace qtreports
+{
+    namespace detail
+    {
+
         /*! @~russian
-        @brief Класс, реализующий тэг <Field>
-        Класс, реализующий тэг <Field>
+        @brief Класс, реализующий тэг <field>
+
+        Класс, реализующий тэг <field>
         */
         class Field : public Object {
 
@@ -24,48 +26,48 @@ namespace qtreports {
             Field();
             ~Field();
 
-
             /*! @~russian
-            Задаем ClassName
-            @param[in] name 
+            Устанавливает атрибут className
+            @param[in] name Название класса
             */
             void            setClassName( const QString & name );
 
             /*! @~russian
-            Получаем ClassName.
-            */            
+            Возвращает атрибут className.
+            */
             const QString   getClassName() const;
 
-
             /*! @~russian
-            Задаем Data
-            @param[in] data 
+            Устанавливает содержимое <field>
+            @param[in] data Вектор, содержащие данные <field>
             */
             void            setData( const QVector< QVariant > & data );
 
-
             /*! @~russian
-            Получить номер строки.
-            @param[in] row номер
+            Возвращает содержимое <field>
+            @param[in] row Номер строки
             */
             QString         getData( int row );
 
+            /*! @~russian
+            Возвращает содержимое <field>. Шаблонный вариант.
+            @param[in] row Номер строки
+            */
             template< typename T1 >
             const T1        getData( int row )
             {
                 return m_data.value( row ).value< T1 >();
             }
 
-
             /*! @~russian
-            Получить количесвто строк
+            Получить количество строк в <field>
             */
-            int getRowCount();
+            int             getRowCount();
 
         private:
-            QString     m_className;
+            QString                 m_className;
+            QVector< QVariant >     m_data;
 
-            QVector < QVariant > m_data;
         };
 
         typedef QSharedPointer< Field > FieldPtr;

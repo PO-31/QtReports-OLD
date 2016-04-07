@@ -2,9 +2,7 @@
 #ifndef WIDGET_HPP
 #define WIDGET_HPP
 
-//#include <QVector>
 #include <QString>
-//#include <QVariant>
 #include <QPoint>
 #include <QSize>
 #include <QRect>
@@ -13,12 +11,15 @@
 #include "style.hpp"
 #include "object.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
+
         /* Интерфейс любого тэга, который будет отображаться на экране.
         Координаты объекта являются локальными относительно родительского объекта.*/
         class Widget : public Object {
-                 
+
         public:
             Widget();
             virtual ~Widget();
@@ -41,7 +42,7 @@ namespace qtreports {
 
             void            setAlignment( Qt::Alignment alignment );
             Qt::Alignment   getAlignment();
-            
+
             const QPoint    getPos() const;
             int             getX() const;
             int             getY() const;

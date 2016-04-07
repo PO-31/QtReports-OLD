@@ -11,9 +11,9 @@ namespace qtreports
     {
 
         /*! @~russian
-        @brief Класс, реализующий тэг TextField
+        @brief Класс, реализующий тэг <textField>
 
-        Класс, реализующий тэг TextField
+        Класс, реализующий тэг <textField>
         */
         class TextField : public TextWidget {
 

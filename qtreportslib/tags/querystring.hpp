@@ -4,28 +4,31 @@
 #include <QSharedPointer>
 #include "object.hpp"
 
-namespace qtreports {
-    namespace detail {
-
+namespace qtreports
+{
+    namespace detail
+    {
 
         /*! @~russian
-        @brief Класс, реализующий тэг <QueryString>
-        Класс, реализующий тэг <QueryString>
+        @brief Класс, реализующий тэг <queryString>
+
+        Класс, реализующий тэг <queryString>
         */
         class QueryString : public Object {
-              
+
         public:
             QueryString();
             ~QueryString();
 
             /*! @~russian
-            Задать Text
-            @param[in] text значение
+            Устанавливает текст <queryString>
+            @param[in] text Строка
             */
             void            setText( const QString & text );
+
             /*! @~russian
-            Получить Text
-            */            
+            Возвращает текст <queryString>
+            */
             const QString   getText() const;
 
         private:

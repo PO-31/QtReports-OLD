@@ -8,11 +8,11 @@ namespace qtreports
 {
     namespace detail
     {
-        
 
         /*! @~russian
-        @brief Класс, реализующий тэг <Ellipse>
-        Класс, реализующий тэг <Ellipse>
+        @brief Класс, реализующий тэг <ellipse>
+
+        Класс, реализующий тэг <ellipse>
         */
         class Ellipse : public Widget {
 

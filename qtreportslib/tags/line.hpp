@@ -9,10 +9,10 @@ namespace qtreports
     namespace detail
     {
 
-
         /*! @~russian
-        @brief Класс, реализующий тэг <Line>
-        Класс, реализующий тэг <Line>
+        @brief Класс, реализующий тэг <line>
+
+        Класс, реализующий тэг <line>
         */
         class Line : public Widget {
 

@@ -22,15 +22,15 @@ namespace qtreports
             ~Image();
 
             /*! @~russian
-            Возвращает изображение, содержащееся в тэге.
-            */
-            const QImage    getImage();
-
-            /*! @~russian
-            Устанавливает изображение тэга.
+            Устанавливает изображение <image>
             @param[in] image Изображение
             */
             void            setImage( const QImage & image );
+
+            /*! @~russian
+            Возвращает изображение <image>
+            */
+            const QImage    getImage();
 
         private:
             QImage          m_image;

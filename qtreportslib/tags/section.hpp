@@ -6,12 +6,15 @@
 #include "object.hpp"
 #include "band.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
         /*! @~russian
-        @brief Класс, реализующий тэг <>
-        Класс, реализующий тэг <>
+        @brief Базовый класс для тэгов <detail>, <title> и подобных.
+
+        Базовый класс для тэгов <detail>, <title> и подобных.
         */
         class Section : public Object {
 

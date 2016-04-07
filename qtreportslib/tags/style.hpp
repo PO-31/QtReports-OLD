@@ -8,15 +8,17 @@
 
 #include "object.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
         class Style : public Object {
-                 
+
         public:
             Style();
             ~Style();
-            
+
             bool	        isDefault() const; // Является ли данный стиль стилем по умолчанию
             void	        setAsDefault( bool flag );
 
@@ -43,10 +45,10 @@ namespace qtreports {
 
             const QString	getPDFFontName() const; // Имя шрифта
             void	        setPDFFontName( const QString & name );
-            
+
             const QString	getPDFEncoding() const; // Имя шрифта
             void	        setPDFEncoding( const QString & encoding );
-            
+
             bool	        isPDFEmbedded() const; // Имя шрифта
             void	        setPDFEmbedded( bool isEmbedded );
 
