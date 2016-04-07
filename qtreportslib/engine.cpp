@@ -113,7 +113,7 @@ namespace qtreports
             m_lastError = "Error in prepare data source: " + m_lastError;
             return false;
         }
-        
+
         m_report->setRowCount( m_processedDB.getMaxRowCount() );
 
         for( auto && field : m_report->getFields() )
@@ -147,7 +147,7 @@ namespace qtreports
     bool    Engine::setDataModel( const QAbstractItemModel & model )
     {
         //Need check parameters
-        Q_UNUSED( model )
+        Q_UNUSED( model );
         return true;
     }
 
@@ -240,7 +240,7 @@ namespace qtreports
         connect(
             &preview, &QPrintPreviewDialog::paintRequested,
             this, &Engine::drawPreview
-            );
+        );
         preview.exec();
 
         return true;
@@ -292,7 +292,8 @@ namespace qtreports
         }
     }
 
-    bool    Engine::prepareDB() {
+    bool    Engine::prepareDB()
+    {
         return setQuery( m_report->getQuery() );
     }
 
@@ -325,16 +326,18 @@ namespace qtreports
 
     void    Engine::executeQueries( const QStringList & queries )
     {
+        QSqlQueryModel model;
         for( auto && query : queries )
         {
-            auto model = new QSqlQueryModel();
-            model->setQuery( query, m_dbConnection );
-            for( int row = 0; row < model->rowCount(); row++ )
+            model.setQuery( query, m_dbConnection );
+            for( int row = 0; row < model.rowCount(); row++ )
             {
-                QSqlRecord rec = model->record( row );
+                QSqlRecord rec = model.record( row );
                 for( int col = 0; col < rec.count(); col++ )
                 {
-                    m_processedDB.appendColumnData( rec.fieldName( col ), rec.field( col ).value() );
+                    auto columnName = rec.fieldName( col );
+                    auto fieldValue = rec.field( col ).value();
+                    m_processedDB.appendColumnData( columnName, fieldValue );
                 }
             }
         }
@@ -349,7 +352,7 @@ namespace qtreports
     {
         return m_report;
     }
-	
+
     const QString   Engine::getLastError() const
     {
         return m_lastError;
