@@ -92,8 +92,7 @@ script:
       sudo make install
       cd ..
       lcov --version
-      
-   #  cd qtreportslib
+      #cd qtreportslib
       lcov --capture --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info
       lcov --remove coverage.info --output-file coverage.info "*moc_*.cpp"
     fi
