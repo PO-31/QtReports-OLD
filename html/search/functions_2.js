@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['getbottommargin',['getBottomMargin',['../classqtreports_1_1detail_1_1_report.html#a1aac1a22db0225606814ea687e1d9298',1,'qtreports::detail::Report']]],
   ['getclassname',['getClassName',['../classqtreports_1_1detail_1_1_field.html#a5208eca6f0064477efd12c2df17ee9a2',1,'qtreports::detail::Field::getClassName()'],['../classqtreports_1_1detail_1_1_text_field.html#a50c6ba3f1b96253e28666556721f9df5',1,'qtreports::detail::TextField::getClassName()']]],
   ['getcolumn',['getColumn',['../classqtreports_1_1detail_1_1_processed_d_b.html#a5cf66b1fba61011b877f94c7305929b2',1,'qtreports::detail::ProcessedDB::getColumn(const QString &amp;name) const '],['../classqtreports_1_1detail_1_1_processed_d_b.html#aeb26946e955330ed7dc1a2674ae3979c',1,'qtreports::detail::ProcessedDB::getColumn(int col) const ']]],
   ['getcolumnindex',['getColumnIndex',['../classqtreports_1_1detail_1_1_processed_d_b.html#ac344a699fd870182826954d9253b3485',1,'qtreports::detail::ProcessedDB']]],
@@ -18,16 +19,20 @@ var searchData=
   ['getfontcolor',['getFontColor',['../classqtreports_1_1detail_1_1_style.html#a2d8d9d0d898c4306e47dcca067c60c28',1,'qtreports::detail::Style']]],
   ['getfontname',['getFontName',['../classqtreports_1_1detail_1_1_style.html#ae233bf8f53b1ceb560398925a50fcb44',1,'qtreports::detail::Style']]],
   ['getfontsize',['getFontSize',['../classqtreports_1_1detail_1_1_style.html#ac969a5ba6cd39a890a72ec4146ba8dda',1,'qtreports::detail::Style']]],
+  ['getheight',['getHeight',['../classqtreports_1_1detail_1_1_report.html#acc2c23b7d2729d02778727dc8d6ea54d',1,'qtreports::detail::Report']]],
   ['getimage',['getImage',['../classqtreports_1_1detail_1_1_band.html#a0613da11a6eb031f94b17bc8f61bb85c',1,'qtreports::detail::Band::getImage()'],['../classqtreports_1_1detail_1_1_image.html#aeb9da44eee523ef003c70cef54080815',1,'qtreports::detail::Image::getImage()']]],
   ['getimages',['getImages',['../classqtreports_1_1detail_1_1_band.html#a4a53533207ed4742d2ebd147723ce296',1,'qtreports::detail::Band']]],
   ['getimagessize',['getImagesSize',['../classqtreports_1_1detail_1_1_band.html#a842d6883ac576ea488ca1ae2c1e845d9',1,'qtreports::detail::Band']]],
   ['getlasterror',['getLastError',['../classqtreports_1_1detail_1_1_converter_to_p_d_f.html#a2d5862efb544884825efeafcf6fec683',1,'qtreports::detail::ConverterToPDF::getLastError()'],['../classqtreports_1_1detail_1_1_parser.html#acb2cceb86384551fed0652b0bfcd9383',1,'qtreports::detail::Parser::getLastError()'],['../classqtreports_1_1detail_1_1_replacer.html#a677f7802e444f2de3af4cb43b6cedf30',1,'qtreports::detail::Replacer::getLastError()'],['../classqtreports_1_1detail_1_1_object.html#ae5217697b83b0d5d6467a4be188ea1e1',1,'qtreports::detail::Object::getLastError()']]],
+  ['getleftmargin',['getLeftMargin',['../classqtreports_1_1detail_1_1_report.html#aa37e59088797c07a28c52f25f36d34c9',1,'qtreports::detail::Report']]],
   ['getline',['getLine',['../classqtreports_1_1detail_1_1_band.html#a8d40282443467204436d8dd7b74b12ab',1,'qtreports::detail::Band']]],
   ['getlines',['getLines',['../classqtreports_1_1detail_1_1_band.html#aa1a654bc6396f860e1662a6c29d14dad',1,'qtreports::detail::Band']]],
   ['getlinessize',['getLinesSize',['../classqtreports_1_1detail_1_1_band.html#a80336ee54b75ad9d9a5816f7652cc95f',1,'qtreports::detail::Band']]],
   ['getlog',['getLog',['../classqtreports_1_1detail_1_1_parser.html#ace6817f32afed3501061adb7a8035f45',1,'qtreports::detail::Parser']]],
+  ['getmargins',['getMargins',['../classqtreports_1_1detail_1_1_report.html#ac419173360ddd88515334207755d5733',1,'qtreports::detail::Report']]],
   ['getmaxrowcount',['getMaxRowCount',['../classqtreports_1_1detail_1_1_processed_d_b.html#a23b078d49f413057c8b9585ebd6cfd7a',1,'qtreports::detail::ProcessedDB']]],
   ['getname',['getName',['../classqtreports_1_1detail_1_1_object.html#acf3f084ddddcae074dedfe99f28eac9f',1,'qtreports::detail::Object']]],
+  ['getorientation',['getOrientation',['../classqtreports_1_1detail_1_1_report.html#aa1d8698f427cfe8f89469a249681d899',1,'qtreports::detail::Report']]],
   ['getoriginaltext',['getOriginalText',['../classqtreports_1_1detail_1_1_text_widget.html#a86102d201b588219125b4bbfd2a1dade',1,'qtreports::detail::TextWidget']]],
   ['getparameter',['getParameter',['../classqtreports_1_1detail_1_1_processed_d_b.html#a610ab76294ef2f960e487825a34f322d',1,'qtreports::detail::ProcessedDB::getParameter()'],['../classqtreports_1_1detail_1_1_report.html#ad9be4eb7c2bc8298ab535911c5d1e2df',1,'qtreports::detail::Report::getParameter()']]],
   ['getparameters',['getParameters',['../classqtreports_1_1detail_1_1_processed_d_b.html#aaf49ec24c265e5b7a97371f855746dd2',1,'qtreports::detail::ProcessedDB::getParameters()'],['../classqtreports_1_1detail_1_1_report.html#a23a5eb0d1a4a2c5aaf4404948465af62',1,'qtreports::detail::Report::getParameters()']]],
@@ -38,7 +43,9 @@ var searchData=
   ['getrects',['getRects',['../classqtreports_1_1detail_1_1_band.html#afdd4c1c109eedbcd75e5967e4c7879b8',1,'qtreports::detail::Band']]],
   ['getrectssize',['getRectsSize',['../classqtreports_1_1detail_1_1_band.html#ac2c4dfe6c30cafaeaf01bee83466af85',1,'qtreports::detail::Band']]],
   ['getreport',['getReport',['../classqtreports_1_1detail_1_1_parser.html#a070b8403eda3e69ac206252b4178c256',1,'qtreports::detail::Parser']]],
+  ['getrightmargin',['getRightMargin',['../classqtreports_1_1detail_1_1_report.html#a8a22c99b343bc9c19d8f305ccfbc2be0',1,'qtreports::detail::Report']]],
   ['getrowcount',['getRowCount',['../classqtreports_1_1detail_1_1_processed_d_b.html#a887c707b061cd783e7a07047046dae2e',1,'qtreports::detail::ProcessedDB::getRowCount(const QString &amp;columnName) const '],['../classqtreports_1_1detail_1_1_processed_d_b.html#a56dbe65687e82f1a1bc8f6be5ce2672c',1,'qtreports::detail::ProcessedDB::getRowCount(int column) const '],['../classqtreports_1_1detail_1_1_field.html#a53c646a9e83d661e7d19654632e764aa',1,'qtreports::detail::Field::getRowCount()'],['../classqtreports_1_1detail_1_1_report.html#aedb49125bf91cbd57285b8c23ff2e4d8',1,'qtreports::detail::Report::getRowCount()']]],
+  ['getsize',['getSize',['../classqtreports_1_1detail_1_1_report.html#ad6d9cd7ef861c34b1982b7bec95873ed',1,'qtreports::detail::Report']]],
   ['getstatictext',['getStaticText',['../classqtreports_1_1detail_1_1_band.html#a23f2aebafb2019f3c4a6396b63641a00',1,'qtreports::detail::Band']]],
   ['getstatictexts',['getStaticTexts',['../classqtreports_1_1detail_1_1_band.html#a060f906c4eb5afe9d6dcdbe33b935d09',1,'qtreports::detail::Band']]],
   ['getstatictextssize',['getStaticTextsSize',['../classqtreports_1_1detail_1_1_band.html#aa154d5e1eef9be35f5ec44a8d0b13e00',1,'qtreports::detail::Band']]],
@@ -51,5 +58,7 @@ var searchData=
   ['gettextfieldssize',['getTextFieldsSize',['../classqtreports_1_1detail_1_1_band.html#a338ce758d304830ca207afb19a98663e',1,'qtreports::detail::Band']]],
   ['gettextwidgets',['getTextWidgets',['../classqtreports_1_1detail_1_1_band.html#aaa061adcdabca37be62c1b78e730b0bf',1,'qtreports::detail::Band']]],
   ['gettextwidgetssize',['getTextWidgetsSize',['../classqtreports_1_1detail_1_1_band.html#abfd513714ddfc19cc4ce614b8d02e354',1,'qtreports::detail::Band']]],
-  ['gettitle',['getTitle',['../classqtreports_1_1detail_1_1_report.html#a96085144b5a7935cbce1668da919e968',1,'qtreports::detail::Report']]]
+  ['gettitle',['getTitle',['../classqtreports_1_1detail_1_1_report.html#a96085144b5a7935cbce1668da919e968',1,'qtreports::detail::Report']]],
+  ['gettopmargin',['getTopMargin',['../classqtreports_1_1detail_1_1_report.html#a3924e930c60b852c276699a11394b872',1,'qtreports::detail::Report']]],
+  ['getwidth',['getWidth',['../classqtreports_1_1detail_1_1_report.html#a257b935d6c7f136c46bdb3d4bf806041',1,'qtreports::detail::Report']]]
 ];
