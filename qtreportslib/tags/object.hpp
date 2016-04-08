@@ -11,34 +11,47 @@ namespace qtreports {
         bool    isEquals( const QString & string1, const QString & string2 );
 
         /*! @~russian
-        @brief Базовый интерфейс обьекта для любого тега
+        @brief Базовый класс для любого тэга
+        
+        Базовый класс для любого тэга
         */
-        /* Базовый интерфейс объекта для любого тэга. */
         class Object {
 
         public:
             Object();
+            
             /*! @~russian
             Конструктор, создается обьект с именем
-            @param[in] имя обьекта
+            @param[in] name Имя обьекта
             */
             Object( const QString & name );
             virtual ~Object();
 
             /*! @~russian
-            Устанавливает имя
-            @param[in] имя
+            Устанавливает значение атрибута name
+            @param[in] name Значение атрибута name
             */
             void            setName( const QString & name );
+            
             /*! @~russian
-            Устанавливает имя тега
-            @param[in] имя тега
+            Возвращает значение атрибута name
+            */
+            const QString   getName() const;
+            
+            /*! @~russian
+            Устанавливает название тэга
+            @param[in] name Название тэга
             */            
             void            setTagName( const QString & name );
-            //virtual bool    setParameter( const QString & name, const QVariant & value );
 
-            const QString   getName() const;
+            /*! @~russian
+            Возвращает название тэга
+            */
             const QString   getTagName() const;
+            
+            /*! @~russian
+            Возвращает описание последней ошибки
+            */
             const QString	getLastError() const;
 
         protected:
