@@ -683,27 +683,39 @@ namespace qtreports
                 return false;
             }
 
-            auto x = xString.toInt();
-            auto y = yString.toInt();
-            auto width = widthString.toInt();
-            auto height = heightString.toInt();
+            if( !xString.isEmpty() )
+            {
+                widget->setX( xString.toInt() );
+            }
+
+            if( !yString.isEmpty() )
+            {
+                widget->setY( yString.toInt() );
+            }
+
+            if( !widthString.isEmpty() )
+            {
+                auto width = widthString.toInt();
+                //if( widthString.contains( "%" ) )
+                //{
+                    //auto percentString = widthString.split( "%" ).at( 0 );
+                    //auto percent = 0.01 * std::max( 0, std::min( 100, percentString.toInt() ) );
+                    //width = static_cast< int >( percent * m_report->getWidth() );
+                //}
+                widget->setWidth( width );
+            }
+
+            if( !heightString.isEmpty() )
+            {
+                widget->setHeight( heightString.toInt() );
+            }
             
             if( !styleString.isEmpty() )
             {
                 widget->setStyle( styleString );
             }
 
-            if( widthString.contains( "%" ) )
-            {
-                auto percentString = widthString.split( "%" ).at( 0 );
-                int percent = std::max( 0, std::min( 100, percentString.toInt() ) );
-                width = static_cast< int >( percent * m_report->getWidth() * 0.01 );
-            }
-            //auto percentString = widthString.split( "%" ).at( 0 );
-            //int percent = std::max( 0, std::min( 100, percentString.toInt() ) );
-            //width = 100;// percent * m_report->getSize().width();
-
-            widget->setRect( QRect( x, y, width, height ) );
+            //widget->setRect( QRect( x, y, width, height ) );
 
             return !reader.hasError();
         }
