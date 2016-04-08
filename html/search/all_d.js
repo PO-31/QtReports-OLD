@@ -1,24 +1,5 @@
 var searchData=
 [
-  ['section',['Section',['../classqtreports_1_1detail_1_1_section.html',1,'qtreports::detail']]],
-  ['setasdefault',['setAsDefault',['../classqtreports_1_1detail_1_1_style.html#a985841d9589e6b5ff41e2c0088987a13',1,'qtreports::detail::Style']]],
-  ['setbold',['setBold',['../classqtreports_1_1detail_1_1_style.html#ad7a45d6dc5e2f8e4655ee6f4c2528b1b',1,'qtreports::detail::Style']]],
-  ['setclassname',['setClassName',['../classqtreports_1_1detail_1_1_field.html#a1f36bb1f5eef2cb03ca7bd36c60deef2',1,'qtreports::detail::Field::setClassName()'],['../classqtreports_1_1detail_1_1_text_field.html#ab2c5cac5919b7cbcecd1c8c4a999b351',1,'qtreports::detail::TextField::setClassName()']]],
-  ['setdata',['setData',['../classqtreports_1_1detail_1_1_field.html#a5ac656a5cba9112fb858c8c791005822',1,'qtreports::detail::Field']]],
-  ['setdpi',['setDPI',['../classqtreports_1_1detail_1_1_converter_to_p_d_f.html#a2cac83dd515822a5c3c7560ef5eb5fd8',1,'qtreports::detail::ConverterToPDF']]],
-  ['setfontcolor',['setFontColor',['../classqtreports_1_1detail_1_1_style.html#ad92dc45bfb04c3ba56ca84dd7444d1ad',1,'qtreports::detail::Style']]],
-  ['setfontname',['setFontName',['../classqtreports_1_1detail_1_1_style.html#ac3542c21bb9b1b5624216dbcb81e88dd',1,'qtreports::detail::Style']]],
-  ['setfontsize',['setFontSize',['../classqtreports_1_1detail_1_1_style.html#a1b4dfcef9c88c5b9f6b5ab6b906bb747',1,'qtreports::detail::Style']]],
-  ['setimage',['setImage',['../classqtreports_1_1detail_1_1_image.html#a31875a96d73387d6e766ba42b73eebf9',1,'qtreports::detail::Image']]],
-  ['setitalic',['setItalic',['../classqtreports_1_1detail_1_1_style.html#a1eee40df8247d0be924ee310212a0bdc',1,'qtreports::detail::Style']]],
-  ['setoriginaltext',['setOriginalText',['../classqtreports_1_1detail_1_1_text_widget.html#aa5b5c9ec0ef4cd677426f03352ef73c3',1,'qtreports::detail::TextWidget']]],
-  ['setparameter',['setParameter',['../classqtreports_1_1detail_1_1_processed_d_b.html#adf782690eec02fa73a5247f4eff5eb6e',1,'qtreports::detail::ProcessedDB']]],
-  ['setparameters',['setParameters',['../classqtreports_1_1detail_1_1_processed_d_b.html#a55572b40bb4f91ec1648f254e8cbefc4',1,'qtreports::detail::ProcessedDB']]],
-  ['setpdfembedded',['setPDFEmbedded',['../classqtreports_1_1detail_1_1_style.html#a793b111ab414c1477455dc0699ed9451',1,'qtreports::detail::Style']]],
-  ['setpdfencoding',['setPDFEncoding',['../classqtreports_1_1detail_1_1_style.html#a6a590fda8323372e557f5250793d781d',1,'qtreports::detail::Style']]],
-  ['setpdffontname',['setPDFFontName',['../classqtreports_1_1detail_1_1_style.html#ab20a8689e73a73e37bb2087c7444f533',1,'qtreports::detail::Style']]],
-  ['settext',['setText',['../classqtreports_1_1detail_1_1_query_string.html#a23fd1de2dce137cb30c9d87668442309',1,'qtreports::detail::QueryString::setText()'],['../classqtreports_1_1detail_1_1_text_widget.html#a442eab76c8decee3624f573a4d91d27f',1,'qtreports::detail::TextWidget::setText()']]],
-  ['setunderline',['setUnderline',['../classqtreports_1_1detail_1_1_style.html#a11c9d1d806cc4ba86e0e18be65c77c32',1,'qtreports::detail::Style']]],
-  ['statictext',['StaticText',['../classqtreports_1_1detail_1_1_static_text.html',1,'qtreports::detail']]],
-  ['style',['Style',['../classqtreports_1_1detail_1_1_style.html',1,'qtreports::detail']]]
+  ['textfield',['TextField',['../classqtreports_1_1detail_1_1_text_field.html',1,'qtreports::detail']]],
+  ['title',['Title',['../classqtreports_1_1detail_1_1_title.html',1,'qtreports::detail']]]
 ];
