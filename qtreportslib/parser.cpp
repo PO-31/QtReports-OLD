@@ -28,7 +28,7 @@ namespace qtreports
             return isEquals( string, "true" ) || isEquals( string, "1" );
         }
 
-        Parser::Parser() : m_log( new QString() )
+        Parser::Parser() : m_log( new QString() ) //MB Memory Leak
         {
             m_functions[ "report" ] = toParseFunc( this, &Parser::parseReport );
             m_functions[ "style" ] = toParseFunc( this, &Parser::parseStyle );
@@ -55,6 +55,10 @@ namespace qtreports
 
         bool	Parser::parse( const QString & path )
         {
+            m_report.clear();
+            m_lastError = "";
+            m_log.setString( new QString() ); //MB Memory Leak
+
             if( !QFile::exists( path ) )
             {
                 m_lastError = "The file not exists";
