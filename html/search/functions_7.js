@@ -1,7 +1,7 @@
 var searchData=
 [
   ['setasdefault',['setAsDefault',['../classqtreports_1_1detail_1_1_style.html#a985841d9589e6b5ff41e2c0088987a13',1,'qtreports::detail::Style']]],
-  ['setbold',['setBold',['../classqtreports_1_1detail_1_1_style.html#ad7a45d6dc5e2f8e4655ee6f4c2528b1b',1,'qtreports::detail::Style']]],
+  ['setbold',['setBold',['../classqtreports_1_1detail_1_1_style.html#ad7a45d6dc5e2f8e4655ee6f4c2528b1b',1,'qtreports::detail::Style::setBold()'],['../classqtreports_1_1detail_1_1_widget.html#ae54170ff849693281af631b6296cccf5',1,'qtreports::detail::Widget::setBold()']]],
   ['setbottommargin',['setBottomMargin',['../classqtreports_1_1detail_1_1_report.html#ab7d00202111001a7e5bca8c2a4ae77bd',1,'qtreports::detail::Report']]],
   ['setclassname',['setClassName',['../classqtreports_1_1detail_1_1_field.html#a1f36bb1f5eef2cb03ca7bd36c60deef2',1,'qtreports::detail::Field::setClassName()'],['../classqtreports_1_1detail_1_1_text_field.html#ab2c5cac5919b7cbcecd1c8c4a999b351',1,'qtreports::detail::TextField::setClassName()']]],
   ['setdata',['setData',['../classqtreports_1_1detail_1_1_field.html#a5ac656a5cba9112fb858c8c791005822',1,'qtreports::detail::Field']]],
@@ -13,7 +13,7 @@ var searchData=
   ['setfontcolor',['setFontColor',['../classqtreports_1_1detail_1_1_style.html#ad92dc45bfb04c3ba56ca84dd7444d1ad',1,'qtreports::detail::Style']]],
   ['setfontname',['setFontName',['../classqtreports_1_1detail_1_1_style.html#ac3542c21bb9b1b5624216dbcb81e88dd',1,'qtreports::detail::Style']]],
   ['setfontsize',['setFontSize',['../classqtreports_1_1detail_1_1_style.html#a1b4dfcef9c88c5b9f6b5ab6b906bb747',1,'qtreports::detail::Style']]],
-  ['setheight',['setHeight',['../classqtreports_1_1detail_1_1_report.html#a68f87e7301b607127d273ee18e324da4',1,'qtreports::detail::Report']]],
+  ['setheight',['setHeight',['../classqtreports_1_1detail_1_1_report.html#a68f87e7301b607127d273ee18e324da4',1,'qtreports::detail::Report::setHeight()'],['../classqtreports_1_1detail_1_1_widget.html#a450245147b38f13c567335ef50297257',1,'qtreports::detail::Widget::setHeight()']]],
   ['setimage',['setImage',['../classqtreports_1_1detail_1_1_image.html#a31875a96d73387d6e766ba42b73eebf9',1,'qtreports::detail::Image']]],
   ['setitalic',['setItalic',['../classqtreports_1_1detail_1_1_style.html#a1eee40df8247d0be924ee310212a0bdc',1,'qtreports::detail::Style']]],
   ['setleftmargin',['setLeftMargin',['../classqtreports_1_1detail_1_1_report.html#aaa6cf15a91127d493bc03603454bfbbb',1,'qtreports::detail::Report']]],
@@ -26,16 +26,19 @@ var searchData=
   ['setpdfembedded',['setPDFEmbedded',['../classqtreports_1_1detail_1_1_style.html#a793b111ab414c1477455dc0699ed9451',1,'qtreports::detail::Style']]],
   ['setpdfencoding',['setPDFEncoding',['../classqtreports_1_1detail_1_1_style.html#a6a590fda8323372e557f5250793d781d',1,'qtreports::detail::Style']]],
   ['setpdffontname',['setPDFFontName',['../classqtreports_1_1detail_1_1_style.html#ab20a8689e73a73e37bb2087c7444f533',1,'qtreports::detail::Style']]],
+  ['setposition',['setPosition',['../classqtreports_1_1detail_1_1_widget.html#adacca16c032555ca3d4897f3d07216be',1,'qtreports::detail::Widget']]],
   ['setquery',['setQuery',['../classqtreports_1_1detail_1_1_report.html#a2225bf295c226b92ecd987c8ea0a7de2',1,'qtreports::detail::Report']]],
   ['setrightmargin',['setRightMargin',['../classqtreports_1_1detail_1_1_report.html#a7ad10c84c5e8fe2483433f9f54abd0bb',1,'qtreports::detail::Report']]],
   ['setrowcount',['setRowCount',['../classqtreports_1_1detail_1_1_report.html#af97ca61259f24cf0419670b1b901e4dc',1,'qtreports::detail::Report']]],
-  ['setsize',['setSize',['../classqtreports_1_1detail_1_1_report.html#a249095261d61a52960b044107c506457',1,'qtreports::detail::Report']]],
+  ['setsize',['setSize',['../classqtreports_1_1detail_1_1_report.html#a249095261d61a52960b044107c506457',1,'qtreports::detail::Report::setSize()'],['../classqtreports_1_1detail_1_1_widget.html#adbd01dbdd27a9af7af2ef67d7aa64a50',1,'qtreports::detail::Widget::setSize()']]],
   ['setstrikethrough',['setStrikeThrough',['../classqtreports_1_1detail_1_1_style.html#ac82bed6774fb5ddde082172d9e2930a2',1,'qtreports::detail::Style']]],
-  ['setstyle',['setStyle',['../classqtreports_1_1detail_1_1_report.html#aea2f68e4ee76ae2542227281fa5af3aa',1,'qtreports::detail::Report']]],
+  ['setstyle',['setStyle',['../classqtreports_1_1detail_1_1_report.html#aea2f68e4ee76ae2542227281fa5af3aa',1,'qtreports::detail::Report::setStyle()'],['../classqtreports_1_1detail_1_1_widget.html#a1d639aee68d36d3901ff8edc0be5a53f',1,'qtreports::detail::Widget::setStyle()']]],
   ['settagname',['setTagName',['../classqtreports_1_1detail_1_1_object.html#a6c91f5a1deb9c5e600d86c50f0301eff',1,'qtreports::detail::Object']]],
   ['settext',['setText',['../classqtreports_1_1detail_1_1_query_string.html#a23fd1de2dce137cb30c9d87668442309',1,'qtreports::detail::QueryString::setText()'],['../classqtreports_1_1detail_1_1_text_widget.html#a442eab76c8decee3624f573a4d91d27f',1,'qtreports::detail::TextWidget::setText()']]],
   ['settitle',['setTitle',['../classqtreports_1_1detail_1_1_report.html#a27c3ad0c3688ba468d9949eabb3994b9',1,'qtreports::detail::Report']]],
   ['settopmargin',['setTopMargin',['../classqtreports_1_1detail_1_1_report.html#a18e54847516cafc89b302e22ae67412d',1,'qtreports::detail::Report']]],
   ['setunderline',['setUnderline',['../classqtreports_1_1detail_1_1_style.html#a11c9d1d806cc4ba86e0e18be65c77c32',1,'qtreports::detail::Style']]],
-  ['setwidth',['setWidth',['../classqtreports_1_1detail_1_1_report.html#ac48c3e513cc04d27a2c2057a458add9a',1,'qtreports::detail::Report']]]
+  ['setwidth',['setWidth',['../classqtreports_1_1detail_1_1_report.html#ac48c3e513cc04d27a2c2057a458add9a',1,'qtreports::detail::Report::setWidth()'],['../classqtreports_1_1detail_1_1_widget.html#af49ffc1d6af5a3eca0adb829685662c4',1,'qtreports::detail::Widget::setWidth()']]],
+  ['setx',['setX',['../classqtreports_1_1detail_1_1_widget.html#a62e5c49a371767925f9f149458f09553',1,'qtreports::detail::Widget']]],
+  ['sety',['setY',['../classqtreports_1_1detail_1_1_widget.html#a992f8fed7ebe57268fd5735929fb263c',1,'qtreports::detail::Widget']]]
 ];
