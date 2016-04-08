@@ -415,8 +415,17 @@ void    Test_Parser::parse() {
     
 
     qtreports::detail::Parser parser;
+
+    QCOMPARE( parser.parse( "" ), false );
+
+    QFile file( "errored.qrxml" );
+    QVERIFY2( file.open( QIODevice::OpenModeFlag::ReadOnly ), file.errorString().toStdString().c_str() );
+    QVERIFY( file.size() != 0 );
+    QCOMPARE( parser.parse( "errored.qrxml" ), false );
+    file.close();
+
     QString reportPath = QFINDTESTDATA( "full.qrxml" );
-    qDebug() << endl << "Used report: " << reportPath;
+    //qDebug() << endl << "Used report: " << reportPath;
 
     QVERIFY2( parser.parse( reportPath ), parser.getLastError().toStdString().c_str() );
     QVERIFY( parser.getLog() != QString() );
@@ -692,7 +701,7 @@ void    Test_Parser::getLastError() {
     QCOMPARE( parser.getLastError(), QString() );
 
     QString reportPath = QFINDTESTDATA( "errored.qrxml" );
-    qDebug() << endl << "Used report: " << reportPath;
+    //qDebug() << endl << "Used report: " << reportPath;
     QCOMPARE( parser.parse( reportPath ), false );
     QVERIFY( parser.getLastError() != QString() );
 }
@@ -702,7 +711,7 @@ void    Test_Parser::getLog() {
     QCOMPARE( parser.getLog(), QString() );
 
     QString reportPath = QFINDTESTDATA( "full.qrxml" );
-    qDebug() << endl << "Used report: " << reportPath;
+    //qDebug() << endl << "Used report: " << reportPath;
     QVERIFY2( parser.parse( reportPath ), parser.getLastError().toStdString().c_str() );
     QVERIFY( parser.getLog() != QString() );
 }
