@@ -1,5 +1,6 @@
 ﻿#include <QTest>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QSqlDatabase>
 #include <QRegularExpression>
 #include <QFileSystemModel>
@@ -12,18 +13,38 @@ Test_Engine::Test_Engine( QObject * parent ) :
 
 Test_Engine::~Test_Engine() {}
 
+void    Test_Engine::engine()
+{
+    qtreports::Engine emptyEngine( "" );
+    QCOMPARE( emptyEngine.isOpened(), false );
+
+    QString reportPath = QFINDTESTDATA( "default.qreport" );
+    //qDebug() << endl << "Used report: " << reportPath;
+    qtreports::Engine engine( reportPath );
+    QVERIFY2( engine.isOpened(), engine.getLastError().toStdString().c_str() );
+}
+
 void    Test_Engine::open() {
     qtreports::Engine engine;
-    QString input = QFINDTESTDATA( "default.qreport" );
-    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
+    QCOMPARE( engine.open( "" ), false );
+
+    QString reportPath = QFINDTESTDATA( "default.qreport" );
+    //qDebug() << endl << "Used report: " << reportPath;
+    QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
+
+    QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
+
+    QString erroredReportPath = QFINDTESTDATA( "errored.qrxml" );
+    //qDebug() << endl << "Used report: " << erroredReportPath;
+    QCOMPARE( engine.open( erroredReportPath ), false );
 }
 
 void    Test_Engine::close()
 {
-    QString input = QFINDTESTDATA( "default.qreport" );
-
+    QString reportPath = QFINDTESTDATA( "default.qreport" );
+    //qDebug() << endl << "Used report: " << reportPath;
     qtreports::Engine engine;
-    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
+    QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
 
     QCOMPARE( engine.isOpened(), true );
     engine.close();
@@ -32,30 +53,34 @@ void    Test_Engine::close()
 
 void    Test_Engine::setParameters()
 {
-    QString reportPath = QFINDTESTDATA( "full.qrxml" );
-    qDebug() << endl << "Used report: " << reportPath;
-
-    qtreports::Engine engine;
-    QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
-
     QMap < QString, QVariant > map;
     map[ "title" ] = "Best Title in World";
-    qDebug() << endl << "Used map: " << map;
+    //qDebug() << endl << "Used map: " << map;
+
+    qtreports::Engine engine;
+    QCOMPARE( engine.setParameters( map ), false );
+
+    QString reportPath = QFINDTESTDATA( "full.qrxml" );
+    //qDebug() << endl << "Used report: " << reportPath;
+    QVERIFY2( engine.open( reportPath ), engine.getLastError().toStdString().c_str() );
+
     QVERIFY2( engine.setParameters( map ), engine.getLastError().toStdString().c_str() );
 }
 
 void    Test_Engine::setConnection() {
     qtreports::Engine engine;
-    QString input = QFINDTESTDATA( "default.qreport" );
-    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
 
     QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
     QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE" );
-    db.setDatabaseName( "testDB" );
+    QCOMPARE( engine.setConnection( db ), false );
 
-    QVERIFY2( db.open(), "Can't open test database 'testDB'" );
+    QString input = QFINDTESTDATA( "default.qreport" );
+    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
+    QCOMPARE( engine.setConnection( db ), false );
+
+    db.setDatabaseName( "testDB" );
+    QVERIFY2( db.open(), ( "Can't open database. Error: " + db.lastError().text() ).toStdString().c_str() );
     QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
-    db.close();
 
     /*
     QSqlQuery q;
@@ -109,7 +134,6 @@ void    Test_Engine::setQuery()
     QVERIFY2( db.open(), "Can't open test database 'testDB'" );
     QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
     QVERIFY2( engine.setQuery( "select * from customers" ), engine.getLastError().toStdString().c_str() );
-    db.close();
 }
 
 void    Test_Engine::addScript()
@@ -144,14 +168,24 @@ void    Test_Engine::createPDF()
     QVERIFY2( db.open(), "Can't open test database 'testDB'" );
     QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
 
-    QVERIFY2( engine.createPDF( "test.pdf" ), engine.getLastError().toStdString().c_str() );
-    //need delete. need test size.
-    db.close();
+    QString outPath = "test.pdf";
+    QVERIFY2( engine.createPDF( outPath ), engine.getLastError().toStdString().c_str() );
+
+    QCOMPARE( QFile::exists( outPath ), true );
+    QFile file( outPath );
+    QVERIFY2( file.open( QIODevice::OpenModeFlag::ReadOnly ), file.errorString().toStdString().c_str() );
+    QVERIFY( file.size() != 0 );
+    file.close();
+    QCOMPARE( QFile::remove( outPath ), true );
 }
 
 void Test_Engine::createHTML()
 {
     qtreports::Engine engine;
+    QString outPath = "test.html";
+
+    QCOMPARE( engine.createHTML( outPath ), false );
+
     QString input = QFINDTESTDATA( "html.qreport" );
     QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
 
@@ -162,9 +196,14 @@ void Test_Engine::createHTML()
     QVERIFY2( db.open(), "Can't open test database 'testDB'" );
     QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
 
-    QVERIFY2( engine.createHTML("test.html"), engine.getLastError().toStdString().c_str() );
+    QVERIFY2( engine.createHTML( outPath ), engine.getLastError().toStdString().c_str() );
 
-    db.close();
+    QCOMPARE( QFile::exists( outPath ), true );
+    QFile file( outPath );
+    QVERIFY2( file.open( QIODevice::OpenModeFlag::ReadOnly ), file.errorString().toStdString().c_str() );
+    QVERIFY( file.size() != 0 );
+    file.close();
+    QCOMPARE( QFile::remove( outPath ), true );
 }
 
 void    Test_Engine::createWidget()
@@ -210,6 +249,17 @@ void    Test_Engine::print()
     qtreports::Engine engine;
 
     QCOMPARE( engine.print(), false );
+
+    QString input = QFINDTESTDATA( "default.qreport" );
+    QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
+
+    QSqlDatabase::removeDatabase( QSqlDatabase::defaultConnection );
+    QSqlDatabase db = QSqlDatabase::addDatabase( "QSQLITE" );
+    db.setDatabaseName( "testDB" );
+
+    QVERIFY2( db.open(), "Can't open test database 'testDB'" );
+    QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
+    //QTRY_VERIFY2_WITH_TIMEOUT( engine.print(), engine.getLastError().toStdString().c_str(), 5 );
 }
 
 void    Test_Engine::isOpened()

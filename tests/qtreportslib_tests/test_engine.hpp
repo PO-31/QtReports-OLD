@@ -11,6 +11,8 @@ public:
     ~Test_Engine();
 
 private slots:
+    void    engine();
+
     void    open();
     void    close();
 
