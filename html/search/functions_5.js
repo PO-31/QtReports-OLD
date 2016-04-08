@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['setclassname',['setClassName',['../classqtreports_1_1detail_1_1_field.html#a1f36bb1f5eef2cb03ca7bd36c60deef2',1,'qtreports::detail::Field::setClassName()'],['../classqtreports_1_1detail_1_1_text_field.html#ab2c5cac5919b7cbcecd1c8c4a999b351',1,'qtreports::detail::TextField::setClassName()']]],
-  ['setdata',['setData',['../classqtreports_1_1detail_1_1_field.html#a5ac656a5cba9112fb858c8c791005822',1,'qtreports::detail::Field']]],
-  ['setdpi',['setDPI',['../classqtreports_1_1detail_1_1_converter_to_p_d_f.html#a2cac83dd515822a5c3c7560ef5eb5fd8',1,'qtreports::detail::ConverterToPDF']]],
-  ['setimage',['setImage',['../classqtreports_1_1detail_1_1_image.html#a31875a96d73387d6e766ba42b73eebf9',1,'qtreports::detail::Image']]],
-  ['setoriginaltext',['setOriginalText',['../classqtreports_1_1detail_1_1_text_widget.html#aa5b5c9ec0ef4cd677426f03352ef73c3',1,'qtreports::detail::TextWidget']]],
-  ['setparameter',['setParameter',['../classqtreports_1_1detail_1_1_processed_d_b.html#adf782690eec02fa73a5247f4eff5eb6e',1,'qtreports::detail::ProcessedDB']]],
-  ['setparameters',['setParameters',['../classqtreports_1_1detail_1_1_processed_d_b.html#a55572b40bb4f91ec1648f254e8cbefc4',1,'qtreports::detail::ProcessedDB']]],
-  ['settext',['setText',['../classqtreports_1_1detail_1_1_query_string.html#a23fd1de2dce137cb30c9d87668442309',1,'qtreports::detail::QueryString::setText()'],['../classqtreports_1_1detail_1_1_text_widget.html#a442eab76c8decee3624f573a4d91d27f',1,'qtreports::detail::TextWidget::setText()']]]
+  ['replace',['replace',['../classqtreports_1_1detail_1_1_replacer.html#af7ccb83be264f7c72b7485cf38455450',1,'qtreports::detail::Replacer']]],
+  ['replacefield',['replaceField',['../classqtreports_1_1detail_1_1_replacer.html#a4642b07160798f2ee4de276e1d0c1ecd',1,'qtreports::detail::Replacer']]],
+  ['replacefieldimage',['replaceFieldImage',['../classqtreports_1_1detail_1_1_replacer.html#ae1ac521aeaf5fdd694e79e2ae52d4704',1,'qtreports::detail::Replacer']]],
+  ['replacefieldinimagewidget',['replaceFieldInImageWidget',['../classqtreports_1_1detail_1_1_replacer.html#a4aeb7794f90c0be34a30ab60a6df1920',1,'qtreports::detail::Replacer']]],
+  ['replacefieldinsection',['replaceFieldInSection',['../classqtreports_1_1detail_1_1_replacer.html#a58cf857aa78eb3e273f6543769af425b',1,'qtreports::detail::Replacer']]],
+  ['replacefieldintextwidget',['replaceFieldInTextWidget',['../classqtreports_1_1detail_1_1_replacer.html#a2be57bd514335f9b9f2a520247562ce1',1,'qtreports::detail::Replacer']]],
+  ['replaceparameters',['replaceParameters',['../classqtreports_1_1detail_1_1_replacer.html#abb903f1c1172efa7e26b040a5695cc86',1,'qtreports::detail::Replacer::replaceParameters(const QString &amp;text, const ReportPtr &amp;report)'],['../classqtreports_1_1detail_1_1_replacer.html#a0755107511a830346c28a8e51bcf99e2',1,'qtreports::detail::Replacer::replaceParameters(const ReportPtr &amp;report)']]],
+  ['replaceparametersinsection',['replaceParametersInSection',['../classqtreports_1_1detail_1_1_replacer.html#a626052332a0425d71f1f754824dc97dd',1,'qtreports::detail::Replacer']]],
+  ['replaceparametersintextwidget',['replaceParametersInTextWidget',['../classqtreports_1_1detail_1_1_replacer.html#add3b6a2869033620c4618669870c26f8',1,'qtreports::detail::Replacer']]]
 ];
