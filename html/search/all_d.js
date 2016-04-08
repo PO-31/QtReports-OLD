@@ -29,6 +29,7 @@ var searchData=
   ['setpdffontname',['setPDFFontName',['../classqtreports_1_1detail_1_1_style.html#ab20a8689e73a73e37bb2087c7444f533',1,'qtreports::detail::Style']]],
   ['setposition',['setPosition',['../classqtreports_1_1detail_1_1_widget.html#adacca16c032555ca3d4897f3d07216be',1,'qtreports::detail::Widget']]],
   ['setquery',['setQuery',['../classqtreports_1_1detail_1_1_report.html#a2225bf295c226b92ecd987c8ea0a7de2',1,'qtreports::detail::Report']]],
+  ['setrect',['setRect',['../classqtreports_1_1detail_1_1_widget.html#af27876ffe4993dbc180e93ca3a47c45d',1,'qtreports::detail::Widget']]],
   ['setrightmargin',['setRightMargin',['../classqtreports_1_1detail_1_1_report.html#a7ad10c84c5e8fe2483433f9f54abd0bb',1,'qtreports::detail::Report']]],
   ['setrowcount',['setRowCount',['../classqtreports_1_1detail_1_1_report.html#af97ca61259f24cf0419670b1b901e4dc',1,'qtreports::detail::Report']]],
   ['setsize',['setSize',['../classqtreports_1_1detail_1_1_report.html#a249095261d61a52960b044107c506457',1,'qtreports::detail::Report::setSize()'],['../classqtreports_1_1detail_1_1_widget.html#adbd01dbdd27a9af7af2ef67d7aa64a50',1,'qtreports::detail::Widget::setSize()']]],

@@ -97,7 +97,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 </div><!--header-->
 <div class="contents">
 
-<p>Класс, реализующий тэг &lt;Widget&gt; Класс, реализующий тэг Виджет  
+<p>Базовый класс для тэгов, которые подлежат отображению  
  <a href="classqtreports_1_1detail_1_1_widget.html#details">Подробнее...</a></p>
 
 <p><code>#include &lt;<a class="el" href="widget_8hpp_source.html">widget.hpp</a>&gt;</code></p>
@@ -133,8 +133,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <tr class="separator:af49ffc1d6af5a3eca0adb829685662c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a450245147b38f13c567335ef50297257"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_widget.html#a450245147b38f13c567335ef50297257">setHeight</a> (int height)</td></tr>
 <tr class="separator:a450245147b38f13c567335ef50297257"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af27876ffe4993dbc180e93ca3a47c45d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af27876ffe4993dbc180e93ca3a47c45d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setRect</b> (const QRect &amp;rect)</td></tr>
+<tr class="memitem:af27876ffe4993dbc180e93ca3a47c45d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_widget.html#af27876ffe4993dbc180e93ca3a47c45d">setRect</a> (const QRect &amp;rect)</td></tr>
 <tr class="separator:af27876ffe4993dbc180e93ca3a47c45d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d639aee68d36d3901ff8edc0be5a53f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_widget.html#a1d639aee68d36d3901ff8edc0be5a53f">setStyle</a> (const QString &amp;style)</td></tr>
 <tr class="separator:a1d639aee68d36d3901ff8edc0be5a53f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -205,7 +204,8 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
 <tr class="separator:a738222cc50885d7aaa05166a4e10bed5 inherit pro_attribs_classqtreports_1_1detail_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
-<div class="textblock"><p>Класс, реализующий тэг &lt;Widget&gt; Класс, реализующий тэг Виджет </p>
+<div class="textblock"><p>Базовый класс для тэгов, которые подлежат отображению </p>
+<p>Базовый класс для тэгов, которые подлежат отображению. Координаты объекта являются локальными относительно родительского объекта. </p>
 </div><h2 class="groupheader">Методы</h2>
 <a class="anchor" id="ae21c0dc40a4e41ebfadb1532ef0f80cc"></a>
 <div class="memitem">
@@ -432,9 +432,31 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Устанавливаем положение объекта </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Устанавливает положение объекта. Аргумент - неотрицательные координаты объекта, с центром координат в верхнем левом углу. Координаты задаются относительно внешнего объекта. </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">положение</td><td>объекта </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pos</td><td>Положение объекта </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af27876ffe4993dbc180e93ca3a47c45d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qtreports::detail::Widget::setRect </td>
+          <td>(</td>
+          <td class="paramtype">const QRect &amp;&#160;</td>
+          <td class="paramname"><em>rect</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Устанавливается высота </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">высота</td><td>объекта </td></tr>
   </table>
   </dd>
 </dl>
