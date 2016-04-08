@@ -14,8 +14,9 @@ namespace qtreports
     {
 
         /*! @~russian
-        @brief Класс, реализующий тэг <Style>
-        Класс, реализующий тэг стиль
+        @brief Класс, реализующий тэг <style>
+        
+        Класс, реализующий тэг <style>
         */
         class Style : public Object {
 
@@ -23,105 +24,124 @@ namespace qtreports
             Style();
             ~Style();
 
-
             /*! @~russian
-            Является ли данный стиль стилем по умолчанию
+            Возвращает, является ли данный стиль стилем по умолчанию
             */
-            bool	        isDefault() const; // Является ли данный стиль стилем по умолчанию
+            bool	        isDefault() const;
+            
             /*! @~russian
-            Устанавливает стиль по умолчанию
-            @param[in] flag - bool
+            Устанавливает, является ли текущий стиль стилем по умолчанию
+            @param[in] flag Новое значение
             */            
             void	        setAsDefault( bool flag );
 
-
             /*! @~russian
-            Получаем имя шрифта
+            Возвращает название шрифта
             */
-            const QString	getFontName() const; // Имя шрифта
+            const QString	getFontName() const;
+            
             /*! @~russian
-            Устанавливает имя шрифта
-            @param[in] имя шрифта
+            Устанавливает название шрифта
+            @param[in] name Название шрифта
             */            
             void	        setFontName( const QString & name );
 
             /*! @~russian
-            Получаем размер шрифта
+            Возвращает размер шрифта
             */
-            int		        getFontSize() const; // Размер шрифта
+            int		        getFontSize() const;
+            
             /*! @~russian
             Устанавливает размер шрифта
-            @param[in] размер шрифта
+            @param[in] size Размер шрифта
             */  
             void	        setFontSize( int size );
 
             /*! @~russian
-            Получаем цвет шрифта
+            Возвращает цвет шрифта
             */
-            const QColor	getFontColor() const; // Цвет шрифта
+            const QColor	getFontColor() const;
+            
             /*! @~russian
             Устанавливает цвет шрифта
-            @param[in] цвет шрифта
+            @param[in] color Цвет шрифта
             */
             void	        setFontColor( const QColor & color );
 
             /*! @~russian
-            Шрифт жирный?
+            Возвращает, является ли шрифт жирным или нет
             */
-            bool	        isBold() const; // Жирный шрифт
+            bool	        isBold() const;
+            
              /*! @~russian
-            Устанавливает шрифт жирным
-            @param[in] флаг отвечающий за включение или отключение жирности
+            Устанавливает, является ли шрифт жирным или нет
+            @param[in] flag Новое значение
             */
             void	        setBold( bool flag );
 
             /*! @~russian
-            Шрифт курсив?
+            Возвращает, является ли шрифт курсивом или нет
             */
-            bool	        isItalic() const; // Курсив
+            bool	        isItalic() const; 
+            
              /*! @~russian
-            Устанавливает шрифт курсивным
-            @param[in] флаг отвечающий за включение или отключение курсива
+            Устанавливает, является ли шрифт курсивом или нет
+            @param[in] flag Новое значение
             */
             void	        setItalic( bool flag );
 
             /*! @~russian
-            Шрифт подчеркнут?
+            Возвращает, является ли шрифт подчеркнутым или нет
             */
-            bool	        isUnderline() const; // Подчеркивание
+            bool	        isUnderline() const;
+            
              /*! @~russian
-            Устанавливает шрифт подчеркнутым
-            @param[in] флаг отвечающий за включение или отключение подчеркивание
+            Устанавливает, является ли шрифт подчеркнутым или нет
+            @param[in] flag Новое значение
             */
             void	        setUnderline( bool flag );
 
-            bool	        isStrikeThrough() const; // Хз
+            /*! @~russian
+            Возвращает, является ли шрифт перечеркнутым или нет
+            */
+            bool	        isStrikeThrough() const;
+            
+             /*! @~russian
+            Устанавливает, является ли шрифт перечеркнутым или нет
+            @param[in] flag Новое значение
+            */
             void	        setStrikeThrough( bool flag );
 
             /*! @~russian
-            Получаем имя шрифта в PDF
+            Возвращает название шрифта в PDF
             */
-            const QString	getPDFFontName() const; // Имя шрифта
+            const QString	getPDFFontName() const;
+            
             /*! @~russian
-            Устанавливает имя шрифта в PDF
-            @param[in] имя шрифта
+            Устанавливает название шрифта в PDF
+            @param[in] name Название шрифта
             */  
             void	        setPDFFontName( const QString & name );
 
             /*! @~russian
-            Получаем имя шрифта в PDF
+            Возвращает название кодировки в PDF
             */
-            const QString	getPDFEncoding() const; // Имя шрифта
+            const QString	getPDFEncoding() const;
+            
              /*! @~russian
-            Устанавливает имя шрифта в PDF
-            @param[in] имя шрифта
+            Устанавливает название кодировки в PDF
+            @param[in] encoding Название кодировки
             */  
             void	        setPDFEncoding( const QString & encoding );
 
-            bool	        isPDFEmbedded() const; // Имя шрифта
             /*! @~russian
-            Устанавливает имя шрифта в PDF
-            @param[in] имя шрифта
+            Возвращает ... в PDF
+            */   
+            bool	        isPDFEmbedded() const;
+            
+            /*! @~russian
+            Устанавливает ... в PDF
+            @param[in] isEmbedded Новое значение
             */              
             void	        setPDFEmbedded( bool isEmbedded );
 
