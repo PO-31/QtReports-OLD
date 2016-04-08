@@ -20,8 +20,9 @@ namespace qtreports {
     namespace detail {
 
         /*! @~russian
-        @brief Класс, реализующий тэг <Report>
-        Класс, реализующий тэг <Report>
+        @brief Класс, реализующий тэг <report>
+        
+        Класс, реализующий тэг <report>
         */
         class Report : public Object {
                  
@@ -31,79 +32,88 @@ namespace qtreports {
 
             /*! @~russian
             Устанавливает стиль по умолчанию
-            @param[in] имя стиля
+            @param[in] style Указатель на обьект стиля
             */
             void                                setDefaultStyle( const StylePtr & style );
+            
             /*! @~russian
             Возвращает стиль по умолчанию
             */
             const StylePtr                      getDefaultStyle() const;
-
+            
             /*! @~russian
-            Устанавливает стиль 
-            @param[in] имя стиля
-            @param[in] имя стиля
+            Добавляет стиль в <report> 
+            @param[in] name Имя стиля
+            @param[in] style Указатель на обьект стиля
             */
             void                                setStyle( const QString & name, const StylePtr & style );
+            
             /*! @~russian
-            Возвращает имя стиля стиль по умолчанию
-            @param[in] имя стиля
+            Возвращает указатель на обьект стиля по имени
+            @param[in] name имя стиля
             */
             const StylePtr                      getStyle( const QString & name ) const;
+            
             /*! @~russian
-            Возвращате QMap стилей
+            Возвращает карту стилей
             */
             const QMap< QString, StylePtr >     getStyles() const;
 
             /*! @~russian
-            Устанавливает запрос
-            @param[in] запрос
+            Устанавливает <queryString>
+            @param[in] query Значение <queryString>
             */
             void                                setQuery( const QString & query );
+            
             /*! @~russian
-            Возвращате запрос
+            Возвращает <queryString>
             */
             const QString                       getQuery() const;
 
             /*! @~russian
-            Устанавливает Field 
-            @param[in] имя Field 
-            @param[in] содержимое Field
+            Устанавливает <field>
+            @param[in] name Имя <field>
+            @param[in] field Указатель на обьект <field>
             */
-            void                                setField( const QString & name, const FieldPtr & field );            
+            void                                setField( const QString & name, const FieldPtr & field );   
+            
             /*! @~russian
-            Возвращате Field
-            @param[in] имя Field 
+            Возвращает <field>
+            @param[in] name Имя <field>
             */
-            const FieldPtr                      getField( const QString & name ) const;            
+            const FieldPtr                      getField( const QString & name ) const;   
+            
             /*! @~russian
-            Возвращате Field
+            Возвращает карту <field>
             */
             const QMap< QString, FieldPtr >     getFields() const;
+            
             /*! @~russian
-            Устанавливает данные Field 
-            @param[in] имя Field 
-            @param[in] вектор данных Field
+            Устанавливает данные <field>
+            @param[in] name Имя <field>
+            @param[in] data Вектор данных <field>
             */
             void                                setFieldData( const QString & name, const QVector< QVariant > & data );
 
             /*! @~russian
-            Устанавливает название отчета
-            @param[in] название
+            Устанавливает <title>
+            @param[in] title Указатель на обьект <title>
             */
             void                                setTitle( const TitlePtr & title );
+            
             /*! @~russian
-            Возвращате название отчета
+            Возвращает указатель на обьект <title>
             */
             const TitlePtr                      getTitle() const;
 
             /*! @~russian
-            Устанавливает Detail
-            @param[in] название Detail
+            Устанавливает <detail>
+            @param[in] detail Указатель на обьект <detail>
             */
             void                                setDetail( const DetailPtr & detail );
+            
             /*! @~russian
-            Возвращате Detail
+            Возвращает указатель на обьект <detail>
             */
             const DetailPtr                     getDetail() const;
 
@@ -113,98 +123,140 @@ namespace qtreports {
             @param[in] значение
             */
             void                                setParameter( const QString & name, const QVariant & value );
+            
             /*! @~russian
-            Устанавливаем QMap ссылок на обьекты
+            Устанавливает QMap ссылок на обьекты
             @param[in] Ссылки на параметры
             */            
             void                                setParameters( const QMap< QString, QVariant > & parameters );
+            
             /*! @~russian
-            Возвращате имя параметра
+            Возвращает имя параметра
             */            
             const QVariant                      getParameter( const QString & name ) const;
+            
             /*! @~russian
-            Возвращате карту параметров с названием и значением
+            Возвращает карту параметров с названием и значением
             */            
             const QMap< QString, QVariant >     getParameters() const;
 
             /*! @~russian
-            Устанавливаем количество строк
+            Устанавливает количество строк
             @param[in] количество
             */
             void    setRowCount( int count );
+            
             /*! @~russian
-            Возвращате количество строк
+            Возвращает количество строк
             */
             int     getRowCount() const;
 
             /*! @~russian
-            Устанавливаем ориентации отчета книжная/альбомная
+            Устанавливает ориентации отчета книжная/альбомная
             @param[in] ориентация
             */
             void                    setOrientation( QPrinter::Orientation orientation );
+            
+            /*! @~russian
+            Возвращает ориентацию отчета(книжная/альбомная)
+            */
             QPrinter::Orientation   getOrientation() const;
 
             /*! @~russian
-            Устанавливаем размер отчета
+            Устанавливает размер отчета
             @param[in] размер
             */
             void            setSize( const QSize & size );
+            
+            /*! @~russian
+            Возвращает размер отчета
+            */
             const QSize     getSize() const;
 
             /*! @~russian
-            Устанавливаем ширину отчета
+            Устанавливает ширину отчета
             @param[in] значение ширины
             */
             void            setWidth( int width );
+            
+            /*! @~russian
+            Возвращает ширину отчета
+            */
             int             getWidth() const;
 
             /*! @~russian
-            Устанавливаем высоту отчета
+            Устанавливает высоту отчета
             @param[in] значение высоты
             */
             void            setHeight( int height );
+            
+            /*! @~russian
+            Возвращает высоту отчета
+            */
             int             getHeight() const;
             
             /*! @~russian
-            Устанавливаем левый отступ
+            Устанавливает левый отступ
             @param[in] значение 
             */
             void    setLeftMargin( int left );
+            
+            /*! @~russian
+            Возвращает левый отступ
+            */
             int     getLeftMargin() const;
             
             /*! @~russian
-            Устанавливаем верхний отступ
+            Устанавливает верхний отступ
             @param[in] значение
             */
             void    setTopMargin( int top );
+            
+            /*! @~russian
+            Возвращает верхний отступ
+            */
             int     getTopMargin() const;
             
             /*! @~russian
-            Устанавливаем правый отступ
+            Устанавливает правый отступ
             @param[in] значение
             */
             void    setRightMargin( int right );
+            
+            /*! @~russian
+            Возвращает правый отступ
+            */
             int     getRightMargin() const;
             
             /*! @~russian
-            Устанавливаем нижний отступ
+            Устанавливает нижний отступ
             @param[in] значение
             */
             void    setBottomMargin( int bottom );
+            
+            /*! @~russian
+            Возвращает нижний отступ
+            */
             int     getBottomMargin() const;
 
             /*! @~russian
-            Устанавливаем отступы от краев
+            Устанавливает отступы от краев
             @param[in] слева
             @param[in] сверху
             @param[in] справа
             @param[in] снизу
             */
             void            setMargins( int left, int top, int right, int bottom );
+            
             /*! @~russian
-            Устанавливаем карту отступов
+            Устанавливает карту отступов
             @param[in] отступы
-            */            void            setMargins( const QMargins & margins );
+            */
+            void            setMargins( const QMargins & margins );
+            
+            /*! @~russian
+            Возвращает карту отступов
+            */
             const QMargins  getMargins() const;
 
         private:
