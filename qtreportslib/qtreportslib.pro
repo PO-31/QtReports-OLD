@@ -6,7 +6,6 @@ CONFIG += c++11
 DEFINES += QTREPORTS_LIBRARY
 
 SOURCES += engine.cpp \
-    processeddb.cpp \
     replacer.cpp \
     parser.cpp \
     converters/convertertohtml.cpp \
@@ -30,7 +29,6 @@ SOURCES += engine.cpp \
     tags/image.cpp
 
 HEADERS += engine.hpp \
-    processeddb.hpp \
     replacer.hpp \
     parser.hpp \
     converters/convertertohtml.hpp \

@@ -41,9 +41,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="processeddb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tags\object.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
@@ -121,9 +118,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="processeddb.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="parser.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

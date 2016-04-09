@@ -42,7 +42,7 @@ namespace qtreports
         m_compiledPath = path;
         m_report = parser.getReport();
 
-        fillColumnsFromReport(); //MB as ProcessedDB::createColumns( ReportPtr )
+        //fillColumnsFromReport(); //MB as ProcessedDB::createColumns( ReportPtr )
 
         return true;
     }
@@ -89,17 +89,17 @@ namespace qtreports
             return false;
         }
 
-        m_report->setRowCount( m_processedDB.getMaxRowCount() );
-
+        //m_report->setRowCount( db.getMaxRowCount() );
+        /*
         for( auto && field : m_report->getFields() )
         {
             auto name = field->getName();
-            auto value = m_processedDB.getColumn( name );
+            auto value = db.getColumn( name );
             m_report->setFieldData( name, value );
         }
 
-        m_processedDB.setParameters( m_report->getParameters() );
-
+        db.setParameters( m_report->getParameters() );
+        */
         return true;
     }
 
@@ -108,21 +108,22 @@ namespace qtreports
         //Need check parameters
         //m_dataSource = columnsSet;
 
+        //detail::ProcessedDB db;
         if( !prepareDataSource( source ) )
         {
             m_lastError = "Error in prepare data source: " + m_lastError;
             return false;
         }
 
-        m_report->setRowCount( m_processedDB.getMaxRowCount() );
-
+        //m_report->setRowCount( db.getMaxRowCount() );
+        /*
         for( auto && field : m_report->getFields() )
         {
             auto name = field->getName();
-            auto value = m_processedDB.getColumn( name );
+            auto value = db.getColumn( name );
             m_report->setFieldData( name, value );
         }
-
+        */
         return true;
     }
 
@@ -316,16 +317,17 @@ namespace qtreports
         return true;
     }
 
-    void    Engine::fillColumnsFromReport()
-    {
-        for( auto && field : m_report->getFields() )
-        {
-            m_processedDB.addEmptyColumn( field->getName() );
-        }
-    }
+    //void    Engine::fillColumnsFromReport()
+    //{
+    //    for( auto && field : m_report->getFields() )
+    //    {
+    //        db.addEmptyColumn( field->getName() );
+    //    }
+    //}
 
     void    Engine::executeQueries( const QStringList & queries )
     {
+        QMap< QString, QVector< QVariant > > data;
         QSqlQueryModel model;
         for( auto && query : queries )
         {
@@ -337,10 +339,13 @@ namespace qtreports
                 {
                     auto columnName = rec.fieldName( col );
                     auto fieldValue = rec.field( col ).value();
-                    m_processedDB.appendColumnData( columnName, fieldValue );
+                    //db.appendColumnData( columnName, fieldValue );
+                    data[ columnName ].append( fieldValue );
                 }
             }
         }
+
+        prepareDataSource( data );
     }
 
     bool    Engine::isOpened() const

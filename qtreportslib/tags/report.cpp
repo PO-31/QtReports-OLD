@@ -120,7 +120,14 @@ namespace qtreports
 
         int     Report::getRowCount() const
         {
-            return m_rowCount;
+            int max = 0;
+            for( auto && field : getFields() )
+            {
+                max = std::max( max, field->getRowCount() );
+            }
+
+            return max;
+            //return m_rowCount;
         }
 
         void    Report::setOrientation( QPrinter::Orientation orientation )

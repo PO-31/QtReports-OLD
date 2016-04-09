@@ -12,7 +12,7 @@
 #include <QPrinter>
 #include <QAbstractItemModel>
 #include "parser.hpp"
-#include "processeddb.hpp"
+//#include "processeddb.hpp"
 #include "tags/report.hpp"
 #include "converters/convertertoqwidget.hpp"
 
@@ -115,12 +115,12 @@ namespace qtreports {
         detail::ReportPtr                   m_report;
         QVector< QString >                  m_scripts;
         QSqlDatabase                        m_dbConnection;
-        detail::ProcessedDB                 m_processedDB;
+        //detail::ProcessedDB                 m_processedDB;
 
         void                                drawPreview( QPrinter * printer );
         bool                                prepareDB();
         bool                                prepareDataSource( const QMap< QString, QVector< QVariant > > & source );
-        void                                fillColumnsFromReport();
+        //void                                fillColumnsFromReport();
         void                                executeQueries( const QStringList & queries );
     };
 }
