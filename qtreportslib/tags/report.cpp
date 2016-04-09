@@ -8,8 +8,7 @@ namespace qtreports
         Report::Report() :
             m_orientation( QPrinter::Orientation::Portrait ),
             m_size( 595, 842 ),
-            m_margins( 30, 30, 30, 30 ),
-            m_rowCount( 0 )
+            m_margins( 30, 30, 30, 30 )
         {}
 
         Report::~Report() {}
@@ -113,11 +112,6 @@ namespace qtreports
             return m_parameters;
         }
 
-        void    Report::setRowCount( int count )
-        {
-            m_rowCount = count;
-        }
-
         int     Report::getRowCount() const
         {
             int max = 0;
@@ -142,7 +136,8 @@ namespace qtreports
 
         void    Report::setSize( const QSize & size )
         {
-            m_size = QPrinter::Orientation::Portrait ? size : size.transposed();
+            //m_size = QPrinter::Orientation::Portrait ? size : size.transposed();
+            m_size = size;
         }
 
         const QSize     Report::getSize() const

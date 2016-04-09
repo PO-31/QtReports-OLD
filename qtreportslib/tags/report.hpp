@@ -139,12 +139,6 @@ namespace qtreports {
             Возвращает карту параметров с названием и значением
             */            
             const QMap< QString, QVariant >     getParameters() const;
-
-            /*! @~russian
-            Устанавливает количество строк
-            @param[in] количество
-            */
-            void    setRowCount( int count );
             
             /*! @~russian
             Возвращает количество строк
@@ -263,7 +257,6 @@ namespace qtreports {
             QPrinter::Orientation	    m_orientation;
             QSize	                    m_size;
             QMargins                    m_margins;
-            int                         m_rowCount;
             StylePtr                    m_defaultStyle;
             QMap< QString, StylePtr >   m_styles;
             QString                     m_query;
