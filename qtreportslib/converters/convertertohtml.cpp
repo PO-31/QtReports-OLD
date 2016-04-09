@@ -32,6 +32,7 @@ namespace qtreports {
             }
 
             QTextStream stream( &file );
+            stream.setCodec( "UTF-8" );
             stream << m_html;
 
             return true;
