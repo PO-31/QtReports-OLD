@@ -1,12 +1,12 @@
-#include <QPrintDialog>
 #include <QPainter>
-#include <QDebug>
+#include <QPrintDialog>
 #include <QPrintPreviewWidget>
 #include <QPrintPreviewDialog>
+#include "parsers/parserfromxml.hpp"
 #include "converters/convertertopdf.hpp"
 #include "converters/convertertohtml.hpp"
-#include "replacer.hpp"
 #include "engine.hpp"
+#include <QDebug>
 
 namespace qtreports
 {
@@ -31,7 +31,7 @@ namespace qtreports
             close();
         }
 
-        detail::Parser parser;
+        detail::ParserFromXML parser;
         if( !parser.parse( path ) )
         {
             m_lastError = "Parsing error: " + parser.getLastError();

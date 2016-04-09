@@ -169,7 +169,7 @@ int main( int argc, char *argv[] ) {
         auto file = QFileDialog::getOpenFileName( &window,
             QObject::tr( "Open QReport" ),
             QString(),
-            QObject::tr( "QReport Files (*.qreport);;All Files (*.*)" ) );
+            QObject::tr( "QReport Files (*.qreport);;QReport Files (*.qrxml);;All Files (*.*)" ) );
         if( file.isEmpty() ) {
             return;
         }

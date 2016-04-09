@@ -39,6 +39,12 @@
     <Filter Include="Converters">
       <UniqueIdentifier>{83a7da29-a9e7-496e-9d6f-53cb62f12123}</UniqueIdentifier>
     </Filter>
+    <Filter Include="parsers">
+      <UniqueIdentifier>{c1188cc6-b94f-49d9-baac-a592b3c7549a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Converters\utils">
+      <UniqueIdentifier>{c8a89af7-29b7-44b4-97d3-08635aa2ea8b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tags\object.cpp">
@@ -64,9 +70,6 @@
     </ClCompile>
     <ClCompile Include="tags\report.cpp">
       <Filter>Tags</Filter>
-    </ClCompile>
-    <ClCompile Include="parser.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tags\field.cpp">
       <Filter>Tags</Filter>
@@ -107,20 +110,20 @@
     <ClCompile Include="tags\textwidget.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
-    <ClCompile Include="replacer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="tags\image.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
     <ClCompile Include="tags\ellipse.cpp">
       <Filter>Tags</Filter>
     </ClCompile>
+    <ClCompile Include="parsers\parserfromxml.cpp">
+      <Filter>parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="converters\utils\replacer.cpp">
+      <Filter>Converters\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="parser.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tags\textfield.hpp">
       <Filter>Tags</Filter>
     </ClInclude>
@@ -145,17 +148,17 @@
     <ClInclude Include="tags\rect.hpp">
       <Filter>Tags</Filter>
     </ClInclude>
-    <ClInclude Include="tags\textwidget.hpp">
-      <Filter>Tags</Filter>
-    </ClInclude>
-    <ClInclude Include="replacer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="tags\image.hpp">
       <Filter>Tags</Filter>
     </ClInclude>
     <ClInclude Include="tags\ellipse.hpp">
       <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="parsers\parserfromxml.hpp">
+      <Filter>parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="converters\utils\replacer.hpp">
+      <Filter>Converters\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

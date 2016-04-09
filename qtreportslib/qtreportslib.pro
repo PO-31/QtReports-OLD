@@ -6,8 +6,8 @@ CONFIG += c++11
 DEFINES += QTREPORTS_LIBRARY
 
 SOURCES += engine.cpp \
-    replacer.cpp \
-    parser.cpp \
+    parsers/parserfromxml.cpp \
+    converters/utils/replacer.cpp \
     converters/convertertohtml.cpp \
     converters/convertertoqwidget.cpp \
     converters/convertertopdf.cpp \
@@ -29,8 +29,8 @@ SOURCES += engine.cpp \
     tags/image.cpp
 
 HEADERS += engine.hpp \
-    replacer.hpp \
-    parser.hpp \
+    parsers/parserfromxml.hpp \
+    converters/utils/replacer.hpp \
     converters/convertertohtml.hpp \
     converters/convertertoqwidget.hpp \
     converters/convertertopdf.hpp \

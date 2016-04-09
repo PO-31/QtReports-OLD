@@ -1,14 +1,14 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QDebug>
-#include "parser.hpp"
+#include "parserfromxml.hpp"
 
 namespace qtreports
 {
     namespace detail
     {
 
-        Parser::ParseFunc    bindParseFunc( Parser * obj, Parser::ParseMethodPtr method )
+        ParserFromXML::ParseFunc    bindParseFunc( ParserFromXML * obj, ParserFromXML::ParseMethodPtr method )
         {
             using namespace std::placeholders;
             auto func = std::bind( method, obj, _1, _2 );
@@ -16,10 +16,10 @@ namespace qtreports
         }
 
         template < typename T1 >
-        Parser::ParseFunc    toParseFunc( Parser * obj, bool( Parser::*method )( QXmlStreamReader &, const T1 & ) )
+        ParserFromXML::ParseFunc    toParseFunc( ParserFromXML * obj, bool( ParserFromXML::*method )( QXmlStreamReader &, const T1 & ) )
         {
             //Cast second parameter to ObjectPtr type;
-            auto parseMethodPtr = reinterpret_cast< Parser::ParseMethodPtr >( method );
+            auto parseMethodPtr = reinterpret_cast< ParserFromXML::ParseMethodPtr >( method );
             return bindParseFunc( obj, parseMethodPtr );
         }
 
@@ -28,32 +28,32 @@ namespace qtreports
             return isEquals( string, "true" ) || isEquals( string, "1" );
         }
 
-        Parser::Parser() : m_log( new QString() ) //MB Memory Leak
+        ParserFromXML::ParserFromXML() : m_log( new QString() ) //MB Memory Leak
         {
-            m_functions[ "report" ] = toParseFunc( this, &Parser::parseReport );
-            m_functions[ "style" ] = toParseFunc( this, &Parser::parseStyle );
-            m_functions[ "queryString" ] = toParseFunc( this, &Parser::parseQueryString );
-            m_functions[ "field" ] = toParseFunc( this, &Parser::parseField );
-            m_functions[ "title" ] = toParseFunc( this, &Parser::parseTitle );
-            m_functions[ "detail" ] = toParseFunc( this, &Parser::parseDetail );
-            m_functions[ "band" ] = toParseFunc( this, &Parser::parseBand );
-            m_functions[ "staticText" ] = toParseFunc( this, &Parser::parseStaticText );
-            m_functions[ "textField" ] = toParseFunc( this, &Parser::parseTextField );
-            m_functions[ "line" ] = toParseFunc( this, &Parser::parseLine );
-            m_functions[ "rect" ] = toParseFunc( this, &Parser::parseRect );
-            m_functions[ "ellipse" ] = toParseFunc( this, &Parser::parseEllipse );
-            m_functions[ "image" ] = toParseFunc( this, &Parser::parseImage );
-            m_functions[ "imageExpression" ] = toParseFunc( this, &Parser::parseImageExpression );
-            m_functions[ "reportElement" ] = toParseFunc( this, &Parser::parseReportElement );
-            m_functions[ "textElement" ] = toParseFunc( this, &Parser::parseTextElement );
-            m_functions[ "font" ] = toParseFunc( this, &Parser::parseFont );
-            m_functions[ "text" ] = toParseFunc( this, &Parser::parseText );
-            m_functions[ "textFieldExpression" ] = toParseFunc( this, &Parser::parseTextFieldExpression );
+            m_functions[ "report" ] = toParseFunc( this, &ParserFromXML::parseReport );
+            m_functions[ "style" ] = toParseFunc( this, &ParserFromXML::parseStyle );
+            m_functions[ "queryString" ] = toParseFunc( this, &ParserFromXML::parseQueryString );
+            m_functions[ "field" ] = toParseFunc( this, &ParserFromXML::parseField );
+            m_functions[ "title" ] = toParseFunc( this, &ParserFromXML::parseTitle );
+            m_functions[ "detail" ] = toParseFunc( this, &ParserFromXML::parseDetail );
+            m_functions[ "band" ] = toParseFunc( this, &ParserFromXML::parseBand );
+            m_functions[ "staticText" ] = toParseFunc( this, &ParserFromXML::parseStaticText );
+            m_functions[ "textField" ] = toParseFunc( this, &ParserFromXML::parseTextField );
+            m_functions[ "line" ] = toParseFunc( this, &ParserFromXML::parseLine );
+            m_functions[ "rect" ] = toParseFunc( this, &ParserFromXML::parseRect );
+            m_functions[ "ellipse" ] = toParseFunc( this, &ParserFromXML::parseEllipse );
+            m_functions[ "image" ] = toParseFunc( this, &ParserFromXML::parseImage );
+            m_functions[ "imageExpression" ] = toParseFunc( this, &ParserFromXML::parseImageExpression );
+            m_functions[ "reportElement" ] = toParseFunc( this, &ParserFromXML::parseReportElement );
+            m_functions[ "textElement" ] = toParseFunc( this, &ParserFromXML::parseTextElement );
+            m_functions[ "font" ] = toParseFunc( this, &ParserFromXML::parseFont );
+            m_functions[ "text" ] = toParseFunc( this, &ParserFromXML::parseText );
+            m_functions[ "textFieldExpression" ] = toParseFunc( this, &ParserFromXML::parseTextFieldExpression );
         }
 
-        Parser::~Parser() {}
+        ParserFromXML::~ParserFromXML() {}
 
-        bool	Parser::parse( const QString & path )
+        bool	ParserFromXML::parse( const QString & path )
         {
             m_report.clear();
             m_lastError = "";
@@ -76,7 +76,7 @@ namespace qtreports
             return parseDocument( file.readAll() );//.replace( " ", "" )
         }
 
-        bool    Parser::getValue( QXmlStreamReader & reader, QString & data )
+        bool    ParserFromXML::getValue( QXmlStreamReader & reader, QString & data )
         {
             m_log << "getValue():\tstart" << endl;
             while( !reader.atEnd() && !reader.isEndElement() )
@@ -97,7 +97,7 @@ namespace qtreports
             return true;
         }
 
-        bool    Parser::getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option )
+        bool    ParserFromXML::getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option )
         {
             m_log << "getAttribute():\tstart. name: " << name << endl;
             auto && attributes = reader.attributes();
@@ -119,17 +119,17 @@ namespace qtreports
             return true;
         }
 
-        bool    Parser::getRequiredAttribute( QXmlStreamReader & reader, const QString & name, QString & data )
+        bool    ParserFromXML::getRequiredAttribute( QXmlStreamReader & reader, const QString & name, QString & data )
         {
             return getAttribute( reader, name, data, AttributeOption::Required );
         }
 
-        bool    Parser::getOptionalAttribute( QXmlStreamReader & reader, const QString & name, QString & data )
+        bool    ParserFromXML::getOptionalAttribute( QXmlStreamReader & reader, const QString & name, QString & data )
         {
             return getAttribute( reader, name, data, AttributeOption::Optional );
         }
 
-        bool    Parser::goToElementEnd( QXmlStreamReader & reader )
+        bool    ParserFromXML::goToElementEnd( QXmlStreamReader & reader )
         {
             m_log << "goToEnd():\tstart" << endl;
             int level = 0;
@@ -161,7 +161,7 @@ namespace qtreports
             return true;
         }
 
-        bool    Parser::parseChilds( QXmlStreamReader & reader, const ObjectPtr & object )
+        bool    ParserFromXML::parseChilds( QXmlStreamReader & reader, const ObjectPtr & object )
         {
             m_log << "parseChilds():\tstart" << endl;
             while( !reader.atEnd() )
@@ -208,7 +208,7 @@ namespace qtreports
             return true;
         }
 
-        bool    Parser::parseDocument( const QString & text )
+        bool    ParserFromXML::parseDocument( const QString & text )
         {
             QXmlStreamReader reader( text );
 
@@ -221,7 +221,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseReport( QXmlStreamReader & reader, const ReportPtr & report )
+        bool	ParserFromXML::parseReport( QXmlStreamReader & reader, const ReportPtr & report )
         {
             QString name;
             if( !getRequiredAttribute( reader, "name", name ) )
@@ -321,7 +321,7 @@ namespace qtreports
         }
 
 
-        bool    Parser::parseStyle( QXmlStreamReader & reader, const ReportPtr & report )
+        bool    ParserFromXML::parseStyle( QXmlStreamReader & reader, const ReportPtr & report )
         {
             QString nameString;
             if( !getRequiredAttribute( reader, "name", nameString ) )
@@ -477,7 +477,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool    Parser::parseField( QXmlStreamReader & reader, const ReportPtr & report )
+        bool    ParserFromXML::parseField( QXmlStreamReader & reader, const ReportPtr & report )
         {
             QString name;
             if( !getRequiredAttribute( reader, "name", name ) )
@@ -514,7 +514,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseTitle( QXmlStreamReader & reader, const ReportPtr & report )
+        bool	ParserFromXML::parseTitle( QXmlStreamReader & reader, const ReportPtr & report )
         {
             TitlePtr title( new Title() );
             if( !parseChilds( reader, title ) )
@@ -529,7 +529,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseDetail( QXmlStreamReader & reader, const ReportPtr & report )
+        bool	ParserFromXML::parseDetail( QXmlStreamReader & reader, const ReportPtr & report )
         {
             DetailPtr detail( new Detail() );
             if( !parseChilds( reader, detail ) )
@@ -544,7 +544,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseBand( QXmlStreamReader & reader, const SectionPtr & section )
+        bool	ParserFromXML::parseBand( QXmlStreamReader & reader, const SectionPtr & section )
         {
             QString height;
             if( !getRequiredAttribute( reader, "height", height ) )
@@ -566,7 +566,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseStaticText( QXmlStreamReader & reader, const BandPtr & band )
+        bool	ParserFromXML::parseStaticText( QXmlStreamReader & reader, const BandPtr & band )
         {
             StaticTextPtr staticText( new StaticText() );
             if( !parseChilds( reader, staticText ) )
@@ -580,7 +580,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseTextField( QXmlStreamReader & reader, const BandPtr & band )
+        bool	ParserFromXML::parseTextField( QXmlStreamReader & reader, const BandPtr & band )
         {
             TextFieldPtr textField( new TextField() );
             if( !parseChilds( reader, textField ) )
@@ -594,7 +594,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool Parser::parseLine( QXmlStreamReader & reader, const BandPtr & band )
+        bool    ParserFromXML::parseLine( QXmlStreamReader & reader, const BandPtr & band )
         {
             LinePtr line( new Line() );
             if( !parseChilds( reader, line ) )
@@ -608,7 +608,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool Parser::parseRect( QXmlStreamReader & reader, const BandPtr & band )
+        bool    ParserFromXML::parseRect( QXmlStreamReader & reader, const BandPtr & band )
         {
             RectPtr rect( new Rect() );
             if( !parseChilds( reader, rect ) )
@@ -622,7 +622,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool    Parser::parseEllipse( QXmlStreamReader & reader, const BandPtr & band )
+        bool    ParserFromXML::parseEllipse( QXmlStreamReader & reader, const BandPtr & band )
         {
             EllipsePtr ellipse( new Ellipse() );
             if( !parseChilds( reader, ellipse ) )
@@ -636,7 +636,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool    Parser::parseImage( QXmlStreamReader & reader, const BandPtr & band )
+        bool    ParserFromXML::parseImage( QXmlStreamReader & reader, const BandPtr & band )
         {
             ImagePtr image( new Image() );
             if( !parseChilds( reader, image ) )
@@ -650,7 +650,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseReportElement( QXmlStreamReader & reader, const WidgetPtr & widget )
+        bool	ParserFromXML::parseReportElement( QXmlStreamReader & reader, const WidgetPtr & widget )
         {
             QString xString;
             if( !getRequiredAttribute( reader, "x", xString ) )
@@ -724,7 +724,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseTextElement( QXmlStreamReader & reader, const WidgetPtr & widget )
+        bool	ParserFromXML::parseTextElement( QXmlStreamReader & reader, const WidgetPtr & widget )
         {
             QString textAlignment;
             if( !getRequiredAttribute( reader, "textAlignment", textAlignment ) )
@@ -757,7 +757,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseFont( QXmlStreamReader & reader, const WidgetPtr & widget )
+        bool	ParserFromXML::parseFont( QXmlStreamReader & reader, const WidgetPtr & widget )
         {
             QString isBold;
             if( !getOptionalAttribute( reader, "isBold", isBold ) )
@@ -778,7 +778,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseText( QXmlStreamReader & reader, const StaticTextPtr & staticText )
+        bool	ParserFromXML::parseText( QXmlStreamReader & reader, const StaticTextPtr & staticText )
         {
             QString text;
             if( !getValue( reader, text ) )
@@ -791,7 +791,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseTextFieldExpression( QXmlStreamReader & reader, const TextFieldPtr & textField )
+        bool	ParserFromXML::parseTextFieldExpression( QXmlStreamReader & reader, const TextFieldPtr & textField )
         {
             QString className;
             if( !getRequiredAttribute( reader, "class", className ) )
@@ -811,7 +811,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool    Parser::parseImageExpression( QXmlStreamReader & reader, const ImagePtr & image )
+        bool    ParserFromXML::parseImageExpression( QXmlStreamReader & reader, const ImagePtr & image )
         {
             //QString className;
             //if( !getRequiredAttribute( reader, "class", className ) )
@@ -831,7 +831,7 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        bool	Parser::parseQueryString( QXmlStreamReader & reader, const ReportPtr & report )
+        bool	ParserFromXML::parseQueryString( QXmlStreamReader & reader, const ReportPtr & report )
         {
             QString text;
             if( !getValue( reader, text ) )
@@ -845,17 +845,17 @@ namespace qtreports
             return !reader.hasError();
         }
 
-        const ReportPtr			Parser::getReport() const
+        const ReportPtr     ParserFromXML::getReport() const
         {
             return m_report;
         }
 
-        const QString			Parser::getLastError() const
+        const QString       ParserFromXML::getLastError() const
         {
             return m_lastError;
         }
 
-        const QString           Parser::getLog() const
+        const QString       ParserFromXML::getLog() const
         {
             return *m_log.string();
         }

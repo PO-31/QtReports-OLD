@@ -146,6 +146,7 @@
     <ClCompile Include="converters\convertertohtml.cpp" />
     <ClCompile Include="converters\convertertopdf.cpp" />
     <ClCompile Include="converters\convertertoqwidget.cpp" />
+    <ClCompile Include="converters\utils\replacer.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_engine.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -155,7 +156,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="replacer.cpp" />
+    <ClCompile Include="parsers\parserfromxml.cpp" />
     <ClCompile Include="tags\band.cpp" />
     <ClCompile Include="tags\detail.cpp" />
     <ClCompile Include="tags\ellipse.cpp" />
@@ -172,14 +173,14 @@
     <ClCompile Include="tags\textfield.cpp" />
     <ClCompile Include="tags\textwidget.cpp" />
     <ClCompile Include="tags\title.cpp" />
-    <ClCompile Include="parser.cpp" />
     <ClCompile Include="tags\widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="converters\convertertohtml.hpp" />
     <ClInclude Include="converters\convertertopdf.hpp" />
     <ClInclude Include="converters\convertertoqwidget.hpp" />
-    <ClInclude Include="replacer.hpp" />
+    <ClInclude Include="converters\utils\replacer.hpp" />
+    <ClInclude Include="parsers\parserfromxml.hpp" />
     <ClInclude Include="tags\ellipse.hpp" />
     <ClInclude Include="tags\image.hpp" />
     <ClInclude Include="tags\line.hpp" />
@@ -187,7 +188,6 @@
     <ClInclude Include="tags\rect.hpp" />
     <ClInclude Include="tags\section.hpp" />
     <ClInclude Include="tags\textfield.hpp" />
-    <ClInclude Include="tags\textwidget.hpp" />
     <CustomBuild Include="engine.hpp">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing engine.hpp...</Message>
@@ -414,7 +414,6 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </Command>
     </CustomBuild>
-    <ClInclude Include="parser.hpp" />
     <CustomBuild Include="tags\widget.hpp">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </Message>

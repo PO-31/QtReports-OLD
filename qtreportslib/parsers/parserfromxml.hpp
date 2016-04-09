@@ -31,11 +31,11 @@ namespace qtreports {
         Класс, который отвечает за парсинг отчета и 
         создание из него внутренней структуры данных Report.
         */
-        class Parser {
+        class ParserFromXML {
 
         public:
-            Parser();
-            ~Parser();
+            ParserFromXML();
+            ~ParserFromXML();
 
             /*! @~russian
             Парсит отчет и создает из него внутреннюю структуру данных Report.
@@ -64,7 +64,7 @@ namespace qtreports {
             const QString      getLog() const;
 
             using ParseFuncPtr = bool( QXmlStreamReader &, const ObjectPtr & );
-            using ParseMethodPtr = bool( Parser::* )( QXmlStreamReader &, const ObjectPtr & );
+            using ParseMethodPtr = bool( ParserFromXML::* )( QXmlStreamReader &, const ObjectPtr & );
             using ParseFunc = std::function< ParseFuncPtr >;
 
         private:

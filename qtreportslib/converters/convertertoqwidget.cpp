@@ -1,7 +1,7 @@
 #include <QFrame>
 #include <QLabel>
 #include <QPainter>
-#include "../replacer.hpp"
+#include "utils/replacer.hpp"
 #include "convertertoqwidget.hpp"
 #include <QDebug>
 

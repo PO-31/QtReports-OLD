@@ -11,7 +11,6 @@
 #include <QSqlField>
 #include <QPrinter>
 #include <QAbstractItemModel>
-#include "parser.hpp"
 //#include "processeddb.hpp"
 #include "tags/report.hpp"
 #include "converters/convertertoqwidget.hpp"
