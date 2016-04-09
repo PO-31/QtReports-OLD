@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['image',['Image',['../classqtreports_1_1detail_1_1_image.html',1,'qtreports::detail']]]
+  ['group',['Group',['../classqtreports_1_1detail_1_1_group.html',1,'qtreports::detail']]]
 ];

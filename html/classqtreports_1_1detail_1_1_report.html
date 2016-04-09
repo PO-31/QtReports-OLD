@@ -116,12 +116,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
 <tr class="separator:a83c186515546872d76de145df28c8044"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e524ea97242d402efca8debbd6cb8e9"><td class="memItemLeft" align="right" valign="top">const StylePtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#a3e524ea97242d402efca8debbd6cb8e9">getDefaultStyle</a> () const </td></tr>
 <tr class="separator:a3e524ea97242d402efca8debbd6cb8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea2f68e4ee76ae2542227281fa5af3aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#aea2f68e4ee76ae2542227281fa5af3aa">setStyle</a> (const QString &amp;name, const StylePtr &amp;style)</td></tr>
-<tr class="separator:aea2f68e4ee76ae2542227281fa5af3aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d84e45ea0cd0a132162247a061a7dd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#a1d84e45ea0cd0a132162247a061a7dd1">addStyle</a> (const QString &amp;name, const StylePtr &amp;style)</td></tr>
+<tr class="separator:a1d84e45ea0cd0a132162247a061a7dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7455c33806b08cc24743e5674be8f595"><td class="memItemLeft" align="right" valign="top">const StylePtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#a7455c33806b08cc24743e5674be8f595">getStyle</a> (const QString &amp;name) const </td></tr>
 <tr class="separator:a7455c33806b08cc24743e5674be8f595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc16908148ab474dd24d5850292aa69f"><td class="memItemLeft" align="right" valign="top">const QMap&lt; QString, StylePtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#abc16908148ab474dd24d5850292aa69f">getStyles</a> () const </td></tr>
 <tr class="separator:abc16908148ab474dd24d5850292aa69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c91cfef8636b62a8a3e62504d3a76d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#a9c91cfef8636b62a8a3e62504d3a76d8">addGroup</a> (const QString &amp;name, const GroupPtr &amp;group)</td></tr>
+<tr class="separator:a9c91cfef8636b62a8a3e62504d3a76d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f94fdd1dfb340cba96eed4a8f46c46c"><td class="memItemLeft" align="right" valign="top">const GroupPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#a8f94fdd1dfb340cba96eed4a8f46c46c">getGroup</a> (const QString &amp;name) const </td></tr>
+<tr class="separator:a8f94fdd1dfb340cba96eed4a8f46c46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06b451008a1b02da0e60203f3935e859"><td class="memItemLeft" align="right" valign="top">const QMap&lt; QString, GroupPtr &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#a06b451008a1b02da0e60203f3935e859">getGroups</a> () const </td></tr>
+<tr class="separator:a06b451008a1b02da0e60203f3935e859"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2225bf295c226b92ecd987c8ea0a7de2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#a2225bf295c226b92ecd987c8ea0a7de2">setQuery</a> (const QString &amp;query)</td></tr>
 <tr class="separator:a2225bf295c226b92ecd987c8ea0a7de2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a231b3bebf8e20cbeacd34f7987701f46"><td class="memItemLeft" align="right" valign="top">const QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqtreports_1_1detail_1_1_report.html#a231b3bebf8e20cbeacd34f7987701f46">getQuery</a> () const </td></tr>
@@ -221,6 +227,72 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
 <div class="textblock"><p>Класс, реализующий тэг &lt;report&gt; </p>
 <p>Класс, реализующий тэг &lt;report&gt; </p>
 </div><h2 class="groupheader">Методы</h2>
+<a class="anchor" id="a9c91cfef8636b62a8a3e62504d3a76d8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qtreports::detail::Report::addGroup </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const GroupPtr &amp;&#160;</td>
+          <td class="paramname"><em>group</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Добавляет &lt;group&gt; в &lt;report&gt; </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Имя &lt;group&gt; </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">group</td><td>Указатель на &lt;group&gt; </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a1d84e45ea0cd0a132162247a061a7dd1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qtreports::detail::Report::addStyle </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const StylePtr &amp;&#160;</td>
+          <td class="paramname"><em>style</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Добавляет &lt;style&gt; в &lt;report&gt; </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Имя стиля </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">style</td><td>Указатель на &lt;style&gt; </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a1aac1a22db0225606814ea687e1d9298"></a>
 <div class="memitem">
 <div class="memproto">
@@ -249,7 +321,7 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Возвращает стиль по умолчанию </p>
+<p>Возвращает &lt;style&gt; по умолчанию </p>
 
 </div>
 </div>
@@ -304,6 +376,44 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
       </table>
 </div><div class="memdoc">
 <p>Возвращает карту &lt;field&gt; </p>
+
+</div>
+</div>
+<a class="anchor" id="a8f94fdd1dfb340cba96eed4a8f46c46c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const GroupPtr qtreports::detail::Report::getGroup </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Возвращает указатель на &lt;group&gt; по имени </p><dl class="params"><dt>Аргументы</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Имя &lt;group&gt; </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a06b451008a1b02da0e60203f3935e859"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const QMap&lt; QString, GroupPtr &gt; qtreports::detail::Report::getGroups </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Возвращает карту указателей на &lt;group&gt; </p>
 
 </div>
 </div>
@@ -481,9 +591,9 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Возвращает указатель на обьект стиля по имени </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Возвращает указатель на &lt;style&gt; по имени </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>имя стиля </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Имя &lt;style&gt; </td></tr>
   </table>
   </dd>
 </dl>
@@ -502,7 +612,7 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Возвращает карту стилей </p>
+<p>Возвращает карту указателей на &lt;style&gt; </p>
 
 </div>
 </div>
@@ -589,9 +699,9 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Устанавливает стиль по умолчанию </p><dl class="params"><dt>Аргументы</dt><dd>
+<p>Устанавливает &lt;style&gt; по умолчанию </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">style</td><td>Указатель на обьект стиля </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">style</td><td>Указатель на &lt;style&gt; </td></tr>
   </table>
   </dd>
 </dl>
@@ -936,39 +1046,6 @@ QString&#160;</td><td class="memItemRight" valign="bottom"><b>m_lastError</b></t
 <p>Устанавливает размер отчета </p><dl class="params"><dt>Аргументы</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">размер</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="aea2f68e4ee76ae2542227281fa5af3aa"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void qtreports::detail::Report::setStyle </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const StylePtr &amp;&#160;</td>
-          <td class="paramname"><em>style</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Добавляет стиль в &lt;report&gt; </p><dl class="params"><dt>Аргументы</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>Имя стиля </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">style</td><td>Указатель на обьект стиля </td></tr>
   </table>
   </dd>
 </dl>
