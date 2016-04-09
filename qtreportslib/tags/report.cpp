@@ -23,7 +23,7 @@ namespace qtreports
             return m_defaultStyle;
         }
 
-        void    Report::setStyle( const QString & name, const StylePtr & style )
+        void    Report::addStyle( const QString & name, const StylePtr & style )
         {
             m_styles[ name ] = style;
         }
@@ -36,6 +36,21 @@ namespace qtreports
         const QMap< QString, StylePtr >     Report::getStyles() const
         {
             return m_styles;
+        }
+
+        void    Report::addGroup( const QString & name, const GroupPtr & group )
+        {
+            m_groups[ name ] = group;
+        }
+
+        const GroupPtr  Report::getGroup( const QString & name ) const
+        {
+            return m_groups.value( name );
+        }
+
+        const QMap< QString, GroupPtr >     Report::getGroups() const
+        {
+            return m_groups;
         }
 
         void    Report::setQuery( const QString & query )

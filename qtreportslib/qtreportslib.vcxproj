@@ -161,6 +161,7 @@
     <ClCompile Include="tags\detail.cpp" />
     <ClCompile Include="tags\ellipse.cpp" />
     <ClCompile Include="tags\field.cpp" />
+    <ClCompile Include="tags\group.cpp" />
     <ClCompile Include="tags\image.cpp" />
     <ClCompile Include="tags\line.cpp" />
     <ClCompile Include="tags\object.cpp" />
@@ -182,12 +183,14 @@
     <ClInclude Include="converters\utils\replacer.hpp" />
     <ClInclude Include="parsers\parserfromxml.hpp" />
     <ClInclude Include="tags\ellipse.hpp" />
+    <ClInclude Include="tags\group.hpp" />
     <ClInclude Include="tags\image.hpp" />
     <ClInclude Include="tags\line.hpp" />
     <ClInclude Include="tags\querystring.hpp" />
     <ClInclude Include="tags\rect.hpp" />
     <ClInclude Include="tags\section.hpp" />
     <ClInclude Include="tags\textfield.hpp" />
+    <ClInclude Include="tags\textwidget.hpp" />
     <CustomBuild Include="engine.hpp">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing engine.hpp...</Message>

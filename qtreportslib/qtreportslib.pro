@@ -17,6 +17,7 @@ SOURCES += engine.cpp \
     tags/report.cpp \
     tags/style.cpp \
     tags/field.cpp \
+    tags/group.cpp \
     tags/title.cpp \
     tags/detail.cpp \
     tags/band.cpp \
@@ -40,6 +41,7 @@ HEADERS += engine.hpp \
     tags/report.hpp \
     tags/style.hpp \
     tags/field.hpp \
+    tags/group.hpp \
     tags/title.hpp \
     tags/detail.hpp \
     tags/band.hpp \

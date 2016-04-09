@@ -34,6 +34,10 @@ namespace qtreports
             m_functions[ "style" ] = toParseFunc( this, &ParserFromXML::parseStyle );
             m_functions[ "queryString" ] = toParseFunc( this, &ParserFromXML::parseQueryString );
             m_functions[ "field" ] = toParseFunc( this, &ParserFromXML::parseField );
+            m_functions[ "group" ] = toParseFunc( this, &ParserFromXML::parseGroup );
+            m_functions[ "groupExpression" ] = toParseFunc( this, &ParserFromXML::parseGroupExpression );
+            m_functions[ "groupHeader" ] = toParseFunc( this, &ParserFromXML::parseGroupHeader );
+            m_functions[ "groupFooter" ] = toParseFunc( this, &ParserFromXML::parseGroupFooter );
             m_functions[ "title" ] = toParseFunc( this, &ParserFromXML::parseTitle );
             m_functions[ "detail" ] = toParseFunc( this, &ParserFromXML::parseDetail );
             m_functions[ "band" ] = toParseFunc( this, &ParserFromXML::parseBand );
@@ -472,7 +476,7 @@ namespace qtreports
                 style->setPDFEmbedded( toBool( isPdfEmbeddedString ) );
             }
 
-            report->setStyle( nameString, style );
+            report->addStyle( nameString, style );
 
             return !reader.hasError();
         }
@@ -514,6 +518,71 @@ namespace qtreports
             return !reader.hasError();
         }
 
+        bool	ParserFromXML::parseGroup( QXmlStreamReader & reader, const ReportPtr & report )
+        {
+            QString nameString;
+            if( !getRequiredAttribute( reader, "name", nameString ) )
+            {
+                return false;
+            }
+
+            GroupPtr group( new Group() );
+            group->setTagName( "group" );
+            group->setName( nameString );
+
+            if( !parseChilds( reader, group ) )
+            {
+                return false;
+            }
+
+            report->addGroup( nameString, group );
+
+            return !reader.hasError();
+        }
+
+        bool	ParserFromXML::parseGroupExpression( QXmlStreamReader & reader, const GroupPtr & group )
+        {
+            QString text;
+            if( !getValue( reader, text ) )
+            {
+                return false;
+            }
+
+            group->setExpression( text );
+
+            return !reader.hasError();
+        }
+
+        bool	ParserFromXML::parseGroupHeader( QXmlStreamReader & reader, const GroupPtr & group )
+        {
+            SectionPtr header( new Section() );
+            header->setTagName( "groupHeader" );
+
+            if( !parseChilds( reader, header ) )
+            {
+                return false;
+            }
+
+            group->setHeader( header );
+
+            return !reader.hasError();
+        }
+
+        bool	ParserFromXML::parseGroupFooter( QXmlStreamReader & reader, const GroupPtr & group )
+        {
+            SectionPtr footer( new Section() );
+            footer->setTagName( "groupFooter" );
+
+            if( !parseChilds( reader, footer ) )
+            {
+                return false;
+            }
+
+            group->setFooter( footer );
+
+            return !reader.hasError();
+        }
+
         bool	ParserFromXML::parseTitle( QXmlStreamReader & reader, const ReportPtr & report )
         {
             TitlePtr title( new Title() );
@@ -523,7 +592,7 @@ namespace qtreports
             }
 
             title->setTagName( "title" );
-            title->setWidth( report->getWidth() );
+            //title->setWidth( report->getWidth() );
             report->setTitle( title );
 
             return !reader.hasError();
@@ -538,7 +607,7 @@ namespace qtreports
             }
 
             detail->setTagName( "detail" );
-            detail->setWidth( report->getWidth() );
+            //detail->setWidth( report->getWidth() );
             report->setDetail( detail );
 
             return !reader.hasError();
@@ -560,7 +629,7 @@ namespace qtreports
 
             band->setTagName( "band" );
             band->setHeight( height.toInt() );
-            band->setWidth( section->getWidth() );
+            //band->setWidth( section->getWidth() );
             section->addBand( band );
 
             return !reader.hasError();

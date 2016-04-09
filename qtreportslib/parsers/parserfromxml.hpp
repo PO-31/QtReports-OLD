@@ -9,6 +9,8 @@
 #include "tags/report.hpp"
 #include "tags/style.hpp"
 #include "tags/field.hpp"
+#include "tags/group.hpp"
+#include "tags/title.hpp"
 #include "tags/detail.hpp"
 #include "tags/band.hpp"
 #include "tags/statictext.hpp"
@@ -93,6 +95,10 @@ namespace qtreports {
             bool    parseStyle( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseQueryString( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseField( QXmlStreamReader & reader, const ReportPtr & report );
+            bool    parseGroup( QXmlStreamReader & reader, const ReportPtr & report );
+            bool    parseGroupExpression( QXmlStreamReader & reader, const GroupPtr & group );
+            bool    parseGroupHeader( QXmlStreamReader & reader, const GroupPtr & group );
+            bool    parseGroupFooter( QXmlStreamReader & reader, const GroupPtr & group );
             bool    parseTitle( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseDetail( QXmlStreamReader & reader, const ReportPtr & report );
             bool    parseBand( QXmlStreamReader & reader, const SectionPtr & section );

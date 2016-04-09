@@ -13,6 +13,7 @@
 #include "object.hpp"
 #include "field.hpp"
 #include "style.hpp"
+#include "group.hpp"
 #include "title.hpp"
 #include "detail.hpp"
 
@@ -31,33 +32,51 @@ namespace qtreports {
             ~Report();
 
             /*! @~russian
-            Устанавливает стиль по умолчанию
-            @param[in] style Указатель на обьект стиля
+            Устанавливает <style> по умолчанию
+            @param[in] style Указатель на <style>
             */
             void                                setDefaultStyle( const StylePtr & style );
             
             /*! @~russian
-            Возвращает стиль по умолчанию
+            Возвращает <style> по умолчанию
             */
             const StylePtr                      getDefaultStyle() const;
             
             /*! @~russian
-            Добавляет стиль в <report> 
+            Добавляет <style> в <report> 
             @param[in] name Имя стиля
-            @param[in] style Указатель на обьект стиля
+            @param[in] style Указатель на <style>
             */
-            void                                setStyle( const QString & name, const StylePtr & style );
+            void                                addStyle( const QString & name, const StylePtr & style );
             
             /*! @~russian
-            Возвращает указатель на обьект стиля по имени
-            @param[in] name имя стиля
+            Возвращает указатель на <style> по имени
+            @param[in] name Имя <style>
             */
             const StylePtr                      getStyle( const QString & name ) const;
             
             /*! @~russian
-            Возвращает карту стилей
+            Возвращает карту указателей на <style>
             */
             const QMap< QString, StylePtr >     getStyles() const;
+
+            /*! @~russian
+            Добавляет <group> в <report>
+            @param[in] name Имя <group>
+            @param[in] group Указатель на <group>
+            */
+            void                                addGroup( const QString & name, const GroupPtr & group );
+
+            /*! @~russian
+            Возвращает указатель на <group> по имени
+            @param[in] name Имя <group>
+            */
+            const GroupPtr                      getGroup( const QString & name ) const;
+
+            /*! @~russian
+            Возвращает карту указателей на <group>
+            */
+            const QMap< QString, GroupPtr >     getGroups() const;
 
             /*! @~russian
             Устанавливает <queryString>
@@ -261,6 +280,7 @@ namespace qtreports {
             QMap< QString, StylePtr >   m_styles;
             QString                     m_query;
             QMap< QString, FieldPtr >   m_fields;
+            QMap< QString, GroupPtr >   m_groups;
             TitlePtr                    m_title;
             DetailPtr                   m_detail;
             QMap< QString, QVariant >   m_parameters;

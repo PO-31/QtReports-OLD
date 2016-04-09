@@ -122,6 +122,9 @@
     <ClCompile Include="converters\utils\replacer.cpp">
       <Filter>Converters\utils</Filter>
     </ClCompile>
+    <ClCompile Include="tags\group.cpp">
+      <Filter>Tags</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tags\textfield.hpp">
@@ -159,6 +162,12 @@
     </ClInclude>
     <ClInclude Include="converters\utils\replacer.hpp">
       <Filter>Converters\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\group.hpp">
+      <Filter>Tags</Filter>
+    </ClInclude>
+    <ClInclude Include="tags\textwidget.hpp">
+      <Filter>Tags</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
