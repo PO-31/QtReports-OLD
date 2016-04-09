@@ -1,7 +1,7 @@
 #include <QRegularExpression>
 #include <QTest>
 #include <QSize>
-#include <parser.hpp>
+#include <parsers/parserfromxml.hpp>
 #include "test_parser.hpp"
 #include <QDebug>
 
@@ -9,7 +9,7 @@ Test_Parser::Test_Parser( QObject *parent ) :
     QObject( parent ) {}
 
 void    Test_Parser::ReportTreeParseTest() {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QString input = QFINDTESTDATA( "default.qreport" );
     QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
       
@@ -170,7 +170,7 @@ void    Test_Parser::ReportTreeParseTest() {
 }
 
 void    Test_Parser::ReportTagParseTest() {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QString input = QFINDTESTDATA( "report test.qreport" );
     QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
 
@@ -216,7 +216,7 @@ void    Test_Parser::ReportTagParseTest() {
 }
 
 void    Test_Parser::TextTest() {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QString input = QFINDTESTDATA( "text test.qreport" );
     QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
 
@@ -270,7 +270,7 @@ void    Test_Parser::TextTest() {
 void Test_Parser::ReportFieldParseTest()
 {
 
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QString input = QFINDTESTDATA( "field test.qreport" );
     QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
 
@@ -295,7 +295,7 @@ void Test_Parser::ReportFieldParseTest()
 
 void Test_Parser::ReportLineParseTest()
 {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QString input = QFINDTESTDATA( "line test.qreport" );
     QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
 
@@ -337,7 +337,7 @@ void Test_Parser::ReportLineParseTest()
 
 void Test_Parser::ReportStyleParseTest()
 {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QString input = QFINDTESTDATA( "style test.qreport" );
 
     QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
@@ -374,7 +374,7 @@ void Test_Parser::ReportStyleParseTest()
 
 void Test_Parser::OptionalFieldsTest()
 {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QString input = QFINDTESTDATA( "optional.qreport" );
 
     QVERIFY2( parser.parse( input ), parser.getLastError().toStdString().c_str() );
@@ -414,7 +414,7 @@ void    Test_Parser::parse() {
     OptionalFieldsTest();
     
 
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
 
     QCOMPARE( parser.parse( "" ), false );
 
@@ -692,12 +692,12 @@ void    Test_Parser::parse() {
 }
 
 void    Test_Parser::getReport() {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QVERIFY( parser.getReport().isNull() );
 }
 
 void    Test_Parser::getLastError() {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QCOMPARE( parser.getLastError(), QString() );
 
     QString reportPath = QFINDTESTDATA( "errored.qrxml" );
@@ -707,7 +707,7 @@ void    Test_Parser::getLastError() {
 }
 
 void    Test_Parser::getLog() {
-    qtreports::detail::Parser parser;
+    qtreports::detail::ParserFromXML parser;
     QCOMPARE( parser.getLog(), QString() );
 
     QString reportPath = QFINDTESTDATA( "full.qrxml" );
