@@ -293,6 +293,12 @@ namespace qtreports
                 }
                 for( auto && imageWidget : band->getImages() )
                 {
+                    if( imageWidget->getRect().isEmpty() )
+                    {
+                        m_lastError = "Ellipse \"" + imageWidget->getName() + "\" rect is empty";
+                        return false;
+                    }
+
                     auto label = new QLabel( frame );
                     QString style = "";
                     if( isLayout() )
@@ -306,6 +312,12 @@ namespace qtreports
                 }
                 for( auto && rect : band->getRects() )
                 {
+                    if( rect->getRect().isEmpty() )
+                    {
+                        m_lastError = "Rect \"" + rect->getName() + "\" rect is empty";
+                        return false;
+                    }
+
                     auto label = new QLabel( frame );
                     QString style = "";
                     if( rect->isBold() )
@@ -323,12 +335,19 @@ namespace qtreports
                 }
                 for( auto && ellipse : band->getEllipses() )
                 {
+                    if( ellipse->getSize().isEmpty() )
+                    {
+                        m_lastError = "Ellipse \"" + ellipse->getName() + "\" size is empty";
+                        return false;
+                    }
+
                     auto label = new QLabel( frame );
                     QString style = "";
                     if( isLayout() )
                     {
                         style += "border: 1px solid gray; ";
                     }
+
                     QPixmap pixmap( ellipse->getSize() );
                     pixmap.fill( Qt::GlobalColor::transparent );
 
@@ -336,11 +355,11 @@ namespace qtreports
                     painter.setRenderHint( QPainter::Antialiasing );
                     painter.drawEllipse( ellipse->getRect() );
                     painter.end();
+                    label->setPixmap( pixmap );
 
                     label->setStyleSheet( "background-color: transparent; " + style );
                     label->setGeometry( ellipse->getRect() );
                     label->setAlignment( ellipse->getAlignment() );
-                    label->setPixmap( pixmap );
                 }
             }
 

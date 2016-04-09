@@ -19,7 +19,7 @@
         <text><![CDATA[$P{title}]]></text>
       </staticText>
       <ellipse>
-        <reportElement x="0" y="0" width="50%" height="35" />
+        <reportElement x="0" y="0" width="535" height="35" />
       </ellipse>
     </band>
   </title>
