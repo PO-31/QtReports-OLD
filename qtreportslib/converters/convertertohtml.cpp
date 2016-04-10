@@ -142,8 +142,8 @@ namespace qtreports {
                                 verticalAlignment = "bottom";
                             if ((textField->getAlignment() & Qt::AlignVCenter) == Qt::AlignVCenter)
                                 verticalAlignment = "middle";
-                            if ((textField->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
-                                verticalAlignment = "baseline";
+                            //if ((textField->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
+                            //    verticalAlignment = "baseline";
 
                             elementStr += QString("     <div class='textfield' "
                                "style='left: %1px; top: %2px; "
@@ -181,8 +181,8 @@ namespace qtreports {
                                 verticalAlignment = "bottom";
                             if ((staticText->getAlignment() & Qt::AlignVCenter) == Qt::AlignVCenter)
                                 verticalAlignment = "middle";
-                            if ((staticText->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
-                                verticalAlignment = "baseline";
+                            //if ((staticText->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
+                            //    verticalAlignment = "baseline";
 
 
                             elementStr += QString("     <div class='statictext' "
@@ -261,8 +261,8 @@ namespace qtreports {
                                 verticalAlignment = "bottom";
                             if ((textField->getAlignment() & Qt::AlignVCenter) == Qt::AlignVCenter)
                                 verticalAlignment = "middle";
-                            if ((textField->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
-                                verticalAlignment = "baseline";
+                            //if ((textField->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
+                            //    verticalAlignment = "baseline";
 
 
                             elementStr += QString("     <div class='textfield' "
@@ -305,8 +305,8 @@ namespace qtreports {
                                     verticalAlignment = "bottom";
                                 if ((staticText->getAlignment() & Qt::AlignVCenter) == Qt::AlignVCenter)
                                     verticalAlignment = "middle";
-                                if ((staticText->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
-                                    verticalAlignment = "baseline";
+                                //if ((staticText->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
+                                //    verticalAlignment = "baseline";
 
                                 elementStr += QString("     <div class='statictext' "
                                     "style='left: %1px; top: %2px; "
