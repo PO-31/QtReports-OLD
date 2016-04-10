@@ -93,22 +93,64 @@ namespace qtreports {
         Engine( const QString & path, QObject * parent = Q_NULLPTR );
         ~Engine();
 
+        /*! @~russian
+            Загружает макет отчета из файла path
+            @param[in] path полное имя макета отчета
+        */
         bool    open( const QString & path );
+        /*! @~russian
+            Выгружает из оперативной памяти данные об отчете
+        */
         bool    close();
 
+        /*! @~russian
+            Передает карту параметров в отчет, для успешной передачи параметров не обязатеьно загружать их описание с макетом отчета
+            @param[in] map карта параметров в формате (<имя параметра>, <значение параметра>)
+        */
         bool    setParameters( const QMap< QString, QString > & map );
+        /*! @~russian
+            Устанавливает источник данных для отчета из БД
+            @param[in] connection соединение с БД
+        */
         bool    setConnection( const QSqlDatabase & connection );
+        /*! @~russian
+            Устанавливает источник данных для отчета из таблицы полей
+            @param[in] columnSet набор данных в формате (<имя столбца>, <вектор значений столбца>)
+        */
         void    setDataSource( const QMap <QString, QVector <QVariant> > & columnsSet);
 
+        /*! @~russian
+            Устанавливает запрос, по которому будут заполнятся поля отчета
+            @param[in] query запрос
+        */
         void    setQuery( const QString & query );
+        /*! @~russian
+            Добавить скрипт для отчета
+            @param[in] script скрипт
+        */
         void    addScript( const QString & script );
 
+        /*! @~russian
+            Создает PDF документ отчета по указанному пути
+            @param[in] path полное имя выходного документа
+        */
         bool                createPDF( const QString & path );
+        /*! @~russian
+            Создает HTML документ отчета по указанному пути
+            @param[in] path полное имя выходного документа
+        */
         bool                createHTML( const QString & path );//etc.
+        
+        /*! @~russian
+            Выводит отчет на виджет
+        */
         const QWidgetPtr	createWidget();
         const QWidgetPtr	createLayout();
         bool                print();
         
+        /*! @~russian
+            Возвращает true в случае учпешной загрузки отчета, иначе - false
+        */
         bool        	    isOpened() const;
         const QString       getLastError() const;
 
