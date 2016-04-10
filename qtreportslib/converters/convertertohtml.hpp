@@ -16,8 +16,8 @@ namespace qtreports {
             bool    convert();
             bool    convert( const QString & path );
 
-            const QString   getHTML() const;
             const QString   getLastError() const;
+            const QString   getHTML() const;
 
         private:
             ReportPtr   m_report;
@@ -25,7 +25,7 @@ namespace qtreports {
             QString     m_html;
 
             bool        createHTML();
-
+            void        drawShapes(QSharedPointer< Band > band, QString &elementStr, int index);
         };
 
     }

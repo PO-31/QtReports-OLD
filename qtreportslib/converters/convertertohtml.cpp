@@ -1,6 +1,8 @@
 #include <QFile>
 #include <QTextStream>
+#include "utils/replacer.hpp"
 #include "convertertohtml.hpp"
+#include "cmath"
 
 namespace qtreports {
     namespace detail {
@@ -45,9 +47,9 @@ namespace qtreports {
                 return false;
             }
 
-            int m_pageHeight = m_report->getSize().height();
-            int m_pageWidth = m_report->getSize().width();
-            int m_freePageSpace = m_pageHeight;
+            int pageHeight = m_report->getHeight();
+            int pageWidth = m_report->getWidth();
+            int freePageSpace = pageHeight;
 
             m_html += QString("<!DOCTYPE html>\n"
                       "<html>\n"
@@ -57,7 +59,6 @@ namespace qtreports {
                       "  <style>\n"
 
                       "   div, .detail, .title, .band {\n"
-                      "   border: 1px solid black;\n"
                       "   position: relative;\n"
                       "   width: 100%;\n"
                       "   overflow: hidden;\n"
@@ -72,7 +73,7 @@ namespace qtreports {
                       "   height: %2px;\n" 
                       "   }\n"
 
-                      "   .statictext, .textfield {\n"
+                      "   .statictext, .textfield, .shape{\n"
                       "   position: absolute;\n"
                       "   background-color: transparent;\n"
                       "   }\n"
@@ -96,7 +97,7 @@ namespace qtreports {
                       "  </style>\n"
                       " </head>\n"
                       " <body>\n")
-                    .arg(m_pageWidth).arg(m_pageHeight)
+                    .arg(pageWidth).arg(pageHeight)
                     .arg("Verdana").arg("12").arg("black").arg("normal").arg("normal")
                     .arg("Verdana").arg("12").arg("black").arg("normal").arg("normal");
 
@@ -107,68 +108,108 @@ namespace qtreports {
             if(!title.isNull())
             {
                 m_html += "   <div class='title'>\n";
-            	int m_titleHeight = 0;
+
+                detail::Replacer replacer;
+                if( !replacer.replace( title, m_report, 0 ) )
+                {
+                    m_lastError = "Error in replacing process: " + replacer.getLastError();
+                    return false;
+                }
 
             	for(auto && band : title->getBands())
             	{
-                    QString m_elementStr = "";
+                    QString elementStr = "";
 
                 	for(auto && textField : band->getTextFields())
-                	{
-                        QString m_oldStr = textField->getText();
-                        QString m_fieldStr = "";
-                        QString m_newStr = "";
-
-                        while (m_oldStr.contains("$F{"))
+                	{                       
+                        if (textField->getText() != "")
                         {
-                            m_newStr += m_oldStr.section("$F{", 0, 0);
-                            m_oldStr = m_oldStr.section("$F{", 1, -1);
-                            m_fieldStr = m_oldStr.section("}", 0, 0);
-                            m_oldStr = m_oldStr.section("}", 1, -1);
+                            QString textAlignment = "left";
+                            QString verticalAlignment = "middle";
 
-                            if (m_report->getField(m_fieldStr).data()->getRowCount() > 0)
-                            {
-                                m_newStr += m_report->getField(m_fieldStr).data()->getData(0);
-                            }
-                        }
+                            if ((textField->getAlignment() & Qt::AlignLeft) == Qt::AlignLeft)
+                                textAlignment = "left";
+                            if ((textField->getAlignment() & Qt::AlignRight) == Qt::AlignRight)
+                                textAlignment = "right";
+                            if ((textField->getAlignment() & Qt::AlignHCenter) == Qt::AlignHCenter)
+                                textAlignment = "center";
+                            if ((textField->getAlignment() & Qt::AlignJustify) == Qt::AlignJustify)
+                                textAlignment = "justify";
 
-                        m_oldStr = m_newStr + m_oldStr;
+                            if ((textField->getAlignment() & Qt::AlignTop) == Qt::AlignTop)
+                                verticalAlignment = "top";
+                            if ((textField->getAlignment() & Qt::AlignBottom) == Qt::AlignBottom)
+                                verticalAlignment = "bottom";
+                            if ((textField->getAlignment() & Qt::AlignVCenter) == Qt::AlignVCenter)
+                                verticalAlignment = "middle";
+                            if ((textField->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
+                                verticalAlignment = "baseline";
 
-                        if (m_oldStr != "")
-                        {
-                            m_elementStr += QString("     <div class='textfield' "
+                            elementStr += QString("     <div class='textfield' "
                                "style='left: %1px; top: %2px; "
-                               "width: %3px; height: %4px'>%5</div>\n")
+                               "width: %3px; height: %4px; "
+                               "text-align: %5; vertical-align: %6'>%7</div>\n")
                                .arg(textField->getX())
                                .arg(textField->getY())
                                .arg(textField->getWidth())
                                .arg(textField->getHeight())
-                               .arg(m_oldStr);
+                               .arg(textAlignment)
+                               .arg(verticalAlignment)
+                               .arg(textField->getText());
                         }
                     }
 
                     for(auto && staticText : band->getStaticTexts())
                     {
-                        m_elementStr += QString("     <div class='statictext' "
-                            "style='left: %1px; top: %2px; "
-                            "width: %3px; height: %4px'>%5</div>\n")
-                            .arg(staticText->getX())
-                            .arg(staticText->getY())
-                            .arg(staticText->getWidth())
-                            .arg(staticText->getHeight())
-                            .arg(staticText->getText());
+                        if (staticText->getText() != "")
+                        {
+                            QString textAlignment = "left";
+                            QString verticalAlignment = "middle";
+
+                            if ((staticText->getAlignment() & Qt::AlignLeft) == Qt::AlignLeft)
+                                textAlignment = "left";
+                            if ((staticText->getAlignment() & Qt::AlignRight) == Qt::AlignRight)
+                                textAlignment = "right";
+                            if ((staticText->getAlignment() & Qt::AlignHCenter) == Qt::AlignHCenter)
+                                textAlignment = "center";
+                            if ((staticText->getAlignment() & Qt::AlignJustify) == Qt::AlignJustify)
+                                textAlignment = "justify";
+
+                            if ((staticText->getAlignment() & Qt::AlignTop) == Qt::AlignTop)
+                                verticalAlignment = "top";
+                            if ((staticText->getAlignment() & Qt::AlignBottom) == Qt::AlignBottom)
+                                verticalAlignment = "bottom";
+                            if ((staticText->getAlignment() & Qt::AlignVCenter) == Qt::AlignVCenter)
+                                verticalAlignment = "middle";
+                            if ((staticText->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
+                                verticalAlignment = "baseline";
+
+
+                            elementStr += QString("     <div class='statictext' "
+                                "style='left: %1px; top: %2px; "
+                                "width: %3px; height: %4px; "
+                                "text-align: %5; vertical-align: %6'>%7</div>\n")
+                                .arg(staticText->getX())
+                                .arg(staticText->getY())
+                                .arg(staticText->getWidth())
+                                .arg(staticText->getHeight())
+                                .arg(textAlignment)
+                                .arg(verticalAlignment)
+                                .arg(staticText->getText());
+                        }
                     }
 
-                    m_titleHeight += band->getSize().height();
+                    drawShapes(band, elementStr, 0);
+
+                    freePageSpace -= band->getSize().height();
 
                     m_html += QString("    <div class='band' "
                              "style='height: %1px'>\n%2    </div>\n")
                              .arg(band->getSize().height())
-                             .arg(m_elementStr);
+                             .arg(elementStr);
             	}
 
             	m_html += "   </div>\n";
-            	m_freePageSpace -= m_titleHeight;
             }
 
 
@@ -179,118 +220,210 @@ namespace qtreports {
                 return false;
             }
 
-            int m_pageCount = 0;
-            int m_detailCount = 0;
+            int pageCount = 0;
+            int detailCount = m_report->getRowCount();
 
-            while (true)
+            for(int i = 0; i < detailCount; ++i)
             {
-                bool m_isDetailEmpty = true;
-                QString m_bandStr = "";
+                detail::Replacer replacer;
+                if( !replacer.replace( detail, m_report, i ) )
+                {
+                    m_lastError = "Error in replacing process: " + replacer.getLastError();
+                    return false;
+                }
+
+                QString bandStr = "";
 
                 for(auto && band : detail->getBands())
                 {
-                    bool m_isBandEmpty = true;
-                    QString m_elementStr = "";
+                    bool isBandEmpty = true;
+                    QString elementStr = "";
 
                     for(auto && textField : band->getTextFields())
                     {
-                       QString m_oldStr = textField->getText();
-                       QString m_fieldStr = "";
-                       QString m_newStr = "";
+                        if (textField->getText() != "")
+                        {
+                            QString textAlignment = "left";
+                            QString verticalAlignment = "middle";
 
-                       while (m_oldStr.contains("$F{"))
-                       {
-                           m_newStr += m_oldStr.section("$F{", 0, 0);
-                           m_oldStr = m_oldStr.section("$F{", 1, -1);
-                           m_fieldStr = m_oldStr.section("}", 0, 0);
-                           m_oldStr = m_oldStr.section("}", 1, -1);
+                            if ((textField->getAlignment() & Qt::AlignLeft) == Qt::AlignLeft)
+                                textAlignment = "left";
+                            if ((textField->getAlignment() & Qt::AlignRight) == Qt::AlignRight)
+                                textAlignment = "right";
+                            if ((textField->getAlignment() & Qt::AlignHCenter) == Qt::AlignHCenter)
+                                textAlignment = "center";
+                            if ((textField->getAlignment() & Qt::AlignJustify) == Qt::AlignJustify)
+                                textAlignment = "justify";
 
-                           if (m_detailCount < m_report->getField(m_fieldStr).data()->getRowCount())
-                           {
-                               m_newStr += m_report->getField(m_fieldStr).data()->getData(m_detailCount);
-                               m_isBandEmpty = false;
-                           }
-                       }
+                            if ((textField->getAlignment() & Qt::AlignTop) == Qt::AlignTop)
+                                verticalAlignment = "top";
+                            if ((textField->getAlignment() & Qt::AlignBottom) == Qt::AlignBottom)
+                                verticalAlignment = "bottom";
+                            if ((textField->getAlignment() & Qt::AlignVCenter) == Qt::AlignVCenter)
+                                verticalAlignment = "middle";
+                            if ((textField->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
+                                verticalAlignment = "baseline";
 
-                       m_oldStr = m_newStr + m_oldStr;
 
-                       /*while (m_oldStr.contains("$P{"))
-                       {
+                            elementStr += QString("     <div class='textfield' "
+                               "style='left: %1px; top: %2px; "
+                               "width: %3px; height: %4px; "
+                               "text-align: %5; vertical-align: %6'>%7</div>\n")
+                               .arg(textField->getX())
+                               .arg(textField->getY())
+                               .arg(textField->getWidth())
+                               .arg(textField->getHeight())
+                               .arg(textAlignment)
+                               .arg(verticalAlignment)
+                               .arg(textField->getText());
 
-                       }
-                       while (m_oldStr.contains("$V{"))
-                       {
-
-                       }*/
-
-                       if (m_oldStr != "")
-                       {
-                           m_elementStr += QString("     <div class='textfield' "
-                                   "style='left: %1px; top: %2px; "
-                                   "width: %3px; height: %4px'>%5</div>\n")
-                                   .arg(textField->getX())
-                                   .arg(textField->getY())
-                                   .arg(textField->getWidth())
-                                   .arg(textField->getHeight())
-                                   .arg(m_oldStr);
-                       }
+                            isBandEmpty = false;
+                        }
                     }
 
-                    if (!m_isBandEmpty)
-                    {
+                    if (!isBandEmpty)
+                    {                        
                         for(auto && staticText : band->getStaticTexts())
                         {
-                            m_elementStr += QString("     <div class='statictext' "
+                            if (staticText->getText() != "")
+                            {
+                                QString textAlignment = "left";
+                                QString verticalAlignment = "middle";
+
+                                if ((staticText->getAlignment() & Qt::AlignLeft) == Qt::AlignLeft)
+                                    textAlignment = "left";
+                                if ((staticText->getAlignment() & Qt::AlignRight) == Qt::AlignRight)
+                                    textAlignment = "right";
+                                if ((staticText->getAlignment() & Qt::AlignHCenter) == Qt::AlignHCenter)
+                                    textAlignment = "center";
+                                if ((staticText->getAlignment() & Qt::AlignJustify) == Qt::AlignJustify)
+                                    textAlignment = "justify";
+
+                                if ((staticText->getAlignment() & Qt::AlignTop) == Qt::AlignTop)
+                                    verticalAlignment = "top";
+                                if ((staticText->getAlignment() & Qt::AlignBottom) == Qt::AlignBottom)
+                                    verticalAlignment = "bottom";
+                                if ((staticText->getAlignment() & Qt::AlignVCenter) == Qt::AlignVCenter)
+                                    verticalAlignment = "middle";
+                                if ((staticText->getAlignment() & Qt::AlignBaseline) == Qt::AlignBaseline)
+                                    verticalAlignment = "baseline";
+
+                                elementStr += QString("     <div class='statictext' "
                                     "style='left: %1px; top: %2px; "
-                                    "width: %3px; height: %4px'>%5</div>\n")
+                                    "width: %3px; height: %4px; "
+                                    "text-align: %5; vertical-align: %6'>%7</div>\n")
                                     .arg(staticText->getX())
                                     .arg(staticText->getY())
                                     .arg(staticText->getWidth())
                                     .arg(staticText->getHeight())
+                                    .arg(textAlignment)
+                                    .arg(verticalAlignment)
                                     .arg(staticText->getText());
+                            }
                         }
 
-                        m_isDetailEmpty = false;
+                        drawShapes(band, elementStr, i);
 
-                        if (m_freePageSpace < band->getSize().height())
+                        if (freePageSpace < band->getSize().height())
                         {
                             m_html += QString("   <div class='detail'>\n%1   </div>\n")
-                                    .arg(m_bandStr);
+                                    .arg(bandStr);
 
-                            ++m_pageCount;
+                            ++pageCount;
                             //колонтитул
-                            m_html += "  </div>\n";
-
-                            m_freePageSpace = m_pageHeight - band->getSize().height();
-                            m_html += "  <div class='page'>\n";
-                            m_bandStr = "";
+                            freePageSpace = pageHeight - band->getSize().height();
+                            m_html += "  </div>\n  <div class='page'>\n";
+                            bandStr = "";
                         }
                         else
-                            m_freePageSpace -= band->getSize().height();
+                            freePageSpace -= band->getSize().height();
 
-                        m_bandStr += QString("    <div class='band' "
+                        bandStr += QString("    <div class='band' "
                                 "style='height: %1px'>\n%2    </div>\n")
                                 .arg(band->getSize().height())
-                                .arg(m_elementStr);
+                                .arg(elementStr);
                     }
                 }
 
-                if (m_isDetailEmpty)
-                {
-                    ++m_pageCount;
-                    //Колонтитул
-                    m_html += "  </div>\n";
-                    break;
-                }
-                else
-                    m_html += QString("   <div class='detail'>\n%1   </div>\n")
-                        .arg(m_bandStr);
-
-                ++m_detailCount;
+                m_html += QString("   <div class='detail'>\n%1   </div>\n")
+                    .arg(bandStr);
             }
 
-            m_html += " </body>\n</html>\n";
+            ++pageCount;
+            //Колонтитул
+            m_html += "  </div>\n </body>\n</html>\n";
             return true;
+        }
+
+        void ConverterToHTML::drawShapes(QSharedPointer<Band> band, QString &elementStr, int index)
+        {
+            int imgCount = 0;
+
+            for (auto && image : band->getImages())
+            {
+                QImage img = image->getImage();
+                img.save("img" + QString::number(index) + QString::number(imgCount) + ".jpg");
+
+                elementStr += QString("     <div class='shape' "
+                    "style='left: %1px; top: %2px; "
+                    "width: %3px; height: %4px'>\n"
+                    "      <img src='img%5%6.jpg' alt='img%5%6'>\n     </div>\n")
+                    .arg(image->getX())
+                    .arg(image->getY())
+                    .arg(image->getWidth())
+                    .arg(image->getHeight())
+                    .arg(index)
+                    .arg(imgCount);
+
+                ++imgCount;
+            }
+
+            for( auto && line : band->getLines() )
+            {
+                float angleRad = atan2(line->getHeight(), line->getWidth());
+                float lineWidth = sqrt(pow(line->getWidth(), 2) + pow(line->getHeight(), 2));
+
+                elementStr += QString("     <div class='shape' "
+                    "style='left: %1px; top: %2px; "
+                    "width: %3px; height: %4px; "
+                    "overflow: visible'>\n"
+                    "      <div style='border-top: 1px solid black; height: 1px; width: %5px; "
+                    "transform-origin: 0 0 0; transform: rotate(%6rad)'></div>\n     </div>\n")
+                    .arg(line->getX())
+                    .arg(line->getY())
+                    .arg(line->getWidth())
+                    .arg(line->getHeight())
+                    .arg(lineWidth)
+                    .arg(angleRad);
+            }
+
+            for( auto && rect : band->getRects() )
+            {
+                elementStr += QString("     <div class='shape' "
+                    "style='border: 1px solid black; left: %1px; top: %2px; "
+                    "width: %3px; height: %4px;'></div>\n")
+                    .arg(rect->getX())
+                    .arg(rect->getY())
+                    .arg(rect->getWidth())
+                    .arg(rect->getHeight());
+            }
+
+            for( auto && ellipse : band->getEllipses() )
+            {
+                elementStr += QString("     <div class='shape' "
+                    "style='border: 1px solid black; "
+                    "left: %1px; top: %2px; "
+                    "width: %3px; height: %4px; "
+                    "-moz-border-radius: %5px / %6px; "
+                    "-webkit-border-radius: %5px / %6px; "
+                    "border-radius: %5px / %6px;'></div>\n")
+                    .arg(ellipse->getX())
+                    .arg(ellipse->getY())
+                    .arg(ellipse->getWidth())
+                    .arg(ellipse->getHeight())
+                    .arg(ellipse->getWidth() / 2)
+                    .arg(ellipse->getHeight() / 2);
+            }
         }
 
         const QString   ConverterToHTML::getLastError() const {
