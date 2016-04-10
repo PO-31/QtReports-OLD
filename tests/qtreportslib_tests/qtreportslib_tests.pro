@@ -13,13 +13,15 @@ SOURCES += main.cpp \
     test_parser.cpp \
     test_convertertoqwidget.cpp \
     test_convertertopdf.cpp \
-    test_convertertohtml.cpp
+    test_convertertohtml.cpp \
+    test_field.cpp
 
 HEADERS  += test_engine.hpp \
     test_parser.hpp \
     test_convertertoqwidget.hpp \
     test_convertertopdf.hpp \
-    test_convertertohtml.hpp
+    test_convertertohtml.hpp \
+    test_field.hpp
 
 QMAKE_CXXFLAGS += -std=c++11
 
