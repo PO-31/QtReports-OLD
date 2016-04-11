@@ -146,6 +146,7 @@
     <ClCompile Include="converters\convertertohtml.cpp" />
     <ClCompile Include="converters\convertertopdf.cpp" />
     <ClCompile Include="converters\convertertoqwidget.cpp" />
+    <ClCompile Include="converters\utils\replacer.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_engine.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -155,30 +156,41 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="objectsplant.cpp" />
-    <ClCompile Include="painter.cpp" />
-    <ClCompile Include="processeddb.cpp" />
+    <ClCompile Include="parsers\parserfromxml.cpp" />
     <ClCompile Include="tags\band.cpp" />
     <ClCompile Include="tags\detail.cpp" />
+    <ClCompile Include="tags\ellipse.cpp" />
     <ClCompile Include="tags\field.cpp" />
+    <ClCompile Include="tags\group.cpp" />
+    <ClCompile Include="tags\image.cpp" />
+    <ClCompile Include="tags\line.cpp" />
     <ClCompile Include="tags\object.cpp" />
     <ClCompile Include="tags\querystring.cpp" />
+    <ClCompile Include="tags\rect.cpp" />
     <ClCompile Include="tags\report.cpp" />
     <ClCompile Include="tags\section.cpp" />
     <ClCompile Include="tags\statictext.cpp" />
     <ClCompile Include="tags\style.cpp" />
     <ClCompile Include="tags\textfield.cpp" />
+    <ClCompile Include="tags\textwidget.cpp" />
     <ClCompile Include="tags\title.cpp" />
-    <ClCompile Include="parser.cpp" />
     <ClCompile Include="tags\widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="converters\convertertohtml.hpp" />
     <ClInclude Include="converters\convertertopdf.hpp" />
     <ClInclude Include="converters\convertertoqwidget.hpp" />
+    <ClInclude Include="converters\utils\replacer.hpp" />
+    <ClInclude Include="parsers\parserfromxml.hpp" />
+    <ClInclude Include="tags\ellipse.hpp" />
+    <ClInclude Include="tags\group.hpp" />
+    <ClInclude Include="tags\image.hpp" />
+    <ClInclude Include="tags\line.hpp" />
     <ClInclude Include="tags\querystring.hpp" />
+    <ClInclude Include="tags\rect.hpp" />
     <ClInclude Include="tags\section.hpp" />
     <ClInclude Include="tags\textfield.hpp" />
+    <ClInclude Include="tags\textwidget.hpp" />
     <CustomBuild Include="engine.hpp">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing engine.hpp...</Message>
@@ -197,9 +209,6 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_PRINTSUPPORT_LIB -DQT_GUI_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtWidgets" "-I$(QTDIR)\include\QtSql" "-I$(QTDIR)\include\QtPrintSupport" "-I$(QTDIR)\include\QtGui" "-I.\tags"</Command>
     </CustomBuild>
-    <ClInclude Include="objectsplant.hpp" />
-    <ClInclude Include="painter.hpp" />
-    <ClInclude Include="processeddb.hpp" />
     <CustomBuild Include="tags\band.hpp">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </Message>
@@ -408,7 +417,6 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </Command>
     </CustomBuild>
-    <ClInclude Include="parser.hpp" />
     <CustomBuild Include="tags\widget.hpp">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
       </Message>

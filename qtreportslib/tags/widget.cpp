@@ -37,8 +37,13 @@ namespace qtreports {
         void	Widget::setRect( const QRect & rect ) {
             m_rect = rect;
         }
-
+        /*
         void	Widget::setStyle( const StylePtr & style ) {
+            m_style = style;
+        }
+        */
+        void	Widget::setStyle( const QString & style )
+        {
             m_style = style;
         }
 
@@ -77,8 +82,13 @@ namespace qtreports {
         const QRect     Widget::getRect() const {
             return m_rect;
         }
-
+        /*
         const StylePtr  Widget::getStyle() const {
+            return m_style;
+        }
+        */
+        const QString   Widget::getStyle() const
+        {
             return m_style;
         }
 

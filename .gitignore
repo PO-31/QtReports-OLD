@@ -235,3 +235,10 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 /qtreportslib/processeddb.i-c218c4e8
+<<<<<<< HEAD
+=======
+QtReports.VC.db
+/qtreportsviewer/test.pdf
+/tests/qtreportslib_tests/test.html
+/tests/qtreportslib_tests/test.pdf
+>>>>>>> develop

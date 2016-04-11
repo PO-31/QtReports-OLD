@@ -1,181 +1,255 @@
 #include "report.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
         Report::Report() :
-            m_isVertical( true ),
-            m_size( 600, 400 ),
-            m_leftMargin( 30 ),
-            m_topMargin( 30 ),
-            m_rightMargin( 30 ),
-            m_bottomMargin( 30 ),
-            m_rowCount( 0 ) {
-            Q_UNUSED( m_isVertical );
-            Q_UNUSED( m_size );
-        }
+            m_orientation( QPrinter::Orientation::Portrait ),
+            m_size( 595, 842 ),
+            m_margins( 30, 30, 30, 30 )
+        {}
 
         Report::~Report() {}
-        /*
-        bool    Report::setParameter( const QString & name, const QVariant & value ) {
-            QString page_width( "page_width" ), page_height( "page_height" ),
-                isVertical( "is_vertical" );
 
-            if( !value.isValid() ) {
-                m_lastError = "Invalid parameter value";
-                return false;
-            }
-
-            if( page_width.compare( name, Qt::CaseInsensitive ) == 0 ) {
-                if( value.type() != QVariant::Int ) {
-                    m_lastError = "Invalid type for this argument";
-                    return false;
-                }
-
-                m_size.setWidth( value.toInt() );
-                return true;
-            }
-
-            if( page_height.compare( name, Qt::CaseInsensitive ) == 0 ) {
-                if( value.type() != QVariant::Int ) {
-                    m_lastError = "Invalid type for this argument";
-                    return false;
-                }
-
-                m_size.setWidth( value.toInt() );
-
-                return true;
-            }
-
-            if( isVertical.compare( name, Qt::CaseInsensitive ) == 0 ) {
-                if( value.type() != QVariant::Bool ) {
-                    m_lastError = "Invalid type for this argument";
-                    return false;
-                }
-
-                m_isVertical = value.toBool();
-                return true;
-            }
-
-            return true;// Object::setParameter( name, value );
-        }
-        */
-
-        void    Report::setDefaultStyle( const StylePtr & style ) {
+        void    Report::setDefaultStyle( const StylePtr & style )
+        {
             m_defaultStyle = style;
         }
 
-        const StylePtr  Report::getDefaultStyle() const {
+        const StylePtr  Report::getDefaultStyle() const
+        {
             return m_defaultStyle;
         }
 
-        void    Report::setStyle( const QString & name, const StylePtr & style ) {
+        void    Report::addStyle( const QString & name, const StylePtr & style )
+        {
             m_styles[ name ] = style;
         }
 
-        const StylePtr  Report::getStyle( const QString & name ) const {
-            if( !m_styles.contains( name ) ) {
-                return StylePtr();
-            }
-
-            return m_styles[ name ];
+        const StylePtr  Report::getStyle( const QString & name ) const
+        {
+            return m_styles.value( name );
         }
 
-        const QMap< QString, StylePtr >     Report::getStyles() const {
+        const QMap< QString, StylePtr >     Report::getStyles() const
+        {
             return m_styles;
         }
 
-        void    Report::setQuery( const QString & query ) {
+        void    Report::addGroup( const QString & name, const GroupPtr & group )
+        {
+            m_groups[ name ] = group;
+        }
+
+        const GroupPtr  Report::getGroup( const QString & name ) const
+        {
+            return m_groups.value( name );
+        }
+
+        const QMap< QString, GroupPtr >     Report::getGroups() const
+        {
+            return m_groups;
+        }
+
+        void    Report::setQuery( const QString & query )
+        {
             m_query = query;
         }
 
-        const QString   Report::getQuery() const {
+        const QString   Report::getQuery() const
+        {
             return m_query;
         }
 
-        void    Report::setField( const QString & name, const FieldPtr & field ) {
+        void    Report::setField( const QString & name, const FieldPtr & field )
+        {
             m_fields[ name ] = field;
         }
 
-        const FieldPtr  Report::getField( const QString & name ) const {
-            if( !m_fields.contains( name ) ) {
-                return  FieldPtr();
-            }
-
-            return m_fields[ name ];
+        const FieldPtr  Report::getField( const QString & name ) const
+        {
+            return m_fields.value( name );
         }
 
-        const QMap< QString, FieldPtr >   Report::getFields() const {
+        const QMap< QString, FieldPtr >   Report::getFields() const
+        {
             return m_fields;
         }
 
-        void    Report::setTitle( const TitlePtr & title ) {
+        void    Report::setFieldData( const QString & name, const QVector< QVariant > & data )
+        {
+            auto field = getField( name );
+            if( !field.isNull() )
+            {
+                field->setData( data );
+            }
+        }
+
+        void    Report::setTitle( const TitlePtr & title )
+        {
             m_title = title;
         }
 
-        const TitlePtr     Report::getTitle() const {
+        const TitlePtr     Report::getTitle() const
+        {
             return m_title;
         }
 
-        void    Report::setDetail( const DetailPtr & detail ) {
+        void    Report::setDetail( const DetailPtr & detail )
+        {
             m_detail = detail;
         }
 
-        const DetailPtr     Report::getDetail() const {
+        const DetailPtr     Report::getDetail() const
+        {
             return m_detail;
         }
 
-        void Report::setFieldData(const QString field_name, const QVector<QVariant> data)
+        void    Report::setParameter( const QString & name, const QVariant & value )
         {
-            m_fields[ field_name ]->setData(data);
+            m_parameters[ name ] = value;
         }
 
-        int     Report::getRowCount() {
-            return m_rowCount;
-        }
-
-        void Report::setRowCount( int count )
+        void    Report::setParameters( const QMap< QString, QVariant > & parameters )
         {
-            m_rowCount = count;
+            m_parameters = parameters;
         }
 
-        int     Report::getLeftMargin() {
-            return m_leftMargin;
+        const QVariant  Report::getParameter( const QString & name ) const
+        {
+            return m_parameters.value( name );
         }
 
-        int     Report::getTopMargin() {
-            return m_topMargin;
+        const QMap< QString, QVariant >   Report::getParameters() const
+        {
+            return m_parameters;
         }
 
-        int     Report::getRightMargin() {
-            return m_rightMargin;
+        int     Report::getRowCount() const
+        {
+            int max = 0;
+            for( auto && field : getFields() )
+            {
+                max = std::max( max, field->getRowCount() );
+            }
+
+            return max;
+            //return m_rowCount;
         }
 
-        int     Report::getBottomMargin() {
-            return m_bottomMargin;
+        void    Report::setOrientation( QPrinter::Orientation orientation )
+        {
+            m_orientation = orientation;
         }
 
-        void    Report::setLeftMargin( int left ) {
-            m_leftMargin = left;
+        QPrinter::Orientation     Report::getOrientation() const
+        {
+            return m_orientation;
         }
 
-        void    Report::setTopMargin( int top ) {
-            m_topMargin = top;
+        void    Report::setSize( const QSize & size )
+        {
+            //m_size = QPrinter::Orientation::Portrait ? size : size.transposed();
+            m_size = size;
         }
 
-        void    Report::setRightMargin( int right ) {
-            m_rightMargin = right;
+        const QSize     Report::getSize() const
+        {
+            return m_orientation == QPrinter::Orientation::Portrait ? m_size : m_size.transposed();
         }
 
-        void    Report::setBottomMargin( int bottom ) {
-            m_bottomMargin = bottom;
+        void Report::setWidth( int width )
+        {
+            //if( m_orientation == QPrinter::Orientation::Portrait )
+            //{
+                m_size.setWidth( width );
+            //}
+            //else
+            //{
+            //    m_size.setHeight( width );
+            //}
         }
 
-        void    Report::setMargins( int left, int top, int right, int bottom ) {
+        int     Report::getWidth() const
+        {
+            return getSize().width();
+        }
+
+        void Report::setHeight( int height )
+        {
+            //if( m_orientation == QPrinter::Orientation::Portrait )
+            //{
+                m_size.setHeight( height );
+            //}
+            //else
+            //{
+            //    m_size.setWidth( height );
+            //}
+        }
+
+        int     Report::getHeight() const
+        {
+            return getSize().height();
+        }
+
+        void    Report::setLeftMargin( int left )
+        {
+            m_margins.setLeft( left );
+        }
+
+        int     Report::getLeftMargin() const
+        {
+            return m_margins.left();
+        }
+
+        void    Report::setTopMargin( int top )
+        {
+            m_margins.setTop( top );
+        }
+
+        int     Report::getTopMargin() const
+        {
+            return m_margins.top();
+        }
+
+        void    Report::setRightMargin( int right )
+        {
+            m_margins.setRight( right );
+        }
+
+        int     Report::getRightMargin() const
+        {
+            return m_margins.right();
+        }
+
+        void    Report::setBottomMargin( int bottom )
+        {
+            m_margins.setBottom( bottom );
+        }
+
+        int     Report::getBottomMargin() const
+        {
+            return m_margins.bottom();
+        }
+
+        void    Report::setMargins( int left, int top, int right, int bottom )
+        {
             setLeftMargin( left );
             setTopMargin( top );
             setRightMargin( right );
             setBottomMargin( bottom );
+        }
+
+        void    Report::setMargins( const QMargins & margins )
+        {
+            m_margins = margins;
+        }
+
+        const QMargins  Report::getMargins() const
+        {
+            return m_margins;
         }
 
     }

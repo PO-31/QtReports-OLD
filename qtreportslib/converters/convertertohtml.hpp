@@ -25,7 +25,7 @@ namespace qtreports {
             QString     m_html;
 
             bool        createHTML();
-
+            void        drawShapes(QSharedPointer< Band > band, QString &elementStr, int index);
         };
 
     }

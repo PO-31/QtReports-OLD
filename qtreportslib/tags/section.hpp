@@ -6,16 +6,26 @@
 #include "object.hpp"
 #include "band.hpp"
 
-namespace qtreports {
-    namespace detail {
+namespace qtreports
+{
+    namespace detail
+    {
 
+        /*! @~russian
+        @brief Базовый класс для тэгов <detail>, <title> и подобных.
+
+        Базовый класс для тэгов <detail>, <title> и подобных.
+        */
         class Section : public Object {
 
         public:
             Section();
             ~Section();
 
-            int                         getHeight();
+            void                        setWidth( int width );
+            int                         getWidth() const;
+
+            int                         getHeight() const;
 
             void                        addBand( const BandPtr & band );
             const BandPtr               getBand( int index ) const;
@@ -24,6 +34,8 @@ namespace qtreports {
 
         protected:
             QVector< BandPtr >  m_bands;
+            int                 m_width;
+            int                 m_height;
 
         };
         typedef QSharedPointer< Section > SectionPtr;

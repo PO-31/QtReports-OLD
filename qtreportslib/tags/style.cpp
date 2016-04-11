@@ -7,6 +7,8 @@ namespace qtreports {
             m_isDefault( false ),
             m_isBold( false ),
             m_isItalic( false ),
+            m_isUnderline( false ),
+            m_isStrikeThrough( false ),
             m_fontSize( 12 ),
             m_isPDFEmbedded( false ) {}
 
@@ -18,6 +20,16 @@ namespace qtreports {
 
         void    Style::setAsDefault( bool flag ) {
             m_isDefault = flag;
+        }
+
+        const QString   Style::getFontName() const
+        {
+            return m_fontName;
+        }
+
+        void    Style::setFontName( const QString &name )
+        {
+            m_fontName = name;
         }
 
         int     Style::getFontSize() const {
@@ -36,12 +48,44 @@ namespace qtreports {
             m_fontColor = color;
         }
 
-        const QString   Style::getFontName() const {
-            return m_fontName;
+        bool    Style::isBold() const
+        {
+            return m_isBold;
         }
 
-        void    Style::setFontName( const QString &name ) {
-            m_fontName = name;
+        void    Style::setBold( bool flag )
+        {
+            m_isBold = flag;
+        }
+
+        bool    Style::isItalic() const
+        {
+            return m_isItalic;
+        }
+
+        void    Style::setItalic( bool flag )
+        {
+            m_isItalic = flag;
+        }
+
+        bool    Style::isUnderline() const
+        {
+            return m_isUnderline;
+        }
+
+        void    Style::setUnderline( bool flag )
+        {
+            m_isUnderline = flag;
+        }
+
+        bool    Style::isStrikeThrough() const
+        {
+            return m_isStrikeThrough;
+        }
+
+        void    Style::setStrikeThrough( bool flag )
+        {
+            m_isStrikeThrough = flag;
         }
 
         const QString   Style::getPDFFontName() const {
@@ -66,22 +110,6 @@ namespace qtreports {
 
         void    Style::setPDFEmbedded( bool isEmbedded ) {
             m_isPDFEmbedded = isEmbedded;
-        }
-
-        bool    Style::isBold() const {
-            return m_isBold;
-        }
-
-        void    Style::setBold( bool flag ) {
-            m_isBold = flag;
-        }
-
-        bool    Style::isItalic() const {
-            return m_isItalic;
-        }
-
-        void    Style::setItalic( bool flag ) {
-            m_isItalic = flag;
         }
 
     }

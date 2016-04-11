@@ -1,3 +1,4 @@
+#pragma once
 #ifndef TEST_PARSER_HPP
 #define TEST_PARSER_HPP
 #include <QObject>
@@ -12,6 +13,13 @@ private:
     void ReportTreeParseTest();
     void ReportTagParseTest();
     void TextTest();
+    void ReportFieldParseTest();
+    void ReportLineParseTest();
+    void ReportStyleParseTest();
+
+    void OptionalFieldsTest();
+    void FullTest();
+
 
 private slots:
     void    parse();

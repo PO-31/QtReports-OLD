@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<queryString>
+		<![CDATA[SELECT
+
+     gosspeciality."idgosspec" AS "Гос. код спец-ти",
+     unispeciality."idunispec" AS "код в ХГТУ",
+     gosspeciality."namegosspec" AS "Гос. наим. спец",      
+     unispeciality."nameunispec" AS "наим. спец. в ХГТУ",
+     unispeciality."krnaimen" AS "Краткое наименование спец.",
+     link2."namespec" AS "Гос. специализация",
+     qualification."namequal" AS "Квалификация"
+     FROM
+     "public"."gosspeciality" gosspeciality INNER JOIN "public"."link1" link1 ON gosspeciality."idgosspec" = link1."idgosspec"
+     INNER JOIN "public"."unispeciality" unispeciality ON link1."idunispec" = unispeciality."idunispec"
+     INNER JOIN "public"."qualification" qualification ON link1."idqual" = qualification."idqual"
+     LEFT OUTER JOIN "public"."link2" link2 ON unispeciality."idunispec" = link2."idunispec" ]]>
+	</queryString>
+	<field name="Гос. код спец-ти" class="java.lang.Integer"/>
+	<field name="код в ХГТУ" class="java.lang.Integer"/>
+	<field name="Гос. наим. спец" class="java.lang.String"/>
+	<field name="наим. спец. в ХГТУ" class="java.lang.String"/>
+	<field name="Краткое наименование спец." class="java.lang.String"/>
+	<field name="Гос. специализация" class="java.lang.String"/>
+	<field name="Квалификация" class="java.lang.String"/>
+
+	<title>
+		<band height="61">
+			<staticText>
+				<reportElement x="188" y="14" width="259" height="30"/>
+				<text><![CDATA[Специальности ХГТУ]]></text>
+			</staticText>
+				<reportElement x="-1" y="60" width="543" height="1"/>
+		</band>
+	</title>
+
+
+		<band height="53">
+			<textField>
+				<reportElement x="0" y="3" width="72" height="42"/>
+				<textFieldExpression><![CDATA["Гос. код спец-ти (код в ХГТУ)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="88" y="3" width="117" height="31"/>
+				<textFieldExpression><![CDATA["Гос. наим. спец (наим. спец. в ХГТУ)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="3" width="90" height="42"/>
+				<textFieldExpression><![CDATA["Краткое наименование спец. в ХГТУ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="3" width="121" height="31"/>
+				<textFieldExpression><![CDATA["Гос. специализация"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="3" width="100" height="20"/>
+				<textFieldExpression><![CDATA["Квалификация"]]></textFieldExpression>
+			</textField>
+		</band>
+
+	<detail>
+		<band height="57">
+			<textField>
+				<reportElement x="11" y="11" width="105" height="38"/>
+				<textFieldExpression><![CDATA[$F{Гос. код спец-ти} + "\n" + "(" + $F{код в ХГТУ} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="143" height="49"/>
+				<textFieldExpression><![CDATA[$F{Гос. наим. спец} +"("+ $F{наим. спец. в ХГТУ} + ")"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="11" width="100" height="38"/>
+				<textFieldExpression><![CDATA[$F{Краткое наименование спец.}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="308" y="0" width="121" height="54"/>
+				<textFieldExpression><![CDATA[$F{Гос. специализация}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="442" y="11" width="100" height="20"/>
+				<textFieldExpression><![CDATA[$F{Квалификация}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="54" width="542" height="2"/>
+			</line>
+			<line>
+				<reportElement x="72" y="0" width="1" height="54"/>
+			</line>
+			<line>
+				<reportElement x="1" y="-1" width="1" height="55"/>
+			</line>
+			<line>
+				<reportElement x="205" y="0" width="1" height="56"/>
+			</line>
+			<line>
+				<reportElement x="296" y="0" width="1" height="56"/>
+			</line>
+			<line>
+				<reportElement x="542" y="0" width="1" height="54"/>
+			</line>
+			<line>
+				<reportElement x="430" y="0" width="1" height="54"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

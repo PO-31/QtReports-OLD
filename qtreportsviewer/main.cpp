@@ -10,6 +10,10 @@
 #include <QSqlError>
 #include <engine.hpp>
 
+#ifdef WIN32
+#include <Windows.h>
+#endif
+
 void    showError( const QString & text )
 {
     QMessageBox::warning( 0, "Error: ", text );
@@ -23,14 +27,21 @@ int main( int argc, char *argv[] ) {
     QMenu file( "File", &bar );
     QMenu convert( "Convert", &bar );
 
-    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/detail.qreport";
+//For Debug in Windows
+#ifdef WIN32
+    AllocConsole();
+    freopen( "CONOUT$", "w", stdout );
+    freopen( "CONOUT$", "w", stderr );
+#endif
+
+    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/images.qrxml";
     qtreports::Engine engine( path );
     if( !engine.isOpened() ) {
         showError( engine.getLastError() );
         return -1;
     }
 
-    QMap < QString, QString > map;
+    QMap < QString, QVariant > map;
     map[ "title" ] = "Best Title in World";
     bool result = engine.setParameters( map );//{ { "title", "Best Title in World" } }
     if( !result ) {
@@ -39,7 +50,7 @@ int main( int argc, char *argv[] ) {
     }
 
     auto db = QSqlDatabase::addDatabase( "QSQLITE" );
-    db.setDatabaseName( "../tests/qtreportslib_tests/testDB" );
+    db.setDatabaseName( "../tests/qtreportslib_tests/images.db" );
     if( !db.open() ) {
         showError( "Can not open database. Database error: " + db.lastError().text() );
         return -1;
@@ -53,7 +64,7 @@ int main( int argc, char *argv[] ) {
 
     auto layout = engine.createLayout();
     if( layout.isNull() ) {
-        showError( "Layout is empty" );
+        showError( "Layout is empty. Error: " + engine.getLastError() );
         return -1;
     }
 
@@ -158,7 +169,7 @@ int main( int argc, char *argv[] ) {
         auto file = QFileDialog::getOpenFileName( &window,
             QObject::tr( "Open QReport" ),
             QString(),
-            QObject::tr( "QReport Files (*.qreport);;All Files (*.*)" ) );
+            QObject::tr( "QReport Files (*.qreport);;QReport Files (*.qrxml);;All Files (*.*)" ) );
         if( file.isEmpty() ) {
             return;
         }
