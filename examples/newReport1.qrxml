@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+
+	<queryString>
+		<![CDATA[SELECT
+     link1."semes" AS link1_semes,
+     link1."kolst" AS link1_kolst,
+     link1."podgr" AS link1_podgr,
+     link1."kolgr" AS link1_kolgr,
+     potok."n_pot" AS potok_n_pot,
+     potok."god" AS potok_god,
+     uchplan."n_pl" AS uchplan_n_pl,
+     special."n_spec" AS special_n_spec,
+     facultet."n_fac" AS facultet_n_fac
+FROM
+     "public"."potok" potok INNER JOIN "public"."link1" link1 ON potok."id_pot" = link1."id_pot"
+     INNER JOIN "public"."uchplan" uchplan ON potok."id_pl" = uchplan."id_pl"
+     INNER JOIN "public"."special" special ON uchplan."id_spec" = special."id_spec"
+     INNER JOIN "public"."facultet" facultet ON special."id_fac" = facultet."id_fac"
+GROUP BY
+     facultet_n_fac,
+	uchplan."n_pl",
+     special."n_spec",
+     
+     potok."n_pot",
+     link1."semes",
+     link1."kolst",
+     link1."podgr",
+     link1."kolgr",
+     potok."god"]]>
+	</queryString>
+	<field name="link1_semes" class="java.lang.Integer"/>
+	<field name="link1_kolst" class="java.lang.Integer"/>
+	<field name="link1_podgr" class="java.lang.Integer"/>
+	<field name="link1_kolgr" class="java.lang.Integer"/>
+	<field name="potok_n_pot" class="java.lang.String"/>
+	<field name="potok_god" class="java.lang.Integer"/>
+	<field name="uchplan_n_pl" class="java.lang.String"/>
+	<field name="special_n_spec" class="java.lang.String"/>
+	<field name="facultet_n_fac" class="java.lang.String"/>
+	<variable name="variable1" class="java.math.BigDecimal" resetType="Group" resetGroup="facultet_n_fac" calculation="Sum">
+		<variableExpression><![CDATA[$F{link1_kolgr}.intValue()]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.math.BigDecimal" resetType="Column" incrementType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{link1_kolst}]]></variableExpression>
+	</variable>
+	<variable name="variable3" class="java.math.BigDecimal" resetType="Column" incrementType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{link1_podgr}]]></variableExpression>
+	</variable>
+	<variable name="variable4" class="java.math.BigDecimal" resetType="Group" resetGroup="facultet_n_fac" calculation="Sum">
+		<variableExpression><![CDATA[$F{link1_kolgr}]]></variableExpression>
+	</variable>
+	<variable name="variable5" class="java.math.BigDecimal" resetType="Group" resetGroup="facultet_n_fac" calculation="Sum">
+		<variableExpression><![CDATA[$F{link1_kolst}]]></variableExpression>
+	</variable>
+	<variable name="variable6" class="java.math.BigDecimal" resetType="Group" resetGroup="facultet_n_fac" calculation="Sum">
+		<variableExpression><![CDATA[$F{link1_podgr}]]></variableExpression>
+	</variable>
+	<group name="facultet_n_fac">
+		<groupExpression><![CDATA[$F{potok_n_pot}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+					<reportElement x="0" y="7" width="555" height="24"/>
+					<textField>
+						<reportElement x="2" y="0" width="479" height="24"/>
+						<textFieldExpression><![CDATA[$F{special_n_spec}]]></textFieldExpression>
+					</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="31">
+				<textField>
+					<reportElement x="69" y="0" width="69" height="20"/>
+					<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="207" y="0" width="69" height="20"/>
+					<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="276" y="0" width="69" height="20"/>
+					<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="69" height="31"/>
+					<text><![CDATA[Total plan:]]></text>
+				</staticText>
+			</band>
+			<band height="50">
+				<textField>
+					<reportElement x="69" y="0" width="69" height="20"/>
+					<textFieldExpression><![CDATA[$V{variable4}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="207" y="0" width="69" height="20"/>
+					<textFieldExpression><![CDATA[$V{variable5}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="276" y="0" width="69" height="20"/>
+					<textFieldExpression><![CDATA[$V{variable6}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="0" width="100" height="26"/>
+					<text><![CDATA[Total faculty:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+
+	<title>
+		<band height="132">
+			<image>
+				<reportElement x="456" y="0" width="99" height="132"/>
+				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
+			</image>
+			<band>
+				<reportElement x="0" y="0" width="451" height="95"/>
+				<staticText>
+					<reportElement x="0" y="0" width="370" height="66"/>
+					<text><![CDATA[Cherry Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="157" y="66" width="249" height="29"/>
+					<text><![CDATA[Cherry SubTitle]]></text>
+				</staticText>
+			</band>
+			<band>
+				<reportElement x="0" y="100" width="451" height="32"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="307" y="12" width="144" height="20"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</band>
+		</band>
+	</title>
+
+		<band height="60">
+			<staticText>
+				<reportElement x="0" y="7" width="69" height="18"/>
+				<text><![CDATA[Potok]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="7" width="69" height="36"/>
+				<text><![CDATA[Kol-vo grupp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="7" width="69" height="36"/>
+				<text><![CDATA[Year of entrance]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="7" width="69" height="36"/>
+				<text><![CDATA[Kol-vo students]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="7" width="69" height="36"/>
+				<text><![CDATA[Number grupp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="7" width="100" height="20"/>
+				<text><![CDATA[Semestr]]></text>
+			</staticText>
+		</band>
+
+	<detail>
+		<band height="20">
+				<reportElement x="0" y="0" width="555" height="18"/>
+				<textField>
+					<reportElement x="0" y="0" width="69" height="18"/>
+					<textFieldExpression><![CDATA[$F{potok_n_pot}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="69" y="0" width="69" height="18"/>
+					<textFieldExpression><![CDATA[$F{link1_kolgr}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="138" y="0" width="69" height="18"/>
+					<textFieldExpression><![CDATA[$F{potok_god}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="207" y="0" width="69" height="18"/>>
+					<textFieldExpression><![CDATA[$F{link1_kolst}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="276" y="0" width="69" height="18"/>
+					<textFieldExpression><![CDATA[$F{link1_podgr}]]></textFieldExpression>
+				</textField>
+			<textField>
+				<reportElement x="345" y="0" width="100" height="20"/>
+				<textFieldExpression><![CDATA[$F{link1_semes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+
+		<band height="34">
+				<reportElement x="0" y="1" width="555" height="24"/>
+				<textField>
+					<reportElement x="513" y="0" width="40" height="20"/>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="433" y="0" width="80" height="20"/>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="2" y="1" width="197" height="20"/>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+		</band>
+
+</jasperReport>
