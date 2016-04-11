@@ -8,7 +8,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #обязательно указать CMAKE_PREFIX_PATH "C:/Qt/5/5.5/mingw492_32" к qt5
-set (CMAKE_PREFIX_PATH "C:/Qt/5/5.5/mingw492_32")
 if(!CMAKE_PREFIX_PATH)
 message(WARNING "CHECK CMAKE_PREFIX_PATH")
 endif()
@@ -38,8 +37,8 @@ else()
 endif()
 
 
-SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin) 
+SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/qtreportsviewer)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/qtreportsviewer) 
 
 
   include_directories (
