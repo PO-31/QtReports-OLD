@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['addellipse',['addEllipse',['../classqtreports_1_1detail_1_1_band.html#a02b980791263ae274739862f90470d3f',1,'qtreports::detail::Band']]],
-  ['addgroup',['addGroup',['../classqtreports_1_1detail_1_1_report.html#a9c91cfef8636b62a8a3e62504d3a76d8',1,'qtreports::detail::Report']]],
-  ['addimage',['addImage',['../classqtreports_1_1detail_1_1_band.html#a17d80de3c7c045ef1b0b19f179f95f06',1,'qtreports::detail::Band']]],
-  ['addline',['addLine',['../classqtreports_1_1detail_1_1_band.html#ad5fc6e52223d858ff83c968766dccd61',1,'qtreports::detail::Band']]],
-  ['addrect',['addRect',['../classqtreports_1_1detail_1_1_band.html#aa3ff3c44bcfb20890ee08022b5c3e895',1,'qtreports::detail::Band']]],
-  ['addscript',['addScript',['../classqtreports_1_1_engine.html#a336b9687b971d58798b1a7833ca5a74a',1,'qtreports::Engine']]],
-  ['addstatictext',['addStaticText',['../classqtreports_1_1detail_1_1_band.html#ad495e3bbc1d9291746533f6c8d7b1229',1,'qtreports::detail::Band']]],
-  ['addstyle',['addStyle',['../classqtreports_1_1detail_1_1_report.html#a1d84e45ea0cd0a132162247a061a7dd1',1,'qtreports::detail::Report']]],
-  ['addtextfield',['addTextField',['../classqtreports_1_1detail_1_1_band.html#af4609fb4af26484079ab6e7f9eed8c87',1,'qtreports::detail::Band']]]
+  ['addcolumn',['addColumn',['../classqtreports_1_1detail_1_1_processed_d_b.html#adde605948b357a49afff2e5d47e64383',1,'qtreports::detail::ProcessedDB']]],
+  ['addfielddata',['addFieldData',['../classqtreports_1_1detail_1_1_processed_d_b.html#a71c710be24a7aabfa7f36c9565274bd0',1,'qtreports::detail::ProcessedDB::addFieldData(const QString &amp;columnName, const QVariant &amp;data)'],['../classqtreports_1_1detail_1_1_processed_d_b.html#ab0b66ff6cd918784ecb963d254bad7e8',1,'qtreports::detail::ProcessedDB::addFieldData(const QString &amp;columnName, const QVector&lt; QVariant &gt; &amp;data)'],['../classqtreports_1_1detail_1_1_processed_d_b.html#a0fb14688c44b7b16c67c79cd7fe850f5',1,'qtreports::detail::ProcessedDB::addFieldData(int column, const QVariant &amp;data)']]],
+  ['addparam',['addParam',['../classqtreports_1_1detail_1_1_processed_d_b.html#ad35bba9804025d0b794b6c136ee5b8ae',1,'qtreports::detail::ProcessedDB']]],
+  ['addscript',['addScript',['../classqtreports_1_1_engine.html#a5d83f63c437fe5ac570a9c85f3aedaa3',1,'qtreports::Engine']]]
 ];
