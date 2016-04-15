@@ -9,7 +9,7 @@
 #include <QSharedPointer>
 #include <QMargins>
 #include <QPrinter>
-
+#include <QRegularExpression>
 #include "object.hpp"
 #include "field.hpp"
 #include "style.hpp"
@@ -272,6 +272,14 @@ namespace qtreports {
             */
             const QMargins  getMargins() const;
 
+            bool            isDetailHasGroupHeader(int detailNum, const QString &groupField);
+            bool            isDetailHasGroupFooter(int detailNum, const QString &groupField);
+            void            reorderByGroups();
+            const QString   getFieldFromGroupExpression(const QString & expression);
+            const QVector<bool> getGroupVec() { return m_group_vec; }
+            int             getGroupIndexFromField(const QString & field);
+            GroupPtr        getGroupByIndex(int index);
+
         private:
             QPrinter::Orientation	    m_orientation;
             QSize	                    m_size;
@@ -284,6 +292,9 @@ namespace qtreports {
             TitlePtr                    m_title;
             DetailPtr                   m_detail;
             QMap< QString, QVariant >   m_parameters;
+            QVector<bool>               m_group_vec;
+
+            void swapRows(int row1, int row2, QVector<bool> & vec);
 
         };
         typedef QSharedPointer< Report > ReportPtr;
