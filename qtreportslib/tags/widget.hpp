@@ -67,7 +67,7 @@ namespace qtreports
 
              /*! @~russian
             Устанавливается высота
-            @param[in] height высота объекта
+            @param[in] Rect высота объекта
             */
             void			setRect( const QRect & rect );
             
@@ -85,37 +85,36 @@ namespace qtreports
             
             /*! @~russian
             Устанавливается позиция объекта
-            @param[in]Pos позиция объекта
+            Возвращается позиция объекта
             */
             const QPoint    getPos() const;
             
             /*! @~russian
             Устанавливается координата х
-            @param[in] x координата х
+            Возвращает координату X 
             */
             int             getX() const;
             
             /*! @~russian
             Устанавливается координата у
-            @param[in] y координата у
+            Возвращает координату Y 
             */
             int             getY() const;
             
             /*! @~russian
             Устанавливается размер объекта
-            @param[in] размер объекта
+            возвращает размер объекта
             */
             const QSize     getSize() const;
             
             /*! @~russian
-            Устанавливается ширина объкта
-            @param[in] Width ширина объекта
+            Возвращает текущую ширину объекта
             */
             int             getWidth() const;
             
             /*! @~russian
             Устанавливается высота объекта
-            @param[in] Height высота объекта
+            Возвращает высоту объекта
             */
             int             getHeight() const;
 
@@ -125,13 +124,12 @@ namespace qtreports
             //const StylePtr  getStyle() const;
             /*! @~russian
             Получаем индекс стиля
-            @param[in] Style индекс стиля
+            Возвращает индекс стиля
             */
             const QString   getStyle() const;
             
             /*! @~russian
             Возвращаем индекс стиля
-            @param[in] Bold индекс
             */
             bool            isBold() const;
             
