@@ -367,14 +367,9 @@ namespace qtreports
             return -1;
         }
 
-        GroupPtr Report::getGroupByIndex(int index)
+        GroupPtr  Report::getGroupByIndex( int index )
         {
-            int ind = 0;
-            for(auto && group : m_groups) {
-                if(ind == index)
-                    return group;
-                ind++;
-            }
+            return m_groups.value( m_groups.keys().value( index ) );
         }
 
         void Report::swapRows(int row1, int row2, QVector<bool> &vec)
