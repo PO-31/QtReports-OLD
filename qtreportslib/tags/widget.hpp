@@ -67,7 +67,7 @@ namespace qtreports
 
              /*! @~russian
             Устанавливается высота
-            @param[in] Rect высота объекта
+            @param[in] rect высота объекта
             */
             void			setRect( const QRect & rect );
             
