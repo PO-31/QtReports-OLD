@@ -86,7 +86,7 @@ namespace qtreports {
             /*! @~russian
             Считывает xml элемент в data
             @param[in] reader QXmlStreamReader
-            @parem[out] data считанные данные
+            @param[out] data считанные данные
             */
             bool    getValue( QXmlStreamReader & reader, QString & data );
             /*! @~russian
@@ -94,7 +94,7 @@ namespace qtreports {
             @param[in] reader QXmlStreamReader
             @param[in] name имя аттрибута
             @param[in] option указывает обязателен ли атрибут
-            @parem[out] data считанные данные
+            @param[out] data считанные данные
             */
             bool    getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option );
             /*! @~russian

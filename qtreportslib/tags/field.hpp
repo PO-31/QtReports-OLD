@@ -59,6 +59,15 @@ namespace qtreports
                 return m_data.value( row ).value< T1 >();
             }
 
+            const QVariant getDataVar(int row)
+            {
+                return m_data[row];
+            }
+
+            void setDataVar(int row, const QVariant & value) {
+                m_data[row] = value;
+            }
+
             /*! @~russian
             Получить количество строк в <field>
             */

@@ -37,43 +37,43 @@ namespace qtreports
             
             /*! @~russian
             устанавливается координата х
-            @param[in] координата х
+            @param[in] x Новое значение координаты х
             */
             void			setX( int x );
             
             /*! @~russian
             устанавливается координата у
-            @param[in] координата у
+            @param[in] y Новое значение координаты у
             */
             void			setY( int y );
             
             /*! @~russian
             Устанавливается размер объекта
-            @param[in] размер объекта
+            @param[in] size размер объекта
             */
             void			setSize( const QSize & size );
             
              /*! @~russian
             Устанавливается ширина
-            @param[in] ширина объекта
+            @param[in] width  ширина объекта
             */
             void			setWidth( int width );
             
              /*! @~russian
             Устанавливается высота
-            @param[in] высота объекта
+            @param[in] height высота объекта
             */
             void			setHeight( int height );
 
              /*! @~russian
             Устанавливается высота
-            @param[in] высота объекта
+            @param[in] rect высота объекта
             */
             void			setRect( const QRect & rect );
             
             /*! @~russian
             Устанавливается индекс стиля объекта
-            @param[in] стиль объекта
+            @param[in] style Новый стиль объекта
             */
             /* Устанавливает индекс стиля объекта значением styleId, отрицательные значения - стиль по умолчанию. */
             //void            setStyle( const StylePtr & style );
@@ -85,37 +85,36 @@ namespace qtreports
             
             /*! @~russian
             Устанавливается позиция объекта
-            @param[in] позиция объекта
+            Возвращается позиция объекта
             */
             const QPoint    getPos() const;
             
             /*! @~russian
             Устанавливается координата х
-            @param[in] координата х
+            Возвращает координату X 
             */
             int             getX() const;
             
             /*! @~russian
             Устанавливается координата у
-            @param[in] координата у
+            Возвращает координату Y 
             */
             int             getY() const;
             
             /*! @~russian
             Устанавливается размер объекта
-            @param[in] размер объекта
+            возвращает размер объекта
             */
             const QSize     getSize() const;
             
             /*! @~russian
-            Устанавливается ширина объкта
-            @param[in] ширина объекта
+            Возвращает текущую ширину объекта
             */
             int             getWidth() const;
             
             /*! @~russian
             Устанавливается высота объекта
-            @param[in] высота объекта
+            Возвращает высоту объекта
             */
             int             getHeight() const;
 
@@ -125,19 +124,18 @@ namespace qtreports
             //const StylePtr  getStyle() const;
             /*! @~russian
             Получаем индекс стиля
-            @param[in] индекс стиля
+            Возвращает индекс стиля
             */
             const QString   getStyle() const;
             
             /*! @~russian
             Возвращаем индекс стиля
-            @param[in] индекс
             */
             bool            isBold() const;
             
             /*! @~russian
             Возвращаем индекс стиля
-            @param[in] isBold - bool
+            @param[in] isBold - bool 
             */
             void            setBold( bool isBold );
 

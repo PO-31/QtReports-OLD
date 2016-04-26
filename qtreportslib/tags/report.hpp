@@ -9,7 +9,7 @@
 #include <QSharedPointer>
 #include <QMargins>
 #include <QPrinter>
-
+#include <QRegularExpression>
 #include "object.hpp"
 #include "field.hpp"
 #include "style.hpp"
@@ -51,7 +51,6 @@ namespace qtreports {
             
             /*! @~russian
             Возвращает указатель на <style> по имени
-            @param[in] name Имя <style>
             */
             const StylePtr                      getStyle( const QString & name ) const;
             
@@ -69,7 +68,6 @@ namespace qtreports {
 
             /*! @~russian
             Возвращает указатель на <group> по имени
-            @param[in] name Имя <group>
             */
             const GroupPtr                      getGroup( const QString & name ) const;
 
@@ -98,7 +96,6 @@ namespace qtreports {
             
             /*! @~russian
             Возвращает <field>
-            @param[in] name Имя <field>
             */
             const FieldPtr                      getField( const QString & name ) const;   
             
@@ -137,15 +134,15 @@ namespace qtreports {
             const DetailPtr                     getDetail() const;
 
             /*! @~russian
-            Устанавливаются ссылки на обьекты
-            @param[in] имя
-            @param[in] значение
+            устанавливает значение парамметра 
+            @param[in] name  новое имя
+            @param[in] value новое значение
             */
             void                                setParameter( const QString & name, const QVariant & value );
             
             /*! @~russian
-            Устанавливает QMap ссылок на обьекты
-            @param[in] Ссылки на параметры
+            Устанавливает карту параметров
+            @param[in] parameters Ссылки на параметры
             */            
             void                                setParameters( const QMap< QString, QVariant > & parameters );
             
@@ -166,7 +163,7 @@ namespace qtreports {
 
             /*! @~russian
             Устанавливает ориентации отчета книжная/альбомная
-            @param[in] ориентация
+            @param[in] orientation ориентация
             */
             void                    setOrientation( QPrinter::Orientation orientation );
             
@@ -177,7 +174,7 @@ namespace qtreports {
 
             /*! @~russian
             Устанавливает размер отчета
-            @param[in] размер
+            @param[in] size размер
             */
             void            setSize( const QSize & size );
             
@@ -188,7 +185,7 @@ namespace qtreports {
 
             /*! @~russian
             Устанавливает ширину отчета
-            @param[in] значение ширины
+            @param[in] width значение ширины
             */
             void            setWidth( int width );
             
@@ -199,7 +196,7 @@ namespace qtreports {
 
             /*! @~russian
             Устанавливает высоту отчета
-            @param[in] значение высоты
+            @param[in] height значение высоты
             */
             void            setHeight( int height );
             
@@ -210,7 +207,7 @@ namespace qtreports {
             
             /*! @~russian
             Устанавливает левый отступ
-            @param[in] значение 
+            @param[in] left значение 
             */
             void    setLeftMargin( int left );
             
@@ -221,7 +218,7 @@ namespace qtreports {
             
             /*! @~russian
             Устанавливает верхний отступ
-            @param[in] значение
+            @param[in] top значение
             */
             void    setTopMargin( int top );
             
@@ -232,7 +229,7 @@ namespace qtreports {
             
             /*! @~russian
             Устанавливает правый отступ
-            @param[in] значение
+            @param[in] right значение
             */
             void    setRightMargin( int right );
             
@@ -243,7 +240,7 @@ namespace qtreports {
             
             /*! @~russian
             Устанавливает нижний отступ
-            @param[in] значение
+            @param[in] bottom значение
             */
             void    setBottomMargin( int bottom );
             
@@ -254,16 +251,16 @@ namespace qtreports {
 
             /*! @~russian
             Устанавливает отступы от краев
-            @param[in] слева
-            @param[in] сверху
-            @param[in] справа
-            @param[in] снизу
+            @param[in] left слева
+            @param[in] top сверху
+            @param[in] right справа
+            @param[in] bottom снизу
             */
             void            setMargins( int left, int top, int right, int bottom );
             
             /*! @~russian
             Устанавливает карту отступов
-            @param[in] отступы
+            @param[in] margins отступы
             */
             void            setMargins( const QMargins & margins );
             
@@ -271,6 +268,14 @@ namespace qtreports {
             Возвращает карту отступов
             */
             const QMargins  getMargins() const;
+
+            bool            isDetailHasGroupHeader(int detailNum, const QString &groupField);
+            bool            isDetailHasGroupFooter(int detailNum, const QString &groupField);
+            void            reorderByGroups();
+            const QString   getFieldFromGroupExpression(const QString & expression);
+            const QVector<bool> getGroupVec() { return m_group_vec; }
+            int             getGroupIndexFromField(const QString & field);
+            GroupPtr        getGroupByIndex(int index);
 
         private:
             QPrinter::Orientation	    m_orientation;
@@ -284,6 +289,9 @@ namespace qtreports {
             TitlePtr                    m_title;
             DetailPtr                   m_detail;
             QMap< QString, QVariant >   m_parameters;
+            QVector<bool>               m_group_vec;
+
+            void swapRows(int row1, int row2, QVector<bool> & vec);
 
         };
         typedef QSharedPointer< Report > ReportPtr;
