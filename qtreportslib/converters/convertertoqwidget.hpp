@@ -23,8 +23,8 @@ namespace qtreports {
             /*! @~russian
             Тип создаваемого виджета.
             */
-            enum WidgetType {
-                Report = 0, ///< Отчет
+            enum class WidgetType {
+                Report, ///< Отчет
                 Layout ///< Макет
             };
 

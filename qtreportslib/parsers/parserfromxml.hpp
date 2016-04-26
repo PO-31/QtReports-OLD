@@ -78,7 +78,7 @@ namespace qtreports {
             /*! @~russian
             Опции при получении аттрибута с помощью вызова getAttribute().
             */
-            enum AttributeOption {
+            enum class AttributeOption {
                 Required, ///< При отсутствии аттрибута будет выдана ошибка.
                 Optional ///< При отсутствии аттрибута будет использовано значение по умолчанию.
             };
