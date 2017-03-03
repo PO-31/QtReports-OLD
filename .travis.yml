@@ -63,7 +63,7 @@ script:
   - if [ "$BUILD_TYPE" = "coverage" ]; then cd ..; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --version; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --capture --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info; fi
-  - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --remove coverage.info --output-file coverage.info "*moc_*.cpp"; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --remove coverage.info --output-file coverage.info; fi
 
 after_success:
   - if [ "$BUILD_TYPE" = "coverage" ]; then ruby --version; fi
