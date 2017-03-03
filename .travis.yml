@@ -1,7 +1,8 @@
 language: cpp
 
-os:
-  - linux
+dist: trusty
+sudo: required
+os: linux
   
 compiler: 
   - gcc
@@ -9,22 +10,16 @@ compiler:
   
 env:
   - BUILD_TYPE=release
-# - BUILD_TYPE=debug
-  
-#env:
-#  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-#   - secure: "P9gHn+wkHWzjRqcwlcCoSGmz8pw1aG3CwuPP0rsMpqsa+jh0lr3SDfdA01Xll68Rb7xY7yVTtXaFOXrEk6ceb3fvGs4JxYXNXRgkG8uF808Lm19bbADAQBb5kXECiClaLKk20es/Y4mlI6G/8Qmr4OmOc0Z2gL/sVqLnh6QLTtI="
 
-  
 matrix:
   include:
    - os: linux
      compiler: gcc
      env: BUILD_TYPE=coverage
+   - os: linux
+     compiler: gcc
+     env: BUILD_TYPE=doxygen
 
-#sudo: false
   
 cache:
   apt: true
@@ -33,40 +28,17 @@ cache:
     - $HOME/.cache/http
     - /home/travis/.cache/pip
     - /home/travis/.cache/pip/http
-    - /var/cache/apt/archives/
 
 branches:
   only:
     - master
     - develop
-    - /^.*travis.*$/
-    
-notifications:
-  email: false
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/cc85956a4a2f1ab871d1
-    on_success: change  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: never     # options: [always|never|change] default: always
-
-#addons:
-#  apt:
-#    sources:
-#    - ubuntu-toolchain-r-test
-#    - ubuntu-sdk-team
-#    packages:
-#    - gcc-4.8
-#    - g++-4.8
-#    - clang
-#    - qt5-default
 
 before_install:
   - sudo sh .travis/${TRAVIS_OS_NAME}/before_install.sh
   - sudo sh .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
  
 install:
-#  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8" GCOV="gcov-4.8"; fi
   - source .travis/${TRAVIS_OS_NAME}/install.sh
   - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
@@ -80,48 +52,43 @@ script:
   - cd ../qtreportsviewer
   - qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
   - make -j$(nproc)
-  - cd ../tests/qtreportslib_tests
+  - cd ../qtreportslib_tests
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
   - make -j$(nproc)
   - ./qtreportslib_tests
-  - >
-    if [ "$BUILD_TYPE" = "coverage" ]; then
-      cd "$TRAVIS_BUILD_DIR"
-      git clone https://github.com/linux-test-project/lcov
-      cd lcov
-      sudo make install
-      cd ..
-      lcov --version
-      lcov --capture --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info
-      lcov --remove coverage.info --output-file coverage.info "*moc_*.cpp"
-    fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then cd "$TRAVIS_BUILD_DIR"; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then git clone https://github.com/linux-test-project/lcov; fi 
+  - if [ "$BUILD_TYPE" = "coverage" ]; then cd lcov; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then sudo make install; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then cd ..; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --version; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --capture --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --remove coverage.info --output-file coverage.info "*moc_*.cpp"; fi
 
 after_success:
-  - > 
-    if [ "$BUILD_TYPE" = "coverage" ]; then
-      ruby --version
-      lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
+  - if [ "$BUILD_TYPE" = "coverage" ]; then ruby --version; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info; fi
       # Auto documentation generation
-      cd "$TRAVIS_BUILD_DIR"
-      cd ..
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
       # Install last doxygen version # Alternative: sudo apt-get install --yes doxygen
-      wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'
-      tar -xvzf doxygen-1.8.11.linux.bin.tar.gz
-      cd doxygen-1.8.11
-      ./configure
-      sudo make install
-      cd ..
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo tar -xvzf doxygen-1.8.11.linux.bin.tar.gz; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd doxygen-1.8.11; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then ./configure; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo make install; fi
+
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
       # Clone repository and update doc
-      git clone https://github.com/PO-21/PO-21.github.io
-      cd PO-21.github.io
-      rm -d -f -r html
-      doxygen Doxyfile
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git clone https://github.com/PO-31/PO-31.github.io; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd PO-31.github.io; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then rm -d -f -r html; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then doxygen Doxyfile; fi
       # Push changes to remote repository
-      git config --global user.name "travic"
-      git config --global user.email "travic@travic.org"
-      git add -A
-      git commit -a -m "Update doc from Travic CI"
-      git config --global push.default simple
-      git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io > /dev/null
-      cd "$TRAVIS_BUILD_DIR"
-    fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global user.name "travic"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global user.email "travic@travic.org"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git add -A; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git commit -a -m "Update doc from Travic CI"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global push.default simple; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/PO-31.github.io > /dev/null; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
