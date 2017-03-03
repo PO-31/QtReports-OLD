@@ -3,6 +3,8 @@ language: cpp
 dist: trusty
 sudo: required
 os: linux
+rvm:
+  - 1.9
   
 compiler: 
   - gcc
