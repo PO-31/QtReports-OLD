@@ -1,0 +1,638 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /usr/include/qt5/QtCore/qobject.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtCore</a> - qobject.h<span style="font-size: 80%;"> (source / <a href="qobject.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-03-03 16:04:58</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+<span class="lineNum">       4 </span>            : ** Copyright (C) 2013 Olivier Goffart &lt;ogoffart@woboq.com&gt;
+<span class="lineNum">       5 </span>            : ** Contact: http://www.qt-project.org/legal
+<span class="lineNum">       6 </span>            : **
+<span class="lineNum">       7 </span>            : ** This file is part of the QtCore module of the Qt Toolkit.
+<span class="lineNum">       8 </span>            : **
+<span class="lineNum">       9 </span>            : ** $QT_BEGIN_LICENSE:LGPL$
+<span class="lineNum">      10 </span>            : ** Commercial License Usage
+<span class="lineNum">      11 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      12 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      13 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      14 </span>            : ** a written agreement between you and Digia.  For licensing terms and
+<span class="lineNum">      15 </span>            : ** conditions see http://qt.digia.com/licensing.  For further information
+<span class="lineNum">      16 </span>            : ** use the contact form at http://qt.digia.com/contact-us.
+<span class="lineNum">      17 </span>            : **
+<span class="lineNum">      18 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      19 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      20 </span>            : ** General Public License version 2.1 as published by the Free Software
+<span class="lineNum">      21 </span>            : ** Foundation and appearing in the file LICENSE.LGPL included in the
+<span class="lineNum">      22 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      23 </span>            : ** ensure the GNU Lesser General Public License version 2.1 requirements
+<span class="lineNum">      24 </span>            : ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      25 </span>            : **
+<span class="lineNum">      26 </span>            : ** In addition, as a special exception, Digia gives you certain additional
+<span class="lineNum">      27 </span>            : ** rights.  These rights are described in the Digia Qt LGPL Exception
+<span class="lineNum">      28 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      29 </span>            : **
+<span class="lineNum">      30 </span>            : ** GNU General Public License Usage
+<span class="lineNum">      31 </span>            : ** Alternatively, this file may be used under the terms of the GNU
+<span class="lineNum">      32 </span>            : ** General Public License version 3.0 as published by the Free Software
+<span class="lineNum">      33 </span>            : ** Foundation and appearing in the file LICENSE.GPL included in the
+<span class="lineNum">      34 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      35 </span>            : ** ensure the GNU General Public License version 3.0 requirements will be
+<span class="lineNum">      36 </span>            : ** met: http://www.gnu.org/copyleft/gpl.html.
+<span class="lineNum">      37 </span>            : **
+<span class="lineNum">      38 </span>            : **
+<span class="lineNum">      39 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      40 </span>            : **
+<span class="lineNum">      41 </span>            : ****************************************************************************/
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            : #ifndef QOBJECT_H
+<span class="lineNum">      44 </span>            : #define QOBJECT_H
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">      47 </span>            : 
+<span class="lineNum">      48 </span>            : #include &lt;QtCore/qobjectdefs.h&gt;
+<span class="lineNum">      49 </span>            : #include &lt;QtCore/qstring.h&gt;
+<span class="lineNum">      50 </span>            : #include &lt;QtCore/qbytearray.h&gt;
+<span class="lineNum">      51 </span>            : #include &lt;QtCore/qlist.h&gt;
+<span class="lineNum">      52 </span>            : #ifdef QT_INCLUDE_COMPAT
+<span class="lineNum">      53 </span>            : #include &lt;QtCore/qcoreevent.h&gt;
+<span class="lineNum">      54 </span>            : #endif
+<span class="lineNum">      55 </span>            : #include &lt;QtCore/qscopedpointer.h&gt;
+<span class="lineNum">      56 </span>            : #include &lt;QtCore/qmetatype.h&gt;
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span>            : #include &lt;QtCore/qobject_impl.h&gt;
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            : class QEvent;
+<span class="lineNum">      64 </span>            : class QTimerEvent;
+<span class="lineNum">      65 </span>            : class QChildEvent;
+<span class="lineNum">      66 </span>            : struct QMetaObject;
+<span class="lineNum">      67 </span>            : class QVariant;
+<span class="lineNum">      68 </span>            : class QObjectPrivate;
+<span class="lineNum">      69 </span>            : class QObject;
+<span class="lineNum">      70 </span>            : class QThread;
+<span class="lineNum">      71 </span>            : class QWidget;
+<span class="lineNum">      72 </span>            : #ifndef QT_NO_REGEXP
+<span class="lineNum">      73 </span>            : class QRegExp;
+<span class="lineNum">      74 </span>            : #endif
+<span class="lineNum">      75 </span>            : #ifndef QT_NO_REGULAREXPRESSION
+<span class="lineNum">      76 </span>            : class QRegularExpression;
+<span class="lineNum">      77 </span>            : #endif
+<span class="lineNum">      78 </span>            : #ifndef QT_NO_USERDATA
+<span class="lineNum">      79 </span>            : class QObjectUserData;
+<span class="lineNum">      80 </span>            : #endif
+<span class="lineNum">      81 </span>            : struct QDynamicMetaObjectData;
+<span class="lineNum">      82 </span>            : 
+<span class="lineNum">      83 </span>            : typedef QList&lt;QObject*&gt; QObjectList;
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span>            : Q_CORE_EXPORT void qt_qFindChildren_helper(const QObject *parent, const QString &amp;name,
+<span class="lineNum">      86 </span>            :                                            const QMetaObject &amp;mo, QList&lt;void *&gt; *list, Qt::FindChildOptions options);
+<span class="lineNum">      87 </span>            : Q_CORE_EXPORT void qt_qFindChildren_helper(const QObject *parent, const QRegExp &amp;re,
+<span class="lineNum">      88 </span>            :                                            const QMetaObject &amp;mo, QList&lt;void *&gt; *list, Qt::FindChildOptions options);
+<span class="lineNum">      89 </span>            : Q_CORE_EXPORT void qt_qFindChildren_helper(const QObject *parent, const QRegularExpression &amp;re,
+<span class="lineNum">      90 </span>            :                                            const QMetaObject &amp;mo, QList&lt;void *&gt; *list, Qt::FindChildOptions options);
+<span class="lineNum">      91 </span>            : Q_CORE_EXPORT QObject *qt_qFindChild_helper(const QObject *parent, const QString &amp;name, const QMetaObject &amp;mo, Qt::FindChildOptions options);
+<span class="lineNum">      92 </span>            : 
+<span class="lineNum">      93 </span>            : class Q_CORE_EXPORT QObjectData {
+<span class="lineNum">      94 </span>            : public:
+<span class="lineNum">      95 </span>            :     virtual ~QObjectData() = 0;
+<span class="lineNum">      96 </span>            :     QObject *q_ptr;
+<span class="lineNum">      97 </span>            :     QObject *parent;
+<span class="lineNum">      98 </span>            :     QObjectList children;
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span>            :     uint isWidget : 1;
+<span class="lineNum">     101 </span>            :     uint blockSig : 1;
+<span class="lineNum">     102 </span>            :     uint wasDeleted : 1;
+<span class="lineNum">     103 </span>            :     uint isDeletingChildren : 1;
+<span class="lineNum">     104 </span>            :     uint sendChildEvents : 1;
+<span class="lineNum">     105 </span>            :     uint receiveChildEvents : 1;
+<span class="lineNum">     106 </span>            :     uint isWindow : 1; //for QWindow
+<span class="lineNum">     107 </span>            :     uint unused : 25;
+<span class="lineNum">     108 </span>            :     int postedEvents;
+<span class="lineNum">     109 </span>            :     QDynamicMetaObjectData *metaObject;
+<span class="lineNum">     110 </span>            :     QMetaObject *dynamicMetaObject() const;
+<span class="lineNum">     111 </span>            : };
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            : class Q_CORE_EXPORT QObject
+<span class="lineNum">     115 </span>            : {
+<span class="lineNum">     116 </span>            :     Q_OBJECT
+<span class="lineNum">     117 </span>            :     Q_PROPERTY(QString objectName READ objectName WRITE setObjectName NOTIFY objectNameChanged)
+<span class="lineNum">     118 </span>            :     Q_DECLARE_PRIVATE(QObject)
+<span class="lineNum">     119 </span>            : 
+<span class="lineNum">     120 </span>            : public:
+<span class="lineNum">     121 </span>            :     Q_INVOKABLE explicit QObject(QObject *parent=0);
+<span class="lineNum">     122 </span>            :     virtual ~QObject();
+<span class="lineNum">     123 </span>            : 
+<span class="lineNum">     124 </span>            :     virtual bool event(QEvent *);
+<span class="lineNum">     125 </span>            :     virtual bool eventFilter(QObject *, QEvent *);
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span>            : #ifdef Q_QDOC
+<span class="lineNum">     128 </span>            :     static QString tr(const char *sourceText, const char *comment = 0, int n = -1);
+<span class="lineNum">     129 </span>            :     static QString trUtf8(const char *sourceText, const char *comment = 0, int n = -1);
+<span class="lineNum">     130 </span>            :     virtual const QMetaObject *metaObject() const;
+<span class="lineNum">     131 </span>            :     static const QMetaObject staticMetaObject;
+<span class="lineNum">     132 </span>            : #endif
+<span class="lineNum">     133 </span>            : #ifdef QT_NO_TRANSLATION
+<span class="lineNum">     134 </span>            :     static QString tr(const char *sourceText, const char * = 0, int = -1)
+<span class="lineNum">     135 </span>            :         { return QString::fromUtf8(sourceText); }
+<span class="lineNum">     136 </span>            : #if QT_DEPRECATED_SINCE(5, 0)
+<span class="lineNum">     137 </span>            :     QT_DEPRECATED static QString trUtf8(const char *sourceText, const char * = 0, int = -1)
+<span class="lineNum">     138 </span>            :         { return QString::fromUtf8(sourceText); }
+<span class="lineNum">     139 </span>            : #endif
+<span class="lineNum">     140 </span>            : #endif //QT_NO_TRANSLATION
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span>            :     QString objectName() const;
+<span class="lineNum">     143 </span>            :     void setObjectName(const QString &amp;name);
+<span class="lineNum">     144 </span>            : 
+<span class="lineNum">     145 </span>            :     inline bool isWidgetType() const { return d_ptr-&gt;isWidget; }
+<span class="lineNum">     146 </span>            :     inline bool isWindowType() const { return d_ptr-&gt;isWindow; }
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span>            :     inline bool signalsBlocked() const { return d_ptr-&gt;blockSig; }
+<span class="lineNum">     149 </span>            :     bool blockSignals(bool b);
+<span class="lineNum">     150 </span>            : 
+<span class="lineNum">     151 </span>            :     QThread *thread() const;
+<span class="lineNum">     152 </span>            :     void moveToThread(QThread *thread);
+<span class="lineNum">     153 </span>            : 
+<span class="lineNum">     154 </span>            :     int startTimer(int interval, Qt::TimerType timerType = Qt::CoarseTimer);
+<span class="lineNum">     155 </span>            :     void killTimer(int id);
+<span class="lineNum">     156 </span>            : 
+<span class="lineNum">     157 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     158 </span>            :     inline T findChild(const QString &amp;aName = QString(), Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+<span class="lineNum">     159 </span>            :     { return static_cast&lt;T&gt;(qt_qFindChild_helper(this, aName, reinterpret_cast&lt;T&gt;(0)-&gt;staticMetaObject, options)); }
+<span class="lineNum">     160 </span>            : 
+<span class="lineNum">     161 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     162 </span>            :     inline QList&lt;T&gt; findChildren(const QString &amp;aName = QString(), Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+<span class="lineNum">     163 </span>            :     {
+<span class="lineNum">     164 </span>            :         QList&lt;T&gt; list;
+<span class="lineNum">     165 </span>            :         qt_qFindChildren_helper(this, aName, reinterpret_cast&lt;T&gt;(0)-&gt;staticMetaObject,
+<span class="lineNum">     166 </span>            :                                 reinterpret_cast&lt;QList&lt;void *&gt; *&gt;(&amp;list), options);
+<span class="lineNum">     167 </span>            :         return list;
+<span class="lineNum">     168 </span>            :     }
+<span class="lineNum">     169 </span>            : 
+<span class="lineNum">     170 </span>            : #ifndef QT_NO_REGEXP
+<span class="lineNum">     171 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     172 </span>            :     inline QList&lt;T&gt; findChildren(const QRegExp &amp;re, Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+<span class="lineNum">     173 </span>            :     {
+<span class="lineNum">     174 </span>            :         QList&lt;T&gt; list;
+<span class="lineNum">     175 </span>            :         qt_qFindChildren_helper(this, re, reinterpret_cast&lt;T&gt;(0)-&gt;staticMetaObject,
+<span class="lineNum">     176 </span>            :                                 reinterpret_cast&lt;QList&lt;void *&gt; *&gt;(&amp;list), options);
+<span class="lineNum">     177 </span>            :         return list;
+<span class="lineNum">     178 </span>            :     }
+<span class="lineNum">     179 </span>            : #endif
+<span class="lineNum">     180 </span>            : 
+<span class="lineNum">     181 </span>            : #ifndef QT_NO_REGULAREXPRESSION
+<span class="lineNum">     182 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     183 </span>            :     inline QList&lt;T&gt; findChildren(const QRegularExpression &amp;re, Qt::FindChildOptions options = Qt::FindChildrenRecursively) const
+<span class="lineNum">     184 </span>            :     {
+<span class="lineNum">     185 </span>            :         QList&lt;T&gt; list;
+<span class="lineNum">     186 </span>            :         qt_qFindChildren_helper(this, re, reinterpret_cast&lt;T&gt;(0)-&gt;staticMetaObject,
+<span class="lineNum">     187 </span>            :                                 reinterpret_cast&lt;QList&lt;void *&gt; *&gt;(&amp;list), options);
+<span class="lineNum">     188 </span>            :         return list;
+<span class="lineNum">     189 </span>            :     }
+<span class="lineNum">     190 </span>            : #endif
+<span class="lineNum">     191 </span>            : 
+<span class="lineNum">     192 </span>            :     inline const QObjectList &amp;children() const { return d_ptr-&gt;children; }
+<span class="lineNum">     193 </span>            : 
+<span class="lineNum">     194 </span>            :     void setParent(QObject *);
+<span class="lineNum">     195 </span>            :     void installEventFilter(QObject *);
+<span class="lineNum">     196 </span>            :     void removeEventFilter(QObject *);
+<span class="lineNum">     197 </span>            : 
+<span class="lineNum">     198 </span>            :     static QMetaObject::Connection connect(const QObject *sender, const char *signal,
+<span class="lineNum">     199 </span>            :                         const QObject *receiver, const char *member, Qt::ConnectionType = Qt::AutoConnection);
+<span class="lineNum">     200 </span>            : 
+<span class="lineNum">     201 </span>            :     static QMetaObject::Connection connect(const QObject *sender, const QMetaMethod &amp;signal,
+<span class="lineNum">     202 </span>            :                         const QObject *receiver, const QMetaMethod &amp;method,
+<span class="lineNum">     203 </span>            :                         Qt::ConnectionType type = Qt::AutoConnection);
+<span class="lineNum">     204 </span>            : 
+<span class="lineNum">     205 </span>            :     inline QMetaObject::Connection connect(const QObject *sender, const char *signal,
+<span class="lineNum">     206 </span>            :                         const char *member, Qt::ConnectionType type = Qt::AutoConnection) const;
+<span class="lineNum">     207 </span>            : 
+<span class="lineNum">     208 </span>            : #ifdef Q_QDOC
+<span class="lineNum">     209 </span>            :     static QMetaObject::Connection connect(const QObject *sender, PointerToMemberFunction signal, const QObject *receiver, PointerToMemberFunction method, Qt::ConnectionType type);
+<span class="lineNum">     210 </span>            :     static QMetaObject::Connection connect(const QObject *sender, PointerToMemberFunction signal, Functor functor);
+<span class="lineNum">     211 </span>            :     static QMetaObject::Connection connect(const QObject *sender, PointerToMemberFunction signal, const QObject *context, Functor functor, Qt::ConnectionType type);
+<span class="lineNum">     212 </span>            : #else
+<a name="213"><span class="lineNum">     213 </span>            :     //Connect a signal to a pointer to qobject member function</a>
+<span class="lineNum">     214 </span>            :     template &lt;typename Func1, typename Func2&gt;
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :     static inline QMetaObject::Connection connect(const typename QtPrivate::FunctionPointer&lt;Func1&gt;::Object *sender, Func1 signal,</span>
+<span class="lineNum">     216 </span>            :                                      const typename QtPrivate::FunctionPointer&lt;Func2&gt;::Object *receiver, Func2 slot,
+<span class="lineNum">     217 </span>            :                                      Qt::ConnectionType type = Qt::AutoConnection)
+<span class="lineNum">     218 </span>            :     {
+<span class="lineNum">     219 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func1&gt; SignalType;
+<span class="lineNum">     220 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func2&gt; SlotType;
+<span class="lineNum">     221 </span>            : 
+<span class="lineNum">     222 </span>            :         Q_STATIC_ASSERT_X(QtPrivate::HasQ_OBJECT_Macro&lt;typename SignalType::Object&gt;::Value,
+<span class="lineNum">     223 </span>            :                           &quot;No Q_OBJECT in the class with the signal&quot;);
+<span class="lineNum">     224 </span>            : 
+<span class="lineNum">     225 </span>            :         //compilation error if the arguments does not match.
+<span class="lineNum">     226 </span>            :         Q_STATIC_ASSERT_X(int(SignalType::ArgumentCount) &gt;= int(SlotType::ArgumentCount),
+<span class="lineNum">     227 </span>            :                           &quot;The slot requires more arguments than the signal provides.&quot;);
+<span class="lineNum">     228 </span>            :         Q_STATIC_ASSERT_X((QtPrivate::CheckCompatibleArguments&lt;typename SignalType::Arguments, typename SlotType::Arguments&gt;::value),
+<span class="lineNum">     229 </span>            :                           &quot;Signal and slot arguments are not compatible.&quot;);
+<span class="lineNum">     230 </span>            :         Q_STATIC_ASSERT_X((QtPrivate::AreArgumentsCompatible&lt;typename SlotType::ReturnType, typename SignalType::ReturnType&gt;::value),
+<span class="lineNum">     231 </span>            :                           &quot;Return type of the slot is not compatible with the return type of the signal.&quot;);
+<span class="lineNum">     232 </span>            : 
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 :         const int *types = 0;</span>
+<span class="lineNum">     234 </span><span class="lineNoCov">          0 :         if (type == Qt::QueuedConnection || type == Qt::BlockingQueuedConnection)</span>
+<span class="lineNum">     235 </span><span class="lineNoCov">          0 :             types = QtPrivate::ConnectionTypes&lt;typename SignalType::Arguments&gt;::types();</span>
+<span class="lineNum">     236 </span>            : 
+<span class="lineNum">     237 </span>            :         return connectImpl(sender, reinterpret_cast&lt;void **&gt;(&amp;signal),
+<span class="lineNum">     238 </span>            :                            receiver, reinterpret_cast&lt;void **&gt;(&amp;slot),
+<span class="lineNum">     239 </span>            :                            new QtPrivate::QSlotObject&lt;Func2, typename QtPrivate::List_Left&lt;typename SignalType::Arguments, SlotType::ArgumentCount&gt;::Value,
+<span class="lineNum">     240 </span>            :                                            typename SignalType::ReturnType&gt;(slot),
+<span class="lineNum">     241 </span><span class="lineNoCov">          0 :                             type, types, &amp;SignalType::Object::staticMetaObject);</span>
+<span class="lineNum">     242 </span>            :     }
+<span class="lineNum">     243 </span>            : 
+<span class="lineNum">     244 </span>            :     //connect to a function pointer  (not a member)
+<span class="lineNum">     245 </span>            :     template &lt;typename Func1, typename Func2&gt;
+<span class="lineNum">     246 </span>            :     static inline typename QtPrivate::QEnableIf&lt;int(QtPrivate::FunctionPointer&lt;Func2&gt;::ArgumentCount) &gt;= 0, QMetaObject::Connection&gt;::Type
+<span class="lineNum">     247 </span>            :             connect(const typename QtPrivate::FunctionPointer&lt;Func1&gt;::Object *sender, Func1 signal, Func2 slot)
+<span class="lineNum">     248 </span>            :     {
+<span class="lineNum">     249 </span>            :         return connect(sender, signal, sender, slot, Qt::DirectConnection);
+<span class="lineNum">     250 </span>            :     }
+<span class="lineNum">     251 </span>            : 
+<span class="lineNum">     252 </span>            :     //connect to a function pointer  (not a member)
+<span class="lineNum">     253 </span>            :     template &lt;typename Func1, typename Func2&gt;
+<span class="lineNum">     254 </span>            :     static inline typename QtPrivate::QEnableIf&lt;int(QtPrivate::FunctionPointer&lt;Func2&gt;::ArgumentCount) &gt;= 0 &amp;&amp;
+<span class="lineNum">     255 </span>            :                                                 !QtPrivate::FunctionPointer&lt;Func2&gt;::IsPointerToMemberFunction, QMetaObject::Connection&gt;::Type
+<span class="lineNum">     256 </span>            :             connect(const typename QtPrivate::FunctionPointer&lt;Func1&gt;::Object *sender, Func1 signal, const QObject *context, Func2 slot,
+<span class="lineNum">     257 </span>            :                     Qt::ConnectionType type = Qt::AutoConnection)
+<span class="lineNum">     258 </span>            :     {
+<span class="lineNum">     259 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func1&gt; SignalType;
+<span class="lineNum">     260 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func2&gt; SlotType;
+<span class="lineNum">     261 </span>            : 
+<span class="lineNum">     262 </span>            :         Q_STATIC_ASSERT_X(QtPrivate::HasQ_OBJECT_Macro&lt;typename SignalType::Object&gt;::Value,
+<span class="lineNum">     263 </span>            :                           &quot;No Q_OBJECT in the class with the signal&quot;);
+<span class="lineNum">     264 </span>            : 
+<span class="lineNum">     265 </span>            :         //compilation error if the arguments does not match.
+<span class="lineNum">     266 </span>            :         Q_STATIC_ASSERT_X(int(SignalType::ArgumentCount) &gt;= int(SlotType::ArgumentCount),
+<span class="lineNum">     267 </span>            :                           &quot;The slot requires more arguments than the signal provides.&quot;);
+<span class="lineNum">     268 </span>            :         Q_STATIC_ASSERT_X((QtPrivate::CheckCompatibleArguments&lt;typename SignalType::Arguments, typename SlotType::Arguments&gt;::value),
+<span class="lineNum">     269 </span>            :                           &quot;Signal and slot arguments are not compatible.&quot;);
+<span class="lineNum">     270 </span>            :         Q_STATIC_ASSERT_X((QtPrivate::AreArgumentsCompatible&lt;typename SlotType::ReturnType, typename SignalType::ReturnType&gt;::value),
+<span class="lineNum">     271 </span>            :                           &quot;Return type of the slot is not compatible with the return type of the signal.&quot;);
+<span class="lineNum">     272 </span>            : 
+<span class="lineNum">     273 </span>            :         const int *types = 0;
+<span class="lineNum">     274 </span>            :         if (type == Qt::QueuedConnection || type == Qt::BlockingQueuedConnection)
+<span class="lineNum">     275 </span>            :             types = QtPrivate::ConnectionTypes&lt;typename SignalType::Arguments&gt;::types();
+<span class="lineNum">     276 </span>            : 
+<span class="lineNum">     277 </span>            :         return connectImpl(sender, reinterpret_cast&lt;void **&gt;(&amp;signal), context, 0,
+<span class="lineNum">     278 </span>            :                            new QtPrivate::QStaticSlotObject&lt;Func2,
+<span class="lineNum">     279 </span>            :                                                  typename QtPrivate::List_Left&lt;typename SignalType::Arguments, SlotType::ArgumentCount&gt;::Value,
+<span class="lineNum">     280 </span>            :                                                  typename SignalType::ReturnType&gt;(slot),
+<span class="lineNum">     281 </span>            :                            type, types, &amp;SignalType::Object::staticMetaObject);
+<span class="lineNum">     282 </span>            :     }
+<span class="lineNum">     283 </span>            : 
+<span class="lineNum">     284 </span>            :     //connect to a functor
+<span class="lineNum">     285 </span>            :     template &lt;typename Func1, typename Func2&gt;
+<span class="lineNum">     286 </span>            :     static inline typename QtPrivate::QEnableIf&lt;QtPrivate::FunctionPointer&lt;Func2&gt;::ArgumentCount == -1, QMetaObject::Connection&gt;::Type
+<span class="lineNum">     287 </span>            :             connect(const typename QtPrivate::FunctionPointer&lt;Func1&gt;::Object *sender, Func1 signal, Func2 slot)
+<span class="lineNum">     288 </span>            :     {
+<span class="lineNum">     289 </span>            :         return connect(sender, signal, sender, slot, Qt::DirectConnection);
+<span class="lineNum">     290 </span>            :     }
+<span class="lineNum">     291 </span>            : 
+<span class="lineNum">     292 </span>            :     //connect to a functor, with a &quot;context&quot; object defining in which event loop is going to be executed
+<span class="lineNum">     293 </span>            :     template &lt;typename Func1, typename Func2&gt;
+<span class="lineNum">     294 </span>            :     static inline typename QtPrivate::QEnableIf&lt;QtPrivate::FunctionPointer&lt;Func2&gt;::ArgumentCount == -1, QMetaObject::Connection&gt;::Type
+<span class="lineNum">     295 </span>            :             connect(const typename QtPrivate::FunctionPointer&lt;Func1&gt;::Object *sender, Func1 signal, const QObject *context, Func2 slot,
+<span class="lineNum">     296 </span>            :                     Qt::ConnectionType type = Qt::AutoConnection)
+<span class="lineNum">     297 </span>            :     {
+<span class="lineNum">     298 </span>            : #if defined (Q_COMPILER_DECLTYPE) &amp;&amp; defined (Q_COMPILER_VARIADIC_TEMPLATES)
+<span class="lineNum">     299 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func1&gt; SignalType;
+<span class="lineNum">     300 </span>            :         const int FunctorArgumentCount = QtPrivate::ComputeFunctorArgumentCount&lt;Func2 , typename SignalType::Arguments&gt;::Value;
+<span class="lineNum">     301 </span>            : 
+<span class="lineNum">     302 </span>            :         Q_STATIC_ASSERT_X((FunctorArgumentCount &gt;= 0),
+<span class="lineNum">     303 </span>            :                           &quot;Signal and slot arguments are not compatible.&quot;);
+<span class="lineNum">     304 </span>            :         const int SlotArgumentCount = (FunctorArgumentCount &gt;= 0) ? FunctorArgumentCount : 0;
+<span class="lineNum">     305 </span>            :         typedef typename QtPrivate::FunctorReturnType&lt;Func2, typename QtPrivate::List_Left&lt;typename SignalType::Arguments, SlotArgumentCount&gt;::Value&gt;::Value SlotReturnType;
+<span class="lineNum">     306 </span>            : #else
+<span class="lineNum">     307 </span>            :       // Without variadic template, we don't detect the best overload of operator(). We just
+<span class="lineNum">     308 </span>            :       // assume there is only one simple operator() and connect to &amp;Func2::operator()
+<span class="lineNum">     309 </span>            : 
+<span class="lineNum">     310 </span>            :       /* If you get an error such as:
+<span class="lineNum">     311 </span>            :              couldn't deduce template parameter 'Func2Operator'
+<span class="lineNum">     312 </span>            :         or
+<span class="lineNum">     313 </span>            :              cannot resolve address of overloaded function
+<span class="lineNum">     314 </span>            :         It means the functor does not have a single operator().
+<span class="lineNum">     315 </span>            :         Functors with overloaded or templated operator() are only supported if the compiler supports
+<span class="lineNum">     316 </span>            :         C++11 variadic templates
+<span class="lineNum">     317 </span>            :       */
+<span class="lineNum">     318 </span>            : #ifndef Q_COMPILER_DECLTYPE  //Workaround the lack of decltype using another function as indirection
+<span class="lineNum">     319 </span>            :         return connect_functor(sender, signal, context, slot, &amp;Func2::operator(), type); }
+<span class="lineNum">     320 </span>            :     template &lt;typename Func1, typename Func2, typename Func2Operator&gt;
+<span class="lineNum">     321 </span>            :     static inline QMetaObject::Connection connect_functor(const QObject *sender, Func1 signal, const QObject *context,
+<span class="lineNum">     322 </span>            :                                                           Func2 slot, Func2Operator, Qt::ConnectionType type) {
+<span class="lineNum">     323 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func2Operator&gt; SlotType ;
+<span class="lineNum">     324 </span>            : #else
+<span class="lineNum">     325 </span>            :         typedef QtPrivate::FunctionPointer&lt;decltype(&amp;Func2::operator())&gt; SlotType ;
+<span class="lineNum">     326 </span>            : #endif
+<span class="lineNum">     327 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func1&gt; SignalType;
+<span class="lineNum">     328 </span>            :         typedef typename SlotType::ReturnType SlotReturnType;
+<span class="lineNum">     329 </span>            :         const int SlotArgumentCount = SlotType::ArgumentCount;
+<span class="lineNum">     330 </span>            : 
+<span class="lineNum">     331 </span>            :         Q_STATIC_ASSERT_X(int(SignalType::ArgumentCount) &gt;= SlotArgumentCount,
+<span class="lineNum">     332 </span>            :                           &quot;The slot requires more arguments than the signal provides.&quot;);
+<span class="lineNum">     333 </span>            :         Q_STATIC_ASSERT_X((QtPrivate::CheckCompatibleArguments&lt;typename SignalType::Arguments, typename SlotType::Arguments&gt;::value),
+<span class="lineNum">     334 </span>            :                           &quot;Signal and slot arguments are not compatible.&quot;);
+<span class="lineNum">     335 </span>            : #endif
+<span class="lineNum">     336 </span>            : 
+<span class="lineNum">     337 </span>            :         Q_STATIC_ASSERT_X((QtPrivate::AreArgumentsCompatible&lt;SlotReturnType, typename SignalType::ReturnType&gt;::value),
+<span class="lineNum">     338 </span>            :                           &quot;Return type of the slot is not compatible with the return type of the signal.&quot;);
+<span class="lineNum">     339 </span>            : 
+<span class="lineNum">     340 </span>            :         Q_STATIC_ASSERT_X(QtPrivate::HasQ_OBJECT_Macro&lt;typename SignalType::Object&gt;::Value,
+<span class="lineNum">     341 </span>            :                           &quot;No Q_OBJECT in the class with the signal&quot;);
+<span class="lineNum">     342 </span>            : 
+<span class="lineNum">     343 </span>            :         const int *types = 0;
+<span class="lineNum">     344 </span>            :         if (type == Qt::QueuedConnection || type == Qt::BlockingQueuedConnection)
+<span class="lineNum">     345 </span>            :             types = QtPrivate::ConnectionTypes&lt;typename SignalType::Arguments&gt;::types();
+<span class="lineNum">     346 </span>            : 
+<span class="lineNum">     347 </span>            :         return connectImpl(sender, reinterpret_cast&lt;void **&gt;(&amp;signal), context, 0,
+<span class="lineNum">     348 </span>            :                            new QtPrivate::QFunctorSlotObject&lt;Func2, SlotArgumentCount,
+<span class="lineNum">     349 </span>            :                                 typename QtPrivate::List_Left&lt;typename SignalType::Arguments, SlotArgumentCount&gt;::Value,
+<span class="lineNum">     350 </span>            :                                 typename SignalType::ReturnType&gt;(slot),
+<span class="lineNum">     351 </span>            :                            type, types, &amp;SignalType::Object::staticMetaObject);
+<span class="lineNum">     352 </span>            :     }
+<span class="lineNum">     353 </span>            : #endif //Q_QDOC
+<span class="lineNum">     354 </span>            : 
+<span class="lineNum">     355 </span>            :     static bool disconnect(const QObject *sender, const char *signal,
+<span class="lineNum">     356 </span>            :                            const QObject *receiver, const char *member);
+<span class="lineNum">     357 </span>            :     static bool disconnect(const QObject *sender, const QMetaMethod &amp;signal,
+<span class="lineNum">     358 </span>            :                            const QObject *receiver, const QMetaMethod &amp;member);
+<span class="lineNum">     359 </span>            :     inline bool disconnect(const char *signal = 0,
+<span class="lineNum">     360 </span>            :                            const QObject *receiver = 0, const char *member = 0) const
+<span class="lineNum">     361 </span>            :         { return disconnect(this, signal, receiver, member); }
+<span class="lineNum">     362 </span>            :     inline bool disconnect(const QObject *receiver, const char *member = 0) const
+<span class="lineNum">     363 </span>            :         { return disconnect(this, 0, receiver, member); }
+<span class="lineNum">     364 </span>            :     static bool disconnect(const QMetaObject::Connection &amp;);
+<span class="lineNum">     365 </span>            : 
+<span class="lineNum">     366 </span>            : #ifdef Q_QDOC
+<span class="lineNum">     367 </span>            :     static bool disconnect(const QObject *sender, PointerToMemberFunction signal, const QObject *receiver, PointerToMemberFunction method);
+<span class="lineNum">     368 </span>            : #else
+<span class="lineNum">     369 </span>            :     template &lt;typename Func1, typename Func2&gt;
+<span class="lineNum">     370 </span>            :     static inline bool disconnect(const typename QtPrivate::FunctionPointer&lt;Func1&gt;::Object *sender, Func1 signal,
+<span class="lineNum">     371 </span>            :                                   const typename QtPrivate::FunctionPointer&lt;Func2&gt;::Object *receiver, Func2 slot)
+<span class="lineNum">     372 </span>            :     {
+<span class="lineNum">     373 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func1&gt; SignalType;
+<span class="lineNum">     374 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func2&gt; SlotType;
+<span class="lineNum">     375 </span>            : 
+<span class="lineNum">     376 </span>            :         Q_STATIC_ASSERT_X(QtPrivate::HasQ_OBJECT_Macro&lt;typename SignalType::Object&gt;::Value,
+<span class="lineNum">     377 </span>            :                           &quot;No Q_OBJECT in the class with the signal&quot;);
+<span class="lineNum">     378 </span>            : 
+<span class="lineNum">     379 </span>            :         //compilation error if the arguments does not match.
+<span class="lineNum">     380 </span>            :         Q_STATIC_ASSERT_X((QtPrivate::CheckCompatibleArguments&lt;typename SignalType::Arguments, typename SlotType::Arguments&gt;::value),
+<span class="lineNum">     381 </span>            :                           &quot;Signal and slot arguments are not compatible.&quot;);
+<span class="lineNum">     382 </span>            : 
+<span class="lineNum">     383 </span>            :         return disconnectImpl(sender, reinterpret_cast&lt;void **&gt;(&amp;signal), receiver, reinterpret_cast&lt;void **&gt;(&amp;slot),
+<span class="lineNum">     384 </span>            :                               &amp;SignalType::Object::staticMetaObject);
+<span class="lineNum">     385 </span>            :     }
+<span class="lineNum">     386 </span>            :     template &lt;typename Func1&gt;
+<span class="lineNum">     387 </span>            :     static inline bool disconnect(const typename QtPrivate::FunctionPointer&lt;Func1&gt;::Object *sender, Func1 signal,
+<span class="lineNum">     388 </span>            :                                   const QObject *receiver, void **zero)
+<span class="lineNum">     389 </span>            :     {
+<span class="lineNum">     390 </span>            :         // This is the overload for when one wish to disconnect a signal from any slot. (slot=0)
+<span class="lineNum">     391 </span>            :         // Since the function template parameter cannot be deduced from '0', we use a
+<span class="lineNum">     392 </span>            :         // dummy void ** parameter that must be equal to 0
+<span class="lineNum">     393 </span>            :         Q_ASSERT(!zero);
+<span class="lineNum">     394 </span>            :         typedef QtPrivate::FunctionPointer&lt;Func1&gt; SignalType;
+<span class="lineNum">     395 </span>            :         return disconnectImpl(sender, reinterpret_cast&lt;void **&gt;(&amp;signal), receiver, zero,
+<span class="lineNum">     396 </span>            :                               &amp;SignalType::Object::staticMetaObject);
+<span class="lineNum">     397 </span>            :     }
+<span class="lineNum">     398 </span>            : #endif //Q_QDOC
+<span class="lineNum">     399 </span>            : 
+<span class="lineNum">     400 </span>            : 
+<span class="lineNum">     401 </span>            :     void dumpObjectTree();
+<span class="lineNum">     402 </span>            :     void dumpObjectInfo();
+<span class="lineNum">     403 </span>            : 
+<span class="lineNum">     404 </span>            : #ifndef QT_NO_PROPERTIES
+<span class="lineNum">     405 </span>            :     bool setProperty(const char *name, const QVariant &amp;value);
+<span class="lineNum">     406 </span>            :     QVariant property(const char *name) const;
+<span class="lineNum">     407 </span>            :     QList&lt;QByteArray&gt; dynamicPropertyNames() const;
+<span class="lineNum">     408 </span>            : #endif // QT_NO_PROPERTIES
+<span class="lineNum">     409 </span>            : 
+<span class="lineNum">     410 </span>            : #ifndef QT_NO_USERDATA
+<span class="lineNum">     411 </span>            :     static uint registerUserData();
+<span class="lineNum">     412 </span>            :     void setUserData(uint id, QObjectUserData* data);
+<span class="lineNum">     413 </span>            :     QObjectUserData* userData(uint id) const;
+<span class="lineNum">     414 </span>            : #endif // QT_NO_USERDATA
+<span class="lineNum">     415 </span>            : 
+<span class="lineNum">     416 </span>            : Q_SIGNALS:
+<span class="lineNum">     417 </span>            :     void destroyed(QObject * = 0);
+<span class="lineNum">     418 </span>            :     void objectNameChanged(const QString &amp;objectName
+<span class="lineNum">     419 </span>            : #if !defined(Q_QDOC)
+<span class="lineNum">     420 </span>            :     , QPrivateSignal
+<span class="lineNum">     421 </span>            : #endif
+<span class="lineNum">     422 </span>            :     );
+<span class="lineNum">     423 </span>            : 
+<span class="lineNum">     424 </span>            : public:
+<span class="lineNum">     425 </span>            :     inline QObject *parent() const { return d_ptr-&gt;parent; }
+<span class="lineNum">     426 </span>            : 
+<span class="lineNum">     427 </span>            :     inline bool inherits(const char *classname) const
+<span class="lineNum">     428 </span>            :         { return const_cast&lt;QObject *&gt;(this)-&gt;qt_metacast(classname) != 0; }
+<span class="lineNum">     429 </span>            : 
+<span class="lineNum">     430 </span>            : public Q_SLOTS:
+<span class="lineNum">     431 </span>            :     void deleteLater();
+<span class="lineNum">     432 </span>            : 
+<span class="lineNum">     433 </span>            : protected:
+<span class="lineNum">     434 </span>            :     QObject *sender() const;
+<span class="lineNum">     435 </span>            :     int senderSignalIndex() const;
+<span class="lineNum">     436 </span>            :     int receivers(const char* signal) const;
+<span class="lineNum">     437 </span>            :     bool isSignalConnected(const QMetaMethod &amp;signal) const;
+<span class="lineNum">     438 </span>            : 
+<span class="lineNum">     439 </span>            :     virtual void timerEvent(QTimerEvent *);
+<span class="lineNum">     440 </span>            :     virtual void childEvent(QChildEvent *);
+<span class="lineNum">     441 </span>            :     virtual void customEvent(QEvent *);
+<span class="lineNum">     442 </span>            : 
+<span class="lineNum">     443 </span>            :     virtual void connectNotify(const QMetaMethod &amp;signal);
+<span class="lineNum">     444 </span>            :     virtual void disconnectNotify(const QMetaMethod &amp;signal);
+<span class="lineNum">     445 </span>            : 
+<span class="lineNum">     446 </span>            : protected:
+<span class="lineNum">     447 </span>            :     QObject(QObjectPrivate &amp;dd, QObject *parent = 0);
+<span class="lineNum">     448 </span>            : 
+<span class="lineNum">     449 </span>            : protected:
+<span class="lineNum">     450 </span>            :     QScopedPointer&lt;QObjectData&gt; d_ptr;
+<span class="lineNum">     451 </span>            : 
+<span class="lineNum">     452 </span>            :     static const QMetaObject staticQtMetaObject;
+<span class="lineNum">     453 </span>            : 
+<span class="lineNum">     454 </span>            :     friend struct QMetaObject;
+<span class="lineNum">     455 </span>            :     friend struct QMetaObjectPrivate;
+<span class="lineNum">     456 </span>            :     friend class QMetaCallEvent;
+<span class="lineNum">     457 </span>            :     friend class QApplication;
+<span class="lineNum">     458 </span>            :     friend class QApplicationPrivate;
+<span class="lineNum">     459 </span>            :     friend class QCoreApplication;
+<span class="lineNum">     460 </span>            :     friend class QCoreApplicationPrivate;
+<span class="lineNum">     461 </span>            :     friend class QWidget;
+<span class="lineNum">     462 </span>            :     friend class QThreadData;
+<span class="lineNum">     463 </span>            : 
+<span class="lineNum">     464 </span>            : private:
+<span class="lineNum">     465 </span>            :     Q_DISABLE_COPY(QObject)
+<span class="lineNum">     466 </span>            :     Q_PRIVATE_SLOT(d_func(), void _q_reregisterTimers(void *))
+<span class="lineNum">     467 </span>            : 
+<span class="lineNum">     468 </span>            : private:
+<span class="lineNum">     469 </span>            :     static QMetaObject::Connection connectImpl(const QObject *sender, void **signal,
+<span class="lineNum">     470 </span>            :                                                const QObject *receiver, void **slotPtr,
+<span class="lineNum">     471 </span>            :                                                QtPrivate::QSlotObjectBase *slot, Qt::ConnectionType type,
+<span class="lineNum">     472 </span>            :                                                const int *types, const QMetaObject *senderMetaObject);
+<span class="lineNum">     473 </span>            : 
+<span class="lineNum">     474 </span>            :     static bool disconnectImpl(const QObject *sender, void **signal, const QObject *receiver, void **slot,
+<span class="lineNum">     475 </span>            :                                const QMetaObject *senderMetaObject);
+<span class="lineNum">     476 </span>            : 
+<span class="lineNum">     477 </span>            : };
+<span class="lineNum">     478 </span>            : 
+<span class="lineNum">     479 </span>            : inline QMetaObject::Connection QObject::connect(const QObject *asender, const char *asignal,
+<span class="lineNum">     480 </span>            :                                             const char *amember, Qt::ConnectionType atype) const
+<span class="lineNum">     481 </span>            : { return connect(asender, asignal, this, amember, atype); }
+<span class="lineNum">     482 </span>            : 
+<span class="lineNum">     483 </span>            : #ifndef QT_NO_USERDATA
+<span class="lineNum">     484 </span>            : class Q_CORE_EXPORT QObjectUserData {
+<span class="lineNum">     485 </span>            : public:
+<span class="lineNum">     486 </span>            :     virtual ~QObjectUserData();
+<span class="lineNum">     487 </span>            : };
+<span class="lineNum">     488 </span>            : #endif
+<span class="lineNum">     489 </span>            : 
+<span class="lineNum">     490 </span>            : #ifdef Q_QDOC
+<span class="lineNum">     491 </span>            : T qFindChild(const QObject *o, const QString &amp;name = QString());
+<span class="lineNum">     492 </span>            : QList&lt;T&gt; qFindChildren(const QObject *oobj, const QString &amp;name = QString());
+<span class="lineNum">     493 </span>            : QList&lt;T&gt; qFindChildren(const QObject *o, const QRegExp &amp;re);
+<span class="lineNum">     494 </span>            : #endif
+<span class="lineNum">     495 </span>            : #if QT_DEPRECATED_SINCE(5, 0)
+<span class="lineNum">     496 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     497 </span>            : inline QT_DEPRECATED T qFindChild(const QObject *o, const QString &amp;name = QString())
+<span class="lineNum">     498 </span>            : { return o-&gt;findChild&lt;T&gt;(name); }
+<span class="lineNum">     499 </span>            : 
+<span class="lineNum">     500 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     501 </span>            : inline QT_DEPRECATED QList&lt;T&gt; qFindChildren(const QObject *o, const QString &amp;name = QString())
+<span class="lineNum">     502 </span>            : {
+<span class="lineNum">     503 </span>            :     return o-&gt;findChildren&lt;T&gt;(name);
+<span class="lineNum">     504 </span>            : }
+<span class="lineNum">     505 </span>            : 
+<span class="lineNum">     506 </span>            : #ifndef QT_NO_REGEXP
+<span class="lineNum">     507 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     508 </span>            : inline QT_DEPRECATED QList&lt;T&gt; qFindChildren(const QObject *o, const QRegExp &amp;re)
+<span class="lineNum">     509 </span>            : {
+<span class="lineNum">     510 </span>            :     return o-&gt;findChildren&lt;T&gt;(re);
+<span class="lineNum">     511 </span>            : }
+<span class="lineNum">     512 </span>            : #endif
+<span class="lineNum">     513 </span>            : 
+<span class="lineNum">     514 </span>            : #endif //QT_DEPRECATED
+<span class="lineNum">     515 </span>            : 
+<span class="lineNum">     516 </span>            : template &lt;class T&gt;
+<span class="lineNum">     517 </span>            : inline T qobject_cast(QObject *object)
+<span class="lineNum">     518 </span>            : {
+<span class="lineNum">     519 </span>            :     typedef typename QtPrivate::remove_cv&lt;typename QtPrivate::remove_pointer&lt;T&gt;::type&gt;::type ObjType;
+<span class="lineNum">     520 </span>            :     Q_STATIC_ASSERT_X(QtPrivate::HasQ_OBJECT_Macro&lt;ObjType&gt;::Value,
+<span class="lineNum">     521 </span>            :                     &quot;qobject_cast requires the type to have a Q_OBJECT macro&quot;);
+<span class="lineNum">     522 </span>            :     return static_cast&lt;T&gt;(reinterpret_cast&lt;T&gt;(object)-&gt;staticMetaObject.cast(object));
+<span class="lineNum">     523 </span>            : }
+<span class="lineNum">     524 </span>            : 
+<span class="lineNum">     525 </span>            : template &lt;class T&gt;
+<span class="lineNum">     526 </span>            : inline T qobject_cast(const QObject *object)
+<span class="lineNum">     527 </span>            : {
+<span class="lineNum">     528 </span>            :     typedef typename QtPrivate::remove_cv&lt;typename QtPrivate::remove_pointer&lt;T&gt;::type&gt;::type ObjType;
+<span class="lineNum">     529 </span>            :     Q_STATIC_ASSERT_X(QtPrivate::HasQ_OBJECT_Macro&lt;ObjType&gt;::Value,
+<span class="lineNum">     530 </span>            :                       &quot;qobject_cast requires the type to have a Q_OBJECT macro&quot;);
+<span class="lineNum">     531 </span>            :     return static_cast&lt;T&gt;(reinterpret_cast&lt;T&gt;(object)-&gt;staticMetaObject.cast(object));
+<span class="lineNum">     532 </span>            : }
+<span class="lineNum">     533 </span>            : 
+<span class="lineNum">     534 </span>            : 
+<span class="lineNum">     535 </span>            : template &lt;class T&gt; inline const char * qobject_interface_iid()
+<span class="lineNum">     536 </span>            : { return 0; }
+<span class="lineNum">     537 </span>            : 
+<span class="lineNum">     538 </span>            : #ifndef Q_MOC_RUN
+<span class="lineNum">     539 </span>            : #  define Q_DECLARE_INTERFACE(IFace, IId) \
+<span class="lineNum">     540 </span>            :     template &lt;&gt; inline const char *qobject_interface_iid&lt;IFace *&gt;() \
+<span class="lineNum">     541 </span>            :     { return IId; } \
+<span class="lineNum">     542 </span>            :     template &lt;&gt; inline IFace *qobject_cast&lt;IFace *&gt;(QObject *object) \
+<span class="lineNum">     543 </span>            :     { return reinterpret_cast&lt;IFace *&gt;((object ? object-&gt;qt_metacast(IId) : 0)); } \
+<span class="lineNum">     544 </span>            :     template &lt;&gt; inline IFace *qobject_cast&lt;IFace *&gt;(const QObject *object) \
+<span class="lineNum">     545 </span>            :     { return reinterpret_cast&lt;IFace *&gt;((object ? const_cast&lt;QObject *&gt;(object)-&gt;qt_metacast(IId) : 0)); }
+<span class="lineNum">     546 </span>            : #endif // Q_MOC_RUN
+<span class="lineNum">     547 </span>            : 
+<span class="lineNum">     548 </span>            : #ifndef QT_NO_DEBUG_STREAM
+<span class="lineNum">     549 </span>            : Q_CORE_EXPORT QDebug operator&lt;&lt;(QDebug, const QObject *);
+<span class="lineNum">     550 </span>            : #endif
+<span class="lineNum">     551 </span>            : 
+<span class="lineNum">     552 </span>            : namespace QtPrivate {
+<span class="lineNum">     553 </span>            :     inline QObject &amp; deref_for_methodcall(QObject &amp;o) { return  o; }
+<span class="lineNum">     554 </span>            :     inline QObject &amp; deref_for_methodcall(QObject *o) { return *o; }
+<span class="lineNum">     555 </span>            : }
+<span class="lineNum">     556 </span>            : #define Q_SET_OBJECT_NAME(obj) QT_PREPEND_NAMESPACE(QtPrivate)::deref_for_methodcall(obj).setObjectName(QLatin1String(#obj))
+<span class="lineNum">     557 </span>            : 
+<span class="lineNum">     558 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     559 </span>            : 
+<span class="lineNum">     560 </span>            : #endif
+<span class="lineNum">     561 </span>            : 
+<span class="lineNum">     562 </span>            : #endif // QOBJECT_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

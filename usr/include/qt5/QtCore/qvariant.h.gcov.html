@@ -1,0 +1,916 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /usr/include/qt5/QtCore/qvariant.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtCore</a> - qvariant.h<span style="font-size: 80%;"> (source / <a href="qvariant.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryMed">76.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-03-03 16:04:58</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+<span class="lineNum">       4 </span>            : ** Contact: http://www.qt-project.org/legal
+<span class="lineNum">       5 </span>            : **
+<span class="lineNum">       6 </span>            : ** This file is part of the QtCore module of the Qt Toolkit.
+<span class="lineNum">       7 </span>            : **
+<span class="lineNum">       8 </span>            : ** $QT_BEGIN_LICENSE:LGPL$
+<span class="lineNum">       9 </span>            : ** Commercial License Usage
+<span class="lineNum">      10 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      11 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      12 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      13 </span>            : ** a written agreement between you and Digia.  For licensing terms and
+<span class="lineNum">      14 </span>            : ** conditions see http://qt.digia.com/licensing.  For further information
+<span class="lineNum">      15 </span>            : ** use the contact form at http://qt.digia.com/contact-us.
+<span class="lineNum">      16 </span>            : **
+<span class="lineNum">      17 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      18 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      19 </span>            : ** General Public License version 2.1 as published by the Free Software
+<span class="lineNum">      20 </span>            : ** Foundation and appearing in the file LICENSE.LGPL included in the
+<span class="lineNum">      21 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      22 </span>            : ** ensure the GNU Lesser General Public License version 2.1 requirements
+<span class="lineNum">      23 </span>            : ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      24 </span>            : **
+<span class="lineNum">      25 </span>            : ** In addition, as a special exception, Digia gives you certain additional
+<span class="lineNum">      26 </span>            : ** rights.  These rights are described in the Digia Qt LGPL Exception
+<span class="lineNum">      27 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      28 </span>            : **
+<span class="lineNum">      29 </span>            : ** GNU General Public License Usage
+<span class="lineNum">      30 </span>            : ** Alternatively, this file may be used under the terms of the GNU
+<span class="lineNum">      31 </span>            : ** General Public License version 3.0 as published by the Free Software
+<span class="lineNum">      32 </span>            : ** Foundation and appearing in the file LICENSE.GPL included in the
+<span class="lineNum">      33 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      34 </span>            : ** ensure the GNU General Public License version 3.0 requirements will be
+<span class="lineNum">      35 </span>            : ** met: http://www.gnu.org/copyleft/gpl.html.
+<span class="lineNum">      36 </span>            : **
+<span class="lineNum">      37 </span>            : **
+<span class="lineNum">      38 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      39 </span>            : **
+<span class="lineNum">      40 </span>            : ****************************************************************************/
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : #ifndef QVARIANT_H
+<span class="lineNum">      43 </span>            : #define QVARIANT_H
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            : #include &lt;QtCore/qatomic.h&gt;
+<span class="lineNum">      46 </span>            : #include &lt;QtCore/qbytearray.h&gt;
+<span class="lineNum">      47 </span>            : #include &lt;QtCore/qlist.h&gt;
+<span class="lineNum">      48 </span>            : #include &lt;QtCore/qmetatype.h&gt;
+<span class="lineNum">      49 </span>            : #include &lt;QtCore/qmap.h&gt;
+<span class="lineNum">      50 </span>            : #include &lt;QtCore/qhash.h&gt;
+<span class="lineNum">      51 </span>            : #include &lt;QtCore/qstring.h&gt;
+<span class="lineNum">      52 </span>            : #include &lt;QtCore/qstringlist.h&gt;
+<span class="lineNum">      53 </span>            : #include &lt;QtCore/qobject.h&gt;
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            : 
+<span class="lineNum">      58 </span>            : class QBitArray;
+<span class="lineNum">      59 </span>            : class QDataStream;
+<span class="lineNum">      60 </span>            : class QDate;
+<span class="lineNum">      61 </span>            : class QDateTime;
+<span class="lineNum">      62 </span>            : class QEasingCurve;
+<span class="lineNum">      63 </span>            : class QLine;
+<span class="lineNum">      64 </span>            : class QLineF;
+<span class="lineNum">      65 </span>            : class QLocale;
+<span class="lineNum">      66 </span>            : class QMatrix;
+<span class="lineNum">      67 </span>            : class QTransform;
+<span class="lineNum">      68 </span>            : class QStringList;
+<span class="lineNum">      69 </span>            : class QTime;
+<span class="lineNum">      70 </span>            : class QPoint;
+<span class="lineNum">      71 </span>            : class QPointF;
+<span class="lineNum">      72 </span>            : class QSize;
+<span class="lineNum">      73 </span>            : class QSizeF;
+<span class="lineNum">      74 </span>            : class QRect;
+<span class="lineNum">      75 </span>            : class QRectF;
+<span class="lineNum">      76 </span>            : #ifndef QT_NO_REGEXP
+<span class="lineNum">      77 </span>            : class QRegExp;
+<span class="lineNum">      78 </span>            : #endif // QT_NO_REGEXP
+<span class="lineNum">      79 </span>            : #ifndef QT_NO_REGULAREXPRESSION
+<span class="lineNum">      80 </span>            : class QRegularExpression;
+<span class="lineNum">      81 </span>            : #endif // QT_NO_REGULAREXPRESSION
+<span class="lineNum">      82 </span>            : class QTextFormat;
+<span class="lineNum">      83 </span>            : class QTextLength;
+<span class="lineNum">      84 </span>            : class QUrl;
+<span class="lineNum">      85 </span>            : class QVariant;
+<span class="lineNum">      86 </span>            : class QVariantComparisonHelper;
+<span class="lineNum">      87 </span>            : 
+<span class="lineNum">      88 </span>            : template &lt;typename T&gt;
+<span class="lineNum">      89 </span>            : inline QVariant qVariantFromValue(const T &amp;);
+<span class="lineNum">      90 </span>            : 
+<span class="lineNum">      91 </span>            : template&lt;typename T&gt;
+<span class="lineNum">      92 </span>            : inline T qvariant_cast(const QVariant &amp;);
+<span class="lineNum">      93 </span>            : 
+<span class="lineNum">      94 </span>            : namespace QtPrivate {
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span>            :     template &lt;typename Derived, typename Argument, typename ReturnType&gt;
+<span class="lineNum">      97 </span>            :     struct ObjectInvoker
+<span class="lineNum">      98 </span>            :     {
+<span class="lineNum">      99 </span>            :         static ReturnType invoke(Argument a)
+<span class="lineNum">     100 </span>            :         {
+<span class="lineNum">     101 </span>            :             return Derived::object(a);
+<span class="lineNum">     102 </span>            :         }
+<span class="lineNum">     103 </span>            :     };
+<span class="lineNum">     104 </span>            : 
+<span class="lineNum">     105 </span>            :     template &lt;typename Derived, typename Argument, typename ReturnType&gt;
+<a name="106"><span class="lineNum">     106 </span>            :     struct MetaTypeInvoker</a>
+<span class="lineNum">     107 </span>            :     {
+<span class="lineNum">     108 </span><span class="lineCov">         48 :         static ReturnType invoke(Argument a)</span>
+<span class="lineNum">     109 </span>            :         {
+<span class="lineNum">     110 </span><span class="lineCov">         48 :             return Derived::metaType(a);</span>
+<span class="lineNum">     111 </span>            :         }
+<span class="lineNum">     112 </span>            :     };
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            :     template &lt;typename Derived, typename T, typename Argument, typename ReturnType, bool = IsPointerToTypeDerivedFromQObject&lt;T&gt;::Value&gt;
+<span class="lineNum">     115 </span>            :     struct TreatAsQObjectBeforeMetaType : ObjectInvoker&lt;Derived, Argument, ReturnType&gt;
+<span class="lineNum">     116 </span>            :     {
+<span class="lineNum">     117 </span>            :     };
+<span class="lineNum">     118 </span>            : 
+<span class="lineNum">     119 </span>            :     template &lt;typename Derived, typename T, typename Argument, typename ReturnType&gt;
+<span class="lineNum">     120 </span>            :     struct TreatAsQObjectBeforeMetaType&lt;Derived, T, Argument, ReturnType, false&gt; : MetaTypeInvoker&lt;Derived, Argument, ReturnType&gt;
+<span class="lineNum">     121 </span>            :     {
+<span class="lineNum">     122 </span>            :     };
+<span class="lineNum">     123 </span>            : 
+<span class="lineNum">     124 </span>            :     template&lt;typename T&gt; struct QVariantValueHelper;
+<span class="lineNum">     125 </span>            : }
+<span class="lineNum">     126 </span>            : 
+<span class="lineNum">     127 </span>            : class Q_CORE_EXPORT QVariant
+<span class="lineNum">     128 </span>            : {
+<span class="lineNum">     129 </span>            :  public:
+<span class="lineNum">     130 </span>            :     enum Type {
+<span class="lineNum">     131 </span>            :         Invalid = QMetaType::UnknownType,
+<span class="lineNum">     132 </span>            :         Bool = QMetaType::Bool,
+<span class="lineNum">     133 </span>            :         Int = QMetaType::Int,
+<span class="lineNum">     134 </span>            :         UInt = QMetaType::UInt,
+<span class="lineNum">     135 </span>            :         LongLong = QMetaType::LongLong,
+<span class="lineNum">     136 </span>            :         ULongLong = QMetaType::ULongLong,
+<span class="lineNum">     137 </span>            :         Double = QMetaType::Double,
+<span class="lineNum">     138 </span>            :         Char = QMetaType::QChar,
+<span class="lineNum">     139 </span>            :         Map = QMetaType::QVariantMap,
+<span class="lineNum">     140 </span>            :         List = QMetaType::QVariantList,
+<span class="lineNum">     141 </span>            :         String = QMetaType::QString,
+<span class="lineNum">     142 </span>            :         StringList = QMetaType::QStringList,
+<span class="lineNum">     143 </span>            :         ByteArray = QMetaType::QByteArray,
+<span class="lineNum">     144 </span>            :         BitArray = QMetaType::QBitArray,
+<span class="lineNum">     145 </span>            :         Date = QMetaType::QDate,
+<span class="lineNum">     146 </span>            :         Time = QMetaType::QTime,
+<span class="lineNum">     147 </span>            :         DateTime = QMetaType::QDateTime,
+<span class="lineNum">     148 </span>            :         Url = QMetaType::QUrl,
+<span class="lineNum">     149 </span>            :         Locale = QMetaType::QLocale,
+<span class="lineNum">     150 </span>            :         Rect = QMetaType::QRect,
+<span class="lineNum">     151 </span>            :         RectF = QMetaType::QRectF,
+<span class="lineNum">     152 </span>            :         Size = QMetaType::QSize,
+<span class="lineNum">     153 </span>            :         SizeF = QMetaType::QSizeF,
+<span class="lineNum">     154 </span>            :         Line = QMetaType::QLine,
+<span class="lineNum">     155 </span>            :         LineF = QMetaType::QLineF,
+<span class="lineNum">     156 </span>            :         Point = QMetaType::QPoint,
+<span class="lineNum">     157 </span>            :         PointF = QMetaType::QPointF,
+<span class="lineNum">     158 </span>            :         RegExp = QMetaType::QRegExp,
+<span class="lineNum">     159 </span>            :         RegularExpression = QMetaType::QRegularExpression,
+<span class="lineNum">     160 </span>            :         Hash = QMetaType::QVariantHash,
+<span class="lineNum">     161 </span>            :         EasingCurve = QMetaType::QEasingCurve,
+<span class="lineNum">     162 </span>            :         Uuid = QMetaType::QUuid,
+<span class="lineNum">     163 </span>            :         ModelIndex = QMetaType::QModelIndex,
+<span class="lineNum">     164 </span>            :         LastCoreType = QMetaType::LastCoreType,
+<span class="lineNum">     165 </span>            : 
+<span class="lineNum">     166 </span>            :         Font = QMetaType::QFont,
+<span class="lineNum">     167 </span>            :         Pixmap = QMetaType::QPixmap,
+<span class="lineNum">     168 </span>            :         Brush = QMetaType::QBrush,
+<span class="lineNum">     169 </span>            :         Color = QMetaType::QColor,
+<span class="lineNum">     170 </span>            :         Palette = QMetaType::QPalette,
+<span class="lineNum">     171 </span>            :         Image = QMetaType::QImage,
+<span class="lineNum">     172 </span>            :         Polygon = QMetaType::QPolygon,
+<span class="lineNum">     173 </span>            :         Region = QMetaType::QRegion,
+<span class="lineNum">     174 </span>            :         Bitmap = QMetaType::QBitmap,
+<span class="lineNum">     175 </span>            :         Cursor = QMetaType::QCursor,
+<span class="lineNum">     176 </span>            :         KeySequence = QMetaType::QKeySequence,
+<span class="lineNum">     177 </span>            :         Pen = QMetaType::QPen,
+<span class="lineNum">     178 </span>            :         TextLength = QMetaType::QTextLength,
+<span class="lineNum">     179 </span>            :         TextFormat = QMetaType::QTextFormat,
+<span class="lineNum">     180 </span>            :         Matrix = QMetaType::QMatrix,
+<span class="lineNum">     181 </span>            :         Transform = QMetaType::QTransform,
+<span class="lineNum">     182 </span>            :         Matrix4x4 = QMetaType::QMatrix4x4,
+<span class="lineNum">     183 </span>            :         Vector2D = QMetaType::QVector2D,
+<span class="lineNum">     184 </span>            :         Vector3D = QMetaType::QVector3D,
+<span class="lineNum">     185 </span>            :         Vector4D = QMetaType::QVector4D,
+<span class="lineNum">     186 </span>            :         Quaternion = QMetaType::QQuaternion,
+<span class="lineNum">     187 </span>            :         PolygonF = QMetaType::QPolygonF,
+<span class="lineNum">     188 </span>            :         Icon = QMetaType::QIcon,
+<span class="lineNum">     189 </span>            :         LastGuiType = QMetaType::LastGuiType,
+<span class="lineNum">     190 </span>            : 
+<span class="lineNum">     191 </span>            :         SizePolicy = QMetaType::QSizePolicy,
+<span class="lineNum">     192 </span>            : 
+<span class="lineNum">     193 </span>            :         UserType = QMetaType::User,
+<span class="lineNum">     194 </span>            :         LastType = 0xffffffff // need this so that gcc &gt;= 3.4 allocates 32 bits for Type
+<span class="lineNum">     195 </span>            :     };
+<span class="lineNum">     196 </span>            : 
+<span class="lineNum">     197 </span>            :     inline QVariant();
+<span class="lineNum">     198 </span>            :     ~QVariant();
+<span class="lineNum">     199 </span>            :     QVariant(Type type);
+<span class="lineNum">     200 </span>            :     QVariant(int typeId, const void *copy);
+<span class="lineNum">     201 </span>            :     QVariant(int typeId, const void *copy, uint flags);
+<span class="lineNum">     202 </span>            :     QVariant(const QVariant &amp;other);
+<span class="lineNum">     203 </span>            : 
+<span class="lineNum">     204 </span>            : #ifndef QT_NO_DATASTREAM
+<span class="lineNum">     205 </span>            :     QVariant(QDataStream &amp;s);
+<span class="lineNum">     206 </span>            : #endif
+<span class="lineNum">     207 </span>            : 
+<span class="lineNum">     208 </span>            :     QVariant(int i);
+<span class="lineNum">     209 </span>            :     QVariant(uint ui);
+<span class="lineNum">     210 </span>            :     QVariant(qlonglong ll);
+<span class="lineNum">     211 </span>            :     QVariant(qulonglong ull);
+<span class="lineNum">     212 </span>            :     QVariant(bool b);
+<span class="lineNum">     213 </span>            :     QVariant(double d);
+<span class="lineNum">     214 </span>            :     QVariant(float f);
+<span class="lineNum">     215 </span>            : #ifndef QT_NO_CAST_FROM_ASCII
+<span class="lineNum">     216 </span>            :     QT_ASCII_CAST_WARN QVariant(const char *str);
+<span class="lineNum">     217 </span>            : #endif
+<span class="lineNum">     218 </span>            : 
+<span class="lineNum">     219 </span>            :     QVariant(const QByteArray &amp;bytearray);
+<span class="lineNum">     220 </span>            :     QVariant(const QBitArray &amp;bitarray);
+<span class="lineNum">     221 </span>            :     QVariant(const QString &amp;string);
+<span class="lineNum">     222 </span>            :     QVariant(QLatin1String string);
+<span class="lineNum">     223 </span>            :     QVariant(const QStringList &amp;stringlist);
+<span class="lineNum">     224 </span>            :     QVariant(QChar qchar);
+<span class="lineNum">     225 </span>            :     QVariant(const QDate &amp;date);
+<span class="lineNum">     226 </span>            :     QVariant(const QTime &amp;time);
+<span class="lineNum">     227 </span>            :     QVariant(const QDateTime &amp;datetime);
+<span class="lineNum">     228 </span>            :     QVariant(const QList&lt;QVariant&gt; &amp;list);
+<span class="lineNum">     229 </span>            :     QVariant(const QMap&lt;QString,QVariant&gt; &amp;map);
+<span class="lineNum">     230 </span>            :     QVariant(const QHash&lt;QString,QVariant&gt; &amp;hash);
+<span class="lineNum">     231 </span>            : #ifndef QT_NO_GEOM_VARIANT
+<span class="lineNum">     232 </span>            :     QVariant(const QSize &amp;size);
+<span class="lineNum">     233 </span>            :     QVariant(const QSizeF &amp;size);
+<span class="lineNum">     234 </span>            :     QVariant(const QPoint &amp;pt);
+<span class="lineNum">     235 </span>            :     QVariant(const QPointF &amp;pt);
+<span class="lineNum">     236 </span>            :     QVariant(const QLine &amp;line);
+<span class="lineNum">     237 </span>            :     QVariant(const QLineF &amp;line);
+<span class="lineNum">     238 </span>            :     QVariant(const QRect &amp;rect);
+<span class="lineNum">     239 </span>            :     QVariant(const QRectF &amp;rect);
+<span class="lineNum">     240 </span>            : #endif
+<span class="lineNum">     241 </span>            :     QVariant(const QLocale &amp;locale);
+<span class="lineNum">     242 </span>            : #ifndef QT_NO_REGEXP
+<span class="lineNum">     243 </span>            :     QVariant(const QRegExp &amp;regExp);
+<span class="lineNum">     244 </span>            : #endif // QT_NO_REGEXP
+<span class="lineNum">     245 </span>            : #ifndef QT_BOOTSTRAPPED
+<span class="lineNum">     246 </span>            : #ifndef QT_NO_REGULAREXPRESSION
+<span class="lineNum">     247 </span>            :     QVariant(const QRegularExpression &amp;re);
+<span class="lineNum">     248 </span>            : #endif // QT_NO_REGULAREXPRESSION
+<span class="lineNum">     249 </span>            :     QVariant(const QUrl &amp;url);
+<span class="lineNum">     250 </span>            :     QVariant(const QEasingCurve &amp;easing);
+<span class="lineNum">     251 </span>            :     QVariant(const QUuid &amp;uuid);
+<span class="lineNum">     252 </span>            :     QVariant(const QModelIndex &amp;modelIndex);
+<span class="lineNum">     253 </span>            :     QVariant(const QJsonValue &amp;jsonValue);
+<span class="lineNum">     254 </span>            :     QVariant(const QJsonObject &amp;jsonObject);
+<span class="lineNum">     255 </span>            :     QVariant(const QJsonArray &amp;jsonArray);
+<span class="lineNum">     256 </span>            :     QVariant(const QJsonDocument &amp;jsonDocument);
+<span class="lineNum">     257 </span>            : #endif // QT_BOOTSTRAPPED
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span>            :     QVariant&amp; operator=(const QVariant &amp;other);
+<span class="lineNum">     260 </span>            : #ifdef Q_COMPILER_RVALUE_REFS
+<span class="lineNum">     261 </span>            :     inline QVariant(QVariant &amp;&amp;other) : d(other.d)
+<span class="lineNum">     262 </span>            :     { other.d = Private(); }
+<span class="lineNum">     263 </span>            :     inline QVariant &amp;operator=(QVariant &amp;&amp;other)
+<span class="lineNum">     264 </span>            :     { qSwap(d, other.d); return *this; }
+<span class="lineNum">     265 </span>            : #endif
+<span class="lineNum">     266 </span>            : 
+<span class="lineNum">     267 </span>            :     inline void swap(QVariant &amp;other) { qSwap(d, other.d); }
+<span class="lineNum">     268 </span>            : 
+<span class="lineNum">     269 </span>            :     Type type() const;
+<span class="lineNum">     270 </span>            :     int userType() const;
+<span class="lineNum">     271 </span>            :     const char *typeName() const;
+<span class="lineNum">     272 </span>            : 
+<span class="lineNum">     273 </span>            :     bool canConvert(int targetTypeId) const;
+<span class="lineNum">     274 </span>            :     bool convert(int targetTypeId);
+<span class="lineNum">     275 </span>            : 
+<span class="lineNum">     276 </span>            :     inline bool isValid() const;
+<span class="lineNum">     277 </span>            :     bool isNull() const;
+<span class="lineNum">     278 </span>            : 
+<span class="lineNum">     279 </span>            :     void clear();
+<span class="lineNum">     280 </span>            : 
+<span class="lineNum">     281 </span>            :     void detach();
+<span class="lineNum">     282 </span>            :     inline bool isDetached() const;
+<span class="lineNum">     283 </span>            : 
+<span class="lineNum">     284 </span>            :     int toInt(bool *ok = 0) const;
+<span class="lineNum">     285 </span>            :     uint toUInt(bool *ok = 0) const;
+<span class="lineNum">     286 </span>            :     qlonglong toLongLong(bool *ok = 0) const;
+<span class="lineNum">     287 </span>            :     qulonglong toULongLong(bool *ok = 0) const;
+<span class="lineNum">     288 </span>            :     bool toBool() const;
+<span class="lineNum">     289 </span>            :     double toDouble(bool *ok = 0) const;
+<span class="lineNum">     290 </span>            :     float toFloat(bool *ok = 0) const;
+<span class="lineNum">     291 </span>            :     qreal toReal(bool *ok = 0) const;
+<span class="lineNum">     292 </span>            :     QByteArray toByteArray() const;
+<span class="lineNum">     293 </span>            :     QBitArray toBitArray() const;
+<span class="lineNum">     294 </span>            :     QString toString() const;
+<span class="lineNum">     295 </span>            :     QStringList toStringList() const;
+<span class="lineNum">     296 </span>            :     QChar toChar() const;
+<span class="lineNum">     297 </span>            :     QDate toDate() const;
+<span class="lineNum">     298 </span>            :     QTime toTime() const;
+<span class="lineNum">     299 </span>            :     QDateTime toDateTime() const;
+<span class="lineNum">     300 </span>            :     QList&lt;QVariant&gt; toList() const;
+<span class="lineNum">     301 </span>            :     QMap&lt;QString, QVariant&gt; toMap() const;
+<span class="lineNum">     302 </span>            :     QHash&lt;QString, QVariant&gt; toHash() const;
+<span class="lineNum">     303 </span>            : 
+<span class="lineNum">     304 </span>            : #ifndef QT_NO_GEOM_VARIANT
+<span class="lineNum">     305 </span>            :     QPoint toPoint() const;
+<span class="lineNum">     306 </span>            :     QPointF toPointF() const;
+<span class="lineNum">     307 </span>            :     QRect toRect() const;
+<span class="lineNum">     308 </span>            :     QSize toSize() const;
+<span class="lineNum">     309 </span>            :     QSizeF toSizeF() const;
+<span class="lineNum">     310 </span>            :     QLine toLine() const;
+<span class="lineNum">     311 </span>            :     QLineF toLineF() const;
+<span class="lineNum">     312 </span>            :     QRectF toRectF() const;
+<span class="lineNum">     313 </span>            : #endif
+<span class="lineNum">     314 </span>            :     QLocale toLocale() const;
+<span class="lineNum">     315 </span>            : #ifndef QT_NO_REGEXP
+<span class="lineNum">     316 </span>            :     QRegExp toRegExp() const;
+<span class="lineNum">     317 </span>            : #endif // QT_NO_REGEXP
+<span class="lineNum">     318 </span>            : #ifndef QT_BOOTSTRAPPED
+<span class="lineNum">     319 </span>            : #ifndef QT_NO_REGULAREXPRESSION
+<span class="lineNum">     320 </span>            :     QRegularExpression toRegularExpression() const;
+<span class="lineNum">     321 </span>            : #endif // QT_NO_REGULAREXPRESSION
+<span class="lineNum">     322 </span>            :     QUrl toUrl() const;
+<span class="lineNum">     323 </span>            :     QEasingCurve toEasingCurve() const;
+<span class="lineNum">     324 </span>            :     QUuid toUuid() const;
+<span class="lineNum">     325 </span>            :     QModelIndex toModelIndex() const;
+<span class="lineNum">     326 </span>            :     QJsonValue toJsonValue() const;
+<span class="lineNum">     327 </span>            :     QJsonObject toJsonObject() const;
+<span class="lineNum">     328 </span>            :     QJsonArray toJsonArray() const;
+<span class="lineNum">     329 </span>            :     QJsonDocument toJsonDocument() const;
+<span class="lineNum">     330 </span>            : #endif // QT_BOOTSTRAPPED
+<span class="lineNum">     331 </span>            : 
+<span class="lineNum">     332 </span>            : #ifndef QT_NO_DATASTREAM
+<span class="lineNum">     333 </span>            :     void load(QDataStream &amp;ds);
+<span class="lineNum">     334 </span>            :     void save(QDataStream &amp;ds) const;
+<span class="lineNum">     335 </span>            : #endif
+<span class="lineNum">     336 </span>            :     static const char *typeToName(int typeId);
+<span class="lineNum">     337 </span>            :     static Type nameToType(const char *name);
+<span class="lineNum">     338 </span>            : 
+<span class="lineNum">     339 </span>            :     void *data();
+<span class="lineNum">     340 </span>            :     const void *constData() const;
+<span class="lineNum">     341 </span>            :     inline const void *data() const { return constData(); }
+<span class="lineNum">     342 </span>            : 
+<span class="lineNum">     343 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     344 </span>            :     inline void setValue(const T &amp;value);
+<a name="345"><span class="lineNum">     345 </span>            : </a>
+<span class="lineNum">     346 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     347 </span><span class="lineCov">         48 :     inline T value() const</span>
+<span class="lineNum">     348 </span><span class="lineCov">         48 :     { return qvariant_cast&lt;T&gt;(*this); }</span>
+<span class="lineNum">     349 </span>            : 
+<span class="lineNum">     350 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     351 </span>            :     static inline QVariant fromValue(const T &amp;value)
+<span class="lineNum">     352 </span>            :     { return qVariantFromValue(value); }
+<span class="lineNum">     353 </span>            : 
+<span class="lineNum">     354 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     355 </span>            :     bool canConvert() const
+<span class="lineNum">     356 </span>            :     { return canConvert(qMetaTypeId&lt;T&gt;()); }
+<span class="lineNum">     357 </span>            : 
+<span class="lineNum">     358 </span>            :  public:
+<span class="lineNum">     359 </span>            : #ifndef Q_QDOC
+<span class="lineNum">     360 </span>            :     struct PrivateShared
+<span class="lineNum">     361 </span>            :     {
+<span class="lineNum">     362 </span>            :         inline PrivateShared(void *v) : ptr(v), ref(1) { }
+<span class="lineNum">     363 </span>            :         void *ptr;
+<span class="lineNum">     364 </span>            :         QAtomicInt ref;
+<span class="lineNum">     365 </span>            :     };
+<a name="366"><span class="lineNum">     366 </span>            :     struct Private</a>
+<span class="lineNum">     367 </span>            :     {
+<span class="lineNum">     368 </span><span class="lineCov">        107 :         inline Private(): type(Invalid), is_shared(false), is_null(true)</span>
+<span class="lineNum">     369 </span><span class="lineCov">        107 :         { data.ptr = 0; }</span>
+<span class="lineNum">     370 </span>            : 
+<span class="lineNum">     371 </span>            :         // Internal constructor for initialized variants.
+<span class="lineNum">     372 </span>            :         explicit inline Private(uint variantType)
+<span class="lineNum">     373 </span>            :             : type(variantType), is_shared(false), is_null(false)
+<span class="lineNum">     374 </span>            :         {}
+<span class="lineNum">     375 </span>            : 
+<span class="lineNum">     376 </span>            :         inline Private(const Private &amp;other)
+<span class="lineNum">     377 </span>            :             : data(other.data), type(other.type),
+<span class="lineNum">     378 </span>            :               is_shared(other.is_shared), is_null(other.is_null)
+<span class="lineNum">     379 </span>            :         {}
+<span class="lineNum">     380 </span>            :         union Data
+<span class="lineNum">     381 </span>            :         {
+<span class="lineNum">     382 </span>            :             char c;
+<span class="lineNum">     383 </span>            :             uchar uc;
+<span class="lineNum">     384 </span>            :             short s;
+<span class="lineNum">     385 </span>            :             signed char sc;
+<span class="lineNum">     386 </span>            :             ushort us;
+<span class="lineNum">     387 </span>            :             int i;
+<span class="lineNum">     388 </span>            :             uint u;
+<span class="lineNum">     389 </span>            :             long l;
+<span class="lineNum">     390 </span>            :             ulong ul;
+<span class="lineNum">     391 </span>            :             bool b;
+<span class="lineNum">     392 </span>            :             double d;
+<span class="lineNum">     393 </span>            :             float f;
+<span class="lineNum">     394 </span>            :             qreal real;
+<span class="lineNum">     395 </span>            :             qlonglong ll;
+<span class="lineNum">     396 </span>            :             qulonglong ull;
+<span class="lineNum">     397 </span>            :             QObject *o;
+<span class="lineNum">     398 </span>            :             void *ptr;
+<span class="lineNum">     399 </span>            :             PrivateShared *shared;
+<span class="lineNum">     400 </span>            :         } data;
+<span class="lineNum">     401 </span>            :         uint type : 30;
+<span class="lineNum">     402 </span>            :         uint is_shared : 1;
+<span class="lineNum">     403 </span>            :         uint is_null : 1;
+<span class="lineNum">     404 </span>            :     };
+<span class="lineNum">     405 </span>            :  public:
+<span class="lineNum">     406 </span>            :     typedef void (*f_construct)(Private *, const void *);
+<span class="lineNum">     407 </span>            :     typedef void (*f_clear)(Private *);
+<span class="lineNum">     408 </span>            :     typedef bool (*f_null)(const Private *);
+<span class="lineNum">     409 </span>            : #ifndef QT_NO_DATASTREAM
+<span class="lineNum">     410 </span>            :     typedef void (*f_load)(Private *, QDataStream &amp;);
+<span class="lineNum">     411 </span>            :     typedef void (*f_save)(const Private *, QDataStream &amp;);
+<span class="lineNum">     412 </span>            : #endif
+<span class="lineNum">     413 </span>            :     typedef bool (*f_compare)(const Private *, const Private *);
+<span class="lineNum">     414 </span>            :     typedef bool (*f_convert)(const QVariant::Private *d, int t, void *, bool *);
+<span class="lineNum">     415 </span>            :     typedef bool (*f_canConvert)(const QVariant::Private *d, int t);
+<span class="lineNum">     416 </span>            :     typedef void (*f_debugStream)(QDebug, const QVariant &amp;);
+<span class="lineNum">     417 </span>            :     struct Handler {
+<span class="lineNum">     418 </span>            :         f_construct construct;
+<span class="lineNum">     419 </span>            :         f_clear clear;
+<span class="lineNum">     420 </span>            :         f_null isNull;
+<span class="lineNum">     421 </span>            : #ifndef QT_NO_DATASTREAM
+<span class="lineNum">     422 </span>            :         f_load load;
+<span class="lineNum">     423 </span>            :         f_save save;
+<span class="lineNum">     424 </span>            : #endif
+<span class="lineNum">     425 </span>            :         f_compare compare;
+<span class="lineNum">     426 </span>            :         f_convert convert;
+<span class="lineNum">     427 </span>            :         f_canConvert canConvert;
+<span class="lineNum">     428 </span>            :         f_debugStream debugStream;
+<span class="lineNum">     429 </span>            :     };
+<span class="lineNum">     430 </span>            : #endif
+<span class="lineNum">     431 </span>            : 
+<span class="lineNum">     432 </span>            :     inline bool operator==(const QVariant &amp;v) const
+<span class="lineNum">     433 </span>            :     { return cmp(v); }
+<span class="lineNum">     434 </span>            :     inline bool operator!=(const QVariant &amp;v) const
+<span class="lineNum">     435 </span>            :     { return !cmp(v); }
+<span class="lineNum">     436 </span>            :     inline bool operator&lt;(const QVariant &amp;v) const
+<span class="lineNum">     437 </span>            :     { return compare(v) &lt; 0; }
+<span class="lineNum">     438 </span>            :     inline bool operator&lt;=(const QVariant &amp;v) const
+<span class="lineNum">     439 </span>            :     { return compare(v) &lt;= 0; }
+<span class="lineNum">     440 </span>            :     inline bool operator&gt;(const QVariant &amp;v) const
+<span class="lineNum">     441 </span>            :     { return compare(v) &gt; 0; }
+<span class="lineNum">     442 </span>            :     inline bool operator&gt;=(const QVariant &amp;v) const
+<span class="lineNum">     443 </span>            :     { return compare(v) &gt;= 0; }
+<span class="lineNum">     444 </span>            : 
+<span class="lineNum">     445 </span>            : protected:
+<span class="lineNum">     446 </span>            :     friend inline bool operator==(const QVariant &amp;, const QVariantComparisonHelper &amp;);
+<span class="lineNum">     447 </span>            : #ifndef QT_NO_DEBUG_STREAM
+<span class="lineNum">     448 </span>            :     friend Q_CORE_EXPORT QDebug operator&lt;&lt;(QDebug, const QVariant &amp;);
+<span class="lineNum">     449 </span>            : #endif
+<span class="lineNum">     450 </span>            : #ifndef Q_NO_TEMPLATE_FRIENDS
+<span class="lineNum">     451 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     452 </span>            :     friend inline T qvariant_cast(const QVariant &amp;);
+<span class="lineNum">     453 </span>            :     template&lt;typename T&gt; friend struct QtPrivate::QVariantValueHelper;
+<span class="lineNum">     454 </span>            : protected:
+<span class="lineNum">     455 </span>            : #else
+<span class="lineNum">     456 </span>            : public:
+<span class="lineNum">     457 </span>            : #endif
+<span class="lineNum">     458 </span>            :     Private d;
+<span class="lineNum">     459 </span>            :     void create(int type, const void *copy);
+<span class="lineNum">     460 </span>            :     bool cmp(const QVariant &amp;other) const;
+<span class="lineNum">     461 </span>            :     int compare(const QVariant &amp;other) const;
+<span class="lineNum">     462 </span>            :     bool convert(const int t, void *ptr) const;
+<span class="lineNum">     463 </span>            : 
+<span class="lineNum">     464 </span>            : private:
+<span class="lineNum">     465 </span>            :     // force compile error, prevent QVariant(bool) to be called
+<span class="lineNum">     466 </span>            :     inline QVariant(void *) Q_DECL_EQ_DELETE;
+<span class="lineNum">     467 </span>            :     // QVariant::Type is marked as \obsolete, but we don't want to
+<span class="lineNum">     468 </span>            :     // provide a constructor from its intended replacement,
+<span class="lineNum">     469 </span>            :     // QMetaType::Type, instead, because the idea behind these
+<span class="lineNum">     470 </span>            :     // constructors is flawed in the first place. But we also don't
+<span class="lineNum">     471 </span>            :     // want QVariant(QMetaType::String) to compile and falsely be an
+<span class="lineNum">     472 </span>            :     // int variant, so delete this constructor:
+<span class="lineNum">     473 </span>            :     QVariant(QMetaType::Type) Q_DECL_EQ_DELETE;
+<span class="lineNum">     474 </span>            : 
+<span class="lineNum">     475 </span>            :     // These constructors don't create QVariants of the type associcated
+<span class="lineNum">     476 </span>            :     // with the enum, as expected, but they would create a QVariant of
+<span class="lineNum">     477 </span>            :     // type int with the value of the enum value.
+<span class="lineNum">     478 </span>            :     // Use QVariant v = QColor(Qt::red) instead of QVariant v = Qt::red for
+<span class="lineNum">     479 </span>            :     // example.
+<span class="lineNum">     480 </span>            :     QVariant(Qt::GlobalColor) Q_DECL_EQ_DELETE;
+<span class="lineNum">     481 </span>            :     QVariant(Qt::BrushStyle) Q_DECL_EQ_DELETE;
+<span class="lineNum">     482 </span>            :     QVariant(Qt::PenStyle) Q_DECL_EQ_DELETE;
+<span class="lineNum">     483 </span>            :     QVariant(Qt::CursorShape) Q_DECL_EQ_DELETE;
+<span class="lineNum">     484 </span>            : #ifdef QT_NO_CAST_FROM_ASCII
+<span class="lineNum">     485 </span>            :     // force compile error when implicit conversion is not wanted
+<span class="lineNum">     486 </span>            :     inline QVariant(const char *) Q_DECL_EQ_DELETE;
+<span class="lineNum">     487 </span>            : #endif
+<span class="lineNum">     488 </span>            : public:
+<span class="lineNum">     489 </span>            :     typedef Private DataPtr;
+<span class="lineNum">     490 </span>            :     inline DataPtr &amp;data_ptr() { return d; }
+<span class="lineNum">     491 </span>            :     inline const DataPtr &amp;data_ptr() const { return d; }
+<span class="lineNum">     492 </span>            : };
+<span class="lineNum">     493 </span>            : 
+<span class="lineNum">     494 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     495 </span>            : inline QVariant qVariantFromValue(const T &amp;t)
+<span class="lineNum">     496 </span>            : {
+<span class="lineNum">     497 </span>            :     return QVariant(qMetaTypeId&lt;T&gt;(), &amp;t, QTypeInfo&lt;T&gt;::isPointer);
+<span class="lineNum">     498 </span>            : }
+<span class="lineNum">     499 </span>            : 
+<span class="lineNum">     500 </span>            : template &lt;&gt;
+<span class="lineNum">     501 </span>            : inline QVariant qVariantFromValue(const QVariant &amp;t) { return t; }
+<span class="lineNum">     502 </span>            : 
+<span class="lineNum">     503 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     504 </span>            : inline void qVariantSetValue(QVariant &amp;v, const T &amp;t)
+<span class="lineNum">     505 </span>            : {
+<span class="lineNum">     506 </span>            :     //if possible we reuse the current QVariant private
+<span class="lineNum">     507 </span>            :     const uint type = qMetaTypeId&lt;T&gt;();
+<span class="lineNum">     508 </span>            :     QVariant::Private &amp;d = v.data_ptr();
+<span class="lineNum">     509 </span>            :     if (v.isDetached() &amp;&amp; (type == d.type || (type &lt;= uint(QVariant::Char) &amp;&amp; d.type &lt;= uint(QVariant::Char)))) {
+<span class="lineNum">     510 </span>            :         d.type = type;
+<span class="lineNum">     511 </span>            :         d.is_null = false;
+<span class="lineNum">     512 </span>            :         T *old = reinterpret_cast&lt;T*&gt;(d.is_shared ? d.data.shared-&gt;ptr : &amp;d.data.ptr);
+<span class="lineNum">     513 </span>            :         if (QTypeInfo&lt;T&gt;::isComplex)
+<span class="lineNum">     514 </span>            :             old-&gt;~T();
+<span class="lineNum">     515 </span>            :         new (old) T(t); //call the copy constructor
+<span class="lineNum">     516 </span>            :     } else {
+<span class="lineNum">     517 </span>            :         v = QVariant(type, &amp;t, QTypeInfo&lt;T&gt;::isPointer);
+<span class="lineNum">     518 </span>            :     }
+<span class="lineNum">     519 </span>            : }
+<span class="lineNum">     520 </span>            : 
+<span class="lineNum">     521 </span>            : template &lt;&gt;
+<span class="lineNum">     522 </span>            : inline void qVariantSetValue&lt;QVariant&gt;(QVariant &amp;v, const QVariant &amp;t)
+<span class="lineNum">     523 </span>            : {
+<span class="lineNum">     524 </span>            :     v = t;
+<span class="lineNum">     525 </span>            : }
+<a name="526"><span class="lineNum">     526 </span>            : </a>
+<span class="lineNum">     527 </span>            : 
+<span class="lineNum">     528 </span><span class="lineCov">        107 : inline QVariant::QVariant() {}</span>
+<span class="lineNum">     529 </span>            : inline bool QVariant::isValid() const { return d.type != Invalid; }
+<span class="lineNum">     530 </span>            : 
+<span class="lineNum">     531 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     532 </span>            : inline void QVariant::setValue(const T &amp;avalue)
+<span class="lineNum">     533 </span>            : { qVariantSetValue(*this, avalue); }
+<span class="lineNum">     534 </span>            : 
+<span class="lineNum">     535 </span>            : #ifndef QT_NO_DATASTREAM
+<span class="lineNum">     536 </span>            : Q_CORE_EXPORT QDataStream&amp; operator&gt;&gt; (QDataStream&amp; s, QVariant&amp; p);
+<span class="lineNum">     537 </span>            : Q_CORE_EXPORT QDataStream&amp; operator&lt;&lt; (QDataStream&amp; s, const QVariant&amp; p);
+<span class="lineNum">     538 </span>            : Q_CORE_EXPORT QDataStream&amp; operator&gt;&gt; (QDataStream&amp; s, QVariant::Type&amp; p);
+<span class="lineNum">     539 </span>            : Q_CORE_EXPORT QDataStream&amp; operator&lt;&lt; (QDataStream&amp; s, const QVariant::Type p);
+<span class="lineNum">     540 </span>            : #endif
+<span class="lineNum">     541 </span>            : 
+<span class="lineNum">     542 </span>            : inline bool QVariant::isDetached() const
+<span class="lineNum">     543 </span>            : { return !d.is_shared || d.data.shared-&gt;ref.load() == 1; }
+<span class="lineNum">     544 </span>            : 
+<span class="lineNum">     545 </span>            : 
+<span class="lineNum">     546 </span>            : #ifdef Q_QDOC
+<span class="lineNum">     547 </span>            :     inline bool operator==(const QVariant &amp;v1, const QVariant &amp;v2);
+<span class="lineNum">     548 </span>            :     inline bool operator!=(const QVariant &amp;v1, const QVariant &amp;v2);
+<span class="lineNum">     549 </span>            : #else
+<span class="lineNum">     550 </span>            : 
+<span class="lineNum">     551 </span>            : /* Helper class to add one more level of indirection to prevent
+<span class="lineNum">     552 </span>            :    implicit casts.
+<span class="lineNum">     553 </span>            : */
+<span class="lineNum">     554 </span>            : class QVariantComparisonHelper
+<span class="lineNum">     555 </span>            : {
+<span class="lineNum">     556 </span>            : public:
+<span class="lineNum">     557 </span>            :     inline QVariantComparisonHelper(const QVariant &amp;var)
+<span class="lineNum">     558 </span>            :         : v(&amp;var) {}
+<span class="lineNum">     559 </span>            : private:
+<span class="lineNum">     560 </span>            :     friend inline bool operator==(const QVariant &amp;, const QVariantComparisonHelper &amp;);
+<span class="lineNum">     561 </span>            :     const QVariant *v;
+<span class="lineNum">     562 </span>            : };
+<span class="lineNum">     563 </span>            : 
+<span class="lineNum">     564 </span>            : inline bool operator==(const QVariant &amp;v1, const QVariantComparisonHelper &amp;v2)
+<span class="lineNum">     565 </span>            : {
+<span class="lineNum">     566 </span>            :     return v1.cmp(*v2.v);
+<span class="lineNum">     567 </span>            : }
+<span class="lineNum">     568 </span>            : 
+<span class="lineNum">     569 </span>            : inline bool operator!=(const QVariant &amp;v1, const QVariantComparisonHelper &amp;v2)
+<span class="lineNum">     570 </span>            : {
+<span class="lineNum">     571 </span>            :     return !operator==(v1, v2);
+<span class="lineNum">     572 </span>            : }
+<span class="lineNum">     573 </span>            : #endif
+<span class="lineNum">     574 </span>            : 
+<span class="lineNum">     575 </span>            : class Q_CORE_EXPORT QSequentialIterable
+<span class="lineNum">     576 </span>            : {
+<span class="lineNum">     577 </span>            :     QtMetaTypePrivate::QSequentialIterableImpl m_impl;
+<span class="lineNum">     578 </span>            : public:
+<span class="lineNum">     579 </span>            :     struct Q_CORE_EXPORT const_iterator
+<span class="lineNum">     580 </span>            :     {
+<span class="lineNum">     581 </span>            :     private:
+<span class="lineNum">     582 </span>            :         QtMetaTypePrivate::QSequentialIterableImpl m_impl;
+<span class="lineNum">     583 </span>            :         QAtomicInt *ref;
+<span class="lineNum">     584 </span>            :         friend class QSequentialIterable;
+<span class="lineNum">     585 </span>            :         explicit const_iterator(const QSequentialIterable &amp;iter, QAtomicInt *ref_);
+<span class="lineNum">     586 </span>            : 
+<span class="lineNum">     587 </span>            :         explicit const_iterator(const QtMetaTypePrivate::QSequentialIterableImpl &amp;impl, QAtomicInt *ref_);
+<span class="lineNum">     588 </span>            : 
+<span class="lineNum">     589 </span>            :         void begin();
+<span class="lineNum">     590 </span>            :         void end();
+<span class="lineNum">     591 </span>            :     public:
+<span class="lineNum">     592 </span>            :         ~const_iterator();
+<span class="lineNum">     593 </span>            : 
+<span class="lineNum">     594 </span>            :         const_iterator(const const_iterator &amp;other);
+<span class="lineNum">     595 </span>            : 
+<span class="lineNum">     596 </span>            :         const_iterator&amp; operator=(const const_iterator &amp;other);
+<span class="lineNum">     597 </span>            : 
+<span class="lineNum">     598 </span>            :         const QVariant operator*() const;
+<span class="lineNum">     599 </span>            :         bool operator==(const const_iterator &amp;o) const;
+<span class="lineNum">     600 </span>            :         bool operator!=(const const_iterator &amp;o) const;
+<span class="lineNum">     601 </span>            :         const_iterator &amp;operator++();
+<span class="lineNum">     602 </span>            :         const_iterator operator++(int);
+<span class="lineNum">     603 </span>            :         const_iterator &amp;operator--();
+<span class="lineNum">     604 </span>            :         const_iterator operator--(int);
+<span class="lineNum">     605 </span>            :         const_iterator &amp;operator+=(int j);
+<span class="lineNum">     606 </span>            :         const_iterator &amp;operator-=(int j);
+<span class="lineNum">     607 </span>            :         const_iterator operator+(int j) const;
+<span class="lineNum">     608 </span>            :         const_iterator operator-(int j) const;
+<span class="lineNum">     609 </span>            :     };
+<span class="lineNum">     610 </span>            : 
+<span class="lineNum">     611 </span>            :     friend struct const_iterator;
+<span class="lineNum">     612 </span>            : 
+<span class="lineNum">     613 </span>            :     explicit QSequentialIterable(QtMetaTypePrivate::QSequentialIterableImpl impl);
+<span class="lineNum">     614 </span>            : 
+<span class="lineNum">     615 </span>            :     const_iterator begin() const;
+<span class="lineNum">     616 </span>            :     const_iterator end() const;
+<span class="lineNum">     617 </span>            : 
+<span class="lineNum">     618 </span>            :     QVariant at(int idx) const;
+<span class="lineNum">     619 </span>            :     int size() const;
+<span class="lineNum">     620 </span>            : 
+<span class="lineNum">     621 </span>            :     bool canReverseIterate() const;
+<span class="lineNum">     622 </span>            : };
+<span class="lineNum">     623 </span>            : 
+<span class="lineNum">     624 </span>            : class Q_CORE_EXPORT QAssociativeIterable
+<span class="lineNum">     625 </span>            : {
+<span class="lineNum">     626 </span>            :     QtMetaTypePrivate::QAssociativeIterableImpl m_impl;
+<span class="lineNum">     627 </span>            : public:
+<span class="lineNum">     628 </span>            :     struct Q_CORE_EXPORT const_iterator
+<span class="lineNum">     629 </span>            :     {
+<span class="lineNum">     630 </span>            :     private:
+<span class="lineNum">     631 </span>            :         QtMetaTypePrivate::QAssociativeIterableImpl m_impl;
+<span class="lineNum">     632 </span>            :         QAtomicInt *ref;
+<span class="lineNum">     633 </span>            :         friend class QAssociativeIterable;
+<span class="lineNum">     634 </span>            :         explicit const_iterator(const QAssociativeIterable &amp;iter, QAtomicInt *ref_);
+<span class="lineNum">     635 </span>            : 
+<span class="lineNum">     636 </span>            :         explicit const_iterator(const QtMetaTypePrivate::QAssociativeIterableImpl &amp;impl, QAtomicInt *ref_);
+<span class="lineNum">     637 </span>            : 
+<span class="lineNum">     638 </span>            :         void begin();
+<span class="lineNum">     639 </span>            :         void end();
+<span class="lineNum">     640 </span>            :     public:
+<span class="lineNum">     641 </span>            :         ~const_iterator();
+<span class="lineNum">     642 </span>            :         const_iterator(const const_iterator &amp;other);
+<span class="lineNum">     643 </span>            : 
+<span class="lineNum">     644 </span>            :         const_iterator&amp; operator=(const const_iterator &amp;other);
+<span class="lineNum">     645 </span>            : 
+<span class="lineNum">     646 </span>            :         const QVariant key() const;
+<span class="lineNum">     647 </span>            : 
+<span class="lineNum">     648 </span>            :         const QVariant value() const;
+<span class="lineNum">     649 </span>            : 
+<span class="lineNum">     650 </span>            :         const QVariant operator*() const;
+<span class="lineNum">     651 </span>            :         bool operator==(const const_iterator &amp;o) const;
+<span class="lineNum">     652 </span>            :         bool operator!=(const const_iterator &amp;o) const;
+<span class="lineNum">     653 </span>            :         const_iterator &amp;operator++();
+<span class="lineNum">     654 </span>            :         const_iterator operator++(int);
+<span class="lineNum">     655 </span>            :         const_iterator &amp;operator--();
+<span class="lineNum">     656 </span>            :         const_iterator operator--(int);
+<span class="lineNum">     657 </span>            :         const_iterator &amp;operator+=(int j);
+<span class="lineNum">     658 </span>            :         const_iterator &amp;operator-=(int j);
+<span class="lineNum">     659 </span>            :         const_iterator operator+(int j) const;
+<span class="lineNum">     660 </span>            :         const_iterator operator-(int j) const;
+<span class="lineNum">     661 </span>            :     };
+<span class="lineNum">     662 </span>            : 
+<span class="lineNum">     663 </span>            :     friend struct const_iterator;
+<span class="lineNum">     664 </span>            : 
+<span class="lineNum">     665 </span>            :     explicit QAssociativeIterable(QtMetaTypePrivate::QAssociativeIterableImpl impl);
+<span class="lineNum">     666 </span>            : 
+<span class="lineNum">     667 </span>            :     const_iterator begin() const;
+<span class="lineNum">     668 </span>            :     const_iterator end() const;
+<span class="lineNum">     669 </span>            : 
+<span class="lineNum">     670 </span>            :     QVariant value(const QVariant &amp;key) const;
+<span class="lineNum">     671 </span>            : 
+<span class="lineNum">     672 </span>            :     int size() const;
+<span class="lineNum">     673 </span>            : };
+<span class="lineNum">     674 </span>            : 
+<span class="lineNum">     675 </span>            : #ifndef QT_MOC
+<span class="lineNum">     676 </span>            : namespace QtPrivate {
+<span class="lineNum">     677 </span>            :     template&lt;typename T&gt;
+<a name="678"><span class="lineNum">     678 </span>            :     struct QVariantValueHelper : TreatAsQObjectBeforeMetaType&lt;QVariantValueHelper&lt;T&gt;, T, const QVariant &amp;, T&gt;</a>
+<span class="lineNum">     679 </span>            :     {
+<span class="lineNum">     680 </span><span class="lineCov">         48 :         static T metaType(const QVariant &amp;v)</span>
+<span class="lineNum">     681 </span>            :         {
+<span class="lineNum">     682 </span><span class="lineCov">         48 :             const int vid = qMetaTypeId&lt;T&gt;();</span>
+<span class="lineNum">     683 </span><span class="lineCov">         48 :             if (vid == v.userType())</span>
+<span class="lineNum">     684 </span><span class="lineCov">         48 :                 return *reinterpret_cast&lt;const T *&gt;(v.constData());</span>
+<span class="lineNum">     685 </span><span class="lineNoCov">          0 :             T t;</span>
+<span class="lineNum">     686 </span><span class="lineNoCov">          0 :             if (v.convert(vid, &amp;t))</span>
+<span class="lineNum">     687 </span><span class="lineNoCov">          0 :                 return t;</span>
+<span class="lineNum">     688 </span><span class="lineNoCov">          0 :             return T();</span>
+<span class="lineNum">     689 </span>            :         }
+<span class="lineNum">     690 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">     691 </span>            :         static T object(const QVariant &amp;v)
+<span class="lineNum">     692 </span>            :         {
+<span class="lineNum">     693 </span>            :             return qobject_cast&lt;T&gt;(QMetaType::typeFlags(v.userType()) &amp; QMetaType::PointerToQObject
+<span class="lineNum">     694 </span>            :                 ? v.d.data.o
+<span class="lineNum">     695 </span>            :                 : QVariantValueHelper::metaType(v));
+<span class="lineNum">     696 </span>            :         }
+<span class="lineNum">     697 </span>            : #endif
+<span class="lineNum">     698 </span>            :     };
+<span class="lineNum">     699 </span>            : 
+<span class="lineNum">     700 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     701 </span>            :     struct QVariantValueHelperInterface : QVariantValueHelper&lt;T&gt;
+<span class="lineNum">     702 </span>            :     {
+<span class="lineNum">     703 </span>            :     };
+<span class="lineNum">     704 </span>            : 
+<span class="lineNum">     705 </span>            :     template&lt;&gt;
+<span class="lineNum">     706 </span>            :     struct QVariantValueHelperInterface&lt;QSequentialIterable&gt;
+<span class="lineNum">     707 </span>            :     {
+<span class="lineNum">     708 </span>            :         static QSequentialIterable invoke(const QVariant &amp;v)
+<span class="lineNum">     709 </span>            :         {
+<span class="lineNum">     710 </span>            :             if (v.userType() == qMetaTypeId&lt;QVariantList&gt;()) {
+<span class="lineNum">     711 </span>            :                 return QSequentialIterable(QtMetaTypePrivate::QSequentialIterableImpl(reinterpret_cast&lt;const QVariantList*&gt;(v.constData())));
+<span class="lineNum">     712 </span>            :             }
+<span class="lineNum">     713 </span>            :             if (v.userType() == qMetaTypeId&lt;QStringList&gt;()) {
+<span class="lineNum">     714 </span>            :                 return QSequentialIterable(QtMetaTypePrivate::QSequentialIterableImpl(reinterpret_cast&lt;const QStringList*&gt;(v.constData())));
+<span class="lineNum">     715 </span>            :             }
+<span class="lineNum">     716 </span>            :             return QSequentialIterable(v.value&lt;QtMetaTypePrivate::QSequentialIterableImpl&gt;());
+<span class="lineNum">     717 </span>            :         }
+<span class="lineNum">     718 </span>            :     };
+<span class="lineNum">     719 </span>            :     template&lt;&gt;
+<span class="lineNum">     720 </span>            :     struct QVariantValueHelperInterface&lt;QAssociativeIterable&gt;
+<span class="lineNum">     721 </span>            :     {
+<span class="lineNum">     722 </span>            :         static QAssociativeIterable invoke(const QVariant &amp;v)
+<span class="lineNum">     723 </span>            :         {
+<span class="lineNum">     724 </span>            :             if (v.userType() == qMetaTypeId&lt;QVariantMap&gt;()) {
+<span class="lineNum">     725 </span>            :                 return QAssociativeIterable(QtMetaTypePrivate::QAssociativeIterableImpl(reinterpret_cast&lt;const QVariantMap*&gt;(v.constData())));
+<span class="lineNum">     726 </span>            :             }
+<span class="lineNum">     727 </span>            :             if (v.userType() == qMetaTypeId&lt;QVariantHash&gt;()) {
+<span class="lineNum">     728 </span>            :                 return QAssociativeIterable(QtMetaTypePrivate::QAssociativeIterableImpl(reinterpret_cast&lt;const QVariantHash*&gt;(v.constData())));
+<span class="lineNum">     729 </span>            :             }
+<span class="lineNum">     730 </span>            :             return QAssociativeIterable(v.value&lt;QtMetaTypePrivate::QAssociativeIterableImpl&gt;());
+<span class="lineNum">     731 </span>            :         }
+<span class="lineNum">     732 </span>            :     };
+<span class="lineNum">     733 </span>            :     template&lt;&gt;
+<span class="lineNum">     734 </span>            :     struct QVariantValueHelperInterface&lt;QVariantList&gt;
+<span class="lineNum">     735 </span>            :     {
+<span class="lineNum">     736 </span>            :         static QVariantList invoke(const QVariant &amp;v)
+<span class="lineNum">     737 </span>            :         {
+<span class="lineNum">     738 </span>            :             if (v.userType() == qMetaTypeId&lt;QStringList&gt;() || QMetaType::hasRegisteredConverterFunction(v.userType(), qMetaTypeId&lt;QtMetaTypePrivate::QSequentialIterableImpl&gt;())) {
+<span class="lineNum">     739 </span>            :                 QSequentialIterable iter = QVariantValueHelperInterface&lt;QSequentialIterable&gt;::invoke(v);
+<span class="lineNum">     740 </span>            :                 QVariantList l;
+<span class="lineNum">     741 </span>            :                 l.reserve(iter.size());
+<span class="lineNum">     742 </span>            :                 for (QSequentialIterable::const_iterator it = iter.begin(), end = iter.end(); it != end; ++it)
+<span class="lineNum">     743 </span>            :                     l &lt;&lt; *it;
+<span class="lineNum">     744 </span>            :                 return l;
+<span class="lineNum">     745 </span>            :             }
+<span class="lineNum">     746 </span>            :             return QVariantValueHelper&lt;QVariantList&gt;::invoke(v);
+<span class="lineNum">     747 </span>            :         }
+<span class="lineNum">     748 </span>            :     };
+<span class="lineNum">     749 </span>            :     template&lt;&gt;
+<span class="lineNum">     750 </span>            :     struct QVariantValueHelperInterface&lt;QVariantHash&gt;
+<span class="lineNum">     751 </span>            :     {
+<span class="lineNum">     752 </span>            :         static QVariantHash invoke(const QVariant &amp;v)
+<span class="lineNum">     753 </span>            :         {
+<span class="lineNum">     754 </span>            :             if (QMetaType::hasRegisteredConverterFunction(v.userType(), qMetaTypeId&lt;QtMetaTypePrivate::QAssociativeIterableImpl&gt;())) {
+<span class="lineNum">     755 </span>            :                 QAssociativeIterable iter = QVariantValueHelperInterface&lt;QAssociativeIterable&gt;::invoke(v);
+<span class="lineNum">     756 </span>            :                 QVariantHash l;
+<span class="lineNum">     757 </span>            :                 l.reserve(iter.size());
+<span class="lineNum">     758 </span>            :                 for (QAssociativeIterable::const_iterator it = iter.begin(), end = iter.end(); it != end; ++it)
+<span class="lineNum">     759 </span>            :                     l.insert(it.key().toString(), it.value());
+<span class="lineNum">     760 </span>            :                 return l;
+<span class="lineNum">     761 </span>            :             }
+<span class="lineNum">     762 </span>            :             return QVariantValueHelper&lt;QVariantHash&gt;::invoke(v);
+<span class="lineNum">     763 </span>            :         }
+<span class="lineNum">     764 </span>            :     };
+<span class="lineNum">     765 </span>            :     template&lt;&gt;
+<span class="lineNum">     766 </span>            :     struct QVariantValueHelperInterface&lt;QVariantMap&gt;
+<span class="lineNum">     767 </span>            :     {
+<span class="lineNum">     768 </span>            :         static QVariantMap invoke(const QVariant &amp;v)
+<span class="lineNum">     769 </span>            :         {
+<span class="lineNum">     770 </span>            :             if (QMetaType::hasRegisteredConverterFunction(v.userType(), qMetaTypeId&lt;QtMetaTypePrivate::QAssociativeIterableImpl&gt;())) {
+<span class="lineNum">     771 </span>            :                 QAssociativeIterable iter = QVariantValueHelperInterface&lt;QAssociativeIterable&gt;::invoke(v);
+<span class="lineNum">     772 </span>            :                 QVariantMap l;
+<span class="lineNum">     773 </span>            :                 for (QAssociativeIterable::const_iterator it = iter.begin(), end = iter.end(); it != end; ++it)
+<span class="lineNum">     774 </span>            :                     l.insert(it.key().toString(), it.value());
+<span class="lineNum">     775 </span>            :                 return l;
+<span class="lineNum">     776 </span>            :             }
+<span class="lineNum">     777 </span>            :             return QVariantValueHelper&lt;QVariantMap&gt;::invoke(v);
+<span class="lineNum">     778 </span>            :         }
+<span class="lineNum">     779 </span>            :     };
+<span class="lineNum">     780 </span>            :     template&lt;&gt;
+<span class="lineNum">     781 </span>            :     struct QVariantValueHelperInterface&lt;QPair&lt;QVariant, QVariant&gt; &gt;
+<span class="lineNum">     782 </span>            :     {
+<span class="lineNum">     783 </span>            :         static QPair&lt;QVariant, QVariant&gt; invoke(const QVariant &amp;v)
+<span class="lineNum">     784 </span>            :         {
+<span class="lineNum">     785 </span>            :             if (v.userType() == qMetaTypeId&lt;QPair&lt;QVariant, QVariant&gt; &gt;())
+<span class="lineNum">     786 </span>            :                 return QVariantValueHelper&lt;QPair&lt;QVariant, QVariant&gt; &gt;::invoke(v);
+<span class="lineNum">     787 </span>            : 
+<span class="lineNum">     788 </span>            :             if (QMetaType::hasRegisteredConverterFunction(v.userType(), qMetaTypeId&lt;QtMetaTypePrivate::QPairVariantInterfaceImpl&gt;())) {
+<span class="lineNum">     789 </span>            :                 QtMetaTypePrivate::QPairVariantInterfaceImpl pi = v.value&lt;QtMetaTypePrivate::QPairVariantInterfaceImpl&gt;();
+<span class="lineNum">     790 </span>            : 
+<span class="lineNum">     791 </span>            :                 const QtMetaTypePrivate::VariantData d1 = pi.first();
+<span class="lineNum">     792 </span>            :                 QVariant v1(d1.metaTypeId, d1.data, d1.flags);
+<span class="lineNum">     793 </span>            :                 if (d1.metaTypeId == qMetaTypeId&lt;QVariant&gt;())
+<span class="lineNum">     794 </span>            :                     v1 = *reinterpret_cast&lt;const QVariant*&gt;(d1.data);
+<span class="lineNum">     795 </span>            : 
+<span class="lineNum">     796 </span>            :                 const QtMetaTypePrivate::VariantData d2 = pi.second();
+<span class="lineNum">     797 </span>            :                 QVariant v2(d2.metaTypeId, d2.data, d2.flags);
+<span class="lineNum">     798 </span>            :                 if (d2.metaTypeId == qMetaTypeId&lt;QVariant&gt;())
+<span class="lineNum">     799 </span>            :                     v2 = *reinterpret_cast&lt;const QVariant*&gt;(d2.data);
+<span class="lineNum">     800 </span>            : 
+<span class="lineNum">     801 </span>            :                 return QPair&lt;QVariant, QVariant&gt;(v1, v2);
+<span class="lineNum">     802 </span>            :             }
+<span class="lineNum">     803 </span>            :             return QVariantValueHelper&lt;QPair&lt;QVariant, QVariant&gt; &gt;::invoke(v);
+<span class="lineNum">     804 </span>            :         }
+<span class="lineNum">     805 </span>            :     };
+<a name="806"><span class="lineNum">     806 </span>            : }</a>
+<span class="lineNum">     807 </span>            : 
+<span class="lineNum">     808 </span><span class="lineCov">         48 : template&lt;typename T&gt; inline T qvariant_cast(const QVariant &amp;v)</span>
+<span class="lineNum">     809 </span>            : {
+<span class="lineNum">     810 </span><span class="lineCov">         48 :     return QtPrivate::QVariantValueHelperInterface&lt;T&gt;::invoke(v);</span>
+<span class="lineNum">     811 </span>            : }
+<span class="lineNum">     812 </span>            : 
+<span class="lineNum">     813 </span>            : template&lt;&gt; inline QVariant qvariant_cast&lt;QVariant&gt;(const QVariant &amp;v)
+<span class="lineNum">     814 </span>            : {
+<span class="lineNum">     815 </span>            :     if (v.userType() == QMetaType::QVariant)
+<span class="lineNum">     816 </span>            :         return *reinterpret_cast&lt;const QVariant *&gt;(v.constData());
+<span class="lineNum">     817 </span>            :     return v;
+<span class="lineNum">     818 </span>            : }
+<span class="lineNum">     819 </span>            : 
+<span class="lineNum">     820 </span>            : #if QT_DEPRECATED_SINCE(5, 0)
+<span class="lineNum">     821 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     822 </span>            : inline QT_DEPRECATED T qVariantValue(const QVariant &amp;variant)
+<span class="lineNum">     823 </span>            : { return qvariant_cast&lt;T&gt;(variant); }
+<span class="lineNum">     824 </span>            : 
+<span class="lineNum">     825 </span>            : template&lt;typename T&gt;
+<span class="lineNum">     826 </span>            : inline QT_DEPRECATED bool qVariantCanConvert(const QVariant &amp;variant)
+<span class="lineNum">     827 </span>            : { return variant.template canConvert&lt;T&gt;(); }
+<span class="lineNum">     828 </span>            : #endif
+<span class="lineNum">     829 </span>            : 
+<span class="lineNum">     830 </span>            : #endif
+<span class="lineNum">     831 </span>            : Q_DECLARE_SHARED(QVariant)
+<span class="lineNum">     832 </span>            : 
+<span class="lineNum">     833 </span>            : #ifndef QT_NO_DEBUG_STREAM
+<span class="lineNum">     834 </span>            : Q_CORE_EXPORT QDebug operator&lt;&lt;(QDebug, const QVariant &amp;);
+<span class="lineNum">     835 </span>            : Q_CORE_EXPORT QDebug operator&lt;&lt;(QDebug, const QVariant::Type);
+<span class="lineNum">     836 </span>            : #endif
+<span class="lineNum">     837 </span>            : 
+<span class="lineNum">     838 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     839 </span>            : 
+<span class="lineNum">     840 </span>            : #endif // QVARIANT_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

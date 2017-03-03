@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /usr/include/qt5/QtCore/qtextstream.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtCore</a> - qtextstream.h<span style="font-size: 80%;"> (source / <a href="qtextstream.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-03-03 16:04:58</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+<span class="lineNum">       4 </span>            : ** Contact: http://www.qt-project.org/legal
+<span class="lineNum">       5 </span>            : **
+<span class="lineNum">       6 </span>            : ** This file is part of the QtCore module of the Qt Toolkit.
+<span class="lineNum">       7 </span>            : **
+<span class="lineNum">       8 </span>            : ** $QT_BEGIN_LICENSE:LGPL$
+<span class="lineNum">       9 </span>            : ** Commercial License Usage
+<span class="lineNum">      10 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      11 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      12 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      13 </span>            : ** a written agreement between you and Digia.  For licensing terms and
+<span class="lineNum">      14 </span>            : ** conditions see http://qt.digia.com/licensing.  For further information
+<span class="lineNum">      15 </span>            : ** use the contact form at http://qt.digia.com/contact-us.
+<span class="lineNum">      16 </span>            : **
+<span class="lineNum">      17 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      18 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      19 </span>            : ** General Public License version 2.1 as published by the Free Software
+<span class="lineNum">      20 </span>            : ** Foundation and appearing in the file LICENSE.LGPL included in the
+<span class="lineNum">      21 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      22 </span>            : ** ensure the GNU Lesser General Public License version 2.1 requirements
+<span class="lineNum">      23 </span>            : ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      24 </span>            : **
+<span class="lineNum">      25 </span>            : ** In addition, as a special exception, Digia gives you certain additional
+<span class="lineNum">      26 </span>            : ** rights.  These rights are described in the Digia Qt LGPL Exception
+<span class="lineNum">      27 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      28 </span>            : **
+<span class="lineNum">      29 </span>            : ** GNU General Public License Usage
+<span class="lineNum">      30 </span>            : ** Alternatively, this file may be used under the terms of the GNU
+<span class="lineNum">      31 </span>            : ** General Public License version 3.0 as published by the Free Software
+<span class="lineNum">      32 </span>            : ** Foundation and appearing in the file LICENSE.GPL included in the
+<span class="lineNum">      33 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      34 </span>            : ** ensure the GNU General Public License version 3.0 requirements will be
+<span class="lineNum">      35 </span>            : ** met: http://www.gnu.org/copyleft/gpl.html.
+<span class="lineNum">      36 </span>            : **
+<span class="lineNum">      37 </span>            : **
+<span class="lineNum">      38 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      39 </span>            : **
+<span class="lineNum">      40 </span>            : ****************************************************************************/
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : #ifndef QTEXTSTREAM_H
+<span class="lineNum">      43 </span>            : #define QTEXTSTREAM_H
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            : #include &lt;QtCore/qiodevice.h&gt;
+<span class="lineNum">      46 </span>            : #include &lt;QtCore/qstring.h&gt;
+<span class="lineNum">      47 </span>            : #include &lt;QtCore/qchar.h&gt;
+<span class="lineNum">      48 </span>            : #include &lt;QtCore/qlocale.h&gt;
+<span class="lineNum">      49 </span>            : #include &lt;QtCore/qscopedpointer.h&gt;
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span>            : #include &lt;stdio.h&gt;
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            : #ifdef Status
+<span class="lineNum">      54 </span>            : #error qtextstream.h must be included before any header file that defines Status
+<span class="lineNum">      55 </span>            : #endif
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            : class QTextCodec;
+<span class="lineNum">      61 </span>            : class QTextDecoder;
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            : class QTextStreamPrivate;
+<span class="lineNum">      64 </span>            : class Q_CORE_EXPORT QTextStream                                // text stream class
+<span class="lineNum">      65 </span>            : {
+<span class="lineNum">      66 </span>            :     Q_DECLARE_PRIVATE(QTextStream)
+<span class="lineNum">      67 </span>            : 
+<span class="lineNum">      68 </span>            : public:
+<span class="lineNum">      69 </span>            :     enum RealNumberNotation {
+<span class="lineNum">      70 </span>            :         SmartNotation,
+<span class="lineNum">      71 </span>            :         FixedNotation,
+<span class="lineNum">      72 </span>            :         ScientificNotation
+<span class="lineNum">      73 </span>            :     };
+<span class="lineNum">      74 </span>            :     enum FieldAlignment {
+<span class="lineNum">      75 </span>            :         AlignLeft,
+<span class="lineNum">      76 </span>            :         AlignRight,
+<span class="lineNum">      77 </span>            :         AlignCenter,
+<span class="lineNum">      78 </span>            :         AlignAccountingStyle
+<span class="lineNum">      79 </span>            :     };
+<span class="lineNum">      80 </span>            :     enum Status {
+<span class="lineNum">      81 </span>            :         Ok,
+<span class="lineNum">      82 </span>            :         ReadPastEnd,
+<span class="lineNum">      83 </span>            :         ReadCorruptData,
+<span class="lineNum">      84 </span>            :         WriteFailed
+<span class="lineNum">      85 </span>            :     };
+<span class="lineNum">      86 </span>            :     enum NumberFlag {
+<span class="lineNum">      87 </span>            :         ShowBase = 0x1,
+<span class="lineNum">      88 </span>            :         ForcePoint = 0x2,
+<span class="lineNum">      89 </span>            :         ForceSign = 0x4,
+<span class="lineNum">      90 </span>            :         UppercaseBase = 0x8,
+<span class="lineNum">      91 </span>            :         UppercaseDigits = 0x10
+<span class="lineNum">      92 </span>            :     };
+<span class="lineNum">      93 </span>            :     Q_DECLARE_FLAGS(NumberFlags, NumberFlag)
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span>            :     QTextStream();
+<span class="lineNum">      96 </span>            :     explicit QTextStream(QIODevice *device);
+<span class="lineNum">      97 </span>            :     explicit QTextStream(FILE *fileHandle, QIODevice::OpenMode openMode = QIODevice::ReadWrite);
+<span class="lineNum">      98 </span>            :     explicit QTextStream(QString *string, QIODevice::OpenMode openMode = QIODevice::ReadWrite);
+<span class="lineNum">      99 </span>            :     explicit QTextStream(QByteArray *array, QIODevice::OpenMode openMode = QIODevice::ReadWrite);
+<span class="lineNum">     100 </span>            :     explicit QTextStream(const QByteArray &amp;array, QIODevice::OpenMode openMode = QIODevice::ReadOnly);
+<span class="lineNum">     101 </span>            :     virtual ~QTextStream();
+<span class="lineNum">     102 </span>            : 
+<span class="lineNum">     103 </span>            : #ifndef QT_NO_TEXTCODEC
+<span class="lineNum">     104 </span>            :     void setCodec(QTextCodec *codec);
+<span class="lineNum">     105 </span>            :     void setCodec(const char *codecName);
+<span class="lineNum">     106 </span>            :     QTextCodec *codec() const;
+<span class="lineNum">     107 </span>            :     void setAutoDetectUnicode(bool enabled);
+<span class="lineNum">     108 </span>            :     bool autoDetectUnicode() const;
+<span class="lineNum">     109 </span>            :     void setGenerateByteOrderMark(bool generate);
+<span class="lineNum">     110 </span>            :     bool generateByteOrderMark() const;
+<span class="lineNum">     111 </span>            : #endif
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            :     void setLocale(const QLocale &amp;locale);
+<span class="lineNum">     114 </span>            :     QLocale locale() const;
+<span class="lineNum">     115 </span>            : 
+<span class="lineNum">     116 </span>            :     void setDevice(QIODevice *device);
+<span class="lineNum">     117 </span>            :     QIODevice *device() const;
+<span class="lineNum">     118 </span>            : 
+<span class="lineNum">     119 </span>            :     void setString(QString *string, QIODevice::OpenMode openMode = QIODevice::ReadWrite);
+<span class="lineNum">     120 </span>            :     QString *string() const;
+<span class="lineNum">     121 </span>            : 
+<span class="lineNum">     122 </span>            :     Status status() const;
+<span class="lineNum">     123 </span>            :     void setStatus(Status status);
+<span class="lineNum">     124 </span>            :     void resetStatus();
+<span class="lineNum">     125 </span>            : 
+<span class="lineNum">     126 </span>            :     bool atEnd() const;
+<span class="lineNum">     127 </span>            :     void reset();
+<span class="lineNum">     128 </span>            :     void flush();
+<span class="lineNum">     129 </span>            :     bool seek(qint64 pos);
+<span class="lineNum">     130 </span>            :     qint64 pos() const;
+<span class="lineNum">     131 </span>            : 
+<span class="lineNum">     132 </span>            :     void skipWhiteSpace();
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span>            :     QString readLine(qint64 maxlen = 0);
+<span class="lineNum">     135 </span>            :     QString readAll();
+<span class="lineNum">     136 </span>            :     QString read(qint64 maxlen);
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span>            :     void setFieldAlignment(FieldAlignment alignment);
+<span class="lineNum">     139 </span>            :     FieldAlignment fieldAlignment() const;
+<span class="lineNum">     140 </span>            : 
+<span class="lineNum">     141 </span>            :     void setPadChar(QChar ch);
+<span class="lineNum">     142 </span>            :     QChar padChar() const;
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span>            :     void setFieldWidth(int width);
+<span class="lineNum">     145 </span>            :     int fieldWidth() const;
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span>            :     void setNumberFlags(NumberFlags flags);
+<span class="lineNum">     148 </span>            :     NumberFlags numberFlags() const;
+<span class="lineNum">     149 </span>            : 
+<span class="lineNum">     150 </span>            :     void setIntegerBase(int base);
+<span class="lineNum">     151 </span>            :     int integerBase() const;
+<span class="lineNum">     152 </span>            : 
+<span class="lineNum">     153 </span>            :     void setRealNumberNotation(RealNumberNotation notation);
+<span class="lineNum">     154 </span>            :     RealNumberNotation realNumberNotation() const;
+<span class="lineNum">     155 </span>            : 
+<span class="lineNum">     156 </span>            :     void setRealNumberPrecision(int precision);
+<span class="lineNum">     157 </span>            :     int realNumberPrecision() const;
+<span class="lineNum">     158 </span>            : 
+<span class="lineNum">     159 </span>            :     QTextStream &amp;operator&gt;&gt;(QChar &amp;ch);
+<span class="lineNum">     160 </span>            :     QTextStream &amp;operator&gt;&gt;(char &amp;ch);
+<span class="lineNum">     161 </span>            :     QTextStream &amp;operator&gt;&gt;(signed short &amp;i);
+<span class="lineNum">     162 </span>            :     QTextStream &amp;operator&gt;&gt;(unsigned short &amp;i);
+<span class="lineNum">     163 </span>            :     QTextStream &amp;operator&gt;&gt;(signed int &amp;i);
+<span class="lineNum">     164 </span>            :     QTextStream &amp;operator&gt;&gt;(unsigned int &amp;i);
+<span class="lineNum">     165 </span>            :     QTextStream &amp;operator&gt;&gt;(signed long &amp;i);
+<span class="lineNum">     166 </span>            :     QTextStream &amp;operator&gt;&gt;(unsigned long &amp;i);
+<span class="lineNum">     167 </span>            :     QTextStream &amp;operator&gt;&gt;(qlonglong &amp;i);
+<span class="lineNum">     168 </span>            :     QTextStream &amp;operator&gt;&gt;(qulonglong &amp;i);
+<span class="lineNum">     169 </span>            :     QTextStream &amp;operator&gt;&gt;(float &amp;f);
+<span class="lineNum">     170 </span>            :     QTextStream &amp;operator&gt;&gt;(double &amp;f);
+<span class="lineNum">     171 </span>            :     QTextStream &amp;operator&gt;&gt;(QString &amp;s);
+<span class="lineNum">     172 </span>            :     QTextStream &amp;operator&gt;&gt;(QByteArray &amp;array);
+<span class="lineNum">     173 </span>            :     QTextStream &amp;operator&gt;&gt;(char *c);
+<span class="lineNum">     174 </span>            : 
+<span class="lineNum">     175 </span>            :     QTextStream &amp;operator&lt;&lt;(QChar ch);
+<span class="lineNum">     176 </span>            :     QTextStream &amp;operator&lt;&lt;(char ch);
+<span class="lineNum">     177 </span>            :     QTextStream &amp;operator&lt;&lt;(signed short i);
+<span class="lineNum">     178 </span>            :     QTextStream &amp;operator&lt;&lt;(unsigned short i);
+<span class="lineNum">     179 </span>            :     QTextStream &amp;operator&lt;&lt;(signed int i);
+<span class="lineNum">     180 </span>            :     QTextStream &amp;operator&lt;&lt;(unsigned int i);
+<span class="lineNum">     181 </span>            :     QTextStream &amp;operator&lt;&lt;(signed long i);
+<span class="lineNum">     182 </span>            :     QTextStream &amp;operator&lt;&lt;(unsigned long i);
+<span class="lineNum">     183 </span>            :     QTextStream &amp;operator&lt;&lt;(qlonglong i);
+<span class="lineNum">     184 </span>            :     QTextStream &amp;operator&lt;&lt;(qulonglong i);
+<span class="lineNum">     185 </span>            :     QTextStream &amp;operator&lt;&lt;(float f);
+<span class="lineNum">     186 </span>            :     QTextStream &amp;operator&lt;&lt;(double f);
+<span class="lineNum">     187 </span>            :     QTextStream &amp;operator&lt;&lt;(const QString &amp;s);
+<span class="lineNum">     188 </span>            :     QTextStream &amp;operator&lt;&lt;(QLatin1String s);
+<span class="lineNum">     189 </span>            :     QTextStream &amp;operator&lt;&lt;(const QByteArray &amp;array);
+<span class="lineNum">     190 </span>            :     QTextStream &amp;operator&lt;&lt;(const char *c);
+<span class="lineNum">     191 </span>            :     QTextStream &amp;operator&lt;&lt;(const void *ptr);
+<span class="lineNum">     192 </span>            : 
+<span class="lineNum">     193 </span>            : private:
+<span class="lineNum">     194 </span>            :     Q_DISABLE_COPY(QTextStream)
+<span class="lineNum">     195 </span>            :     friend class QDebugStateSaverPrivate;
+<span class="lineNum">     196 </span>            : 
+<span class="lineNum">     197 </span>            :     QScopedPointer&lt;QTextStreamPrivate&gt; d_ptr;
+<span class="lineNum">     198 </span>            : };
+<span class="lineNum">     199 </span>            : 
+<span class="lineNum">     200 </span>            : Q_DECLARE_OPERATORS_FOR_FLAGS(QTextStream::NumberFlags)
+<span class="lineNum">     201 </span>            : 
+<span class="lineNum">     202 </span>            : /*****************************************************************************
+<span class="lineNum">     203 </span>            :   QTextStream manipulators
+<span class="lineNum">     204 </span>            :  *****************************************************************************/
+<span class="lineNum">     205 </span>            : 
+<span class="lineNum">     206 </span>            : typedef QTextStream &amp; (*QTextStreamFunction)(QTextStream &amp;);// manipulator function
+<span class="lineNum">     207 </span>            : typedef void (QTextStream::*QTSMFI)(int); // manipulator w/int argument
+<span class="lineNum">     208 </span>            : typedef void (QTextStream::*QTSMFC)(QChar); // manipulator w/QChar argument
+<span class="lineNum">     209 </span>            : 
+<span class="lineNum">     210 </span>            : 
+<span class="lineNum">     211 </span>            : class Q_CORE_EXPORT QTextStreamManipulator
+<span class="lineNum">     212 </span>            : {
+<span class="lineNum">     213 </span>            : public:
+<span class="lineNum">     214 </span>            :     QTextStreamManipulator(QTSMFI m, int a) { mf = m; mc = 0; arg = a; }
+<span class="lineNum">     215 </span>            :     QTextStreamManipulator(QTSMFC m, QChar c) { mf = 0; mc = m; ch = c; arg = -1; }
+<span class="lineNum">     216 </span>            :     void exec(QTextStream &amp;s) { if (mf) { (s.*mf)(arg); } else { (s.*mc)(ch); } }
+<span class="lineNum">     217 </span>            : 
+<span class="lineNum">     218 </span>            : private:
+<span class="lineNum">     219 </span>            :     QTSMFI mf;                                        // QTextStream member function
+<span class="lineNum">     220 </span>            :     QTSMFC mc;                                        // QTextStream member function
+<span class="lineNum">     221 </span>            :     int arg;                                          // member function argument
+<span class="lineNum">     222 </span>            :     QChar ch;
+<span class="lineNum">     223 </span>            : };
+<span class="lineNum">     224 </span>            : 
+<span class="lineNum">     225 </span>            : inline QTextStream &amp;operator&gt;&gt;(QTextStream &amp;s, QTextStreamFunction f)
+<a name="226"><span class="lineNum">     226 </span>            : { return (*f)(s); }</a>
+<span class="lineNum">     227 </span>            : 
+<span class="lineNum">     228 </span><span class="lineCov">       7731 : inline QTextStream &amp;operator&lt;&lt;(QTextStream &amp;s, QTextStreamFunction f)</span>
+<span class="lineNum">     229 </span><span class="lineCov">       7731 : { return (*f)(s); }</span>
+<span class="lineNum">     230 </span>            : 
+<span class="lineNum">     231 </span>            : inline QTextStream &amp;operator&lt;&lt;(QTextStream &amp;s, QTextStreamManipulator m)
+<span class="lineNum">     232 </span>            : { m.exec(s); return s; }
+<span class="lineNum">     233 </span>            : 
+<span class="lineNum">     234 </span>            : Q_CORE_EXPORT QTextStream &amp;bin(QTextStream &amp;s);
+<span class="lineNum">     235 </span>            : Q_CORE_EXPORT QTextStream &amp;oct(QTextStream &amp;s);
+<span class="lineNum">     236 </span>            : Q_CORE_EXPORT QTextStream &amp;dec(QTextStream &amp;s);
+<span class="lineNum">     237 </span>            : Q_CORE_EXPORT QTextStream &amp;hex(QTextStream &amp;s);
+<span class="lineNum">     238 </span>            : 
+<span class="lineNum">     239 </span>            : Q_CORE_EXPORT QTextStream &amp;showbase(QTextStream &amp;s);
+<span class="lineNum">     240 </span>            : Q_CORE_EXPORT QTextStream &amp;forcesign(QTextStream &amp;s);
+<span class="lineNum">     241 </span>            : Q_CORE_EXPORT QTextStream &amp;forcepoint(QTextStream &amp;s);
+<span class="lineNum">     242 </span>            : Q_CORE_EXPORT QTextStream &amp;noshowbase(QTextStream &amp;s);
+<span class="lineNum">     243 </span>            : Q_CORE_EXPORT QTextStream &amp;noforcesign(QTextStream &amp;s);
+<span class="lineNum">     244 </span>            : Q_CORE_EXPORT QTextStream &amp;noforcepoint(QTextStream &amp;s);
+<span class="lineNum">     245 </span>            : 
+<span class="lineNum">     246 </span>            : Q_CORE_EXPORT QTextStream &amp;uppercasebase(QTextStream &amp;s);
+<span class="lineNum">     247 </span>            : Q_CORE_EXPORT QTextStream &amp;uppercasedigits(QTextStream &amp;s);
+<span class="lineNum">     248 </span>            : Q_CORE_EXPORT QTextStream &amp;lowercasebase(QTextStream &amp;s);
+<span class="lineNum">     249 </span>            : Q_CORE_EXPORT QTextStream &amp;lowercasedigits(QTextStream &amp;s);
+<span class="lineNum">     250 </span>            : 
+<span class="lineNum">     251 </span>            : Q_CORE_EXPORT QTextStream &amp;fixed(QTextStream &amp;s);
+<span class="lineNum">     252 </span>            : Q_CORE_EXPORT QTextStream &amp;scientific(QTextStream &amp;s);
+<span class="lineNum">     253 </span>            : 
+<span class="lineNum">     254 </span>            : Q_CORE_EXPORT QTextStream &amp;left(QTextStream &amp;s);
+<span class="lineNum">     255 </span>            : Q_CORE_EXPORT QTextStream &amp;right(QTextStream &amp;s);
+<span class="lineNum">     256 </span>            : Q_CORE_EXPORT QTextStream &amp;center(QTextStream &amp;s);
+<span class="lineNum">     257 </span>            : 
+<span class="lineNum">     258 </span>            : Q_CORE_EXPORT QTextStream &amp;endl(QTextStream &amp;s);
+<span class="lineNum">     259 </span>            : Q_CORE_EXPORT QTextStream &amp;flush(QTextStream &amp;s);
+<span class="lineNum">     260 </span>            : Q_CORE_EXPORT QTextStream &amp;reset(QTextStream &amp;s);
+<span class="lineNum">     261 </span>            : 
+<span class="lineNum">     262 </span>            : Q_CORE_EXPORT QTextStream &amp;bom(QTextStream &amp;s);
+<span class="lineNum">     263 </span>            : 
+<span class="lineNum">     264 </span>            : Q_CORE_EXPORT QTextStream &amp;ws(QTextStream &amp;s);
+<span class="lineNum">     265 </span>            : 
+<span class="lineNum">     266 </span>            : inline QTextStreamManipulator qSetFieldWidth(int width)
+<span class="lineNum">     267 </span>            : {
+<span class="lineNum">     268 </span>            :     QTSMFI func = &amp;QTextStream::setFieldWidth;
+<span class="lineNum">     269 </span>            :     return QTextStreamManipulator(func,width);
+<span class="lineNum">     270 </span>            : }
+<span class="lineNum">     271 </span>            : 
+<span class="lineNum">     272 </span>            : inline QTextStreamManipulator qSetPadChar(QChar ch)
+<span class="lineNum">     273 </span>            : {
+<span class="lineNum">     274 </span>            :     QTSMFC func = &amp;QTextStream::setPadChar;
+<span class="lineNum">     275 </span>            :     return QTextStreamManipulator(func, ch);
+<span class="lineNum">     276 </span>            : }
+<span class="lineNum">     277 </span>            : 
+<span class="lineNum">     278 </span>            : inline QTextStreamManipulator qSetRealNumberPrecision(int precision)
+<span class="lineNum">     279 </span>            : {
+<span class="lineNum">     280 </span>            :     QTSMFI func = &amp;QTextStream::setRealNumberPrecision;
+<span class="lineNum">     281 </span>            :     return QTextStreamManipulator(func, precision);
+<span class="lineNum">     282 </span>            : }
+<span class="lineNum">     283 </span>            : 
+<span class="lineNum">     284 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     285 </span>            : 
+<span class="lineNum">     286 </span>            : #endif // QTEXTSTREAM_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

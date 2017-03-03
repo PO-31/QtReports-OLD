@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /usr/include/qt5/QtCore/qbasicatomic.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtCore</a> - qbasicatomic.h<span style="font-size: 80%;"> (source / <a href="qbasicatomic.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-03-03 16:04:58</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2011 Thiago Macieira &lt;thiago@kde.org&gt;
+<span class="lineNum">       4 </span>            : ** Contact: http://www.qt-project.org/legal
+<span class="lineNum">       5 </span>            : **
+<span class="lineNum">       6 </span>            : ** This file is part of the QtCore module of the Qt Toolkit.
+<span class="lineNum">       7 </span>            : **
+<span class="lineNum">       8 </span>            : ** $QT_BEGIN_LICENSE:LGPL$
+<span class="lineNum">       9 </span>            : ** Commercial License Usage
+<span class="lineNum">      10 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      11 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      12 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      13 </span>            : ** a written agreement between you and Digia.  For licensing terms and
+<span class="lineNum">      14 </span>            : ** conditions see http://qt.digia.com/licensing.  For further information
+<span class="lineNum">      15 </span>            : ** use the contact form at http://qt.digia.com/contact-us.
+<span class="lineNum">      16 </span>            : **
+<span class="lineNum">      17 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      18 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      19 </span>            : ** General Public License version 2.1 as published by the Free Software
+<span class="lineNum">      20 </span>            : ** Foundation and appearing in the file LICENSE.LGPL included in the
+<span class="lineNum">      21 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      22 </span>            : ** ensure the GNU Lesser General Public License version 2.1 requirements
+<span class="lineNum">      23 </span>            : ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      24 </span>            : **
+<span class="lineNum">      25 </span>            : ** In addition, as a special exception, Digia gives you certain additional
+<span class="lineNum">      26 </span>            : ** rights.  These rights are described in the Digia Qt LGPL Exception
+<span class="lineNum">      27 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      28 </span>            : **
+<span class="lineNum">      29 </span>            : ** GNU General Public License Usage
+<span class="lineNum">      30 </span>            : ** Alternatively, this file may be used under the terms of the GNU
+<span class="lineNum">      31 </span>            : ** General Public License version 3.0 as published by the Free Software
+<span class="lineNum">      32 </span>            : ** Foundation and appearing in the file LICENSE.GPL included in the
+<span class="lineNum">      33 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      34 </span>            : ** ensure the GNU General Public License version 3.0 requirements will be
+<span class="lineNum">      35 </span>            : ** met: http://www.gnu.org/copyleft/gpl.html.
+<span class="lineNum">      36 </span>            : **
+<span class="lineNum">      37 </span>            : **
+<span class="lineNum">      38 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      39 </span>            : **
+<span class="lineNum">      40 </span>            : ****************************************************************************/
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : #include &lt;QtCore/qatomic.h&gt;
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span>            : #ifndef QBASICATOMIC_H
+<span class="lineNum">      45 </span>            : #define QBASICATOMIC_H
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            : #if defined(QT_BOOTSTRAPPED)
+<span class="lineNum">      48 </span>            : #  include &lt;QtCore/qatomic_bootstrap.h&gt;
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span>            : // Compiler dependent implementation
+<span class="lineNum">      51 </span>            : #elif defined(Q_CC_MSVC)
+<span class="lineNum">      52 </span>            : #  include &lt;QtCore/qatomic_msvc.h&gt;
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            : // Operating system dependent implementation
+<span class="lineNum">      55 </span>            : #elif defined(Q_OS_INTEGRITY)
+<span class="lineNum">      56 </span>            : #  include &quot;QtCore/qatomic_integrity.h&quot;
+<span class="lineNum">      57 </span>            : #elif defined(Q_OS_VXWORKS)
+<span class="lineNum">      58 </span>            : #  include &quot;QtCore/qatomic_vxworks.h&quot;
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span>            : // Processor dependent implementation
+<span class="lineNum">      61 </span>            : #elif defined(Q_PROCESSOR_ALPHA)
+<span class="lineNum">      62 </span>            : #  include &quot;QtCore/qatomic_alpha.h&quot;
+<span class="lineNum">      63 </span>            : #elif defined(Q_PROCESSOR_ARM_V7) &amp;&amp; defined(Q_PROCESSOR_ARM_32)
+<span class="lineNum">      64 </span>            : # include &quot;QtCore/qatomic_armv7.h&quot;
+<span class="lineNum">      65 </span>            : #elif defined(Q_PROCESSOR_ARM_V6) &amp;&amp; defined(Q_PROCESSOR_ARM_32)
+<span class="lineNum">      66 </span>            : # include &quot;QtCore/qatomic_armv6.h&quot;
+<span class="lineNum">      67 </span>            : #elif defined(Q_PROCESSOR_ARM_V5) &amp;&amp; defined(Q_PROCESSOR_ARM_32)
+<span class="lineNum">      68 </span>            : # include &quot;QtCore/qatomic_armv5.h&quot;
+<span class="lineNum">      69 </span>            : #elif defined(Q_PROCESSOR_BFIN)
+<span class="lineNum">      70 </span>            : #  include &quot;QtCore/qatomic_bfin.h&quot;
+<span class="lineNum">      71 </span>            : #elif defined(Q_PROCESSOR_IA64)
+<span class="lineNum">      72 </span>            : #  include &quot;QtCore/qatomic_ia64.h&quot;
+<span class="lineNum">      73 </span>            : #elif defined(Q_PROCESSOR_MIPS)
+<span class="lineNum">      74 </span>            : #  include &quot;QtCore/qatomic_mips.h&quot;
+<span class="lineNum">      75 </span>            : #elif defined(Q_PROCESSOR_POWER)
+<span class="lineNum">      76 </span>            : #  include &quot;QtCore/qatomic_power.h&quot;
+<span class="lineNum">      77 </span>            : #elif defined(Q_PROCESSOR_S390)
+<span class="lineNum">      78 </span>            : #  include &quot;QtCore/qatomic_s390.h&quot;
+<span class="lineNum">      79 </span>            : #elif defined(Q_PROCESSOR_SH4A)
+<span class="lineNum">      80 </span>            : #  include &quot;QtCore/qatomic_sh4a.h&quot;
+<span class="lineNum">      81 </span>            : #elif defined(Q_PROCESSOR_SPARC)
+<span class="lineNum">      82 </span>            : #  include &quot;QtCore/qatomic_sparc.h&quot;
+<span class="lineNum">      83 </span>            : #elif defined(Q_PROCESSOR_X86)
+<span class="lineNum">      84 </span>            : #  include &lt;QtCore/qatomic_x86.h&gt;
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span>            : // Fallback compiler dependent implementation
+<span class="lineNum">      87 </span>            : #elif defined(Q_COMPILER_ATOMICS) &amp;&amp; defined(Q_COMPILER_CONSTEXPR)
+<span class="lineNum">      88 </span>            : #  include &lt;QtCore/qatomic_cxx11.h&gt;
+<span class="lineNum">      89 </span>            : #elif defined(Q_CC_GNU)
+<span class="lineNum">      90 </span>            : #  include &lt;QtCore/qatomic_gcc.h&gt;
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span>            : // Fallback operating system dependent implementation
+<span class="lineNum">      93 </span>            : #elif defined(Q_OS_UNIX)
+<span class="lineNum">      94 </span>            : #  include &lt;QtCore/qatomic_unix.h&gt;
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span>            : // No fallback
+<span class="lineNum">      97 </span>            : #else
+<span class="lineNum">      98 </span>            : #  error &quot;Qt has not been ported to this platform&quot;
+<span class="lineNum">      99 </span>            : #endif
+<span class="lineNum">     100 </span>            : 
+<span class="lineNum">     101 </span>            : // Only include if the implementation has been ported to QAtomicOps
+<span class="lineNum">     102 </span>            : #ifndef QOLDBASICATOMIC_H
+<span class="lineNum">     103 </span>            : 
+<span class="lineNum">     104 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span>            : #if 0
+<span class="lineNum">     107 </span>            : // silence syncqt warnings
+<span class="lineNum">     108 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     109 </span>            : #pragma qt_no_master_include
+<span class="lineNum">     110 </span>            : #pragma qt_sync_stop_processing
+<span class="lineNum">     111 </span>            : #endif
+<span class="lineNum">     112 </span>            : 
+<span class="lineNum">     113 </span>            : // New atomics
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span>            : #if defined(Q_COMPILER_CONSTEXPR) &amp;&amp; defined(Q_COMPILER_DEFAULT_MEMBERS) &amp;&amp; defined(Q_COMPILER_DELETE_MEMBERS)
+<span class="lineNum">     116 </span>            : # if defined(Q_CC_CLANG) &amp;&amp; ((((__clang_major__ * 100) + __clang_minor__) &lt; 303) \
+<span class="lineNum">     117 </span>            :                              || defined(__apple_build_version__) \
+<span class="lineNum">     118 </span>            :                             )
+<span class="lineNum">     119 </span>            :    /* Do not define QT_BASIC_ATOMIC_HAS_CONSTRUCTORS for &quot;stock&quot; clang before version 3.3.
+<span class="lineNum">     120 </span>            :       Apple's version has different (higher!) version numbers, so disable it for all of them for now.
+<span class="lineNum">     121 </span>            :       (The only way to distinguish between them seems to be a check for __apple_build_version__ .)
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span>            :       For details about the bug: see http://llvm.org/bugs/show_bug.cgi?id=12670
+<span class="lineNum">     124 </span>            :     */
+<span class="lineNum">     125 </span>            : # else
+<span class="lineNum">     126 </span>            : #  define QT_BASIC_ATOMIC_HAS_CONSTRUCTORS
+<span class="lineNum">     127 </span>            : # endif
+<span class="lineNum">     128 </span>            : #endif
+<span class="lineNum">     129 </span>            : 
+<span class="lineNum">     130 </span>            : template &lt;typename T&gt;
+<span class="lineNum">     131 </span>            : class QBasicAtomicInteger
+<span class="lineNum">     132 </span>            : {
+<span class="lineNum">     133 </span>            : public:
+<span class="lineNum">     134 </span>            :     typedef QAtomicOps&lt;T&gt; Ops;
+<span class="lineNum">     135 </span>            :     // static check that this is a valid integer
+<span class="lineNum">     136 </span>            :     typedef char PermittedIntegerType[QAtomicIntegerTraits&lt;T&gt;::IsInteger ? 1 : -1];
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span>            :     typename Ops::Type _q_value;
+<span class="lineNum">     139 </span>            : 
+<a name="140"><span class="lineNum">     140 </span>            :     // Everything below is either implemented in ../arch/qatomic_XXX.h or (as fallback) in qgenericatomic.h</a>
+<a name="141"><span class="lineNum">     141 </span>            : </a>
+<span class="lineNum">     142 </span><span class="lineCov">      23474 :     T load() const Q_DECL_NOTHROW { return Ops::load(_q_value); }</span>
+<span class="lineNum">     143 </span><span class="lineCov">       1836 :     void store(T newValue) Q_DECL_NOTHROW { Ops::store(_q_value, newValue); }</span>
+<span class="lineNum">     144 </span>            : 
+<span class="lineNum">     145 </span>            :     T loadAcquire() const Q_DECL_NOTHROW { return Ops::loadAcquire(_q_value); }
+<span class="lineNum">     146 </span>            :     void storeRelease(T newValue) Q_DECL_NOTHROW { Ops::storeRelease(_q_value, newValue); }
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span>            :     static Q_DECL_CONSTEXPR bool isReferenceCountingNative() Q_DECL_NOTHROW { return Ops::isReferenceCountingNative(); }
+<a name="149"><span class="lineNum">     149 </span>            :     static Q_DECL_CONSTEXPR bool isReferenceCountingWaitFree() Q_DECL_NOTHROW { return Ops::isReferenceCountingWaitFree(); }</a>
+<a name="150"><span class="lineNum">     150 </span>            : </a>
+<span class="lineNum">     151 </span><span class="lineCov">       8967 :     bool ref() Q_DECL_NOTHROW { return Ops::ref(_q_value); }</span>
+<span class="lineNum">     152 </span><span class="lineCov">       4258 :     bool deref() Q_DECL_NOTHROW { return Ops::deref(_q_value); }</span>
+<span class="lineNum">     153 </span>            : 
+<span class="lineNum">     154 </span>            :     static Q_DECL_CONSTEXPR bool isTestAndSetNative() Q_DECL_NOTHROW { return Ops::isTestAndSetNative(); }
+<span class="lineNum">     155 </span>            :     static Q_DECL_CONSTEXPR bool isTestAndSetWaitFree() Q_DECL_NOTHROW { return Ops::isTestAndSetWaitFree(); }
+<span class="lineNum">     156 </span>            : 
+<span class="lineNum">     157 </span>            :     bool testAndSetRelaxed(T expectedValue, T newValue) Q_DECL_NOTHROW
+<span class="lineNum">     158 </span>            :     { return Ops::testAndSetRelaxed(_q_value, expectedValue, newValue); }
+<span class="lineNum">     159 </span>            :     bool testAndSetAcquire(T expectedValue, T newValue) Q_DECL_NOTHROW
+<span class="lineNum">     160 </span>            :     { return Ops::testAndSetAcquire(_q_value, expectedValue, newValue); }
+<span class="lineNum">     161 </span>            :     bool testAndSetRelease(T expectedValue, T newValue) Q_DECL_NOTHROW
+<span class="lineNum">     162 </span>            :     { return Ops::testAndSetRelease(_q_value, expectedValue, newValue); }
+<span class="lineNum">     163 </span>            :     bool testAndSetOrdered(T expectedValue, T newValue) Q_DECL_NOTHROW
+<span class="lineNum">     164 </span>            :     { return Ops::testAndSetOrdered(_q_value, expectedValue, newValue); }
+<span class="lineNum">     165 </span>            : 
+<span class="lineNum">     166 </span>            :     static Q_DECL_CONSTEXPR bool isFetchAndStoreNative() Q_DECL_NOTHROW { return Ops::isFetchAndStoreNative(); }
+<span class="lineNum">     167 </span>            :     static Q_DECL_CONSTEXPR bool isFetchAndStoreWaitFree() Q_DECL_NOTHROW { return Ops::isFetchAndStoreWaitFree(); }
+<span class="lineNum">     168 </span>            : 
+<span class="lineNum">     169 </span>            :     T fetchAndStoreRelaxed(T newValue) Q_DECL_NOTHROW
+<span class="lineNum">     170 </span>            :     { return Ops::fetchAndStoreRelaxed(_q_value, newValue); }
+<span class="lineNum">     171 </span>            :     T fetchAndStoreAcquire(T newValue) Q_DECL_NOTHROW
+<span class="lineNum">     172 </span>            :     { return Ops::fetchAndStoreAcquire(_q_value, newValue); }
+<span class="lineNum">     173 </span>            :     T fetchAndStoreRelease(T newValue) Q_DECL_NOTHROW
+<span class="lineNum">     174 </span>            :     { return Ops::fetchAndStoreRelease(_q_value, newValue); }
+<span class="lineNum">     175 </span>            :     T fetchAndStoreOrdered(T newValue) Q_DECL_NOTHROW
+<span class="lineNum">     176 </span>            :     { return Ops::fetchAndStoreOrdered(_q_value, newValue); }
+<span class="lineNum">     177 </span>            : 
+<span class="lineNum">     178 </span>            :     static Q_DECL_CONSTEXPR bool isFetchAndAddNative() Q_DECL_NOTHROW { return Ops::isFetchAndAddNative(); }
+<span class="lineNum">     179 </span>            :     static Q_DECL_CONSTEXPR bool isFetchAndAddWaitFree() Q_DECL_NOTHROW { return Ops::isFetchAndAddWaitFree(); }
+<span class="lineNum">     180 </span>            : 
+<span class="lineNum">     181 </span>            :     T fetchAndAddRelaxed(T valueToAdd) Q_DECL_NOTHROW
+<span class="lineNum">     182 </span>            :     { return Ops::fetchAndAddRelaxed(_q_value, valueToAdd); }
+<span class="lineNum">     183 </span>            :     T fetchAndAddAcquire(T valueToAdd) Q_DECL_NOTHROW
+<span class="lineNum">     184 </span>            :     { return Ops::fetchAndAddAcquire(_q_value, valueToAdd); }
+<span class="lineNum">     185 </span>            :     T fetchAndAddRelease(T valueToAdd) Q_DECL_NOTHROW
+<span class="lineNum">     186 </span>            :     { return Ops::fetchAndAddRelease(_q_value, valueToAdd); }
+<span class="lineNum">     187 </span>            :     T fetchAndAddOrdered(T valueToAdd) Q_DECL_NOTHROW
+<span class="lineNum">     188 </span>            :     { return Ops::fetchAndAddOrdered(_q_value, valueToAdd); }
+<a name="189"><span class="lineNum">     189 </span>            : </a>
+<span class="lineNum">     190 </span>            : #ifdef QT_BASIC_ATOMIC_HAS_CONSTRUCTORS
+<span class="lineNum">     191 </span><span class="lineCov">        918 :     QBasicAtomicInteger() = default;</span>
+<span class="lineNum">     192 </span>            :     constexpr QBasicAtomicInteger(T value) Q_DECL_NOTHROW : _q_value(value) {}
+<span class="lineNum">     193 </span>            :     QBasicAtomicInteger(const QBasicAtomicInteger &amp;) = delete;
+<span class="lineNum">     194 </span>            :     QBasicAtomicInteger &amp;operator=(const QBasicAtomicInteger &amp;) = delete;
+<span class="lineNum">     195 </span>            :     QBasicAtomicInteger &amp;operator=(const QBasicAtomicInteger &amp;) volatile = delete;
+<span class="lineNum">     196 </span>            : #endif
+<span class="lineNum">     197 </span>            : };
+<span class="lineNum">     198 </span>            : typedef QBasicAtomicInteger&lt;int&gt; QBasicAtomicInt;
+<span class="lineNum">     199 </span>            : 
+<span class="lineNum">     200 </span>            : template &lt;typename X&gt;
+<span class="lineNum">     201 </span>            : class QBasicAtomicPointer
+<span class="lineNum">     202 </span>            : {
+<span class="lineNum">     203 </span>            : public:
+<span class="lineNum">     204 </span>            :     typedef X *Type;
+<span class="lineNum">     205 </span>            :     typedef QAtomicOps&lt;Type&gt; Ops;
+<span class="lineNum">     206 </span>            :     typedef typename Ops::Type AtomicType;
+<span class="lineNum">     207 </span>            : 
+<span class="lineNum">     208 </span>            :     AtomicType _q_value;
+<span class="lineNum">     209 </span>            : 
+<span class="lineNum">     210 </span>            :     // Non-atomic API
+<span class="lineNum">     211 </span>            :     Type load() const Q_DECL_NOTHROW { return _q_value; }
+<span class="lineNum">     212 </span>            :     void store(Type newValue) Q_DECL_NOTHROW { _q_value = newValue; }
+<span class="lineNum">     213 </span>            : 
+<span class="lineNum">     214 </span>            :     // Atomic API, implemented in qatomic_XXX.h
+<span class="lineNum">     215 </span>            :     Type loadAcquire() const Q_DECL_NOTHROW { return Ops::loadAcquire(_q_value); }
+<span class="lineNum">     216 </span>            :     void storeRelease(Type newValue) Q_DECL_NOTHROW { Ops::storeRelease(_q_value, newValue); }
+<span class="lineNum">     217 </span>            : 
+<span class="lineNum">     218 </span>            :     static Q_DECL_CONSTEXPR bool isTestAndSetNative() Q_DECL_NOTHROW { return Ops::isTestAndSetNative(); }
+<span class="lineNum">     219 </span>            :     static Q_DECL_CONSTEXPR bool isTestAndSetWaitFree() Q_DECL_NOTHROW { return Ops::isTestAndSetWaitFree(); }
+<span class="lineNum">     220 </span>            : 
+<span class="lineNum">     221 </span>            :     bool testAndSetRelaxed(Type expectedValue, Type newValue) Q_DECL_NOTHROW
+<span class="lineNum">     222 </span>            :     { return Ops::testAndSetRelaxed(_q_value, expectedValue, newValue); }
+<span class="lineNum">     223 </span>            :     bool testAndSetAcquire(Type expectedValue, Type newValue) Q_DECL_NOTHROW
+<span class="lineNum">     224 </span>            :     { return Ops::testAndSetAcquire(_q_value, expectedValue, newValue); }
+<span class="lineNum">     225 </span>            :     bool testAndSetRelease(Type expectedValue, Type newValue) Q_DECL_NOTHROW
+<span class="lineNum">     226 </span>            :     { return Ops::testAndSetRelease(_q_value, expectedValue, newValue); }
+<span class="lineNum">     227 </span>            :     bool testAndSetOrdered(Type expectedValue, Type newValue) Q_DECL_NOTHROW
+<span class="lineNum">     228 </span>            :     { return Ops::testAndSetOrdered(_q_value, expectedValue, newValue); }
+<span class="lineNum">     229 </span>            : 
+<span class="lineNum">     230 </span>            :     static Q_DECL_CONSTEXPR bool isFetchAndStoreNative() Q_DECL_NOTHROW { return Ops::isFetchAndStoreNative(); }
+<span class="lineNum">     231 </span>            :     static Q_DECL_CONSTEXPR bool isFetchAndStoreWaitFree() Q_DECL_NOTHROW { return Ops::isFetchAndStoreWaitFree(); }
+<span class="lineNum">     232 </span>            : 
+<span class="lineNum">     233 </span>            :     Type fetchAndStoreRelaxed(Type newValue) Q_DECL_NOTHROW
+<span class="lineNum">     234 </span>            :     { return Ops::fetchAndStoreRelaxed(_q_value, newValue); }
+<span class="lineNum">     235 </span>            :     Type fetchAndStoreAcquire(Type newValue) Q_DECL_NOTHROW
+<span class="lineNum">     236 </span>            :     { return Ops::fetchAndStoreAcquire(_q_value, newValue); }
+<span class="lineNum">     237 </span>            :     Type fetchAndStoreRelease(Type newValue) Q_DECL_NOTHROW
+<span class="lineNum">     238 </span>            :     { return Ops::fetchAndStoreRelease(_q_value, newValue); }
+<span class="lineNum">     239 </span>            :     Type fetchAndStoreOrdered(Type newValue) Q_DECL_NOTHROW
+<span class="lineNum">     240 </span>            :     { return Ops::fetchAndStoreOrdered(_q_value, newValue); }
+<span class="lineNum">     241 </span>            : 
+<span class="lineNum">     242 </span>            :     static Q_DECL_CONSTEXPR bool isFetchAndAddNative() Q_DECL_NOTHROW { return Ops::isFetchAndAddNative(); }
+<span class="lineNum">     243 </span>            :     static Q_DECL_CONSTEXPR bool isFetchAndAddWaitFree() Q_DECL_NOTHROW { return Ops::isFetchAndAddWaitFree(); }
+<span class="lineNum">     244 </span>            : 
+<span class="lineNum">     245 </span>            :     Type fetchAndAddRelaxed(qptrdiff valueToAdd) Q_DECL_NOTHROW
+<span class="lineNum">     246 </span>            :     { return Ops::fetchAndAddRelaxed(_q_value, valueToAdd); }
+<span class="lineNum">     247 </span>            :     Type fetchAndAddAcquire(qptrdiff valueToAdd) Q_DECL_NOTHROW
+<span class="lineNum">     248 </span>            :     { return Ops::fetchAndAddAcquire(_q_value, valueToAdd); }
+<span class="lineNum">     249 </span>            :     Type fetchAndAddRelease(qptrdiff valueToAdd) Q_DECL_NOTHROW
+<span class="lineNum">     250 </span>            :     { return Ops::fetchAndAddRelease(_q_value, valueToAdd); }
+<span class="lineNum">     251 </span>            :     Type fetchAndAddOrdered(qptrdiff valueToAdd) Q_DECL_NOTHROW
+<span class="lineNum">     252 </span>            :     { return Ops::fetchAndAddOrdered(_q_value, valueToAdd); }
+<span class="lineNum">     253 </span>            : 
+<span class="lineNum">     254 </span>            : #ifdef QT_BASIC_ATOMIC_HAS_CONSTRUCTORS
+<span class="lineNum">     255 </span>            :     QBasicAtomicPointer() = default;
+<span class="lineNum">     256 </span>            :     constexpr QBasicAtomicPointer(Type value) Q_DECL_NOTHROW : _q_value(value) {}
+<span class="lineNum">     257 </span>            :     QBasicAtomicPointer(const QBasicAtomicPointer &amp;) = delete;
+<span class="lineNum">     258 </span>            :     QBasicAtomicPointer &amp;operator=(const QBasicAtomicPointer &amp;) = delete;
+<span class="lineNum">     259 </span>            :     QBasicAtomicPointer &amp;operator=(const QBasicAtomicPointer &amp;) volatile = delete;
+<span class="lineNum">     260 </span>            : #endif
+<span class="lineNum">     261 </span>            : };
+<span class="lineNum">     262 </span>            : 
+<span class="lineNum">     263 </span>            : #ifndef Q_BASIC_ATOMIC_INITIALIZER
+<span class="lineNum">     264 </span>            : #  define Q_BASIC_ATOMIC_INITIALIZER(a) { (a) }
+<span class="lineNum">     265 </span>            : #endif
+<span class="lineNum">     266 </span>            : 
+<span class="lineNum">     267 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     268 </span>            : 
+<span class="lineNum">     269 </span>            : #endif // QOLDBASICATOMIC_H
+<span class="lineNum">     270 </span>            : 
+<span class="lineNum">     271 </span>            : #endif // QBASICATOMIC_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

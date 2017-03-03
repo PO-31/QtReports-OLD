@@ -1,0 +1,717 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /usr/include/qt5/QtCore/qobjectdefs_impl.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtCore</a> - qobjectdefs_impl.h<span style="font-size: 80%;"> (source / <a href="qobjectdefs_impl.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-03-03 16:04:58</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+<span class="lineNum">       4 </span>            : ** Copyright (C) 2013 Olivier Goffart &lt;ogoffart@woboq.com&gt;
+<span class="lineNum">       5 </span>            : ** Contact: http://www.qt-project.org/legal
+<span class="lineNum">       6 </span>            : **
+<span class="lineNum">       7 </span>            : ** This file is part of the QtCore module of the Qt Toolkit.
+<span class="lineNum">       8 </span>            : **
+<span class="lineNum">       9 </span>            : ** $QT_BEGIN_LICENSE:LGPL$
+<span class="lineNum">      10 </span>            : ** Commercial License Usage
+<span class="lineNum">      11 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      12 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      13 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      14 </span>            : ** a written agreement between you and Digia.  For licensing terms and
+<span class="lineNum">      15 </span>            : ** conditions see http://qt.digia.com/licensing.  For further information
+<span class="lineNum">      16 </span>            : ** use the contact form at http://qt.digia.com/contact-us.
+<span class="lineNum">      17 </span>            : **
+<span class="lineNum">      18 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      19 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      20 </span>            : ** General Public License version 2.1 as published by the Free Software
+<span class="lineNum">      21 </span>            : ** Foundation and appearing in the file LICENSE.LGPL included in the
+<span class="lineNum">      22 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      23 </span>            : ** ensure the GNU Lesser General Public License version 2.1 requirements
+<span class="lineNum">      24 </span>            : ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      25 </span>            : **
+<span class="lineNum">      26 </span>            : ** In addition, as a special exception, Digia gives you certain additional
+<span class="lineNum">      27 </span>            : ** rights.  These rights are described in the Digia Qt LGPL Exception
+<span class="lineNum">      28 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      29 </span>            : **
+<span class="lineNum">      30 </span>            : ** GNU General Public License Usage
+<span class="lineNum">      31 </span>            : ** Alternatively, this file may be used under the terms of the GNU
+<span class="lineNum">      32 </span>            : ** General Public License version 3.0 as published by the Free Software
+<span class="lineNum">      33 </span>            : ** Foundation and appearing in the file LICENSE.GPL included in the
+<span class="lineNum">      34 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      35 </span>            : ** ensure the GNU General Public License version 3.0 requirements will be
+<span class="lineNum">      36 </span>            : ** met: http://www.gnu.org/copyleft/gpl.html.
+<span class="lineNum">      37 </span>            : **
+<span class="lineNum">      38 </span>            : **
+<span class="lineNum">      39 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      40 </span>            : **
+<span class="lineNum">      41 </span>            : ****************************************************************************/
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span>            : #ifndef Q_QDOC
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            : #ifndef QOBJECTDEFS_H
+<span class="lineNum">      46 </span>            : #error Do not include qobjectdefs_impl.h directly
+<span class="lineNum">      47 </span>            : #endif
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span>            : #if 0
+<span class="lineNum">      50 </span>            : #pragma qt_sync_skip_header_check
+<span class="lineNum">      51 </span>            : #pragma qt_sync_stop_processing
+<span class="lineNum">      52 </span>            : #endif
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            : namespace QtPrivate {
+<span class="lineNum">      58 </span>            :     template &lt;typename T&gt; struct RemoveRef { typedef T Type; };
+<span class="lineNum">      59 </span>            :     template &lt;typename T&gt; struct RemoveRef&lt;T&amp;&gt; { typedef T Type; };
+<span class="lineNum">      60 </span>            :     template &lt;typename T&gt; struct RemoveConstRef { typedef T Type; };
+<span class="lineNum">      61 </span>            :     template &lt;typename T&gt; struct RemoveConstRef&lt;const T&amp;&gt; { typedef T Type; };
+<span class="lineNum">      62 </span>            : 
+<span class="lineNum">      63 </span>            :     /*
+<span class="lineNum">      64 </span>            :        The following List classes are used to help to handle the list of arguments.
+<span class="lineNum">      65 </span>            :        It follow the same principles as the lisp lists.
+<span class="lineNum">      66 </span>            :        List_Left&lt;L,N&gt; take a list and a number as a parameter and returns (via the Value typedef,
+<span class="lineNum">      67 </span>            :        the list composed of the first N element of the list
+<span class="lineNum">      68 </span>            :      */
+<span class="lineNum">      69 </span>            : #ifndef Q_COMPILER_VARIADIC_TEMPLATES
+<span class="lineNum">      70 </span>            :     template &lt;typename Head, typename Tail&gt; struct List { typedef Head Car; typedef Tail Cdr; };
+<span class="lineNum">      71 </span>            :     template &lt;typename L, int N&gt; struct List_Left { typedef List&lt;typename L::Car, typename List_Left&lt;typename L::Cdr, N - 1&gt;::Value &gt; Value; };
+<span class="lineNum">      72 </span>            :     template &lt;typename L&gt; struct List_Left&lt;L,0&gt; { typedef void Value; };
+<span class="lineNum">      73 </span>            : #else
+<span class="lineNum">      74 </span>            :     // With variadic template, lists are represented using a variadic template argument instead of the lisp way
+<span class="lineNum">      75 </span>            :     template &lt;typename...&gt; struct List {};
+<span class="lineNum">      76 </span>            :     template &lt;typename Head, typename... Tail&gt; struct List&lt;Head, Tail...&gt; { typedef Head Car; typedef List&lt;Tail...&gt; Cdr; };
+<span class="lineNum">      77 </span>            :     template &lt;typename, typename&gt; struct List_Append;
+<span class="lineNum">      78 </span>            :     template &lt;typename... L1, typename...L2&gt; struct List_Append&lt;List&lt;L1...&gt;, List&lt;L2...&gt;&gt; { typedef List&lt;L1..., L2...&gt; Value; };
+<span class="lineNum">      79 </span>            :     template &lt;typename L, int N&gt; struct List_Left {
+<span class="lineNum">      80 </span>            :         typedef typename List_Append&lt;List&lt;typename L::Car&gt;,typename List_Left&lt;typename L::Cdr, N - 1&gt;::Value&gt;::Value Value;
+<span class="lineNum">      81 </span>            :     };
+<span class="lineNum">      82 </span>            :     template &lt;typename L&gt; struct List_Left&lt;L, 0&gt; { typedef List&lt;&gt; Value; };
+<span class="lineNum">      83 </span>            : #endif
+<span class="lineNum">      84 </span>            :     // List_Select&lt;L,N&gt; returns (via typedef Value) the Nth element of the list L
+<span class="lineNum">      85 </span>            :     template &lt;typename L, int N&gt; struct List_Select { typedef typename List_Select&lt;typename L::Cdr, N - 1&gt;::Value Value; };
+<span class="lineNum">      86 </span>            :     template &lt;typename L&gt; struct List_Select&lt;L,0&gt; { typedef typename L::Car Value; };
+<span class="lineNum">      87 </span>            : 
+<span class="lineNum">      88 </span>            :     /*
+<span class="lineNum">      89 </span>            :        trick to set the return value of a slot that works even if the signal or the slot returns void
+<span class="lineNum">      90 </span>            :        to be used like     function(), ApplyReturnValue&lt;ReturnType&gt;(&amp;return_value)
+<span class="lineNum">      91 </span>            :        if function() returns a value, the operator,(T, ApplyReturnValue&lt;ReturnType&gt;) is called, but if it
+<span class="lineNum">      92 </span>            :        returns void, the builtin one is used without an error.
+<span class="lineNum">      93 </span>            :     */
+<span class="lineNum">      94 </span>            :     template &lt;typename T&gt;
+<a name="95"><span class="lineNum">      95 </span>            :     struct ApplyReturnValue {</a>
+<span class="lineNum">      96 </span>            :         void *data;
+<span class="lineNum">      97 </span><span class="lineNoCov">          0 :         explicit ApplyReturnValue(void *data_) : data(data_) {}</span>
+<span class="lineNum">      98 </span>            :     };
+<span class="lineNum">      99 </span>            :     template&lt;typename T, typename U&gt;
+<span class="lineNum">     100 </span>            :     void operator,(const T &amp;value, const ApplyReturnValue&lt;U&gt; &amp;container) {
+<span class="lineNum">     101 </span>            :         if (container.data)
+<span class="lineNum">     102 </span>            :             *reinterpret_cast&lt;U*&gt;(container.data) = value;
+<span class="lineNum">     103 </span>            :     }
+<span class="lineNum">     104 </span>            : #ifdef Q_COMPILER_RVALUE_REFS
+<span class="lineNum">     105 </span>            :     template&lt;typename T, typename U&gt;
+<span class="lineNum">     106 </span>            :     void operator,(T &amp;&amp;value, const ApplyReturnValue&lt;U&gt; &amp;container) {
+<span class="lineNum">     107 </span>            :         if (container.data)
+<span class="lineNum">     108 </span>            :             *reinterpret_cast&lt;U*&gt;(container.data) = value;
+<span class="lineNum">     109 </span>            :     }
+<span class="lineNum">     110 </span>            : #endif
+<span class="lineNum">     111 </span>            :     template&lt;typename T&gt;
+<span class="lineNum">     112 </span>            :     void operator,(T, const ApplyReturnValue&lt;void&gt; &amp;) {}
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span>            :     /*
+<span class="lineNum">     116 </span>            :       The FunctionPointer&lt;Func&gt; struct is a type trait for function pointer.
+<span class="lineNum">     117 </span>            :         - ArgumentCount  is the number of argument, or -1 if it is unknown
+<span class="lineNum">     118 </span>            :         - the Object typedef is the Object of a pointer to member function
+<span class="lineNum">     119 </span>            :         - the Arguments typedef is the list of argument (in a QtPrivate::List)
+<span class="lineNum">     120 </span>            :         - the Function typedef is an alias to the template parameter Func
+<span class="lineNum">     121 </span>            :         - the call&lt;Args, R&gt;(f,o,args) method is used to call that slot
+<span class="lineNum">     122 </span>            :             Args is the list of argument of the signal
+<span class="lineNum">     123 </span>            :             R is the return type of the signal
+<span class="lineNum">     124 </span>            :             f is the function pointer
+<span class="lineNum">     125 </span>            :             o is the receiver object
+<span class="lineNum">     126 </span>            :             and args is the array of pointer to arguments, as used in qt_metacall
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span>            :        The Functor&lt;Func,N&gt; struct is the helper to call a functor of N argument.
+<span class="lineNum">     129 </span>            :        its call function is the same as the FunctionPointer::call function.
+<span class="lineNum">     130 </span>            :      */
+<span class="lineNum">     131 </span>            : #ifndef Q_COMPILER_VARIADIC_TEMPLATES
+<span class="lineNum">     132 </span>            :     template&lt;typename Func&gt; struct FunctionPointer { enum {ArgumentCount = -1, IsPointerToMemberFunction = false}; };
+<span class="lineNum">     133 </span>            :     //Pointers to member functions
+<span class="lineNum">     134 </span>            :     template&lt;class Obj, typename Ret&gt; struct FunctionPointer&lt;Ret (Obj::*) ()&gt;
+<span class="lineNum">     135 </span>            :     {
+<span class="lineNum">     136 </span>            :         typedef Obj Object;
+<span class="lineNum">     137 </span>            :         typedef void Arguments;
+<span class="lineNum">     138 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     139 </span>            :         typedef Ret (Obj::*Function) ();
+<span class="lineNum">     140 </span>            :         enum {ArgumentCount = 0, IsPointerToMemberFunction = true};
+<span class="lineNum">     141 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     142 </span>            :         static void call(Function f, Obj *o, void **arg) { (o-&gt;*f)(), ApplyReturnValue&lt;R&gt;(arg[0]); }
+<span class="lineNum">     143 </span>            :     };
+<span class="lineNum">     144 </span>            :     template&lt;class Obj, typename Ret, typename Arg1&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1)&gt;
+<span class="lineNum">     145 </span>            :     {
+<span class="lineNum">     146 </span>            :         typedef Obj Object;
+<span class="lineNum">     147 </span>            :         typedef List&lt;Arg1, void&gt; Arguments;
+<span class="lineNum">     148 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     149 </span>            :         typedef Ret (Obj::*Function) (Arg1);
+<span class="lineNum">     150 </span>            :         enum {ArgumentCount = 1, IsPointerToMemberFunction = true};
+<span class="lineNum">     151 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     152 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     153 </span>            :             (o-&gt;*f)((*reinterpret_cast&lt;typename RemoveRef&lt;typename Args::Car&gt;::Type *&gt;(arg[1]))), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     154 </span>            :         }
+<span class="lineNum">     155 </span>            :     };
+<span class="lineNum">     156 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2)&gt;
+<span class="lineNum">     157 </span>            :     {
+<span class="lineNum">     158 </span>            :         typedef Obj Object;
+<span class="lineNum">     159 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, void&gt; &gt;  Arguments;
+<span class="lineNum">     160 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     161 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2);
+<span class="lineNum">     162 </span>            :         enum {ArgumentCount = 2, IsPointerToMemberFunction = true};
+<span class="lineNum">     163 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     164 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     165 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     166 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     167 </span>            :         }
+<span class="lineNum">     168 </span>            :     };
+<span class="lineNum">     169 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2, typename Arg3&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2, Arg3)&gt;
+<span class="lineNum">     170 </span>            :     {
+<span class="lineNum">     171 </span>            :         typedef Obj Object;
+<span class="lineNum">     172 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, void&gt; &gt; &gt;  Arguments;
+<span class="lineNum">     173 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     174 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2, Arg3);
+<span class="lineNum">     175 </span>            :         enum {ArgumentCount = 3, IsPointerToMemberFunction = true};
+<span class="lineNum">     176 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     177 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     178 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     179 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     180 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     181 </span>            :         }
+<span class="lineNum">     182 </span>            :     };
+<span class="lineNum">     183 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2, Arg3, Arg4)&gt;
+<span class="lineNum">     184 </span>            :     {
+<span class="lineNum">     185 </span>            :         typedef Obj Object;
+<span class="lineNum">     186 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, List&lt;Arg4, void&gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     187 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     188 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2, Arg3, Arg4);
+<span class="lineNum">     189 </span>            :         enum {ArgumentCount = 4, IsPointerToMemberFunction = true};
+<span class="lineNum">     190 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     191 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     192 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     193 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     194 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     195 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     196 </span>            :         }
+<span class="lineNum">     197 </span>            :     };
+<span class="lineNum">     198 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4, typename Arg5&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2, Arg3, Arg4, Arg5)&gt;
+<span class="lineNum">     199 </span>            :     {
+<span class="lineNum">     200 </span>            :         typedef Obj Object;
+<span class="lineNum">     201 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, List&lt;Arg4, List&lt;Arg5, void&gt; &gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     202 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     203 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2, Arg3, Arg4, Arg5);
+<span class="lineNum">     204 </span>            :         enum {ArgumentCount = 5, IsPointerToMemberFunction = true};
+<span class="lineNum">     205 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     206 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     207 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     208 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     209 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     210 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4]),
+<span class="lineNum">     211 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 4&gt;::Value&gt;::Type *&gt;(arg[5])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     212 </span>            :         }
+<span class="lineNum">     213 </span>            :     };
+<span class="lineNum">     214 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4, typename Arg5, typename Arg6&gt;
+<span class="lineNum">     215 </span>            :     struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)&gt;
+<span class="lineNum">     216 </span>            :     {
+<span class="lineNum">     217 </span>            :         typedef Obj Object;
+<span class="lineNum">     218 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, List&lt;Arg4, List&lt;Arg5, List&lt;Arg6, void&gt; &gt; &gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     219 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     220 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+<span class="lineNum">     221 </span>            :         enum {ArgumentCount = 6, IsPointerToMemberFunction = true};
+<span class="lineNum">     222 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     223 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     224 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     225 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     226 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     227 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4]),
+<span class="lineNum">     228 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 4&gt;::Value&gt;::Type *&gt;(arg[5]),
+<span class="lineNum">     229 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 5&gt;::Value&gt;::Type *&gt;(arg[6])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     230 </span>            :         }
+<span class="lineNum">     231 </span>            :     };
+<span class="lineNum">     232 </span>            : 
+<span class="lineNum">     233 </span>            :     //Pointers to const member functions
+<span class="lineNum">     234 </span>            :     template&lt;class Obj, typename Ret&gt; struct FunctionPointer&lt;Ret (Obj::*) () const&gt;
+<span class="lineNum">     235 </span>            :     {
+<span class="lineNum">     236 </span>            :         typedef Obj Object;
+<span class="lineNum">     237 </span>            :         typedef void Arguments;
+<span class="lineNum">     238 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     239 </span>            :         typedef Ret (Obj::*Function) () const;
+<span class="lineNum">     240 </span>            :         enum {ArgumentCount = 0, IsPointerToMemberFunction = true};
+<span class="lineNum">     241 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     242 </span>            :         static void call(Function f, Obj *o, void **arg) { (o-&gt;*f)(), ApplyReturnValue&lt;R&gt;(arg[0]); }
+<span class="lineNum">     243 </span>            :     };
+<span class="lineNum">     244 </span>            :     template&lt;class Obj, typename Ret, typename Arg1&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1) const&gt;
+<span class="lineNum">     245 </span>            :     {
+<span class="lineNum">     246 </span>            :         typedef Obj Object;
+<span class="lineNum">     247 </span>            :         typedef List&lt;Arg1, void&gt; Arguments;
+<span class="lineNum">     248 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     249 </span>            :         typedef Ret (Obj::*Function) (Arg1) const;
+<span class="lineNum">     250 </span>            :         enum {ArgumentCount = 1, IsPointerToMemberFunction = true};
+<span class="lineNum">     251 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     252 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     253 </span>            :             (o-&gt;*f)((*reinterpret_cast&lt;typename RemoveRef&lt;typename Args::Car&gt;::Type *&gt;(arg[1]))), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     254 </span>            :         }
+<span class="lineNum">     255 </span>            :     };
+<span class="lineNum">     256 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2) const&gt;
+<span class="lineNum">     257 </span>            :     {
+<span class="lineNum">     258 </span>            :         typedef Obj Object;
+<span class="lineNum">     259 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, void&gt; &gt;  Arguments;
+<span class="lineNum">     260 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     261 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2) const;
+<span class="lineNum">     262 </span>            :         enum {ArgumentCount = 2, IsPointerToMemberFunction = true};
+<span class="lineNum">     263 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     264 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     265 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     266 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     267 </span>            :         }
+<span class="lineNum">     268 </span>            :     };
+<span class="lineNum">     269 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2, typename Arg3&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2, Arg3) const&gt;
+<span class="lineNum">     270 </span>            :     {
+<span class="lineNum">     271 </span>            :         typedef Obj Object;
+<span class="lineNum">     272 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, void&gt; &gt; &gt;  Arguments;
+<span class="lineNum">     273 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     274 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2, Arg3) const;
+<span class="lineNum">     275 </span>            :         enum {ArgumentCount = 3, IsPointerToMemberFunction = true};
+<span class="lineNum">     276 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     277 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     278 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     279 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     280 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     281 </span>            :         }
+<span class="lineNum">     282 </span>            :     };
+<span class="lineNum">     283 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2, Arg3, Arg4) const&gt;
+<span class="lineNum">     284 </span>            :     {
+<span class="lineNum">     285 </span>            :         typedef Obj Object;
+<span class="lineNum">     286 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, List&lt;Arg4, void&gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     287 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     288 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2, Arg3, Arg4) const;
+<span class="lineNum">     289 </span>            :         enum {ArgumentCount = 4, IsPointerToMemberFunction = true};
+<span class="lineNum">     290 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     291 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     292 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     293 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     294 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     295 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     296 </span>            :         }
+<span class="lineNum">     297 </span>            :     };
+<span class="lineNum">     298 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4, typename Arg5&gt; struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2, Arg3, Arg4, Arg5) const&gt;
+<span class="lineNum">     299 </span>            :     {
+<span class="lineNum">     300 </span>            :         typedef Obj Object;
+<span class="lineNum">     301 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, List&lt;Arg4, List&lt;Arg5, void&gt; &gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     302 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     303 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2, Arg3, Arg4, Arg5) const;
+<span class="lineNum">     304 </span>            :         enum {ArgumentCount = 5, IsPointerToMemberFunction = true};
+<span class="lineNum">     305 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     306 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     307 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     308 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     309 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     310 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4]),
+<span class="lineNum">     311 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 4&gt;::Value&gt;::Type *&gt;(arg[5])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     312 </span>            :         }
+<span class="lineNum">     313 </span>            :     };
+<span class="lineNum">     314 </span>            :     template&lt;class Obj, typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4, typename Arg5, typename Arg6&gt;
+<span class="lineNum">     315 </span>            :     struct FunctionPointer&lt;Ret (Obj::*) (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6) const&gt;
+<span class="lineNum">     316 </span>            :     {
+<span class="lineNum">     317 </span>            :         typedef Obj Object;
+<span class="lineNum">     318 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, List&lt;Arg4, List&lt;Arg5, List&lt;Arg6, void&gt; &gt; &gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     319 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     320 </span>            :         typedef Ret (Obj::*Function) (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6) const;
+<span class="lineNum">     321 </span>            :         enum {ArgumentCount = 6, IsPointerToMemberFunction = true};
+<span class="lineNum">     322 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     323 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     324 </span>            :             (o-&gt;*f)( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     325 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     326 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     327 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4]),
+<span class="lineNum">     328 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 4&gt;::Value&gt;::Type *&gt;(arg[5]),
+<span class="lineNum">     329 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 5&gt;::Value&gt;::Type *&gt;(arg[6])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     330 </span>            :         }
+<span class="lineNum">     331 </span>            :     };
+<span class="lineNum">     332 </span>            : 
+<span class="lineNum">     333 </span>            :     //Static functions
+<span class="lineNum">     334 </span>            :     template&lt;typename Ret&gt; struct FunctionPointer&lt;Ret (*) ()&gt;
+<span class="lineNum">     335 </span>            :     {
+<span class="lineNum">     336 </span>            :         typedef void Arguments;
+<span class="lineNum">     337 </span>            :         typedef Ret (*Function) ();
+<span class="lineNum">     338 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     339 </span>            :         enum {ArgumentCount = 0, IsPointerToMemberFunction = false};
+<span class="lineNum">     340 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     341 </span>            :         static void call(Function f, void *, void **arg) { f(), ApplyReturnValue&lt;R&gt;(arg[0]); }
+<span class="lineNum">     342 </span>            :     };
+<span class="lineNum">     343 </span>            :     template&lt;typename Ret, typename Arg1&gt; struct FunctionPointer&lt;Ret (*) (Arg1)&gt;
+<span class="lineNum">     344 </span>            :     {
+<span class="lineNum">     345 </span>            :         typedef List&lt;Arg1, void&gt; Arguments;
+<span class="lineNum">     346 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     347 </span>            :         typedef Ret (*Function) (Arg1);
+<span class="lineNum">     348 </span>            :         enum {ArgumentCount = 1, IsPointerToMemberFunction = false};
+<span class="lineNum">     349 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     350 </span>            :         static void call(Function f, void *, void **arg)
+<span class="lineNum">     351 </span>            :         { f(*reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1])), ApplyReturnValue&lt;R&gt;(arg[0]); }
+<span class="lineNum">     352 </span>            :     };
+<span class="lineNum">     353 </span>            :     template&lt;typename Ret, typename Arg1, typename Arg2&gt; struct FunctionPointer&lt;Ret (*) (Arg1, Arg2)&gt;
+<span class="lineNum">     354 </span>            :     {
+<span class="lineNum">     355 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, void&gt; &gt; Arguments;
+<span class="lineNum">     356 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     357 </span>            :         typedef Ret (*Function) (Arg1, Arg2);
+<span class="lineNum">     358 </span>            :         enum {ArgumentCount = 2, IsPointerToMemberFunction = false};
+<span class="lineNum">     359 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     360 </span>            :         static void call(Function f, void *, void **arg) {
+<span class="lineNum">     361 </span>            :             f(*reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     362 </span>            :               *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2])), ApplyReturnValue&lt;R&gt;(arg[0]); }
+<span class="lineNum">     363 </span>            :     };
+<span class="lineNum">     364 </span>            :     template&lt;typename Ret, typename Arg1, typename Arg2, typename Arg3&gt; struct FunctionPointer&lt;Ret (*) (Arg1, Arg2, Arg3)&gt;
+<span class="lineNum">     365 </span>            :     {
+<span class="lineNum">     366 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, void&gt; &gt; &gt;  Arguments;
+<span class="lineNum">     367 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     368 </span>            :         typedef Ret (*Function) (Arg1, Arg2, Arg3);
+<span class="lineNum">     369 </span>            :         enum {ArgumentCount = 3, IsPointerToMemberFunction = false};
+<span class="lineNum">     370 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     371 </span>            :         static void call(Function f, void *, void **arg) {
+<span class="lineNum">     372 </span>            :             f(       *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     373 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     374 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     375 </span>            :         }
+<span class="lineNum">     376 </span>            :     };
+<span class="lineNum">     377 </span>            :     template&lt;typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4&gt; struct FunctionPointer&lt;Ret (*) (Arg1, Arg2, Arg3, Arg4)&gt;
+<span class="lineNum">     378 </span>            :     {
+<span class="lineNum">     379 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, List&lt;Arg4, void&gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     380 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     381 </span>            :         typedef Ret (*Function) (Arg1, Arg2, Arg3, Arg4);
+<span class="lineNum">     382 </span>            :         enum {ArgumentCount = 4, IsPointerToMemberFunction = false};
+<span class="lineNum">     383 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     384 </span>            :         static void call(Function f, void *, void **arg) {
+<span class="lineNum">     385 </span>            :             f(       *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     386 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     387 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     388 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     389 </span>            :         }
+<span class="lineNum">     390 </span>            :     };
+<span class="lineNum">     391 </span>            :     template&lt;typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4, typename Arg5&gt; struct FunctionPointer&lt;Ret (*) (Arg1, Arg2, Arg3, Arg4, Arg5)&gt;
+<span class="lineNum">     392 </span>            :     {
+<span class="lineNum">     393 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3,
+<span class="lineNum">     394 </span>            :         List&lt;Arg4, List&lt;Arg5, void &gt; &gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     395 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     396 </span>            :         typedef Ret (*Function) (Arg1, Arg2, Arg3, Arg4, Arg5);
+<span class="lineNum">     397 </span>            :         enum {ArgumentCount = 5, IsPointerToMemberFunction = false};
+<span class="lineNum">     398 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     399 </span>            :         static void call(Function f, void *, void **arg) {
+<span class="lineNum">     400 </span>            :             f(       *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     401 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     402 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     403 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4]),
+<span class="lineNum">     404 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 4&gt;::Value&gt;::Type *&gt;(arg[5])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     405 </span>            :         }
+<span class="lineNum">     406 </span>            :     };
+<span class="lineNum">     407 </span>            :     template&lt;typename Ret, typename Arg1, typename Arg2, typename Arg3, typename Arg4, typename Arg5, typename Arg6&gt; struct FunctionPointer&lt;Ret (*) (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6)&gt;
+<span class="lineNum">     408 </span>            :     {
+<span class="lineNum">     409 </span>            :         typedef List&lt;Arg1, List&lt;Arg2, List&lt;Arg3, List&lt;Arg4, List&lt;Arg5, List&lt;Arg6, void&gt; &gt; &gt; &gt; &gt; &gt;  Arguments;
+<span class="lineNum">     410 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     411 </span>            :         typedef Ret (*Function) (Arg1, Arg2, Arg3, Arg4, Arg5, Arg6);
+<span class="lineNum">     412 </span>            :         enum {ArgumentCount = 6, IsPointerToMemberFunction = false};
+<span class="lineNum">     413 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     414 </span>            :         static void call(Function f, void *, void **arg) {
+<span class="lineNum">     415 </span>            :             f(       *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     416 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     417 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     418 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4]),
+<span class="lineNum">     419 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 4&gt;::Value&gt;::Type *&gt;(arg[5]),
+<span class="lineNum">     420 </span>            :                      *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 5&gt;::Value&gt;::Type *&gt;(arg[6])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     421 </span>            :         }
+<span class="lineNum">     422 </span>            :     };
+<span class="lineNum">     423 </span>            : 
+<span class="lineNum">     424 </span>            :     //Functors
+<span class="lineNum">     425 </span>            :     template&lt;typename F, int N&gt; struct Functor;
+<span class="lineNum">     426 </span>            :     template&lt;typename Function&gt; struct Functor&lt;Function, 0&gt;
+<span class="lineNum">     427 </span>            :     {
+<span class="lineNum">     428 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     429 </span>            :         static void call(Function &amp;f, void *, void **arg) { f(), ApplyReturnValue&lt;R&gt;(arg[0]); }
+<span class="lineNum">     430 </span>            :     };
+<span class="lineNum">     431 </span>            :     template&lt;typename Function&gt; struct Functor&lt;Function, 1&gt;
+<span class="lineNum">     432 </span>            :     {
+<span class="lineNum">     433 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     434 </span>            :         static void call(Function &amp;f, void *, void **arg) {
+<span class="lineNum">     435 </span>            :             f(*reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     436 </span>            :         }
+<span class="lineNum">     437 </span>            :     };
+<span class="lineNum">     438 </span>            :     template&lt;typename Function&gt; struct Functor&lt;Function, 2&gt;
+<span class="lineNum">     439 </span>            :     {
+<span class="lineNum">     440 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     441 </span>            :         static void call(Function &amp;f, void *, void **arg) {
+<span class="lineNum">     442 </span>            :             f( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     443 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     444 </span>            :         }
+<span class="lineNum">     445 </span>            :     };
+<span class="lineNum">     446 </span>            :     template&lt;typename Function&gt; struct Functor&lt;Function, 3&gt;
+<span class="lineNum">     447 </span>            :     {
+<span class="lineNum">     448 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     449 </span>            :         static void call(Function &amp;f, void *, void **arg) {
+<span class="lineNum">     450 </span>            :             f( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     451 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     452 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     453 </span>            :         }
+<span class="lineNum">     454 </span>            :     };
+<span class="lineNum">     455 </span>            :     template&lt;typename Function&gt; struct Functor&lt;Function, 4&gt;
+<span class="lineNum">     456 </span>            :     {
+<span class="lineNum">     457 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     458 </span>            :         static void call(Function &amp;f, void *, void **arg) {
+<span class="lineNum">     459 </span>            :             f( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     460 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     461 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     462 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     463 </span>            :         }
+<span class="lineNum">     464 </span>            :     };
+<span class="lineNum">     465 </span>            :     template&lt;typename Function&gt; struct Functor&lt;Function, 5&gt;
+<span class="lineNum">     466 </span>            :     {
+<span class="lineNum">     467 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     468 </span>            :         static void call(Function &amp;f, void *, void **arg) {
+<span class="lineNum">     469 </span>            :             f( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     470 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     471 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     472 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4]),
+<span class="lineNum">     473 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 4&gt;::Value&gt;::Type *&gt;(arg[5])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     474 </span>            :         }
+<span class="lineNum">     475 </span>            :     };
+<span class="lineNum">     476 </span>            :     template&lt;typename Function&gt; struct Functor&lt;Function, 6&gt;
+<span class="lineNum">     477 </span>            :     {
+<span class="lineNum">     478 </span>            :         template &lt;typename Args, typename R&gt;
+<span class="lineNum">     479 </span>            :         static void call(Function &amp;f, void *, void **arg) {
+<span class="lineNum">     480 </span>            :             f( *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 0&gt;::Value&gt;::Type *&gt;(arg[1]),
+<span class="lineNum">     481 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 1&gt;::Value&gt;::Type *&gt;(arg[2]),
+<span class="lineNum">     482 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 2&gt;::Value&gt;::Type *&gt;(arg[3]),
+<span class="lineNum">     483 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 3&gt;::Value&gt;::Type *&gt;(arg[4]),
+<span class="lineNum">     484 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 4&gt;::Value&gt;::Type *&gt;(arg[5]),
+<span class="lineNum">     485 </span>            :                *reinterpret_cast&lt;typename RemoveRef&lt;typename List_Select&lt;Args, 5&gt;::Value&gt;::Type *&gt;(arg[6])), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     486 </span>            :         }
+<span class="lineNum">     487 </span>            :     };
+<span class="lineNum">     488 </span>            : #else
+<span class="lineNum">     489 </span>            :     template &lt;int...&gt; struct IndexesList {};
+<span class="lineNum">     490 </span>            :     template &lt;typename IndexList, int Right&gt; struct IndexesAppend;
+<span class="lineNum">     491 </span>            :     template &lt;int... Left, int Right&gt; struct IndexesAppend&lt;IndexesList&lt;Left...&gt;, Right&gt;
+<span class="lineNum">     492 </span>            :     { typedef IndexesList&lt;Left..., Right&gt; Value; };
+<span class="lineNum">     493 </span>            :     template &lt;int N&gt; struct Indexes
+<span class="lineNum">     494 </span>            :     { typedef typename IndexesAppend&lt;typename Indexes&lt;N - 1&gt;::Value, N - 1&gt;::Value Value; };
+<span class="lineNum">     495 </span>            :     template &lt;&gt; struct Indexes&lt;0&gt; { typedef IndexesList&lt;&gt; Value; };
+<span class="lineNum">     496 </span>            :     template&lt;typename Func&gt; struct FunctionPointer { enum {ArgumentCount = -1, IsPointerToMemberFunction = false}; };
+<span class="lineNum">     497 </span>            : 
+<span class="lineNum">     498 </span>            :     template &lt;typename, typename, typename, typename&gt; struct FunctorCall;
+<span class="lineNum">     499 </span>            :     template &lt;int... II, typename... SignalArgs, typename R, typename Function&gt;
+<span class="lineNum">     500 </span>            :     struct FunctorCall&lt;IndexesList&lt;II...&gt;, List&lt;SignalArgs...&gt;, R, Function&gt; {
+<span class="lineNum">     501 </span>            :         static void call(Function f, void **arg) {
+<span class="lineNum">     502 </span>            :             f((*reinterpret_cast&lt;typename RemoveRef&lt;SignalArgs&gt;::Type *&gt;(arg[II+1]))...), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     503 </span>            :         }
+<span class="lineNum">     504 </span>            :     };
+<a name="505"><span class="lineNum">     505 </span>            :     template &lt;int... II, typename... SignalArgs, typename R, typename... SlotArgs, typename SlotRet, class Obj&gt;</a>
+<span class="lineNum">     506 </span>            :     struct FunctorCall&lt;IndexesList&lt;II...&gt;, List&lt;SignalArgs...&gt;, R, SlotRet (Obj::*)(SlotArgs...)&gt; {
+<span class="lineNum">     507 </span><span class="lineNoCov">          0 :         static void call(SlotRet (Obj::*f)(SlotArgs...), Obj *o, void **arg) {</span>
+<span class="lineNum">     508 </span><span class="lineNoCov">          0 :             (o-&gt;*f)((*reinterpret_cast&lt;typename RemoveRef&lt;SignalArgs&gt;::Type *&gt;(arg[II+1]))...), ApplyReturnValue&lt;R&gt;(arg[0]);</span>
+<span class="lineNum">     509 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     510 </span>            :     };
+<span class="lineNum">     511 </span>            :     template &lt;int... II, typename... SignalArgs, typename R, typename... SlotArgs, typename SlotRet, class Obj&gt;
+<span class="lineNum">     512 </span>            :     struct FunctorCall&lt;IndexesList&lt;II...&gt;, List&lt;SignalArgs...&gt;, R, SlotRet (Obj::*)(SlotArgs...) const&gt; {
+<span class="lineNum">     513 </span>            :         static void call(SlotRet (Obj::*f)(SlotArgs...) const, Obj *o, void **arg) {
+<span class="lineNum">     514 </span>            :             (o-&gt;*f)((*reinterpret_cast&lt;typename RemoveRef&lt;SignalArgs&gt;::Type *&gt;(arg[II+1]))...), ApplyReturnValue&lt;R&gt;(arg[0]);
+<span class="lineNum">     515 </span>            :         }
+<span class="lineNum">     516 </span>            :     };
+<span class="lineNum">     517 </span>            : 
+<span class="lineNum">     518 </span>            :     template&lt;class Obj, typename Ret, typename... Args&gt; struct FunctionPointer&lt;Ret (Obj::*) (Args...)&gt;
+<span class="lineNum">     519 </span>            :     {
+<span class="lineNum">     520 </span>            :         typedef Obj Object;
+<span class="lineNum">     521 </span>            :         typedef List&lt;Args...&gt;  Arguments;
+<span class="lineNum">     522 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     523 </span>            :         typedef Ret (Obj::*Function) (Args...);
+<a name="524"><span class="lineNum">     524 </span>            :         enum {ArgumentCount = sizeof...(Args), IsPointerToMemberFunction = true};</a>
+<span class="lineNum">     525 </span>            :         template &lt;typename SignalArgs, typename R&gt;
+<span class="lineNum">     526 </span><span class="lineNoCov">          0 :         static void call(Function f, Obj *o, void **arg) {</span>
+<span class="lineNum">     527 </span><span class="lineNoCov">          0 :             FunctorCall&lt;typename Indexes&lt;ArgumentCount&gt;::Value, SignalArgs, R, Function&gt;::call(f, o, arg);</span>
+<span class="lineNum">     528 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     529 </span>            :     };
+<span class="lineNum">     530 </span>            :     template&lt;class Obj, typename Ret, typename... Args&gt; struct FunctionPointer&lt;Ret (Obj::*) (Args...) const&gt;
+<span class="lineNum">     531 </span>            :     {
+<span class="lineNum">     532 </span>            :         typedef Obj Object;
+<span class="lineNum">     533 </span>            :         typedef List&lt;Args...&gt;  Arguments;
+<span class="lineNum">     534 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     535 </span>            :         typedef Ret (Obj::*Function) (Args...) const;
+<span class="lineNum">     536 </span>            :         enum {ArgumentCount = sizeof...(Args), IsPointerToMemberFunction = true};
+<span class="lineNum">     537 </span>            :         template &lt;typename SignalArgs, typename R&gt;
+<span class="lineNum">     538 </span>            :         static void call(Function f, Obj *o, void **arg) {
+<span class="lineNum">     539 </span>            :             FunctorCall&lt;typename Indexes&lt;ArgumentCount&gt;::Value, SignalArgs, R, Function&gt;::call(f, o, arg);
+<span class="lineNum">     540 </span>            :         }
+<span class="lineNum">     541 </span>            :     };
+<span class="lineNum">     542 </span>            : 
+<span class="lineNum">     543 </span>            :     template&lt;typename Ret, typename... Args&gt; struct FunctionPointer&lt;Ret (*) (Args...)&gt;
+<span class="lineNum">     544 </span>            :     {
+<span class="lineNum">     545 </span>            :         typedef List&lt;Args...&gt; Arguments;
+<span class="lineNum">     546 </span>            :         typedef Ret ReturnType;
+<span class="lineNum">     547 </span>            :         typedef Ret (*Function) (Args...);
+<span class="lineNum">     548 </span>            :         enum {ArgumentCount = sizeof...(Args), IsPointerToMemberFunction = false};
+<span class="lineNum">     549 </span>            :         template &lt;typename SignalArgs, typename R&gt;
+<span class="lineNum">     550 </span>            :         static void call(Function f, void *, void **arg) {
+<span class="lineNum">     551 </span>            :             FunctorCall&lt;typename Indexes&lt;ArgumentCount&gt;::Value, SignalArgs, R, Function&gt;::call(f, arg);
+<span class="lineNum">     552 </span>            :         }
+<span class="lineNum">     553 </span>            :     };
+<span class="lineNum">     554 </span>            : 
+<span class="lineNum">     555 </span>            :     template&lt;typename Function, int N&gt; struct Functor
+<span class="lineNum">     556 </span>            :     {
+<span class="lineNum">     557 </span>            :         template &lt;typename SignalArgs, typename R&gt;
+<span class="lineNum">     558 </span>            :         static void call(Function &amp;f, void *, void **arg) {
+<span class="lineNum">     559 </span>            :             FunctorCall&lt;typename Indexes&lt;N&gt;::Value, SignalArgs, R, Function&gt;::call(f, arg);
+<span class="lineNum">     560 </span>            :         }
+<span class="lineNum">     561 </span>            :     };
+<span class="lineNum">     562 </span>            : #endif
+<span class="lineNum">     563 </span>            : 
+<span class="lineNum">     564 </span>            :     /*
+<span class="lineNum">     565 </span>            :        Logic that check if the arguments of the slot matches the argument of the signal.
+<span class="lineNum">     566 </span>            :        To be used like this:
+<span class="lineNum">     567 </span>            :        Q_STATIC_ASSERT(CheckCompatibleArguments&lt;FunctionPointer&lt;Signal&gt;::Arguments, FunctionPointer&lt;Slot&gt;::Arguments&gt;::value)
+<span class="lineNum">     568 </span>            :     */
+<span class="lineNum">     569 </span>            :     template&lt;typename A1, typename A2&gt; struct AreArgumentsCompatible {
+<span class="lineNum">     570 </span>            :         static int test(A2);
+<span class="lineNum">     571 </span>            :         static char test(...);
+<span class="lineNum">     572 </span>            :         static A1 dummy();
+<span class="lineNum">     573 </span>            :         enum { value = sizeof(test(dummy())) == sizeof(int) };
+<span class="lineNum">     574 </span>            :     };
+<span class="lineNum">     575 </span>            :     template&lt;typename A1, typename A2&gt; struct AreArgumentsCompatible&lt;A1, A2&amp;&gt; { enum { value = false }; };
+<span class="lineNum">     576 </span>            :     template&lt;typename A&gt; struct AreArgumentsCompatible&lt;A&amp;, A&amp;&gt; { enum { value = true }; };
+<span class="lineNum">     577 </span>            :     // void as a return value
+<span class="lineNum">     578 </span>            :     template&lt;typename A&gt; struct AreArgumentsCompatible&lt;void, A&gt; { enum { value = true }; };
+<span class="lineNum">     579 </span>            :     template&lt;typename A&gt; struct AreArgumentsCompatible&lt;A, void&gt; { enum { value = true }; };
+<span class="lineNum">     580 </span>            :     template&lt;&gt; struct AreArgumentsCompatible&lt;void, void&gt; { enum { value = true }; };
+<span class="lineNum">     581 </span>            : 
+<span class="lineNum">     582 </span>            : #ifndef Q_COMPILER_VARIADIC_TEMPLATES
+<span class="lineNum">     583 </span>            :     template &lt;typename List1, typename List2&gt; struct CheckCompatibleArguments { enum { value = false }; };
+<span class="lineNum">     584 </span>            :     template &lt;&gt; struct CheckCompatibleArguments&lt;void, void&gt; { enum { value = true }; };
+<span class="lineNum">     585 </span>            :     template &lt;typename List1&gt; struct CheckCompatibleArguments&lt;List1, void&gt; { enum { value = true }; };
+<span class="lineNum">     586 </span>            :     template &lt;typename Arg1, typename Arg2, typename Tail1, typename Tail2&gt; struct CheckCompatibleArguments&lt;List&lt;Arg1, Tail1&gt;, List&lt;Arg2, Tail2&gt; &gt;
+<span class="lineNum">     587 </span>            :     {
+<span class="lineNum">     588 </span>            :         enum { value = AreArgumentsCompatible&lt;typename RemoveConstRef&lt;Arg1&gt;::Type, typename RemoveConstRef&lt;Arg2&gt;::Type&gt;::value
+<span class="lineNum">     589 </span>            :                     &amp;&amp; CheckCompatibleArguments&lt;Tail1, Tail2&gt;::value };
+<span class="lineNum">     590 </span>            :     };
+<span class="lineNum">     591 </span>            : #else
+<span class="lineNum">     592 </span>            :     template &lt;typename List1, typename List2&gt; struct CheckCompatibleArguments { enum { value = false }; };
+<span class="lineNum">     593 </span>            :     template &lt;&gt; struct CheckCompatibleArguments&lt;List&lt;&gt;, List&lt;&gt;&gt; { enum { value = true }; };
+<span class="lineNum">     594 </span>            :     template &lt;typename List1&gt; struct CheckCompatibleArguments&lt;List1, List&lt;&gt;&gt; { enum { value = true }; };
+<span class="lineNum">     595 </span>            :     template &lt;typename Arg1, typename Arg2, typename... Tail1, typename... Tail2&gt;
+<span class="lineNum">     596 </span>            :     struct CheckCompatibleArguments&lt;List&lt;Arg1, Tail1...&gt;, List&lt;Arg2, Tail2...&gt;&gt;
+<span class="lineNum">     597 </span>            :     {
+<span class="lineNum">     598 </span>            :         enum { value = AreArgumentsCompatible&lt;typename RemoveConstRef&lt;Arg1&gt;::Type, typename RemoveConstRef&lt;Arg2&gt;::Type&gt;::value
+<span class="lineNum">     599 </span>            :                     &amp;&amp; CheckCompatibleArguments&lt;List&lt;Tail1...&gt;, List&lt;Tail2...&gt;&gt;::value };
+<span class="lineNum">     600 </span>            :     };
+<span class="lineNum">     601 </span>            : #endif
+<span class="lineNum">     602 </span>            : 
+<span class="lineNum">     603 </span>            : #if defined(Q_COMPILER_DECLTYPE) &amp;&amp; defined(Q_COMPILER_VARIADIC_TEMPLATES)
+<span class="lineNum">     604 </span>            :     /*
+<span class="lineNum">     605 </span>            :        Find the maximum number of arguments a functor object can take and be still compatible with
+<span class="lineNum">     606 </span>            :        the arguments from the signal.
+<span class="lineNum">     607 </span>            :        Value is the number of arguments, or -1 if nothing matches.
+<span class="lineNum">     608 </span>            :      */
+<span class="lineNum">     609 </span>            :     template &lt;typename Functor, typename ArgList&gt; struct ComputeFunctorArgumentCount;
+<span class="lineNum">     610 </span>            : 
+<span class="lineNum">     611 </span>            :     template &lt;typename Functor, typename ArgList, bool Done&gt; struct ComputeFunctorArgumentCountHelper
+<span class="lineNum">     612 </span>            :     { enum { Value = -1 }; };
+<span class="lineNum">     613 </span>            :     template &lt;typename Functor, typename First, typename... ArgList&gt;
+<span class="lineNum">     614 </span>            :     struct ComputeFunctorArgumentCountHelper&lt;Functor, List&lt;First, ArgList...&gt;, false&gt;
+<span class="lineNum">     615 </span>            :         : ComputeFunctorArgumentCount&lt;Functor,
+<span class="lineNum">     616 </span>            :             typename List_Left&lt;List&lt;First, ArgList...&gt;, sizeof...(ArgList)&gt;::Value&gt; {};
+<span class="lineNum">     617 </span>            : 
+<span class="lineNum">     618 </span>            :     template &lt;typename Functor, typename... ArgList&gt; struct ComputeFunctorArgumentCount&lt;Functor, List&lt;ArgList...&gt;&gt;
+<span class="lineNum">     619 </span>            :     {
+<span class="lineNum">     620 </span>            :         template &lt;typename D&gt; static D dummy();
+<span class="lineNum">     621 </span>            :         template &lt;typename F&gt; static auto test(F f) -&gt; decltype(((f.operator()((dummy&lt;ArgList&gt;())...)), int()));
+<span class="lineNum">     622 </span>            :         static char test(...);
+<span class="lineNum">     623 </span>            :         enum {
+<span class="lineNum">     624 </span>            :             Ok = sizeof(test(dummy&lt;Functor&gt;())) == sizeof(int),
+<span class="lineNum">     625 </span>            :             Value = Ok ? sizeof...(ArgList) : int(ComputeFunctorArgumentCountHelper&lt;Functor, List&lt;ArgList...&gt;, Ok&gt;::Value)
+<span class="lineNum">     626 </span>            :         };
+<span class="lineNum">     627 </span>            :     };
+<span class="lineNum">     628 </span>            : 
+<span class="lineNum">     629 </span>            :     /* get the return type of a functor, given the signal argument list  */
+<span class="lineNum">     630 </span>            :     template &lt;typename Functor, typename ArgList&gt; struct FunctorReturnType;
+<span class="lineNum">     631 </span>            :     template &lt;typename Functor, typename ... ArgList&gt; struct FunctorReturnType&lt;Functor, List&lt;ArgList...&gt;&gt; {
+<span class="lineNum">     632 </span>            :         template &lt;typename D&gt; static D dummy();
+<span class="lineNum">     633 </span>            :         typedef decltype(dummy&lt;Functor&gt;().operator()((dummy&lt;ArgList&gt;())...)) Value;
+<span class="lineNum">     634 </span>            :     };
+<span class="lineNum">     635 </span>            : #endif
+<span class="lineNum">     636 </span>            : 
+<span class="lineNum">     637 </span>            : }
+<span class="lineNum">     638 </span>            : 
+<span class="lineNum">     639 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     640 </span>            : 
+<span class="lineNum">     641 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

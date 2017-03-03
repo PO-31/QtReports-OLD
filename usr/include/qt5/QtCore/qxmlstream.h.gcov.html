@@ -1,0 +1,504 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - /usr/include/qt5/QtCore/qxmlstream.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtCore</a> - qxmlstream.h<span style="font-size: 80%;"> (source / <a href="qxmlstream.h.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-03-03 16:04:58</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+<span class="lineNum">       4 </span>            : ** Contact: http://www.qt-project.org/legal
+<span class="lineNum">       5 </span>            : **
+<span class="lineNum">       6 </span>            : ** This file is part of the QtCore module of the Qt Toolkit.
+<span class="lineNum">       7 </span>            : **
+<span class="lineNum">       8 </span>            : ** $QT_BEGIN_LICENSE:LGPL$
+<span class="lineNum">       9 </span>            : ** Commercial License Usage
+<span class="lineNum">      10 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      11 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      12 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      13 </span>            : ** a written agreement between you and Digia.  For licensing terms and
+<span class="lineNum">      14 </span>            : ** conditions see http://qt.digia.com/licensing.  For further information
+<span class="lineNum">      15 </span>            : ** use the contact form at http://qt.digia.com/contact-us.
+<span class="lineNum">      16 </span>            : **
+<span class="lineNum">      17 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      18 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      19 </span>            : ** General Public License version 2.1 as published by the Free Software
+<span class="lineNum">      20 </span>            : ** Foundation and appearing in the file LICENSE.LGPL included in the
+<span class="lineNum">      21 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      22 </span>            : ** ensure the GNU Lesser General Public License version 2.1 requirements
+<span class="lineNum">      23 </span>            : ** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      24 </span>            : **
+<span class="lineNum">      25 </span>            : ** In addition, as a special exception, Digia gives you certain additional
+<span class="lineNum">      26 </span>            : ** rights.  These rights are described in the Digia Qt LGPL Exception
+<span class="lineNum">      27 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      28 </span>            : **
+<span class="lineNum">      29 </span>            : ** GNU General Public License Usage
+<span class="lineNum">      30 </span>            : ** Alternatively, this file may be used under the terms of the GNU
+<span class="lineNum">      31 </span>            : ** General Public License version 3.0 as published by the Free Software
+<span class="lineNum">      32 </span>            : ** Foundation and appearing in the file LICENSE.GPL included in the
+<span class="lineNum">      33 </span>            : ** packaging of this file.  Please review the following information to
+<span class="lineNum">      34 </span>            : ** ensure the GNU General Public License version 3.0 requirements will be
+<span class="lineNum">      35 </span>            : ** met: http://www.gnu.org/copyleft/gpl.html.
+<span class="lineNum">      36 </span>            : **
+<span class="lineNum">      37 </span>            : **
+<span class="lineNum">      38 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      39 </span>            : **
+<span class="lineNum">      40 </span>            : ****************************************************************************/
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : #ifndef QXMLSTREAM_H
+<span class="lineNum">      43 </span>            : #define QXMLSTREAM_H
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            : #include &lt;QtCore/qiodevice.h&gt;
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            : #ifndef QT_NO_XMLSTREAM
+<span class="lineNum">      48 </span>            : 
+<span class="lineNum">      49 </span>            : #include &lt;QtCore/qstring.h&gt;
+<span class="lineNum">      50 </span>            : #include &lt;QtCore/qvector.h&gt;
+<span class="lineNum">      51 </span>            : #include &lt;QtCore/qscopedpointer.h&gt;
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            : class Q_CORE_EXPORT QXmlStreamStringRef {
+<span class="lineNum">      57 </span>            :     QString m_string;
+<span class="lineNum">      58 </span>            :     int m_position, m_size;
+<span class="lineNum">      59 </span>            : public:
+<span class="lineNum">      60 </span>            :     inline QXmlStreamStringRef():m_position(0), m_size(0){}
+<span class="lineNum">      61 </span>            :     inline QXmlStreamStringRef(const QStringRef &amp;aString)
+<span class="lineNum">      62 </span>            :         :m_string(aString.string()?*aString.string():QString()), m_position(aString.position()), m_size(aString.size()){}
+<span class="lineNum">      63 </span>            :     inline QXmlStreamStringRef(const QString &amp;aString):m_string(aString), m_position(0), m_size(aString.size()){}
+<span class="lineNum">      64 </span>            :     inline ~QXmlStreamStringRef(){}
+<span class="lineNum">      65 </span>            :     inline void clear() { m_string.clear(); m_position = m_size = 0; }
+<span class="lineNum">      66 </span>            :     inline operator QStringRef() const { return QStringRef(&amp;m_string, m_position, m_size); }
+<span class="lineNum">      67 </span>            :     inline const QString *string() const { return &amp;m_string; }
+<span class="lineNum">      68 </span>            :     inline int position() const { return m_position; }
+<span class="lineNum">      69 </span>            :     inline int size() const { return m_size; }
+<span class="lineNum">      70 </span>            : };
+<span class="lineNum">      71 </span>            : 
+<span class="lineNum">      72 </span>            : 
+<span class="lineNum">      73 </span>            : class QXmlStreamReaderPrivate;
+<span class="lineNum">      74 </span>            : class QXmlStreamAttributes;
+<span class="lineNum">      75 </span>            : class Q_CORE_EXPORT QXmlStreamAttribute {
+<span class="lineNum">      76 </span>            :     QXmlStreamStringRef m_name, m_namespaceUri, m_qualifiedName, m_value;
+<span class="lineNum">      77 </span>            :     void *reserved;
+<span class="lineNum">      78 </span>            :     uint m_isDefault : 1;
+<span class="lineNum">      79 </span>            :     friend class QXmlStreamReaderPrivate;
+<span class="lineNum">      80 </span>            :     friend class QXmlStreamAttributes;
+<span class="lineNum">      81 </span>            : public:
+<span class="lineNum">      82 </span>            :     QXmlStreamAttribute();
+<span class="lineNum">      83 </span>            :     QXmlStreamAttribute(const QString &amp;qualifiedName, const QString &amp;value);
+<span class="lineNum">      84 </span>            :     QXmlStreamAttribute(const QString &amp;namespaceUri, const QString &amp;name, const QString &amp;value);
+<span class="lineNum">      85 </span>            :     QXmlStreamAttribute(const QXmlStreamAttribute &amp;);
+<span class="lineNum">      86 </span>            :     QXmlStreamAttribute&amp; operator=(const QXmlStreamAttribute &amp;);
+<span class="lineNum">      87 </span>            :     ~QXmlStreamAttribute();
+<span class="lineNum">      88 </span>            :     inline QStringRef namespaceUri() const { return m_namespaceUri; }
+<span class="lineNum">      89 </span>            :     inline QStringRef name() const { return m_name; }
+<span class="lineNum">      90 </span>            :     inline QStringRef qualifiedName() const { return m_qualifiedName; }
+<span class="lineNum">      91 </span>            :     inline QStringRef prefix() const {
+<span class="lineNum">      92 </span>            :         return QStringRef(m_qualifiedName.string(),
+<span class="lineNum">      93 </span>            :                           m_qualifiedName.position(),
+<span class="lineNum">      94 </span>            :                           qMax(0, m_qualifiedName.size() - m_name.size() - 1));
+<span class="lineNum">      95 </span>            :     }
+<span class="lineNum">      96 </span>            :     inline QStringRef value() const { return m_value; }
+<span class="lineNum">      97 </span>            :     inline bool isDefault() const { return m_isDefault; }
+<span class="lineNum">      98 </span>            :     inline bool operator==(const QXmlStreamAttribute &amp;other) const {
+<span class="lineNum">      99 </span>            :         return (value() == other.value()
+<span class="lineNum">     100 </span>            :                 &amp;&amp; (namespaceUri().isNull() ? (qualifiedName() == other.qualifiedName())
+<span class="lineNum">     101 </span>            :                     : (namespaceUri() == other.namespaceUri() &amp;&amp; name() == other.name())));
+<span class="lineNum">     102 </span>            :     }
+<span class="lineNum">     103 </span>            :     inline bool operator!=(const QXmlStreamAttribute &amp;other) const
+<span class="lineNum">     104 </span>            :         { return !operator==(other); }
+<span class="lineNum">     105 </span>            : };
+<span class="lineNum">     106 </span>            : 
+<a name="107"><span class="lineNum">     107 </span>            : Q_DECLARE_TYPEINFO(QXmlStreamAttribute, Q_MOVABLE_TYPE);</a>
+<span class="lineNum">     108 </span>            : 
+<span class="lineNum">     109 </span><span class="lineCov">       2031 : class Q_CORE_EXPORT QXmlStreamAttributes : public QVector&lt;QXmlStreamAttribute&gt;</span>
+<span class="lineNum">     110 </span>            : {
+<span class="lineNum">     111 </span>            : public:
+<span class="lineNum">     112 </span>            :     inline QXmlStreamAttributes() {}
+<span class="lineNum">     113 </span>            :     QStringRef value(const QString &amp;namespaceUri, const QString &amp;name) const;
+<span class="lineNum">     114 </span>            :     QStringRef value(const QString &amp;namespaceUri, QLatin1String name) const;
+<span class="lineNum">     115 </span>            :     QStringRef value(QLatin1String namespaceUri, QLatin1String name) const;
+<span class="lineNum">     116 </span>            :     QStringRef value(const QString &amp;qualifiedName) const;
+<span class="lineNum">     117 </span>            :     QStringRef value(QLatin1String qualifiedName) const;
+<span class="lineNum">     118 </span>            :     void append(const QString &amp;namespaceUri, const QString &amp;name, const QString &amp;value);
+<a name="119"><span class="lineNum">     119 </span>            :     void append(const QString &amp;qualifiedName, const QString &amp;value);</a>
+<span class="lineNum">     120 </span>            : 
+<span class="lineNum">     121 </span><span class="lineCov">       2031 :     inline bool hasAttribute(const QString &amp;qualifiedName) const</span>
+<span class="lineNum">     122 </span>            :     {
+<span class="lineNum">     123 </span><span class="lineCov">       2031 :         return !value(qualifiedName).isNull();</span>
+<span class="lineNum">     124 </span>            :     }
+<span class="lineNum">     125 </span>            : 
+<span class="lineNum">     126 </span>            :     inline bool hasAttribute(QLatin1String qualifiedName) const
+<span class="lineNum">     127 </span>            :     {
+<span class="lineNum">     128 </span>            :         return !value(qualifiedName).isNull();
+<span class="lineNum">     129 </span>            :     }
+<span class="lineNum">     130 </span>            : 
+<span class="lineNum">     131 </span>            :     inline bool hasAttribute(const QString &amp;namespaceUri, const QString &amp;name) const
+<span class="lineNum">     132 </span>            :     {
+<span class="lineNum">     133 </span>            :         return !value(namespaceUri, name).isNull();
+<span class="lineNum">     134 </span>            :     }
+<span class="lineNum">     135 </span>            : 
+<span class="lineNum">     136 </span>            : #if !defined(Q_NO_USING_KEYWORD)
+<span class="lineNum">     137 </span>            :     using QVector&lt;QXmlStreamAttribute&gt;::append;
+<span class="lineNum">     138 </span>            : #else
+<span class="lineNum">     139 </span>            :     inline void append(const QXmlStreamAttribute &amp;attribute)
+<span class="lineNum">     140 </span>            :         { QVector&lt;QXmlStreamAttribute&gt;::append(attribute); }
+<span class="lineNum">     141 </span>            : #endif
+<span class="lineNum">     142 </span>            : };
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span>            : class Q_CORE_EXPORT QXmlStreamNamespaceDeclaration {
+<span class="lineNum">     145 </span>            :     QXmlStreamStringRef m_prefix, m_namespaceUri;
+<span class="lineNum">     146 </span>            :     void *reserved;
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span>            :     friend class QXmlStreamReaderPrivate;
+<span class="lineNum">     149 </span>            : public:
+<span class="lineNum">     150 </span>            :     QXmlStreamNamespaceDeclaration();
+<span class="lineNum">     151 </span>            :     QXmlStreamNamespaceDeclaration(const QXmlStreamNamespaceDeclaration &amp;);
+<span class="lineNum">     152 </span>            :     QXmlStreamNamespaceDeclaration(const QString &amp;prefix, const QString &amp;namespaceUri);
+<span class="lineNum">     153 </span>            :     ~QXmlStreamNamespaceDeclaration();
+<span class="lineNum">     154 </span>            :     QXmlStreamNamespaceDeclaration&amp; operator=(const QXmlStreamNamespaceDeclaration &amp;);
+<span class="lineNum">     155 </span>            :     inline QStringRef prefix() const { return m_prefix; }
+<span class="lineNum">     156 </span>            :     inline QStringRef namespaceUri() const { return m_namespaceUri; }
+<span class="lineNum">     157 </span>            :     inline bool operator==(const QXmlStreamNamespaceDeclaration &amp;other) const {
+<span class="lineNum">     158 </span>            :         return (prefix() == other.prefix() &amp;&amp; namespaceUri() == other.namespaceUri());
+<span class="lineNum">     159 </span>            :     }
+<span class="lineNum">     160 </span>            :     inline bool operator!=(const QXmlStreamNamespaceDeclaration &amp;other) const
+<span class="lineNum">     161 </span>            :         { return !operator==(other); }
+<span class="lineNum">     162 </span>            : };
+<span class="lineNum">     163 </span>            : 
+<span class="lineNum">     164 </span>            : Q_DECLARE_TYPEINFO(QXmlStreamNamespaceDeclaration, Q_MOVABLE_TYPE);
+<span class="lineNum">     165 </span>            : typedef QVector&lt;QXmlStreamNamespaceDeclaration&gt; QXmlStreamNamespaceDeclarations;
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span>            : class Q_CORE_EXPORT QXmlStreamNotationDeclaration {
+<span class="lineNum">     168 </span>            :     QXmlStreamStringRef m_name, m_systemId, m_publicId;
+<span class="lineNum">     169 </span>            :     void *reserved;
+<span class="lineNum">     170 </span>            : 
+<span class="lineNum">     171 </span>            :     friend class QXmlStreamReaderPrivate;
+<span class="lineNum">     172 </span>            : public:
+<span class="lineNum">     173 </span>            :     QXmlStreamNotationDeclaration();
+<span class="lineNum">     174 </span>            :     ~QXmlStreamNotationDeclaration();
+<span class="lineNum">     175 </span>            :     QXmlStreamNotationDeclaration(const QXmlStreamNotationDeclaration &amp;);
+<span class="lineNum">     176 </span>            :     QXmlStreamNotationDeclaration&amp; operator=(const QXmlStreamNotationDeclaration &amp;);
+<span class="lineNum">     177 </span>            :     inline QStringRef name() const { return m_name; }
+<span class="lineNum">     178 </span>            :     inline QStringRef systemId() const { return m_systemId; }
+<span class="lineNum">     179 </span>            :     inline QStringRef publicId() const { return m_publicId; }
+<span class="lineNum">     180 </span>            :     inline bool operator==(const QXmlStreamNotationDeclaration &amp;other) const {
+<span class="lineNum">     181 </span>            :         return (name() == other.name() &amp;&amp; systemId() == other.systemId()
+<span class="lineNum">     182 </span>            :                 &amp;&amp; publicId() == other.publicId());
+<span class="lineNum">     183 </span>            :     }
+<span class="lineNum">     184 </span>            :     inline bool operator!=(const QXmlStreamNotationDeclaration &amp;other) const
+<span class="lineNum">     185 </span>            :         { return !operator==(other); }
+<span class="lineNum">     186 </span>            : };
+<span class="lineNum">     187 </span>            : 
+<span class="lineNum">     188 </span>            : Q_DECLARE_TYPEINFO(QXmlStreamNotationDeclaration, Q_MOVABLE_TYPE);
+<span class="lineNum">     189 </span>            : typedef QVector&lt;QXmlStreamNotationDeclaration&gt; QXmlStreamNotationDeclarations;
+<span class="lineNum">     190 </span>            : 
+<span class="lineNum">     191 </span>            : class Q_CORE_EXPORT QXmlStreamEntityDeclaration {
+<span class="lineNum">     192 </span>            :     QXmlStreamStringRef m_name, m_notationName, m_systemId, m_publicId, m_value;
+<span class="lineNum">     193 </span>            :     void *reserved;
+<span class="lineNum">     194 </span>            : 
+<span class="lineNum">     195 </span>            :     friend class QXmlStreamReaderPrivate;
+<span class="lineNum">     196 </span>            : public:
+<span class="lineNum">     197 </span>            :     QXmlStreamEntityDeclaration();
+<span class="lineNum">     198 </span>            :     ~QXmlStreamEntityDeclaration();
+<span class="lineNum">     199 </span>            :     QXmlStreamEntityDeclaration(const QXmlStreamEntityDeclaration &amp;);
+<span class="lineNum">     200 </span>            :     QXmlStreamEntityDeclaration&amp; operator=(const QXmlStreamEntityDeclaration &amp;);
+<span class="lineNum">     201 </span>            :     inline QStringRef name() const { return m_name; }
+<span class="lineNum">     202 </span>            :     inline QStringRef notationName() const { return m_notationName; }
+<span class="lineNum">     203 </span>            :     inline QStringRef systemId() const { return m_systemId; }
+<span class="lineNum">     204 </span>            :     inline QStringRef publicId() const { return m_publicId; }
+<span class="lineNum">     205 </span>            :     inline QStringRef value() const { return m_value; }
+<span class="lineNum">     206 </span>            :     inline bool operator==(const QXmlStreamEntityDeclaration &amp;other) const {
+<span class="lineNum">     207 </span>            :         return (name() == other.name()
+<span class="lineNum">     208 </span>            :                 &amp;&amp; notationName() == other.notationName()
+<span class="lineNum">     209 </span>            :                 &amp;&amp; systemId() == other.systemId()
+<span class="lineNum">     210 </span>            :                 &amp;&amp; publicId() == other.publicId()
+<span class="lineNum">     211 </span>            :                 &amp;&amp; value() == other.value());
+<span class="lineNum">     212 </span>            :     }
+<span class="lineNum">     213 </span>            :     inline bool operator!=(const QXmlStreamEntityDeclaration &amp;other) const
+<span class="lineNum">     214 </span>            :         { return !operator==(other); }
+<span class="lineNum">     215 </span>            : };
+<span class="lineNum">     216 </span>            : 
+<span class="lineNum">     217 </span>            : Q_DECLARE_TYPEINFO(QXmlStreamEntityDeclaration, Q_MOVABLE_TYPE);
+<span class="lineNum">     218 </span>            : typedef QVector&lt;QXmlStreamEntityDeclaration&gt; QXmlStreamEntityDeclarations;
+<span class="lineNum">     219 </span>            : 
+<span class="lineNum">     220 </span>            : 
+<span class="lineNum">     221 </span>            : class Q_CORE_EXPORT QXmlStreamEntityResolver
+<span class="lineNum">     222 </span>            : {
+<span class="lineNum">     223 </span>            : public:
+<span class="lineNum">     224 </span>            :     virtual ~QXmlStreamEntityResolver();
+<span class="lineNum">     225 </span>            :     virtual QString resolveEntity(const QString&amp; publicId, const QString&amp; systemId);
+<span class="lineNum">     226 </span>            :     virtual QString resolveUndeclaredEntity(const QString &amp;name);
+<span class="lineNum">     227 </span>            : };
+<span class="lineNum">     228 </span>            : 
+<span class="lineNum">     229 </span>            : #ifndef QT_NO_XMLSTREAMREADER
+<span class="lineNum">     230 </span>            : class Q_CORE_EXPORT QXmlStreamReader {
+<span class="lineNum">     231 </span>            :     QDOC_PROPERTY(bool namespaceProcessing READ namespaceProcessing WRITE setNamespaceProcessing)
+<span class="lineNum">     232 </span>            : public:
+<span class="lineNum">     233 </span>            :     enum TokenType {
+<span class="lineNum">     234 </span>            :         NoToken = 0,
+<span class="lineNum">     235 </span>            :         Invalid,
+<span class="lineNum">     236 </span>            :         StartDocument,
+<span class="lineNum">     237 </span>            :         EndDocument,
+<span class="lineNum">     238 </span>            :         StartElement,
+<span class="lineNum">     239 </span>            :         EndElement,
+<span class="lineNum">     240 </span>            :         Characters,
+<span class="lineNum">     241 </span>            :         Comment,
+<span class="lineNum">     242 </span>            :         DTD,
+<span class="lineNum">     243 </span>            :         EntityReference,
+<span class="lineNum">     244 </span>            :         ProcessingInstruction
+<span class="lineNum">     245 </span>            :     };
+<span class="lineNum">     246 </span>            : 
+<span class="lineNum">     247 </span>            : 
+<span class="lineNum">     248 </span>            :     QXmlStreamReader();
+<span class="lineNum">     249 </span>            :     explicit QXmlStreamReader(QIODevice *device);
+<span class="lineNum">     250 </span>            :     explicit QXmlStreamReader(const QByteArray &amp;data);
+<span class="lineNum">     251 </span>            :     explicit QXmlStreamReader(const QString &amp;data);
+<span class="lineNum">     252 </span>            :     explicit QXmlStreamReader(const char * data);
+<span class="lineNum">     253 </span>            :     ~QXmlStreamReader();
+<span class="lineNum">     254 </span>            : 
+<span class="lineNum">     255 </span>            :     void setDevice(QIODevice *device);
+<span class="lineNum">     256 </span>            :     QIODevice *device() const;
+<span class="lineNum">     257 </span>            :     void addData(const QByteArray &amp;data);
+<span class="lineNum">     258 </span>            :     void addData(const QString &amp;data);
+<span class="lineNum">     259 </span>            :     void addData(const char *data);
+<span class="lineNum">     260 </span>            :     void clear();
+<span class="lineNum">     261 </span>            : 
+<span class="lineNum">     262 </span>            : 
+<span class="lineNum">     263 </span>            :     bool atEnd() const;
+<span class="lineNum">     264 </span>            :     TokenType readNext();
+<span class="lineNum">     265 </span>            : 
+<span class="lineNum">     266 </span>            :     bool readNextStartElement();
+<span class="lineNum">     267 </span>            :     void skipCurrentElement();
+<span class="lineNum">     268 </span>            : 
+<span class="lineNum">     269 </span>            :     TokenType tokenType() const;
+<span class="lineNum">     270 </span>            :     QString tokenString() const;
+<span class="lineNum">     271 </span>            : 
+<span class="lineNum">     272 </span>            :     void setNamespaceProcessing(bool);
+<span class="lineNum">     273 </span>            :     bool namespaceProcessing() const;
+<span class="lineNum">     274 </span>            : 
+<a name="275"><span class="lineNum">     275 </span>            :     inline bool isStartDocument() const { return tokenType() == StartDocument; }</a>
+<a name="276"><span class="lineNum">     276 </span>            :     inline bool isEndDocument() const { return tokenType() == EndDocument; }</a>
+<span class="lineNum">     277 </span><span class="lineCov">       2233 :     inline bool isStartElement() const { return tokenType() == StartElement; }</span>
+<span class="lineNum">     278 </span><span class="lineCov">       3689 :     inline bool isEndElement() const { return tokenType() == EndElement; }</span>
+<span class="lineNum">     279 </span>            :     inline bool isCharacters() const { return tokenType() == Characters; }
+<span class="lineNum">     280 </span>            :     bool isWhitespace() const;
+<span class="lineNum">     281 </span>            :     bool isCDATA() const;
+<span class="lineNum">     282 </span>            :     inline bool isComment() const { return tokenType() == Comment; }
+<span class="lineNum">     283 </span>            :     inline bool isDTD() const { return tokenType() == DTD; }
+<span class="lineNum">     284 </span>            :     inline bool isEntityReference() const { return tokenType() == EntityReference; }
+<span class="lineNum">     285 </span>            :     inline bool isProcessingInstruction() const { return tokenType() == ProcessingInstruction; }
+<span class="lineNum">     286 </span>            : 
+<span class="lineNum">     287 </span>            :     bool isStandaloneDocument() const;
+<span class="lineNum">     288 </span>            :     QStringRef documentVersion() const;
+<span class="lineNum">     289 </span>            :     QStringRef documentEncoding() const;
+<span class="lineNum">     290 </span>            : 
+<span class="lineNum">     291 </span>            :     qint64 lineNumber() const;
+<span class="lineNum">     292 </span>            :     qint64 columnNumber() const;
+<span class="lineNum">     293 </span>            :     qint64 characterOffset() const;
+<span class="lineNum">     294 </span>            : 
+<span class="lineNum">     295 </span>            :     QXmlStreamAttributes attributes() const;
+<span class="lineNum">     296 </span>            : 
+<span class="lineNum">     297 </span>            :     enum ReadElementTextBehaviour {
+<span class="lineNum">     298 </span>            :         ErrorOnUnexpectedElement,
+<span class="lineNum">     299 </span>            :         IncludeChildElements,
+<span class="lineNum">     300 </span>            :         SkipChildElements
+<span class="lineNum">     301 </span>            :     };
+<span class="lineNum">     302 </span>            :     QString readElementText(ReadElementTextBehaviour behaviour = ErrorOnUnexpectedElement);
+<span class="lineNum">     303 </span>            : 
+<span class="lineNum">     304 </span>            :     QStringRef name() const;
+<span class="lineNum">     305 </span>            :     QStringRef namespaceUri() const;
+<span class="lineNum">     306 </span>            :     QStringRef qualifiedName() const;
+<span class="lineNum">     307 </span>            :     QStringRef prefix() const;
+<span class="lineNum">     308 </span>            : 
+<span class="lineNum">     309 </span>            :     QStringRef processingInstructionTarget() const;
+<span class="lineNum">     310 </span>            :     QStringRef processingInstructionData() const;
+<span class="lineNum">     311 </span>            : 
+<span class="lineNum">     312 </span>            :     QStringRef text() const;
+<span class="lineNum">     313 </span>            : 
+<span class="lineNum">     314 </span>            :     QXmlStreamNamespaceDeclarations namespaceDeclarations() const;
+<span class="lineNum">     315 </span>            :     void addExtraNamespaceDeclaration(const QXmlStreamNamespaceDeclaration &amp;extraNamespaceDeclaraction);
+<span class="lineNum">     316 </span>            :     void addExtraNamespaceDeclarations(const QXmlStreamNamespaceDeclarations &amp;extraNamespaceDeclaractions);
+<span class="lineNum">     317 </span>            :     QXmlStreamNotationDeclarations notationDeclarations() const;
+<span class="lineNum">     318 </span>            :     QXmlStreamEntityDeclarations entityDeclarations() const;
+<span class="lineNum">     319 </span>            :     QStringRef dtdName() const;
+<span class="lineNum">     320 </span>            :     QStringRef dtdPublicId() const;
+<span class="lineNum">     321 </span>            :     QStringRef dtdSystemId() const;
+<span class="lineNum">     322 </span>            : 
+<span class="lineNum">     323 </span>            : 
+<span class="lineNum">     324 </span>            :     enum Error {
+<span class="lineNum">     325 </span>            :         NoError,
+<span class="lineNum">     326 </span>            :         UnexpectedElementError,
+<span class="lineNum">     327 </span>            :         CustomError,
+<span class="lineNum">     328 </span>            :         NotWellFormedError,
+<span class="lineNum">     329 </span>            :         PrematureEndOfDocumentError
+<span class="lineNum">     330 </span>            :     };
+<span class="lineNum">     331 </span>            :     void raiseError(const QString&amp; message = QString());
+<span class="lineNum">     332 </span>            :     QString errorString() const;
+<a name="333"><span class="lineNum">     333 </span>            :     Error error() const;</a>
+<span class="lineNum">     334 </span>            : 
+<span class="lineNum">     335 </span><span class="lineCov">       1881 :     inline bool hasError() const</span>
+<span class="lineNum">     336 </span>            :     {
+<span class="lineNum">     337 </span><span class="lineCov">       1881 :         return error() != NoError;</span>
+<span class="lineNum">     338 </span>            :     }
+<span class="lineNum">     339 </span>            : 
+<span class="lineNum">     340 </span>            :     void setEntityResolver(QXmlStreamEntityResolver *resolver);
+<span class="lineNum">     341 </span>            :     QXmlStreamEntityResolver *entityResolver() const;
+<span class="lineNum">     342 </span>            : 
+<span class="lineNum">     343 </span>            : private:
+<span class="lineNum">     344 </span>            :     Q_DISABLE_COPY(QXmlStreamReader)
+<span class="lineNum">     345 </span>            :     Q_DECLARE_PRIVATE(QXmlStreamReader)
+<span class="lineNum">     346 </span>            :     QScopedPointer&lt;QXmlStreamReaderPrivate&gt; d_ptr;
+<span class="lineNum">     347 </span>            : 
+<span class="lineNum">     348 </span>            : };
+<span class="lineNum">     349 </span>            : #endif // QT_NO_XMLSTREAMREADER
+<span class="lineNum">     350 </span>            : 
+<span class="lineNum">     351 </span>            : #ifndef QT_NO_XMLSTREAMWRITER
+<span class="lineNum">     352 </span>            : 
+<span class="lineNum">     353 </span>            : class QXmlStreamWriterPrivate;
+<span class="lineNum">     354 </span>            : 
+<span class="lineNum">     355 </span>            : class Q_CORE_EXPORT QXmlStreamWriter
+<span class="lineNum">     356 </span>            : {
+<span class="lineNum">     357 </span>            :     QDOC_PROPERTY(bool autoFormatting READ autoFormatting WRITE setAutoFormatting)
+<span class="lineNum">     358 </span>            :     QDOC_PROPERTY(int autoFormattingIndent READ autoFormattingIndent WRITE setAutoFormattingIndent)
+<span class="lineNum">     359 </span>            : public:
+<span class="lineNum">     360 </span>            :     QXmlStreamWriter();
+<span class="lineNum">     361 </span>            :     explicit QXmlStreamWriter(QIODevice *device);
+<span class="lineNum">     362 </span>            :     explicit QXmlStreamWriter(QByteArray *array);
+<span class="lineNum">     363 </span>            :     explicit QXmlStreamWriter(QString *string);
+<span class="lineNum">     364 </span>            :     ~QXmlStreamWriter();
+<span class="lineNum">     365 </span>            : 
+<span class="lineNum">     366 </span>            :     void setDevice(QIODevice *device);
+<span class="lineNum">     367 </span>            :     QIODevice *device() const;
+<span class="lineNum">     368 </span>            : 
+<span class="lineNum">     369 </span>            : #ifndef QT_NO_TEXTCODEC
+<span class="lineNum">     370 </span>            :     void setCodec(QTextCodec *codec);
+<span class="lineNum">     371 </span>            :     void setCodec(const char *codecName);
+<span class="lineNum">     372 </span>            :     QTextCodec *codec() const;
+<span class="lineNum">     373 </span>            : #endif
+<span class="lineNum">     374 </span>            : 
+<span class="lineNum">     375 </span>            :     void setAutoFormatting(bool);
+<span class="lineNum">     376 </span>            :     bool autoFormatting() const;
+<span class="lineNum">     377 </span>            : 
+<span class="lineNum">     378 </span>            :     void setAutoFormattingIndent(int spacesOrTabs);
+<span class="lineNum">     379 </span>            :     int autoFormattingIndent() const;
+<span class="lineNum">     380 </span>            : 
+<span class="lineNum">     381 </span>            :     void writeAttribute(const QString &amp;qualifiedName, const QString &amp;value);
+<span class="lineNum">     382 </span>            :     void writeAttribute(const QString &amp;namespaceUri, const QString &amp;name, const QString &amp;value);
+<span class="lineNum">     383 </span>            :     void writeAttribute(const QXmlStreamAttribute&amp; attribute);
+<span class="lineNum">     384 </span>            :     void writeAttributes(const QXmlStreamAttributes&amp; attributes);
+<span class="lineNum">     385 </span>            : 
+<span class="lineNum">     386 </span>            :     void writeCDATA(const QString &amp;text);
+<span class="lineNum">     387 </span>            :     void writeCharacters(const QString &amp;text);
+<span class="lineNum">     388 </span>            :     void writeComment(const QString &amp;text);
+<span class="lineNum">     389 </span>            : 
+<span class="lineNum">     390 </span>            :     void writeDTD(const QString &amp;dtd);
+<span class="lineNum">     391 </span>            : 
+<span class="lineNum">     392 </span>            :     void writeEmptyElement(const QString &amp;qualifiedName);
+<span class="lineNum">     393 </span>            :     void writeEmptyElement(const QString &amp;namespaceUri, const QString &amp;name);
+<span class="lineNum">     394 </span>            : 
+<span class="lineNum">     395 </span>            :     void writeTextElement(const QString &amp;qualifiedName, const QString &amp;text);
+<span class="lineNum">     396 </span>            :     void writeTextElement(const QString &amp;namespaceUri, const QString &amp;name, const QString &amp;text);
+<span class="lineNum">     397 </span>            : 
+<span class="lineNum">     398 </span>            :     void writeEndDocument();
+<span class="lineNum">     399 </span>            :     void writeEndElement();
+<span class="lineNum">     400 </span>            : 
+<span class="lineNum">     401 </span>            :     void writeEntityReference(const QString &amp;name);
+<span class="lineNum">     402 </span>            :     void writeNamespace(const QString &amp;namespaceUri, const QString &amp;prefix = QString());
+<span class="lineNum">     403 </span>            :     void writeDefaultNamespace(const QString &amp;namespaceUri);
+<span class="lineNum">     404 </span>            :     void writeProcessingInstruction(const QString &amp;target, const QString &amp;data = QString());
+<span class="lineNum">     405 </span>            : 
+<span class="lineNum">     406 </span>            :     void writeStartDocument();
+<span class="lineNum">     407 </span>            :     void writeStartDocument(const QString &amp;version);
+<span class="lineNum">     408 </span>            :     void writeStartDocument(const QString &amp;version, bool standalone);
+<span class="lineNum">     409 </span>            :     void writeStartElement(const QString &amp;qualifiedName);
+<span class="lineNum">     410 </span>            :     void writeStartElement(const QString &amp;namespaceUri, const QString &amp;name);
+<span class="lineNum">     411 </span>            : 
+<span class="lineNum">     412 </span>            : #ifndef QT_NO_XMLSTREAMREADER
+<span class="lineNum">     413 </span>            :     void writeCurrentToken(const QXmlStreamReader &amp;reader);
+<span class="lineNum">     414 </span>            : #endif
+<span class="lineNum">     415 </span>            : 
+<span class="lineNum">     416 </span>            :     bool hasError() const;
+<span class="lineNum">     417 </span>            : 
+<span class="lineNum">     418 </span>            : private:
+<span class="lineNum">     419 </span>            :     Q_DISABLE_COPY(QXmlStreamWriter)
+<span class="lineNum">     420 </span>            :     Q_DECLARE_PRIVATE(QXmlStreamWriter)
+<span class="lineNum">     421 </span>            :     QScopedPointer&lt;QXmlStreamWriterPrivate&gt; d_ptr;
+<span class="lineNum">     422 </span>            : };
+<span class="lineNum">     423 </span>            : #endif // QT_NO_XMLSTREAMWRITER
+<span class="lineNum">     424 </span>            : 
+<span class="lineNum">     425 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     426 </span>            : 
+<span class="lineNum">     427 </span>            : #endif // QT_NO_XMLSTREAM
+<span class="lineNum">     428 </span>            : #endif // QXMLSTREAM_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
