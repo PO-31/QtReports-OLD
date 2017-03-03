@@ -22,7 +22,10 @@ matrix:
   include:
    - os: linux
      compiler: gcc
-     env: BUILD_TYPE=coverage
+     env: BUILD_TYPE=coverage     
+   - os: linux
+     compiler: gcc
+     env: BUILD_TYPE=doxegen
 
 #sudo: false
   
@@ -43,12 +46,12 @@ branches:
     
 notifications:
   email: false
-  webhooks:
-    urls:
-      - https://webhooks.gitter.im/e/cc85956a4a2f1ab871d1
-    on_success: change  # options: [always|never|change] default: always
-    on_failure: always  # options: [always|never|change] default: always
-    on_start: never     # options: [always|never|change] default: always
+  #webhooks:
+  #  urls:
+  #    - https://webhooks.gitter.im/e/cc85956a4a2f1ab871d1
+  #  on_success: change  # options: [always|never|change] default: always
+  #  on_failure: always  # options: [always|never|change] default: always
+  #  on_start: never     # options: [always|never|change] default: always
 
 #addons:
 #  apt:
@@ -95,12 +98,8 @@ script:
       lcov --capture --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info
       lcov --remove coverage.info --output-file coverage.info "*moc_*.cpp"
     fi
-
-after_success:
-  - > 
-    if [ "$BUILD_TYPE" = "coverage" ]; then
-      ruby --version
-      lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
+  - >
+    if [ "$BUILD_TYPE" = "doxegen" ]; then
       # Auto documentation generation
       cd "$TRAVIS_BUILD_DIR"
       cd ..
@@ -124,4 +123,11 @@ after_success:
       git config --global push.default simple
       git push -f -q https://havendv:$GITHUB_API_KEY@github.com/PO-21/PO-21.github.io > /dev/null
       cd "$TRAVIS_BUILD_DIR"
+   fi
+
+after_success:
+  - > 
+    if [ "$BUILD_TYPE" = "coverage" ]; then
+      ruby --version
+      lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info
     fi
