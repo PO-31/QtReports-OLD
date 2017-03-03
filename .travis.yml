@@ -64,10 +64,15 @@ script:
   - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --version; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --capture --directory $TRAVIS_BUILD_DIR/qtreportslib --output-file coverage.info; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --remove coverage.info --output-file coverage.info; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then cd "$TRAVIS_BUILD_DIR"; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then git clone  -b gh_pages https://github.com/PO-31/QtReports ./gh_pages; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then genhtml ./QtReports/coverage.info --output-directory ./gh_pages; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then cd ./gh_pages; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then git config --global user.name "travic"; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then git config --global user.email "travic@travic.org"; fi
+  - if [ "$BUILD_TYPE" = "coverage" ]; then git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/QtReports/branch=gh_pages > /dev/null; fi
 
 after_success:
-  - if [ "$BUILD_TYPE" = "coverage" ]; then ruby --version; fi
-  - if [ "$BUILD_TYPE" = "coverage" ]; then lcoveralls --root . --retry-count 5 --token "${COVERALLS_IO_TOKEN}" coverage.info; fi
       # Auto documentation generation
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
