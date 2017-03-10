@@ -1,0 +1,514 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - qtreportslib/converters/convertertohtml.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">qtreportslib/converters</a> - convertertohtml.cpp<span style="font-size: 80%;"> (source / <a href="convertertohtml.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">196</td>
+            <td class="headerCovTableEntry">224</td>
+            <td class="headerCovTableEntryMed">87.5 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2017-03-10 07:01:01</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &lt;QFile&gt;</a>
+<span class="lineNum">       2 </span>            : #include &lt;QTextStream&gt;
+<span class="lineNum">       3 </span>            : #include &quot;utils/replacer.hpp&quot;
+<span class="lineNum">       4 </span>            : #include &quot;convertertohtml.hpp&quot;
+<span class="lineNum">       5 </span>            : #include &quot;cmath&quot;
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span>            : namespace qtreports {
+<a name="8"><span class="lineNum">       8 </span>            :     namespace detail {</a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">          5 :         ConverterToHTML::ConverterToHTML( const ReportPtr &amp; report ) :</span>
+<a name="11"><span class="lineNum">      11 </span><span class="lineCov">          5 :             m_report( report ) {}</span></a>
+<span class="lineNum">      12 </span>            : 
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">          5 :         ConverterToHTML::~ConverterToHTML() {}</span></a>
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span><span class="lineCov">          3 :         bool    ConverterToHTML::convert() {</span>
+<span class="lineNum">      16 </span><span class="lineCov">          3 :             return createHTML();</span>
+<a name="17"><span class="lineNum">      17 </span>            :         }</a>
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span><span class="lineCov">          2 :         bool    ConverterToHTML::convert( const QString &amp; path ) {</span>
+<span class="lineNum">      20 </span><span class="lineCov">          2 :             if( !convert() ) {</span>
+<span class="lineNum">      21 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">      22 </span>            :             }
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span><span class="lineCov">          2 :             QFile file( path );</span>
+<span class="lineNum">      25 </span>            :             file.open(
+<span class="lineNum">      26 </span><span class="lineCov">          4 :                 QIODevice::OpenModeFlag::WriteOnly |</span>
+<span class="lineNum">      27 </span>            :                 QIODevice::OpenModeFlag::Text |
+<span class="lineNum">      28 </span>            :                 QIODevice::OpenModeFlag::Truncate
+<span class="lineNum">      29 </span><span class="lineCov">          2 :             );</span>
+<span class="lineNum">      30 </span>            : 
+<span class="lineNum">      31 </span><span class="lineCov">          2 :             if( !file.isOpen() ) {</span>
+<span class="lineNum">      32 </span><span class="lineNoCov">          0 :                 m_lastError = &quot;The file can not be opened&quot;;</span>
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">      34 </span>            :             }
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span><span class="lineCov">          4 :             QTextStream stream( &amp;file );</span>
+<span class="lineNum">      37 </span><span class="lineCov">          2 :             stream.setCodec( &quot;UTF-8&quot; );</span>
+<span class="lineNum">      38 </span><span class="lineCov">          2 :             stream &lt;&lt; m_html;</span>
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span><span class="lineCov">          4 :             return true;</span>
+<a name="41"><span class="lineNum">      41 </span>            :         }</a>
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span><span class="lineCov">          3 :         bool    ConverterToHTML::createHTML() {</span>
+<span class="lineNum">      44 </span><span class="lineCov">          3 :             if(m_report.isNull())</span>
+<span class="lineNum">      45 </span>            :             {
+<span class="lineNum">      46 </span><span class="lineNoCov">          0 :                 m_lastError = &quot;Report is empty&quot;;</span>
+<span class="lineNum">      47 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">      48 </span>            :             }
+<span class="lineNum">      49 </span>            : 
+<span class="lineNum">      50 </span><span class="lineCov">          3 :             int pageHeight = m_report-&gt;getHeight();</span>
+<span class="lineNum">      51 </span><span class="lineCov">          3 :             int pageWidth = m_report-&gt;getWidth();</span>
+<span class="lineNum">      52 </span><span class="lineCov">          3 :             int freePageSpace = pageHeight;</span>
+<span class="lineNum">      53 </span>            : 
+<span class="lineNum">      54 </span><span class="lineCov">          6 :             m_html += QString(&quot;&lt;!DOCTYPE html&gt;\n&quot;</span>
+<span class="lineNum">      55 </span>            :                       &quot;&lt;html&gt;\n&quot;
+<span class="lineNum">      56 </span>            :                       &quot; &lt;head&gt;\n&quot;
+<span class="lineNum">      57 </span>            :                       &quot;  &lt;meta http-equiv='Content-Type' content='text/html; charset=utf-8'&gt;\n&quot;
+<span class="lineNum">      58 </span>            :                       &quot;  &lt;title&gt;Report&lt;/title&gt;\n&quot;
+<span class="lineNum">      59 </span>            :                       &quot;  &lt;style&gt;\n&quot;
+<span class="lineNum">      60 </span>            : 
+<span class="lineNum">      61 </span>            :                       &quot;   div, .detail, .title, .band {\n&quot;
+<span class="lineNum">      62 </span>            :                       &quot;   position: relative;\n&quot;
+<span class="lineNum">      63 </span>            :                       &quot;   width: 100%;\n&quot;
+<span class="lineNum">      64 </span>            :                       &quot;   overflow: hidden;\n&quot;
+<span class="lineNum">      65 </span>            :                       &quot;   }\n&quot;
+<span class="lineNum">      66 </span>            : 
+<span class="lineNum">      67 </span>            :                       &quot;   @media print {\n&quot;
+<span class="lineNum">      68 </span>            :                       &quot;   .page {page-break-after: always;}\n&quot;
+<span class="lineNum">      69 </span>            :                       &quot;   }\n&quot;
+<span class="lineNum">      70 </span>            : 
+<span class="lineNum">      71 </span>            :                       &quot;   .page {\n&quot;
+<span class="lineNum">      72 </span>            :                       &quot;   width: %1px;\n&quot;
+<span class="lineNum">      73 </span>            :                       &quot;   height: %2px;\n&quot; 
+<span class="lineNum">      74 </span>            :                       &quot;   }\n&quot;
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span>            :                       &quot;   .statictext, .textfield, .shape{\n&quot;
+<span class="lineNum">      77 </span>            :                       &quot;   position: absolute;\n&quot;
+<span class="lineNum">      78 </span>            :                       &quot;   background-color: transparent;\n&quot;
+<span class="lineNum">      79 </span>            :                       &quot;   }\n&quot;
+<span class="lineNum">      80 </span>            : 
+<span class="lineNum">      81 </span>            :                       &quot;   .statictext {\n&quot;
+<span class="lineNum">      82 </span>            :                       &quot;   font-family: %3;\n&quot;
+<span class="lineNum">      83 </span>            :                       &quot;   font-size: %4pt;\n&quot;
+<span class="lineNum">      84 </span>            :                       &quot;   color: %5;\n&quot;
+<span class="lineNum">      85 </span>            :                       &quot;   font-style: %6;\n&quot;
+<span class="lineNum">      86 </span>            :                       &quot;   font-weight: %7;\n&quot;
+<span class="lineNum">      87 </span>            :                       &quot;   }\n&quot;
+<span class="lineNum">      88 </span>            : 
+<span class="lineNum">      89 </span>            :                       &quot;   .textfield {\n&quot;
+<span class="lineNum">      90 </span>            :                       &quot;   font-family: %8;\n&quot;
+<span class="lineNum">      91 </span>            :                       &quot;   font-size: %9pt;\n&quot;
+<span class="lineNum">      92 </span>            :                       &quot;   color: %10;\n&quot;
+<span class="lineNum">      93 </span>            :                       &quot;   font-style: %11;\n&quot;
+<span class="lineNum">      94 </span>            :                       &quot;   font-weight: %12;\n&quot;
+<span class="lineNum">      95 </span>            :                       &quot;   }\n&quot;
+<span class="lineNum">      96 </span>            : 
+<span class="lineNum">      97 </span>            :                       &quot;  &lt;/style&gt;\n&quot;
+<span class="lineNum">      98 </span>            :                       &quot; &lt;/head&gt;\n&quot;
+<span class="lineNum">      99 </span>            :                       &quot; &lt;body&gt;\n&quot;)
+<span class="lineNum">     100 </span>            :                     .arg(pageWidth).arg(pageHeight)
+<span class="lineNum">     101 </span>            :                     .arg(&quot;Verdana&quot;).arg(&quot;12&quot;).arg(&quot;black&quot;).arg(&quot;normal&quot;).arg(&quot;normal&quot;)
+<span class="lineNum">     102 </span><span class="lineCov">          3 :                     .arg(&quot;Verdana&quot;).arg(&quot;12&quot;).arg(&quot;black&quot;).arg(&quot;normal&quot;).arg(&quot;normal&quot;);</span>
+<span class="lineNum">     103 </span>            : 
+<span class="lineNum">     104 </span><span class="lineCov">          3 :             m_html += &quot;  &lt;div class='page'&gt;\n&quot;;</span>
+<span class="lineNum">     105 </span>            : 
+<span class="lineNum">     106 </span><span class="lineCov">          3 :             auto title = m_report-&gt;getTitle();</span>
+<span class="lineNum">     107 </span>            : 
+<span class="lineNum">     108 </span><span class="lineCov">          3 :             if(!title.isNull())</span>
+<span class="lineNum">     109 </span>            :             {
+<span class="lineNum">     110 </span><span class="lineCov">          2 :                 m_html += &quot;   &lt;div class='title'&gt;\n&quot;;</span>
+<span class="lineNum">     111 </span>            : 
+<span class="lineNum">     112 </span><span class="lineCov">          2 :                 detail::Replacer replacer;</span>
+<span class="lineNum">     113 </span><span class="lineCov">          2 :                 if( !replacer.replace( title, m_report, 0 ) )</span>
+<span class="lineNum">     114 </span>            :                 {
+<span class="lineNum">     115 </span><span class="lineNoCov">          0 :                     m_lastError = &quot;Error in replacing process: &quot; + replacer.getLastError();</span>
+<span class="lineNum">     116 </span><span class="lineNoCov">          0 :                     return false;</span>
+<span class="lineNum">     117 </span>            :                 }
+<span class="lineNum">     118 </span>            : 
+<span class="lineNum">     119 </span><span class="lineCov">          4 :                 for(auto &amp;&amp; band : title-&gt;getBands())</span>
+<span class="lineNum">     120 </span>            :                 {
+<span class="lineNum">     121 </span><span class="lineCov">          2 :                     QString elementStr = &quot;&quot;;</span>
+<span class="lineNum">     122 </span>            : 
+<span class="lineNum">     123 </span><span class="lineCov">          4 :                         for(auto &amp;&amp; textField : band-&gt;getTextFields())</span>
+<span class="lineNum">     124 </span>            :                         {                       
+<span class="lineNum">     125 </span><span class="lineCov">          2 :                         if (textField-&gt;getText() != &quot;&quot;)</span>
+<span class="lineNum">     126 </span>            :                         {
+<span class="lineNum">     127 </span><span class="lineCov">          2 :                             QString textAlignment = &quot;left&quot;;</span>
+<span class="lineNum">     128 </span><span class="lineCov">          4 :                             QString verticalAlignment = &quot;middle&quot;;</span>
+<span class="lineNum">     129 </span>            : 
+<span class="lineNum">     130 </span><span class="lineCov">          2 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignLeft) == Qt::AlignLeft)</span>
+<span class="lineNum">     131 </span><span class="lineCov">          2 :                                 textAlignment = &quot;left&quot;;</span>
+<span class="lineNum">     132 </span><span class="lineCov">          2 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignRight) == Qt::AlignRight)</span>
+<span class="lineNum">     133 </span><span class="lineNoCov">          0 :                                 textAlignment = &quot;right&quot;;</span>
+<span class="lineNum">     134 </span><span class="lineCov">          2 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignHCenter) == Qt::AlignHCenter)</span>
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :                                 textAlignment = &quot;center&quot;;</span>
+<span class="lineNum">     136 </span><span class="lineCov">          2 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignJustify) == Qt::AlignJustify)</span>
+<span class="lineNum">     137 </span><span class="lineNoCov">          0 :                                 textAlignment = &quot;justify&quot;;</span>
+<span class="lineNum">     138 </span>            : 
+<span class="lineNum">     139 </span><span class="lineCov">          2 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignTop) == Qt::AlignTop)</span>
+<span class="lineNum">     140 </span><span class="lineNoCov">          0 :                                 verticalAlignment = &quot;top&quot;;</span>
+<span class="lineNum">     141 </span><span class="lineCov">          2 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignBottom) == Qt::AlignBottom)</span>
+<span class="lineNum">     142 </span><span class="lineCov">          2 :                                 verticalAlignment = &quot;bottom&quot;;</span>
+<span class="lineNum">     143 </span><span class="lineCov">          2 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignVCenter) == Qt::AlignVCenter)</span>
+<span class="lineNum">     144 </span><span class="lineNoCov">          0 :                                 verticalAlignment = &quot;middle&quot;;</span>
+<span class="lineNum">     145 </span>            :                             //if ((textField-&gt;getAlignment() &amp; Qt::AlignBaseline) == Qt::AlignBaseline)
+<span class="lineNum">     146 </span>            :                             //    verticalAlignment = &quot;baseline&quot;;
+<span class="lineNum">     147 </span>            : 
+<span class="lineNum">     148 </span><span class="lineCov">         14 :                             elementStr += QString(&quot;     &lt;div class='textfield' &quot;</span>
+<span class="lineNum">     149 </span>            :                                &quot;style='left: %1px; top: %2px; &quot;
+<span class="lineNum">     150 </span>            :                                &quot;width: %3px; height: %4px; &quot;
+<span class="lineNum">     151 </span>            :                                &quot;text-align: %5; vertical-align: %6'&gt;%7&lt;/div&gt;\n&quot;)
+<span class="lineNum">     152 </span><span class="lineCov">          2 :                                .arg(textField-&gt;getX())</span>
+<span class="lineNum">     153 </span><span class="lineCov">          2 :                                .arg(textField-&gt;getY())</span>
+<span class="lineNum">     154 </span><span class="lineCov">          2 :                                .arg(textField-&gt;getWidth())</span>
+<span class="lineNum">     155 </span><span class="lineCov">          2 :                                .arg(textField-&gt;getHeight())</span>
+<span class="lineNum">     156 </span>            :                                .arg(textAlignment)
+<span class="lineNum">     157 </span>            :                                .arg(verticalAlignment)
+<span class="lineNum">     158 </span><span class="lineCov">          6 :                                .arg(textField-&gt;getText());</span>
+<span class="lineNum">     159 </span>            :                         }
+<span class="lineNum">     160 </span><span class="lineCov">          2 :                     }</span>
+<span class="lineNum">     161 </span>            : 
+<span class="lineNum">     162 </span><span class="lineCov">          4 :                     for(auto &amp;&amp; staticText : band-&gt;getStaticTexts())</span>
+<span class="lineNum">     163 </span>            :                     {
+<span class="lineNum">     164 </span><span class="lineCov">          2 :                         if (staticText-&gt;getText() != &quot;&quot;)</span>
+<span class="lineNum">     165 </span>            :                         {
+<span class="lineNum">     166 </span><span class="lineCov">          2 :                             QString textAlignment = &quot;left&quot;;</span>
+<span class="lineNum">     167 </span><span class="lineCov">          4 :                             QString verticalAlignment = &quot;middle&quot;;</span>
+<span class="lineNum">     168 </span>            : 
+<span class="lineNum">     169 </span><span class="lineCov">          2 :                             if ((staticText-&gt;getAlignment() &amp; Qt::AlignLeft) == Qt::AlignLeft)</span>
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :                                 textAlignment = &quot;left&quot;;</span>
+<span class="lineNum">     171 </span><span class="lineCov">          2 :                             if ((staticText-&gt;getAlignment() &amp; Qt::AlignRight) == Qt::AlignRight)</span>
+<span class="lineNum">     172 </span><span class="lineCov">          2 :                                 textAlignment = &quot;right&quot;;</span>
+<span class="lineNum">     173 </span><span class="lineCov">          2 :                             if ((staticText-&gt;getAlignment() &amp; Qt::AlignHCenter) == Qt::AlignHCenter)</span>
+<span class="lineNum">     174 </span><span class="lineNoCov">          0 :                                 textAlignment = &quot;center&quot;;</span>
+<span class="lineNum">     175 </span><span class="lineCov">          2 :                             if ((staticText-&gt;getAlignment() &amp; Qt::AlignJustify) == Qt::AlignJustify)</span>
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :                                 textAlignment = &quot;justify&quot;;</span>
+<span class="lineNum">     177 </span>            : 
+<span class="lineNum">     178 </span><span class="lineCov">          2 :                             if ((staticText-&gt;getAlignment() &amp; Qt::AlignTop) == Qt::AlignTop)</span>
+<span class="lineNum">     179 </span><span class="lineCov">          2 :                                 verticalAlignment = &quot;top&quot;;</span>
+<span class="lineNum">     180 </span><span class="lineCov">          2 :                             if ((staticText-&gt;getAlignment() &amp; Qt::AlignBottom) == Qt::AlignBottom)</span>
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :                                 verticalAlignment = &quot;bottom&quot;;</span>
+<span class="lineNum">     182 </span><span class="lineCov">          2 :                             if ((staticText-&gt;getAlignment() &amp; Qt::AlignVCenter) == Qt::AlignVCenter)</span>
+<span class="lineNum">     183 </span><span class="lineNoCov">          0 :                                 verticalAlignment = &quot;middle&quot;;</span>
+<span class="lineNum">     184 </span>            :                             //if ((staticText-&gt;getAlignment() &amp; Qt::AlignBaseline) == Qt::AlignBaseline)
+<span class="lineNum">     185 </span>            :                             //    verticalAlignment = &quot;baseline&quot;;
+<span class="lineNum">     186 </span>            : 
+<span class="lineNum">     187 </span>            : 
+<span class="lineNum">     188 </span><span class="lineCov">         14 :                             elementStr += QString(&quot;     &lt;div class='statictext' &quot;</span>
+<span class="lineNum">     189 </span>            :                                 &quot;style='left: %1px; top: %2px; &quot;
+<span class="lineNum">     190 </span>            :                                 &quot;width: %3px; height: %4px; &quot;
+<span class="lineNum">     191 </span>            :                                 &quot;text-align: %5; vertical-align: %6'&gt;%7&lt;/div&gt;\n&quot;)
+<span class="lineNum">     192 </span><span class="lineCov">          2 :                                 .arg(staticText-&gt;getX())</span>
+<span class="lineNum">     193 </span><span class="lineCov">          2 :                                 .arg(staticText-&gt;getY())</span>
+<span class="lineNum">     194 </span><span class="lineCov">          2 :                                 .arg(staticText-&gt;getWidth())</span>
+<span class="lineNum">     195 </span><span class="lineCov">          2 :                                 .arg(staticText-&gt;getHeight())</span>
+<span class="lineNum">     196 </span>            :                                 .arg(textAlignment)
+<span class="lineNum">     197 </span>            :                                 .arg(verticalAlignment)
+<span class="lineNum">     198 </span><span class="lineCov">          6 :                                 .arg(staticText-&gt;getText());</span>
+<span class="lineNum">     199 </span>            :                         }
+<span class="lineNum">     200 </span><span class="lineCov">          2 :                     }</span>
+<span class="lineNum">     201 </span>            : 
+<span class="lineNum">     202 </span><span class="lineCov">          2 :                     drawShapes(band, elementStr, 0);</span>
+<span class="lineNum">     203 </span>            : 
+<span class="lineNum">     204 </span><span class="lineCov">          2 :                     freePageSpace -= band-&gt;getSize().height();</span>
+<span class="lineNum">     205 </span>            : 
+<span class="lineNum">     206 </span><span class="lineCov">          6 :                     m_html += QString(&quot;    &lt;div class='band' &quot;</span>
+<span class="lineNum">     207 </span>            :                              &quot;style='height: %1px'&gt;\n%2    &lt;/div&gt;\n&quot;)
+<span class="lineNum">     208 </span><span class="lineCov">          2 :                              .arg(band-&gt;getSize().height())</span>
+<span class="lineNum">     209 </span><span class="lineCov">          2 :                              .arg(elementStr);</span>
+<span class="lineNum">     210 </span><span class="lineCov">          4 :                 }</span>
+<span class="lineNum">     211 </span>            : 
+<span class="lineNum">     212 </span><span class="lineCov">          2 :                 m_html += &quot;   &lt;/div&gt;\n&quot;;</span>
+<span class="lineNum">     213 </span>            :             }
+<span class="lineNum">     214 </span>            : 
+<span class="lineNum">     215 </span>            : 
+<span class="lineNum">     216 </span><span class="lineCov">          6 :             auto detail = m_report-&gt;getDetail();</span>
+<span class="lineNum">     217 </span><span class="lineCov">          3 :             if(detail.isNull())</span>
+<span class="lineNum">     218 </span>            :             {
+<span class="lineNum">     219 </span><span class="lineNoCov">          0 :                 m_lastError = &quot;Report-&gt;Detail is empty&quot;;</span>
+<span class="lineNum">     220 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     221 </span>            :             }
+<span class="lineNum">     222 </span>            : 
+<span class="lineNum">     223 </span><span class="lineCov">          3 :             int pageCount = 0;</span>
+<span class="lineNum">     224 </span><span class="lineCov">          3 :             int detailCount = m_report-&gt;getRowCount();</span>
+<span class="lineNum">     225 </span>            : 
+<span class="lineNum">     226 </span><span class="lineCov">         33 :             for(int i = 0; i &lt; detailCount; ++i)</span>
+<span class="lineNum">     227 </span>            :             {
+<span class="lineNum">     228 </span><span class="lineCov">         30 :                 detail::Replacer replacer;</span>
+<span class="lineNum">     229 </span><span class="lineCov">         30 :                 if( !replacer.replace( detail, m_report, i ) )</span>
+<span class="lineNum">     230 </span>            :                 {
+<span class="lineNum">     231 </span><span class="lineNoCov">          0 :                     m_lastError = &quot;Error in replacing process: &quot; + replacer.getLastError();</span>
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :                     return false;</span>
+<span class="lineNum">     233 </span>            :                 }
+<span class="lineNum">     234 </span>            : 
+<span class="lineNum">     235 </span><span class="lineCov">         60 :                 QString bandStr = &quot;&quot;;</span>
+<span class="lineNum">     236 </span>            : 
+<span class="lineNum">     237 </span><span class="lineCov">        112 :                 for(auto &amp;&amp; band : detail-&gt;getBands())</span>
+<span class="lineNum">     238 </span>            :                 {
+<span class="lineNum">     239 </span><span class="lineCov">         82 :                     bool isBandEmpty = true;</span>
+<span class="lineNum">     240 </span><span class="lineCov">         82 :                     QString elementStr = &quot;&quot;;</span>
+<span class="lineNum">     241 </span>            : 
+<span class="lineNum">     242 </span><span class="lineCov">        164 :                     for(auto &amp;&amp; textField : band-&gt;getTextFields())</span>
+<span class="lineNum">     243 </span>            :                     {
+<span class="lineNum">     244 </span><span class="lineCov">         82 :                         if (textField-&gt;getText() != &quot;&quot;)</span>
+<span class="lineNum">     245 </span>            :                         {
+<span class="lineNum">     246 </span><span class="lineCov">         82 :                             QString textAlignment = &quot;left&quot;;</span>
+<span class="lineNum">     247 </span><span class="lineCov">        164 :                             QString verticalAlignment = &quot;middle&quot;;</span>
+<span class="lineNum">     248 </span>            : 
+<span class="lineNum">     249 </span><span class="lineCov">         82 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignLeft) == Qt::AlignLeft)</span>
+<span class="lineNum">     250 </span><span class="lineCov">         38 :                                 textAlignment = &quot;left&quot;;</span>
+<span class="lineNum">     251 </span><span class="lineCov">         82 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignRight) == Qt::AlignRight)</span>
+<span class="lineNum">     252 </span><span class="lineCov">         44 :                                 textAlignment = &quot;right&quot;;</span>
+<span class="lineNum">     253 </span><span class="lineCov">         82 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignHCenter) == Qt::AlignHCenter)</span>
+<span class="lineNum">     254 </span><span class="lineNoCov">          0 :                                 textAlignment = &quot;center&quot;;</span>
+<span class="lineNum">     255 </span><span class="lineCov">         82 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignJustify) == Qt::AlignJustify)</span>
+<span class="lineNum">     256 </span><span class="lineNoCov">          0 :                                 textAlignment = &quot;justify&quot;;</span>
+<span class="lineNum">     257 </span>            : 
+<span class="lineNum">     258 </span><span class="lineCov">         82 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignTop) == Qt::AlignTop)</span>
+<span class="lineNum">     259 </span><span class="lineCov">         44 :                                 verticalAlignment = &quot;top&quot;;</span>
+<span class="lineNum">     260 </span><span class="lineCov">         82 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignBottom) == Qt::AlignBottom)</span>
+<span class="lineNum">     261 </span><span class="lineCov">         22 :                                 verticalAlignment = &quot;bottom&quot;;</span>
+<span class="lineNum">     262 </span><span class="lineCov">         82 :                             if ((textField-&gt;getAlignment() &amp; Qt::AlignVCenter) == Qt::AlignVCenter)</span>
+<span class="lineNum">     263 </span><span class="lineCov">         16 :                                 verticalAlignment = &quot;middle&quot;;</span>
+<span class="lineNum">     264 </span>            :                             //if ((textField-&gt;getAlignment() &amp; Qt::AlignBaseline) == Qt::AlignBaseline)
+<span class="lineNum">     265 </span>            :                             //    verticalAlignment = &quot;baseline&quot;;
+<span class="lineNum">     266 </span>            : 
+<span class="lineNum">     267 </span>            : 
+<span class="lineNum">     268 </span><span class="lineCov">        574 :                             elementStr += QString(&quot;     &lt;div class='textfield' &quot;</span>
+<span class="lineNum">     269 </span>            :                                &quot;style='left: %1px; top: %2px; &quot;
+<span class="lineNum">     270 </span>            :                                &quot;width: %3px; height: %4px; &quot;
+<span class="lineNum">     271 </span>            :                                &quot;text-align: %5; vertical-align: %6'&gt;%7&lt;/div&gt;\n&quot;)
+<span class="lineNum">     272 </span><span class="lineCov">         82 :                                .arg(textField-&gt;getX())</span>
+<span class="lineNum">     273 </span><span class="lineCov">         82 :                                .arg(textField-&gt;getY())</span>
+<span class="lineNum">     274 </span><span class="lineCov">         82 :                                .arg(textField-&gt;getWidth())</span>
+<span class="lineNum">     275 </span><span class="lineCov">         82 :                                .arg(textField-&gt;getHeight())</span>
+<span class="lineNum">     276 </span>            :                                .arg(textAlignment)
+<span class="lineNum">     277 </span>            :                                .arg(verticalAlignment)
+<span class="lineNum">     278 </span><span class="lineCov">        164 :                                .arg(textField-&gt;getText());</span>
+<span class="lineNum">     279 </span>            : 
+<span class="lineNum">     280 </span><span class="lineCov">        164 :                             isBandEmpty = false;</span>
+<span class="lineNum">     281 </span>            :                         }
+<span class="lineNum">     282 </span><span class="lineCov">         82 :                     }</span>
+<span class="lineNum">     283 </span>            : 
+<span class="lineNum">     284 </span><span class="lineCov">         82 :                     if (!isBandEmpty)</span>
+<span class="lineNum">     285 </span>            :                     {                        
+<span class="lineNum">     286 </span><span class="lineCov">         82 :                         for(auto &amp;&amp; staticText : band-&gt;getStaticTexts())</span>
+<span class="lineNum">     287 </span>            :                         {
+<span class="lineNum">     288 </span><span class="lineCov">         22 :                             if (staticText-&gt;getText() != &quot;&quot;)</span>
+<span class="lineNum">     289 </span>            :                             {
+<span class="lineNum">     290 </span><span class="lineCov">         22 :                                 QString textAlignment = &quot;left&quot;;</span>
+<span class="lineNum">     291 </span><span class="lineCov">         44 :                                 QString verticalAlignment = &quot;middle&quot;;</span>
+<span class="lineNum">     292 </span>            : 
+<span class="lineNum">     293 </span><span class="lineCov">         22 :                                 if ((staticText-&gt;getAlignment() &amp; Qt::AlignLeft) == Qt::AlignLeft)</span>
+<span class="lineNum">     294 </span><span class="lineNoCov">          0 :                                     textAlignment = &quot;left&quot;;</span>
+<span class="lineNum">     295 </span><span class="lineCov">         22 :                                 if ((staticText-&gt;getAlignment() &amp; Qt::AlignRight) == Qt::AlignRight)</span>
+<span class="lineNum">     296 </span><span class="lineCov">         22 :                                     textAlignment = &quot;right&quot;;</span>
+<span class="lineNum">     297 </span><span class="lineCov">         22 :                                 if ((staticText-&gt;getAlignment() &amp; Qt::AlignHCenter) == Qt::AlignHCenter)</span>
+<span class="lineNum">     298 </span><span class="lineNoCov">          0 :                                     textAlignment = &quot;center&quot;;</span>
+<span class="lineNum">     299 </span><span class="lineCov">         22 :                                 if ((staticText-&gt;getAlignment() &amp; Qt::AlignJustify) == Qt::AlignJustify)</span>
+<span class="lineNum">     300 </span><span class="lineNoCov">          0 :                                     textAlignment = &quot;justify&quot;;</span>
+<span class="lineNum">     301 </span>            : 
+<span class="lineNum">     302 </span><span class="lineCov">         22 :                                 if ((staticText-&gt;getAlignment() &amp; Qt::AlignTop) == Qt::AlignTop)</span>
+<span class="lineNum">     303 </span><span class="lineCov">         22 :                                     verticalAlignment = &quot;top&quot;;</span>
+<span class="lineNum">     304 </span><span class="lineCov">         22 :                                 if ((staticText-&gt;getAlignment() &amp; Qt::AlignBottom) == Qt::AlignBottom)</span>
+<span class="lineNum">     305 </span><span class="lineNoCov">          0 :                                     verticalAlignment = &quot;bottom&quot;;</span>
+<span class="lineNum">     306 </span><span class="lineCov">         22 :                                 if ((staticText-&gt;getAlignment() &amp; Qt::AlignVCenter) == Qt::AlignVCenter)</span>
+<span class="lineNum">     307 </span><span class="lineNoCov">          0 :                                     verticalAlignment = &quot;middle&quot;;</span>
+<span class="lineNum">     308 </span>            :                                 //if ((staticText-&gt;getAlignment() &amp; Qt::AlignBaseline) == Qt::AlignBaseline)
+<span class="lineNum">     309 </span>            :                                 //    verticalAlignment = &quot;baseline&quot;;
+<span class="lineNum">     310 </span>            : 
+<span class="lineNum">     311 </span><span class="lineCov">        154 :                                 elementStr += QString(&quot;     &lt;div class='statictext' &quot;</span>
+<span class="lineNum">     312 </span>            :                                     &quot;style='left: %1px; top: %2px; &quot;
+<span class="lineNum">     313 </span>            :                                     &quot;width: %3px; height: %4px; &quot;
+<span class="lineNum">     314 </span>            :                                     &quot;text-align: %5; vertical-align: %6'&gt;%7&lt;/div&gt;\n&quot;)
+<span class="lineNum">     315 </span><span class="lineCov">         22 :                                     .arg(staticText-&gt;getX())</span>
+<span class="lineNum">     316 </span><span class="lineCov">         22 :                                     .arg(staticText-&gt;getY())</span>
+<span class="lineNum">     317 </span><span class="lineCov">         22 :                                     .arg(staticText-&gt;getWidth())</span>
+<span class="lineNum">     318 </span><span class="lineCov">         22 :                                     .arg(staticText-&gt;getHeight())</span>
+<span class="lineNum">     319 </span>            :                                     .arg(textAlignment)
+<span class="lineNum">     320 </span>            :                                     .arg(verticalAlignment)
+<span class="lineNum">     321 </span><span class="lineCov">         66 :                                     .arg(staticText-&gt;getText());</span>
+<span class="lineNum">     322 </span>            :                             }
+<span class="lineNum">     323 </span><span class="lineCov">         60 :                         }</span>
+<span class="lineNum">     324 </span>            : 
+<span class="lineNum">     325 </span><span class="lineCov">         60 :                         drawShapes(band, elementStr, i);</span>
+<span class="lineNum">     326 </span>            : 
+<span class="lineNum">     327 </span><span class="lineCov">         60 :                         if (freePageSpace &lt; band-&gt;getSize().height())</span>
+<span class="lineNum">     328 </span>            :                         {
+<span class="lineNum">     329 </span><span class="lineCov">         50 :                             m_html += QString(&quot;   &lt;div class='detail'&gt;\n%1   &lt;/div&gt;\n&quot;)</span>
+<span class="lineNum">     330 </span><span class="lineCov">         25 :                                     .arg(bandStr);</span>
+<span class="lineNum">     331 </span>            : 
+<span class="lineNum">     332 </span><span class="lineCov">         25 :                             ++pageCount;</span>
+<span class="lineNum">     333 </span>            :                             //колонтитул
+<span class="lineNum">     334 </span><span class="lineCov">         25 :                             freePageSpace = pageHeight - band-&gt;getSize().height();</span>
+<span class="lineNum">     335 </span><span class="lineCov">         25 :                             m_html += &quot;  &lt;/div&gt;\n  &lt;div class='page'&gt;\n&quot;;</span>
+<span class="lineNum">     336 </span><span class="lineCov">         25 :                             bandStr = &quot;&quot;;</span>
+<span class="lineNum">     337 </span>            :                         }
+<span class="lineNum">     338 </span>            :                         else
+<span class="lineNum">     339 </span><span class="lineCov">         35 :                             freePageSpace -= band-&gt;getSize().height();</span>
+<span class="lineNum">     340 </span>            : 
+<span class="lineNum">     341 </span><span class="lineCov">        180 :                         bandStr += QString(&quot;    &lt;div class='band' &quot;</span>
+<span class="lineNum">     342 </span>            :                                 &quot;style='height: %1px'&gt;\n%2    &lt;/div&gt;\n&quot;)
+<span class="lineNum">     343 </span><span class="lineCov">         60 :                                 .arg(band-&gt;getSize().height())</span>
+<span class="lineNum">     344 </span><span class="lineCov">         60 :                                 .arg(elementStr);</span>
+<span class="lineNum">     345 </span>            :                     }
+<span class="lineNum">     346 </span><span class="lineCov">        112 :                 }</span>
+<span class="lineNum">     347 </span>            : 
+<span class="lineNum">     348 </span><span class="lineCov">         60 :                 m_html += QString(&quot;   &lt;div class='detail'&gt;\n%1   &lt;/div&gt;\n&quot;)</span>
+<span class="lineNum">     349 </span><span class="lineCov">         30 :                     .arg(bandStr);</span>
+<span class="lineNum">     350 </span><span class="lineCov">         30 :             }</span>
+<span class="lineNum">     351 </span>            : 
+<span class="lineNum">     352 </span><span class="lineCov">          3 :             ++pageCount;</span>
+<span class="lineNum">     353 </span>            :             //Колонтитул
+<span class="lineNum">     354 </span><span class="lineCov">          3 :             m_html += &quot;  &lt;/div&gt;\n &lt;/body&gt;\n&lt;/html&gt;\n&quot;;</span>
+<span class="lineNum">     355 </span><span class="lineCov">          6 :             return true;</span>
+<a name="356"><span class="lineNum">     356 </span>            :         }</a>
+<span class="lineNum">     357 </span>            : 
+<span class="lineNum">     358 </span><span class="lineCov">         62 :         void ConverterToHTML::drawShapes(QSharedPointer&lt;Band&gt; band, QString &amp;elementStr, int index)</span>
+<span class="lineNum">     359 </span>            :         {
+<span class="lineNum">     360 </span><span class="lineCov">         62 :             int imgCount = 0;</span>
+<span class="lineNum">     361 </span>            : 
+<span class="lineNum">     362 </span><span class="lineCov">         86 :             for (auto &amp;&amp; image : band-&gt;getImages())</span>
+<span class="lineNum">     363 </span>            :             {
+<span class="lineNum">     364 </span><span class="lineCov">         24 :                 QImage img = image-&gt;getImage();</span>
+<span class="lineNum">     365 </span><span class="lineCov">         24 :                 img.save(&quot;img&quot; + QString::number(index) + QString::number(imgCount) + &quot;.jpg&quot;);</span>
+<span class="lineNum">     366 </span>            : 
+<span class="lineNum">     367 </span><span class="lineCov">        144 :                 elementStr += QString(&quot;     &lt;div class='shape' &quot;</span>
+<span class="lineNum">     368 </span>            :                     &quot;style='left: %1px; top: %2px; &quot;
+<span class="lineNum">     369 </span>            :                     &quot;width: %3px; height: %4px'&gt;\n&quot;
+<span class="lineNum">     370 </span>            :                     &quot;      &lt;img src='img%5%6.jpg' alt='img%5%6'&gt;\n     &lt;/div&gt;\n&quot;)
+<span class="lineNum">     371 </span><span class="lineCov">         24 :                     .arg(image-&gt;getX())</span>
+<span class="lineNum">     372 </span><span class="lineCov">         24 :                     .arg(image-&gt;getY())</span>
+<span class="lineNum">     373 </span><span class="lineCov">         24 :                     .arg(image-&gt;getWidth())</span>
+<span class="lineNum">     374 </span><span class="lineCov">         24 :                     .arg(image-&gt;getHeight())</span>
+<span class="lineNum">     375 </span>            :                     .arg(index)
+<span class="lineNum">     376 </span><span class="lineCov">         24 :                     .arg(imgCount);</span>
+<span class="lineNum">     377 </span>            : 
+<span class="lineNum">     378 </span><span class="lineCov">         24 :                 ++imgCount;</span>
+<span class="lineNum">     379 </span><span class="lineCov">         86 :             }</span>
+<span class="lineNum">     380 </span>            : 
+<span class="lineNum">     381 </span><span class="lineCov">         64 :             for( auto &amp;&amp; line : band-&gt;getLines() )</span>
+<span class="lineNum">     382 </span>            :             {
+<span class="lineNum">     383 </span><span class="lineCov">          2 :                 float angleRad = atan2(line-&gt;getHeight(), line-&gt;getWidth());</span>
+<span class="lineNum">     384 </span><span class="lineCov">          2 :                 float lineWidth = sqrt(pow(line-&gt;getWidth(), 2) + pow(line-&gt;getHeight(), 2));</span>
+<span class="lineNum">     385 </span>            : 
+<span class="lineNum">     386 </span><span class="lineCov">         12 :                 elementStr += QString(&quot;     &lt;div class='shape' &quot;</span>
+<span class="lineNum">     387 </span>            :                     &quot;style='left: %1px; top: %2px; &quot;
+<span class="lineNum">     388 </span>            :                     &quot;width: %3px; height: %4px; &quot;
+<span class="lineNum">     389 </span>            :                     &quot;overflow: visible'&gt;\n&quot;
+<span class="lineNum">     390 </span>            :                     &quot;      &lt;div style='border-top: 1px solid black; height: 1px; width: %5px; &quot;
+<span class="lineNum">     391 </span>            :                     &quot;transform-origin: 0 0 0; transform: rotate(%6rad)'&gt;&lt;/div&gt;\n     &lt;/div&gt;\n&quot;)
+<span class="lineNum">     392 </span><span class="lineCov">          2 :                     .arg(line-&gt;getX())</span>
+<span class="lineNum">     393 </span><span class="lineCov">          2 :                     .arg(line-&gt;getY())</span>
+<span class="lineNum">     394 </span><span class="lineCov">          2 :                     .arg(line-&gt;getWidth())</span>
+<span class="lineNum">     395 </span><span class="lineCov">          2 :                     .arg(line-&gt;getHeight())</span>
+<span class="lineNum">     396 </span>            :                     .arg(lineWidth)
+<span class="lineNum">     397 </span><span class="lineCov">          2 :                     .arg(angleRad);</span>
+<span class="lineNum">     398 </span><span class="lineCov">         62 :             }</span>
+<span class="lineNum">     399 </span>            : 
+<span class="lineNum">     400 </span><span class="lineCov">         64 :             for( auto &amp;&amp; rect : band-&gt;getRects() )</span>
+<span class="lineNum">     401 </span>            :             {
+<span class="lineNum">     402 </span><span class="lineCov">         12 :                 elementStr += QString(&quot;     &lt;div class='shape' &quot;</span>
+<span class="lineNum">     403 </span>            :                     &quot;style='border: 1px solid black; left: %1px; top: %2px; &quot;
+<span class="lineNum">     404 </span>            :                     &quot;width: %3px; height: %4px;'&gt;&lt;/div&gt;\n&quot;)
+<span class="lineNum">     405 </span><span class="lineCov">          2 :                     .arg(rect-&gt;getX())</span>
+<span class="lineNum">     406 </span><span class="lineCov">          2 :                     .arg(rect-&gt;getY())</span>
+<span class="lineNum">     407 </span><span class="lineCov">          2 :                     .arg(rect-&gt;getWidth())</span>
+<span class="lineNum">     408 </span><span class="lineCov">          4 :                     .arg(rect-&gt;getHeight());</span>
+<span class="lineNum">     409 </span><span class="lineCov">         62 :             }</span>
+<span class="lineNum">     410 </span>            : 
+<span class="lineNum">     411 </span><span class="lineCov">         64 :             for( auto &amp;&amp; ellipse : band-&gt;getEllipses() )</span>
+<span class="lineNum">     412 </span>            :             {
+<span class="lineNum">     413 </span><span class="lineCov">         16 :                 elementStr += QString(&quot;     &lt;div class='shape' &quot;</span>
+<span class="lineNum">     414 </span>            :                     &quot;style='border: 1px solid black; &quot;
+<span class="lineNum">     415 </span>            :                     &quot;left: %1px; top: %2px; &quot;
+<span class="lineNum">     416 </span>            :                     &quot;width: %3px; height: %4px; &quot;
+<span class="lineNum">     417 </span>            :                     &quot;-moz-border-radius: %5px / %6px; &quot;
+<span class="lineNum">     418 </span>            :                     &quot;-webkit-border-radius: %5px / %6px; &quot;
+<span class="lineNum">     419 </span>            :                     &quot;border-radius: %5px / %6px;'&gt;&lt;/div&gt;\n&quot;)
+<span class="lineNum">     420 </span><span class="lineCov">          2 :                     .arg(ellipse-&gt;getX())</span>
+<span class="lineNum">     421 </span><span class="lineCov">          2 :                     .arg(ellipse-&gt;getY())</span>
+<span class="lineNum">     422 </span><span class="lineCov">          2 :                     .arg(ellipse-&gt;getWidth())</span>
+<span class="lineNum">     423 </span><span class="lineCov">          2 :                     .arg(ellipse-&gt;getHeight())</span>
+<span class="lineNum">     424 </span><span class="lineCov">          2 :                     .arg(ellipse-&gt;getWidth() / 2)</span>
+<span class="lineNum">     425 </span><span class="lineCov">          4 :                     .arg(ellipse-&gt;getHeight() / 2);</span>
+<span class="lineNum">     426 </span><span class="lineCov">         62 :             }</span>
+<a name="427"><span class="lineNum">     427 </span><span class="lineCov">         62 :         }</span></a>
+<span class="lineNum">     428 </span>            : 
+<span class="lineNum">     429 </span><span class="lineCov">          5 :         const QString   ConverterToHTML::getLastError() const {</span>
+<span class="lineNum">     430 </span><span class="lineCov">          5 :             return m_lastError;</span>
+<a name="431"><span class="lineNum">     431 </span>            :         }</a>
+<span class="lineNum">     432 </span>            : 
+<span class="lineNum">     433 </span><span class="lineCov">          3 :         const QString   ConverterToHTML::getHTML() const {</span>
+<span class="lineNum">     434 </span><span class="lineCov">          3 :             return m_html;</span>
+<span class="lineNum">     435 </span>            :         }
+<span class="lineNum">     436 </span>            : 
+<span class="lineNum">     437 </span>            :     }
+<span class="lineNum">     438 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-2-g25f5d38</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
