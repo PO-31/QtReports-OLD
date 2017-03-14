@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtreportsviewer", "qtreportsviewer\qtreportsviewer.vcxproj", "{BC439B0E-90F7-41BA-9AE0-FF883E7C31B7}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -10,7 +10,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtreportsviewer", "qtreport
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtreportslib", "qtreportslib\qtreportslib.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtreportslib_tests", "tests\qtreportslib_tests\qtreportslib_tests.vcxproj", "{917BBF97-39FB-46E2-846B-6F5975C11336}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtreportslib_tests", "qtreportslib_tests\qtreportslib_tests.vcxproj", "{917BBF97-39FB-46E2-846B-6F5975C11336}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B12702AD-ABFB-343A-A199-8E24837244A3} = {B12702AD-ABFB-343A-A199-8E24837244A3}
 	EndProjectSection
@@ -50,5 +50,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		Qt5Version = 5.8.0_x64
 	EndGlobalSection
 EndGlobal

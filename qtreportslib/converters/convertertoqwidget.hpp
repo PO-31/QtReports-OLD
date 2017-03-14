@@ -24,7 +24,7 @@ namespace qtreports {
             Тип создаваемого виджета.
             */
             enum class WidgetType {
-                Report, ///< Отчет
+                Report = 0, ///< Отчет
                 Layout ///< Макет
             };
 

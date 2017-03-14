@@ -79,14 +79,14 @@ namespace qtreports {
             Опции при получении аттрибута с помощью вызова getAttribute().
             */
             enum class AttributeOption {
-                Required, ///< При отсутствии аттрибута будет выдана ошибка.
+                Required = 0, ///< При отсутствии аттрибута будет выдана ошибка.
                 Optional ///< При отсутствии аттрибута будет использовано значение по умолчанию.
             };
 
             /*! @~russian
             Считывает xml элемент в data
             @param[in] reader QXmlStreamReader
-            @param[out] data считанные данные
+            @parem[out] data считанные данные
             */
             bool    getValue( QXmlStreamReader & reader, QString & data );
             /*! @~russian
@@ -94,7 +94,7 @@ namespace qtreports {
             @param[in] reader QXmlStreamReader
             @param[in] name имя аттрибута
             @param[in] option указывает обязателен ли атрибут
-            @param[out] data считанные данные
+            @parem[out] data считанные данные
             */
             bool    getAttribute( QXmlStreamReader & reader, const QString & name, QString & data, AttributeOption option );
             /*! @~russian
