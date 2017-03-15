@@ -5,7 +5,6 @@ TEMPLATE = app
 CONFIG += release c++11
 INCLUDEPATH += ../qtreportslib
 LIBPATH     += ../qtreportslib/build/
-DESTDIR = ./build/
 LIBS += -L../qtreportslib
 LIBS   += -lqtreportslib
 
@@ -29,8 +28,3 @@ QMAKE_CXXFLAGS += -std=c++11
 message("Using spec: $$QMAKESPEC")
 message("Compiler: $$QMAKE_CXX")
 
-win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../../buildQPro/qtreportslib/release/ -lqtreportslib
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../../buildQPro/qtreportslib/debug/ -lqtreportslib
-
-INCLUDEPATH += $$PWD/../../buildQPro/qtreportslib/release
-DEPENDPATH += $$PWD/../../buildQPro/qtreportslib/release

@@ -5,12 +5,10 @@ TEMPLATE = app
 CONFIG += release c++11
 INCLUDEPATH += ../qtreportslib
 LIBPATH     += ../qtreportslib/build/
-DESTDIR = ./build/
 LIBS   += -L../../qtreportslib
 LIBS   += -lqtreportslib
 
 SOURCES += main.cpp
-HEADERS += 
 
 QMAKE_CXXFLAGS += -std=c++11
 
