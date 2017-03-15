@@ -4,7 +4,8 @@ TARGET = qtreportslib_tests
 TEMPLATE = app
 CONFIG += release c++11
 INCLUDEPATH += ../qtreportslib
-LIBPATH     += ../qtreportslib
+LIBPATH     += ../qtreportslib/build/
+DESTDIR = ./build/
 LIBS += -L../qtreportslib
 LIBS   += -lqtreportslib
 

@@ -1,9 +1,10 @@
 QT += core gui sql widgets printsupport
 
-TARGET = qtreportslib
 TEMPLATE = lib
-CONFIG += c++11
-DEFINES += QTREPORTS_LIBRARY
+DESTDIR = ./build/
+VERSION = 1.0.0
+CONFIG += build_all
+CONFIG += staticlib
 
 SOURCES += engine.cpp \
     parsers/parserfromxml.cpp \
@@ -61,7 +62,11 @@ unix {
     headers.files = $$HEADERS
     headers.path = /usr/include/qtreports/
     INSTALLS += headers
+} else {
+    TARGET = $$qtLibraryTarget(qtreportslib)
 }
+
+
 
 linux-clang {
     QMAKE_CXXFLAGS += -Wdocumentation
