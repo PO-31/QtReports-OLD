@@ -16,10 +16,6 @@ matrix:
    - os: linux
      compiler: gcc
      env: BUILD_TYPE=coverage
-   - os: linux
-     compiler: gcc
-     env: BUILD_TYPE=doxygen
-
   
 cache:
   apt: true
