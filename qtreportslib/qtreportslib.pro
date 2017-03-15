@@ -1,9 +1,9 @@
 QT += core gui sql widgets printsupport
 
+TARGET = qtreportslib
 TEMPLATE = lib
 CONFIG += c++11
-CONFIG += build_all
-CONFIG += staticlib
+DEFINES += QTREPORTS_LIBRARY
 
 SOURCES += engine.cpp \
     parsers/parserfromxml.cpp \
@@ -56,7 +56,6 @@ HEADERS += engine.hpp \
 QMAKE_CXXFLAGS += -std=c++11
 
 unix {
-    TARGET = qtreportslib
     target.path = /usr/lib
     INSTALLS += target
     headers.files = $$HEADERS
@@ -65,6 +64,8 @@ unix {
 }
 
 win32 {
+    CONFIG += build_all
+    CONFIG += staticlib
     DESTDIR = $$PWD/build/
     VERSION = 1.0.0
     TARGET = $$qtLibraryTarget(qtreportslib)
@@ -84,5 +85,6 @@ coverage {
 }
 QMAKE_EXTRA_TARGETS += coverage
 
+message("Using config: $$CONFIG")
 message("Using spec: $$QMAKESPEC")
 message("Compiler: $$QMAKE_CXX")
