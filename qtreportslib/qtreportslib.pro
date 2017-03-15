@@ -1,6 +1,7 @@
 QT += core gui sql widgets printsupport
 
 TEMPLATE = lib
+CONFIG += c++11
 CONFIG += build_all
 CONFIG += staticlib
 
@@ -55,6 +56,7 @@ HEADERS += engine.hpp \
 QMAKE_CXXFLAGS += -std=c++11
 
 unix {
+    TARGET = qtreportslib
     target.path = /usr/lib
     INSTALLS += target
     headers.files = $$HEADERS
