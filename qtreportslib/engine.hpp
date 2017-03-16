@@ -113,7 +113,7 @@ namespace qtreports {
 
         /*! @~russian
         Устанавливает источник данных для отчета из таблицы полей
-        @param[in] columnSet набор данных в формате (<имя столбца>, <вектор значений столбца>)
+        @param[in] columnsSet набор данных в формате (<имя столбца>, <вектор значений столбца>)
         */
         bool    setDataSource( const QMap <QString, QVector <QVariant> > & columnsSet);
 

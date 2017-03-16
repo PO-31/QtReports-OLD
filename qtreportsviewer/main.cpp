@@ -34,11 +34,14 @@ int main( int argc, char *argv[] ) {
     freopen( "CONOUT$", "w", stderr );
 #endif
 
-    QString path = argc > 1 ? argv[ 1 ] : "../tests/qtreportslib_tests/images.qrxml";
+	QString path = argc > 1 ? argv[ 1 ] : QFileDialog::getOpenFileName( &window,
+																		QObject::tr( "Open QReport" ),
+																		QString(),
+																		QObject::tr( "QReport Files (*.qreport);;QReport Files (*.qrxml);;All Files (*.*)" ) );
     qtreports::Engine engine( path );
     if( !engine.isOpened() ) {
         showError( engine.getLastError() );
-        return -1;
+		return -1;
     }
 
     QMap < QString, QVariant > map;
@@ -46,20 +49,20 @@ int main( int argc, char *argv[] ) {
     bool result = engine.setParameters( map );//{ { "title", "Best Title in World" } }
     if( !result ) {
         showError( engine.getLastError() );
-        return -1;
+		return -1;
     }
 
     auto db = QSqlDatabase::addDatabase( "QSQLITE" );
-    db.setDatabaseName( "../tests/qtreportslib_tests/images.db" );
+	db.setDatabaseName( "../qtreportslib_tests/images.db" );
     if( !db.open() ) {
         showError( "Can not open database. Database error: " + db.lastError().text() );
-        return -1;
+		return -1;
     }
 
     result = engine.setConnection( db );
     if( !result ) {
         showError( engine.getLastError() );
-        return -1;
+		return -1;
     }
 
     auto layout = engine.createLayout();

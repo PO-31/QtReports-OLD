@@ -63,6 +63,14 @@ unix {
     INSTALLS += headers
 }
 
+win32 {
+    CONFIG += build_all
+    CONFIG += staticlib
+    DESTDIR = $$PWD/build/
+    VERSION = 1.0.0
+    TARGET = $$qtLibraryTarget(qtreportslib)
+}
+
 linux-clang {
     QMAKE_CXXFLAGS += -Wdocumentation
 }
@@ -77,5 +85,6 @@ coverage {
 }
 QMAKE_EXTRA_TARGETS += coverage
 
+message("Using config: $$CONFIG")
 message("Using spec: $$QMAKESPEC")
 message("Compiler: $$QMAKE_CXX")
