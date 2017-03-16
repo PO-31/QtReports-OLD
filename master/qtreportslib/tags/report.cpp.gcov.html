@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">91</td>
-            <td class="headerCovTableEntry">118</td>
-            <td class="headerCovTableEntryMed">77.1 %</td>
+            <td class="headerCovTableEntry">204</td>
+            <td class="headerCovTableEntryLo">44.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-15 13:03:26</td>
+            <td class="headerValue">2017-03-16 06:59:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">37</td>
-            <td class="headerCovTableEntry">45</td>
-            <td class="headerCovTableEntryMed">82.2 %</td>
+            <td class="headerCovTableEntry">52</td>
+            <td class="headerCovTableEntryLo">71.2 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -312,10 +312,142 @@
 <span class="lineNum">     250 </span><span class="lineCov">         22 :         const QMargins  Report::getMargins() const</span>
 <span class="lineNum">     251 </span>            :         {
 <span class="lineNum">     252 </span><span class="lineCov">         22 :             return m_margins;</span>
-<span class="lineNum">     253 </span>            :         }
+<a name="253"><span class="lineNum">     253 </span>            :         }</a>
 <span class="lineNum">     254 </span>            : 
-<span class="lineNum">     255 </span>            :     }
-<span class="lineNum">     256 </span>            : }
+<span class="lineNum">     255 </span><span class="lineNoCov">          0 :         bool Report::isDetailHasGroupHeader(int detailNum, const QString &amp;groupField)</span>
+<span class="lineNum">     256 </span>            :         {
+<span class="lineNum">     257 </span><span class="lineNoCov">          0 :             int groupIndex = getGroupIndexFromField(groupField);</span>
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span><span class="lineNoCov">          0 :             if(groupIndex == 0) {</span>
+<span class="lineNum">     260 </span><span class="lineNoCov">          0 :                 if(detailNum == 0)</span>
+<span class="lineNum">     261 </span><span class="lineNoCov">          0 :                     return true;</span>
+<span class="lineNum">     262 </span>            :                 else {
+<span class="lineNum">     263 </span><span class="lineNoCov">          0 :                     if(m_fields[groupField].data()-&gt;getData(detailNum) !=</span>
+<span class="lineNum">     264 </span><span class="lineNoCov">          0 :                             m_fields[groupField].data()-&gt;getData(detailNum - 1)) {</span>
+<span class="lineNum">     265 </span><span class="lineNoCov">          0 :                         return true;</span>
+<span class="lineNum">     266 </span>            :                     }
+<span class="lineNum">     267 </span>            :                     else
+<span class="lineNum">     268 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">     269 </span>            :                 }
+<span class="lineNum">     270 </span>            :             }
+<span class="lineNum">     271 </span>            :             else {
+<span class="lineNum">     272 </span><span class="lineNoCov">          0 :                 for(int ind = 0; ind &lt;= groupIndex; ind++) {</span>
+<span class="lineNum">     273 </span><span class="lineNoCov">          0 :                     QString parentGroupField = getFieldFromGroupExpression(getGroupByIndex(ind).data()-&gt;getExpression());</span>
+<span class="lineNum">     274 </span><span class="lineNoCov">          0 :                     if(detailNum == 0)</span>
+<span class="lineNum">     275 </span><span class="lineNoCov">          0 :                         return true;</span>
+<span class="lineNum">     276 </span>            :                     else {
+<span class="lineNum">     277 </span><span class="lineNoCov">          0 :                         if(m_fields[parentGroupField].data()-&gt;getData(detailNum) !=</span>
+<span class="lineNum">     278 </span><span class="lineNoCov">          0 :                                 m_fields[parentGroupField].data()-&gt;getData(detailNum - 1))</span>
+<span class="lineNum">     279 </span><span class="lineNoCov">          0 :                             return true;</span>
+<span class="lineNum">     280 </span>            :                     }
+<span class="lineNum">     281 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">     282 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     283 </span>            :             }
+<a name="284"><span class="lineNum">     284 </span>            :         }</a>
+<span class="lineNum">     285 </span>            : 
+<span class="lineNum">     286 </span><span class="lineNoCov">          0 :         bool Report::isDetailHasGroupFooter(int detailNum, const QString &amp;groupField)</span>
+<span class="lineNum">     287 </span>            :         {
+<span class="lineNum">     288 </span><span class="lineNoCov">          0 :             int groupIndex = getGroupIndexFromField(groupField);</span>
+<span class="lineNum">     289 </span>            : 
+<span class="lineNum">     290 </span><span class="lineNoCov">          0 :             if(groupIndex == 0) {</span>
+<span class="lineNum">     291 </span><span class="lineNoCov">          0 :                 if(detailNum == getRowCount() - 1)</span>
+<span class="lineNum">     292 </span><span class="lineNoCov">          0 :                     return true;</span>
+<span class="lineNum">     293 </span>            :                 else {
+<span class="lineNum">     294 </span><span class="lineNoCov">          0 :                     if(m_fields[groupField].data()-&gt;getData(detailNum) !=</span>
+<span class="lineNum">     295 </span><span class="lineNoCov">          0 :                             m_fields[groupField].data()-&gt;getData(detailNum + 1)) {</span>
+<span class="lineNum">     296 </span><span class="lineNoCov">          0 :                         return true;</span>
+<span class="lineNum">     297 </span>            :                     }
+<span class="lineNum">     298 </span>            :                     else
+<span class="lineNum">     299 </span><span class="lineNoCov">          0 :                         return false;</span>
+<span class="lineNum">     300 </span>            :                 }
+<span class="lineNum">     301 </span>            :             }
+<span class="lineNum">     302 </span>            :             else {
+<span class="lineNum">     303 </span><span class="lineNoCov">          0 :                 for(int ind = 0; ind &lt;= groupIndex; ind++) {</span>
+<span class="lineNum">     304 </span><span class="lineNoCov">          0 :                     QString parentGroupField = getFieldFromGroupExpression(getGroupByIndex(ind).data()-&gt;getExpression());</span>
+<span class="lineNum">     305 </span><span class="lineNoCov">          0 :                     if(detailNum == getRowCount() - 1)</span>
+<span class="lineNum">     306 </span><span class="lineNoCov">          0 :                         return true;</span>
+<span class="lineNum">     307 </span>            :                     else {
+<span class="lineNum">     308 </span><span class="lineNoCov">          0 :                         if(m_fields[parentGroupField].data()-&gt;getData(detailNum) !=</span>
+<span class="lineNum">     309 </span><span class="lineNoCov">          0 :                                 m_fields[parentGroupField].data()-&gt;getData(detailNum + 1))</span>
+<span class="lineNum">     310 </span><span class="lineNoCov">          0 :                             return true;</span>
+<span class="lineNum">     311 </span>            :                     }
+<span class="lineNum">     312 </span><span class="lineNoCov">          0 :                 }</span>
+<span class="lineNum">     313 </span><span class="lineNoCov">          0 :                 return false;</span>
+<span class="lineNum">     314 </span>            :             }
+<a name="315"><span class="lineNum">     315 </span>            :         }</a>
+<span class="lineNum">     316 </span>            : 
+<span class="lineNum">     317 </span><span class="lineNoCov">          0 :         void Report::reorderByGroups()</span>
+<span class="lineNum">     318 </span>            :         {
+<span class="lineNum">     319 </span><span class="lineNoCov">          0 :             int rowCount = getRowCount();</span>
+<span class="lineNum">     320 </span><span class="lineNoCov">          0 :             m_group_vec = QVector&lt;bool&gt;(rowCount);</span>
+<span class="lineNum">     321 </span><span class="lineNoCov">          0 :             QMapIterator&lt;QString, GroupPtr&gt; groupIterator(getGroups());</span>
+<span class="lineNum">     322 </span><span class="lineNoCov">          0 :             while(groupIterator.hasNext()) {</span>
+<span class="lineNum">     323 </span><span class="lineNoCov">          0 :                 groupIterator.next();</span>
+<span class="lineNum">     324 </span><span class="lineNoCov">          0 :                 QString fieldName = getFieldFromGroupExpression(groupIterator.value().data()-&gt;getExpression());</span>
+<span class="lineNum">     325 </span><span class="lineNoCov">          0 :                 FieldPtr field = getField(fieldName);</span>
+<span class="lineNum">     326 </span><span class="lineNoCov">          0 :                 int currentIndex = 0;</span>
+<span class="lineNum">     327 </span><span class="lineNoCov">          0 :                 while(currentIndex != field.data()-&gt;getRowCount() - 1) {</span>
+<span class="lineNum">     328 </span><span class="lineNoCov">          0 :                     if(m_group_vec[currentIndex] == true) {</span>
+<span class="lineNum">     329 </span><span class="lineNoCov">          0 :                         currentIndex++;</span>
+<span class="lineNum">     330 </span><span class="lineNoCov">          0 :                         continue;</span>
+<span class="lineNum">     331 </span>            :                     }
+<span class="lineNum">     332 </span><span class="lineNoCov">          0 :                     for(int i = currentIndex + 1; i &lt; rowCount; i++) {</span>
+<span class="lineNum">     333 </span><span class="lineNoCov">          0 :                         QString currentData = field.data()-&gt;getData(currentIndex);</span>
+<span class="lineNum">     334 </span><span class="lineNoCov">          0 :                         if(field.data()-&gt;getData(i) == currentData) {</span>
+<span class="lineNum">     335 </span><span class="lineNoCov">          0 :                             swapRows(i - 1, currentIndex + 1, m_group_vec);</span>
+<span class="lineNum">     336 </span><span class="lineNoCov">          0 :                             currentIndex++;</span>
+<span class="lineNum">     337 </span><span class="lineNoCov">          0 :                             m_group_vec[currentIndex] = true;</span>
+<span class="lineNum">     338 </span>            :                         }
+<span class="lineNum">     339 </span><span class="lineNoCov">          0 :                     }</span>
+<span class="lineNum">     340 </span><span class="lineNoCov">          0 :                     if(currentIndex != field.data()-&gt;getRowCount() - 1) currentIndex++;</span>
+<span class="lineNum">     341 </span>            :                 }
+<span class="lineNum">     342 </span><span class="lineNoCov">          0 :             }</span>
+<a name="343"><span class="lineNum">     343 </span><span class="lineNoCov">          0 :         }</span></a>
+<span class="lineNum">     344 </span>            : 
+<span class="lineNum">     345 </span><span class="lineNoCov">          0 :         const QString Report::getFieldFromGroupExpression(const QString &amp;expression)</span>
+<span class="lineNum">     346 </span>            :         {
+<span class="lineNum">     347 </span><span class="lineNoCov">          0 :             QRegularExpression regExpression(&quot;.*\\$F\\{(.*)\\}.*&quot;);</span>
+<span class="lineNum">     348 </span><span class="lineNoCov">          0 :             QRegularExpressionMatch match = regExpression.match(expression);</span>
+<span class="lineNum">     349 </span><span class="lineNoCov">          0 :             if(match.hasMatch()) {</span>
+<span class="lineNum">     350 </span><span class="lineNoCov">          0 :                 return match.captured(1);</span>
+<span class="lineNum">     351 </span>            :             }
+<span class="lineNum">     352 </span>            :             else
+<span class="lineNum">     353 </span><span class="lineNoCov">          0 :                 return &quot;&quot;;</span>
+<a name="354"><span class="lineNum">     354 </span>            :         }</a>
+<span class="lineNum">     355 </span>            : 
+<span class="lineNum">     356 </span><span class="lineNoCov">          0 :         int Report::getGroupIndexFromField(const QString &amp;field)</span>
+<span class="lineNum">     357 </span>            :         {
+<span class="lineNum">     358 </span><span class="lineNoCov">          0 :             QMapIterator&lt;QString, GroupPtr&gt; groupIt(m_groups);</span>
+<span class="lineNum">     359 </span><span class="lineNoCov">          0 :             int index = 0;</span>
+<span class="lineNum">     360 </span><span class="lineNoCov">          0 :             while(groupIt.hasNext()) {</span>
+<span class="lineNum">     361 </span><span class="lineNoCov">          0 :                 groupIt.next();</span>
+<span class="lineNum">     362 </span><span class="lineNoCov">          0 :                 if(QString::compare(getFieldFromGroupExpression(groupIt.value().data()-&gt;getExpression()), field) == 0) {</span>
+<span class="lineNum">     363 </span><span class="lineNoCov">          0 :                     return index;</span>
+<span class="lineNum">     364 </span>            :                 }
+<span class="lineNum">     365 </span><span class="lineNoCov">          0 :                 index++;</span>
+<span class="lineNum">     366 </span>            :             }
+<span class="lineNum">     367 </span><span class="lineNoCov">          0 :             return -1;</span>
+<a name="368"><span class="lineNum">     368 </span>            :         }</a>
+<span class="lineNum">     369 </span>            : 
+<span class="lineNum">     370 </span><span class="lineNoCov">          0 :         GroupPtr  Report::getGroupByIndex( int index )</span>
+<span class="lineNum">     371 </span>            :         {
+<span class="lineNum">     372 </span><span class="lineNoCov">          0 :             return m_groups.value( m_groups.keys().value( index ) );</span>
+<a name="373"><span class="lineNum">     373 </span>            :         }</a>
+<span class="lineNum">     374 </span>            : 
+<span class="lineNum">     375 </span><span class="lineNoCov">          0 :         void Report::swapRows(int row1, int row2, QVector&lt;bool&gt; &amp;vec)</span>
+<span class="lineNum">     376 </span>            :         {
+<span class="lineNum">     377 </span><span class="lineNoCov">          0 :             for(auto &amp;&amp; field : m_fields) {</span>
+<span class="lineNum">     378 </span><span class="lineNoCov">          0 :                 QVariant temp = field.data()-&gt;getDataVar(row1);</span>
+<span class="lineNum">     379 </span><span class="lineNoCov">          0 :                 field.data()-&gt;setDataVar(row1, field.data()-&gt;getDataVar(row2));</span>
+<span class="lineNum">     380 </span><span class="lineNoCov">          0 :                 field.data()-&gt;setDataVar(row2, temp);</span>
+<span class="lineNum">     381 </span><span class="lineNoCov">          0 :             }</span>
+<span class="lineNum">     382 </span>            : 
+<span class="lineNum">     383 </span><span class="lineNoCov">          0 :             bool tempVec = vec[row1];</span>
+<span class="lineNum">     384 </span><span class="lineNoCov">          0 :             vec[row2] = vec[row1];</span>
+<span class="lineNum">     385 </span><span class="lineNoCov">          0 :             vec[row1] = tempVec;</span>
+<span class="lineNum">     386 </span><span class="lineNoCov">          0 :         }</span>
+<span class="lineNum">     387 </span>            :     }
+<span class="lineNum">     388 </span>            : }
 </pre>
       </td>
     </tr>

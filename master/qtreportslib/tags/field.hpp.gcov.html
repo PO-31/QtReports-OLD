@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryLo">28.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-15 13:03:26</td>
+            <td class="headerValue">2017-03-16 06:59:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">33.3 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -119,24 +119,33 @@
 <span class="lineNum">      57 </span><span class="lineCov">         48 :             const T1        getData( int row )</span>
 <span class="lineNum">      58 </span>            :             {
 <span class="lineNum">      59 </span><span class="lineCov">         48 :                 return m_data.value( row ).value&lt; T1 &gt;();</span>
-<span class="lineNum">      60 </span>            :             }
+<a name="60"><span class="lineNum">      60 </span>            :             }</a>
 <span class="lineNum">      61 </span>            : 
-<span class="lineNum">      62 </span>            :             /*! @~russian
-<span class="lineNum">      63 </span>            :             Получить количество строк в &lt;field&gt;
-<span class="lineNum">      64 </span>            :             */
-<span class="lineNum">      65 </span>            :             int             getRowCount();
+<span class="lineNum">      62 </span><span class="lineNoCov">          0 :             const QVariant getDataVar(int row)</span>
+<span class="lineNum">      63 </span>            :             {
+<span class="lineNum">      64 </span><span class="lineNoCov">          0 :                 return m_data[row];</span>
+<a name="65"><span class="lineNum">      65 </span>            :             }</a>
 <span class="lineNum">      66 </span>            : 
-<span class="lineNum">      67 </span>            :         private:
-<span class="lineNum">      68 </span>            :             QString                 m_className;
-<span class="lineNum">      69 </span>            :             QVector&lt; QVariant &gt;     m_data;
+<span class="lineNum">      67 </span><span class="lineNoCov">          0 :             void setDataVar(int row, const QVariant &amp; value) {</span>
+<span class="lineNum">      68 </span><span class="lineNoCov">          0 :                 m_data[row] = value;</span>
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :             }</span>
 <span class="lineNum">      70 </span>            : 
-<span class="lineNum">      71 </span>            :         };
-<span class="lineNum">      72 </span>            : 
-<span class="lineNum">      73 </span>            :         typedef QSharedPointer&lt; Field &gt; FieldPtr;
-<span class="lineNum">      74 </span>            :     }
-<span class="lineNum">      75 </span>            : }
-<span class="lineNum">      76 </span>            : 
-<span class="lineNum">      77 </span>            : #endif // FIELD_HPP
+<span class="lineNum">      71 </span>            :             /*! @~russian
+<span class="lineNum">      72 </span>            :             Получить количество строк в &lt;field&gt;
+<span class="lineNum">      73 </span>            :             */
+<span class="lineNum">      74 </span>            :             int             getRowCount();
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span>            :         private:
+<span class="lineNum">      77 </span>            :             QString                 m_className;
+<span class="lineNum">      78 </span>            :             QVector&lt; QVariant &gt;     m_data;
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            :         };
+<span class="lineNum">      81 </span>            : 
+<span class="lineNum">      82 </span>            :         typedef QSharedPointer&lt; Field &gt; FieldPtr;
+<span class="lineNum">      83 </span>            :     }
+<span class="lineNum">      84 </span>            : }
+<span class="lineNum">      85 </span>            : 
+<span class="lineNum">      86 </span>            : #endif // FIELD_HPP
 </pre>
       </td>
     </tr>
