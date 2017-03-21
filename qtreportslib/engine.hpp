@@ -20,13 +20,13 @@
 Добро пожаловать в документацию проекта QtReports
 
 @section intro_sec Введение
-Хм.
+Эта документация предназначена для того, чтобы помочь в использовании проекта. 
 
 @section install_sec Установка с помощью CMAKE
 
 @subsection step1 Шаг 1: Распаковка проекта.
 
-Скачать проект по ссылке https://github.com/PO-21/QtReports/archive/master.zip.
+Скачать проект по ссылке https://github.com/PO-31/QtReports/archive/master.zip.
 
 Распаковать архив в папку QtReports. 
 
@@ -75,8 +75,6 @@ Exe-файл будет расположен в папке qtreportsviewer
 @section use_sec Использование
 Подключите библиотеку к проекту с помощью
 -lqtreportslib -I/usr/include/qtreportslib
-и вперед, навстречу приключениям!
-
 */
 
 namespace qtreports {
