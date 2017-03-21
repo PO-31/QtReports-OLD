@@ -40,10 +40,6 @@
 
 cmake [CMAKE_PREFIX_PATH="путь к qt"]  -G "MinGW Makefiles" -B./bin -H./
 
-Для Unix:
-
-cmake [CMAKE_PREFIX_PATH="путь к qt"]  -G "Unix Makefiles" -B./bin -H./
-
 Примечание:
 
 При возникновении ошибки "By not providing "FindQt5Widgets.cmake" in CMAKE_MODULE_PATH this project
@@ -55,20 +51,11 @@ has asked CMake to find a package configuration file provided by
 Пример для Windows:
 cmake [CMAKE_PREFIX_PATH="C:/Qt/5.5/mingw492_32"]  -G "MinGW Makefiles" -B./bin -H./
 
-Пример для Unix:
-
-cmake CMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/qt5"  -G "Unix Makefiles" -B./bin -H./
-
-
 @subsection step3 Шаг 3: Компиляция проекта.
 
 Windows:
 
 Запустить команду: mingw32-make -C./bin
-
-Linux: 
-
-Запустить команду: make -C ./bin
 
 Exe-файл будет расположен в папке qtreportsviewer
 
