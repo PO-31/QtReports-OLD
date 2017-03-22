@@ -1,0 +1,26 @@
+CREATE build\libqtreportslib.a
+ADDMOD release\engine.o
+ADDMOD release\parserfromxml.o
+ADDMOD release\replacer.o
+ADDMOD release\convertertohtml.o
+ADDMOD release\convertertoqwidget.o
+ADDMOD release\convertertopdf.o
+ADDMOD release\object.o
+ADDMOD release\widget.o
+ADDMOD release\section.o
+ADDMOD release\report.o
+ADDMOD release\style.o
+ADDMOD release\field.o
+ADDMOD release\group.o
+ADDMOD release\title.o
+ADDMOD release\detail.o
+ADDMOD release\band.o
+ADDMOD release\textwidget.o
+ADDMOD release\statictext.o
+ADDMOD release\textfield.o
+ADDMOD release\line.o
+ADDMOD release\rect.o
+ADDMOD release\ellipse.o
+ADDMOD release\image.o
+ADDMOD release\moc_engine.o
+SAVE

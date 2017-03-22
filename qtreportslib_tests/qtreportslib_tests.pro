@@ -4,8 +4,7 @@ TARGET = qtreportslib_tests
 TEMPLATE = app
 CONFIG += release c++11
 INCLUDEPATH += ../qtreportslib
-LIBPATH     += ../qtreportslib/build/
-LIBS += -L../qtreportslib
+win32: LIBS   += -L "$$PWD"/../qtreportslib/build/
 LIBS   += -lqtreportslib
 
 SOURCES += main.cpp \
@@ -14,7 +13,6 @@ SOURCES += main.cpp \
     test_convertertoqwidget.cpp \
     test_convertertopdf.cpp \
     test_convertertohtml.cpp \
-    test_groups.cpp \
     test_field.cpp
 
 HEADERS  += test_engine.hpp \
@@ -22,7 +20,6 @@ HEADERS  += test_engine.hpp \
     test_convertertoqwidget.hpp \
     test_convertertopdf.hpp \
     test_convertertohtml.hpp \
-    test_groups.hpp \
     test_field.hpp
 
 QMAKE_CXXFLAGS += -std=c++11
