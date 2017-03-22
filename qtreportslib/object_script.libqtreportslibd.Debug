@@ -1,0 +1,26 @@
+CREATE build\libqtreportslibd.a
+ADDMOD debug\engine.o
+ADDMOD debug\parserfromxml.o
+ADDMOD debug\replacer.o
+ADDMOD debug\convertertohtml.o
+ADDMOD debug\convertertoqwidget.o
+ADDMOD debug\convertertopdf.o
+ADDMOD debug\object.o
+ADDMOD debug\widget.o
+ADDMOD debug\section.o
+ADDMOD debug\report.o
+ADDMOD debug\style.o
+ADDMOD debug\field.o
+ADDMOD debug\group.o
+ADDMOD debug\title.o
+ADDMOD debug\detail.o
+ADDMOD debug\band.o
+ADDMOD debug\textwidget.o
+ADDMOD debug\statictext.o
+ADDMOD debug\textfield.o
+ADDMOD debug\line.o
+ADDMOD debug\rect.o
+ADDMOD debug\ellipse.o
+ADDMOD debug\image.o
+ADDMOD debug\moc_engine.o
+SAVE

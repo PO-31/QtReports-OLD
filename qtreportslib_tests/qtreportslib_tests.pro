@@ -4,8 +4,7 @@ TARGET = qtreportslib_tests
 TEMPLATE = app
 CONFIG += release c++11
 INCLUDEPATH += ../qtreportslib
-LIBPATH     += ../qtreportslib/build/
-LIBS += -L../qtreportslib
+win32: LIBS   += -L "$$PWD"/../qtreportslib/build/
 LIBS   += -lqtreportslib
 
 SOURCES += main.cpp \
