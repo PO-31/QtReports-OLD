@@ -53,7 +53,10 @@ int main( int argc, char *argv[] ) {
     }
 
     auto db = QSqlDatabase::addDatabase( "QSQLITE" );
-	db.setDatabaseName( "../qtreportslib_tests/images.db" );
+	db.setDatabaseName(QFileDialog::getOpenFileName( &window,
+													 QObject::tr( "Open QReport" ),
+													 QString(),
+													 QObject::tr( "DataBase files (*.db);;All Files (*.*)" ) ););
     if( !db.open() ) {
         showError( "Can not open database. Database error: " + db.lastError().text() );
 		return -1;
