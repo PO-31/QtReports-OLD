@@ -218,21 +218,21 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="default.qreport" />
-    <None Include="detail.qreport">
+    <None Include=".\reports\default.qreport" />
+    <None Include=".\reports\detail.qreport">
       <SubType>Designer</SubType>
     </None>
-    <None Include="errored.qrxml" />
-    <None Include="full.qrxml" />
-    <None Include="images.qrxml" />
-    <None Include="report test.qreport" />
-    <None Include="simple.qreport" />
+    <None Include=".\reports\errored.qrxml" />
+    <None Include=".\reports\full.qrxml" />
+    <None Include=".\reports\images.qrxml" />
+    <None Include=".\reports\report test.qreport" />
+    <None Include=".\reports\simple.qreport" />
     <None Include="qtreportslib_tests.pro" />
-    <None Include="students.qreport">
+    <None Include=".\reports\students.qreport">
       <SubType>Designer</SubType>
     </None>
-    <None Include="style test.qreport" />
-    <None Include="text test.qreport" />
+    <None Include=".\reports\style test.qreport" />
+    <None Include=".\reports\text test.qreport" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="test_parser.hpp">
