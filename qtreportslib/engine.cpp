@@ -131,10 +131,10 @@ namespace qtreports
     {
         //Need check parameters
         auto queries = query.split( ";", QString::SkipEmptyParts );
-        executeQueries( queries );
+        return executeQueries( queries );
 
-        m_lastError = query;
-        return true;
+        //m_lastError = query;
+        //return true;
     }
 
     bool    Engine::addScript( const QString & script )
@@ -236,6 +236,9 @@ namespace qtreports
             return false;
         }
 
+		if (!prepareDB())
+			return false;
+
         QPrinter printer;
         QPrintPreviewDialog preview( &printer );
         connect(
@@ -301,6 +304,12 @@ namespace qtreports
     bool    Engine::prepareDataSource( const QMap< QString, QVector< QVariant > > & source )
     {
         QMapIterator< QString, QVector< QVariant > > iterator( source );
+		if (!iterator.hasNext())
+		{
+			m_lastError = "Query has not rerurned result";
+			return false;
+		}
+
         while( iterator.hasNext() )
         {
             iterator.next();
@@ -325,13 +334,14 @@ namespace qtreports
     //    }
     //}
 
-    void    Engine::executeQueries( const QStringList & queries )
+    bool    Engine::executeQueries( const QStringList & queries )
     {
         QMap< QString, QVector< QVariant > > data;
         QSqlQueryModel model;
         for( auto && query : queries )
         {
             model.setQuery( query, m_dbConnection );
+			
             for( int row = 0; row < model.rowCount(); row++ )
             {
                 QSqlRecord rec = model.record( row );
@@ -345,7 +355,7 @@ namespace qtreports
             }
         }
 
-        prepareDataSource( data );
+        return prepareDataSource( data );
     }
 
     bool    Engine::isOpened() const

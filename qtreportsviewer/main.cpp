@@ -82,7 +82,7 @@ int main( int argc, char *argv[] ) {
     print.setShortcuts( QKeySequence::Print );
     print.setStatusTip( QObject::tr( "Print current report" ) );
     QObject::connect( &print, &QAction::triggered, [ & ]() {
-        bool result = engine.print();
+		bool result = engine.print();
         if( !result ) {
             showError( engine.getLastError() );
             return;
