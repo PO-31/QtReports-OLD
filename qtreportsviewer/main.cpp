@@ -202,6 +202,30 @@ int main( int argc, char *argv[] ) {
             return;
         }
 
+		//new code
+		file = QFileDialog::getOpenFileName(&window,
+			QObject::tr("Open DB"),
+			QString(),
+			QObject::tr("All Files (*.*)"));
+		if (file.isEmpty())
+		{
+			return;
+		}
+
+		auto db = QSqlDatabase::addDatabase("QSQLITE");
+		db.setDatabaseName(file);
+		if (!db.open())
+		{
+			showError("Can not open database. Database error: " + db.lastError().text());
+			return;
+		}
+
+		if (!engine.setConnection(db))
+		{
+			showError(engine.getLastError());
+			return;
+		}
+
         window.setCentralWidget( layout.data() );
         window.resize( layout->size() );
     } );
