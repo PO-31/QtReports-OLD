@@ -101,15 +101,15 @@ void    Test_Engine::setDataSource()
 
     QVector< QVariant > ids;
     ids << 1 << 2 << 3;
-    data[ "id" ] = ids;
+    data[ "group_id" ] = ids;
 
-    QVector< QVariant > firstnames;
-    firstnames << "first" << "second" << "three";
-    data[ "firstname" ] = firstnames;
+    QVector< QVariant > group_names;
+	group_names << "first" << "second" << "three";
+    data[ "group_name" ] = group_names;
 
-    QVector< QVariant > lastnames;
-    lastnames << "" << "" << "";
-    data[ "lastname" ] = lastnames;
+    QVector< QVariant > dep_ids;
+	dep_ids << 11 << 12 << 13;
+    data[ "dep_id" ] = dep_ids;
 
     QVector< QVariant > citys;
     citys << "" << "" << "";
@@ -133,7 +133,7 @@ void    Test_Engine::setQuery()
 
     QVERIFY2( db.open(), "Can't open test database 'testDB'" );
     QVERIFY2( engine.setConnection( db ), engine.getLastError().toStdString().c_str() );
-    QVERIFY2( engine.setQuery( "select * from customers" ), engine.getLastError().toStdString().c_str() );
+    QVERIFY2( engine.setQuery( "select * from groups_t" ), engine.getLastError().toStdString().c_str() );
 }
 
 void    Test_Engine::addScript()
@@ -141,6 +141,7 @@ void    Test_Engine::addScript()
     qtreports::Engine engine;
     QString input = QFINDTESTDATA( "reports/default.qreport" );
     QVERIFY2( engine.open( input ), engine.getLastError().toStdString().c_str() );
+    // нет скрипта test, найти или поменять на другой
     QVERIFY2( engine.addScript( "test" ), engine.getLastError().toStdString().c_str() );
 }
 
