@@ -153,7 +153,7 @@ namespace qtreports {
         bool                                prepareDB();
         bool                                prepareDataSource( const QMap< QString, QVector< QVariant > > & source );
         //void                                fillColumnsFromReport();
-        void                                executeQueries( const QStringList & queries );
+        bool                                executeQueries( const QStringList & queries );
     };
 }
 #endif // ENGINE_HPP

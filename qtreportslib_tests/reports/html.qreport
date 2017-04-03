@@ -8,6 +8,7 @@
     <![CDATA[ select * from students_t ]]>
   </queryString>
 
+  <field name="stud_id" class="QString" />
   <field name="stud_name" class="QString" />
   <field name="group_id" class="QString" />
 

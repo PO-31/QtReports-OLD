@@ -5,12 +5,12 @@
     isPdfEmbedded="false" />
 
   <queryString>
-    <![CDATA[ select * from customers ]]>
+    <![CDATA[ select * from groups_t ]]>
   </queryString>
 
-  <field name="id" class="QString" />
-  <field name="firstname" class="QString" />
-  <field name="lastname" class="QString" />
+  <field name="group_id" class="QString" />
+  <field name="group_name" class="QString" />
+  <field name="dep_id" class="QString" />
   <field name="city" class="QString" />
   <field name="segment" class="QString" />
 
@@ -29,19 +29,19 @@
       <textField>
         <reportElement x="0" y="0" width="50" height="20" />
         <textFieldExpression class="QString">
-          <![CDATA[$F{id}]]>
+          <![CDATA[$F{group_id}]]>
         </textFieldExpression>
       </textField>
       <textField>
         <reportElement x="51" y="0" width="200" height="20" />
         <textFieldExpression class="QString">
-          <![CDATA[$F{firstname}]]>
+          <![CDATA[$F{group_name}]]>
         </textFieldExpression>
       </textField>
       <textField>
         <reportElement x="252" y="0" width="200" height="20" />
         <textFieldExpression class="QString">
-          <![CDATA[$F{lastname}]]>
+          <![CDATA[$F{dep_id}]]>
         </textFieldExpression>
       </textField>
     </band>

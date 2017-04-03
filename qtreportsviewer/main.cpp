@@ -53,7 +53,10 @@ int main( int argc, char *argv[] ) {
     }
 
     auto db = QSqlDatabase::addDatabase( "QSQLITE" );
-	db.setDatabaseName( "../qtreportslib_tests/images.db" );
+	db.setDatabaseName(QFileDialog::getOpenFileName( &window,
+													 QObject::tr( "Open QReport" ),
+													 QString(),
+                                                     QObject::tr( "DataBase files (*.db);;All Files (*.*)" ) ));
     if( !db.open() ) {
         showError( "Can not open database. Database error: " + db.lastError().text() );
 		return -1;
@@ -79,7 +82,7 @@ int main( int argc, char *argv[] ) {
     print.setShortcuts( QKeySequence::Print );
     print.setStatusTip( QObject::tr( "Print current report" ) );
     QObject::connect( &print, &QAction::triggered, [ & ]() {
-        bool result = engine.print();
+		bool result = engine.print();
         if( !result ) {
             showError( engine.getLastError() );
             return;
@@ -198,6 +201,30 @@ int main( int argc, char *argv[] ) {
             showError( "Widget is empty" );
             return;
         }
+
+		//new code
+		file = QFileDialog::getOpenFileName(&window,
+			QObject::tr("Open DB"),
+			QString(),
+			QObject::tr("All Files (*.*)"));
+		if (file.isEmpty())
+		{
+			return;
+		}
+
+		auto db = QSqlDatabase::addDatabase("QSQLITE");
+		db.setDatabaseName(file);
+		if (!db.open())
+		{
+			showError("Can not open database. Database error: " + db.lastError().text());
+			return;
+		}
+
+		if (!engine.setConnection(db))
+		{
+			showError(engine.getLastError());
+			return;
+		}
 
         window.setCentralWidget( layout.data() );
         window.resize( layout->size() );
