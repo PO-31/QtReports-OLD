@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-22 01:48:43</td>
+            <td class="headerValue">2017-04-03 06:40:30</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">44</td>
@@ -163,11 +163,11 @@
 <span class="lineNum">     101 </span><span class="lineCov">        166 :             return true;</span>
 <a name="102"><span class="lineNum">     102 </span>            :         }</a>
 <span class="lineNum">     103 </span>            : 
-<span class="lineNum">     104 </span><span class="lineCov">       2092 :         bool    ParserFromXML::getAttribute( QXmlStreamReader &amp; reader, const QString &amp; name, QString &amp; data, AttributeOption option )</span>
+<span class="lineNum">     104 </span><span class="lineCov">       2094 :         bool    ParserFromXML::getAttribute( QXmlStreamReader &amp; reader, const QString &amp; name, QString &amp; data, AttributeOption option )</span>
 <span class="lineNum">     105 </span>            :         {
-<span class="lineNum">     106 </span><span class="lineCov">       2092 :             m_log &lt;&lt; &quot;getAttribute():\tstart. name: &quot; &lt;&lt; name &lt;&lt; endl;</span>
-<span class="lineNum">     107 </span><span class="lineCov">       2092 :             auto &amp;&amp; attributes = reader.attributes();</span>
-<span class="lineNum">     108 </span><span class="lineCov">       2092 :             if( !attributes.hasAttribute( name ) )</span>
+<span class="lineNum">     106 </span><span class="lineCov">       2094 :             m_log &lt;&lt; &quot;getAttribute():\tstart. name: &quot; &lt;&lt; name &lt;&lt; endl;</span>
+<span class="lineNum">     107 </span><span class="lineCov">       2094 :             auto &amp;&amp; attributes = reader.attributes();</span>
+<span class="lineNum">     108 </span><span class="lineCov">       2094 :             if( !attributes.hasAttribute( name ) )</span>
 <span class="lineNum">     109 </span>            :             {
 <span class="lineNum">     110 </span><span class="lineCov">        364 :                 m_log &lt;&lt; &quot;getAttribute():\tnot have attribute: &quot; + name &lt;&lt; endl;</span>
 <span class="lineNum">     111 </span><span class="lineCov">        364 :                 if( option == AttributeOption::Optional )</span>
@@ -180,14 +180,14 @@
 <span class="lineNum">     118 </span><span class="lineNoCov">          0 :                     &quot;\&quot; not have attribute: &quot; + name;</span>
 <span class="lineNum">     119 </span><span class="lineNoCov">          0 :                 return false;</span>
 <span class="lineNum">     120 </span>            :             }
-<span class="lineNum">     121 </span><span class="lineCov">       1728 :             data = attributes.value( name ).toString();</span>
-<span class="lineNum">     122 </span><span class="lineCov">       1728 :             m_log &lt;&lt; &quot;getAttribute():\tend. name: &quot; &lt;&lt; name &lt;&lt; &quot;,\t data: &quot; &lt;&lt; data &lt;&lt; endl;</span>
-<span class="lineNum">     123 </span><span class="lineCov">       1728 :             return true;</span>
+<span class="lineNum">     121 </span><span class="lineCov">       1730 :             data = attributes.value( name ).toString();</span>
+<span class="lineNum">     122 </span><span class="lineCov">       1730 :             m_log &lt;&lt; &quot;getAttribute():\tend. name: &quot; &lt;&lt; name &lt;&lt; &quot;,\t data: &quot; &lt;&lt; data &lt;&lt; endl;</span>
+<span class="lineNum">     123 </span><span class="lineCov">       1730 :             return true;</span>
 <a name="124"><span class="lineNum">     124 </span>            :         }</a>
 <span class="lineNum">     125 </span>            : 
-<span class="lineNum">     126 </span><span class="lineCov">       1216 :         bool    ParserFromXML::getRequiredAttribute( QXmlStreamReader &amp; reader, const QString &amp; name, QString &amp; data )</span>
+<span class="lineNum">     126 </span><span class="lineCov">       1218 :         bool    ParserFromXML::getRequiredAttribute( QXmlStreamReader &amp; reader, const QString &amp; name, QString &amp; data )</span>
 <span class="lineNum">     127 </span>            :         {
-<span class="lineNum">     128 </span><span class="lineCov">       1216 :             return getAttribute( reader, name, data, AttributeOption::Required );</span>
+<span class="lineNum">     128 </span><span class="lineCov">       1218 :             return getAttribute( reader, name, data, AttributeOption::Required );</span>
 <a name="129"><span class="lineNum">     129 </span>            :         }</a>
 <span class="lineNum">     130 </span>            : 
 <span class="lineNum">     131 </span><span class="lineCov">        876 :         bool    ParserFromXML::getOptionalAttribute( QXmlStreamReader &amp; reader, const QString &amp; name, QString &amp; data )</span>
@@ -227,31 +227,31 @@
 <span class="lineNum">     165 </span><span class="lineCov">        263 :             return true;</span>
 <a name="166"><span class="lineNum">     166 </span>            :         }</a>
 <span class="lineNum">     167 </span>            : 
-<span class="lineNum">     168 </span><span class="lineCov">        518 :         bool    ParserFromXML::parseChilds( QXmlStreamReader &amp; reader, const ObjectPtr &amp; object )</span>
+<span class="lineNum">     168 </span><span class="lineCov">        519 :         bool    ParserFromXML::parseChilds( QXmlStreamReader &amp; reader, const ObjectPtr &amp; object )</span>
 <span class="lineNum">     169 </span>            :         {
-<span class="lineNum">     170 </span><span class="lineCov">        518 :             m_log &lt;&lt; &quot;parseChilds():\tstart&quot; &lt;&lt; endl;</span>
-<span class="lineNum">     171 </span><span class="lineCov">        518 :             while( !reader.atEnd() )</span>
+<span class="lineNum">     170 </span><span class="lineCov">        519 :             m_log &lt;&lt; &quot;parseChilds():\tstart&quot; &lt;&lt; endl;</span>
+<span class="lineNum">     171 </span><span class="lineCov">        519 :             while( !reader.atEnd() )</span>
 <span class="lineNum">     172 </span>            :             {
-<span class="lineNum">     173 </span><span class="lineCov">       2776 :                 reader.readNext();</span>
-<span class="lineNum">     174 </span><span class="lineCov">       2776 :                 if( reader.isEndElement() )</span>
+<span class="lineNum">     173 </span><span class="lineCov">       2779 :                 reader.readNext();</span>
+<span class="lineNum">     174 </span><span class="lineCov">       2779 :                 if( reader.isEndElement() )</span>
 <span class="lineNum">     175 </span>            :                 {
-<span class="lineNum">     176 </span><span class="lineCov">        483 :                     break;</span>
+<span class="lineNum">     176 </span><span class="lineCov">        484 :                     break;</span>
 <span class="lineNum">     177 </span>            :                 }
-<span class="lineNum">     178 </span><span class="lineCov">       2293 :                 if( !reader.isStartElement() )</span>
+<span class="lineNum">     178 </span><span class="lineCov">       2295 :                 if( !reader.isStartElement() )</span>
 <span class="lineNum">     179 </span>            :                 {
-<span class="lineNum">     180 </span><span class="lineCov">       1350 :                     continue;</span>
+<span class="lineNum">     180 </span><span class="lineCov">       1351 :                     continue;</span>
 <span class="lineNum">     181 </span>            :                 }
 <span class="lineNum">     182 </span>            : 
-<span class="lineNum">     183 </span><span class="lineCov">        943 :                 auto name = reader.name().toString();</span>
-<span class="lineNum">     184 </span><span class="lineCov">        943 :                 m_log &lt;&lt; &quot;parseChilds():\tcurrent tag: &quot; &lt;&lt; name &lt;&lt; endl;</span>
-<span class="lineNum">     185 </span><span class="lineCov">        943 :                 if( m_functions.contains( name ) )</span>
+<span class="lineNum">     183 </span><span class="lineCov">        944 :                 auto name = reader.name().toString();</span>
+<span class="lineNum">     184 </span><span class="lineCov">        944 :                 m_log &lt;&lt; &quot;parseChilds():\tcurrent tag: &quot; &lt;&lt; name &lt;&lt; endl;</span>
+<span class="lineNum">     185 </span><span class="lineCov">        944 :                 if( m_functions.contains( name ) )</span>
 <span class="lineNum">     186 </span>            :                 {
-<span class="lineNum">     187 </span><span class="lineCov">        939 :                     m_log &lt;&lt; &quot;parseChilds():\tuse func for: &quot; &lt;&lt; name &lt;&lt; endl;</span>
-<span class="lineNum">     188 </span><span class="lineCov">        939 :                     auto func = m_functions[ name ];</span>
-<span class="lineNum">     189 </span><span class="lineCov">        939 :                     if( !func( reader, object ) )</span>
+<span class="lineNum">     187 </span><span class="lineCov">        940 :                     m_log &lt;&lt; &quot;parseChilds():\tuse func for: &quot; &lt;&lt; name &lt;&lt; endl;</span>
+<span class="lineNum">     188 </span><span class="lineCov">        940 :                     auto func = m_functions[ name ];</span>
+<span class="lineNum">     189 </span><span class="lineCov">        940 :                     if( !func( reader, object ) )</span>
 <span class="lineNum">     190 </span>            :                     {
 <span class="lineNum">     191 </span><span class="lineCov">          3 :                         return false;</span>
-<span class="lineNum">     192 </span><span class="lineCov">        936 :                     }</span>
+<span class="lineNum">     192 </span><span class="lineCov">        937 :                     }</span>
 <span class="lineNum">     193 </span>            :                 }
 <span class="lineNum">     194 </span>            :                 else
 <span class="lineNum">     195 </span>            :                 {
@@ -261,17 +261,17 @@
 <span class="lineNum">     199 </span><span class="lineNoCov">          0 :                         return false;</span>
 <span class="lineNum">     200 </span>            :                     }
 <span class="lineNum">     201 </span>            :                 }
-<span class="lineNum">     202 </span><span class="lineCov">        940 :             }</span>
+<span class="lineNum">     202 </span><span class="lineCov">        941 :             }</span>
 <span class="lineNum">     203 </span>            : 
-<span class="lineNum">     204 </span><span class="lineCov">        515 :             if( reader.hasError() )</span>
+<span class="lineNum">     204 </span><span class="lineCov">        516 :             if( reader.hasError() )</span>
 <span class="lineNum">     205 </span>            :             {
 <span class="lineNum">     206 </span><span class="lineCov">          3 :                 m_log &lt;&lt; &quot;parseChilds():\terror&quot; &lt;&lt; endl;</span>
 <span class="lineNum">     207 </span><span class="lineCov">          3 :                 m_lastError = reader.errorString();</span>
 <span class="lineNum">     208 </span><span class="lineCov">          3 :                 return false;</span>
 <span class="lineNum">     209 </span>            :             }
 <span class="lineNum">     210 </span>            : 
-<span class="lineNum">     211 </span><span class="lineCov">        512 :             m_log &lt;&lt; &quot;parseChilds():\tend&quot; &lt;&lt; endl;</span>
-<span class="lineNum">     212 </span><span class="lineCov">        512 :             return true;</span>
+<span class="lineNum">     211 </span><span class="lineCov">        513 :             m_log &lt;&lt; &quot;parseChilds():\tend&quot; &lt;&lt; endl;</span>
+<span class="lineNum">     212 </span><span class="lineCov">        513 :             return true;</span>
 <a name="213"><span class="lineNum">     213 </span>            :         }</a>
 <span class="lineNum">     214 </span>            : 
 <span class="lineNum">     215 </span><span class="lineCov">         32 :         bool    ParserFromXML::parseDocument( const QString &amp; text )</span>
@@ -543,16 +543,16 @@
 <span class="lineNum">     481 </span><span class="lineCov">         56 :             return !reader.hasError();</span>
 <a name="482"><span class="lineNum">     482 </span>            :         }</a>
 <span class="lineNum">     483 </span>            : 
-<span class="lineNum">     484 </span><span class="lineCov">        114 :         bool    ParserFromXML::parseField( QXmlStreamReader &amp; reader, const ReportPtr &amp; report )</span>
+<span class="lineNum">     484 </span><span class="lineCov">        115 :         bool    ParserFromXML::parseField( QXmlStreamReader &amp; reader, const ReportPtr &amp; report )</span>
 <span class="lineNum">     485 </span>            :         {
-<span class="lineNum">     486 </span><span class="lineCov">        114 :             QString name;</span>
-<span class="lineNum">     487 </span><span class="lineCov">        114 :             if( !getRequiredAttribute( reader, &quot;name&quot;, name ) )</span>
+<span class="lineNum">     486 </span><span class="lineCov">        115 :             QString name;</span>
+<span class="lineNum">     487 </span><span class="lineCov">        115 :             if( !getRequiredAttribute( reader, &quot;name&quot;, name ) )</span>
 <span class="lineNum">     488 </span>            :             {
 <span class="lineNum">     489 </span><span class="lineNoCov">          0 :                 return false;</span>
 <span class="lineNum">     490 </span>            :             }
 <span class="lineNum">     491 </span>            : 
-<span class="lineNum">     492 </span><span class="lineCov">        228 :             QString className;</span>
-<span class="lineNum">     493 </span><span class="lineCov">        114 :             if( !getRequiredAttribute( reader, &quot;class&quot;, className ) )</span>
+<span class="lineNum">     492 </span><span class="lineCov">        230 :             QString className;</span>
+<span class="lineNum">     493 </span><span class="lineCov">        115 :             if( !getRequiredAttribute( reader, &quot;class&quot;, className ) )</span>
 <span class="lineNum">     494 </span>            :             {
 <span class="lineNum">     495 </span><span class="lineNoCov">          0 :                 return false;</span>
 <span class="lineNum">     496 </span>            :             }
@@ -566,18 +566,18 @@
 <span class="lineNum">     504 </span>            :                 return false;
 <span class="lineNum">     505 </span>            :             }
 <span class="lineNum">     506 </span>            :             */
-<span class="lineNum">     507 </span><span class="lineCov">        228 :             FieldPtr field( new Field() );</span>
-<span class="lineNum">     508 </span><span class="lineCov">        114 :             if( !parseChilds( reader, field ) )</span>
+<span class="lineNum">     507 </span><span class="lineCov">        230 :             FieldPtr field( new Field() );</span>
+<span class="lineNum">     508 </span><span class="lineCov">        115 :             if( !parseChilds( reader, field ) )</span>
 <span class="lineNum">     509 </span>            :             {
 <span class="lineNum">     510 </span><span class="lineNoCov">          0 :                 return false;</span>
 <span class="lineNum">     511 </span>            :             }
 <span class="lineNum">     512 </span>            : 
-<span class="lineNum">     513 </span><span class="lineCov">        114 :             field-&gt;setTagName( &quot;field&quot; );</span>
-<span class="lineNum">     514 </span><span class="lineCov">        114 :             field-&gt;setName( name );</span>
-<span class="lineNum">     515 </span><span class="lineCov">        114 :             field-&gt;setClassName( className );</span>
-<span class="lineNum">     516 </span><span class="lineCov">        114 :             report-&gt;setField( name, field );</span>
+<span class="lineNum">     513 </span><span class="lineCov">        115 :             field-&gt;setTagName( &quot;field&quot; );</span>
+<span class="lineNum">     514 </span><span class="lineCov">        115 :             field-&gt;setName( name );</span>
+<span class="lineNum">     515 </span><span class="lineCov">        115 :             field-&gt;setClassName( className );</span>
+<span class="lineNum">     516 </span><span class="lineCov">        115 :             report-&gt;setField( name, field );</span>
 <span class="lineNum">     517 </span>            : 
-<span class="lineNum">     518 </span><span class="lineCov">        228 :             return !reader.hasError();</span>
+<span class="lineNum">     518 </span><span class="lineCov">        230 :             return !reader.hasError();</span>
 <a name="519"><span class="lineNum">     519 </span>            :         }</a>
 <span class="lineNum">     520 </span>            : 
 <span class="lineNum">     521 </span><span class="lineCov">          1 :         bool    ParserFromXML::parseGroup( QXmlStreamReader &amp; reader, const ReportPtr &amp; report )</span>
@@ -1001,7 +1001,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-2-g25f5d38</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-4-g53a6ce8</a></td></tr>
   </table>
   <br>
 
