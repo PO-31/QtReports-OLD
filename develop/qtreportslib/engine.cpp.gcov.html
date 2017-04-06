@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-31 05:39:37</td>
+            <td class="headerValue">2017-04-06 07:33:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">22</td>
@@ -73,40 +73,40 @@
 <span class="lineNum">      11 </span>            : namespace qtreports
 <a name="12"><span class="lineNum">      12 </span>            : {</a>
 <span class="lineNum">      13 </span>            : 
-<span class="lineNum">      14 </span><span class="lineCov">         21 :     Engine::Engine( QObject * parent ) :</span>
+<span class="lineNum">      14 </span><span class="lineCov">         22 :     Engine::Engine( QObject * parent ) :</span>
 <span class="lineNum">      15 </span>            :         QObject( parent ),
-<span class="lineNum">      16 </span><span class="lineCov">         21 :         m_isOpened( false )</span>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">         21 :     {}</span></a>
+<span class="lineNum">      16 </span><span class="lineCov">         22 :         m_isOpened( false )</span>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">         22 :     {}</span></a>
 <span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">          2 :     Engine::Engine( const QString &amp; path, QObject * parent ) :</span>
-<span class="lineNum">      20 </span><span class="lineCov">          2 :         Engine( parent )</span>
+<span class="lineNum">      19 </span><span class="lineCov">          3 :     Engine::Engine( const QString &amp; path, QObject * parent ) :</span>
+<span class="lineNum">      20 </span><span class="lineCov">          3 :         Engine( parent )</span>
 <span class="lineNum">      21 </span>            :     {
-<span class="lineNum">      22 </span><span class="lineCov">          2 :         open( path );</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          2 :     }</span></a>
+<span class="lineNum">      22 </span><span class="lineCov">          3 :         open( path );</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">          3 :     }</span></a>
 <span class="lineNum">      24 </span>            : 
-<a name="25"><span class="lineNum">      25 </span><span class="lineCov">         21 :     Engine::~Engine() {}</span></a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">         22 :     Engine::~Engine() {}</span></a>
 <span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span><span class="lineCov">         23 :     bool        Engine::open( const QString &amp; path )</span>
+<span class="lineNum">      27 </span><span class="lineCov">         24 :     bool        Engine::open( const QString &amp; path )</span>
 <span class="lineNum">      28 </span>            :     {
-<span class="lineNum">      29 </span><span class="lineCov">         23 :         if( isOpened() )</span>
+<span class="lineNum">      29 </span><span class="lineCov">         24 :         if( isOpened() )</span>
 <span class="lineNum">      30 </span>            :         {
 <span class="lineNum">      31 </span><span class="lineCov">          2 :             close();</span>
 <span class="lineNum">      32 </span>            :         }
 <span class="lineNum">      33 </span>            : 
-<span class="lineNum">      34 </span><span class="lineCov">         23 :         detail::ParserFromXML parser;</span>
-<span class="lineNum">      35 </span><span class="lineCov">         23 :         if( !parser.parse( path ) )</span>
+<span class="lineNum">      34 </span><span class="lineCov">         24 :         detail::ParserFromXML parser;</span>
+<span class="lineNum">      35 </span><span class="lineCov">         24 :         if( !parser.parse( path ) )</span>
 <span class="lineNum">      36 </span>            :         {
 <span class="lineNum">      37 </span><span class="lineCov">          3 :             m_lastError = &quot;Parsing error: &quot; + parser.getLastError();</span>
 <span class="lineNum">      38 </span><span class="lineCov">          3 :             return false;</span>
 <span class="lineNum">      39 </span>            :         }
 <span class="lineNum">      40 </span>            : 
-<span class="lineNum">      41 </span><span class="lineCov">         20 :         m_isOpened = true;</span>
-<span class="lineNum">      42 </span><span class="lineCov">         20 :         m_compiledPath = path;</span>
-<span class="lineNum">      43 </span><span class="lineCov">         20 :         m_report = parser.getReport();</span>
+<span class="lineNum">      41 </span><span class="lineCov">         21 :         m_isOpened = true;</span>
+<span class="lineNum">      42 </span><span class="lineCov">         21 :         m_compiledPath = path;</span>
+<span class="lineNum">      43 </span><span class="lineCov">         21 :         m_report = parser.getReport();</span>
 <span class="lineNum">      44 </span>            : 
 <span class="lineNum">      45 </span>            :         //fillColumnsFromReport(); //MB as ProcessedDB::createColumns( ReportPtr )
 <span class="lineNum">      46 </span>            : 
-<span class="lineNum">      47 </span><span class="lineCov">         20 :         return true;</span>
+<span class="lineNum">      47 </span><span class="lineCov">         21 :         return true;</span>
 <a name="48"><span class="lineNum">      48 </span>            :     }</a>
 <span class="lineNum">      49 </span>            : 
 <span class="lineNum">      50 </span><span class="lineCov">          3 :     void    Engine::close()</span>
@@ -420,9 +420,9 @@
 <span class="lineNum">     358 </span><span class="lineCov">         24 :         return prepareDataSource( data );</span>
 <a name="359"><span class="lineNum">     359 </span>            :     }</a>
 <span class="lineNum">     360 </span>            : 
-<span class="lineNum">     361 </span><span class="lineCov">         29 :     bool    Engine::isOpened() const</span>
+<span class="lineNum">     361 </span><span class="lineCov">         31 :     bool    Engine::isOpened() const</span>
 <span class="lineNum">     362 </span>            :     {
-<span class="lineNum">     363 </span><span class="lineCov">         29 :         return m_isOpened;</span>
+<span class="lineNum">     363 </span><span class="lineCov">         31 :         return m_isOpened;</span>
 <a name="364"><span class="lineNum">     364 </span>            :     }</a>
 <span class="lineNum">     365 </span>            : 
 <span class="lineNum">     366 </span><span class="lineCov">          5 :     detail::ReportPtr   Engine::getReport() const</span>
@@ -430,9 +430,9 @@
 <span class="lineNum">     368 </span><span class="lineCov">          5 :         return m_report;</span>
 <a name="369"><span class="lineNum">     369 </span>            :     }</a>
 <span class="lineNum">     370 </span>            : 
-<span class="lineNum">     371 </span><span class="lineCov">         45 :     const QString   Engine::getLastError() const</span>
+<span class="lineNum">     371 </span><span class="lineCov">         46 :     const QString   Engine::getLastError() const</span>
 <span class="lineNum">     372 </span>            :     {
-<span class="lineNum">     373 </span><span class="lineCov">         45 :         return m_lastError;</span>
+<span class="lineNum">     373 </span><span class="lineCov">         46 :         return m_lastError;</span>
 <span class="lineNum">     374 </span>            :     }
 <span class="lineNum">     375 </span>            : 
 <span class="lineNum">     376 </span>            : }
@@ -444,7 +444,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-4-g53a6ce8</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-5-g3b397a3</a></td></tr>
   </table>
   <br>
 

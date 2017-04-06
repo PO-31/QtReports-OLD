@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-03-31 05:39:37</td>
+            <td class="headerValue">2017-04-06 07:33:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">25</td>
@@ -65,42 +65,42 @@
 <span class="lineNum">       3 </span>            : namespace qtreports {
 <a name="4"><span class="lineNum">       4 </span>            :     namespace detail {</a>
 <span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span><span class="lineCov">         27 :         Style::Style() : </span>
+<span class="lineNum">       6 </span><span class="lineCov">         28 :         Style::Style() : </span>
 <span class="lineNum">       7 </span>            :             m_isDefault( false ),
 <span class="lineNum">       8 </span>            :             m_isBold( false ),
 <span class="lineNum">       9 </span>            :             m_isItalic( false ),
 <span class="lineNum">      10 </span>            :             m_isUnderline( false ),
 <span class="lineNum">      11 </span>            :             m_isStrikeThrough( false ),
 <span class="lineNum">      12 </span>            :             m_fontSize( 12 ),
-<a name="13"><span class="lineNum">      13 </span><span class="lineCov">         27 :             m_isPDFEmbedded( false ) {}</span></a>
+<a name="13"><span class="lineNum">      13 </span><span class="lineCov">         28 :             m_isPDFEmbedded( false ) {}</span></a>
 <span class="lineNum">      14 </span>            : 
-<a name="15"><span class="lineNum">      15 </span><span class="lineCov">         54 :         Style::~Style() {}</span></a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">         56 :         Style::~Style() {}</span></a>
 <span class="lineNum">      16 </span>            : 
 <span class="lineNum">      17 </span><span class="lineCov">          3 :         bool    Style::isDefault() const {</span>
 <span class="lineNum">      18 </span><span class="lineCov">          3 :             return m_isDefault;</span>
 <a name="19"><span class="lineNum">      19 </span>            :         }</a>
 <span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span><span class="lineCov">         26 :         void    Style::setAsDefault( bool flag ) {</span>
-<span class="lineNum">      22 </span><span class="lineCov">         26 :             m_isDefault = flag;</span>
-<a name="23"><span class="lineNum">      23 </span><span class="lineCov">         26 :         }</span></a>
+<span class="lineNum">      21 </span><span class="lineCov">         27 :         void    Style::setAsDefault( bool flag ) {</span>
+<span class="lineNum">      22 </span><span class="lineCov">         27 :             m_isDefault = flag;</span>
+<a name="23"><span class="lineNum">      23 </span><span class="lineCov">         27 :         }</span></a>
 <span class="lineNum">      24 </span>            : 
 <span class="lineNum">      25 </span><span class="lineCov">          4 :         const QString   Style::getFontName() const</span>
 <span class="lineNum">      26 </span>            :         {
 <span class="lineNum">      27 </span><span class="lineCov">          4 :             return m_fontName;</span>
 <a name="28"><span class="lineNum">      28 </span>            :         }</a>
 <span class="lineNum">      29 </span>            : 
-<span class="lineNum">      30 </span><span class="lineCov">         26 :         void    Style::setFontName( const QString &amp;name )</span>
+<span class="lineNum">      30 </span><span class="lineCov">         27 :         void    Style::setFontName( const QString &amp;name )</span>
 <span class="lineNum">      31 </span>            :         {
-<span class="lineNum">      32 </span><span class="lineCov">         26 :             m_fontName = name;</span>
-<a name="33"><span class="lineNum">      33 </span><span class="lineCov">         26 :         }</span></a>
+<span class="lineNum">      32 </span><span class="lineCov">         27 :             m_fontName = name;</span>
+<a name="33"><span class="lineNum">      33 </span><span class="lineCov">         27 :         }</span></a>
 <span class="lineNum">      34 </span>            : 
 <span class="lineNum">      35 </span><span class="lineCov">          4 :         int     Style::getFontSize() const {</span>
 <span class="lineNum">      36 </span><span class="lineCov">          4 :             return m_fontSize;</span>
 <a name="37"><span class="lineNum">      37 </span>            :         }</a>
 <span class="lineNum">      38 </span>            : 
-<span class="lineNum">      39 </span><span class="lineCov">         26 :         void    Style::setFontSize( int size ) {</span>
-<span class="lineNum">      40 </span><span class="lineCov">         26 :             m_fontSize = size;</span>
-<a name="41"><span class="lineNum">      41 </span><span class="lineCov">         26 :         }</span></a>
+<span class="lineNum">      39 </span><span class="lineCov">         27 :         void    Style::setFontSize( int size ) {</span>
+<span class="lineNum">      40 </span><span class="lineCov">         27 :             m_fontSize = size;</span>
+<a name="41"><span class="lineNum">      41 </span><span class="lineCov">         27 :         }</span></a>
 <span class="lineNum">      42 </span>            : 
 <span class="lineNum">      43 </span><span class="lineCov">          2 :         const QColor    Style::getFontColor() const {</span>
 <span class="lineNum">      44 </span><span class="lineCov">          2 :             return m_fontColor;</span>
@@ -154,25 +154,25 @@
 <span class="lineNum">      92 </span><span class="lineCov">          4 :             return m_pdfFontName;</span>
 <a name="93"><span class="lineNum">      93 </span>            :         }</a>
 <span class="lineNum">      94 </span>            : 
-<span class="lineNum">      95 </span><span class="lineCov">         26 :         void    Style::setPDFFontName( const QString &amp; name ) {</span>
-<span class="lineNum">      96 </span><span class="lineCov">         26 :             m_pdfFontName = name;</span>
-<a name="97"><span class="lineNum">      97 </span><span class="lineCov">         26 :         }</span></a>
+<span class="lineNum">      95 </span><span class="lineCov">         27 :         void    Style::setPDFFontName( const QString &amp; name ) {</span>
+<span class="lineNum">      96 </span><span class="lineCov">         27 :             m_pdfFontName = name;</span>
+<a name="97"><span class="lineNum">      97 </span><span class="lineCov">         27 :         }</span></a>
 <span class="lineNum">      98 </span>            : 
 <span class="lineNum">      99 </span><span class="lineCov">          4 :         const QString   Style::getPDFEncoding() const {</span>
 <span class="lineNum">     100 </span><span class="lineCov">          4 :             return m_pdfEncoding;</span>
 <a name="101"><span class="lineNum">     101 </span>            :         }</a>
 <span class="lineNum">     102 </span>            : 
-<span class="lineNum">     103 </span><span class="lineCov">         26 :         void    Style::setPDFEncoding( const QString &amp; encoding ) {</span>
-<span class="lineNum">     104 </span><span class="lineCov">         26 :             m_pdfEncoding = encoding;</span>
-<a name="105"><span class="lineNum">     105 </span><span class="lineCov">         26 :         }</span></a>
+<span class="lineNum">     103 </span><span class="lineCov">         27 :         void    Style::setPDFEncoding( const QString &amp; encoding ) {</span>
+<span class="lineNum">     104 </span><span class="lineCov">         27 :             m_pdfEncoding = encoding;</span>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">         27 :         }</span></a>
 <span class="lineNum">     106 </span>            : 
 <span class="lineNum">     107 </span><span class="lineCov">          2 :         bool    Style::isPDFEmbedded() const {</span>
 <span class="lineNum">     108 </span><span class="lineCov">          2 :             return m_isPDFEmbedded;</span>
 <a name="109"><span class="lineNum">     109 </span>            :         }</a>
 <span class="lineNum">     110 </span>            : 
-<span class="lineNum">     111 </span><span class="lineCov">         26 :         void    Style::setPDFEmbedded( bool isEmbedded ) {</span>
-<span class="lineNum">     112 </span><span class="lineCov">         26 :             m_isPDFEmbedded = isEmbedded;</span>
-<span class="lineNum">     113 </span><span class="lineCov">         26 :         }</span>
+<span class="lineNum">     111 </span><span class="lineCov">         27 :         void    Style::setPDFEmbedded( bool isEmbedded ) {</span>
+<span class="lineNum">     112 </span><span class="lineCov">         27 :             m_isPDFEmbedded = isEmbedded;</span>
+<span class="lineNum">     113 </span><span class="lineCov">         27 :         }</span>
 <span class="lineNum">     114 </span>            : 
 <span class="lineNum">     115 </span>            :     }
 <span class="lineNum">     116 </span>            : }
@@ -184,7 +184,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-4-g53a6ce8</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-5-g3b397a3</a></td></tr>
   </table>
   <br>
 
