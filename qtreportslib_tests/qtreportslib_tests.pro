@@ -13,6 +13,7 @@ SOURCES += main.cpp \
     test_convertertoqwidget.cpp \
     test_convertertopdf.cpp \
     test_convertertohtml.cpp \
+    test_groups.cpp \
     test_field.cpp
 
 HEADERS  += test_engine.hpp \
@@ -20,6 +21,7 @@ HEADERS  += test_engine.hpp \
     test_convertertoqwidget.hpp \
     test_convertertopdf.hpp \
     test_convertertohtml.hpp \
+    test_groups.hpp \
     test_field.hpp
 
 QMAKE_CXXFLAGS += -std=c++11
