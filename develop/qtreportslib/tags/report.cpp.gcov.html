@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">91</td>
+            <td class="headerCovTableEntry">93</td>
             <td class="headerCovTableEntry">204</td>
-            <td class="headerCovTableEntryLo">44.6 %</td>
+            <td class="headerCovTableEntryLo">45.6 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-04-06 07:33:11</td>
+            <td class="headerValue">2017-04-07 06:29:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">37</td>
+            <td class="headerCovTableEntry">38</td>
             <td class="headerCovTableEntry">52</td>
-            <td class="headerCovTableEntryLo">71.2 %</td>
+            <td class="headerCovTableEntryLo">73.1 %</td>
           </tr>
           <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -130,9 +130,9 @@
 <span class="lineNum">      68 </span><span class="lineCov">        115 :             m_fields[ name ] = field;</span>
 <a name="69"><span class="lineNum">      69 </span><span class="lineCov">        115 :         }</span></a>
 <span class="lineNum">      70 </span>            : 
-<span class="lineNum">      71 </span><span class="lineCov">        222 :         const FieldPtr  Report::getField( const QString &amp; name ) const</span>
+<span class="lineNum">      71 </span><span class="lineCov">        226 :         const FieldPtr  Report::getField( const QString &amp; name ) const</span>
 <span class="lineNum">      72 </span>            :         {
-<span class="lineNum">      73 </span><span class="lineCov">        222 :             return m_fields.value( name );</span>
+<span class="lineNum">      73 </span><span class="lineCov">        226 :             return m_fields.value( name );</span>
 <a name="74"><span class="lineNum">      74 </span>            :         }</a>
 <span class="lineNum">      75 </span>            : 
 <span class="lineNum">      76 </span><span class="lineCov">          9 :         const QMap&lt; QString, FieldPtr &gt;   Report::getFields() const</span>
@@ -154,9 +154,9 @@
 <span class="lineNum">      92 </span><span class="lineCov">          6 :             m_title = title;</span>
 <a name="93"><span class="lineNum">      93 </span><span class="lineCov">          6 :         }</span></a>
 <span class="lineNum">      94 </span>            : 
-<span class="lineNum">      95 </span><span class="lineCov">         74 :         const TitlePtr     Report::getTitle() const</span>
+<span class="lineNum">      95 </span><span class="lineCov">         76 :         const TitlePtr     Report::getTitle() const</span>
 <span class="lineNum">      96 </span>            :         {
-<span class="lineNum">      97 </span><span class="lineCov">         74 :             return m_title;</span>
+<span class="lineNum">      97 </span><span class="lineCov">         76 :             return m_title;</span>
 <a name="98"><span class="lineNum">      98 </span>            :         }</a>
 <span class="lineNum">      99 </span>            : 
 <span class="lineNum">     100 </span><span class="lineCov">         27 :         void    Report::setDetail( const DetailPtr &amp; detail )</span>
@@ -164,9 +164,9 @@
 <span class="lineNum">     102 </span><span class="lineCov">         27 :             m_detail = detail;</span>
 <a name="103"><span class="lineNum">     103 </span><span class="lineCov">         27 :         }</span></a>
 <span class="lineNum">     104 </span>            : 
-<span class="lineNum">     105 </span><span class="lineCov">        115 :         const DetailPtr     Report::getDetail() const</span>
+<span class="lineNum">     105 </span><span class="lineCov">        117 :         const DetailPtr     Report::getDetail() const</span>
 <span class="lineNum">     106 </span>            :         {
-<span class="lineNum">     107 </span><span class="lineCov">        115 :             return m_detail;</span>
+<span class="lineNum">     107 </span><span class="lineCov">        117 :             return m_detail;</span>
 <a name="108"><span class="lineNum">     108 </span>            :         }</a>
 <span class="lineNum">     109 </span>            : 
 <span class="lineNum">     110 </span><span class="lineNoCov">          0 :         void    Report::setParameter( const QString &amp; name, const QVariant &amp; value )</span>
@@ -429,9 +429,9 @@
 <span class="lineNum">     367 </span><span class="lineNoCov">          0 :             return -1;</span>
 <a name="368"><span class="lineNum">     368 </span>            :         }</a>
 <span class="lineNum">     369 </span>            : 
-<span class="lineNum">     370 </span><span class="lineNoCov">          0 :         GroupPtr  Report::getGroupByIndex( int index )</span>
+<span class="lineNum">     370 </span><span class="lineCov">          6 :         GroupPtr  Report::getGroupByIndex( int index )</span>
 <span class="lineNum">     371 </span>            :         {
-<span class="lineNum">     372 </span><span class="lineNoCov">          0 :             return m_groups.value( m_groups.keys().value( index ) );</span>
+<span class="lineNum">     372 </span><span class="lineCov">          6 :             return m_groups.value( m_groups.keys().value( index ) );</span>
 <a name="373"><span class="lineNum">     373 </span>            :         }</a>
 <span class="lineNum">     374 </span>            : 
 <span class="lineNum">     375 </span><span class="lineNoCov">          0 :         void Report::swapRows(int row1, int row2, QVector&lt;bool&gt; &amp;vec)</span>
@@ -456,7 +456,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-5-g3b397a3</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13-6-g477957f</a></td></tr>
   </table>
   <br>
 
