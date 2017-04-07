@@ -193,15 +193,42 @@ namespace qtreports
                 }
             }
 
+			auto group = report->getGroupByIndex(0);
+			if (!group.isNull())
+			{
+				auto header = group->getHeader();
+				if (!header.isNull())
+				{
+					QWidget * sectionWidget = isLayout() ? addSectionLayout(layout, report->getMargins(), header->getHeight()) : nullptr;
+					if (!createSection(sectionWidget, header, 0))
+					{
+						return false;
+					}
+				}
+			}
+
             int count = isReport() ? report->getRowCount() : 1;
             for( int i = 0; i < count; ++i )
             {
-                QWidget * sectionWidget = isLayout() ? addSectionLayout( layout, report->getMargins(), detail->getHeight() ) : nullptr;
+				QWidget * sectionWidget = isLayout() ? addSectionLayout( layout, report->getMargins(), detail->getHeight() ) : nullptr;
                 if( !createSection( sectionWidget, detail, i ) )
                 {
                     return false;
                 }
             }
+
+			if (!group.isNull())
+			{
+				auto footer = group->getFooter();
+				if (!footer.isNull())
+				{
+					QWidget * sectionWidget = isLayout() ? addSectionLayout(layout, report->getMargins(), footer->getHeight()) : nullptr;
+					if (!createSection(sectionWidget, footer, 0))
+					{
+						return false;
+					}
+				}
+			}
 
             addEmptySection( layout, report->getMargins() );
             addVerticalBorder( layout, report->getMargins(), report->getBottomMargin() );
