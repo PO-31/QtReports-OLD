@@ -5,7 +5,7 @@
     isPdfEmbedded="false" />
 
   <queryString>
-    <![CDATA[ select group_name, stud_name from groups_t NATURAL JOIN students_t]]>
+    <![CDATA[ select group_name, stud_name from groups_t NATURAL JOIN students_t ORDER BY group_name]]>
   </queryString>
 
   <field name="group_name" class="QString" />
@@ -26,7 +26,7 @@
   <groupFooter>
     <band height="40">
       <textField>
-        <reportElement x="50" y="0" width="200" height="20" />
+        <reportElement x="0" y="0" width="100" height="30" />
         <textFieldExpression class="QString">
           <![CDATA[$F{group_name}]]>
         </textFieldExpression>

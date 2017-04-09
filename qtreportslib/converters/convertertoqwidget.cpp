@@ -207,11 +207,45 @@ namespace qtreports
 				}
 			}
 
+			auto nameField = group->getHeader()->getBand(0)->getTextField(0)->getOriginalText();
+			detail::Replacer replacer;
+			auto text = replacer.replaceField(nameField, report, 0);
+
             int count = isReport() ? report->getRowCount() : 1;
             for( int i = 0; i < count; ++i )
             {
 				QWidget * sectionWidget = isLayout() ? addSectionLayout( layout, report->getMargins(), detail->getHeight() ) : nullptr;
-                if( !createSection( sectionWidget, detail, i ) )
+				auto curText = replacer.replaceField(nameField, report, i);
+				if (curText != text)
+				{
+					if (!group.isNull())
+					{
+						auto footer = group->getFooter();
+						if (!footer.isNull())
+						{
+							QWidget * sectionWidgetFooter = isLayout() ? addSectionLayout(layout, report->getMargins(), footer->getHeight()) : nullptr;
+							if (!createSection(sectionWidgetFooter, footer, i - 1))
+							{
+								return false;
+							}
+						}
+					}
+					if (!group.isNull())
+					{
+						auto header = group->getHeader();
+						if (!header.isNull())
+						{
+							QWidget * sectionWidgetHeader = isLayout() ? addSectionLayout(layout, report->getMargins(), header->getHeight()) : nullptr;
+							if (!createSection(sectionWidgetHeader, header, i))
+							{
+								return false;
+							}
+						}
+					}
+					text = curText;
+				}
+				
+				if( !createSection( sectionWidget, detail, i ) )
                 {
                     return false;
                 }
@@ -223,7 +257,7 @@ namespace qtreports
 				if (!footer.isNull())
 				{
 					QWidget * sectionWidget = isLayout() ? addSectionLayout(layout, report->getMargins(), footer->getHeight()) : nullptr;
-					if (!createSection(sectionWidget, footer, 0))
+					if (!createSection(sectionWidget, footer, (count - 1)))
 					{
 						return false;
 					}
