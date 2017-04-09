@@ -207,15 +207,23 @@ namespace qtreports
 				}
 			}
 
-			auto nameField = group->getHeader()->getBand(0)->getTextField(0)->getOriginalText();
+			QString nameField = "", text = "";
 			detail::Replacer replacer;
-			auto text = replacer.replaceField(nameField, report, 0);
+			if (!group.isNull())
+			{
+				nameField = group->getHeader()->getBand(0)->getTextField(0)->getOriginalText();
+				text = replacer.replaceField(nameField, report, 0);
+			}
 
             int count = isReport() ? report->getRowCount() : 1;
             for( int i = 0; i < count; ++i )
             {
 				QWidget * sectionWidget = isLayout() ? addSectionLayout( layout, report->getMargins(), detail->getHeight() ) : nullptr;
-				auto curText = replacer.replaceField(nameField, report, i);
+				QString curText = "";
+				if (!group.isNull())
+				{
+					curText = replacer.replaceField(nameField, report, i);
+				}
 				if (curText != text)
 				{
 					if (!group.isNull())
