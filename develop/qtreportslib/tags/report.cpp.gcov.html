@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-04-09 12:46:49</td>
+            <td class="headerValue">2017-04-10 10:11:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">38</td>
@@ -110,9 +110,9 @@
 <span class="lineNum">      48 </span><span class="lineNoCov">          0 :             return m_groups.value( name );</span>
 <a name="49"><span class="lineNum">      49 </span>            :         }</a>
 <span class="lineNum">      50 </span>            : 
-<span class="lineNum">      51 </span><span class="lineNoCov">          0 :         const QMap&lt; QString, GroupPtr &gt;     Report::getGroups() const</span>
+<span class="lineNum">      51 </span><span class="lineCov">          6 :         const QMap&lt; QString, GroupPtr &gt;     Report::getGroups() const</span>
 <span class="lineNum">      52 </span>            :         {
-<span class="lineNum">      53 </span><span class="lineNoCov">          0 :             return m_groups;</span>
+<span class="lineNum">      53 </span><span class="lineCov">          6 :             return m_groups;</span>
 <a name="54"><span class="lineNum">      54 </span>            :         }</a>
 <span class="lineNum">      55 </span>            : 
 <span class="lineNum">      56 </span><span class="lineCov">         26 :         void    Report::setQuery( const QString &amp; query )</span>
@@ -429,9 +429,9 @@
 <span class="lineNum">     367 </span><span class="lineNoCov">          0 :             return -1;</span>
 <a name="368"><span class="lineNum">     368 </span>            :         }</a>
 <span class="lineNum">     369 </span>            : 
-<span class="lineNum">     370 </span><span class="lineCov">          6 :         GroupPtr  Report::getGroupByIndex( int index )</span>
+<span class="lineNum">     370 </span><span class="lineNoCov">          0 :         GroupPtr  Report::getGroupByIndex( int index )</span>
 <span class="lineNum">     371 </span>            :         {
-<span class="lineNum">     372 </span><span class="lineCov">          6 :             return m_groups.value( m_groups.keys().value( index ) );</span>
+<span class="lineNum">     372 </span><span class="lineNoCov">          0 :             return m_groups.value( m_groups.keys().value( index ) );</span>
 <a name="373"><span class="lineNum">     373 </span>            :         }</a>
 <span class="lineNum">     374 </span>            : 
 <span class="lineNum">     375 </span><span class="lineNoCov">          0 :         void Report::swapRows(int row1, int row2, QVector&lt;bool&gt; &amp;vec)</span>
