@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2017-04-10 10:11:26</td>
+            <td class="headerValue">2017-04-10 10:48:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">19</td>
@@ -270,7 +270,7 @@
 <span class="lineNum">     208 </span><span class="lineCov">         12 :             QList&lt;GroupPtr&gt; groups = report-&gt;getGroups().values();</span>
 <span class="lineNum">     209 </span><span class="lineCov">         12 :             QList&lt;QString&gt; groupNames;</span>
 <span class="lineNum">     210 </span>            :             //Сюда помещаем конкретные имена по которым группируем
-<span class="lineNum">     211 </span><span class="lineCov">         12 :             QString particularNames[groups.length()];</span>
+<span class="lineNum">     211 </span><span class="lineCov">          6 :                         QString *particularNames = new QString[groups.length()];</span>
 <span class="lineNum">     212 </span><span class="lineCov">          6 :             for (int i = 0; i&lt;groups.length(); i++)</span>
 <span class="lineNum">     213 </span>            :             {
 <span class="lineNum">     214 </span><span class="lineNoCov">          0 :                 groupNames.append(groups[i]</span>
