@@ -208,7 +208,7 @@ namespace qtreports
             QList<GroupPtr> groups = report->getGroups().values();
             QList<QString> groupNames;
             //Сюда помещаем конкретные имена по которым группируем
-            QString particularNames[groups.length()];
+			QString *particularNames = new QString[groups.length()];
             for (int i = 0; i<groups.length(); i++)
             {
                 groupNames.append(groups[i]
