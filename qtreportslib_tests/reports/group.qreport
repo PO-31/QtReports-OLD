@@ -11,20 +11,38 @@
   <field name="group_name" class="QString" />
   <field name="stud_name" class="QString" />
 
-<group name="first">
+<group name="group_name">
         <groupExpression class="QString">
-          <![CDATA[$F{group_name}]]>
+            <![CDATA[$F{group_name}]]>
         </groupExpression>
- </group>
+  <groupHeader>
+      <band height="37">
+        <textField>
+          <reportElement x="33" y="0" width="100" height="30" />
+          <textFieldExpression class="QString"><![CDATA[$F{group_name}]]></textFieldExpression>
+        </textField>
+      </band>
+  </groupHeader> 
+  <groupFooter>
+    <band height="40">
+      <textField>
+        <reportElement x="0" y="0" width="100" height="30" />
+        <textFieldExpression class="QString">
+          <![CDATA[$F{group_name}]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupFooter> 
+</group>
 
   <detail>
-    <band height="400">
+    <band height="40">
       <staticText>
         <reportElement x="380" y="0" width="200" height="20" />
         <text><![CDATA[Тест !!]]></text>
       </staticText>
       <textField>
-        <reportElement x="220" y="20" width="100" height="200" />
+        <reportElement x="220" y="20" width="100" height="20" />
         <textFieldExpression class="QString">
           <![CDATA[$P{title}]]>
         </textFieldExpression>
