@@ -13,7 +13,10 @@ namespace qtreports {
     typedef QSharedPointer< QWidget > QWidgetPtr;
 
     namespace detail {
-
+	/*! @~russian
+	* @brief The ConverterToQWidget class
+	* Класс Для преобразования отчета в QWidget
+	*/
         class ConverterToQWidget {
 
         public:
@@ -53,7 +56,7 @@ namespace qtreports {
             void        addPage();
 
 
-			/*!
+			/*! @~russian
 			@brief addGroupsIntoReport Функция добавления группировок в отчет
 			@param report Указатель на отчет, с которым ведется работа
 			@param detail Указатель на блок detail, в котором будут отображаться данные данные
