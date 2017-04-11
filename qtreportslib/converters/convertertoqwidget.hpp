@@ -52,7 +52,14 @@ namespace qtreports {
             
             void        addPage();
 
-            bool         addGroupsIntoReport(const ReportPtr & report, const DetailPtr & detail, QVBoxLayout* layout);
+			///
+			/// \brief addGroupsIntoReport ‘ункци€ добавлени€ группировок в отчет
+			/// \param report ”казатель на отчет, с которым ведетс€ работа
+			/// \param detail ”казатель на блок detail, в котором будут отображатьс€ данные данные
+			/// \param layout ”казатель на layout, который €вл€етс€ непосредственным контейнером данных
+			/// \return true, если добавлении групп успешно, иначе false
+			///
+			bool        addGroupsIntoReport(const ReportPtr & report, const DetailPtr & detail, QVBoxLayout* layout);
             bool        createQWidget( const ReportPtr & report );
             bool        createSection( QWidget * parent, const SectionPtr & section, int i );
             bool        createBands( QWidget * parent, const SectionPtr & section );
