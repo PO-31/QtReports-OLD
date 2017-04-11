@@ -193,18 +193,108 @@ namespace qtreports
                 }
             }
 
-            int count = isReport() ? report->getRowCount() : 1;
-            for( int i = 0; i < count; ++i )
+            if(!addGroupsIntoReport(report, detail, layout))
+                return false;
+
+            addEmptySection( layout, report->getMargins() );
+            addVerticalBorder( layout, report->getMargins(), report->getBottomMargin() );
+            return true;
+        }
+
+        bool ConverterToQWidget::addGroupsIntoReport(const ReportPtr & report, const DetailPtr & detail, QVBoxLayout* layout)
+        {
+            detail::Replacer replacer;
+
+            QList<GroupPtr> groups = report->getGroups().values();
+            QList<QString> groupNames;
+            //Сюда помещаем конкретные имена по которым группируем
+			QString *particularNames = new QString[groups.length()];
+            for (int i = 0; i<groups.length(); i++)
             {
-                QWidget * sectionWidget = isLayout() ? addSectionLayout( layout, report->getMargins(), detail->getHeight() ) : nullptr;
-                if( !createSection( sectionWidget, detail, i ) )
+                groupNames.append(groups[i]
+                    ->getHeader()
+                    ->getBand(0)
+                    ->getTextField(0)
+                    ->getOriginalText());
+                particularNames[i] = replacer.replaceField(groupNames[i], report, 0);
+            }
+            //Открываем хедеры групп
+            for (int i = 0; i<groups.length(); i++)
+            {
+                auto header = groups[i]->getHeader();
+                if (!header.isNull())
+                {
+                    QWidget * sectionWidget = isLayout() ? addSectionLayout(layout, report->getMargins(), header->getHeight()) : nullptr;
+                    if (!createSection(sectionWidget, header, 0))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            int rowCount = isReport()? report->getRowCount() : 1;
+            for(int i = 0; i < rowCount; i++)
+            {
+                QWidget * sectionWidget = isLayout() ? sectionWidget = addSectionLayout(layout, report->getMargins(), detail->getHeight()) : nullptr;
+
+                //Закрываем футеры, если группа закончилась
+                for(int j = groups.length() - 1; j >= 0; j--)
+                {
+                    //сверяем поле в заголовке и текущее поле
+                    if(particularNames[j] != replacer.replaceField(groupNames[j], report, i))
+                    {
+                        auto footer = report->getGroupByIndex(j)->getFooter();
+                        if (!footer.isNull())
+                        {
+                            QWidget * sectionWidgetFooter = isLayout() ? addSectionLayout(layout, report->getMargins(), footer->getHeight()) : nullptr;
+                            if (!createSection(sectionWidgetFooter, footer, i - 1))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                //Аналогично открываем хедеры
+                for(int j = 0; j < groupNames.length(); j++)
+                {                    
+                    //сверяем поле в заголовке и текущее поле
+                    if(particularNames[j] != replacer.replaceField(groupNames[j], report, i))
+                    {
+                        auto header = report->getGroupByIndex(j)->getHeader();
+                        if (!header.isNull())
+                        {
+                            QWidget * sectionWidgetHeader = isLayout() ? addSectionLayout(layout, report->getMargins(), header->getHeight()) : nullptr;
+                            if (!createSection(sectionWidgetHeader, header, i))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                //Переписываем имена для сравнения
+                for(int j = 0; j < groupNames.length(); j++)
+                {
+                    particularNames[j] = replacer.replaceField(groupNames[j], report, i);
+                }
+                //Выводим поле
+                if (!createSection(sectionWidget, detail, i))
                 {
                     return false;
                 }
             }
-
-            addEmptySection( layout, report->getMargins() );
-            addVerticalBorder( layout, report->getMargins(), report->getBottomMargin() );
+            //Закрываем хедеры групп
+            for(int i = groups.length() - 1; i >= 0; i--)
+            {
+                auto footer = groups[i]->getFooter();
+                            if (!footer.isNull())
+                            {
+                                QWidget * sectionWidget = isLayout() ? addSectionLayout(layout, report->getMargins(), footer->getHeight()) : nullptr;
+                                if (!createSection(sectionWidget, footer, (rowCount - 1)))
+                                {
+                                    return false;
+                                }
+                            }
+            }
             return true;
         }
 
