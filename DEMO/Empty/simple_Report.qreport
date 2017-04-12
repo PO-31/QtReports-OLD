@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report name="sample_report">
+  <style name="Arial_Normal" isDefault="true" fontName="Arial"
+    fontSize="12" pdfFontName="c:\tahoma.ttf" pdfEncoding="Cp1251"
+    isPdfEmbedded="false" />
+	 <queryString>
+    <![CDATA[ select * FROM Empty]]>
+  </queryString>
+  
+  <field name="_id" class="QString" />
+  
+<title>
+   <band height="50">
+
+      <staticText>
+
+          <reportElement x="100" y="16" width="100" height="20"/>
+
+          <textElement verticalAlignment="Top" textAlignment="Right"/>
+
+          <text><![CDATA[Title]]></text>
+      </staticText>
+   </band> 
+</title>
+
+ <detail>
+    <band height="30">   
+      <textField>
+        <reportElement x="51" y="0" width="400" height="30" />
+        <textFieldExpression class="QString">
+          <![CDATA[$F{_id}]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </detail>
+</report>
