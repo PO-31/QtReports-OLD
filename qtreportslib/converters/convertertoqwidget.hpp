@@ -14,8 +14,8 @@ namespace qtreports {
 
     namespace detail {
 	/*! @~russian
-	* @brief The ConverterToQWidget class
-	* Класс Для преобразования отчета в QWidget
+	* @brief РљР»Р°СЃСЃ ConverterToQWidget
+	* РљР»Р°СЃСЃ Р”Р»СЏ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РѕС‚С‡РµС‚Р° РІ РѕР±СЉРµРєС‚ С‚РёРїР° QWidget
 	*/
         class ConverterToQWidget {
 
@@ -24,11 +24,11 @@ namespace qtreports {
             ~ConverterToQWidget();
 
             /*! @~russian
-            Тип создаваемого виджета.
+            РўРёРї СЃРѕР·РґР°РІР°РµРјРѕРіРѕ РІРёРґР¶РµС‚Р°.
             */
             enum class WidgetType {
-                Report = 0, ///< Отчет
-                Layout ///< Макет
+                Report = 0, ///< ГЋГІГ·ГҐГІ
+                Layout ///< ГЊГ ГЄГҐГІ
             };
 
             bool                convert( WidgetType type = WidgetType::Report );
@@ -57,11 +57,11 @@ namespace qtreports {
 
 
 			/*! @~russian
-			@brief addGroupsIntoReport Функция добавления группировок в отчет
-			@param report Указатель на отчет, с которым ведется работа
-			@param detail Указатель на блок detail, в котором будут отображаться данные данные
-			@param layout Указатель на layout, который является непосредственным контейнером данных
-			@return true, если добавлении групп успешно, иначе false
+			@brief addGroupsIntoReport Р¤СѓРЅРєС†РёСЏ РґРѕР±Р°РІР»РµРЅРёСЏ РіСЂСѓРїРїРёСЂРѕРІРѕРє РІ РѕС‚С‡РµС‚
+			@param report РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РѕС‚С‡РµС‚, СЃ РєРѕС‚РѕСЂС‹Рј РІРµРґРµС‚СЃСЏ СЂР°Р±РѕС‚Р°
+			@param detail РЈРєР°Р·Р°С‚РµР»СЊ РЅР° Р±Р»РѕРє detail, РІ РєРѕС‚РѕСЂРѕРј Р±СѓРґСѓС‚ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊСЃСЏ РґР°РЅРЅС‹Рµ РґР°РЅРЅС‹Рµ
+			@param layout РЈРєР°Р·Р°С‚РµР»СЊ РЅР° layout, РєРѕС‚РѕСЂС‹Р№ СЏРІР»СЏРµС‚СЃСЏ РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅС‹Рј РєРѕРЅС‚РµР№РЅРµСЂРѕРј РґР°РЅРЅС‹С…
+			@return true, РµСЃР»Рё РґРѕР±Р°РІР»РµРЅРёРµ РіСЂСѓРїРїС‹ РїСЂРѕРёР·РѕС€Р»Рѕ СѓСЃРїРµС€РЅРѕ, РёРЅР°С‡Рµ false
 			*/
 			bool        addGroupsIntoReport(const ReportPtr & report, const DetailPtr & detail, QVBoxLayout* layout);
             bool        createQWidget( const ReportPtr & report );
