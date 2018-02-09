@@ -76,26 +76,26 @@ script:
   - if [ "$BUILD_TYPE" = "coverage" ]; then git commit -a -m "Update coverage from Travis CI"; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then git config --global push.default simple; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/QtReports HEAD:gh-pages > /dev/null; fi
-    # Auto documentation generation
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
-    # Install last doxygen version # Alternative: sudo apt-get install --yes doxygen
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo tar -xvzf doxygen-1.8.11.linux.bin.tar.gz; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then cd doxygen-1.8.11; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo ./configure; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo make install; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
-    # Clone repository and update doc
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then git clone https://github.com/PO-31/PO-31.github.io; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then cd PO-31.github.io; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then rm -d -f -r html; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then doxygen Doxyfile; fi
-    # Push changes to remote repository
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global user.name "travis"; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global user.email "travis@travis.org"; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then git add -A; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then git commit -a -m "Update doc from Travis CI"; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global push.default simple; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/PO-31.github.io > /dev/null; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
+  # Auto documentation generation
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
+  # Install last doxygen version # Alternative: sudo apt-get install --yes doxygen
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo tar -xvzf doxygen-1.8.11.linux.bin.tar.gz; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd doxygen-1.8.11; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo ./configure; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo make install; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
+  # Clone repository and update doc
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git clone https://github.com/PO-31/PO-31.github.io; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd PO-31.github.io; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then rm -d -f -r html; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then doxygen Doxyfile; fi
+  # Push changes to remote repository
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global user.name "travis"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global user.email "travis@travis.org"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git add -A; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git commit -a -m "Update doc from Travis CI"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global push.default simple; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/PO-31.github.io > /dev/null; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
