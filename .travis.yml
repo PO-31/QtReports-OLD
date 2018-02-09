@@ -83,7 +83,7 @@ script:
     - if [ "$BUILD_TYPE" = "doxygen" ]; then wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'; fi
     - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo tar -xvzf doxygen-1.8.11.linux.bin.tar.gz; fi
     - if [ "$BUILD_TYPE" = "doxygen" ]; then cd doxygen-1.8.11; fi
-    - if [ "$BUILD_TYPE" = "doxygen" ]; then ./configure; fi
+    - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo ./configure; fi
     - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo make install; fi
     - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
     # Clone repository and update doc
