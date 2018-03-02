@@ -127,14 +127,32 @@ namespace qtreports
         return true;
     }
 
-    bool    Engine::setQuery( const QString & query )
+     bool Engine::setQuery( const QString & query )
     {
-        //Need check parameters
-        auto queries = query.split( ";", QString::SkipEmptyParts );
-        return executeQueries( queries );
+    //Need check parameters
 
-        //m_lastError = query;
-        //return true;
+
+    QStringList queries = query.split( ";", QString::SkipEmptyParts );
+    QMap< QString, QVariant > param = m_report->getParameters();
+    QStringList result;
+    QString q;
+
+    for (auto it = param.begin(); it != param.end(); it++) {
+
+    foreach (q , queries)
+    {
+    QString find = "$P{" + it.key() + "}";
+    QString to = "'" + it.value().toString() + "'";
+    //i->replace(f, to);
+    if(q.indexOf(find)!=-1)
+    result.append(q.replace(find, to));
+    }
+    }
+
+    return executeQueries(result);
+
+    //m_lastError = query;
+    //return true;
     }
 
     bool    Engine::addScript( const QString & script )
