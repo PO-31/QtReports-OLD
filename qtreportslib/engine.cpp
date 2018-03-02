@@ -149,12 +149,6 @@ namespace qtreports
         return executeQueries(queries);
     }
 
-    return executeQueries(result);
-
-    //m_lastError = query;
-    //return true;
-    }
-
     bool    Engine::addScript( const QString & script )
     {
         //Need check parameters
