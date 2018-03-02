@@ -10,7 +10,8 @@
 
 namespace qtreports
 {
-
+  
+	
     Engine::Engine( QObject * parent ) :
         QObject( parent ),
         m_isOpened( false )
