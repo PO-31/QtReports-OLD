@@ -2,6 +2,10 @@ The MIT License (MIT)
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 684ce0770da3ec1e49a1db15eaf1f7d5b5dc972f
 Copyright (c) 2016 Pacific National University
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
