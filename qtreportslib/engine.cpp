@@ -128,25 +128,24 @@ namespace qtreports
     }
 
      bool Engine::setQuery( const QString & query )
-    {
-    //Need check parameters
+        {
+        //Need check parameters
 
+        QStringList queries = query.split( ";", QString::SkipEmptyParts );
+        QMap< QString, QVariant > param = m_report->getParameters();
 
-    QStringList queries = query.split( ";", QString::SkipEmptyParts );
-    QMap< QString, QVariant > param = m_report->getParameters();
-    QStringList result;
-    QString q;
+        for(int i=0; i<queries.size(); i++)
+        {
+            for (auto it = param.begin(); it != param.end(); it++) {
 
-    for (auto it = param.begin(); it != param.end(); it++) {
+                QString find = "$P{" + it.key() + "}";
+                QString to = "'" + it.value().toString() + "'";
+                if(queries[i].indexOf(find)!=-1)
+                    queries[i] = queries[i].replace(find, to);
+            }
+        }
 
-    foreach (q , queries)
-    {
-    QString find = "$P{" + it.key() + "}";
-    QString to = "'" + it.value().toString() + "'";
-    //i->replace(f, to);
-    if(q.indexOf(find)!=-1)
-    result.append(q.replace(find, to));
-    }
+        return executeQueries(queries);
     }
 
     return executeQueries(result);
