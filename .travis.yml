@@ -55,7 +55,7 @@ script:
   - cd ../qtreportslib_tests
   - qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
   - make
-  - ./qtreportslib_tests
+
   - if [ "$BUILD_TYPE" = "coverage" ]; then cd "$TRAVIS_BUILD_DIR"; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then git clone https://github.com/linux-test-project/lcov; fi 
   - if [ "$BUILD_TYPE" = "coverage" ]; then cd lcov; fi
