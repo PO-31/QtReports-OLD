@@ -97,7 +97,7 @@ script:
   - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global user.name "travis"; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global user.email "travis@travis.org"; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then git add -A; fi
-  - if [ "$BUILD_TYPE" = "doxygen" ]; then git commit -a -m "Update doc from Travis CI"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then git commit -am "travis-ci documentation update"; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then git config --global push.default simple; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/PO-31.github.io > /dev/null; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
