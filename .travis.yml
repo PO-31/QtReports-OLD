@@ -80,8 +80,8 @@ script:
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd "$TRAVIS_BUILD_DIR"; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
   # Install last doxygen version # Alternative: sudo apt-get install --yes doxygen
-  - if [ "$BUILD_TYPE" = "doxygen" ]; then wget 'https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz'; fi
-  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo tar -xvf doxygen-1.8.11.linux.bin.tar.gz; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then wget https://sourceforge.net/projects/doxygen/files/rel-1.8.11/doxygen-1.8.11.linux.bin.tar.gz; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo tar -xvzf doxygen-1.8.11.linux.bin.tar.gz; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd doxygen-1.8.11; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo ./configure; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cat "Makefile" | grep -v "#$(INSTTOOL) -m 755 bin/doxytag    $(INSTALL)/bin"; fi
