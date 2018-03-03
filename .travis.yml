@@ -67,7 +67,7 @@ script:
   - if [ "$BUILD_TYPE" = "coverage" ]; then lcov --remove coverage.info --output-file coverage.info "*/usr/*"; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then cd "$TRAVIS_BUILD_DIR"; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then git clone  -b gh-pages https://github.com/PO-31/QtReports ../gh_pages; fi
-
+  - if [ "$BUILD_TYPE" = "coverage" ]; then rm -r ../gh_pages/${TRAVIS_BRANCH}; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then genhtml coverage.info --output-directory ../gh_pages/${TRAVIS_BRANCH}; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then cd ../gh_pages; fi
   - if [ "$BUILD_TYPE" = "coverage" ]; then git config --global user.name "travis"; fi
