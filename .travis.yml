@@ -83,9 +83,11 @@ script:
   - if [ "$BUILD_TYPE" = "doxygen" ]; then wget http://ftp.stack.nl/pub/users/dimitri/doxygen-1.8.11.linux.bin.tar.gz; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then tar -xvzf doxygen-1.8.11.linux.bin.tar.gz; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd doxygen-1.8.11; fi
-  - if [ "$BUILD_TYPE" = "doxygen" ]; then cat "Makefile.in" | grep -v "\$(INSTTOOL) -m 755 bin/doxytag*\$(INSTALL)/bin" > "Makefile.in" && sudo ./configure; fi
-  - if [ "$BUILD_TYPE" = "doxygen" ]; then make; fi
-  - if [ "$BUILD_TYPE" = "doxygen" ]; then make install; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo ./configure; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo chmod 666 Makefile; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then cat "Makefile" | grep -v "\$(INSTTOOL) -m 755 bin/doxytag*\$(INSTALL)/bin" > "Makefile" fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo make; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo make install; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
   # Clone repository and update doc
   - if [ "$BUILD_TYPE" = "doxygen" ]; then git clone https://github.com/PO-31/PO-31.github.io; fi
