@@ -85,7 +85,7 @@ script:
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd doxygen-1.8.11; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo ./configure; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo chmod 666 Makefile; fi
-  - if [ "$BUILD_TYPE" = "doxygen" ]; then sed --in-place '/\$(INSTTOOL) -m 755 bin\/doxytag *\$(INSTALL)\/bin/d' > "Makefile"; fi
+  - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo sed --in-place '/\$(INSTTOOL) -m 755 bin\/doxytag *\$(INSTALL)\/bin/d' > "Makefile"; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo make; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then sudo make install; fi
   - if [ "$BUILD_TYPE" = "doxygen" ]; then cd ..; fi
