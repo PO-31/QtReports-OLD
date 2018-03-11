@@ -2,18 +2,15 @@
 
 namespace qtreports {
     namespace detail {
-    Variable::Variable(){}
+    Variable::Variable()
+    {
+        m_resetType = "Report";
+        m_resetGroup = "";
+        m_incrementType = "None";
+        m_incrementGroup = "";
+        m_calculation = "Nothing";
+    }
     Variable::~Variable(){}
-
-    void Variable::setVariableName(const QString &name)
-    {
-        m_variableName = name;
-    }
-
-    const QString Variable::getVariableName() const
-    {
-        return m_variableName;
-    }
 
     void Variable::setClassName(const QString &name)
     {
@@ -25,12 +22,12 @@ namespace qtreports {
         return m_className;
     }
 
-    void Variable::setResetType(const SpaceType &type)
+    void Variable::setResetType(const QString &type)
     {
         m_resetType = type;
     }
 
-    const SpaceType Variable::getResetType() const
+    const QString Variable::getResetType() const
     {
         return m_resetType;
     }
@@ -45,12 +42,12 @@ namespace qtreports {
         return m_resetGroup;
     }
 
-    void Variable::setIncrementType(const SpaceType &type)
+    void Variable::setIncrementType(const QString &type)
     {
         m_incrementType = type;
     }
 
-    const SpaceType Variable::getIncrementType() const
+    const QString Variable::getIncrementType() const
     {
         return m_incrementType;
     }
@@ -65,14 +62,34 @@ namespace qtreports {
         return m_incrementGroup;
     }
 
-    void Variable::setCalculation(const CalculationType &type)
+    void Variable::setCalculation(const QString & type)
     {
         m_calculation = type;
     }
 
-    const CalculationType Variable::getCalculation() const
+    const QString Variable::getCalculation() const
     {
         return m_calculation;
+    }
+
+    void Variable::setVariableExpression(const QString & expression)
+    {
+        m_expression = expression;
+    }
+
+    QString Variable::getVariableExpression()
+    {
+        return m_expression;
+    }
+
+    void Variable::setInitialValueExpression(const QString & expression)
+    {
+        m_initialExpression = expression;
+    }
+
+    QString Variable::getInitialValueExpression() const
+    {
+        return m_initialExpression;
     }
 
     }

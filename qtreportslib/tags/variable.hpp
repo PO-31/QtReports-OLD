@@ -3,34 +3,23 @@
 #define VARIABLE_HPP
 #include <QSharedPointer>
 
-#include <QVariant>
 #include <QString>
 #include "object.hpp"
 
 namespace qtreports {
     namespace detail {
-        enum SpaceType {None = "None", Report = "Report", Page = "Page", Column = "Column", Group = "Group"};
+        /*enum ResetType {None = "None", Report = "Report", Page = "Page", Column = "Column", Group = "Group"};
+        enum IncrementType {None = "None", Report = "Report", Page = "Page", Column = "Column", Group = "Group"};
 
         enum CalculationType {Nothing = "Nothing" , Count = "Count", DistinctCount = "DistinctCount", Sum = "Sum",
                               Average = "Average", Lowest = "Lowest", Highest = "Highest",
                               StandardDeviation = "StandardDeviation", Variance = "Variance", System = "System",
-                              First = "First"};
+                              First = "First"};*/
 
         class Variable : public Object {
         public:
             Variable();
             ~Variable();
-
-            /*! @~russian
-            Устанавливает атрибут variableName
-            @param[in] name Название переменной
-            */
-            void            setVariableName(const QString & name);
-
-            /*! @~russian
-            Возвращает атрибут variableName.
-            */
-            const QString   getVariableName() const;
 
             /*! @~russian
             Устанавливает атрибут className
@@ -47,12 +36,12 @@ namespace qtreports {
             Устанавливает атрибут resetType
             @param[in] type Тип области сброса переменой
             */
-            void            setResetType( const SpaceType & type );
+            void            setResetType( const QString & type );
 
             /*! @~russian
             Возвращает атрибут resetType.
             */
-            const SpaceType getResetType() const;
+            const QString getResetType() const;
 
             /*! @~russian
             Устанавливает атрибут resetGroup
@@ -69,12 +58,12 @@ namespace qtreports {
             Устанавливает атрибут incrementType
             @param[in] type Тип области инкрементирования переменной
             */
-            void            setIncrementType( const SpaceType & type );
+            void                  setIncrementType( const QString & type );
 
             /*! @~russian
             Возвращает атрибут incrementType.
             */
-            const SpaceType   getIncrementType() const;
+            const QString   getIncrementType() const;
 
             /*! @~russian
             Устанавливает атрибут incrementGroup
@@ -91,22 +80,45 @@ namespace qtreports {
             Устанавливает атрибут calculation
             @param[in] type Название класса
             */
-            void            setCalculation( const CalculationType & type );
+            void                    setCalculation( const QString & type );
 
             /*! @~russian
             Возвращает атрибут calculation.
             */
-            const CalculationType   getCalculation() const;
+            const QString   getCalculation() const;
+
+            /*! @~russian
+            Устанавливает атрибут expression
+            @param[in] expression Выражение
+            */
+            void        setVariableExpression( const QString & expression );
+
+            /*! @~russian
+            Возвращает атрибут expression.
+            */
+            QString     getVariableExpression();
+
+            /*! @~russian
+            Устанавливает атрибут initialExpression
+            @param[in] expression Выражение
+            */
+            void        setInitialValueExpression( const QString & expression );
+
+            /*! @~russian
+            Возвращает атрибут initialExpression.
+            */
+            QString     getInitialValueExpression() const;
 
 
         private:
-            QString m_variableName;
-            QString m_className;
-            SpaceType m_resetType;
-            QString m_resetGroup;
-            SpaceType m_incrementType;
-            QString m_incrementGroup;
-            CalculationType m_calculation;
+            QString     m_className;
+            QString     m_resetType;
+            QString     m_resetGroup;
+            QString     m_incrementType;
+            QString     m_incrementGroup;
+            QString     m_calculation;
+            QString     m_expression;
+            QString     m_initialExpression;
         };
 
         typedef QSharedPointer<Variable> VariablePtr;

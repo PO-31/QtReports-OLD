@@ -38,6 +38,21 @@ namespace qtreports
             return m_styles;
         }
 
+        void Report::addVariable(const QString &name, const VariablePtr & variable)
+        {
+            m_variables[ name ] = variable;
+        }
+
+        const VariablePtr Report::getVariable(const QString & name) const
+        {
+            return m_variables.value(name);
+        }
+
+        const QMap<QString, VariablePtr> Report::getVariables() const
+        {
+            return m_variables;
+        }
+
         void    Report::addGroup( const QString & name, const GroupPtr & group )
         {
             m_groups[ name ] = group;
