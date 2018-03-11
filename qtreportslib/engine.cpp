@@ -130,11 +130,21 @@ namespace qtreports
     bool    Engine::setQuery( const QString & query )
     {
         //Need check parameters
-        auto queries = query.split( ";", QString::SkipEmptyParts );
-        return executeQueries( queries );
+		
+        QStringList queries = query.split( ";", QString::SkipEmptyParts );
+		QMap< QString, QVariant > param = m_report->getParameters();
 
-        //m_lastError = query;
-        //return true;
+		for (int i = 0; i < queries.size(); i++) {
+			for (auto it = param.begin(); it != param.end(); it++) {
+			
+				QString find = "$P{" + it.key() + "}";
+				QString to = "'" + it.value().toString() + "'";
+				if(queries[i].indexOf(find)!=-1)
+					queries[i] = queries[i].replace(find, to);
+			}
+		}
+
+        return executeQueries(queries);
     }
 
     bool    Engine::addScript( const QString & script )
