@@ -1,0 +1,24 @@
+create table Inst(
+	nameInst text not null,
+ 	idInst integer not null primary key autoincrement);
+create table Spec(
+	nameSpec text not null,
+	idSpec integer not null primary key autoincrement,
+	idInst integer not null, foreign key (idInst) references Inst(idInst));
+create table Plan(
+	namePlan text not null,
+	idPlan integer not null primary key autoincrement,
+	fo text not null,
+	year text not null,
+	idSpec integer not null,
+	foreign key (idSpec) references Spec(idSpec));
+create table Thr(
+	nameThr text not null,
+	idThr integer not null primary key autoincrement,
+	kolgr integer not null,
+	yearp integer not null,
+	kolst integer not null,
+	kolpd integer not null,
+	idPlan integer not null,
+	foreign key (idPlan) references Plan(idPlan));
+
