@@ -5,7 +5,7 @@
     isPdfEmbedded="false" />
 
   <queryString>
-    <![CDATA[ select nameInst, nameSpec, namePlan, nameThr from Inst, Spec, Plan, Thr where Inst.idInst = Spec.idInst and Spec.idSpec = Plan.idSpec and Inst.idInst=$P{idInst=1}; ]]>
+    <![CDATA[ select nameInst, nameSpec, namePlan, nameThr from Inst, Spec, Plan, Thr where Inst.idInst = Spec.idInst and Spec.idSpec = Plan.idSpec and Inst.idInst=$P{idInst}; ]]>
   </queryString>
 
   <field name="nameInst" class="QString" />
