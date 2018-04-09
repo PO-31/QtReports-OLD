@@ -45,7 +45,9 @@ int main( int argc, char *argv[] ) {
     }
 
     QMap < QString, QVariant > map;
-    map[ "title" ] = "Best Title in World";
+    map[ "title" ] = "GRISHA RULIT";
+    map[ "idPlan" ] = "2";
+	
     bool result = engine.setParameters( map );//{ { "title", "Best Title in World" } }
     if( !result ) {
         showError( engine.getLastError() );
