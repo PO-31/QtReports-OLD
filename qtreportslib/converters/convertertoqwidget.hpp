@@ -13,7 +13,10 @@ namespace qtreports {
     typedef QSharedPointer< QWidget > QWidgetPtr;
 
     namespace detail {
-
+	/*! @~russian
+	* @brief Класс ConverterToQWidget
+	* Класс Для преобразования отчета в объект типа QWidget
+	*/
         class ConverterToQWidget {
 
         public:
@@ -21,11 +24,11 @@ namespace qtreports {
             ~ConverterToQWidget();
 
             /*! @~russian
-            ��� ������������ �������.
+            Тип создаваемого виджета.
             */
             enum class WidgetType {
-                Report = 0, ///< �����
-                Layout ///< �����
+                Report = 0, ///< Îò÷åò
+                Layout ///< Ìàêåò
             };
 
             bool                convert( WidgetType type = WidgetType::Report );
@@ -52,7 +55,15 @@ namespace qtreports {
             
             void        addPage();
 
-            bool         addGroupsIntoReport(const ReportPtr & report, const DetailPtr & detail, QVBoxLayout* layout);
+
+			/*! @~russian
+			@brief addGroupsIntoReport Функция добавления группировок в отчет
+			@param report Указатель на отчет, с которым ведется работа
+			@param detail Указатель на блок detail, в котором будут отображаться данные данные
+			@param layout Указатель на layout, который является непосредственным контейнером данных
+			@return true, если добавление группы произошло успешно, иначе false
+			*/
+			bool        addGroupsIntoReport(const ReportPtr & report, const DetailPtr & detail, QVBoxLayout* layout);
             bool        createQWidget( const ReportPtr & report );
             bool        createSection( QWidget * parent, const SectionPtr & section, int i );
             bool        createBands( QWidget * parent, const SectionPtr & section );

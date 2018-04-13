@@ -4,10 +4,10 @@ Reimplementation of JasperReports in Qt
 Branches
 ========
 
-master (stable) | develop (unstable)
---------------- | -----------------
-[![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=master)](https://travis-ci.org/PO-31/QtReports)| [![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=develop)](https://travis-ci.org/PO-31/QtReports)
-[Coverage](http://po-31.github.io/QtReports)
+master (stable) | develop (unstable) | coverage (stable)
+--------------- | ----------------- | -----------------
+[![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=master)](https://travis-ci.org/PO-31/QtReports)| [![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=develop)](https://travis-ci.org/PO-31/QtReports)| [![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=test)](https://travis-ci.org/PO-31/QtReports)
+ | [Coverage](http://po-31.github.io/QtReports)
 
 # Requirements
 + Qt 5.0+

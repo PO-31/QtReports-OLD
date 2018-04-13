@@ -16,6 +16,7 @@
 #include "group.hpp"
 #include "title.hpp"
 #include "detail.hpp"
+#include "variable.hpp"
 
 namespace qtreports {
     namespace detail {
@@ -58,6 +59,23 @@ namespace qtreports {
             Возвращает карту указателей на <style>
             */
             const QMap< QString, StylePtr >     getStyles() const;
+
+            /*! @~russian
+            Добавляет <variable> в <report>
+            @param[in] name Имя стиля
+            @param[in] style Указатель на <variable>
+            */
+            void                                addVariable( const QString & name, const VariablePtr & variable );
+
+            /*! @~russian
+            Возвращает указатель на <variable> по имени
+            */
+            const VariablePtr                      getVariable( const QString & name ) const;
+
+            /*! @~russian
+            Возвращает карту указателей на <variable>
+            */
+            const QMap< QString, VariablePtr >     getVariables() const;
 
             /*! @~russian
             Добавляет <group> в <report>
@@ -289,6 +307,7 @@ namespace qtreports {
             TitlePtr                    m_title;
             DetailPtr                   m_detail;
             QMap< QString, QVariant >   m_parameters;
+            QMap< QString, VariablePtr> m_variables;
             QVector<bool>               m_group_vec;
 
             void swapRows(int row1, int row2, QVector<bool> & vec);

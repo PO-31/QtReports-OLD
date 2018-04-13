@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include "parserfromxml.hpp"
+#include "parserfromxml.hpp"
 
 namespace qtreports
 {
@@ -53,6 +54,9 @@ namespace qtreports
             m_functions[ "font" ] = toParseFunc( this, &ParserFromXML::parseFont );
             m_functions[ "text" ] = toParseFunc( this, &ParserFromXML::parseText );
             m_functions[ "textFieldExpression" ] = toParseFunc( this, &ParserFromXML::parseTextFieldExpression );
+            m_functions[ "variable" ] = toParseFunc( this, &ParserFromXML::parseVariable );
+            m_functions[ "variableExpression" ] = toParseFunc( this, &ParserFromXML::parseVariableExpression );
+            m_functions[ "initialValueExpression" ] = toParseFunc( this, &ParserFromXML::parseInitialValueExpression );
         }
 
         ParserFromXML::~ParserFromXML() {}
@@ -911,6 +915,87 @@ namespace qtreports
             report->setQuery( text );
             report->setTagName( "queryString" );
 
+            return !reader.hasError();
+        }
+
+        bool    ParserFromXML::parseVariable(QXmlStreamReader & reader, const ReportPtr & report )
+        {
+            QString variableName;
+            if( !getRequiredAttribute( reader, "name", variableName ) )
+            {
+                return false;
+            }
+
+            QString className;
+            if( !getRequiredAttribute( reader, "class", className ) )
+            {
+                return false;
+            }
+
+            QString resetType;
+            getOptionalAttribute( reader, "resetType", resetType );
+
+            QString resetGroup;
+            getOptionalAttribute( reader, "resetGroup", resetGroup );
+
+            QString incrementType;
+            getOptionalAttribute( reader, "incrementType", incrementType );
+
+            QString incrementGroup;
+            getOptionalAttribute( reader, "incrementGroup", incrementGroup );
+
+            QString calculation;
+            getOptionalAttribute( reader, "calculation", calculation );
+
+            VariablePtr variable( new Variable() );
+            if( !parseChilds( reader, variable ) )
+            {
+                return false;
+            }
+
+            variable->setTagName("variable");
+            variable->setName(variableName);
+            variable->setClassName(className);
+
+            if (!resetType.isEmpty() || !resetType.isNull())
+                variable->setResetType(resetType);
+
+            if (resetType == "Group" && !resetGroup.isEmpty() && !resetGroup.isNull())
+                variable->setResetGroup(resetGroup);
+
+            if (!incrementType.isEmpty() || !incrementType.isNull())
+                variable->setIncrementType(incrementType);
+
+            if (incrementGroup == "Group" && !incrementGroup.isEmpty() && !incrementGroup.isNull())
+                variable->setIncrementGroup(incrementGroup);
+
+            if (!calculation.isEmpty() || !calculation.isNull())
+                variable->setCalculation(calculation);
+
+            report->addVariable(variableName, variable);
+
+            return !reader.hasError();
+        }
+
+        bool ParserFromXML::parseVariableExpression(QXmlStreamReader & reader, const VariablePtr & variable)
+        {
+            QString expression;
+            if( !getValue( reader, expression ) )
+            {
+                return false;
+            }
+            variable->setVariableExpression(expression);
+            return !reader.hasError();
+        }
+
+        bool ParserFromXML::parseInitialValueExpression(QXmlStreamReader &reader, const VariablePtr &variable)
+        {
+            QString expression;
+            if( !getValue( reader, expression ) )
+            {
+                return false;
+            }
+            variable->setInitialValueExpression(expression);
             return !reader.hasError();
         }
 

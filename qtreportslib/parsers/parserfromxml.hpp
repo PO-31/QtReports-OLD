@@ -235,6 +235,21 @@ namespace qtreports {
             @param[in] image тэг image, текущий объект
             */
             bool    parseImageExpression( QXmlStreamReader & reader, const ImagePtr & image );
+            /*! @~russian
+            Парсерит тег variable
+            @param[in] report тэг report, текущий объект
+            */
+            bool    parseVariable(QXmlStreamReader & reader, const ReportPtr & report );
+            /*! @~russian
+            Парсерит текст (VariableExpression) для variable
+            @param[in] variable тэг variable, текущий объект
+            */
+            bool    parseVariableExpression(QXmlStreamReader & reader, const VariablePtr & variable );
+            /*! @~russian
+            Парсерит текст (InitialValueExpression) для variable
+            @param[in] variable тэг variable, текущий объект
+            */
+            bool    parseInitialValueExpression(QXmlStreamReader & reader, const VariablePtr & variable );
 
         };
 
