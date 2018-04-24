@@ -61,6 +61,7 @@ unix {
     headers.files = $$HEADERS
     headers.path = /usr/include/qtreports/
     INSTALLS += headers
+    DESTDIR = $$PWD/build/
 }
 
 win32 {
