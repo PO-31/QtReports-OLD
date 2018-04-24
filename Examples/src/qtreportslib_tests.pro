@@ -3,9 +3,11 @@ QT += core gui sql widgets printsupport testlib
 TARGET = qtreportslib_tests
 TEMPLATE = app
 CONFIG += release c++11
-INCLUDEPATH += ../qtreportslib
-win32: LIBS   += -L "$$PWD"/../qtreportslib/build/
+INCLUDEPATH += ../../qtreportslib
+win32: LIBS   += -L "$$PWD"/../../qtreportslib/build/
+linux: LIBS   += -L "$$PWD"/../../qtreportslib/build/
 LIBS   += -lqtreportslib
+DESTDIR = $$PWD/build/
 
 SOURCES += main.cpp \
     test_engine.cpp \
