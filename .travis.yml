@@ -33,6 +33,7 @@ branches:
     - master
     - develop
     - test
+    - travis_changes
 
 before_install:
   - sudo sh .travis/${TRAVIS_OS_NAME}/before_install.sh
