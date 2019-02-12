@@ -13,3 +13,6 @@ if [ "$BUILD_TYPE" = "coverage" ]; then
   sudo update-alternatives --install /usr/bin/ruby ruby /usr/bin/ruby1.9.1 100
   sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 100
 fi
+if [ "$BUILD_TYPE" = "doxygen" ]; then 
+  sudo apt-get install -y doxygen=1.8.11
+fi
