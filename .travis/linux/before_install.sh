@@ -14,5 +14,5 @@ if [ "$BUILD_TYPE" = "coverage" ]; then
   sudo update-alternatives --install /usr/bin/gem gem /usr/bin/gem1.9.1 100
 fi
 if [ "$BUILD_TYPE" = "doxygen" ]; then 
-  sudo apt-get install -y doxygen=1.8.11
+  sudo apt-get install -y doxygen
 fi
