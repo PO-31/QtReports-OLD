@@ -36,12 +36,12 @@ branches:
     - travis_changes
 
 before_install:
-  - sudo sh .travis/${TRAVIS_OS_NAME}/before_install.sh
-  - sudo sh .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
+  - source .travis/${TRAVIS_OS_NAME}/before_install.sh
+  - source .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
  
 install:
   - source .travis/${TRAVIS_OS_NAME}/install.sh
   - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
 script:
-  - sudo sh .travis/script.sh
+  - source .travis/script.sh
