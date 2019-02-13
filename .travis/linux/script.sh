@@ -1,13 +1,34 @@
-nproc
-${CXX} --version
+
+# Auto documentation generation
+if [ "$BUILD_TYPE" = "doxygen" ]; then
+	cd "$TRAVIS_BUILD_DIR"
+	cd ..
+	# Clone repository and update doc
+	git clone https://github.com/PO-31/PO-31.github.io 
+	cd PO-31.github.io
+	rm -d -f -r html
+	doxygen Doxyfile
+	
+	# Push changes to remote repository
+	git config --global user.name "travis"
+	git config --global user.email "travis@travis.org"
+	git add -A
+
+	git commit -am "Update doc from Travis CI"
+	git config --global push.default simple
+	git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/PO-31.github.io > /dev/null
+	# cd "$TRAVIS_BUILD_DIR"
+	exit
+fi
+
 cd qtreportslib
 qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
-make
-
+make -j $(nproc)
 sudo make install
+
 cd ../qtreportsviewer
 qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
-make
+make -j $(nproc)
 
 # old autotest program
 # replaced by qtreportsviewer (manual test program)
@@ -39,24 +60,3 @@ if [ "$BUILD_TYPE" = "coverage" ]; then
 	git config --global push.default simple
     git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/QtReports HEAD:gh-pages > /dev/null
 fi
-
-# Auto documentation generation
-if [ "$BUILD_TYPE" = "doxygen" ]; then
-	cd "$TRAVIS_BUILD_DIR"
-	cd ..
-	# Clone repository and update doc
-	git clone https://github.com/PO-31/PO-31.github.io 
-	cd PO-31.github.io
-	rm -d -f -r html
-	doxygen Doxyfile
-	
-	# Push changes to remote repository
-	git config --global user.name "travis"
-	git config --global user.email "travis@travis.org"
-	git add -A
-
-	git commit -am "Update doc from Travis CI"
-	git config --global push.default simple
-	git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/PO-31.github.io > /dev/null
-	cd "$TRAVIS_BUILD_DIR"
-fi 

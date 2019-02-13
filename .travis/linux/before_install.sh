@@ -1,11 +1,11 @@
 #!/bin/bash
 
-packages=''
+packages_list='qt5-default qttools5-dev-tools'
 if [ "$BUILD_TYPE" = "doxygen" ]; then 
-  packages+=' doxygen'
-else
-  packages+=' qt5-default qttools5-dev-tools'
+  packages_list+=' doxygen'
 fi
 
+echo $packages_list
+
 # sudo apt-get update
-sudo apt-get install -y $add_packages
+sudo apt-get install -y $packages_list
