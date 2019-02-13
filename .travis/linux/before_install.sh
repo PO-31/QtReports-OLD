@@ -7,5 +7,5 @@ fi
 
 echo $packages_list
 
-# sudo apt-get update
+sudo apt-get update
 sudo apt-get install -y $packages_list

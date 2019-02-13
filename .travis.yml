@@ -15,10 +15,10 @@ matrix:
   include:
    - os: linux
      compiler: gcc
-     env: BUILD_TYPE=doxygen
+     env: BUILD_TYPE=coverage
    - os: linux
      compiler: gcc
-     env: BUILD_TYPE=coverage
+     env: BUILD_TYPE=doxygen
      
 cache:
   apt: true
