@@ -30,15 +30,17 @@ cd ../qtreportsviewer
 qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
 make -j $(nproc)
 
-# old autotest program
-# replaced by qtreportsviewer (manual test program)
-
-# cd ../qtreportslib_tests
-# qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
-# make
-# ./qtreportslib_tests
 
 if [ "$BUILD_TYPE" = "coverage" ]; then
+
+	# old autotest program
+	# replaced by qtreportsviewer (manual test program)
+	
+	cd ../qtreportslib_tests
+	qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
+	make
+	./qtreportslib_tests
+
 	cd "$TRAVIS_BUILD_DIR"
 	git clone https://github.com/linux-test-project/lcov
 	cd lcov

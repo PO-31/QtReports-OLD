@@ -16,6 +16,8 @@ matrix:
    - os: linux
      compiler: gcc
      env: BUILD_TYPE=coverage
+     services:
+        - xvfb
    - os: linux
      compiler: gcc
      env: BUILD_TYPE=doxygen
