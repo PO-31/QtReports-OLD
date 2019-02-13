@@ -3,14 +3,19 @@ ${CXX} --version
 cd qtreportslib
 qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib.pro
 make
+
 sudo make install
 cd ../qtreportsviewer
 qmake -spec ${USING_QT_MKSPEC} qtreportsviewer.pro
 make
-cd ../qtreportslib_tests
-qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
-make
-./qtreportslib_tests
+
+# old autotest program
+# replaced by qtreportsviewer (manual test program)
+
+# cd ../qtreportslib_tests
+# qmake -spec ${USING_QT_MKSPEC} "CONFIG+= ${BUILD_TYPE}" qtreportslib_tests.pro
+# make
+# ./qtreportslib_tests
 
 if [ "$BUILD_TYPE" = "coverage" ]; then
 	cd "$TRAVIS_BUILD_DIR"
