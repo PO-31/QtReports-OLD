@@ -2,7 +2,7 @@ language: cpp
 
 dist: xenial
 sudo: required
-os: linux
+os: bionic
   
 compiler: 
   - gcc
@@ -37,11 +37,9 @@ branches:
 
 before_install:
   - source .travis/${TRAVIS_OS_NAME}/before_install.sh
-  - source .travis/${TRAVIS_OS_NAME}/${CC}/before_install.sh
  
 install:
   - source .travis/${TRAVIS_OS_NAME}/install.sh
-  - source .travis/${TRAVIS_OS_NAME}/${CC}/install.sh
    
 script:
-  - source .travis/script.sh
+  - source .travis/${TRAVIS_OS_NAME}/script.sh
