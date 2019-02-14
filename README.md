@@ -14,13 +14,21 @@ master (stable) | develop (unstable)
 + gcc-4.8+/clang-3.4+/msvc14+
 
 # Travis-CI configuration
-## OS:
- + Ubuntu 16.04 LST (xenial)
-## Compilers:
- - Clang (Version set by Travis CI)
- - gcc (Version set by Travis CI)
-## Qt version
-5.5.1
+### Linux
+#### Distibutive:
+ + Xenial (Ubuntu 16.04 LST)
+#### Compilers:
+ + Clang (Version set by Travis CI)
+ + gcc (Version set by Travis CI)
+#### Qt version: 5.5.1
+Note: It's last available version of Qt in standard Xenial repo
+
+### Windows
+Planning in future
+
+### macOS
+Planning in future
+
 
 # Documentation
 * [Doxygen](http://po-31.github.io/)
