@@ -4,14 +4,23 @@ Reimplementation of JasperReports in Qt
 Branches
 ========
 
-master (stable) | develop (unstable) | coverage (stable)
---------------- | ----------------- | -----------------
-[![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=master)](https://travis-ci.org/PO-31/QtReports)| [![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=develop)](https://travis-ci.org/PO-31/QtReports)| [![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=test)](https://travis-ci.org/PO-31/QtReports)
- | [Coverage](http://po-31.github.io/QtReports)
+master (stable) | develop (unstable)
+--------------- | ------------------
+[![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=master)](https://travis-ci.org/PO-31/QtReports)| [![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=develop)](https://travis-ci.org/PO-31/QtReports)
+ | [Coverage master](http://po-31.github.io/QtReports/master/) | [Coverage develop](http://po-31.github.io/QtReports/master/)
 
 # Requirements
 + Qt 5.0+
 + gcc-4.8+/clang-3.4+/msvc14+
+
+# Travis-CI configuration
+## OS:
+ + Ubuntu 16.04 LST (xenial)
+## Compilers:
+ - Clang (Version set by Travis CI)
+ - gcc (Version set by Travis CI)
+## Qt version
+5.5.1
 
 # Documentation
 * [Doxygen](http://po-31.github.io/)
