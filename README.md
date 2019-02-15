@@ -32,4 +32,4 @@ Planning in future
 
 # Documentation
 * [Doxygen](http://po-31.github.io/)
-* [Wiki](https://github.com/PO-31/QtReports/wiki)
+* [Wiki](https://github.com/PO-31/QtReports-OLD/wiki)
