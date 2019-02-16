@@ -51,7 +51,7 @@ if [ "$BUILD_TYPE" = "coverage" ]; then
 	lcov --remove coverage.info --output-file coverage.info "*moc_*.cpp"
 	lcov --remove coverage.info --output-file coverage.info "*/usr/*"
 	cd "$TRAVIS_BUILD_DIR"
-	git clone  -b gh-pages https://github.com/PO-31/QtReports ../gh_pages
+	git clone  -b gh-pages https://github.com/PO-31/QtReports-OLD ../gh_pages
 	rm -r ../gh_pages/${TRAVIS_BRANCH}
 	genhtml coverage.info --output-directory ../gh_pages/${TRAVIS_BRANCH}
 	cd ../gh_pages
@@ -60,5 +60,5 @@ if [ "$BUILD_TYPE" = "coverage" ]; then
 	git add -A
 	git commit -a -m "Update coverage from Travis CI"
 	git config --global push.default simple
-    git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/QtReports HEAD:gh-pages > /dev/null
+    git push -f -q https://LancerX0:$GITHUB_API_KEY@github.com/PO-31/QtReports-OLD HEAD:gh-pages > /dev/null
 fi
