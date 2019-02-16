@@ -6,8 +6,8 @@ Branches
 
 master (stable) | develop (unstable)
 --------------- | ------------------
-[![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=master)](https://travis-ci.org/PO-31/QtReports)| [![Build Status](https://api.travis-ci.org/PO-31/QtReports.svg?branch=develop)](https://travis-ci.org/PO-31/QtReports)
- | [Coverage master](http://po-31.github.io/QtReports/master/) | [Coverage develop](http://po-31.github.io/QtReports/master/)
+[![Build Status](https://api.travis-ci.org/PO-31/QtReports-OLD.svg?branch=master)](https://travis-ci.org/PO-31/QtReports-OLD)| [![Build Status](https://api.travis-ci.org/PO-31/QtReports-OLD.svg?branch=develop)](https://travis-ci.org/PO-31/QtReports-OLD)
+ | [Coverage master](http://po-31.github.io/QtReports-OLD/master/) | [Coverage develop](http://po-31.github.io/QtReports-OLD/develop/)
 
 # Requirements
 + Qt 5.0+
